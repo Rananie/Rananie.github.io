@@ -2962,11 +2962,11 @@ var Gitment =
                 }
 
                 // dirty
-                // use a blank image to trigger height calculating when element rendered
+                // use a blank img to trigger height calculating when element rendered
                 var imgTrigger = document.createElement('img');
                 var markdownBody = commentItem.querySelector('.gitment-comment-body');
                 imgTrigger.className = 'gitment-hidden';
-                imgTrigger.src = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+                imgTrigger.src = "data:img/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
                 imgTrigger.onload = function () {
                     if (markdownBody.clientHeight > instance.maxCommentHeight) {
                         markdownBody.classList.add('gitment-comment-body-folded');

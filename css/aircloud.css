@@ -117,7 +117,7 @@ body {
   margin-top: 10px;
   margin-bottom: 20px;
 }
-.nav .avatar-name .name i {
+.nav .avatar-name .name span {
   font-size: 16px;
   font-family: "italic" !important;
   font-weight: 300;

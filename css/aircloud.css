@@ -734,15 +734,6 @@ body {
   flex: 1;
   margin-top:57px;
 }
-.toc-item > .toc-child{
-    display: none;
-}
-.toc-article li.active > .toc-child {
-    display: block;
-}
-.toc-article li:hover > .toc-child {
-    display: block;
-}
 @media screen and (max-width: 1180px) {
   .index-container {
     left: 0;
@@ -1210,4 +1201,14 @@ pre .javascript .function {
 }
 .gitment-comment p {
   text-indent: 0;
+}
+/*修改的样式*/
+.toc-item > .toc-child{
+  display: none;
+}
+.toc-article li.active > .toc-child {
+  display: block;
+}
+.toc-article li:hover > .toc-child {
+  display: block;
 }

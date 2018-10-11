@@ -11,7 +11,7 @@
 
     <title>
         
-        
+        project_email - undefined
         
     </title>
 
@@ -65,7 +65,7 @@
                     <span>TAGS</span>
                 </a>
             </li>
-            <li  class=active >
+            <li >
                 <a href="/archives">
                     <i class="iconfont icon-guidang2"></i>
                     <span>ARCHIVES</span>
@@ -87,6 +87,10 @@
             
         </ul>
     </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#邮件收发项目"><span class="toc-text">邮件收发项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#项目相关"><span class="toc-text">项目相关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#项目不足"><span class="toc-text">项目不足</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主要功能"><span class="toc-text">主要功能</span></a></li></ol>
+</div>
     
 </div>
 
@@ -113,50 +117,56 @@
         
 
 
-<!-- 归档列表 -->
+<div class="post-container">
+    <div class="post-title">
+        project_email
+    </div>
 
-<div class="archives-container">
-
-<div class="one-tag-list">
-                <span class="fa fa-calendar-times-o listing-seperator" id="2018">
-                    <span class="tag-text">2018</span>
-                </span>
-    <ul>
+    <div class="post-meta">
+        <span class="attr">Post：<span>2018-10-11 15:16:32</span></span>
         
-        <!-- <li class="listing-item">
-        <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-        <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-        </li> -->
-        <li >
-            <span>10-11</span>
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/2018/10/11/project-email/">
-                        <span>
-                            project_email
-                        </span>
-            </a>
-            <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-        </li>
+        <span class="attr">Tags：/
         
-        <!-- <li class="listing-item">
-        <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-        <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-        </li> -->
-        <li >
-            <span>10-11</span>
-            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-            <a href="/2018/10/11/summary-2018-9/">
-                        <span>
-                            summary-2018.9
-                        </span>
-            </a>
-            <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-        </li>
+        <a class="tag" href="/tags/#project" title="project">project</a>
+        <span>/</span>
         
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h2 id="邮件收发项目"><a href="#邮件收发项目" class="headerlink" title="邮件收发项目"></a>邮件收发项目</h2><p>大二上开始学html，css，js之后做的暑假做的前端页面，很感谢老师可以给一个练手的机会，在做的过程中发现了很多问题，以及项目完成之后的收获。<br>虽然是一个很简单的界面，但是之前学习的时候不太仔细，也没有demo练习，还是做的磕磕绊绊，还好最后做的差不多了。TAT<br>争对过程中的问题，阅读了很多关于语法规范的文章，js，jq又重新学习了一遍（练习了很多），大二下期基本在学习之中度过的。希望在以后的项目中可以有所进步，彻底的实现前后端分离！！！</p>
+<h2 id="项目相关"><a href="#项目相关" class="headerlink" title="项目相关"></a>项目相关</h2><ul>
+<li>完成时间：大二上期寒假  2018-3月左右</li>
+<li>bootsrap框架，layui框架，jquery</li>
+</ul>
+<h2 id="项目不足"><a href="#项目不足" class="headerlink" title="项目不足"></a>项目不足</h2><ul>
+<li>语法不规范，复用性不强，后面修改过一次感觉修改起来很复杂</li>
+<li>js不熟练，项目之后大二下期又重新开始学习了一遍js，并写了总结 (<a href="https://biubiuins.github.io/2018/10/11/summary-2018-9/" target="_blank" rel="noopener">https://biubiuins.github.io/2018/10/11/summary-2018-9/</a>)</li>
+<li><p>技术不足，没有实现前后端分离</p>
+<h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2></li>
+<li><p>首页 <a href="http://mailroom.sicau.edu.cn/email/public/" target="_blank" rel="noopener">http://mailroom.sicau.edu.cn/email/public/</a></p>
+<ul>
+<li>bootsrap做了响应式，用了ajax请求数据</li>
+</ul>
+</li>
+<li>管理页面（需要登陆仅提供图片）<br><img src="img/project_eamil/admin.png" alt="首页"><ul>
+<li>实现全选与批量删除</li>
+<li>点击已取之后，重新获取数据（保证筛选邮件之后点击已取仍显示的是筛选之后的邮件)</li>
+<li>邮件类型默认显示上一次选择的类型，可输入筛选的下拉框<br><img src="img/project_eamil/admin1.png" alt="首页"></li>
+<li>超级管理员界面实现了原生js模态框，并做了根据屏幕居中</li>
+</ul>
+</li>
+</ul>
 
-    </ul>
-</div>
-
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
 </div>
     </div>
 </div>
@@ -196,7 +206,7 @@
     // We expose some of the variables needed by the front end
     window.hexo_search_path = "search.xml"
     window.hexo_root = "/"
-    window.isPost = false
+    window.isPost = true
 </script>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>

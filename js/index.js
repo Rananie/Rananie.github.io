@@ -233,9 +233,7 @@ function getDistanceOfLeft(obj) {
 }
 
 var toc = document.getElementById('toc')
-console.log(toc);
 var tocToTop = getDistanceOfLeft(toc).top;
-console.log(tocToTop);
 function reHeightToc(){
     if(toc) { // resize toc height
         toc.style.height = ( document.documentElement.clientHeight - 10 ) + 'px';

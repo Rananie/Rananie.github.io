@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="biubiu的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        express学习笔记 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <span>biubiu</span>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>SEARCH</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#express-学习笔记"><span class="toc-text">express 学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建简单服务器"><span class="toc-text">搭建简单服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#app-listen-port-hostname-backlog-callback"><span class="toc-text">app.listen(port, [hostname], [backlog], [callback])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app-set-name-value"><span class="toc-text">app.set(name,value)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app-get-name"><span class="toc-text">app.get(name)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app-get-path-callback-callback-…"><span class="toc-text">app.get(path, callback [, callback …])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app-all-path-callback-callback-…"><span class="toc-text">app.all(path, callback [, callback …])</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#请求与响应"><span class="toc-text">请求与响应</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#response"><span class="toc-text">response</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#res-render"><span class="toc-text">res.render()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#res-setHeader"><span class="toc-text">res.setHeader()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#res-redirect"><span class="toc-text">res.redirect()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#res-location"><span class="toc-text">res.location()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#request"><span class="toc-text">request</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#req-query"><span class="toc-text">req.query</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#req-body"><span class="toc-text">req.body</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#req-params"><span class="toc-text">req.params</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#req-param-name"><span class="toc-text">req.param(name)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#中间件"><span class="toc-text">中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#app-use（-path-function）"><span class="toc-text">app.use（[path],function）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#错误中间件"><span class="toc-text">错误中间件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用生成器"><span class="toc-text">应用生成器</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        express学习笔记
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2018-10-12 14:09:06</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#express" title="express">express</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h1 id="express-学习笔记"><a href="#express-学习笔记" class="headerlink" title="express 学习笔记"></a>express 学习笔记</h1><hr>
+<h2 id="搭建简单服务器"><a href="#搭建简单服务器" class="headerlink" title="搭建简单服务器"></a>搭建简单服务器</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//express() 是一个由 express 模块导出的入口（top-level）函数</span></span><br><span class="line"><span class="keyword">let</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="comment">//创建一个express应用实例名app</span></span><br><span class="line"><span class="keyword">let</span> app = express();</span><br><span class="line"><span class="comment">// 设置端口号：3000</span></span><br><span class="line"><span class="comment">//process.env.PORT：读取当前目录下环境变量port的值</span></span><br><span class="line"><span class="keyword">let</span> port = process.env.PORT || <span class="number">3000</span> ;</span><br><span class="line"><span class="comment">//在端口号上开启服务</span></span><br><span class="line">app.listen(port,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"server start"</span>+port);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="app-listen-port-hostname-backlog-callback"><a href="#app-listen-port-hostname-backlog-callback" class="headerlink" title="app.listen(port, [hostname], [backlog], [callback])"></a>app.listen(port, [hostname], [backlog], [callback])</h3><p>类似于node中的http.Server.listen()<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 设置端口号：3000</span></span><br><span class="line"><span class="comment">//process.env.PORT：读取当前目录下环境变量port的值</span></span><br><span class="line"><span class="keyword">let</span> port = process.env.PORT || <span class="number">3000</span> ;</span><br><span class="line"><span class="comment">//在端口号上开启服务</span></span><br><span class="line">app.listen(port,<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"server start"</span>+port);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>服务器启动时候，<br>默认端口3000：node app.js<br>设置端口8080：PORT=8080 node app.js</p>
+<h3 id="app-set-name-value"><a href="#app-set-name-value" class="headerlink" title="app.set(name,value)"></a>app.set(name,value)</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置 views 文件夹为存放视图文件的目录, 即存放模板文件的地方,__dirname 为全局变量,存储当前正在执行的脚本所在的目录。</span></span><br><span class="line">app.set(<span class="string">'views'</span>, path.join(__dirname, <span class="string">'views'</span>));</span><br><span class="line">app.set(<span class="string">"views"</span>,<span class="string">"./views"</span>);</span><br><span class="line"><span class="comment">//设置使用的模板引擎</span></span><br><span class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'ejs’)</span></span><br><span class="line"><span class="string">app.set("view engine","jade")</span></span><br><span class="line"><span class="string">npm install --save express-art-template</span></span><br><span class="line"><span class="string">//设置art模板引擎，后缀为art</span></span><br><span class="line"><span class="string">app.engine('</span>art<span class="string">', require('</span>express-art-template<span class="string">'));</span></span><br></pre></td></tr></table></figure>
+<h3 id="app-get-name"><a href="#app-get-name" class="headerlink" title="app.get(name)"></a>app.get(name)</h3><p>返回name的value值<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//实例一</span></span><br><span class="line">app.get(<span class="string">'title'</span>);</span><br><span class="line"><span class="comment">// =&gt; undefined</span></span><br><span class="line">app.set(<span class="string">'title'</span>, <span class="string">'My Site'</span>);</span><br><span class="line">app.get(<span class="string">'title'</span>);</span><br><span class="line"><span class="comment">// =&gt; "My Site"</span></span><br><span class="line"><span class="comment">//实例二</span></span><br><span class="line">app.set(<span class="string">'port'</span>, process.env.PORT || <span class="number">3000</span>);</span><br><span class="line"><span class="keyword">var</span> server = app.listen(app.get(<span class="string">'port'</span>), <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"server start"</span>+port);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="app-get-path-callback-callback-…"><a href="#app-get-path-callback-callback-…" class="headerlink" title="app.get(path, callback [, callback …])"></a>app.get(path, callback [, callback …])</h3><h3 id="app-all-path-callback-callback-…"><a href="#app-all-path-callback-callback-…" class="headerlink" title="app.all(path, callback [, callback …])"></a>app.all(path, callback [, callback …])</h3><p>这种方法就像标准的app.METHOD()方法, 除了它匹配所有HTTP动词。<br>访问path路径的所有方法执行的回调函数.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//* 表示匹配所有的路径</span></span><br><span class="line">app.all(<span class="string">'*'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">  res.end(req.method + <span class="string">'user'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//一般放在最后面防止前面的被覆盖</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="请求与响应"><a href="#请求与响应" class="headerlink" title="请求与响应"></a>请求与响应</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Express 应用使用回调函数的参数： request 和 response 对象来处理请求和响应的数据。</span></span><br><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">  res.send(<span class="string">'hello world'</span>);</span><br><span class="line">  res.status(<span class="number">404</span>).send(错误请求)<span class="comment">//访问这个路径是设定状态码为404</span></span><br><span class="line">  <span class="comment">//通过res.send（）接口向客户端发送hello world，send只能响应一次，意思是只能出现一个send</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>res.send（）只能出现一次<br>如果要响应多次，用node原生的write和end，但是如果只有write会处于一个挂起状态<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>)</span>&#123;</span><br><span class="line">  res.write(<span class="string">'hello world'</span>);</span><br><span class="line">  res.write(<span class="string">'hello world'</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>res.send有结束响应的作用</li>
+<li>res.write没有结束响应的作用，需要res.end结束中间件挂起<h3 id="response"><a href="#response" class="headerlink" title="response"></a>response</h3>下表中响应对象（res）的方法向客户端返回响应，终结请求响应的循环。如果在路由句柄中一个方法也不调用，来自客户端的请求会一直挂起。<br><img src="/img/express/response.jpg" alt="response"><h4 id="res-render"><a href="#res-render" class="headerlink" title="res.render()"></a>res.render()</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置 views 文件夹为存放视图文件的目录, 即存放模板文件的地方,__dirname 为全局变量,存储当前正在执行的脚本所在的目录。</span></span><br><span class="line">app.set(<span class="string">'views'</span>, path.join(__dirname, <span class="string">'views'</span>));</span><br><span class="line">app.set(<span class="string">"views"</span>,<span class="string">"./views"</span>);</span><br><span class="line"><span class="comment">//第一个是渲染的views文件夹下面的index，第二个是传递的数据,注意需要设置模板引擎</span></span><br><span class="line">res.render(<span class="string">"index"</span>,&#123;&#125;,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="res-setHeader"><a href="#res-setHeader" class="headerlink" title="res.setHeader()"></a>res.setHeader()</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//Content-Type的作用 该实体头的作用是让服务器告诉浏览器它发送的数据属于什么文件类型。</span><br><span class="line">res.setHeader(&quot;Content-Type&quot;,&apos;text/html;charset=utf-8&apos;)</span><br></pre></td></tr></table></figure>
+<h4 id="res-redirect"><a href="#res-redirect" class="headerlink" title="res.redirect()"></a>res.redirect()</h4><p>调用redirect()方法后，其后的代码都不会被执行。<br>而使用redirect()设置的状态码不是301或302也不会发生跳转<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">res.redirect([status,] path)</span><br><span class="line">//重定义到path所指定的URL，重定向时可以同时指定HTTP状态码，不指定状态码默认为302</span><br></pre></td></tr></table></figure></p>
+<h4 id="res-location"><a href="#res-location" class="headerlink" title="res.location()"></a>res.location()</h4><p>location()方法本质上是调用了ServerResponse对象的setHeader()方法，但并没有设置状态码。<br>使用location()设置头信息，而不设置状态码或状态码不是301或302，并不会发生重定向<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res.location(path)</span><br></pre></td></tr></table></figure></p>
+<h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><p><img src="/img/express/request.jpg" alt="response"></p>
+<h4 id="req-query"><a href="#req-query" class="headerlink" title="req.query"></a>req.query</h4><p>处理 get 请求，获取 get 请求参数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// GET /search?q=tobi+ferret</span></span><br><span class="line">req.query.q</span><br><span class="line"><span class="comment">// =&gt; "tobi ferret"</span></span><br><span class="line"><span class="comment">// GET /shoes?order=desc&amp;shoe[color]=blue&amp;shoe[type]=converse</span></span><br><span class="line">req.query.order</span><br><span class="line"><span class="comment">// =&gt; "desc"</span></span><br><span class="line">req.query.shoe.color</span><br><span class="line"><span class="comment">// =&gt; "blue"</span></span><br><span class="line">req.query.shoe.type</span><br><span class="line"><span class="comment">// =&gt; "converse"</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="req-body"><a href="#req-body" class="headerlink" title="req.body"></a>req.body</h4><p>处理 post 请求，获取 post 请求体<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// POST user[name]=tobi&amp;user[email]=tobi@learnboost.com</span></span><br><span class="line">req.body.user.name</span><br><span class="line"><span class="comment">// =&gt; "tobi"</span></span><br><span class="line">req.body.user.email</span><br><span class="line"><span class="comment">// =&gt; "tobi@learnboost.com"</span></span><br><span class="line"><span class="comment">// POST &#123; "name": "tobi" &#125;</span></span><br><span class="line">req.body.name</span><br><span class="line"><span class="comment">// =&gt; "tobi"</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="req-params"><a href="#req-params" class="headerlink" title="req.params"></a>req.params</h4><p>处理 /:xxx 形式的 get 或 post 请求，获取请求参数<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// GET /user/tj</span></span><br><span class="line">req.params.name</span><br><span class="line"><span class="comment">// =&gt; "tj"</span></span><br><span class="line"><span class="comment">// GET /file/javascripts/jquery.js</span></span><br><span class="line">req.params[<span class="number">0</span>]</span><br><span class="line"><span class="comment">// =&gt; "javascripts/jquery.js"</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="req-param-name"><a href="#req-param-name" class="headerlink" title="req.param(name)"></a>req.param(name)</h4><p>处理 get 和 post 请求，但查找优先级由高到低为 req.params→req.body→req.query<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ?name=tobi</span></span><br><span class="line">req.param(<span class="string">'name'</span>)</span><br><span class="line"><span class="comment">// =&gt; "tobi"</span></span><br><span class="line"><span class="comment">// POST name=tobi</span></span><br><span class="line">req.param(<span class="string">'name'</span>)</span><br><span class="line"><span class="comment">// =&gt; "tobi"</span></span><br><span class="line"><span class="comment">// /user/tobi for /user/:name</span></span><br><span class="line">req.param(<span class="string">'name'</span>)</span><br><span class="line"><span class="comment">// =&gt; "tobi"</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h3><p>用于客户端与服务器路由匹配之前的中间操作，正常中间件放在路由上面，中间件通过next()往下走。</p>
+<h4 id="app-use（-path-function）"><a href="#app-use（-path-function）" class="headerlink" title="app.use（[path],function）"></a>app.use（[path],function）</h4><p>利用express托管静态文件<br>node.js不能通过目录来引入文件，而express可以，public为静态目录<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//设置public文件夹为存放静态文件的目录。</span></span><br><span class="line"><span class="keyword">let</span> path=<span class="built_in">require</span>(<span class="string">"path"</span>)</span><br><span class="line"><span class="comment">//ex4里面唯一的内置中间件</span></span><br><span class="line">app.use(express.static(path.join(__dirname, <span class="string">'public'</span>)));</span><br></pre></td></tr></table></figure></p>
+<p>一个中间件处理器，请求来了，让那些中间件先处理一遍</p>
+<ul>
+<li>没有挂载路径的中间件，应用的每个请求都会执行该中间件</li>
+<li>挂载至 /path 的中间件，任何指向 /path 的请求都会执行它<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">app.use(&quot;/name&quot;,function(req,res,next)&#123;</span><br><span class="line">res.setHeader(&quot;Content-Type&quot;,&apos;text/html;charset=utf-8&apos;)</span><br><span class="line">next();</span><br><span class="line">&#125;)</span><br><span class="line">app.get(&quot;/name/n&quot;,function(req,res)&#123;</span><br><span class="line">&#125;)</span><br><span class="line">//也可以匹配到，在执行get请求/name/n时先执行上面的中间件</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="错误中间件"><a href="#错误中间件" class="headerlink" title="错误中间件"></a>错误中间件</h4><p>错误处理中间件和其他中间件定义类似，只是必须要使用 4 个参数(err, req, res, next)。即使不需要 next 对象，也必须在签名中声明它，否则中间件会被识别为一个常规中间件，不能处理错误。遇见错误之后直接执行错误中间件。<br>错误处理中间件应当在在其他 app.use() 和路由调用之后才能加载，一般放在路由的最底部，比如：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser'</span>);</span><br><span class="line"><span class="keyword">var</span> methodOverride = <span class="built_in">require</span>(<span class="string">'method-override'</span>);</span><br><span class="line">app.use(bodyParser());</span><br><span class="line">app.use(methodOverride());</span><br><span class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">err, req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 业务逻辑</span></span><br><span class="line">  <span class="built_in">console</span>.error(err.stack);</span><br><span class="line">  res.status(<span class="number">500</span>).send(<span class="string">'Something broke!'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="应用生成器"><a href="#应用生成器" class="headerlink" title="应用生成器"></a>应用生成器</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//安装</span></span><br><span class="line">$ npm install express-generator -g</span><br><span class="line"><span class="comment">//view=XXX 使用引擎名字  myapp项目名称</span></span><br><span class="line">$ express --view=pug myapp</span><br><span class="line"><span class="comment">//安装所有依赖</span></span><br><span class="line">$ cd myapp</span><br><span class="line">$ npm install</span><br><span class="line"></span><br><span class="line"><span class="comment">//启动myapp项目</span></span><br><span class="line">$ set DEBUG=myapp:* &amp; npm start</span><br></pre></td></tr></table></figure>
+<hr>
+<p>我的石墨文档链接：<a href="https://shimo.im/docs/TXeewzaE8Jsdgn0I/" target="_blank" rel="noopener">https://shimo.im/docs/TXeewzaE8Jsdgn0I/</a><br>练习的简易聊天室连接：<a href="https://github.com/biubiuins/demo_chat" target="_blank" rel="noopener">https://github.com/biubiuins/demo_chat</a></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!--<footer class="footer">-->
+    <!--<ul class="list-inline text-center">-->
+        <!---->
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+    <!--</ul>-->
+    <!---->
+    <!--<p>-->
+        <!--<span id="busuanzi_container_site_pv">-->
+            <!--<span id="busuanzi_value_site_pv"></span>PV-->
+        <!--</span>-->
+        <!--<span id="busuanzi_container_site_uv">-->
+            <!--<span id="busuanzi_value_site_uv"></span>UV-->
+        <!--</span>-->
+        <!--Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>-->
+<!--</footer>-->
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.xml"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</html>

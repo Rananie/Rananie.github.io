@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-10-12T06:09:31.574Z</updated>
+  <updated>2018-10-12T06:24:07.211Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>git</title>
+    <link href="http://yoursite.com/2018/10/12/git/"/>
+    <id>http://yoursite.com/2018/10/12/git/</id>
+    <published>2018-10-12T06:13:03.000Z</published>
+    <updated>2018-10-12T06:24:07.211Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="git的基本操作"><a href="#git的基本操作" class="headerlink" title="git的基本操作"></a>git的基本操作</h1><hr><h2 id="初次配置"><a href="#初次配置" class="headerlink" title="初次配置"></a>初次配置</h2><p>第一步需要配置用户名和邮箱地址，因为git为每一次提交记录名字和邮箱地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git config --global user.name &apos;runoob&apos;</span><br><span class="line">$ git config --global user.email test@runoob.com</span><br></pre></td></tr></table></figure></p><h3 id="ssh-key"><a href="#ssh-key" class="headerlink" title="ssh key"></a>ssh key</h3><ol><li><p>生成一对shh key（id_rsa私钥，id_rsa.pub公钥）</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure><p> 注：在主目录下生成的密钥在 /c/Users/用户名/.ssh/id_rsa 里</p></li><li><p>查看公钥内容（需在.ssh目录下执行）</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat id_rsa.pub</span><br></pre></td></tr></table></figure></li><li><p>复制密钥内容添加到 github 上</p></li><li><p>使用ssh协议上传文件到仓库</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git add .</span><br><span class="line">git commit -m &quot; &quot;</span><br><span class="line">git remote add origin git@github.com:...</span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure><p> 注：若在创建新仓库时有readme.md 文件会上传失败</p></li></ol><h2 id="新建版本库"><a href="#新建版本库" class="headerlink" title="新建版本库"></a>新建版本库</h2><ol><li>git里面先进入新建库的文件夹下</li><li><p>初始化库<br>初始化目录，目录下回出现一个.git的目录，该目录包含了资源的所有元数据</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br><span class="line">git init 目录名</span><br></pre></td></tr></table></figure></li><li><p>添加文件到暂存区<br>将当前目录下几个文件纳入版本控制，需要先用git add 命令告诉git开始对这些文件进行跟踪</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add .//添加当前项目的所有文件</span><br><span class="line">git add README //添加名为README的文件</span><br><span class="line">git add -A 所有修改的内容添加到缓存区</span><br></pre></td></tr></table></figure></li><li><p>增加到版本库中<br>使用 git add 命令将想要快照的内容写入缓存区， 而执行 git commit -m将缓存区内容添加到仓库中。</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git commit -a 跳过这一步</span><br><span class="line">git commit -m&quot;版本留言描述&quot;</span><br></pre></td></tr></table></figure></li><li><p>连接远程仓库（现在GitHub上面新建仓库）</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin 仓库地址</span><br></pre></td></tr></table></figure></li><li><p>讲本地仓库推送到远程库上</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git push</span><br><span class="line">git push -u origin master //首次执行，说明上传到仓库的master分支上</span><br></pre></td></tr></table></figure></li></ol><hr><p>问题：![rejected] master -&gt; master (fetch first)<br>解决办法：1. 先执行<code>git pull</code></p><pre><code>2. 然后再执行`git push --force origin master`替换原先的 `git push -u origin master`</code></pre><h2 id="从远程库克隆"><a href="#从远程库克隆" class="headerlink" title="从远程库克隆"></a>从远程库克隆</h2><p>先把别人的fork进自己的库里面</p><ol><li><p>克隆仓库到指定目录</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//自己在本地进入需要克隆进的文件夹下执行下面第一条指令</span><br><span class="line">git clone 仓库地址</span><br><span class="line">git clone 仓库地址 本地目录</span><br></pre></td></tr></table></figure></li><li><p>add commit push</p></li></ol><h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><ol><li><p>本地删除文件</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//或者直接在文件管理器中把没用的文件删了</span><br><span class="line">//需要git进入文件夹下</span><br><span class="line">$ rm test.txt</span><br></pre></td></tr></table></figure><p> Git知道你删除了文件，这个时候只是本地删除了文件，而版本库里面还有文件，所以可以恢复文件</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -- test.txt</span><br></pre></td></tr></table></figure></li><li><p>远程库删除文件</p> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm test.txt</span><br></pre></td></tr></table></figure><p> 记得还需要commit</p><hr><p> 我的石墨文档：<a href="https://shimo.im/docs/2Eg0gszciPEQBPxG/" target="_blank" rel="noopener">https://shimo.im/docs/2Eg0gszciPEQBPxG/</a></p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;git的基本操作&quot;&gt;&lt;a href=&quot;#git的基本操作&quot; class=&quot;headerlink&quot; title=&quot;git的基本操作&quot;&gt;&lt;/a&gt;git的基本操作&lt;/h1&gt;&lt;hr&gt;
+&lt;h2 id=&quot;初次配置&quot;&gt;&lt;a href=&quot;#初次配置&quot; class=&quot;headerl
+      
+    
+    </summary>
+    
+    
+      <category term="git" scheme="http://yoursite.com/tags/git/"/>
+    
+  </entry>
   
   <entry>
     <title>express学习笔记</title>
@@ -45,9 +69,9 @@
     <link href="http://yoursite.com/2018/10/11/project-email/"/>
     <id>http://yoursite.com/2018/10/11/project-email/</id>
     <published>2018-10-11T07:16:32.000Z</published>
-    <updated>2018-10-11T07:27:15.403Z</updated>
+    <updated>2018-10-12T06:12:53.915Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="邮件收发项目"><a href="#邮件收发项目" class="headerlink" title="邮件收发项目"></a>邮件收发项目</h2><p>大二上开始学html，css，js之后做的暑假做的前端页面，很感谢老师可以给一个练手的机会，在做的过程中发现了很多问题，以及项目完成之后的收获。<br>&nbsp;&nbsp;&nbsp;&nbsp;虽然是一个很简单的界面，但是之前学习的时候不太仔细，也没有demo练习，还是做的磕磕绊绊，还好最后做的差不多了。TAT<br>&nbsp;&nbsp;针对过程中的问题，阅读了很多关于语法规范的文章，js，jq又重新学习了一遍（练习了很多），大二下期基本在学习之中度过的。希望在以后的项目中可以有所进步，彻底的实现前后端分离！！！</p><h2 id="项目相关"><a href="#项目相关" class="headerlink" title="项目相关"></a>项目相关</h2><ul><li>完成时间：大二上期寒假  2018-3月左右</li><li>bootsrap框架，layui框架，jquery</li></ul><h2 id="项目不足"><a href="#项目不足" class="headerlink" title="项目不足"></a>项目不足</h2><ul><li>语法不规范，复用性不强，后面修改过一次感觉修改起来很复杂</li><li>js不熟练，项目之后大二下期又重新开始学习了一遍js，并写了总结 (<a href="https://biubiuins.github.io/2018/10/11/summary-2018-9/" target="_blank" rel="noopener">https://biubiuins.github.io/2018/10/11/summary-2018-9/</a>)</li><li><p>技术不足，没有实现前后端分离</p><h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2></li><li><p>首页 <a href="http://mailroom.sicau.edu.cn/email/public/" target="_blank" rel="noopener">http://mailroom.sicau.edu.cn/email/public/</a></p><ul><li>bootsrap做了响应式，用了ajax请求数据</li></ul></li><li>管理页面（需要登陆仅提供图片）<br><img src="/img/project_eamil/admin.png" alt="首页"><ul><li>实现全选与批量删除</li><li>点击已取之后，重新获取数据（保证筛选邮件之后点击已取仍显示的是筛选之后的邮件)</li><li>邮件类型默认显示上一次选择的类型，可输入筛选的下拉框<br><img src="/img/project_eamil/admin1.png" alt="首页"></li><li>超级管理员界面实现了原生js模态框，并做了根据屏幕居中</li></ul></li></ul>]]></content>
+    <content type="html"><![CDATA[<h2 id="邮件收发项目"><a href="#邮件收发项目" class="headerlink" title="邮件收发项目"></a>邮件收发项目</h2><p>大二上开始学html，css，js之后做的暑假做的前端页面，很感谢老师可以给一个练手的机会，在做的过程中发现了很多问题，以及项目完成之后的收获。<br>&nbsp;&nbsp;&nbsp;&nbsp;虽然是一个很简单的界面，但是之前学习的时候不太仔细，也没有demo练习，还是做的磕磕绊绊，还好最后做的差不多了。TAT<br>&nbsp;&nbsp;针对过程中的问题，阅读了很多关于语法规范的文章，js，jq又重新学习了一遍（练习了很多），大二下期基本在学习之中度过的。希望在以后的项目中可以有所进步，彻底的实现前后端分离！！！</p><h2 id="项目相关"><a href="#项目相关" class="headerlink" title="项目相关"></a>项目相关</h2><ul><li>完成时间：大二上期寒假  2018-3月左右</li><li>bootsrap框架，layui框架，jquery</li></ul><h2 id="项目不足"><a href="#项目不足" class="headerlink" title="项目不足"></a>项目不足</h2><ul><li>语法不规范，复用性不强，后面修改过一次感觉修改起来很复杂</li><li>js不熟练，项目之后大二下期又重新开始学习了一遍js，并写了总结 (<a href="https://biubiuins.github.io/2018/10/11/summary-2018-9/" target="_blank" rel="noopener">https://biubiuins.github.io/2018/10/11/summary-2018-9/</a>)</li><li><p>技术不足，没有实现前后端分离</p><h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2></li><li><p>首页 <a href="http://mailroom.sicau.edu.cn/email/public/" target="_blank" rel="noopener">http://mailroom.sicau.edu.cn/email/public/</a></p><ul><li>bootsrap做了响应式，用了ajax请求数据</li></ul></li><li>管理页面（需要登陆仅提供图片）<br><img src="/img/project_email/admin.png" alt="首页"><ul><li>实现全选与批量删除</li><li>点击已取之后，重新获取数据（保证筛选邮件之后点击已取仍显示的是筛选之后的邮件)</li><li>邮件类型默认显示上一次选择的类型，可输入筛选的下拉框<br><img src="/img/project_email/admin1.png" alt="首页"></li><li>超级管理员界面实现了原生js模态框，并做了根据屏幕居中</li></ul></li></ul>]]></content>
     
     <summary type="html">
     

@@ -11,7 +11,7 @@
 
     <title>
         
-        
+        todolist - undefined
         
     </title>
 
@@ -53,7 +53,7 @@
     </div>
     <div class="contents" id="nav-content">
         <ul>
-            <li  class=active >
+            <li >
                 <a href="/">
                     <i class="iconfont icon-shouye1"></i>
                     <span>HOME</span>
@@ -88,6 +88,10 @@
         </ul>
     </div>
     
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#todoList-vue练习"><span class="toc-text">todoList(vue练习)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#功能"><span class="toc-text">功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#收获"><span class="toc-text">收获</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#watch"><span class="toc-text">watch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#directivess"><span class="toc-text">directivess</span></a></li></ol></li></ol></li></ol>
+</div>
+    
 </div>
 
 
@@ -111,114 +115,59 @@
     <div class="index-middle">
         <!-- Main Content -->
         
-<div class="post-preview-container" style="min-height: 720px">
-    
-    <div class="post-preview">
-        <div class="post-time">2018-10-13</div>
-        <div class="post-info">
-            <a href="/2018/10/13/todolist/">
-                <h3>
-                    todolist
-                </h3>
-            </a>
-            <p>
-                
-                <span>/</span>
-                
-                <a class="tag" href="/tags/#vue" title="vue">vue</a>
-                <span>/</span>
-                
-                
-            </p>
-        </div>
-    </div>
-    
-    <div class="post-preview">
-        <div class="post-time">2018-10-12</div>
-        <div class="post-info">
-            <a href="/2018/10/12/git/">
-                <h3>
-                    git
-                </h3>
-            </a>
-            <p>
-                
-                <span>/</span>
-                
-                <a class="tag" href="/tags/#git" title="git">git</a>
-                <span>/</span>
-                
-                
-            </p>
-        </div>
-    </div>
-    
-    <div class="post-preview">
-        <div class="post-time">2018-10-12</div>
-        <div class="post-info">
-            <a href="/2018/10/12/express学习笔记/">
-                <h3>
-                    express学习笔记
-                </h3>
-            </a>
-            <p>
-                
-                <span>/</span>
-                
-                <a class="tag" href="/tags/#node" title="node">node</a>
-                <span>/</span>
-                
-                
-            </p>
-        </div>
-    </div>
-    
-    <div class="post-preview">
-        <div class="post-time">2018-10-11</div>
-        <div class="post-info">
-            <a href="/2018/10/11/project-email/">
-                <h3>
-                    project_email
-                </h3>
-            </a>
-            <p>
-                
-                <span>/</span>
-                
-                <a class="tag" href="/tags/#project" title="project">project</a>
-                <span>/</span>
-                
-                
-            </p>
-        </div>
-    </div>
-    
-    <div class="post-preview">
-        <div class="post-time">2018-10-11</div>
-        <div class="post-info">
-            <a href="/2018/10/11/summary-2018-9/">
-                <h3>
-                    summary-2018.9
-                </h3>
-            </a>
-            <p>
-                
-                <span>/</span>
-                
-                <a class="tag" href="/tags/#summary" title="summary">summary</a>
-                <span>/</span>
-                
-                
-            </p>
-        </div>
-    </div>
-    
-</div>
-<ul class="pager">
-    
-    
-</ul>
 
+
+<div class="post-container">
+    <div class="post-title">
+        todolist
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2018-10-13 22:51:07</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#vue" title="vue">vue</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h1 id="todoList-vue练习"><a href="#todoList-vue练习" class="headerlink" title="todoList(vue练习)"></a>todoList(vue练习)</h1><hr>
+<p><img src="/img/vue/todoList.png" width="85%"></p>
+<h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><ul>
+<li>将数据循坏到页面</li>
+<li>敲回车时添加新数据（需要添加isSelected属性）</li>
+<li>删除功能</li>
+<li>计算当前没有被选中的，选中的有删除样式</li>
+<li>双击任务可以修改任务,已经完成的不可以</li>
+<li>自定义输入框聚焦</li>
+<li>回车或者失去焦点的时候修改成功</li>
+<li>计算属性 根据hash展示todolist</li>
+<li>数据永久化，hash单页刷新</li>
+</ul>
+<hr>
+<h2 id="收获"><a href="#收获" class="headerlink" title="收获"></a>收获</h2><h3 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h3><ul>
+<li>监控todos的变化,当变化时更新数据</li>
+<li>watch:todos(){} 只能监控一层的数据变化（删减）</li>
+<li>watch:todos:handler(){},deep:true 深度监控<h3 id="directivess"><a href="#directivess" class="headerlink" title="directivess"></a>directivess</h3></li>
+<li>自定义指令，指令是操作的dom</li>
+<li>XXX(el,bindings){} 名字需要和v-XXX的相同，el指代的是当前的dom，bindings参数</li>
+</ul>
+<hr>
+<p>github: <a href="https://github.com/biubiuins/todolist" target="_blank" rel="noopener">https://github.com/biubiuins/todolist</a></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
     </div>
 </div>
 
@@ -257,7 +206,7 @@
     // We expose some of the variables needed by the front end
     window.hexo_search_path = "search.xml"
     window.hexo_root = "/"
-    window.isPost = false
+    window.isPost = true
 </script>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>

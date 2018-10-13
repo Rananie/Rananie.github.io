@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[todolist]]></title>
     <url>%2F2018%2F10%2F13%2Ftodolist%2F</url>
-    <content type="text"><![CDATA[todoList(vue练习) 功能 将数据循坏到页面 敲回车时添加新数据（需要添加isSelected属性） 删除功能 计算当前没有被选中的，选中的有删除样式 双击任务可以修改任务,已经完成的不可以 自定义输入框聚焦 回车或者失去焦点的时候修改成功 计算属性 根据hash展示todolist 数据永久化，hash单页刷新 收获watch 监控todos的变化,当变化时更新数据 watch:todos(){} 只能监控一层的数据变化（删减） watch:todos:handler(){},deep:true 深度监控directivess 自定义指令，指令是操作的dom XXX(el,bindings){} 名字需要和v-XXX的相同，el指代的是当前的dom，bindings参数 github: https://github.com/biubiuins/todolist]]></content>
+    <content type="text"><![CDATA[todoList(vue练习) 功能 将数据循坏到页面 敲回车时添加新数据（需要添加isSelected属性） 删除功能 计算当前没有被选中的，选中的有删除样式 双击任务可以修改任务,已经完成的不可以 自定义输入框聚焦 回车或者失去焦点的时候修改成功 计算属性 根据hash展示todolist 数据永久化，hash单页刷新 收获watch 监控todos的变化,当变化时更新数据 watch:todos(){} 只能监控一层的数据变化（删减） watch:todos:handler(){},deep:true 深度监控directivess 自定义指令，指令是操作的dom XXX(el,bindings){} 名字需要和v-XXX的相同，el指代的是当前的dom，bindings参数 github: https://github.com/biubiuins/demo_todolist]]></content>
       <tags>
         <tag>vue</tag>
       </tags>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="biubiu的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        HTTP 简括 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <span>biubiu</span>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>SEARCH</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#http"><span class="toc-text">http</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP请求方法"><span class="toc-text">HTTP请求方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#get-和-post区别"><span class="toc-text">get 和 post区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP状态码"><span class="toc-text">HTTP状态码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http的请求部分"><span class="toc-text">http的请求部分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP-content-type"><span class="toc-text">HTTP content-type</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP响应头信息"><span class="toc-text">HTTP响应头信息</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#跨域的响应头"><span class="toc-text">跨域的响应头</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        HTTP 简括
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2018-10-24 21:11:13</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#http" title="http">http</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h1 id="http"><a href="#http" class="headerlink" title="http"></a>http</h1><p>一次完整的HTTP请求需要7个步骤</p>
+<ol>
+<li>建立TCP连接</li>
+<li>Web浏览器向Web服务器发送请求命令<ul>
+<li>一旦建立了TCP连接，Web浏览器就会向Web服务器发送请求命令。例如：GET/sample/hello.jsp HTTP/1.1。</li>
+</ul>
+</li>
+<li>Web浏览器发送请求头信息<ul>
+<li>浏览器发送其请求命令之后，还要以头信息的形式向Web服务器发送一些别的信息，之后浏览器发送了一空白行来通知服务器，它已经结束了该头信息的发送。</li>
+</ul>
+</li>
+<li>Web服务器应答<ul>
+<li>客户机向服务器发出请求后，服务器会客户机回送应答， HTTP/1.1 200 OK ，应答的第一部分是协议的版本号和应答状态码</li>
+</ul>
+</li>
+<li>Web服务器发送应答头信息<ul>
+<li>正如客户端会随同请求发送关于自身的信息一样，服务器也会随同应答向用户发送关于它自己的数据及被请求的文档。</li>
+</ul>
+</li>
+<li>Web服务器向浏览器发送数据<ul>
+<li>Web服务器向浏览器发送头信息后，它会发送一个空白行来表示头信息的发送到此为结束，接着，它就以Content-Type应答头信息所描述的格式发送用户所请求的实际数据。</li>
+</ul>
+</li>
+<li>Web服务器关闭TCP连接<br>一般情况下，一旦Web服务器向浏览器发送了请求数据，它就要关闭TCP连接，然后如果浏览器或者服务器在其头信息加入了这行代码：Connection:keep-alive，TCP连接在发送后将仍然保持打开状态，于是，浏览器可以继续通过相同的连接发送请求。</li>
+</ol>
+<p>http协议的特点<br>①通信流程：断开式（无状态）</p>
+<ul>
+<li>断开式：http协议每次响应完成后，会断开与客户端的连接</li>
+<li>无状态：由于服务器断开了之前的连接，就无法知晓连接间的关系。</li>
+</ul>
+<p>②内容格式：消息头和消息体</p>
+<h2 id="HTTP请求方法"><a href="#HTTP请求方法" class="headerlink" title="HTTP请求方法"></a>HTTP请求方法</h2><ul>
+<li>OPTIONS<br>返回服务器针对特定资源所支持的HTML请求方法   或web服务器发送*测试服务器功能。询问支持的方法。</li>
+<li>HEAD<ul>
+<li>类似get，但只返回响应头。</li>
+<li>常用于查看某个页面的状态</li>
+</ul>
+</li>
+<li>GET<ul>
+<li>获取资源</li>
+<li>GET方法要求服务器将URL定位的资源放在响应报文的数据部分，回送给客户端。</li>
+<li>使用GET方法时，请求参数和对应的值附加在URL后面，利用一个问号（“?”）代表URL的结尾与请求参数的开始</li>
+</ul>
+</li>
+<li>POST<ul>
+<li>向指定资源提交数据进行处理请求（提交表单、上传文件）</li>
+<li>将请求参数封装在HTTP请求数据中，以名称/值的形式出现</li>
+</ul>
+</li>
+<li>PUT<br>向指定资源位置上上传其最新内容</li>
+<li>DELETE<br>请求服务器删除</li>
+<li>TRACE<br>  回显服务器收到的请求，用于测试和诊断</li>
+<li>CONNECT<br>HTTP/1.1协议中能够将连接改为管道方式的代理服务器</li>
+</ul>
+<h3 id="get-和-post区别"><a href="#get-和-post区别" class="headerlink" title="get 和 post区别"></a>get 和 post区别</h3><p>get请求无消息体，只能携带少量数据<br>post请求有消息体，可以携带大量数据<br>get请求将数据放在url地址中<br>post请求将数据放在消息体中</p>
+<h2 id="HTTP状态码"><a href="#HTTP状态码" class="headerlink" title="HTTP状态码"></a>HTTP状态码</h2><ul>
+<li>1xx：相关信息</li>
+<li>2xx：操作成功</li>
+<li>3xx：重定向</li>
+<li>4xx：客户端错误</li>
+<li>5xx：服务器错误<br>GET<br>安全且幂等<br>获取表示<br>变更时获取表示（缓存）</li>
+<li>200（OK） - 表示已在响应中发出</li>
+<li>204（无内容） - 资源有空表示</li>
+<li>301（Moved Permanently） - 资源的URI已被更新</li>
+<li>303（See Other） - 其他（如，负载均衡）</li>
+<li>304（not modified）- 资源未更改（缓存）</li>
+<li>400 （bad request）- 指代坏请求（如，参数错误）</li>
+<li>404 （not found）- 资源不存在</li>
+<li>406 （not acceptable）- 服务端不支持所需表示</li>
+<li>500 （internal server error）- 通用错误响应</li>
+<li>503 （Service Unavailable）- 服务端当前无法处理请求<br>POST<br>创建子资源<br>部分更新资源</li>
+<li>如果没有被修改，则不过更新资源（乐观锁）</li>
+<li>200（OK）- 如果现有资源已被更改</li>
+<li>201（created）- 如果新资源被创建</li>
+<li>202（accepted）- 已接受处理请求但尚未完成（异步处理）</li>
+<li>301（Moved Permanently）- 资源的URI被更新</li>
+<li>303（See Other）- 其他（如，负载均衡）</li>
+<li>400（bad request）- 指代坏请求</li>
+<li>404 （not found）- 资源不存在</li>
+<li>406 （not acceptable）- 服务端不支持所需表示</li>
+<li>409 （conflict）- 通用冲突</li>
+<li>412 （Precondition Failed）- 前置条件失败（如执行条件更新时的冲突）</li>
+<li>415 （unsupported media type）- 接受到的表示不受支持</li>
+<li>500 （internal server error）- 通用错误响应</li>
+<li>503 （Service Unavailable）- 服务当前无法处理请求</li>
+</ul>
+<p>PUT<br>通过替换的方式更新资源</p>
+<ul>
+<li>200 （OK）- 如果已存在资源被更改</li>
+<li>201 （created）- 如果新资源被创建</li>
+<li>301（Moved Permanently）- 资源的URI已更改</li>
+<li>303 （See Other）- 其他（如，负载均衡）</li>
+<li>400 （bad request）- 指代坏请求</li>
+<li>404 （not found）- 资源不存在</li>
+<li>406 （not acceptable）- 服务端不支持所需表示</li>
+<li>409 （conflict）- 通用冲突</li>
+<li>412 （Precondition Failed）- 前置条件失败（如执行条件更新时的冲突）</li>
+<li>415 （unsupported media type）- 接受到的表示不受支持</li>
+<li>500 （internal server error）- 通用错误响应</li>
+<li>503 （Service Unavailable）- 服务当前无法处理请求</li>
+</ul>
+<p>DELETE<br>不安全但幂等<br>删除资源</p>
+<ul>
+<li>200 （OK）- 资源已被删除</li>
+<li>301 （Moved Permanently）- 资源的URI已更改</li>
+<li>303 （See Other）- 其他，如负载均衡</li>
+<li>400 （bad request）- 指代坏请求</li>
+<li>404 （not found）- 资源不存在</li>
+<li>409 （conflict）- 通用冲突</li>
+<li>500 （internal server error）- 通用错误响应</li>
+<li>503 （Service Unavailable）- 服务端当前无法处理请求</li>
+</ul>
+<hr>
+<h2 id="http的请求部分"><a href="#http的请求部分" class="headerlink" title="http的请求部分"></a>http的请求部分</h2><ul>
+<li>请求方法（GET/POST）、URI、协议/版本</li>
+<li>请求头(Request Header)</li>
+<li>空行</li>
+<li>请求正文</li>
+</ul>
+<p><a href="https://blog.csdn.net/chen1403876161/article/details/51546653" target="_blank" rel="noopener">https://blog.csdn.net/chen1403876161/article/details/51546653</a><br>| 请求头 | 说明 | 实列|<br>| —— | —— |——|<br>| Accept |这个头信息指定浏览器或其他客户端可以处理的 MIME 类型|Accept:application/json, text/plain, <em>/</em>|<br>|Accept-Encoding|浏览器能够进行解码的数据编码方式|Accept-Encoding:gzip, deflate, br|<br>|Accept-Language|    这个头信息指定客户端的首选语言，在这种情况下，Servlet 会产生多种语言的结果|Accept-Language:zh-CN,zh;q=0.8|<br>|Accept-Charset|浏览器可接受的字符集||<br>|Connection|这个头信息指示客户端是否可以处理持久 HTTP 连接。持久连接允许客户端或其他浏览器通过单个请求来检索多个文件|Connection:keep-alive|<br>|Host|指定请求资源的Intenet主机和端口号（服务器，向谁请求）|Host:localhost:3000|<br>|Referer|这个头信息指示所指向的 Web 页的 URL。例如，如果您在网页 1，点击一个链接到网页 2，当浏览器请求网页 2 时，网页 1 的 URL 就会包含在 Referer 头信息中。|<br>|User-Agent|这个头信息识别发出请求的浏览器或其他客户端，并可以向不同类型的浏览器返回不同的内容。|<br>|Content-Length|这个头信息只适用于 POST 请求，并给出 POST 数据的大小（以字节为单位）。|Content-Length:60|<br>|Content-Type|用于post请求|Content-Type：application/json;charset=UTF-8|<br>|Authorization|授权信息，通常出现在对服务器发送的WWW-Authenticate头的应答中||</p>
+<h2 id="HTTP-content-type"><a href="#HTTP-content-type" class="headerlink" title="HTTP content-type"></a>HTTP content-type</h2><ul>
+<li>application/x-www-form-urlencoded<br>  这应该是最常见的 POST 提交数据的方式了。<form enctype="””">中默认的encType，form表单数据被编码为         key/value格式发送到服务器（表单默认的提交数据的格式）</form></li>
+<li>multipart/form-data<br> 需要在表单中进行文件上传时，就需要使用该格式</li>
+<li>application/json<br>JSON数据格式</li>
+</ul>
+<h2 id="HTTP响应头信息"><a href="#HTTP响应头信息" class="headerlink" title="HTTP响应头信息"></a>HTTP响应头信息</h2><ol>
+<li>状态行</li>
+<li>响应头(Response Header)</li>
+<li>空行</li>
+<li>响应正文</li>
+</ol>
+<p>其他一般的在上面的连接中可以看到，这里整理了平时遇到的跨域问题</p>
+<h3 id="跨域的响应头"><a href="#跨域的响应头" class="headerlink" title="跨域的响应头"></a>跨域的响应头</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">res.setHeader(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>);</span><br><span class="line"> res.setHeader(<span class="string">"Access-Control-Allow-Headers"</span>, <span class="string">"Content-Type,Content-Length, Authorization, Accept,X-Requested-With"</span>);</span><br><span class="line"> res.setHeader(<span class="string">"Access-Control-Allow-Methods"</span>,<span class="string">"PUT,POST,GET,DELETE,OPTIONS"</span>);</span><br><span class="line"> res.setHeader(<span class="string">"X-Powered-By"</span>,<span class="string">' 3.2.1'</span>)</span><br><span class="line"> res.setHeader(<span class="string">"Content-Type"</span>, <span class="string">"application/json;charset=utf-8"</span>);</span><br><span class="line"> <span class="keyword">if</span>(req.method==<span class="string">"OPTIONS"</span>)  <span class="keyword">return</span> res.end();<span class="comment">/*让options请求快速返回*/</span></span><br></pre></td></tr></table></figure>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!--<footer class="footer">-->
+    <!--<ul class="list-inline text-center">-->
+        <!---->
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+    <!--</ul>-->
+    <!---->
+    <!--<p>-->
+        <!--<span id="busuanzi_container_site_pv">-->
+            <!--<span id="busuanzi_value_site_pv"></span>PV-->
+        <!--</span>-->
+        <!--<span id="busuanzi_container_site_uv">-->
+            <!--<span id="busuanzi_value_site_uv"></span>UV-->
+        <!--</span>-->
+        <!--Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>-->
+<!--</footer>-->
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.xml"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</html>

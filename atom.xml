@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-10-27T08:51:35.280Z</updated>
+  <updated>2018-10-28T05:44:22.294Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>summary_js</title>
+    <link href="http://yoursite.com/2018/10/28/summary_js/"/>
+    <id>http://yoursite.com/2018/10/28/summary_js/</id>
+    <published>2018-10-28T05:32:22.000Z</published>
+    <updated>2018-10-28T05:44:22.294Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="enter回车"><a href="#enter回车" class="headerlink" title="enter回车"></a>enter回车</h1><blockquote><p>持续更新</p></blockquote><p>在修改项目的过程中，学习到了关于表单enter键提交是否可以触发</p><ul><li>如果type是submit，一个文本或者多个文本都会提交</li><li>如果是button，仅一个文本的时候提交</li><li>type为image的按钮，等同于type为submit的效果</li><li>用button时，fx和IE有不同的表现。radio和checkbox在FX下也会触发提交表单，在IE下不会</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;enter回车&quot;&gt;&lt;a href=&quot;#enter回车&quot; class=&quot;headerlink&quot; title=&quot;enter回车&quot;&gt;&lt;/a&gt;enter回车&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;持续更新&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在修改项目的过程中，学
+      
+    
+    </summary>
+    
+    
+      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
+    
+  </entry>
   
   <entry>
     <title>demo_vue-book</title>

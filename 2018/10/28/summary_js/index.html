@@ -11,7 +11,7 @@
 
     <title>
         
-        about - biubiu - undefined
+        summary_js - undefined
         
     </title>
 
@@ -71,7 +71,7 @@
                     <span>ARCHIVES</span>
                 </a>
             </li>
-            <li  class=active >
+            <li >
                 <a href="/about/">
                     <i class="iconfont icon-guanyu2"></i>
                     <span>ABOUT</span>
@@ -87,6 +87,10 @@
             
         </ul>
     </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#enter回车"><span class="toc-text">enter回车</span></a></li></ol>
+</div>
     
 </div>
 
@@ -111,18 +115,46 @@
     <div class="index-middle">
         <!-- Main Content -->
         
-<div class="post-content ">
-    <blockquote>
-<p>普通人不能停止学习与思考</p>
-</blockquote>
-<p>大多时候，都在思考想活成什么样子，想过哪种的生活。现在仍然没有找到答案。<br>&nbsp;&nbsp;&nbsp;&nbsp;但至少就现在我想学前端，然后找到一份相关的工作。想学习日语，考过日语n2。或许过段时间，我又有了新的目标，新的想完成的事情。但至少现在会尽我最大的努力去实现我现在想要的。<br>&nbsp;&nbsp;&nbsp;&nbsp;希望每一个人都是幸运的，所有的付出终会有收获。</p>
-<p>github：<a href="https://github.com/biubiuins" target="_blank" rel="noopener">https://github.com/biubiuins</a></p>
 
-    
-    <div id="comment-container">
+
+<div class="post-container">
+    <div class="post-title">
+        summary_js
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2018-10-28 13:32:22</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <h1 id="enter回车"><a href="#enter回车" class="headerlink" title="enter回车"></a>enter回车</h1><blockquote>
+<p>持续更新</p>
+</blockquote>
+<p>在修改项目的过程中，学习到了关于表单enter键提交是否可以触发</p>
+<ul>
+<li>如果type是submit，一个文本或者多个文本都会提交</li>
+<li>如果是button，仅一个文本的时候提交</li>
+<li>type为image的按钮，等同于type为submit的效果</li>
+<li>用button时，fx和IE有不同的表现。radio和checkbox在FX下也会触发提交表单，在IE下不会</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
     </div>
 </div>
-
     </div>
 </div>
 
@@ -161,7 +193,7 @@
     // We expose some of the variables needed by the front end
     window.hexo_search_path = "search.xml"
     window.hexo_root = "/"
-    window.isPost = false
+    window.isPost = true
 </script>
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>

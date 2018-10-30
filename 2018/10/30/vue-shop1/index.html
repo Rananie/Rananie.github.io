@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="biubiu的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        demo_vue-shop1 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <span>biubiu</span>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>SEARCH</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#vue实战项目外卖1"><span class="toc-text">vue实战项目外卖1</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#技术栈"><span class="toc-text">技术栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#前端路由"><span class="toc-text">前端路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建项目"><span class="toc-text">搭建项目</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#结构分析"><span class="toc-text">结构分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#编码测试与打包发布项目"><span class="toc-text">编码测试与打包发布项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字体图标准备"><span class="toc-text">字体图标准备</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目目录"><span class="toc-text">项目目录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#stylus"><span class="toc-text">stylus</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#分析整个项目的-vue-组件结构"><span class="toc-text">分析整个项目的 vue 组件结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编写网页"><span class="toc-text">编写网页</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#样式重置"><span class="toc-text">样式重置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移动端"><span class="toc-text">移动端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#路由"><span class="toc-text">路由</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#引入组件"><span class="toc-text">引入组件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在App-vue里使用router-view"><span class="toc-text">在App.vue里使用router-view</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FooterGuide-vue"><span class="toc-text">FooterGuide.vue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HeaderTop-vue"><span class="toc-text">HeaderTop.vue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Msite-vue"><span class="toc-text">Msite.vue</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Swiper-轮播"><span class="toc-text">Swiper 轮播</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ShopList-vue"><span class="toc-text">ShopList.vue</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Login-vue"><span class="toc-text">Login.vue</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#后台应用"><span class="toc-text">后台应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#封装ajax请求函数"><span class="toc-text">封装ajax请求函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#封装接口请求函数"><span class="toc-text">封装接口请求函数</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        demo_vue-shop1
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2018-10-30 19:52:29</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#vue" title="vue">vue</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h1 id="vue实战项目外卖1"><a href="#vue实战项目外卖1" class="headerlink" title="vue实战项目外卖1"></a>vue实战项目外卖1</h1><h2 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h2><p>前段数据处理/交互/组件化</p>
+<ul>
+<li>vue全家桶/技术栈<ul>
+<li>vue</li>
+<li>vue-router</li>
+<li>vuex</li>
+<li>mint-ui</li>
+<li>vue-lazyload</li>
+<li>vue-scroller</li>
+</ul>
+</li>
+<li>滑动库<ul>
+<li>vue-scroller</li>
+<li>better-scroll</li>
+<li>swiper</li>
+</ul>
+</li>
+<li>日期处理<ul>
+<li>moment</li>
+<li>date-fns</li>
+</ul>
+</li>
+</ul>
+<p>前后台交互</p>
+<ul>
+<li>mock数据：mockjs</li>
+<li>接口测试：postman</li>
+<li>ajax请求 axios</li>
+</ul>
+<p>模块化</p>
+<ul>
+<li>ES6</li>
+<li>babel</li>
+</ul>
+<p>项目构建/工程化</p>
+<ul>
+<li>webpack</li>
+<li>vue-cli</li>
+</ul>
+<p>css预编译器</p>
+<ul>
+<li>stylus</li>
+</ul>
+<p>后台</p>
+<ul>
+<li>node</li>
+<li>express</li>
+<li>mongodb</li>
+</ul>
+<h2 id="前端路由"><a href="#前端路由" class="headerlink" title="前端路由"></a>前端路由</h2><p>一级路由</p>
+<ul>
+<li>首页  /miste Miste.vue</li>
+<li>搜索  /search Search.vue</li>
+<li>订单  /order Order.vue</li>
+<li>个人  /profile Profile.vue</li>
+<li>登陆  /login  Login.vue(不适用底部导航)</li>
+<li>商家  /shop  Shop.vue(不适用底部导航)</li>
+</ul>
+<p>二级导航</p>
+<ul>
+<li>商家商品 /goods ShopGoods.vue</li>
+<li>商家评价 /ratings ShopRatings.vue</li>
+<li>商家信息 /info  ShopInfo.vue</li>
+</ul>
+<h2 id="搭建项目"><a href="#搭建项目" class="headerlink" title="搭建项目"></a>搭建项目</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack my-project</span><br></pre></td></tr></table></figure>
+<h3 id="结构分析"><a href="#结构分析" class="headerlink" title="结构分析"></a>结构分析</h3><ul>
+<li>|– build : webpack 相关的配置文件夹(基本不需要修改)</li>
+<li>|– config: webpack 相关的配置文件夹(基本不需要修改)<ul>
+<li>index.js: 指定的后台服务的端口号和静态资源文件夹</li>
+</ul>
+</li>
+<li>|– node_modules</li>
+<li>|– src : 源码文件夹<ul>
+<li>|– main.js: 应用入口 js  （初始化vue实例并使用需要的插件 ）</li>
+</ul>
+</li>
+<li>|– static: 静态资源文件夹</li>
+<li>|– .babelrc: babel 的配置文件</li>
+<li>|– .editorconfig: 通过编辑器的编码/格式进行一定的配置</li>
+<li>|– .eslintignore: eslint 检查忽略的配置</li>
+<li>|– .eslintrc.js: eslint 检查的配置</li>
+<li>|– .gitignore: git 版本管理忽略的配置</li>
+<li>|– index.html: 默认的主渲染页面文件</li>
+<li>|– package.json: 应用包配置文件</li>
+<li>|– README.md: 应用描述说明的 readme 文件</li>
+</ul>
+<h3 id="编码测试与打包发布项目"><a href="#编码测试与打包发布项目" class="headerlink" title="编码测试与打包发布项目"></a>编码测试与打包发布项目</h3><ul>
+<li>编码测试<br>npm run dev<br>访问: <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a><br>编码, 自动编译打包(HMR), 查看效果</li>
+<li>打包发布<br>npm run build<br>//服务器管理<br>npm install -g serve<br>serve dist<br>访问: <a href="http://localhost:5000" target="_blank" rel="noopener">http://localhost:5000</a></li>
+</ul>
+<h3 id="字体图标准备"><a href="#字体图标准备" class="headerlink" title="字体图标准备"></a>字体图标准备</h3><p>使用阿里的图标库<a href="http://www.iconfont.cn/home/index?spm=a313x.7781069.1998910419.2" target="_blank" rel="noopener">http://www.iconfont.cn/home/index?spm=a313x.7781069.1998910419.2</a><br>生成的资源:<a href="http://at.alicdn.com/t/font_726904_68moeoeirj3.css" target="_blank" rel="noopener">http://at.alicdn.com/t/font_726904_68moeoeirj3.css</a></p>
+<h3 id="项目目录"><a href="#项目目录" class="headerlink" title="项目目录"></a>项目目录</h3><ul>
+<li>src<ul>
+<li>api 与后台交互模板文件夹</li>
+<li>common 通用资源文件夹，如fonts/img/stylus</li>
+<li>components 非路由组件文件夹</li>
+<li>filters 自定义过滤器模块文件夹</li>
+<li>mock 模拟数据接口文件夹</li>
+<li>pages 路由组件文件夹</li>
+<li>router 路由器文件夹</li>
+<li>store vuex相关模块文件夹</li>
+<li>App.vue 应用组件，根组件</li>
+<li>main.js 入口js</li>
+</ul>
+</li>
+</ul>
+<h2 id="stylus"><a href="#stylus" class="headerlink" title="stylus"></a>stylus</h2><p>安装<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install stylus stylus-loader --save-dev</span><br></pre></td></tr></table></figure></p>
+<p>使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;style lang=&apos;stylus&apos; rel=&apos;stylesheet/stylus&apos;&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>在common文件夹下新建stylus文件夹</p>
+</li>
+<li><p>在stylus文件加下面新建mixins.styl文件</p>
+</li>
+</ul>
+<h2 id="分析整个项目的-vue-组件结构"><a href="#分析整个项目的-vue-组件结构" class="headerlink" title="分析整个项目的 vue 组件结构"></a>分析整个项目的 vue 组件结构</h2><ul>
+<li>|– components————非路由组件文件夹<ul>
+<li>|– FooterGuide—————底部组件文件夹<ul>
+<li>|– FooterGuide.vue——–底部组件 vue</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>|– pages—————–路由组件文件夹<ul>
+<li>|– Msite—————首页组件文件夹<ul>
+<li>|– Msite.vue——–首页组件 vue</li>
+</ul>
+</li>
+<li>|– Search—————-搜索组件文件夹<ul>
+<li>|– Search.vue———搜索组件 vue</li>
+</ul>
+</li>
+<li>|– Order————–订单组件文件夹<ul>
+<li>|– Order.vue——-订单组件 vue<ul>
+<li>|– Profile————–个人组件文件夹</li>
+<li>|– Profile.vue——-个人组件 vue</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>|– App.vue—————应用根组件 vue</li>
+<li>|– main.js—————应用入口 js</li>
+</ul>
+<ol>
+<li>页面底部的FooterGuide组件只是用来放pages里的组件的容器，所以它不是路由组件</li>
+<li>页面最上面的标题栏在我们的项目中属于路由组件的组成部分（与中间内容部分在一起）</li>
+<li>但每个路由组件中都有最顶部的组件且相似度很高，所以可以将其抽取成为一个单独的组件</li>
+</ol>
+<h2 id="编写网页"><a href="#编写网页" class="headerlink" title="编写网页"></a>编写网页</h2><h3 id="样式重置"><a href="#样式重置" class="headerlink" title="样式重置"></a>样式重置</h3><p>在项目主目录下的static文件夹内新建css文件夹</p>
+<ul>
+<li>在css文件夹内新建重置样式文件reset.css</li>
+<li><p>在index.html 中引入</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"/static/css/reset.css"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h3><ul>
+<li><p>meta</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no&quot;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Fastclick</p>
+<blockquote>
+<p>当用户一次点击屏幕之后，浏览器并不能立刻判断用户是要进行双击缩放，还是想要进行单击操作。因此，iOS Safari 就等待 300 毫秒，以判断用户是否再次点击了屏幕。 于是，300 毫秒延迟就这么诞生了。</p>
+</blockquote>
+<ul>
+<li><p>安装fastclick库  解决点击响应延时 0.3s 问题</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install fastclick --save</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在main.js中引入，并绑定到body</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> FastClick <span class="keyword">from</span> <span class="string">'fastclick'</span></span><br><span class="line">FastClick.attach(<span class="built_in">document</span>.body);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3><h4 id="引入组件"><a href="#引入组件" class="headerlink" title="引入组件"></a>引入组件</h4><p>普通引入<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Msite <span class="keyword">from</span> <span class="string">'../pages/Msite/Msite.vue'</span></span><br></pre></td></tr></table></figure></p>
+<p>动态引入<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="attr">path</span>:<span class="string">'/msite'</span>,<span class="attr">component</span>:<span class="function"><span class="params">()</span>=&gt;</span> <span class="keyword">import</span>(<span class="string">'.../pages/Msite/Msite.vue'</span>)&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="在App-vue里使用router-view"><a href="#在App-vue里使用router-view" class="headerlink" title="在App.vue里使用router-view"></a>在App.vue里使用router-view</h4><p>引入底部导航FooterFuide，映射成标签，渲染到页面上<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.</span></span><br><span class="line"><span class="keyword">import</span> FooterGuide <span class="keyword">from</span> <span class="string">'./components/FooterGuide/FooterGuide.vue'</span></span><br><span class="line"><span class="comment">//2</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'App'</span>,</span><br><span class="line">  templates:&#123;FooterGuide&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//3</span></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="string">"app"</span>&gt;</span><br><span class="line">    &lt;router-view&gt; <span class="xml"><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">FooterGuide</span>&gt;</span><span class="tag">&lt;/<span class="name">FooterGuide</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;<span class="regexp">/template&gt;</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="FooterGuide-vue"><a href="#FooterGuide-vue" class="headerlink" title="FooterGuide.vue"></a>FooterGuide.vue</h3><h3 id="HeaderTop-vue"><a href="#HeaderTop-vue" class="headerlink" title="HeaderTop.vue"></a>HeaderTop.vue</h3><p>因为基本每个组件的头部样式都类似，只有内容有区别，所以把它抽离出来。<br><strong>页面分析</strong></p>
+<ol>
+<li>中间有一个固定的标题栏，只是用在不同的路由组件中显示的内容不同</li>
+<li>标题栏两侧可能有搜索框之类的部分（Msite）也可能没有</li>
+<li>此组件为非路由组件的公用组件（所以在Components文件夹内）<br><strong>实现</strong></li>
+</ol>
+<ul>
+<li>标题栏两侧是否有其他部分，要用到slot插槽进行组件间通信</li>
+<li>slot 通信是标签, 而不是单纯的数据</li>
+<li>中间标题栏接收的文本可以用props</li>
+</ul>
+<p>代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;header class=&quot;header&quot;&gt;</span><br><span class="line">      &lt;slot name=&quot;left&quot;&gt;&lt;/slot&gt;</span><br><span class="line">      &lt;span class=&quot;header_title&quot;&gt;</span><br><span class="line">      &lt;span class=&quot;header_title_text ellipsis&quot;&gt;&#123;&#123;title&#125;&#125;&lt;/span&gt;</span><br><span class="line">    &lt;/span&gt;</span><br><span class="line">      &lt;slot name=&quot;right&quot;&gt;&lt;/slot&gt;</span><br><span class="line">    &lt;/header&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure></p>
+<p><strong>props 传递数据</strong></p>
+<ol>
+<li><p>父组件传值</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;HeaderTop title=<span class="string">"四川农业大学(雅安市雨城区)"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">HeaderTop</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>子组件接收</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">props:&#123;</span><br><span class="line">    title:String</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>插槽 传递标签</strong><br>插槽用于显示父组件使用子组件时，中间内容的显示<br>命名插槽</p>
+<ol>
+<li><p>子组件插槽命名</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;slot name=&quot;left&quot;&gt;&lt;/slot&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>父组件匹配插槽</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;span slot=&quot;left&quot;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Msite-vue"><a href="#Msite-vue" class="headerlink" title="Msite.vue"></a>Msite.vue</h3><h4 id="Swiper-轮播"><a href="#Swiper-轮播" class="headerlink" title="Swiper 轮播"></a>Swiper 轮播</h4><p><strong>文档:</strong>  <a href="http://www.swiper.com.cn/api/" target="_blank" rel="noopener">Swiper官方文档</a><br>安装<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save swiper</span><br></pre></td></tr></table></figure></p>
+<p>引入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import Swiper from &apos;swiper&apos;</span><br><span class="line">import &apos;swiper/dist/css/swiper.min.css&apos;</span><br></pre></td></tr></table></figure></p>
+<h4 id="ShopList-vue"><a href="#ShopList-vue" class="headerlink" title="ShopList.vue"></a>ShopList.vue</h4><p>抽离出一个组件</p>
+<h4 id="Login-vue"><a href="#Login-vue" class="headerlink" title="Login.vue"></a>Login.vue</h4><ul>
+<li>利用<code>@click=&quot;$router.back()&quot;</code>实现点击页面的箭头返回上一级路由/Profile的功能</li>
+<li>已确定底部的四个路由组件需要显示Footer部分</li>
+<li>而Login组件为一级路由组件，且不需要显示底部的FooterGuide导航组件</li>
+<li><p>所以为路由组件添加meta元数据来标识是否显示Footer,<code>v-show=&quot;$route.meta.showFooter&quot;</code>·来判断是否显示</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  path: <span class="string">'/msite'</span>,</span><br><span class="line">  component: Msite,</span><br><span class="line">  meta: &#123;</span><br><span class="line">    showFooter: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="后台应用"><a href="#后台应用" class="headerlink" title="后台应用"></a>后台应用</h2><ol>
+<li>整个项目为前后端分离的项目：mintshop-client 与 mintshop-server</li>
+<li>后台应用负责处理前台应用提交的请求, 并给前台应用返回 json 数据</li>
+<li>前台应用负责展现数据, 与用户交互, 与后台应用交互<br><strong>数据库</strong></li>
+<li>确保启动 mongodb 服务</li>
+<li>进入mintshop-server文件夹，启动服务器应用:  <code>npm start</code></li>
+</ol>
+<h3 id="封装ajax请求函数"><a href="#封装ajax请求函数" class="headerlink" title="封装ajax请求函数"></a>封装ajax请求函数</h3><p>新建两个文件<br>api/ajax.js<br>api/index.js</p>
+<ul>
+<li>为了实现统一向后端发送请求数据，所以需要封装一个ajax请求函数</li>
+</ul>
+<p>引入axios,axios返回的是一个promise对象<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">'axios'</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>之前调用请求函数，返回的是response,现在想实现请求函数之后直接返回response.data</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 向外部暴漏一个函数 ajax</span></span><br><span class="line"><span class="comment"> * @param &#123;*&#125; url 请求路径，默认为空</span></span><br><span class="line"><span class="comment"> * @param &#123;*&#125; data 请求参数，默认为空对象</span></span><br><span class="line"><span class="comment"> * @param &#123;*&#125; type 请求方法，默认为GET</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> <span class="title">ajax</span> (<span class="params">url = <span class="string">''</span>, data = &#123;&#125;, type = <span class="string">'GET'</span></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 返回值 Promise对象 （异步返回的数据是response.data，而不是response）</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// （利用axios）异步执行ajax请求</span></span><br><span class="line">    <span class="keyword">let</span> promise <span class="comment">// 这个内部的promise用来保存axios的返回值(promise对象)</span></span><br><span class="line">    <span class="keyword">if</span> (type === <span class="string">'GET'</span>) &#123;</span><br><span class="line">      <span class="comment">// 准备 url query 参数数据</span></span><br><span class="line">      <span class="keyword">let</span> dataStr = <span class="string">''</span> <span class="comment">// 数据拼接字符串，将data连接到url</span></span><br><span class="line">      <span class="built_in">Object</span>.keys(data).forEach(<span class="function"><span class="params">key</span> =&gt;</span> &#123;</span><br><span class="line">        dataStr += key + <span class="string">'='</span> + data[key] + <span class="string">'&amp;'</span></span><br><span class="line">      &#125;)</span><br><span class="line">      <span class="keyword">if</span> (dataStr !== <span class="string">''</span>) &#123;</span><br><span class="line">        dataStr = dataStr.substring(<span class="number">0</span>, dataStr.lastIndexOf(<span class="string">'&amp;'</span>))</span><br><span class="line">        url = url + <span class="string">'?'</span> + dataStr</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// 发送 get 请求</span></span><br><span class="line">      promise = axios.get(url)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 发送 post 请求</span></span><br><span class="line">      promise = axios.post(url, data)</span><br><span class="line">    &#125;</span><br><span class="line">    promise.then(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 成功回调resolve()</span></span><br><span class="line">      resolve(response.data)</span><br><span class="line">    &#125;)</span><br><span class="line">      .catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 失败回调reject()</span></span><br><span class="line">        reject(error)</span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="封装接口请求函数"><a href="#封装接口请求函数" class="headerlink" title="封装接口请求函数"></a>封装接口请求函数</h3><ul>
+<li>有了发送请求数据的ajax函数，还需要封装一些与后台交互的接口函数</li>
+<li>根据接口文档来定义接口请求函数</li>
+<li>这个接口函数返回的仍然是promise</li>
+<li>在路径里面的是路径参数，通过第二个参数传过去的query参数</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!--<footer class="footer">-->
+    <!--<ul class="list-inline text-center">-->
+        <!---->
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+    <!--</ul>-->
+    <!---->
+    <!--<p>-->
+        <!--<span id="busuanzi_container_site_pv">-->
+            <!--<span id="busuanzi_value_site_pv"></span>PV-->
+        <!--</span>-->
+        <!--<span id="busuanzi_container_site_uv">-->
+            <!--<span id="busuanzi_value_site_uv"></span>UV-->
+        <!--</span>-->
+        <!--Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>-->
+<!--</footer>-->
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.xml"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</html>

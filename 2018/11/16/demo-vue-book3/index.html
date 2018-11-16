@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="biubiu的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        demo_vue-book3 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <span>biubiu</span>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>SEARCH</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#vue实战项目外卖3"><span class="toc-text">vue实战项目外卖3</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#实现登陆注册功能"><span class="toc-text">实现登陆注册功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#模块界面效果及交互功能说明"><span class="toc-text">模块界面效果及交互功能说明</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#效果一：切换登陆方式"><span class="toc-text">效果一：切换登陆方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#效果二：手机号合法检查"><span class="toc-text">效果二：手机号合法检查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#效果三：30s倒计时"><span class="toc-text">效果三：30s倒计时</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#效果四：-密码的显示隐藏"><span class="toc-text">效果四： 密码的显示隐藏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#效果五：前台表单验证"><span class="toc-text">效果五：前台表单验证</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#功能一：图形验证码"><span class="toc-text">功能一：图形验证码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#功能二：短信验证码"><span class="toc-text">功能二：短信验证码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#功能三：短信与密码登录"><span class="toc-text">功能三：短信与密码登录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#功能四：获取用户信息-实现自动登陆"><span class="toc-text">功能四：获取用户信息,实现自动登陆</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#功能五：退出登录"><span class="toc-text">功能五：退出登录</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        demo_vue-book3
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2018-11-16 19:57:44</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#vue" title="vue">vue</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h1 id="vue实战项目外卖3"><a href="#vue实战项目外卖3" class="headerlink" title="vue实战项目外卖3"></a>vue实战项目外卖3</h1><h2 id="实现登陆注册功能"><a href="#实现登陆注册功能" class="headerlink" title="实现登陆注册功能"></a>实现登陆注册功能</h2><h3 id="模块界面效果及交互功能说明"><a href="#模块界面效果及交互功能说明" class="headerlink" title="模块界面效果及交互功能说明"></a>模块界面效果及交互功能说明</h3><p><strong>界面相关效果</strong></p>
+<ol>
+<li>切换登陆方式</li>
+<li>手机号合法检查</li>
+<li>倒计时效果</li>
+<li>切换显示或隐藏密码</li>
+<li>前台验证提示</li>
+</ol>
+<p><strong>前后台交互功能</strong></p>
+<ol>
+<li>动态一次性图形验证码</li>
+<li>动态一次性短信验证码</li>
+<li>短信登陆</li>
+<li>密码登陆</li>
+<li>获取用户信息,实现自动登陆</li>
+<li>退出登陆</li>
+</ol>
+<h4 id="效果一：切换登陆方式"><a href="#效果一：切换登陆方式" class="headerlink" title="效果一：切换登陆方式"></a>效果一：切换登陆方式</h4><ol>
+<li><p>既然要切换登陆方式，就需要一个变量来标识这两种方式</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   data () &#123;</span><br><span class="line"><span class="keyword">return</span> &#123;</span><br><span class="line">	loginWay: <span class="literal">false</span> <span class="comment">// true代表短信登陆, false代表密码</span></span><br><span class="line">&#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>动态绑定a标签的class和点击事件来实现点击切换样式</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"login_header_title"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:;"</span> <span class="attr">:class</span>=<span class="string">"&#123;on: loginWay&#125;"</span> @<span class="attr">click</span>=<span class="string">"loginWay=true"</span>&gt;</span>短信登录<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:;"</span> <span class="attr">:class</span>=<span class="string">"&#123;on: !loginWay&#125;"</span> @<span class="attr">click</span>=<span class="string">"loginWay=false"</span>&gt;</span>密码登录<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>同时实现下面的表单登陆框自动切换</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"login_content"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">:class</span>=<span class="string">"&#123;on: loginWay&#125;"</span>&gt;</span></span><br><span class="line">        短信登陆的input...</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">:class</span>=<span class="string">"&#123;on: !loginWay&#125;"</span>&gt;</span></span><br><span class="line">        密码登陆的input...</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="效果二：手机号合法检查"><a href="#效果二：手机号合法检查" class="headerlink" title="效果二：手机号合法检查"></a>效果二：手机号合法检查</h4><ul>
+<li><p>既然是要对手机号格式进行检查就要为其绑定数据</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--v-model的值最好按照api文档里要求的字段来命名--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"tel"</span> <span class="attr">maxlength</span>=<span class="string">"11"</span> <span class="attr">placeholder</span>=<span class="string">"手机号"</span> <span class="attr">v-model</span>=<span class="string">"phone"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>根据手机号格式是否正确来动态的为获取验证码添加一个类名right_phone</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">disabled</span>=<span class="string">"disabled"</span> <span class="attr">class</span>=<span class="string">"get_verification"</span> <span class="attr">:class</span>=<span class="string">"&#123;right_phone:rightPhone&#125;"</span>&gt;</span>获取验证码<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>right_phone的值是根据phone来确定的，所以应该是一个计算属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">  rightPhone () &#123;</span><br><span class="line">    <span class="comment">// 利用正则对手机号进行匹配，返回布尔值</span></span><br><span class="line">    <span class="keyword">return</span> <span class="regexp">/^1\d&#123;10&#125;$/</span>.test(<span class="keyword">this</span>.phone)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>此时button的disabled也应该根据rightPhone的返回值来确定</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">:disabled</span>=<span class="string">"!rightPhone"</span> <span class="attr">class</span>=<span class="string">"get_verification"</span> <span class="attr">:class</span>=<span class="string">"&#123;right_phone:rightPhone&#125;"</span>&gt;</span>获取验证码<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在style部分加入新定义的right_phone样式</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.get_verification</span></span><br><span class="line">	...</span><br><span class="line">	&amp;<span class="selector-class">.right_phone</span></span><br><span class="line">    	<span class="attribute">color</span> black</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="效果三：30s倒计时"><a href="#效果三：30s倒计时" class="headerlink" title="效果三：30s倒计时"></a>效果三：30s倒计时</h4><ul>
+<li><p>点击获取验证码之后会显示30s倒计时的效果并发送获取验证码的请求</p>
+</li>
+<li><p>注意要阻止点击button的默认提交表单事件，所以用<a href="mailto:`@click.prevent" target="_blank" rel="noopener">`@click.prevent</a>`</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">:disabled</span>=<span class="string">"!rightPhone"</span> <span class="attr">class</span>=<span class="string">"get_verification"</span> <span class="attr">:class</span>=<span class="string">"&#123;right_phone:rightPhone&#125;"</span> @<span class="attr">click.prevent</span>=<span class="string">"getCode"</span>&gt;</span>获取验证码<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在data里定义定时变量computeTime，然后感觉时间判断显示的内容</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"get_verification"</span>&gt;</span>&#123;&#123;computeTime&gt;0 ? `($&#123;computeTime&#125;s)已发送` : '获取验证码'&#125;&#125;<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后在methods里定义定时器</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">    getCode () &#123;</span><br><span class="line">     <span class="comment">// 如果当前没有计时!this.computeTime等于this.computeTime === 0</span></span><br><span class="line">       <span class="keyword">if</span>(!<span class="keyword">this</span>.computeTime) &#123;</span><br><span class="line">         <span class="comment">// 启动倒计时</span></span><br><span class="line">         <span class="keyword">this</span>.computeTime = <span class="number">30</span></span><br><span class="line">         <span class="keyword">this</span>.intervalId = setInterval(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">           <span class="keyword">this</span>.computeTime--</span><br><span class="line">           <span class="keyword">if</span>(<span class="keyword">this</span>.computeTime &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">             <span class="comment">// 停止计时</span></span><br><span class="line">             clearInterval(<span class="keyword">this</span>.intervalId)</span><br><span class="line">           &#125;</span><br><span class="line">         &#125;, <span class="number">1000</span>)</span><br><span class="line">       &#125;</span><br><span class="line">     <span class="comment">// 发送ajax请求（向指定手机号发送验证码短信）</span></span><br><span class="line">   &#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="效果四：-密码的显示隐藏"><a href="#效果四：-密码的显示隐藏" class="headerlink" title="效果四： 密码的显示隐藏"></a>效果四： 密码的显示隐藏</h4><ul>
+<li><p>利用两个type不同的input来实现密码的显示隐藏</p>
+</li>
+<li><p>在data里定义showPwd(默认为false)控制两者的显隐，同时使用v-model绑定数据pwd</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">"login_verification"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">maxlength</span>=<span class="string">"8"</span> <span class="attr">placeholder</span>=<span class="string">"密码"</span> <span class="attr">v-if</span>=<span class="string">"showPwd"</span> <span class="attr">v-model</span>=<span class="string">"pwd"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">maxlength</span>=<span class="string">"8"</span> <span class="attr">placeholder</span>=<span class="string">"密码"</span> <span class="attr">v-else</span> <span class="attr">v-model</span>=<span class="string">"pwd"</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为滑块区域添加点击监听，用来切换showPwd的值</p>
+</li>
+<li><p>同时切换滑块的各种样式</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"switch_button"</span> <span class="attr">:class</span>=<span class="string">"showPwd?'on':'off'"</span> @<span class="attr">click</span>=<span class="string">"showPwd=!showPwd"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"switch_circle"</span> <span class="attr">:class</span>=<span class="string">"&#123;right: showPwd&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"switch_text"</span>&gt;</span>&#123;&#123;showPwd ? 'abc' : '...'&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加必要的style</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="selector-class">.switch_circle</span></span><br><span class="line">	...</span><br><span class="line">	&amp;<span class="selector-class">.right</span></span><br><span class="line">    	<span class="attribute">transform</span> translateX(30px)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="效果五：前台表单验证"><a href="#效果五：前台表单验证" class="headerlink" title="效果五：前台表单验证"></a>效果五：前台表单验证</h4><ol>
+<li><p>首先阻止点击登录button的默认提交表单事件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> @<span class="attr">submit.prevent</span> = <span class="string">"login"</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在methods里定义login方法并收集表单数据(即为未使用v-model绑定data的input添加data)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">        name: <span class="string">''</span>, <span class="comment">// 用户名</span></span><br><span class="line">        code: <span class="string">''</span>, <span class="comment">// 短信验证码</span></span><br><span class="line">        captcha: <span class="string">''</span>, <span class="comment">// 图形验证码</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在login里根据不同的登录方式对收集的数据进行检查</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">this</span>.loginWay) &#123;  <span class="comment">// 短信登陆</span></span><br><span class="line">	<span class="keyword">if</span>(!<span class="keyword">this</span>.rightPhone) &#123;</span><br><span class="line">		<span class="comment">// 手机号不正确</span></span><br><span class="line">    	<span class="keyword">return</span></span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span>(!<span class="regexp">/^\d&#123;6&#125;$/</span>.test(code)) &#123;</span><br><span class="line">        <span class="comment">// 验证必须是6位数字</span></span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">else</span> &#123;	<span class="comment">// 密码登陆</span></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>要将验证失败的提示信息显示出来，可以使用自定义AlertTip弹窗组件(开发中可以用第三方插件)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> AlertTip <span class="keyword">from</span> <span class="string">'../../components/AlertTip/AlertTip.vue'</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">	...</span><br><span class="line">	components: &#123;</span><br><span class="line">    	AlertTip</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为AlertTip定义状态数据</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">        alertText: <span class="string">''</span>, <span class="comment">// 提示文本</span></span><br><span class="line">        alertShow: <span class="literal">false</span>, <span class="comment">// 是否显示警告框</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在页面中放置弹窗组件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">section</span>&gt;</span></span><br><span class="line">	...</span><br><span class="line">    <span class="tag">&lt;<span class="name">AlertTip</span> <span class="attr">:alertText</span>=<span class="string">"alertText"</span> <span class="attr">v-show</span>=<span class="string">"alertShow"</span> @<span class="attr">closeTip</span>=<span class="string">"closeTip"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>抽取显示弹窗和关闭弹窗的方法，并在login方法和AlertTip中使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">showAlert (alertText) &#123;</span><br><span class="line">	<span class="keyword">this</span>.alertShow = <span class="literal">true</span></span><br><span class="line">	<span class="keyword">this</span>.alertText = alertText</span><br><span class="line">&#125;,</span><br><span class="line">closeTip () &#123;</span><br><span class="line">	<span class="keyword">this</span>.alertShow = <span class="literal">false</span></span><br><span class="line">	<span class="keyword">this</span>.alertText = <span class="string">''</span></span><br><span class="line">&#125;,</span><br><span class="line">login () &#123;</span><br><span class="line">	<span class="keyword">if</span>(<span class="keyword">this</span>.loginWay) &#123;  <span class="comment">// 短信登陆</span></span><br><span class="line">		<span class="keyword">if</span>(!<span class="keyword">this</span>.rightPhone) &#123;</span><br><span class="line">			<span class="comment">// 手机号不正确</span></span><br><span class="line">            <span class="keyword">this</span>.showAlert(<span class="string">'手机号不正确'</span>)</span><br><span class="line">    		<span class="keyword">return</span></span><br><span class="line">		&#125; <span class="keyword">else</span> <span class="keyword">if</span>(!<span class="regexp">/^\d&#123;6&#125;$/</span>.test(code)) &#123;</span><br><span class="line">        	<span class="keyword">this</span>.showAlert(<span class="string">'验证必须是6位数字'</span>)</span><br><span class="line">        	<span class="keyword">return</span></span><br><span class="line">    	&#125;</span><br><span class="line">	&#125;...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="功能一：图形验证码"><a href="#功能一：图形验证码" class="headerlink" title="功能一：图形验证码"></a>功能一：图形验证码</h3><ul>
+<li><p>根据API文档，动态一次性图形验证码的接口为<code>http://localhost:4000/captcha</code></p>
+</li>
+<li><p>同时为这个img添加点击事件，让其可以点击重新发送请求，刷新图片</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"get_verification"</span> <span class="attr">src</span>=<span class="string">"http://localhost:4000/captcha"</span> <span class="attr">alt</span>=<span class="string">"captcha"</span> @<span class="attr">click</span>=<span class="string">"getCaptcha"</span> <span class="attr">ref</span>=<span class="string">"captcha"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为这个img元素添加ref属性，方便在getCaptcha中使用</p>
+</li>
+<li><p>利用时间戳使其每次加载时的请求参数不一样</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">getCaptcha () &#123;</span><br><span class="line">	<span class="comment">// 每次指定的src要不一样</span></span><br><span class="line">    <span class="keyword">this</span>.$refs.captcha.src = <span class="string">'http://localhost:4000/captcha?time='</span>+<span class="built_in">Date</span>.now()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="功能二：短信验证码"><a href="#功能二：短信验证码" class="headerlink" title="功能二：短信验证码"></a>功能二：短信验证码</h4><ul>
+<li><p>利用第三方短信验证码平台(容联云通讯)提供的接口来实现</p>
+</li>
+<li><p>先在服务端项目将自己的sid与token填入util文件夹下的sms_util.js文件</p>
+</li>
+<li><p>再在客户端的登录组件中引入接口请求函数(这是为了方便处理，同样也可以在action里调用)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;reqSendCode, reqSmsLogin, reqPwdLogin&#125; <span class="keyword">from</span> <span class="string">'../../api'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在getCode方法里进行调用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 请求返回的是promise对象，所以用到了async await</span></span><br><span class="line"><span class="keyword">async</span> getCode () &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">// 发送ajax请求(向指定手机号发送验证码短信)</span></span><br><span class="line">    <span class="keyword">const</span> result = <span class="keyword">await</span> reqSendCode(<span class="keyword">this</span>.phone)</span><br><span class="line">    <span class="keyword">if</span>(result.code===<span class="number">1</span>) &#123; <span class="comment">// 手机号验证失败</span></span><br><span class="line">    	<span class="comment">// 显示提示</span></span><br><span class="line">        <span class="keyword">this</span>.showAlert(result.msg)</span><br><span class="line">        <span class="comment">// 停止计时</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.computeTime) &#123;</span><br><span class="line">        	<span class="keyword">this</span>.computeTime = <span class="number">0</span></span><br><span class="line">            clearInterval(<span class="keyword">this</span>.intervalId)</span><br><span class="line">            <span class="keyword">this</span>.intervalId = <span class="literal">undefined</span></span><br><span class="line">        &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 只要手机号填写正确 短信验证码也可以在服务端的控制台中查看</span></span><br></pre></td></tr></table></figure>
+<h3 id="功能三：短信与密码登录"><a href="#功能三：短信与密码登录" class="headerlink" title="功能三：短信与密码登录"></a>功能三：短信与密码登录</h3></li>
+<li><p>在login方法里完成短信和密码登录的aiax请求</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> login () &#123;</span><br><span class="line">    <span class="keyword">let</span> result <span class="comment">// 保存登录成功后返回的数据</span></span><br><span class="line">    	...</span><br><span class="line">    	<span class="comment">// 发送ajax请求短信登陆</span></span><br><span class="line">    	result = <span class="keyword">await</span> reqSmsLogin(phone, code)</span><br><span class="line">    	...</span><br><span class="line">    	<span class="comment">// 发送ajax请求密码登陆</span></span><br><span class="line">    	result = <span class="keyword">await</span> reqPwdLogin(&#123;name, pwd, captcha&#125;)</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>点击登录发送请求的同时停止计时器，然后将请求的结果进行处理</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"> ...</span><br><span class="line"><span class="comment">// 停止计时</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">this</span>.computeTime) &#123;</span><br><span class="line">	<span class="keyword">this</span>.computeTime = <span class="number">0</span></span><br><span class="line">    clearInterval(<span class="keyword">this</span>.intervalId)</span><br><span class="line">    <span class="keyword">this</span>.intervalId = <span class="literal">undefined</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 根据结果数据处理</span></span><br><span class="line"><span class="keyword">if</span>(result.code===<span class="number">0</span>) &#123; <span class="comment">// 成功</span></span><br><span class="line">	<span class="keyword">const</span> user = result.data</span><br><span class="line"> 	<span class="comment">// 将user信息保存到vuex的state</span></span><br><span class="line">    <span class="comment">// todo</span></span><br><span class="line">    <span class="comment">// 去个人中心界面</span></span><br><span class="line">    <span class="keyword">this</span>.$router.replace(<span class="string">'/profile'</span>)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 显示新的图片验证码</span></span><br><span class="line">    <span class="keyword">this</span>.getCaptcha()</span><br><span class="line">    <span class="comment">// 显示警告提示</span></span><br><span class="line">    <span class="keyword">const</span> msg = result.msg</span><br><span class="line">    <span class="keyword">this</span>.showAlert(msg)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试用的用户名: abc，密码: 123。</p>
+</li>
+</ul>
+<h3 id="功能四：获取用户信息-实现自动登陆"><a href="#功能四：获取用户信息-实现自动登陆" class="headerlink" title="功能四：获取用户信息,实现自动登陆"></a>功能四：获取用户信息,实现自动登陆</h3><p><strong>1. 将用户信息保存到vuex</strong></p>
+<ol>
+<li><p>在state中添加用户信息的状态数据userInfo</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userInfo: &#123;&#125; <span class="comment">// 用户信息</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在mutation-types中定义常量</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> RECEIVE_USER_INFO = <span class="string">'receive_user_info'</span> <span class="comment">// 接收用户信息</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在mutations文件中增加改变state的方法</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">//先import引入RECEIVE_USER_INFO</span></span><br><span class="line">  [RECEIVE_USER_INFO] (state, &#123;userInfo&#125;) &#123;</span><br><span class="line">  state.userInfo = userInfo</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在actions文件中增加同步用户信息的方法</p>
+<ul>
+<li>因为之前已经异步获取了用户信息，所以这里将用户信息state更新的操作是同步的</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 要先引入RECEIVE_USER_INFO这个mutation</span></span><br><span class="line"><span class="comment">// 同步记录用户信息</span></span><br><span class="line">  recordUser (&#123;commit&#125;, userInfo) &#123;</span><br><span class="line">    commit(RECEIVE_USER_INFO, &#123;userInfo&#125;)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在Login组件中调用这个action</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将user保存到vuex的state</span></span><br><span class="line"><span class="keyword">this</span>.$store.dispatch(<span class="string">'recordUser'</span>,user)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>之后可以在个人中心Profile页面读取并显示用户信息userInfo</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;mapState&#125; <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line">...</span><br><span class="line">computed: &#123;</span><br><span class="line">    ...mapState([<span class="string">'userInfo'</span>])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"user-info-top"</span>&gt;</span>&#123;&#123;userInfo.name || '登录/注册'&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong>2. 更新登录后的个人中心界面</strong></p>
+<ul>
+<li><p>使用用户名和密码登录时显示用户名和绑定的手机号信息</p>
+</li>
+<li><p>使用手机号登录时只需要显示手机号</p>
+</li>
+<li><p>根据用户是否登录来定义a标签不同的路由</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--userinfo路由对应的页面暂时未做--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">:to</span>=<span class="string">"userInfo._id ? '/userinfo': '/login'"</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"user-info"</span>&gt;</span></span><br><span class="line"> 		<span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"user-info-top"</span> <span class="attr">v-if</span>=<span class="string">"!userInfo.phone"</span> &gt;</span>			&#123;&#123;userInfo.name || '登录/注册'&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    	...</span><br><span class="line">		<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"icon-mobile-number"</span>&gt;</span>&#123;&#123;userInfo.phone || '暂无绑定手机号'&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>同时要注意首页Msite顶部的信息也要进行更改</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">class</span>=<span class="string">"header_login"</span> <span class="attr">slot</span>=<span class="string">"right"</span> <span class="attr">:to</span>=<span class="string">"userInfo._id ? '/userinfo': '/login'"</span>&gt;</span></span><br><span class="line"> 	<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"header_login_text"</span> <span class="attr">v-if</span>=<span class="string">"!userInfo._id"</span>&gt;</span></span><br><span class="line">          登录|注册</span><br><span class="line">	<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--如果已经登录则显示一个icon--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"header_login_text"</span> <span class="attr">v-else</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"iconfont icon-yonghuming"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">router-link</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>3. 完成自动登录功能</strong></p>
+</li>
+<li><p>服务器端的routes文件夹下的index.js中已经定义了返回用户信息的方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 其中她将用户的userid取出来放入一个session会话中</span></span><br><span class="line">router.get(<span class="string">'/userinfo'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 取出userid</span></span><br><span class="line">  <span class="keyword">const</span> userid = req.session.userid</span><br><span class="line">  <span class="comment">// 查询</span></span><br><span class="line">  UserModel.findOne(&#123;<span class="attr">_id</span>: userid&#125;, _filter, <span class="function"><span class="keyword">function</span> (<span class="params">err, user</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 如果没有, 返回错误提示</span></span><br><span class="line">    <span class="keyword">if</span> (!user) &#123;</span><br><span class="line">      <span class="comment">// 清除浏览器保存的userid的cookie</span></span><br><span class="line">      <span class="keyword">delete</span> req.session.userid</span><br><span class="line"></span><br><span class="line">      res.send(&#123;<span class="attr">code</span>: <span class="number">1</span>, <span class="attr">msg</span>: <span class="string">'请先登陆'</span>&#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 如果有, 返回user</span></span><br><span class="line">      res.send(&#123;<span class="attr">code</span>: <span class="number">0</span>, <span class="attr">data</span>: user&#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>服务端的app.js中已经定义了这个用户登录的session会话的维持时间为24h</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">app.use(session(&#123;</span><br><span class="line">  secret: <span class="string">'12345'</span>,</span><br><span class="line">  cookie: &#123;<span class="attr">maxAge</span>: <span class="number">1000</span>*<span class="number">60</span>*<span class="number">60</span>*<span class="number">24</span> &#125;,  <span class="comment">//设置maxAge是80000ms，即80s后session和相应的cookie失效过期</span></span><br><span class="line">  resave: <span class="literal">false</span>,</span><br><span class="line">  saveUninitialized: <span class="literal">true</span>,</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>api中的对应接口已经完成</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 获取用户信息(根据会话)</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> reqUserInfo = <span class="function"><span class="params">()</span> =&gt;</span> ajax(BASE_URL + <span class="string">'/userinfo'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在action中定义一个方法来调用这个接口</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 异步获取用户信息(先引入reqUserInfo接口)</span></span><br><span class="line"><span class="keyword">async</span> getUserInfo (&#123;commit&#125;) &#123;</span><br><span class="line">    <span class="keyword">const</span> result = <span class="keyword">await</span> reqUserInfo()</span><br><span class="line">    <span class="keyword">if</span> (result.code === <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> userInfo = result.data</span><br><span class="line">      commit(RECEIVE_USER_INFO, &#123;userInfo&#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后在App.vue中引入action并触发</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> mounted () &#123;</span><br><span class="line">	...</span><br><span class="line">    <span class="comment">// this.getAddress()</span></span><br><span class="line">    <span class="keyword">this</span>.getUserInfo()</span><br><span class="line">  &#125;,</span><br><span class="line">methods: &#123;</span><br><span class="line">    ...mapActions([<span class="string">'getUserInfo'</span>])</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="功能五：退出登录"><a href="#功能五：退出登录" class="headerlink" title="功能五：退出登录"></a>功能五：退出登录</h3><ul>
+<li><p>用户登录后在个人中心页面添加一个退出登录的按钮</p>
+</li>
+<li><p>下载安装mint-ui来实现</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 安装mint-ui</span><br><span class="line">npm install --save mint-ui</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现自动按需打包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 安装工具包</span><br><span class="line">npm install --save-dev babel-pulgin-component</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改.babeirc</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 配置</span></span><br><span class="line"><span class="string">"plugins"</span>: [<span class="string">"transform-runtime"</span>,[<span class="string">"component"</span>, [</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="string">"libraryName"</span>: <span class="string">"mint-ui"</span>,</span><br><span class="line">		<span class="string">"style"</span>: <span class="literal">true</span></span><br><span class="line">	&#125;</span><br><span class="line">]]]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>引入并注册使用mint-ui的标签组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在入口的main.js引入Button</span></span><br><span class="line"><span class="keyword">import</span> &#123;Button&#125; <span class="keyword">from</span> <span class="string">'mint-ui'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 注册全局组件</span></span><br><span class="line">Vue.component(Button.name, Button)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在Profile页面中使用mint-ui的标签</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">"profile_my_order border-1px"</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--只有用户登录之后才会显示 同时绑定点击事件--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">mt-button</span> <span class="attr">type</span>=<span class="string">"danger"</span> <span class="attr">style</span>=<span class="string">"width: 100%"</span> <span class="attr">v-if</span>=<span class="string">"userInfo._id"</span> @<span class="attr">click</span>=<span class="string">"logout"</span>&gt;</span>退出登录<span class="tag">&lt;/<span class="name">mt-button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>引入mint-ui的confirm确认和toast文本提示框</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; MessageBox, Toast &#125; <span class="keyword">from</span> <span class="string">'mint-ui'</span></span><br><span class="line"></span><br><span class="line">logout () &#123;</span><br><span class="line">	MessageBox.confirm(<span class="string">'确认退出吗?'</span>).then(</span><br><span class="line">		action =&gt; &#123;</span><br><span class="line">         <span class="comment">// 请求退出</span></span><br><span class="line">         <span class="keyword">this</span>.$store.dispatch(<span class="string">'logout'</span>)</span><br><span class="line">         	Toast(<span class="string">'登出完成'</span>)</span><br><span class="line">         &#125;,</span><br><span class="line">		action =&gt; &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'取消登录'</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在actions.js中定义退出登录的方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 首先引入api的index.js中定义的reqLogout接口和mutation</span></span><br><span class="line"><span class="comment">// 异步登出</span></span><br><span class="line"><span class="keyword">async</span> logout (&#123;commit&#125;) &#123;</span><br><span class="line">	<span class="keyword">const</span> result = <span class="keyword">await</span> reqLogout()</span><br><span class="line">	<span class="keyword">if</span> (result.code === <span class="number">0</span>) &#123; commit(RESET_USER_INFO)&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//同时改动下列两个文件</span></span><br><span class="line"><span class="comment">//mutations-types文件</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> RESET_USER_INFO = <span class="string">'receive_user_info'</span> <span class="comment">// 重置用户信息</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//mutations文件</span></span><br><span class="line">[RESET_USER_INFO] (state) &#123;</span><br><span class="line">    state.userInfo = &#123;&#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!--<footer class="footer">-->
+    <!--<ul class="list-inline text-center">-->
+        <!---->
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+    <!--</ul>-->
+    <!---->
+    <!--<p>-->
+        <!--<span id="busuanzi_container_site_pv">-->
+            <!--<span id="busuanzi_value_site_pv"></span>PV-->
+        <!--</span>-->
+        <!--<span id="busuanzi_container_site_uv">-->
+            <!--<span id="busuanzi_value_site_uv"></span>UV-->
+        <!--</span>-->
+        <!--Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>-->
+<!--</footer>-->
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.xml"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</html>

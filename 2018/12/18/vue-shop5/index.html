@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="biubiu的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        vue-shop5 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <span>biubiu</span>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#异步显示ShopGoods数据"><span class="toc-text">异步显示ShopGoods数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#完成用户交互功能"><span class="toc-text">完成用户交互功能</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        vue-shop5
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2018-12-18 20:26:45</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#vue" title="vue">vue</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h3 id="异步显示ShopGoods数据"><a href="#异步显示ShopGoods数据" class="headerlink" title="异步显示ShopGoods数据"></a>异步显示ShopGoods数据</h3><blockquote>
+<p>完成了头部的ShopHeader，接下来是点餐部分的ShopGoods组件。此组件是一个比较复杂的路由组件，主要包含了3个部分：ShopCart组件（底部的购物车）、CartControl组件（购物车里的加减商品按钮组件）、Food组件（点击商品图片查看详细信息的弹窗）</p>
+</blockquote>
+<blockquote>
+<p>另外还使用了第三方库 better-scroll: 处理UI 滑动</p>
+</blockquote>
+<ul>
+<li><p>左右结构的模版布局</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"goods"</span>&gt;</span></span><br><span class="line">     <span class="comment">&lt;!-- 左侧的菜单选项--&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"menu-wrapper"</span> <span class="attr">ref</span>=<span class="string">"menuWrapper"</span>&gt;</span></span><br><span class="line">     	<span class="comment">&lt;!-- 菜单对应的是食物分类列表--&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">li</span>&gt;</span>折扣<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">li</span>&gt;</span>优惠<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">li</span>&gt;</span>爽口凉菜<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">li</span>&gt;</span>...<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 右侧的食物列表--&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"foods-wrapper"</span> <span class="attr">ref</span>=<span class="string">"foodsWrapper"</span>&gt;</span></span><br><span class="line">     	<span class="comment">&lt;!-- 右侧的食物列表是根据左侧的分类列表展现的--&gt;</span></span><br><span class="line">         <span class="comment">&lt;!-- 所以右侧是在一个分类标题列表里面嵌套着各类食物列表--&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"food-list-hook"</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>折扣<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">            	  <span class="tag">&lt;<span class="name">li</span>&gt;</span>南瓜粥<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">li</span>&gt;</span>红豆薏米美肤粥<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"food-list-hook"</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">h1</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>优惠<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">            	  <span class="tag">&lt;<span class="name">li</span>&gt;</span>红枣山药<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">li</span>&gt;</span>...<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">             <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">li</span>&gt;</span>其他分类...<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>请求并读取数据进行模版渲染</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;mapState&#125; <span class="keyword">from</span> <span class="string">'vuex'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  mounted () &#123;</span><br><span class="line">    <span class="comment">// 使用 axios 请求 mockjs 提供的接口</span></span><br><span class="line">    <span class="keyword">this</span>.$store.dispatch(<span class="string">'getShopGoods'</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    ...mapState([<span class="string">'goods'</span>])</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"menu-item"</span> <span class="attr">v-for</span>=<span class="string">"(good, index) in goods"</span> <span class="attr">:key</span>=<span class="string">"index"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"text bottom-border-1px"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"icon"</span> <span class="attr">:src</span>=<span class="string">"good.icon"</span> <span class="attr">v-if</span>=<span class="string">"good.icon"</span>&gt;</span></span><br><span class="line">  &#123;&#123;good.name&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 右侧的模版渲染同上--&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="完成用户交互功能"><a href="#完成用户交互功能" class="headerlink" title="完成用户交互功能"></a>完成用户交互功能</h3><ol>
+<li>修改当前食品分类的样式</li>
+<li>当滑动右侧食品列表时，更新左侧的当前分类</li>
+<li>点击左侧某个分类，右侧列表滑动到指定位置</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--current是标识当前分类的class 而它的值应该是一个计算后的布尔值--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"menu-item"</span> <span class="attr">:class</span>=<span class="string">"&#123;current: index===currentIndex&#125;"</span> &gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>设计计算属性：currentIndex</p>
+<p>根据哪些数据来进行计算？</p>
+<p>既然要实现左右两侧的联动，那么首先要获取一些位置信息。</p>
+<pre><code>scrollY: 右侧食品列表滑动的Y轴坐标（滑动过程中实时变化）
+
+tops: 所有右侧分类标题到屏幕顶部的距离，即li的top值组成的数组
+
+    （列表第一次显示后就不再变化）
+</code></pre><ol>
+<li>在滑动过程中，实时收集scrollY</li>
+<li>列表第一次显示后，收集tops</li>
+<li>实现currentIndex的计算逻辑</li>
+</ol>
+</blockquote>
+<ul>
+<li><p>使用better-scroll实现回弹滑动</p>
+<p><code>npm install --save better-scroll</code></p>
+<p><a href="https://ustbhuangyi.github.io/better-scroll/#/zh" target="_blank" rel="noopener">中文官网</a></p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> BScroll <span class="keyword">from</span> <span class="string">'better-scroll'</span></span><br><span class="line"><span class="comment">// 要考虑列表显示之后创建BScroll实例的时机</span></span><br><span class="line"><span class="comment">//（参考12.2解决swiper的bug，之前使用watch和nextTick来监听数据更新）</span></span><br><span class="line"><span class="comment">// 这里使用另一种方法 通过action的回调函数来通知组件数据已经更新</span></span><br><span class="line">mounted() &#123;</span><br><span class="line">    <span class="keyword">this</span>.$store.dispatch(<span class="string">'getShopGoods'</span>, () =&gt; &#123;<span class="comment">// 数据更新后执行</span></span><br><span class="line">      <span class="keyword">this</span>.$nextTick(<span class="function"><span class="params">()</span> =&gt;</span> &#123; <span class="comment">// 列表数据更新显示后执行</span></span><br><span class="line">        <span class="keyword">new</span> BScroll(<span class="string">'.menu-wrapper'</span>, &#123;</span><br><span class="line">          click: <span class="literal">true</span></span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="keyword">new</span> BScroll(<span class="string">'.foods-wrapper'</span>, &#123;</span><br><span class="line">          click: <span class="literal">true</span></span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//同时也要修改getShopGoods这个action</span></span><br><span class="line"><span class="comment">// 异步获取商家商品列表</span></span><br><span class="line"><span class="keyword">async</span> getShopGoods (&#123;commit&#125;, callback) &#123;</span><br><span class="line">  <span class="keyword">const</span> result = <span class="keyword">await</span> reqShopGoods()</span><br><span class="line">  <span class="keyword">if</span> (result.code === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> goods = result.data</span><br><span class="line">    commit(RECEIVE_GOODS, &#123;goods&#125;)</span><br><span class="line">    <span class="comment">// 数据更新了, 通知一下组件</span></span><br><span class="line">    callback &amp;&amp; callback()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>收集scrollY和tops</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 要收集滚动的数据，那么就要利用betterScroll对象来监听滚动事件</span></span><br><span class="line"></span><br><span class="line">_initScroll() &#123;</span><br><span class="line">	<span class="comment">// 列表显示之后创建</span></span><br><span class="line">	<span class="keyword">new</span> BScroll(<span class="string">'.menu-wrapper'</span>, &#123;</span><br><span class="line">		click: <span class="literal">true</span></span><br><span class="line">	&#125;)</span><br><span class="line">    <span class="comment">// 根据文档配置scroll选项</span></span><br><span class="line">	<span class="keyword">this</span>.foodsScroll = <span class="keyword">new</span> BScroll(<span class="string">'.foods-wrapper'</span>, &#123;</span><br><span class="line">		probeType: <span class="number">2</span>,  <span class="comment">// 因为惯性滑动不会触发</span></span><br><span class="line">		click: <span class="literal">true</span></span><br><span class="line">	&#125;)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 给右侧列表绑定scroll监听</span></span><br><span class="line">	<span class="keyword">this</span>.foodsScroll.on(<span class="string">'scroll'</span>, (&#123;x, y&#125;) =&gt; &#123;</span><br><span class="line">		<span class="built_in">console</span>.log(x, y)</span><br><span class="line">		<span class="keyword">this</span>.scrollY = <span class="built_in">Math</span>.abs(y)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125; <span class="comment">// 将其封装为初始化滚动的方法</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化tops</span></span><br><span class="line">_initTops() &#123;</span><br><span class="line">	<span class="comment">// 1. 初始化tops</span></span><br><span class="line">	<span class="keyword">const</span> tops = []</span><br><span class="line">	<span class="keyword">let</span> top = <span class="number">0</span></span><br><span class="line">     <span class="comment">// 第一个li的top为0</span></span><br><span class="line">	tops.push(top)</span><br><span class="line">	<span class="comment">// 2. 收集</span></span><br><span class="line">	<span class="comment">// 在foods列表下找到所有分类的li</span></span><br><span class="line">	<span class="keyword">const</span> lis = <span class="keyword">this</span>.$refs.foodsUl.getElementsByClassName(<span class="string">'food-list-hook'</span>)</span><br><span class="line">	<span class="comment">// ★把伪数组变成真数组</span></span><br><span class="line">     <span class="built_in">Array</span>.prototype.slice.call(lis).forEach(<span class="function"><span class="params">li</span> =&gt;</span> &#123;</span><br><span class="line">     	top += li.clientHeight</span><br><span class="line">     	tops.push(top)</span><br><span class="line">     &#125;)</span><br><span class="line"></span><br><span class="line">     <span class="comment">// 3. 更新数据</span></span><br><span class="line">     <span class="keyword">this</span>.tops = tops</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>完成计算属性currentIndex的逻辑</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">currentIndex () &#123; <span class="comment">// 初始和相关数据发生了变化</span></span><br><span class="line">	<span class="comment">// 得到条件数据</span></span><br><span class="line">	<span class="keyword">const</span> &#123;scrollY, tops&#125; = <span class="keyword">this</span></span><br><span class="line">	<span class="comment">// 根据条件计算产生一个结果</span></span><br><span class="line">	<span class="keyword">const</span> index = tops.findIndex(<span class="function">(<span class="params">top, index</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="comment">// scrollY&gt;=当前top &amp;&amp; scrollY&lt;下一个top</span></span><br><span class="line">	<span class="keyword">return</span> scrollY &gt;= top &amp;&amp; scrollY &lt; tops[index + <span class="number">1</span>]</span><br><span class="line">	&#125;)</span><br><span class="line">	<span class="comment">// 返回结果(也就是当前的scrollY值属于第几个li区间)</span></span><br><span class="line">	<span class="keyword">return</span> index</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 此时可以实现滑动右侧列表更新左侧当前分类</span></span><br><span class="line"><span class="comment">// 但如果快速滑动则会出现因为惯性滑动不能正确收集scrollY值的bug</span></span><br><span class="line"><span class="comment">// 解决方法一：将probeType的值改为3 但如果不想实现监听惯性滑动触发大量事件，则需要计算滑动结束时的scrollY值来确定当前分类</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 在_initScroll里给右侧列表绑定scroll结束的监听</span></span><br><span class="line"><span class="keyword">this</span>.foodsScroll.on(<span class="string">'scrollEnd'</span>, (&#123;x, y&#125;) =&gt; &#123;</span><br><span class="line">	<span class="built_in">console</span>.log(<span class="string">'scrollEnd'</span>, x, y)</span><br><span class="line">	<span class="keyword">this</span>.scrollY = <span class="built_in">Math</span>.abs(y)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>实现点击左侧分类滑动右侧食物列表</p>
+   <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--首先为li绑定click事件--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"menu-item"</span> <span class="attr">:class</span>=<span class="string">"&#123;current: index===currentIndex&#125;"</span> @<span class="attr">click</span>=<span class="string">"clickMenuItem(index)"</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
+   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">clickMenuItem (index) &#123;</span><br><span class="line">	<span class="comment">// 得到目标位置的scrollY</span></span><br><span class="line">	<span class="keyword">const</span> scrollY = <span class="keyword">this</span>.tops[index]</span><br><span class="line">	<span class="comment">// 立即更新scrollY(让点击的分类项成为当前分类)</span></span><br><span class="line">	<span class="keyword">this</span>.scrollY = scrollY</span><br><span class="line">	<span class="comment">// 平滑滑动右侧列表 better-scroll里的方法</span></span><br><span class="line">	<span class="keyword">this</span>.foodsScroll.scrollTo(<span class="number">0</span>, -scrollY, <span class="number">300</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!--<footer class="footer">-->
+    <!--<ul class="list-inline text-center">-->
+        <!---->
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+    <!--</ul>-->
+    <!---->
+    <!--<p>-->
+        <!--<span id="busuanzi_container_site_pv">-->
+            <!--<span id="busuanzi_value_site_pv"></span>PV-->
+        <!--</span>-->
+        <!--<span id="busuanzi_container_site_uv">-->
+            <!--<span id="busuanzi_value_site_uv"></span>UV-->
+        <!--</span>-->
+        <!--Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>-->
+<!--</footer>-->
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.xml"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</html>

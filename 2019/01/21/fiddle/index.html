@@ -11,7 +11,7 @@
 
     <title>
         
-        stylus - undefined
+        fiddle - undefined
         
     </title>
 
@@ -89,7 +89,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#stylus学习笔记"><span class="toc-text">stylus学习笔记</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#fiddle学习笔记"><span class="toc-text">fiddle学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#简介fiddle"><span class="toc-text">简介fiddle</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a></li></ol></li></ol>
 </div>
     
 </div>
@@ -119,15 +119,15 @@
 
 <div class="post-container">
     <div class="post-title">
-        stylus
+        fiddle
     </div>
 
     <div class="post-meta">
-        <span class="attr">Post：<span>2018-10-29 14:08:13</span></span>
+        <span class="attr">Post：<span>2019-01-21 15:32:02</span></span>
         
         <span class="attr">Tags：/
         
-        <a class="tag" href="/tags/#css" title="css">css</a>
+        <a class="tag" href="/tags/#tool" title="tool">tool</a>
         <span>/</span>
         
         
@@ -137,31 +137,64 @@
 </span>
     </div>
     <div class="post-content no-indent">
-        <h1 id="stylus学习笔记"><a href="#stylus学习笔记" class="headerlink" title="stylus学习笔记"></a>stylus学习笔记</h1><ul>
-<li>冒号可选，分号可选，逗号可选，括号可选</li>
-<li><p>缩进与空格很重要</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">body</span><br><span class="line">  color white</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>父级引用 &amp;</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">textarea</span><br><span class="line">input</span><br><span class="line">  color #A7A7A7</span><br><span class="line">  &amp;:hover</span><br><span class="line">    color #000</span><br><span class="line">//等于</span><br><span class="line">textarea,</span><br><span class="line">  input &#123;</span><br><span class="line">    color: #a7a7a7;</span><br><span class="line">  &#125;</span><br><span class="line">  textarea:hover,</span><br><span class="line">  input:hover &#123;</span><br><span class="line">    color: #000;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>变量</p>
-</li>
-<li><p>属性查找 @</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#logo</span><br><span class="line">  position: absolute</span><br><span class="line">  top: 50%</span><br><span class="line">  left: 50%</span><br><span class="line">  width: 150px</span><br><span class="line">  height: 80px</span><br><span class="line">  margin-left: -(@width / 2)</span><br><span class="line">  margin-top: -(@height / 2)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>运算符</p>
+        <h1 id="fiddle学习笔记"><a href="#fiddle学习笔记" class="headerlink" title="fiddle学习笔记"></a>fiddle学习笔记</h1><h2 id="简介fiddle"><a href="#简介fiddle" class="headerlink" title="简介fiddle"></a>简介fiddle</h2><p>fiddle是Web调试工具，相当于代理服务器，先到fiddle再到目标服务器</p>
 <ul>
-<li>范围 .. 包含界限 …包含开头不包含结尾</li>
-<li>存在操作符in</li>
-<li>实例检查 is a</li>
-<li>条件赋值：?= :=</li>
-<li>变量定义：is defined</li>
+<li>截获http/https请求并查看</li>
+<li>伪造请求</li>
+<li>测试性能</li>
 </ul>
+<p>两种代理模式</p>
+<ol>
+<li>流模式(streaming):实时，更接近与浏览器本身的工作</li>
+<li>缓冲模式(buffering):等待所有数据都准备好了，才返回。 可控制最后的服务器响应</li>
+</ol>
+<p>使用场景</p>
+<ul>
+<li>开发环境host配置</li>
+<li>前后端接口调试</li>
+<li>线上bugfix</li>
+<li>性能分析与优化</li>
+</ul>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p><strong>工具条常用功能</strong></p>
+<ol>
+<li>气泡：捕捉到的会话添加备注</li>
+<li>replay：请求回放</li>
+<li>×：清空监控面板</li>
+<li>GO：调试Debug，res，req请求断点</li>
+<li>stream：模式切换</li>
+<li>decode：解压请求</li>
+<li>any process：过滤请求</li>
+<li>find：查找</li>
+<li>clear cache：清空浏览器缓存</li>
+<li>textWizard：编码/解码</li>
+<li>tearoff：面板分离</li>
+<li>MSDN：MSDN搜索</li>
+</ol>
+<p><strong>状态栏</strong></p>
+<ol>
+<li>黑色的框：命令行</li>
+<li>Capturing: 控制fiddle是否工作</li>
+</ol>
+<p><strong>监控面板的使用</strong></p>
+<ol>
+<li>statistics：反应性能上的指标。RTT：往返时间。show chart：数据可视化</li>
+<li>inspectors:对请求进行解包</li>
+<li>AutoResponder:文件代理，比如需要服务器返回的文件，使用本地文件做代理。</li>
+<li>Composer:前后端接口连调（把一个会话拖进去，可以进行修改，伪造请求）</li>
+</ol>
+<p><strong>常用功能</strong></p>
+<ul>
+<li><p>host配置：让服务器指向本地</p>
+<pre><code>1. tools-host
+2. 激活这个功能
+3. 在最后修改至本地的地址
+</code></pre></li>
+<li><p>文件代理</p>
 </li>
-<li>混合书写</li>
-<li>方法</li>
+<li>请求模拟，前后端接口链调</li>
+<li>网络限速</li>
 </ul>
+<p>参考资料：<a href="https://www.cnblogs.com/conquerorren/p/8472285.html" target="_blank" rel="noopener">https://www.cnblogs.com/conquerorren/p/8472285.html</a></p>
 
         
         <br />

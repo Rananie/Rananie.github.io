@@ -162,10 +162,9 @@
 <li><p>居中元素有宽度</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   .center &#123;</span><br><span class="line">width: 960px;</span><br><span class="line">margin-left: auto;</span><br><span class="line">margin-right: auto;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>margin:0 auto 使用场景<br>块级元素：给定要居中的块级元素的宽度<br>行内元素：①设置display:block；；②给定要居中的行内元素的宽度。（行内元素设置成块级元素后可以对其宽高进行设置）</p>
-<p> 注：①所有元素也可以通过对父元素设置 text-align：center；的方式来实现居中。（而对于块元素来说，对要居中的元素自身进行设置text-align:center也能实现居中——而无需对其父元素进行设置）</p>
-<pre><code>②浮动、绝对定位、固定定位的盒子失效。
-</code></pre></li>
+<li><p>margin:0 auto 使用场景<br>块级元素：给定要居中的块级元素的宽度<br>行内元素：①设置display:block。②给定要居中的行内元素的宽度。（行内元素设置成块级元素后可以对其宽高进行设置）</p>
+<p> 注：①所有元素也可以通过对父元素设置 text-align：center；的方式来实现居中。(而对于块元素来说，对要居中的元素自身进行设置text-align:center也能实现居中——而无需对其父元素进行设置) 。②浮动、绝对定位、固定定位的盒子失效。</p>
+</li>
 </ol>
 <ol start="3">
 <li>脱离文档流元素的水平垂直<br> margin:auto或者按圆点定位定在正中间，margin设置成负的宽高的一般 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">div&#123;</span><br><span class="line">      width: 300px;</span><br><span class="line">      height: 300px;</span><br><span class="line">      position: relative;</span><br><span class="line">      border: 1px solid #465468;</span><br><span class="line"> &#125;</span><br><span class="line"> img&#123;</span><br><span class="line">      position: absolute;</span><br><span class="line">      margin: auto;</span><br><span class="line">      top: 0;</span><br><span class="line">      left: 0;</span><br><span class="line">      right: 0;</span><br><span class="line">      bottom: 0;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>

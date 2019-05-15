@@ -191,13 +191,14 @@
 <h3 id="all全局搜索替换"><a href="#all全局搜索替换" class="headerlink" title="all全局搜索替换"></a>all全局搜索替换</h3><p>使用选择器匹配到的 全部声明。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/* Less */</span><br><span class="line">#main&#123;</span><br><span class="line">  width: 200px;</span><br><span class="line">&#125;</span><br><span class="line">#main &#123;</span><br><span class="line">  &amp;:after &#123;</span><br><span class="line">    content:&quot;Less is good!&quot;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">#wrap:extend(#main all) &#123;&#125;</span><br><span class="line"></span><br><span class="line">/* 生成的 CSS */</span><br><span class="line">#main,#wrap&#123;</span><br><span class="line">  width: 200px;</span><br><span class="line">&#125;</span><br><span class="line">#main:after, #wrap:after &#123;</span><br><span class="line">    content: &quot;Less is good!&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
-<li>从表面 看来，extend 与 方法 最大的差别，就是 extend 是同个选择器共用同一个声明，而 方法 是使用自己的声明。</li>
+<li><p>从表面 看来，extend 与 方法 最大的差别，就是 extend 是同个选择器共用同一个声明，而 方法 是使用自己的声明。</p>
+</li>
+<li><p>~”XXXXX” less之中避免编译，让浏览器编译</p>
+</li>
 </ul>
 </li>
 </ol>
-<pre><code>## less避免编译
-~&quot;XXXXX&quot; less之中避免编译，让浏览器编译
-</code></pre>
+
         
         <br />
         <div id="comment-container">

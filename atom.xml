@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-05-30T14:47:03.404Z</updated>
+  <updated>2019-06-26T12:28:48.020Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>软件超市-改变v-html内容的图片样式</title>
+    <link href="http://yoursite.com/2019/06/26/%E8%BD%AF%E4%BB%B6%E8%B6%85%E5%B8%82-%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2019/06/26/软件超市-问题总结/</id>
+    <published>2019-06-26T11:13:48.000Z</published>
+    <updated>2019-06-26T12:28:48.020Z</updated>
+    
+    <content type="html"><![CDATA[<p>在通过v-html把后台传过来的内容渲染到页面之后，发现后台传来的图片是限制了宽和高的。</p><p><img src="\img\软件超市\图1.png" alt="视图1"></p><p>通过查资料发现，这里解析是把v-html传来的数据作为了一个新的组件，所以在scoped下的style里面设置样式不起作用。那么根据原理，或许可以把scoped直接去掉，但是为了防止组件之间的样式污染，参用了其他办法。</p><p><strong>方法一</strong></p><blockquote><blockquote><blockquote><p>(深度作用选择器) 或者 有些sass类的预处理器无法正确解析可以使用 /deep/</p></blockquote></blockquote></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/*----html----*/</span><br><span class="line">&lt;div class=<span class="string">"announcement_img"</span> v-html=<span class="string">"announcement.content"</span>&gt;&lt;/div&gt;</span><br><span class="line">/*----style----*/</span><br><span class="line">.announcement_img&gt;&gt;&gt;img&#123;</span><br><span class="line">width: 100%;</span><br><span class="line">display: block;</span><br><span class="line">height: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><strong>方法二</strong></p><p>updated周期函数中，js动态配置样式。</p><p>首先需要清楚updated周期函数在什么时候起作用，①data里面需要有该数据变量如arr ②在页面重新渲染arr完成后才进入updated。<br>更深入的会在以后学习。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">updated:function()&#123;</span><br><span class="line">console.log(&quot;1==我会先执行&quot;);</span><br><span class="line">this.$nextTick(function()&#123;</span><br><span class="line">//在下次 DOM 更新循环结束之后执行这个回调。在修改数据之后立即使用这个方法，获取更新后的DOM.</span><br><span class="line">console.log(&quot;3==我只能等页面渲染完了才会立即执行&quot;);</span><br><span class="line">&#125;)</span><br><span class="line">console.log(&quot;2==我虽然在最后但会比$nextTick先执行&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p><img src="\img\软件超市\图2.png" alt="视图2"></p><p>如果后期发现更好的或者更多的办法会重新更新。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在通过v-html把后台传过来的内容渲染到页面之后，发现后台传来的图片是限制了宽和高的。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;\img\软件超市\图1.png&quot; alt=&quot;视图1&quot;&gt;&lt;/p&gt;
+&lt;p&gt;通过查资料发现，这里解析是把v-html传来的数据作为了一个新的组件，所以在s
+      
+    
+    </summary>
+    
+    
+      <category term="project" scheme="http://yoursite.com/tags/project/"/>
+    
+      <category term="软件超市" scheme="http://yoursite.com/tags/%E8%BD%AF%E4%BB%B6%E8%B6%85%E5%B8%82/"/>
+    
+  </entry>
   
   <entry>
     <title>css总结</title>

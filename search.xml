@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[软件超市-改变v-html内容的图片样式]]></title>
+    <url>%2F2019%2F06%2F26%2F%E8%BD%AF%E4%BB%B6%E8%B6%85%E5%B8%82-%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93%2F</url>
+    <content type="text"><![CDATA[在通过v-html把后台传过来的内容渲染到页面之后，发现后台传来的图片是限制了宽和高的。 通过查资料发现，这里解析是把v-html传来的数据作为了一个新的组件，所以在scoped下的style里面设置样式不起作用。那么根据原理，或许可以把scoped直接去掉，但是为了防止组件之间的样式污染，参用了其他办法。 方法一 (深度作用选择器) 或者 有些sass类的预处理器无法正确解析可以使用 /deep/ 12345678/*----html----*/&lt;div class="announcement_img" v-html="announcement.content"&gt;&lt;/div&gt;/*----style----*/.announcement_img&gt;&gt;&gt;img&#123;width: 100%;display: block;height: auto;&#125; 方法二 updated周期函数中，js动态配置样式。 首先需要清楚updated周期函数在什么时候起作用，①data里面需要有该数据变量如arr ②在页面重新渲染arr完成后才进入updated。更深入的会在以后学习。 12345678updated:function()&#123;console.log(&quot;1==我会先执行&quot;);this.$nextTick(function()&#123;//在下次 DOM 更新循环结束之后执行这个回调。在修改数据之后立即使用这个方法，获取更新后的DOM.console.log(&quot;3==我只能等页面渲染完了才会立即执行&quot;);&#125;)console.log(&quot;2==我虽然在最后但会比$nextTick先执行&quot;)&#125; 如果后期发现更好的或者更多的办法会重新更新。]]></content>
+      <tags>
+        <tag>project</tag>
+        <tag>软件超市</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[css总结]]></title>
     <url>%2F2019%2F05%2F18%2Fcss%E6%80%BB%E7%BB%93%2F</url>
     <content type="text"><![CDATA[在学习的过程中，对css有了更深一步的了解，把遇见过的问题、经常使用到的样式做一个总结。 清除默认样式http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css 清除浮动 方法一 给受影响的盒子添加clear属性，添加了clear的属性不可以添加margin-top 方法二 12345678910浮动元素::after&#123; content:&quot;&quot;; display:block; height:0; visibility:hidden; clear:both&#125;浮动元素&#123; *zoom:1;//兼容IE6&#125; 盒子的问题 在默认布局的垂直方向上，外边距有合并现象(BFC块级，水平方向也可以，但是块级都是占一行的，而浮动成水平的 BFC的区域不会与float box重叠) 嵌套盒子时，里面的盒子设置margin-top时，父盒子一起被顶下来。 解决办法：父盒子添加border，或者overflow：hidden 图片的问题 自适应图片 123max-width:100%;height:auto;display:block 设置图片img的width和height的时候，指定其中一个另外一个自动算出来 当图片宽度大于父元素宽度时，居中：父元素text-align：center,子元素：margin：0，-100% 居中浮动之后的高宽不设定则有内容撑开 居中元素有宽度 12345 .center &#123;width: 960px;margin-left: auto;margin-right: auto; &#125; margin:0 auto 使用场景块级元素：给定要居中的块级元素的宽度行内元素： ①设置display:block。 ②给定要居中的行内元素的宽度。（行内元素设置成块级元素后可以对其宽高进行设置） 所有元素也可以通过对父元素设置 text-align：center；的方式来实现居中。(而对于块元素来说，对要居中的元素自身进行设置text-align:center也能实现居中——而无需对其父元素进行设置) 。 浮动、绝对定位、固定定位的盒子失效。 脱离文档流元素的水平垂直 margin:auto或者按圆点定位定在正中间，margin设置成负的宽高的一般 法二： 1234567891011121314div&#123; width: 300px; height: 300px; position: relative; border: 1px solid #465468; &#125; img&#123; position: absolute; margin: auto; top: 0; left: 0; right: 0; bottom: 0; &#125; 指定宽高元素水平居中 还可以定位到50% 50% 改变margin-left/margin-top为元素的一半定位（元素加padding，可以结合box-sizing） 12345678910#test&#123;position:absolute;left:0;right:0;bottom:0;top:0margin:auto;width:100pxheight:100px&#125; 图片的垂直居中 12345678910111213//img的外部包含元素 如divdiv&#123; text-align:center;&#125; div:after&#123; content:&quot;&quot;; display:inline-block; height:100% vertical-align:middle;&#125;img&#123; vertical-align:middle&#125; 其余 超出省略号 盒子不可以仅由内容撑开的时候 123white-space:nowrap //不换行overflow：hidden//超出部分截掉text-overflow:ellipsis //省略号 禁止滚动条 1234html,body&#123;height:100%overflow:hidden&#125;]]></content>

@@ -142,15 +142,9 @@
     <div class="post-content no-indent">
         <p>在通过v-html把后台传过来的内容渲染到页面之后，发现后台传来的图片是限制了宽和高的。</p>
 <p><img src="\img\软件超市\图1.png" alt="视图1"></p>
-<p>通过查资料发现，这里解析是把v-html传来的数据作为了一个新的组件，所以在scoped下的style里面设置样式不起作用。那么根据原理，或许可以把scoped直接去掉，但是为了防止组件之间的样式污染，参用了其他办法。</p>
+<p>通过查资料发现，这里解析是把v-html传来的数据作为了一个新的组件，所以在scoped下的style里面设置样式不起作用。那么根据原理，或许可以把scoped直接去掉，但是为了防止组件之间的样式污染，使用了其他办法。</p>
 <p><strong>方法一</strong></p>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>(深度作用选择器) 或者 有些sass类的预处理器无法正确解析可以使用 /deep/</p>
-</blockquote>
-</blockquote>
-</blockquote>
+<p> <code>&gt;&gt;&gt;</code>(深度作用选择器) 或者 有些sass类的预处理器无法正确解析可以使用 /deep/</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/*----html----*/</span><br><span class="line">&lt;div class=<span class="string">"announcement_img"</span> v-html=<span class="string">"announcement.content"</span>&gt;&lt;/div&gt;</span><br><span class="line">/*----style----*/</span><br><span class="line">.announcement_img&gt;&gt;&gt;img&#123;</span><br><span class="line">width: 100%;</span><br><span class="line">display: block;</span><br><span class="line">height: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>方法二</strong></p>
 <p>updated周期函数中，js动态配置样式。</p>

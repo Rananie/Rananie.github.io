@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="biubiu的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        css总结 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <span>biubiu</span>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>SEARCH</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#清除默认样式"><span class="toc-text">清除默认样式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#清除浮动"><span class="toc-text">清除浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#盒子的问题"><span class="toc-text">盒子的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片的问题"><span class="toc-text">图片的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#居中"><span class="toc-text">居中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其余"><span class="toc-text">其余</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        css总结
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2019-05-18 22:01:07</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#css" title="css">css</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#总结" title="总结">总结</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>在学习的过程中，对css有了更深一步的了解，把遇见过的问题、经常使用到的样式做一个总结。</p>
+<h2 id="清除默认样式"><a href="#清除默认样式" class="headerlink" title="清除默认样式"></a>清除默认样式</h2><p><a href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css" target="_blank" rel="noopener">http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css</a></p>
+<h2 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h2><ul>
+<li>方法一<br>  给受影响的盒子添加clear属性，添加了clear的属性不可以添加margin-top</li>
+<li><p>方法二</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">浮动元素::after&#123;</span><br><span class="line">  content:&quot;&quot;;</span><br><span class="line">  display:block;</span><br><span class="line">  height:0;</span><br><span class="line">  visibility:hidden;</span><br><span class="line">  clear:both</span><br><span class="line">&#125;</span><br><span class="line">浮动元素&#123;</span><br><span class="line">  *zoom:1;//兼容IE6</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="盒子的问题"><a href="#盒子的问题" class="headerlink" title="盒子的问题"></a>盒子的问题</h2><ul>
+<li>在默认布局的垂直方向上，外边距有合并现象(BFC块级，水平方向也可以，但是块级都是占一行的，而浮动成水平的 BFC的区域不会与float box重叠)</li>
+<li>嵌套盒子时，里面的盒子设置margin-top时，父盒子一起被顶下来。<br>  解决办法：父盒子添加border，或者overflow：hidden</li>
+</ul>
+<h2 id="图片的问题"><a href="#图片的问题" class="headerlink" title="图片的问题"></a>图片的问题</h2><ul>
+<li><p>自适应图片</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">max-width:100%;</span><br><span class="line">height:auto;</span><br><span class="line">display:block</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置图片img的width和height的时候，指定其中一个另外一个自动算出来</p>
+</li>
+<li><p>当图片宽度大于父元素宽度时，居中：父元素text-align：center,子元素：margin：0，-100%</p>
+</li>
+</ul>
+<h2 id="居中"><a href="#居中" class="headerlink" title="居中"></a>居中</h2><p><strong>浮动之后的高宽不设定则有内容撑开</strong></p>
+<ol>
+<li><p>居中元素有宽度</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   .center &#123;</span><br><span class="line">width: 960px;</span><br><span class="line">margin-left: auto;</span><br><span class="line">margin-right: auto;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>margin:0 auto 使用场景<br>块级元素：给定要居中的块级元素的宽度<br>行内元素：<br> <br><br>①设置display:block。<br> <br><br>②给定要居中的行内元素的宽度。（行内元素设置成块级元素后可以对其宽高进行设置）<br> <br></p>
+<p> <strong>所有元素也可以通过对父元素设置 text-align：center；的方式来实现居中。(而对于块元素来说，对要居中的元素自身进行设置text-align:center也能实现居中——而无需对其父元素进行设置) 。</strong></p>
+<p>  <strong>浮动、绝对定位、固定定位的盒子失效。</strong></p>
+</li>
+</ol>
+<ol start="3">
+<li>脱离文档流元素的水平垂直<br> margin:auto或者按圆点定位定在正中间，margin设置成负的宽高的一般</li>
+</ol>
+<p>   法二：<br>    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">div&#123;</span><br><span class="line">      width: 300px;</span><br><span class="line">      height: 300px;</span><br><span class="line">      position: relative;</span><br><span class="line">      border: 1px solid #465468;</span><br><span class="line"> &#125;</span><br><span class="line"> img&#123;</span><br><span class="line">      position: absolute;</span><br><span class="line">      margin: auto;</span><br><span class="line">      top: 0;</span><br><span class="line">      left: 0;</span><br><span class="line">      right: 0;</span><br><span class="line">      bottom: 0;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<ol start="4">
+<li><p>指定宽高元素水平居中</p>
+<p>还可以定位到50% 50% 改变margin-left/margin-top为元素的一半定位（元素加padding，可以结合box-sizing）</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#test&#123;</span><br><span class="line">position:absolute;</span><br><span class="line">left:0;</span><br><span class="line">right:0;</span><br><span class="line">bottom:0;</span><br><span class="line">top:0</span><br><span class="line">margin:auto;</span><br><span class="line">width:100px</span><br><span class="line">height:100px</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>图片的垂直居中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//img的外部包含元素 如div</span><br><span class="line">div&#123;</span><br><span class="line">  text-align:center;</span><br><span class="line">&#125;</span><br><span class="line"> div:after&#123;</span><br><span class="line"> content:&quot;&quot;;</span><br><span class="line"> display:inline-block;</span><br><span class="line"> height:100%</span><br><span class="line"> vertical-align:middle;</span><br><span class="line">&#125;</span><br><span class="line">img&#123;</span><br><span class="line"> vertical-align:middle</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="其余"><a href="#其余" class="headerlink" title="其余"></a>其余</h2><ol>
+<li>超出省略号</li>
+</ol>
+<p>盒子不可以仅由内容撑开的时候</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">white-space:nowrap //不换行</span><br><span class="line">overflow：hidden//超出部分截掉</span><br><span class="line">text-overflow:ellipsis //省略号</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>禁止滚动条</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">html,body&#123;</span><br><span class="line">height:100%</span><br><span class="line">overflow:hidden</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!--<footer class="footer">-->
+    <!--<ul class="list-inline text-center">-->
+        <!---->
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+    <!--</ul>-->
+    <!---->
+    <!--<p>-->
+        <!--<span id="busuanzi_container_site_pv">-->
+            <!--<span id="busuanzi_value_site_pv"></span>PV-->
+        <!--</span>-->
+        <!--<span id="busuanzi_container_site_uv">-->
+            <!--<span id="busuanzi_value_site_uv"></span>UV-->
+        <!--</span>-->
+        <!--Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>-->
+<!--</footer>-->
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.xml"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</html>

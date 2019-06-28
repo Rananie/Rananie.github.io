@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="biubiu的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        软件超市-返回刷新问题 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <span>biubiu</span>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>SEARCH</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法一：keep-alive与vue-router配合使用"><span class="toc-text">方法一：keep-alive与vue-router配合使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法二：keep-alive标签内部添加"><span class="toc-text">方法二：keep-alive标签内部添加</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        软件超市-返回刷新问题
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2019-06-28 21:59:03</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#project" title="project">project</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#软件超市" title="软件超市">软件超市</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>在对项目进行优化的时候，发现返回上一页的函数很多组件都会使用，于是打算把这个函数抽离出来。</p>
+<p>在此之前需要先解决<strong>首页进入列表页面刷新，而详情页返回列表页面不刷新的问题</strong>的问题</p>
+<blockquote>
+<p><a href="/2019/06/27/keep-alive">keep-alive的总结</a></p>
+</blockquote>
+<h3 id="方法一：keep-alive与vue-router配合使用"><a href="#方法一：keep-alive与vue-router配合使用" class="headerlink" title="方法一：keep-alive与vue-router配合使用"></a>方法一：keep-alive与vue-router配合使用</h3><p>实现在定义了两个字段 <code>keepAlive:true</code> 标识是否使用keep-alive组件字段,<code>ifDoFresh:false</code>标识是否刷新数据字符</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/*------router/index-----*/</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/project'</span>,</span><br><span class="line">      name:<span class="string">'项目列表'</span></span><br><span class="line">      component:resolve =&gt; require([<span class="string">"@/pages/Project/Project"</span>],resolve),</span><br><span class="line">      meta: &#123;</span><br><span class="line">        keepAlive:<span class="literal">true</span>,</span><br><span class="line">        ifDoFresh:<span class="literal">false</span>,</span><br><span class="line">        showNav: <span class="literal">true</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+<p>在根组件中根据<code>keepAlive</code> 字符判断是否使用keep-alive组件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/*------app.vue----*/</span><br><span class="line">&lt;div class=<span class="string">"main"</span>&gt;</span><br><span class="line">    &lt;keep-alive&gt;</span><br><span class="line">       &lt;router-view v-if=<span class="string">"<span class="variable">$route</span>.meta.keepAlive"</span>/&gt;</span><br><span class="line">    &lt;/keep-alive&gt;</span><br><span class="line">    &lt;router-view v-if=<span class="string">"!<span class="variable">$route</span>.meta.keepAlive"</span>/&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>在目标列表页的beforeRouteEnter判断从哪个页面进入的，根据需求更改<code>ifDoFresh</code>变量。这里与<code>activated</code>联合用，<code>activated</code>具体的用法也在keep-alive那篇博客记录。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">beforeRouteEnter(to,from,next)&#123;</span><br><span class="line">        //需要刷新的页面</span><br><span class="line">        <span class="keyword">if</span> (from.name!=<span class="string">"团队详情"</span>) &#123;</span><br><span class="line">          to.meta.ifDoFresh = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        next()</span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">activated</span></span>()&#123;</span><br><span class="line">       <span class="keyword">if</span> (this.<span class="variable">$route</span>.meta.ifDoFresh)&#123;</span><br><span class="line">          // 先重置</span><br><span class="line">        this.<span class="variable">$route</span>.meta.ifDoFresh=<span class="literal">false</span></span><br><span class="line">         this.<span class="variable">$store</span>.dispatch(<span class="string">'getTeam'</span>,&#123;teamId:0&#125;)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<p>按逻辑来说这样就可以了，但是有个的问题出现了！！！！</p>
+<p><img src="\img\软件超市\图3.png" alt="视图3"><br><img src="\img\软件超市\图4.png" alt="视图4"></p>
+<p>返回只显示一个团队了！！好气啊，不断调试中发现我团队详情的团队信息居然和我列表的团队信息存储在同一个变量里！！！！所以点进详情页后，改变了team，而keep-alive缓存的是team里的数据。我是白痴吗？？？？</p>
+<h3 id="方法二：keep-alive标签内部添加"><a href="#方法二：keep-alive标签内部添加" class="headerlink" title="方法二：keep-alive标签内部添加"></a>方法二：keep-alive标签内部添加</h3><p>keep-alive 有两个prop：</p>
+<ul>
+<li>include: 字符串或正则表达式。只有匹配的组件会被缓存。</li>
+<li>exclude: 字符串或正则表达式。任何匹配的组件都不会被缓存。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">/*--该组件必须命名！！---*/</span><br><span class="line"><span class="built_in">export</span> default &#123;</span><br><span class="line">  name: <span class="string">'test-keep-alive'</span>,</span><br><span class="line">  <span class="function"><span class="title">data</span></span> () &#123;</span><br><span class="line">    <span class="built_in">return</span> &#123;</span><br><span class="line">        includedComponents: <span class="string">"test-keep-alive"</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;keep-alive include=<span class="string">"test-keep-alive"</span>&gt;</span><br><span class="line">  &lt;!-- 将缓存name为<span class="built_in">test</span>-keep-alive的组件 --&gt;</span><br><span class="line">  &lt;component&gt;&lt;/component&gt;</span><br><span class="line">&lt;/keep-alive&gt;</span><br><span class="line"></span><br><span class="line">&lt;keep-alive include=<span class="string">"a,b"</span>&gt;</span><br><span class="line">  &lt;!-- 将缓存name为a或者b的组件，结合动态组件使用 --&gt;</span><br><span class="line">  &lt;component :is=<span class="string">"view"</span>&gt;&lt;/component&gt;</span><br><span class="line">&lt;/keep-alive&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 使用正则表达式，需使用v-bind --&gt;</span><br><span class="line">&lt;keep-alive :include=<span class="string">"/a|b/"</span>&gt;</span><br><span class="line">  &lt;component :is=<span class="string">"view"</span>&gt;&lt;/component&gt;</span><br><span class="line">&lt;/keep-alive&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 动态判断 --&gt;</span><br><span class="line">&lt;keep-alive :include=<span class="string">"includedComponents"</span>&gt;</span><br><span class="line">  &lt;router-view&gt;&lt;/router-view&gt;</span><br><span class="line">&lt;/keep-alive&gt;</span><br><span class="line"></span><br><span class="line">&lt;keep-alive exclude=<span class="string">"test-keep-alive"</span>&gt;</span><br><span class="line">  &lt;!-- 将不缓存name为<span class="built_in">test</span>-keep-alive的组件 --&gt;</span><br><span class="line">  &lt;component&gt;&lt;/component&gt;</span><br><span class="line">&lt;/keep-alive&gt;</span><br></pre></td></tr></table></figure>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!--<footer class="footer">-->
+    <!--<ul class="list-inline text-center">-->
+        <!---->
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+    <!--</ul>-->
+    <!---->
+    <!--<p>-->
+        <!--<span id="busuanzi_container_site_pv">-->
+            <!--<span id="busuanzi_value_site_pv"></span>PV-->
+        <!--</span>-->
+        <!--<span id="busuanzi_container_site_uv">-->
+            <!--<span id="busuanzi_value_site_uv"></span>UV-->
+        <!--</span>-->
+        <!--Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>-->
+<!--</footer>-->
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.xml"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</html>

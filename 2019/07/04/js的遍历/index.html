@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="biubiu的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        js的遍历 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <span>biubiu</span>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>SEARCH</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#数组的遍历"><span class="toc-text">数组的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#forEach"><span class="toc-text">forEach()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#map"><span class="toc-text">map()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#filter"><span class="toc-text">filter()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#every-some"><span class="toc-text">every()/some()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#reduce-reduceRight"><span class="toc-text">reduce()/reduceRight()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对象"><span class="toc-text">对象</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        js的遍历
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2019-07-04 08:45:05</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#js" title="js">js</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>复习之余，把常用的遍历方法总结，方便使用的时候查看。</p>
+<h3 id="数组的遍历"><a href="#数组的遍历" class="headerlink" title="数组的遍历"></a>数组的遍历</h3><p>语法中有thisValue参数的，可以接收第二个参数，用来绑定回调函数内部的this变量，将回调函数内部的this对象，指向第二个参数，间接操作这个参数（一般是数组）。以map为例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var arr = [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;];</span><br><span class="line"></span><br><span class="line">[1, 2].map(function (e) &#123;</span><br><span class="line">    return this[e];</span><br><span class="line">&#125;, arr)</span><br><span class="line"> // [&apos;b&apos;, &apos;c&apos;]</span><br></pre></td></tr></table></figure>
+<h4 id="forEach"><a href="#forEach" class="headerlink" title="forEach()"></a>forEach()</h4><p>语法: array.forEach(function(currentValue, index, arr), thisValue)</p>
+<p> 调用数组的每个元素，并将元素传递给回调函数。<br> <strong>没有返回一个新数组。不能中断，对空数组是不会执行回调函数。</strong></p>
+<h4 id="map"><a href="#map" class="headerlink" title="map()"></a>map()</h4><p>语法: array.map(function(currentValue,index,arr), thisValue)</p>
+<p>按照原始数组元素顺序依次处理元素，结果放在一个新数组里返回。<br><strong>返回一个新数组，不会改变原始数组</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/*------从接口得到数据------*/</span><br><span class="line">const users=res.items.map(item =&gt; (&#123;</span><br><span class="line">    url: item.html_url,</span><br><span class="line">    img: item.avatar_url,</span><br><span class="line">    name: item.login,</span><br><span class="line">    &#125;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h4 id="filter"><a href="#filter" class="headerlink" title="filter()"></a>filter()</h4><p>语法：array.filter(function(currentValue,index,arr), thisValue)</p>
+<p>创建一个新的数组，指定数组中符合条件的放入新数组。<br><strong>返回一个新数组，按照约定条件筛选数组元素时比较常用</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/*-----去重问题----*/</span><br><span class="line">var arr = [1, 2, 2, 3, 4, 5, 5, 6, 7, 7,8,8,0,8,6,3,4,56,2];</span><br><span class="line">var arr2 = arr.filter((x, index,self)=&gt;self.indexOf(x)===index)</span><br><span class="line">console.log(arr2); //[1, 2, 3, 4, 5, 6, 7, 8, 0, 56]</span><br></pre></td></tr></table></figure>
+<h4 id="every-some"><a href="#every-some" class="headerlink" title="every()/some()"></a>every()/some()</h4><p>语法: array.every(function(currentValue,index,arr), thisValue)</p>
+<p>对整个数组进行检查，如有一个元素满足，整个表达式返回false，且其余元素不检查。否则返回true。</p>
+<p><strong>不会改变原数组</strong></p>
+<p>语法:array.some(function(currentValue,index,arr),thisValue)</p>
+<p>对整个数组进行检查，如果有一个元素满足条件，则表达式返回true , 剩余的元素不会再执行检测。反之返回false。</p>
+<p><strong>不会改变原数组</strong></p>
+<p>   这两个方法在实际开发中，大有可用之处。比如在判定用户是否勾选了不可操作的数据，或者是否勾选了一条可以操作的数据可以使用这两个方法遍历循环数组。</p>
+<h4 id="reduce-reduceRight"><a href="#reduce-reduceRight" class="headerlink" title="reduce()/reduceRight()"></a>reduce()/reduceRight()</h4><p>语法:arr.reduce(callback,[initialValue])</p>
+<p>callback （执行数组中每个值的函数，包含四个参数）</p>
+<ul>
+<li>previousValue 必选。上一次调用回调返回的值，或者是提供的初始值（initialValue）</li>
+<li>currentValue 必选。数组中当前被处理的元素</li>
+<li>index 可选。当前元素在数组中的索引。</li>
+<li>arr    可选。当前元素所属的数组对象。</li>
+</ul>
+<p>initialValue （作为第一次调用 callback 的第一个参数。）</p>
+<p>将数组元素做“叠加”处理， <strong>返回一个值。</strong> reduce方向从左向右，reduceRight方向从右向左</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1, 2, 3, 4];</span><br><span class="line">var sum = arr.reduce(function(prev, cur, index, arr) &#123;</span><br><span class="line">    console.log(prev, cur, index);</span><br><span class="line">    return prev + cur;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(arr, sum);</span><br><span class="line">/*-----打印结果---*/</span><br><span class="line">1 2 1</span><br><span class="line">3 3 2</span><br><span class="line">6 4 3</span><br><span class="line">[1, 2, 3, 4] 10</span><br></pre></td></tr></table></figure>
+<p>index是从1开始的，第一次的prev的值是数组的第一个值。数组长度是4，<strong>但是reduce函数循环3次。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var  arr = [1, 2, 3, 4];</span><br><span class="line">var sum = arr.reduce(function(prev, cur, index, arr) &#123;</span><br><span class="line">    console.log(prev, cur, index);</span><br><span class="line">    return prev + cur;</span><br><span class="line">&#125;，0) //注意这里设置了初始值</span><br><span class="line">console.log(arr, sum);</span><br><span class="line">/*----打印结果----*/</span><br><span class="line">0 1 0</span><br><span class="line">1 2 1</span><br><span class="line">3 3 2</span><br><span class="line">6 4 3</span><br><span class="line">[1, 2, 3, 4] 10</span><br></pre></td></tr></table></figure>
+<p>这个例子index是从0开始的，第一次的prev的值是我们设置的初始值0，数组长度是4，reduce函数循环4次。</p>
+<p><strong>如果没有提供initialValue，reduce 会从索引1的地方开始执行 callback 方法，跳过第一个索引。如果提供initialValue，从索引0开始</strong></p>
+<p>对空数组来说，不设置初始值会报错，设置了初始值不会报错，所以一般来说我们提供初始值通常更安全。</p>
+<p>使用场景也很多，具体可以看 <a href="https://www.jianshu.com/p/e375ba1cfc47" target="_blank" rel="noopener">参考文档</a></p>
+<h3 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h3><ul>
+<li>Object.keys() 返回一个由一个给定对象的自身可枚举<strong>属性组成的数组</strong></li>
+<li>Object.getOwnPropertyNames() 返回一个数组,包含对象自身的所有属性(不含Symbol属性,但是包括不可枚举属性).</li>
+<li>for in 循环遍历对象自身的和继承的可枚举属性(不含Symbol属性).</li>
+<li>for of 主要来遍历可迭代的对象（包括Array, Map, Set, arguments等），它主要用来获取对象的<strong>属性值</strong>，而for..in主要获取对象的属性名。</li>
+</ul>
+<p>总结:</p>
+<p><img src="\img\js\图1.png" alt="总结"></p>
+<ol>
+<li>for in遍历数组的下标类型不一样 ：for in为String，for为Number</li>
+<li>for in不适合遍历数组</li>
+<li>对不存在项的处理：for in不存在的项不被枚举出来；for全部枚举出</li>
+<li>遍历对象可通过hasOwnProperty()过滤掉原型里面的属性</li>
+<li>for of输出数组中包括不存在的值在内的所有值</li>
+</ol>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!--<footer class="footer">-->
+    <!--<ul class="list-inline text-center">-->
+        <!---->
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+    <!--</ul>-->
+    <!---->
+    <!--<p>-->
+        <!--<span id="busuanzi_container_site_pv">-->
+            <!--<span id="busuanzi_value_site_pv"></span>PV-->
+        <!--</span>-->
+        <!--<span id="busuanzi_container_site_uv">-->
+            <!--<span id="busuanzi_value_site_uv"></span>UV-->
+        <!--</span>-->
+        <!--Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>-->
+<!--</footer>-->
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.xml"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</html>

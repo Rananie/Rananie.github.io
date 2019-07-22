@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-07-04T02:10:47.276Z</updated>
+  <updated>2019-07-22T15:11:08.175Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,65 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>js的遍历</title>
+    <title>js常用字符串操作方法总结</title>
+    <link href="http://yoursite.com/2019/07/16/js%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    <id>http://yoursite.com/2019/07/16/js的字符串/</id>
+    <published>2019-07-16T13:36:40.000Z</published>
+    <updated>2019-07-22T15:11:08.175Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>终于忙完期末了，考研复习也慢慢走上正轨，要抽出更多的时间把以前学的东西总结下来，再在项目中实践，重新学习更深的内容。24小时完全不够用QAQ。</p></blockquote><h2 id="substring-star-stop-slice（star-stop）"><a href="#substring-star-stop-slice（star-stop）" class="headerlink" title="substring(star,stop)/slice（star,stop）"></a>substring(star,stop)/slice（star,stop）</h2><p>最常用的就是对后台传过来的字符串进行<strong>截取处理</strong></p><p>语法：stringObject.substring(start,stop)</p><ul><li>start 必须，并且非负整数</li><li>stop 可选，并且非负整数。如果省略，一直截取到字符串的结尾</li><li>返回一个新的字符串，包含了start处的字符，但不包括stop处的字符</li></ul><p>语法：stringObject.slice(start,end)</p><ul><li>start 截取的片段的起始下标，如果为负数，从后往前截取（-1 指字符串的最后一个字符）</li><li>end  截取的结尾的下标</li><li>返回一个新的字符串，包含了start处的字符，但不包括end处的字符</li></ul><blockquote><p>arrayObject.slice(start,end)与stringObject.slice(start,end)相似用法。注意array.splice与slice的区别在于splice方法会改变原数组并且可以向原数组中添加元素，如果有删除元素则返回是含有删除的元素的数组。</p></blockquote><h2 id="String-split-Array-join"><a href="#String-split-Array-join" class="headerlink" title="String.split()/Array.join()"></a>String.split()/Array.join()</h2><p>语法: stringObject.split(separator,howmany)</p><p>把一个字符串分割成字符串数组</p><ul><li>separator 必须。字符或正则表达式，从该从该参数指定的地方分割 stringObject。</li><li>howmany  可选。该参数可指定返回的数组的最大长度。</li><li>返回一个字符串数组，不包括separator自身</li></ul><p>语法： arrayObject.join(separator)</p><p>数组中的所有元素放入一个字符串。</p><ul><li>separator 数组中的元素形成字符串时连接的符号，默认逗号。</li><li>如果把空字符串 (“”) 用作 separator，那么 stringObject 中的每个字符之间都会被分割</li><li>返回一个字符串数组</li></ul><h2 id="String-concat-Array-concat"><a href="#String-concat-Array-concat" class="headerlink" title="String.concat()/Array.concat()"></a>String.concat()/Array.concat()</h2><p>字符串的concat方法其实并不常用，连接两个字符串的时候我们常常用<code>+</code>来代替。这里主要是记录几个数组的连接方法。</p><p>语法:arrayObject.concat(arrayX,arrayX,……,arrayX)</p><ul><li>添加的是数组的元素不是添加一个数组</li><li>返回一个新数组，不改变原数组</li></ul><h2 id="string-replace-regexp-substr-replacement"><a href="#string-replace-regexp-substr-replacement" class="headerlink" title="string.replace(regexp/substr,replacement)"></a>string.replace(regexp/substr,replacement)</h2><ul><li>第一个参数可以使RegExp对象或者一个字符串，第二个参数可以是一个字符串或者一个函数。如果第一个参数是字符串，那么只会替换第一个字符串。如果想替换所有的字符串，则必须使用正则表达式。</li><li>默认只进行第一次匹配操作的替换，想要全局替换，需要置上正则全局标识g</li><li>‘\s”是转移符号用以匹配任何空白字符，包括空格、制表符、换页符等等，</li></ul><h2 id="string-search-regexp-string-indexOf-searchvalue-fromindex"><a href="#string-search-regexp-string-indexOf-searchvalue-fromindex" class="headerlink" title="string.search(regexp)/string.indexOf(searchvalue,fromindex)"></a>string.search(regexp)/string.indexOf(searchvalue,fromindex)</h2><p>语法 string.indexOf(searchvalue,fromindex)</p><ul><li>searchvalue，规定检索的字符串值</li><li>fromindex 可选的整数参数。规定在字符串中开始检索的位置。它的合法取值是 0 到 stringObject.length - 1。</li><li>返回的检索的字符串第一次出现的位置，如果没有出现，返回-1</li></ul><p>语法 string.search(regexp)</p><ul><li>regexp 该参数可以是需要在 stringObject 中检索的子串，也可以是需要检索的 RegExp 对象。</li><li>要执行忽略大小写的检索，追加标志 i。</li><li>返回值：stringObject 中第一个与 regexp 相匹配的子串的起始位置。</li><li>search() 方法不执行全局匹配，它将忽略标志 g。它同时忽略 regexp 的 lastIndex 属性，</li></ul><p>语法 stringObject.match(searchvalue)<br>     stringObject.match(regexp)</p><ul><li>返回指定的值</li><li>非全局下返回的数组包含index，input，全局模式下只返回匹配结果，没有index，input等，只有结果。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;终于忙完期末了，考研复习也慢慢走上正轨，要抽出更多的时间把以前学的东西总结下来，再在项目中实践，重新学习更深的内容。24小时完全不够用QAQ。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;substring-star-stop-slice（
+      
+    
+    </summary>
+    
+    
+      <category term="js" scheme="http://yoursite.com/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>正则表达式</title>
+    <link href="http://yoursite.com/2019/07/15/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    <id>http://yoursite.com/2019/07/15/正则表达式/</id>
+    <published>2019-07-15T14:57:10.000Z</published>
+    <updated>2019-07-22T14:55:08.529Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><p><strong>修饰符</strong></p><table><thead><tr><th>修饰符</th><th>描述</th></tr></thead><tbody><tr><td>i</td><td>执行对大小写不敏感的匹配。</td></tr><tr><td>g</td><td>执行全局匹配（查找所有匹配而非在找到第一个匹配后停止）。</td></tr><tr><td>m</td><td>执行多行匹配。</td></tr></tbody></table><p><strong>元字符</strong></p><p><img src="\img\js\元字符.png" alt="元字符"></p><p><strong>方括号</strong></p><p><img src="\img\js\方括号.png" alt="方括号"></p><p><strong>量词</strong></p><p><img src="\img\js\量词.png" alt="量词"></p><ul><li>js里面的正则只有前瞻，头部的（后），尾部的（前），所以前瞻就是后面紧跟着的</li><li>匹配有贪婪模式（尽可能多的匹配），非贪婪模式（尽可能少的匹配），默认为贪婪模式，非贪婪模式需要在量词后面加？</li></ul><p><strong>对象属性</strong></p><p>其中的模式（pattern）部分可以是任何简单或者复杂的正则表达式，可以包含字符类、限定符、分组、向前查找以及反向引用。每个正则表达式可带有一个或者多个标注（flags）,用以标明正则表达式的行为。有三个一下标志：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var expression = /pattern/flags;</span><br></pre></td></tr></table></figure><ul><li>g：表示全局模式,即模式将被应用到所有字符串，而非在发现第一个匹配项时立即停止。</li><li>i：表示不区分大小写模式。</li><li>m：表示多行模式，即在到达一行文本末尾时还在继续查找下一行中是否存在于模式匹配的项。</li></ul><p><a href="https://www.cnblogs.com/zxin/archive/2013/01/26/2877765.html" target="_blank" rel="noopener">常用正则表达</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;基本语法&quot;&gt;&lt;a href=&quot;#基本语法&quot; class=&quot;headerlink&quot; title=&quot;基本语法&quot;&gt;&lt;/a&gt;基本语法&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;修饰符&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;修饰符&lt;/th&gt;
+&lt;th
+      
+    
+    </summary>
+    
+    
+      <category term="js" scheme="http://yoursite.com/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>js遍历方法总结</title>
     <link href="http://yoursite.com/2019/07/04/js%E7%9A%84%E9%81%8D%E5%8E%86/"/>
     <id>http://yoursite.com/2019/07/04/js的遍历/</id>
     <published>2019-07-04T00:45:05.000Z</published>
-    <updated>2019-07-04T02:10:47.276Z</updated>
+    <updated>2019-07-15T13:38:02.166Z</updated>
     
     <content type="html"><![CDATA[<p>复习之余，把常用的遍历方法总结，方便使用的时候查看。</p><h3 id="数组的遍历"><a href="#数组的遍历" class="headerlink" title="数组的遍历"></a>数组的遍历</h3><p>语法中有thisValue参数的，可以接收第二个参数，用来绑定回调函数内部的this变量，将回调函数内部的this对象，指向第二个参数，间接操作这个参数（一般是数组）。以map为例子</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var arr = [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;];</span><br><span class="line"></span><br><span class="line">[1, 2].map(function (e) &#123;</span><br><span class="line">    return this[e];</span><br><span class="line">&#125;, arr)</span><br><span class="line"> // [&apos;b&apos;, &apos;c&apos;]</span><br></pre></td></tr></table></figure><h4 id="forEach"><a href="#forEach" class="headerlink" title="forEach()"></a>forEach()</h4><p>语法: array.forEach(function(currentValue, index, arr), thisValue)</p><p> 调用数组的每个元素，并将元素传递给回调函数。<br> <strong>没有返回一个新数组。不能中断，对空数组是不会执行回调函数。</strong></p><h4 id="map"><a href="#map" class="headerlink" title="map()"></a>map()</h4><p>语法: array.map(function(currentValue,index,arr), thisValue)</p><p>按照原始数组元素顺序依次处理元素，结果放在一个新数组里返回。<br><strong>返回一个新数组，不会改变原始数组</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/*------从接口得到数据------*/</span><br><span class="line">const users=res.items.map(item =&gt; (&#123;</span><br><span class="line">    url: item.html_url,</span><br><span class="line">    img: item.avatar_url,</span><br><span class="line">    name: item.login,</span><br><span class="line">    &#125;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure><h4 id="filter"><a href="#filter" class="headerlink" title="filter()"></a>filter()</h4><p>语法：array.filter(function(currentValue,index,arr), thisValue)</p><p>创建一个新的数组，指定数组中符合条件的放入新数组。<br><strong>返回一个新数组，按照约定条件筛选数组元素时比较常用</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/*-----去重问题----*/</span><br><span class="line">var arr = [1, 2, 2, 3, 4, 5, 5, 6, 7, 7,8,8,0,8,6,3,4,56,2];</span><br><span class="line">var arr2 = arr.filter((x, index,self)=&gt;self.indexOf(x)===index)</span><br><span class="line">console.log(arr2); //[1, 2, 3, 4, 5, 6, 7, 8, 0, 56]</span><br></pre></td></tr></table></figure><h4 id="every-some"><a href="#every-some" class="headerlink" title="every()/some()"></a>every()/some()</h4><p>语法: array.every(function(currentValue,index,arr), thisValue)</p><p>对整个数组进行检查，如有一个元素满足，整个表达式返回false，且其余元素不检查。否则返回true。</p><p><strong>不会改变原数组</strong></p><p>语法:array.some(function(currentValue,index,arr),thisValue)</p><p>对整个数组进行检查，如果有一个元素满足条件，则表达式返回true , 剩余的元素不会再执行检测。反之返回false。</p><p><strong>不会改变原数组</strong></p><p>   这两个方法在实际开发中，大有可用之处。比如在判定用户是否勾选了不可操作的数据，或者是否勾选了一条可以操作的数据可以使用这两个方法遍历循环数组。</p><h4 id="reduce-reduceRight"><a href="#reduce-reduceRight" class="headerlink" title="reduce()/reduceRight()"></a>reduce()/reduceRight()</h4><p>语法:arr.reduce(callback,[initialValue])</p><p>callback （执行数组中每个值的函数，包含四个参数）</p><ul><li>previousValue 必选。上一次调用回调返回的值，或者是提供的初始值（initialValue）</li><li>currentValue 必选。数组中当前被处理的元素</li><li>index 可选。当前元素在数组中的索引。</li><li>arr    可选。当前元素所属的数组对象。</li></ul><p>initialValue （作为第一次调用 callback 的第一个参数。）</p><p>将数组元素做“叠加”处理， <strong>返回一个值。</strong> reduce方向从左向右，reduceRight方向从右向左</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1, 2, 3, 4];</span><br><span class="line">var sum = arr.reduce(function(prev, cur, index, arr) &#123;</span><br><span class="line">    console.log(prev, cur, index);</span><br><span class="line">    return prev + cur;</span><br><span class="line">&#125;)</span><br><span class="line">console.log(arr, sum);</span><br><span class="line">/*-----打印结果---*/</span><br><span class="line">1 2 1</span><br><span class="line">3 3 2</span><br><span class="line">6 4 3</span><br><span class="line">[1, 2, 3, 4] 10</span><br></pre></td></tr></table></figure><p>index是从1开始的，第一次的prev的值是数组的第一个值。数组长度是4，<strong>但是reduce函数循环3次。</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var  arr = [1, 2, 3, 4];</span><br><span class="line">var sum = arr.reduce(function(prev, cur, index, arr) &#123;</span><br><span class="line">    console.log(prev, cur, index);</span><br><span class="line">    return prev + cur;</span><br><span class="line">&#125;，0) //注意这里设置了初始值</span><br><span class="line">console.log(arr, sum);</span><br><span class="line">/*----打印结果----*/</span><br><span class="line">0 1 0</span><br><span class="line">1 2 1</span><br><span class="line">3 3 2</span><br><span class="line">6 4 3</span><br><span class="line">[1, 2, 3, 4] 10</span><br></pre></td></tr></table></figure><p>这个例子index是从0开始的，第一次的prev的值是我们设置的初始值0，数组长度是4，reduce函数循环4次。</p><p><strong>如果没有提供initialValue，reduce 会从索引1的地方开始执行 callback 方法，跳过第一个索引。如果提供initialValue，从索引0开始</strong></p><p>对空数组来说，不设置初始值会报错，设置了初始值不会报错，所以一般来说我们提供初始值通常更安全。</p><p>使用场景也很多，具体可以看 <a href="https://www.jianshu.com/p/e375ba1cfc47" target="_blank" rel="noopener">参考文档</a></p><h3 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h3><ul><li>Object.keys() 返回一个由一个给定对象的自身可枚举<strong>属性组成的数组</strong></li><li>Object.getOwnPropertyNames() 返回一个数组,包含对象自身的所有属性(不含Symbol属性,但是包括不可枚举属性).</li><li>for in 循环遍历对象自身的和继承的可枚举属性(不含Symbol属性).</li><li>for of 主要来遍历可迭代的对象（包括Array, Map, Set, arguments等），它主要用来获取对象的<strong>属性值</strong>，而for..in主要获取对象的属性名。</li></ul><p>总结:</p><p><img src="\img\js\图1.png" alt="总结"></p><ol><li>for in遍历数组的下标类型不一样 ：for in为String，for为Number</li><li>for in不适合遍历数组</li><li>对不存在项的处理：for in不存在的项不被枚举出来；for全部枚举出</li><li>遍历对象可通过hasOwnProperty()过滤掉原型里面的属性</li><li>for of输出数组中包括不存在的值在内的所有值</li></ol>]]></content>
     
@@ -166,9 +220,9 @@
     </summary>
     
     
-      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
-    
       <category term="css" scheme="http://yoursite.com/tags/css/"/>
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -242,11 +296,11 @@
     </summary>
     
     
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
       <category term="vue" scheme="http://yoursite.com/tags/vue/"/>
     
       <category term="库" scheme="http://yoursite.com/tags/%E5%BA%93/"/>
-    
-      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   

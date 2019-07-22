@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="biubiu的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        js常用字符串操作方法总结 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <span>biubiu</span>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>SEARCH</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#substring-star-stop-slice（star-stop）"><span class="toc-text">substring(star,stop)/slice（star,stop）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#String-split-Array-join"><span class="toc-text">String.split()/Array.join()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#String-concat-Array-concat"><span class="toc-text">String.concat()/Array.concat()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#string-replace-regexp-substr-replacement"><span class="toc-text">string.replace(regexp/substr,replacement)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#string-search-regexp-string-indexOf-searchvalue-fromindex"><span class="toc-text">string.search(regexp)/string.indexOf(searchvalue,fromindex)</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        js常用字符串操作方法总结
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2019-07-16 21:36:40</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#js" title="js">js</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <blockquote>
+<p>终于忙完期末了，考研复习也慢慢走上正轨，要抽出更多的时间把以前学的东西总结下来，再在项目中实践，重新学习更深的内容。24小时完全不够用QAQ。</p>
+</blockquote>
+<h2 id="substring-star-stop-slice（star-stop）"><a href="#substring-star-stop-slice（star-stop）" class="headerlink" title="substring(star,stop)/slice（star,stop）"></a>substring(star,stop)/slice（star,stop）</h2><p>最常用的就是对后台传过来的字符串进行<strong>截取处理</strong></p>
+<p>语法：stringObject.substring(start,stop)</p>
+<ul>
+<li>start 必须，并且非负整数</li>
+<li>stop 可选，并且非负整数。如果省略，一直截取到字符串的结尾</li>
+<li>返回一个新的字符串，包含了start处的字符，但不包括stop处的字符</li>
+</ul>
+<p>语法：stringObject.slice(start,end)</p>
+<ul>
+<li>start 截取的片段的起始下标，如果为负数，从后往前截取（-1 指字符串的最后一个字符）</li>
+<li>end  截取的结尾的下标</li>
+<li>返回一个新的字符串，包含了start处的字符，但不包括end处的字符</li>
+</ul>
+<blockquote>
+<p>arrayObject.slice(start,end)与stringObject.slice(start,end)相似用法。注意array.splice与slice的区别在于splice方法会改变原数组并且可以向原数组中添加元素，如果有删除元素则返回是含有删除的元素的数组。</p>
+</blockquote>
+<h2 id="String-split-Array-join"><a href="#String-split-Array-join" class="headerlink" title="String.split()/Array.join()"></a>String.split()/Array.join()</h2><p>语法: stringObject.split(separator,howmany)</p>
+<p>把一个字符串分割成字符串数组</p>
+<ul>
+<li>separator 必须。字符或正则表达式，从该从该参数指定的地方分割 stringObject。</li>
+<li>howmany  可选。该参数可指定返回的数组的最大长度。</li>
+<li>返回一个字符串数组，不包括separator自身</li>
+</ul>
+<p>语法： arrayObject.join(separator)</p>
+<p>数组中的所有元素放入一个字符串。</p>
+<ul>
+<li>separator 数组中的元素形成字符串时连接的符号，默认逗号。</li>
+<li>如果把空字符串 (“”) 用作 separator，那么 stringObject 中的每个字符之间都会被分割</li>
+<li>返回一个字符串数组</li>
+</ul>
+<h2 id="String-concat-Array-concat"><a href="#String-concat-Array-concat" class="headerlink" title="String.concat()/Array.concat()"></a>String.concat()/Array.concat()</h2><p>字符串的concat方法其实并不常用，连接两个字符串的时候我们常常用<code>+</code>来代替。这里主要是记录几个数组的连接方法。</p>
+<p>语法:arrayObject.concat(arrayX,arrayX,……,arrayX)</p>
+<ul>
+<li>添加的是数组的元素不是添加一个数组</li>
+<li>返回一个新数组，不改变原数组</li>
+</ul>
+<h2 id="string-replace-regexp-substr-replacement"><a href="#string-replace-regexp-substr-replacement" class="headerlink" title="string.replace(regexp/substr,replacement)"></a>string.replace(regexp/substr,replacement)</h2><ul>
+<li>第一个参数可以使RegExp对象或者一个字符串，第二个参数可以是一个字符串或者一个函数。如果第一个参数是字符串，那么只会替换第一个字符串。如果想替换所有的字符串，则必须使用正则表达式。</li>
+<li>默认只进行第一次匹配操作的替换，想要全局替换，需要置上正则全局标识g</li>
+<li>‘\s”是转移符号用以匹配任何空白字符，包括空格、制表符、换页符等等，</li>
+</ul>
+<h2 id="string-search-regexp-string-indexOf-searchvalue-fromindex"><a href="#string-search-regexp-string-indexOf-searchvalue-fromindex" class="headerlink" title="string.search(regexp)/string.indexOf(searchvalue,fromindex)"></a>string.search(regexp)/string.indexOf(searchvalue,fromindex)</h2><p>语法 string.indexOf(searchvalue,fromindex)</p>
+<ul>
+<li>searchvalue，规定检索的字符串值</li>
+<li>fromindex 可选的整数参数。规定在字符串中开始检索的位置。它的合法取值是 0 到 stringObject.length - 1。</li>
+<li>返回的检索的字符串第一次出现的位置，如果没有出现，返回-1</li>
+</ul>
+<p>语法 string.search(regexp)</p>
+<ul>
+<li>regexp 该参数可以是需要在 stringObject 中检索的子串，也可以是需要检索的 RegExp 对象。</li>
+<li>要执行忽略大小写的检索，追加标志 i。</li>
+<li>返回值：stringObject 中第一个与 regexp 相匹配的子串的起始位置。</li>
+<li>search() 方法不执行全局匹配，它将忽略标志 g。它同时忽略 regexp 的 lastIndex 属性，</li>
+</ul>
+<p>语法 stringObject.match(searchvalue)<br>     stringObject.match(regexp)</p>
+<ul>
+<li>返回指定的值</li>
+<li>非全局下返回的数组包含index，input，全局模式下只返回匹配结果，没有index，input等，只有结果。</li>
+</ul>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!--<footer class="footer">-->
+    <!--<ul class="list-inline text-center">-->
+        <!---->
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+    <!--</ul>-->
+    <!---->
+    <!--<p>-->
+        <!--<span id="busuanzi_container_site_pv">-->
+            <!--<span id="busuanzi_value_site_pv"></span>PV-->
+        <!--</span>-->
+        <!--<span id="busuanzi_container_site_uv">-->
+            <!--<span id="busuanzi_value_site_uv"></span>UV-->
+        <!--</span>-->
+        <!--Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>-->
+<!--</footer>-->
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.xml"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="biubiu的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        MongoDB学习笔记 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <span>biubiu</span>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>SEARCH</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本操作"><span class="toc-text">基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#增加"><span class="toc-text">增加</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查询"><span class="toc-text">查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改"><span class="toc-text">修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除"><span class="toc-text">删除</span></a></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        MongoDB学习笔记
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2019-08-01 22:15:07</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#MongoDB" title="MongoDB">MongoDB</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>MongoDB是非关系型数据库文档数据库，存的<strong>类似JSON</strong>的结构。</p>
+<p>启动服务器，db存放数据库，我创建在D盘的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mongod --dbpath D:\mongoDB\data\db</span><br><span class="line">/*-----默认端口号27017-----*/</span><br><span class="line">mongod --dbpath D:\mongoDB\data\db --port XXX</span><br></pre></td></tr></table></figure>
+<p>注意两个概念：</p>
+<ol>
+<li>数据库的服务器。服务器用来保存数据，mongod启动服务器</li>
+<li>数据库的客户端。客户端用来操作服务器，对数据惊醒增删改查的操作，mongo启动</li>
+</ol>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>数据库：存放集合。<br>集合：类似数组，在集合中存放文档。<br>文档：文档是数据库中的最小单位，存储和操作内容都是文档。</p>
+<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p>use 数据库名 //进入数据库</p>
+<h3 id="增加"><a href="#增加" class="headerlink" title="增加"></a>增加</h3><p>插入一个放对象db.<collection>.insert({数据})//db.<collection>.insertOne()<br>插入多个放数组db.<collection>.insert([{},{}]) //db .<collection>.insertMang()</collection></collection></collection></collection></p>
+<p>//插入多条可以配合使用for循环</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var arr =[];</span><br><span class="line">for (var i=1;i&lt;=20000;i++)&#123;</span><br><span class="line">arr.push(&#123;num:i&#125;);</span><br><span class="line">&#125;</span><br><span class="line">db.numbers.insert(arr)</span><br></pre></td></tr></table></figure>
+<h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><p>db.<collection>.find({条件})，为空查询所有。</collection></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/*----名字为张三并且年龄为28的文档,返回的是一个数组--*/</span><br><span class="line">db.stus.find(&#123;name:&quot;张三&quot;,age:28&#125;)</span><br><span class="line">/*----查询符合条件的第一个集合，返回的是一个对象--*/</span><br><span class="line">db.stus.findOne(&#123;age:28&#125;)</span><br><span class="line">/*-----返回符合条件的文档数量----*/</span><br><span class="line">db.&lt;collection&gt;.find().count()</span><br></pre></td></tr></table></figure>
+<p>MongoDB支持通过内嵌文档的属性进行查询，通过点（.）连接。但是此属性名必须是用引号。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hobby:&#123;movies:[111,222],XXX&#125;</span><br><span class="line"></span><br><span class="line">//查找的是hobby里面的moovies里面的值有111</span><br><span class="line">db.users.find(‘hobby.movies’:&apos;111&apos;)</span><br></pre></td></tr></table></figure>
+<h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><p>db.<collection>.update(查询条件，新对象,{修改的配置选项，可选})。update默认会使用新对象来替换旧对象。所以不常用。<strong>默认情况下只会修改一个</strong> ，实际上既可修改单个，也可修改多个。<br>db.<collection>.updateMany()。 修改多条<br>db.<collection>.updateOne()。 修改单条<br>db.collection.replaceOne()。替换单条</collection></collection></collection></p>
+<p>常与<code>$set</code>结合使用来修改文档中的指定属性，没有的属性名会自动创建。<code>unset</code>可以删除响应属性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">db.stus.update(&#123;name:&quot;李四&quot;&#125;,&#123;$set:&#123;gender:&quot;女&quot;&#125;，&#123;add:&quot;哈哈哈&quot;&#125;&#125;)</span><br><span class="line">//若值为一个数组,$push往数组中添加。不考虑是否重复</span><br><span class="line">//$addToSet 向数组中添加一个新元素。 重复的就不会添加。</span><br><span class="line">db.stus.update(&#123;name:&quot;李四&quot;&#125;,&#123;$push:&#123;hobby.movies’:&apos;333&apos;&#125;&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p>db.collection.remove()  删除符合条件的所有文档，第二个参数可选：删除配置（比如只删除一个）。<strong>必须传参，但如果传递空对象，则所有文档都删除（清空集合，性能太差）</strong><br>db.collection.deleteMany()<br>db.collection.deleteOne()<br>db.collection.drop() 删除集合<br>db.dropDatabase()删除数据库</p>
+<p><strong>一般数据是不会删除的，而是在数据中添加一个字段，表示是否删除</strong></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!--<footer class="footer">-->
+    <!--<ul class="list-inline text-center">-->
+        <!---->
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+    <!--</ul>-->
+    <!---->
+    <!--<p>-->
+        <!--<span id="busuanzi_container_site_pv">-->
+            <!--<span id="busuanzi_value_site_pv"></span>PV-->
+        <!--</span>-->
+        <!--<span id="busuanzi_container_site_uv">-->
+            <!--<span id="busuanzi_value_site_uv"></span>UV-->
+        <!--</span>-->
+        <!--Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>-->
+<!--</footer>-->
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.xml"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</html>

@@ -5,7 +5,7 @@
     <url>%2F2020%2F01%2F04%2F%E8%BD%AF%E4%BB%B6%E8%B6%85%E5%B8%82%E9%A1%B9%E7%9B%AE%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B%2F</url>
     <content type="text"><![CDATA[3.3 组件编写3.3.1 Manage.vue 存放目录：src/views/Manage.vue 作用：作为Layout容器 详情：包含了Header组件与Sidebar组件 3.3.2 Login.vue 存放目录：src/views/login.Login 作用：登陆界面 详情：通过前台展示界面进入，进入时选择身份，ID的不同身份权限不一样。 具体实现 获取当前用户的userId通过store实现 创建store main.js里引入store 1234567import store from &quot;./store&quot;;new Vue(&#123;el: &apos;#app&apos;,render:h=&gt;h(App),router,store&#125;)]]></content>
       <tags>
-        <tag>vue</tag>
+        <tag>project</tag>
         <tag>软件超市</tag>
       </tags>
   </entry>
@@ -81,8 +81,8 @@
     <url>%2F2019%2F05%2F18%2Fcss%E6%80%BB%E7%BB%93%2F</url>
     <content type="text"><![CDATA[在学习的过程中，对css有了更深一步的了解，把遇见过的问题、经常使用到的样式做一个总结。 清除默认样式http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css 清除浮动 方法一 给受影响的盒子添加clear属性，添加了clear的属性不可以添加margin-top 方法二 12345678910浮动元素::after&#123; content:&quot;&quot;; display:block; height:0; visibility:hidden; clear:both&#125;浮动元素&#123; *zoom:1;//兼容IE6&#125; 盒子的问题 在默认布局的垂直方向上，外边距有合并现象(BFC块级，水平方向也可以，但是块级都是占一行的，而浮动成水平的 BFC的区域不会与float box重叠) 嵌套盒子时，里面的盒子设置margin-top时，父盒子一起被顶下来。 解决办法：父盒子添加border，或者overflow：hidden 图片的问题 自适应图片 123max-width:100%;height:auto;display:block 设置图片img的width和height的时候，指定其中一个另外一个自动算出来 当图片宽度大于父元素宽度时，居中：父元素text-align：center,子元素：margin：0，-100% 居中浮动之后的高宽不设定则有内容撑开 居中元素有宽度 12345 .center &#123;width: 960px;margin-left: auto;margin-right: auto; &#125; margin:0 auto 使用场景块级元素：给定要居中的块级元素的宽度行内元素： ①设置display:block。 ②给定要居中的行内元素的宽度。（行内元素设置成块级元素后可以对其宽高进行设置） 所有元素也可以通过对父元素设置 text-align：center；的方式来实现居中。(而对于块元素来说，对要居中的元素自身进行设置text-align:center也能实现居中——而无需对其父元素进行设置) 。 浮动、绝对定位、固定定位的盒子失效。 脱离文档流元素的水平垂直 margin:auto或者按圆点定位定在正中间，margin设置成负的宽高的一般 法二： 1234567891011121314div&#123; width: 300px; height: 300px; position: relative; border: 1px solid #465468; &#125; img&#123; position: absolute; margin: auto; top: 0; left: 0; right: 0; bottom: 0; &#125; 指定宽高元素水平居中 还可以定位到50% 50% 改变margin-left/margin-top为元素的一半定位（元素加padding，可以结合box-sizing） 12345678910#test&#123;position:absolute;left:0;right:0;bottom:0;top:0margin:auto;width:100pxheight:100px&#125; 图片的垂直居中 12345678910111213//img的外部包含元素 如divdiv&#123; text-align:center;&#125; div:after&#123; content:&quot;&quot;; display:inline-block; height:100% vertical-align:middle;&#125;img&#123; vertical-align:middle&#125; 其余 超出省略号 盒子不可以仅由内容撑开的时候 123white-space:nowrap //不换行overflow：hidden//超出部分截掉text-overflow:ellipsis //省略号 禁止滚动条 1234html,body&#123;height:100%overflow:hidden&#125;]]></content>
       <tags>
-        <tag>总结</tag>
         <tag>css</tag>
+        <tag>总结</tag>
       </tags>
   </entry>
   <entry>
@@ -107,9 +107,9 @@
     <url>%2F2019%2F04%2F19%2Felement-ui%E6%80%BB%E7%BB%93%2F</url>
     <content type="text"><![CDATA[在一次项目中用到了element-ui框架，对在使用过程中遇见的问题进行总结（持续更新）。 表单1.数据为二级对象时数据为二级对象时，验证的数据要用字符串形式。 12345rules:&#123; "captainInformation.name": [ &#123; required: true, message: '请输入姓名', trigger: 'blur' &#125;, ], &#125; 2.动态添加的数据动态添加的输入框或表单绑定数据时注意 :prop=&quot;&#39;v-for绑定的数组.&#39; + index + &#39;.v-model绑定的变量&#39;&quot; 我是直接把验证写在标签里面的 1&lt;el-form-item label=&quot;姓名&quot; :prop=&quot;&apos;memberInformation.&apos;+index+&apos;.name&apos;&quot; :rules=&quot;[ &#123; required: true, message: &apos;请输入姓名&apos;, trigger: &apos;blur&apos; &#125;]&quot;&gt; 增加与减少成员 123456789101112//增加成员 addmember() &#123; let newmember = &#123; name: &quot;&quot;, studentId: &quot;&quot;, &#125; this.form.memberInformation.push(newmember) &#125;, //减少成员 reducemember(index) &#123; this.form.memberInformation.splice(index, 1) &#125;, 这个是我在项目中用到的办法，在阅读时发现了另一种情况的解决办法：https://blog.csdn.net/weixin_41041379/article/details/81908788 3.普通输入验证1234567891011rules:&#123;data1:[//必填，trigger是触发类型&#123; required: true, message: '请输入学号', trigger: 'blur' &#125;,//数字类型 'number', 整数: 'integer', 浮点数: 'float'//使用整数的时候，首先要保证数据类型为数字，可以v-model.number绑定数据&#123;type: 'integer', message: '格式错误', trigger: 'blur'&#125;,//长度限制&#123; min: 2, max: 4, message: '长度在 2 到 4 个字符', trigger: 'blur' &#125;]&#125; 4.手动验证 第一种是直接写在rules的里面 1234567891011rules:&#123;data1:[ &#123; validator:(rule,value,callback)=&gt;&#123; if(/^\d+$/.test(value) == false)&#123; callback(new Error(&quot;只能输入数字&quot;)); &#125;else&#123; callback(); &#125; &#125;, trigger: &apos;blur&apos; &#125;&#125;] 第二种写法是抽离出来 1234567891011121314151617181920212223//注意书写位置 data()&#123; let checkAge = (rule, value, callback) =&gt; &#123; if (!value) &#123; return callback(new Error(&apos;年龄不能为空&apos;)); &#125; if (!Number.isInteger(value)) &#123; callback(new Error(&apos;请输入数字值&apos;)); &#125; else &#123; if (value &lt; 18) &#123; callback(new Error(&apos;必须年满18岁&apos;)); &#125; else &#123; callback(); &#125; &#125; &#125; return &#123; rules:&#123; age: [ &#123; trigger: &apos;blur&apos;, validator: checkAge &#125; ] &#125; &#125; 5.手动上传文件12345678910111213141516171819202122232425262728293031323334353637//html &lt;el-upload action ref="upload" //覆盖默认的上传行为，自定义上传的实现 :http-request="finish" //取消自动上传 :auto-upload="false" &gt; &lt;el-button slot="trigger" size="small" type="primary"&gt;选取文件&lt;/el-button&gt; &lt;div slot="tip" class="el-upload__tip"&gt;请上传您的项目功能清单&lt;/div&gt; &lt;/el-upload&gt;//js finish() &#123; this.$refs.form.validate(valid =&gt; &#123; // 验证成功 if (valid) &#123; //这里的需求是必须上传文件 const file = this.$refs.upload.uploadFiles[0]; if (!file) &#123; this.$message(&#123; type: "warning", message: "请选择文件" &#125;); return; &#125; //数据处理 let formData = new FormData(); formData.append("projectId", this.runId); formData.append("timeNode",JSON.stringify(this.form.timeNode)); formData.append("teamId", 1); formData.append("functionFile",file.raw ); //....中间的弹框确定等省略 submitApply(formData) &#125; &#125; &#125; 6.动态获取选项+模糊查询]]></content>
       <tags>
+        <tag>总结</tag>
         <tag>vue</tag>
         <tag>库</tag>
-        <tag>总结</tag>
       </tags>
   </entry>
   <entry>

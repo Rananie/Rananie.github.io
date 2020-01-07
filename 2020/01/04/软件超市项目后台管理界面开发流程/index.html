@@ -56,32 +56,32 @@
             <li >
                 <a href="/">
                     <i class="iconfont icon-shouye1"></i>
-                    <span>HOME</span>
+                    <span>主页</span>
                 </a>
             </li>
             <li >
                 <a href="/tags">
                     <i class="iconfont icon-biaoqian1"></i>
-                    <span>TAGS</span>
+                    <span>标签</span>
                 </a>
             </li>
             <li >
                 <a href="/archives">
                     <i class="iconfont icon-guidang2"></i>
-                    <span>ARCHIVES</span>
+                    <span>存档</span>
                 </a>
             </li>
             <li >
                 <a href="/about/">
                     <i class="iconfont icon-guanyu2"></i>
-                    <span>ABOUT</span>
+                    <span>关于</span>
                 </a>
             </li>
             
             <li>
                 <a id="search">
                     <i class="iconfont icon-sousuo1"></i>
-                    <span>SEARCH</span>
+                    <span>搜索</span>
                 </a>
             </li>
             
@@ -89,7 +89,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#3-3-组件编写"><span class="toc-text">3.3 组件编写</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-1-Manage-vue"><span class="toc-text">3.3.1 Manage.vue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-2-Login-vue"><span class="toc-text">3.3.2 Login.vue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建store"><span class="toc-text">创建store</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#3-3-组件编写"><span class="toc-text">3.3 组件编写</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-1-Manage-vue"><span class="toc-text">3.3.1 Manage.vue</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-2-Login-vue"><span class="toc-text">3.3.2 Login.vue</span></a></li></ol></li></ol>
 </div>
     
 </div>
@@ -100,7 +100,7 @@
         <div class="search-input">
             <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
             <input id="search-input"/>
-            <span id="begin-search">search</span>
+            <span id="begin-search">搜索</span>
         </div>
         <div class="search-result-container" id="search-result-container">
 
@@ -123,9 +123,9 @@
     </div>
 
     <div class="post-meta">
-        <span class="attr">Post：<span>2020-01-04 21:53:41</span></span>
+        <span class="attr">发布于：<span>2020-01-04 21:53:41</span></span>
         
-        <span class="attr">Tags：/
+        <span class="attr">标签：/
         
         <a class="tag" href="/tags/#project" title="project">project</a>
         <span>/</span>
@@ -135,7 +135,7 @@
         
         
         </span>
-        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
 </span>
 </span>
     </div>
@@ -150,13 +150,22 @@
 <li>作用：登陆界面</li>
 <li>详情：通过前台展示界面进入，进入时选择身份，ID的不同身份权限不一样。</li>
 </ul>
-<p><img src="\img\软件超市\后台管理界面login.png" alt="视图2"></p>
+<p><img src="\img\软件超市\后台管理界面login.png" alt="后台管理界面"></p>
 <p><strong>具体实现</strong></p>
+<p>需要根据前台显示的页面获取信息：</p>
 <ol>
-<li>获取当前用户的userId<br>通过store实现</li>
+<li>getStudentIdByRequest get请求获取登陆的学号ID</li>
+<li>getUserId?studentId= 通过登陆的studentId获取userId</li>
+<li>getRole?userId= 通过userId获取角色权限，通过不用的权限生成不同的导航栏。</li>
+<li>getMessageByUserGet?userGet=userId 通过userId获取消息，如果有未读消息，进入管理页面后直接显示消息通知，如果没有未读消息，则显示团队管理。<br> <img src="\img\软件超市\软件超市项目后台管理界面开发流程2.png" alt="后台管理界面"></li>
+<li>权限、登陆时效等相关（重要）</li>
 </ol>
-<h3 id="创建store"><a href="#创建store" class="headerlink" title="创建store"></a>创建store</h3><ol>
-<li>main.js里引入store <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">import store from &quot;./store&quot;;</span><br><span class="line">new Vue(&#123;</span><br><span class="line">el: &apos;#app&apos;,</span><br><span class="line">render:h=&gt;h(App),</span><br><span class="line">router,</span><br><span class="line">store</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<p><strong>问题一</strong>：跨域问题<br>由于vue-cli脚手架工具开发时，由于项目本身启动本地服务是需要占用一个端口的，所以必然会有跨域问题。<br>解决办法：config/index（webpack构建下），更改开发环境下(在dev里配置)的proxyTable。将请求代理到目标域名<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">proxyTable: &#123;</span><br><span class="line">  &quot;/v1&quot;:&#123;</span><br><span class="line">    target:&quot;http://software.sicau.edu.cn:8080&quot;,</span><br><span class="line">    changeOrigin: true//是否开启代理</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></p>
+<p><strong>问题二</strong>：axios的cookie问题<br>由于用的是学校的统一认证平台，采用的是cookie，在使用axios的时候，发现http响应头中少了Set-Cookie属性（axios隐藏了这部分）。<br>解决办法：axios.defaults.withCredentials = true。withCredentials属性主要功能是指定跨域的请求是否应该使用证书（如cookie或授权头header）</p>
+<p><strong>问题三</strong>：vue组件刷新问题。（这个方法在添加删除之中比较好用，最后虽然没有采用但还是把记录下来）<br>用vue-router重新路由到当前页面，页面是不进行刷新的。采用window.reload,或者router.go(0)刷新时，整个浏览器进行了重新加载，闪烁，体验感不好。<br>解决办法：provide/inject组合<br>provide：选项应该是一个对象或返回一个对象的函数。该对象包含可传递其子孙的属性。<br>inject：一个字符串数组，或一个对象，对象的 key 是本地的绑定名</p>
+<ol>
+<li>app.vue 中通过provide将父组件中的数据传给子组件<br> <img src="\img\软件超市\软件超市项目后台管理界面开发流程3.png" alt="后台管理界面"></li>
+<li>在要使用的组件中inject:[‘reload’],调用this.reload()既可实现刷新。</li>
 </ol>
 
         

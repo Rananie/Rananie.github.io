@@ -89,7 +89,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise"><span class="toc-text">Promise</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#预备知识"><span class="toc-text">预备知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-函数对象与实例对象"><span class="toc-text">1.函数对象与实例对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-两种类型的回调函数"><span class="toc-text">2.两种类型的回调函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-error处理"><span class="toc-text">3.error处理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise的理解和使用"><span class="toc-text">Promise的理解和使用</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise"><span class="toc-text">Promise</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#预备知识"><span class="toc-text">预备知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-函数对象与实例对象"><span class="toc-text">1.函数对象与实例对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-两种类型的回调函数"><span class="toc-text">2.两种类型的回调函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-error处理"><span class="toc-text">3.error处理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise的理解和使用"><span class="toc-text">Promise的理解和使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#async与await"><span class="toc-text">async与await</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-async-函数"><span class="toc-text">1.async 函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-await-表达式"><span class="toc-text">2.await 表达式</span></a></li></ol></li></ol>
 </div>
     
 </div>
@@ -128,6 +128,9 @@
         <span class="attr">Tags：/
         
         <a class="tag" href="/tags/#学习笔记" title="学习笔记">学习笔记</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#javascript" title="javascript">javascript</a>
         <span>/</span>
         
         
@@ -184,8 +187,16 @@
 <p>当使用promise的then链式调用时，可以在最后指定失败的回调，因为没有处理异常相当于 <code>reason =&gt; {throw reason}</code>。会一层一层往下寻找异常处理（知道找到）。</p>
 <p>当使用promise的then链式调用时，若想中断promise链，可一返回<code>new Promise(()=&gt;{})</code>返回一个处于pending的promise。</p>
 <blockquote>
-<p>自定义promise连接：<a href="https://github.com/biubiuins/promise-/tree/master" target="_blank" rel="noopener">https://github.com/biubiuins/promise-/tree/master</a></p>
+<p>自定义promise链接：<a href="https://github.com/biubiuins/promise-/tree/master" target="_blank" rel="noopener">https://github.com/biubiuins/promise-/tree/master</a></p>
 </blockquote>
+<h2 id="async与await"><a href="#async与await" class="headerlink" title="async与await"></a>async与await</h2><h3 id="1-async-函数"><a href="#1-async-函数" class="headerlink" title="1.async 函数"></a>1.async 函数</h3><p>async是’异步’的简写，用于申明这个函数是异步的。<br>函数的返回值为Promise对象，promise对象的结果由async函数执行的返回值决定。</p>
+<h3 id="2-await-表达式"><a href="#2-await-表达式" class="headerlink" title="2.await 表达式"></a>2.await 表达式</h3><p>await相当于then的语法糖。<br>当await后面的表达式为promise，await 就忙起来了，它会阻塞后面的代码，等着 Promise 对象 resolve，得到的结果就是promise成功的value。如果右侧表达不是promise，得到的结果就是它本身。</p>
+<p><strong>注意：</strong></p>
+<ul>
+<li>await必须放在async函数里面</li>
+<li>await只能得到成功的结果，失败的结果需用try-catch</li>
+<li>try catch只能捕获同步代码，不能捕获异步代码，在async函数内，使用await可以捕获异步代码，这里实际上是异步代码变成了同步代码。</li>
+</ul>
 
         
         <br />

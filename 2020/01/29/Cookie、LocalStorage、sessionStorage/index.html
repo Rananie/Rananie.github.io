@@ -11,7 +11,7 @@
 
     <title>
         
-        async/await - undefined
+        Cookie、LocalStorage、sessionStorage - undefined
         
     </title>
 
@@ -119,15 +119,18 @@
 
 <div class="post-container">
     <div class="post-title">
-        async/await
+        Cookie、LocalStorage、sessionStorage
     </div>
 
     <div class="post-meta">
-        <span class="attr">Post：<span>2020-01-27 15:01:07</span></span>
+        <span class="attr">Post：<span>2020-01-29 16:36:10</span></span>
         
         <span class="attr">Tags：/
         
         <a class="tag" href="/tags/#学习笔记" title="学习笔记">学习笔记</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#javascript" title="javascript">javascript</a>
         <span>/</span>
         
         
@@ -137,7 +140,20 @@
 </span>
     </div>
     <div class="post-content no-indent">
-        
+        <p><strong>主要区别</strong></p>
+<p><img src="/img/js/Cookie.png" width="70%"></p>
+<p><strong>方法</strong></p>
+<p>localStorage和sessionStorage都具有相同的操作方法，例如setItem、getItem和removeItem等</p>
+<p>setItem存储value</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sessionStorage.setItem(<span class="string">"key"</span>, <span class="string">"value"</span>);</span><br><span class="line">localStorage.setItem(<span class="string">"key"</span>, <span class="string">"value"</span>);</span><br></pre></td></tr></table></figure>
+<p>getItem获取value</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> value = sessionStorage.getItem(<span class="string">"key"</span>);</span><br><span class="line"><span class="built_in">let</span> key = localStorage.getItem(<span class="string">"key"</span>);</span><br></pre></td></tr></table></figure>
+<p>removeItem删除key</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sessionStorage.removeItem(<span class="string">"key"</span>);</span><br><span class="line">localStorage.removeItem(<span class="string">"key"</span>);</span><br></pre></td></tr></table></figure>
+<p>clear清除所有的key/value</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sessionStorage.clear();</span><br><span class="line">localStorage.clear();</span><br></pre></td></tr></table></figure>
+<p>localStorage和sessionStorage的key和length属性实现遍历</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">let</span> storage = window.localStorage;</span><br><span class="line"><span class="keyword">for</span>(var i=0, len=storage.length; i&lt;len;i++)&#123;</span><br><span class="line">    var key = storage.key(i);</span><br><span class="line">    var value = storage.getItem(key);</span><br><span class="line">    console.log(key + <span class="string">"="</span> + value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         
         <br />
         <div id="comment-container">

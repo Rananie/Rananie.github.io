@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="biubiu的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        软件超市项目后台管理界面开发流程2 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <span>biubiu</span>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>SEARCH</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#设置权限时动态加载路由"><span class="toc-text">设置权限时动态加载路由</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#permission-js"><span class="toc-text">permission.js</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Layout页面"><span class="toc-text">Layout页面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#框架"><span class="toc-text">框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Siderbar"><span class="toc-text">Siderbar</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#导航图标上显示未读消息数量"><span class="toc-text">导航图标上显示未读消息数量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Header-vue"><span class="toc-text">Header.vue</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        软件超市项目后台管理界面开发流程2
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2020-01-31 21:53:41</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#project" title="project">project</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#软件超市" title="软件超市">软件超市</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <h2 id="设置权限时动态加载路由"><a href="#设置权限时动态加载路由" class="headerlink" title="设置权限时动态加载路由"></a>设置权限时动态加载路由</h2><ol>
+<li>路由分为两类，一类是静态路由（不需要登陆验证），一类是动态路由（需要登陆验证）</li>
+<li>当用户登陆后，获取用role（权限），将role和路由表每个页面的需要的权限作比较，生成用户可访问的路由表</li>
+<li>调用router.addRoutes(store.getters.addRouters)添加用户可访问的路由。</li>
+<li>使用vuex管理路由表，根据vuex中可访问的路由渲染侧边栏组件。</li>
+</ol>
+<h3 id="permission-js"><a href="#permission-js" class="headerlink" title="permission.js"></a>permission.js</h3><p>首先新建store/permission.js，用来控制生成的路由表。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">//是否有权限访问，role为当前权限</span><br><span class="line">function hasPermission(role, route) &#123;</span><br><span class="line">  if (route.meta &amp;&amp; route.meta.roles) &#123;</span><br><span class="line">    //如果该路由的meta存在，并且有要求权限</span><br><span class="line">    const roles = route.meta.roles;</span><br><span class="line">    //如果路由要求的权限有当前权限，返回成功</span><br><span class="line">    return roles.includes(role);</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    //如果不存在说明不需要权限</span><br><span class="line">    return true;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">const permission =&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    //默认路由</span><br><span class="line">    routers: constantRouterMap,</span><br><span class="line">    //添加的路由</span><br><span class="line">    addRouters: []</span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    SET_ROUTERS: (state, routers) =&gt; &#123;</span><br><span class="line">      //往数组中添加符合条件的路由</span><br><span class="line">      state.addRouters = routers;</span><br><span class="line">      //符合权限的路由变成默认路由可访问。</span><br><span class="line">      state.routers = constantRouterMap.concat(routers);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    //定义产生路由的方法</span><br><span class="line">    async GenerateRoutes(&#123; commit &#125;, &#123; role &#125;) &#123;</span><br><span class="line">      console.log(role);</span><br><span class="line">      //返回符合权限的异步路由</span><br><span class="line">      const accessedRouters = await asyncRouterMap.filter(route =&gt;</span><br><span class="line">        hasPermission(role, route)</span><br><span class="line">      );</span><br><span class="line">      console.log(accessedRouters);</span><br><span class="line">      commit(&quot;SET_ROUTERS&quot;, accessedRouters);</span><br><span class="line">      return accessedRouters;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">export default permission;</span><br></pre></td></tr></table></figure>
+<p>这里可以把permission.js看成一个模块，因为它拥有自己的state,mutation,action。所以还需要把permission挂载在vuex里。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">export default new Vuex.Store(&#123;</span><br><span class="line">  modules:&#123;</span><br><span class="line">    permission</span><br><span class="line">  &#125;,</span><br><span class="line">  state,</span><br><span class="line">  actions,</span><br><span class="line">  mutations,</span><br><span class="line">  getters</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>问题一</strong>addRoutes在哪里调用<br>登录后，获取用户的权限信息，然后筛选有权限访问的路由，再调用addRoutes添加路由。这个方法是可行的。但是不可能每次进入应用都需要登录，用户刷新浏览器又要登陆一次。所以addRoutes还是要在全局路由守卫里进行调用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(token)&#123;</span><br><span class="line">//已经登陆了</span><br><span class="line"><span class="keyword">if</span> (to.path ===<span class="string">"/login"</span>) next(&#123;path:<span class="string">"/"</span>&#125;)</span><br><span class="line">//</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line"><span class="keyword">if</span> (!store.getters.role)&#123;</span><br><span class="line"> //如果没有当前权限信息,role仅getUserInfor后可以获得</span><br><span class="line">//用户登陆之后，根据缓存获取登陆信息</span><br><span class="line">  store.dispatch(<span class="string">"getUserInfor"</span>).<span class="keyword">then</span>(role=&gt;&#123;</span><br><span class="line"> //产生符合权限路由的方法</span><br><span class="line">   store.dispatch(<span class="string">"GenerateRoutes"</span>, &#123; role &#125;)</span><br><span class="line">     .<span class="keyword">then</span>(</span><br><span class="line">                   data =&gt; &#123;</span><br><span class="line">                     // 生成可访问的路由表</span><br><span class="line">                     router.addRoutes(data);</span><br><span class="line">                    next(&#123; ...to, replace: <span class="literal">true</span> &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">.....</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>问题一</strong> next()的使用</p>
+<ol>
+<li><p>首先调用next()时会直接进入to路由，不会再调用beforeEach(),所以刷新页面可能会进入无限循环，调用next(‘xxx’)后会拦截路由使得路由重定向xxx，并再次调用beforeEach()。</p>
+</li>
+<li><p>如果把replace设置为true，那么导航不会留下history记录，点击浏览器回退按钮不会再回到这个路由。router.addRoutes之后的next()可能会失效，因为可能next()的时候路由并没有完全add完成，next({…to}) 的时候重新指定以下刷新前的路径。</p>
+</li>
+</ol>
+<p><strong>问题二</strong> 404页面<br>404路由写在动态路由中，否则可能会有闪屏和路由为空时加载的404页面。<br>原因是：当页面刷新，会导致vue重新实例化，路由也恢复了初始路,addRoutes 还没有添加上路由就开始跳转， 所以找不到路由就跳转到404页面了。</p>
+<h2 id="Layout页面"><a href="#Layout页面" class="headerlink" title="Layout页面"></a>Layout页面</h2><p>Layout作为整个后台管理页面的框架，主要有Header、根据权限生成的Sidebar和中间的显示界面组成。</p>
+<h3 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//Layout组件</span><br><span class="line">   &lt;div id=<span class="string">"manage"</span>&gt;</span><br><span class="line">      &lt;Header&gt;&lt;/Header&gt;</span><br><span class="line">      &lt;div class=<span class="string">"container"</span>&gt;</span><br><span class="line">      &lt;Sidebar&gt;&lt;/Sidebar&gt;</span><br><span class="line">        &lt;router-view class=<span class="string">"content"</span> &gt;&lt;/router-view&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>通过把一级路由与二级路由的path设置成同一个，来同时加载Header组件、Sidebar组件和中间对应的显示界面</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">//仅用其中一个举列子</span><br><span class="line">const project =&#123;</span><br><span class="line">  path: &#123;</span><br><span class="line">    path: <span class="string">"/projectManage"</span>,</span><br><span class="line">    name: <span class="string">"projectManage"</span>,</span><br><span class="line">    component: Layout</span><br><span class="line">  &#125;,</span><br><span class="line">  check: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">"check"</span>,</span><br><span class="line">      name: <span class="string">"projectCheck"</span>,</span><br><span class="line">      component: () =&gt;</span><br><span class="line">        import(</span><br><span class="line">          /* webpackChunkName: <span class="string">"ProjectCheck"</span> */ <span class="string">"../views/projectManage/components/ProjectCheck"</span></span><br><span class="line">          )</span><br><span class="line">    &#125;,</span><br><span class="line">  ],</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> const asyncRouterMap = [</span><br><span class="line">&#123;</span><br><span class="line">    ...project.path,</span><br><span class="line">  children: [</span><br><span class="line">      &#123;</span><br><span class="line">        path: project.path.path,</span><br><span class="line">        redirect: <span class="string">"/projectManage/check"</span>,</span><br><span class="line">        component: () =&gt; import(/* webpackChunkName: <span class="string">"ProjectDeveloper"</span> */ <span class="string">"../views/projectManage/ProjectDeveloper"</span>),</span><br><span class="line">        children: [...project.check]</span><br><span class="line">      &#125;,]</span><br><span class="line">&#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>这里有个简单的重定向问题我晕了好久QAQ</p>
+<p>首先是path加/和不加/有什么区别。/xx就是根路径。下面代码去到children是/#/child而不是/#/fa/child。而不以斜杠开头的，都会被当成普通的字符串拼到当前路径的后面。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">path: /fa</span><br><span class="line">children: &#123;</span><br><span class="line">    path: /child</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后这里重新定向之后<code>projectManage/check</code>路由到底算几级路由？通过把redirect注释之后终于弄懂了。这里是因为<strong>children控制的是第几个router-view</strong>,第一个children控制的是第二个router-view，即使它重定向<code>/projectManage/check</code>,第二个router-view显示的还是ProjectDeveloper组件。</p>
+<h3 id="Siderbar"><a href="#Siderbar" class="headerlink" title="Siderbar"></a>Siderbar</h3><h4 id="导航图标上显示未读消息数量"><a href="#导航图标上显示未读消息数量" class="headerlink" title="导航图标上显示未读消息数量"></a>导航图标上显示未读消息数量</h4><p>   <img src="/img/软件超市/消息提醒.png" width="30%"></p>
+<p>主要实现是使用element-ui里面的badge组件+父子间传值实现的。这里以导航图标上显示未读消息数量为例子，后续类似操作将不做记录。</p>
+<p>新建一个MessageNue.vue记录未处理的消息数量，作为子组件，接收父组件传来的值。这里接收两个值：customClass样式，因为这个组件会重复使用，并且不同消息显示的位置可能不同，所以关于定位的信息要单独接收。menu接收的是显示的哪一个消息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;span class=<span class="string">"badgebox"</span>&gt;</span><br><span class="line">    &lt;slot&gt;&lt;/slot&gt;</span><br><span class="line">    &lt;el-badge :value=<span class="string">"getMsgN(menu)"</span> :style=<span class="string">"customClass"</span> class=<span class="string">"item"</span> :max=<span class="string">"99"</span> :hidden=<span class="string">"!getMsgN(menu)"</span>&gt;&lt;/el-badge&gt;</span><br><span class="line">  &lt;/span&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="built_in">export</span> default &#123;</span><br><span class="line">  name: <span class="string">"MessageNum"</span>,</span><br><span class="line">  props: &#123;</span><br><span class="line">    menu: Object,</span><br><span class="line">    customClass: String</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    getMsgN(menu) &#123;</span><br><span class="line">      <span class="built_in">return</span> this.count[menu.path];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    <span class="function"><span class="title">count</span></span>() &#123;</span><br><span class="line">      <span class="built_in">return</span> this.<span class="variable">$store</span>.state.msgNum;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">//state.js</span><br><span class="line">  //需要显示的消息数量</span><br><span class="line">  msgNum: &#123;</span><br><span class="line">    publishExamine: 0,</span><br><span class="line">    delayExamine: 0,</span><br><span class="line">    alterExamine: 0,</span><br><span class="line">    undertakeExamine: 0,</span><br><span class="line">    projectExamine: 0,</span><br><span class="line">    porjectRun: 0,</span><br><span class="line">    projectCheck: 0,</span><br><span class="line">    projectFinish: 0,</span><br><span class="line">    projectManage: 0</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<p>Sidebar.vue 作为父组件，把组件挂载好之后。menu值是传的动态值所以用<code>v-bind:</code>绑定，而customClass是一个静态值所以直接传值就行。</p>
+<p><strong>这里有一个命名的坑:</strong><br>props属性支持驼峰命名,不支持连接线命名。HTML特性是不区分大小写的，所以在HTML之中的驼峰写法要变成连接线写法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;message-num :menu=&quot;&#123;path:router.name&#125;&quot; custom-class=&quot;top:-12px;right:-12px&quot;&gt;</span><br><span class="line">  &lt;i class=&quot;iconfont&quot; :class=&quot;&apos;icon-&apos;+router.meta.icon&quot;&gt;&lt;/i&gt;</span><br><span class="line">&lt;/message-num&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="Header-vue"><a href="#Header-vue" class="headerlink" title="Header.vue"></a>Header.vue</h4><p>主要功能有：</p>
+<p>1.显示用户名，可退出<br>2.如果身份是开发团队的队长，且同时有几个团队，显示当前团队，并可切换其他团队。<br>3.点击logo的时候，可以操作侧边栏展开</p>
+<p>①下拉框用的是Element-ui的el-dropdown组件,下拉的时候出现退出键。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// @<span class="built_in">command</span>=<span class="string">"handleCommand"</span>为绑定下拉框点击事件，<span class="built_in">command</span>为值</span><br><span class="line">    &lt;el-dropdown class=<span class="string">"exit"</span>  @<span class="built_in">command</span>=<span class="string">"handleCommand"</span>  trigger=<span class="string">"click"</span>&gt;</span><br><span class="line">      &lt;span class=<span class="string">"el-dropdown-link"</span>&gt;</span><br><span class="line">        &#123;&#123; username &#125;&#125;</span><br><span class="line">        &lt;i class=<span class="string">"el-icon-arrow-down el-icon--right"</span>&gt;&lt;/i&gt;</span><br><span class="line">      &lt;/span&gt;</span><br><span class="line">      &lt;el-dropdown-menu slot=<span class="string">"dropdown"</span>&gt;</span><br><span class="line">        &lt;el-dropdown-item <span class="built_in">command</span>=<span class="string">"exit"</span>&gt;退出&lt;/el-dropdown-item&gt;</span><br><span class="line">      &lt;/el-dropdown-menu&gt;</span><br><span class="line">    &lt;/el-dropdown&gt;</span><br><span class="line"></span><br><span class="line">   // 退出登录或者切换用户管理界面</span><br><span class="line">      handleCommand(<span class="built_in">command</span>) &#123;</span><br><span class="line">        console.log(<span class="built_in">command</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">command</span> === <span class="string">"exit"</span>) &#123;</span><br><span class="line">        //退出之后清除</span><br><span class="line">          this.exit();</span><br><span class="line">        &#125;，</span><br><span class="line">      <span class="function"><span class="title">exit</span></span>() &#123;</span><br><span class="line">      // 退出清除缓存和登录</span><br><span class="line">      //登录成功之后重定向到登录页</span><br><span class="line">      this.<span class="variable">$store</span>.dispatch(<span class="string">"Logout"</span>);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+<p>②做第二个功能的时候，首先团队名称是通过axios获取的，并且刷新的时候还要在。所以应该把数据存在session中，同时要解决数据渲染的问题,采用了在state里面设置get和set的方法。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//state.js</span><br><span class="line">  get <span class="function"><span class="title">teams</span></span>() &#123;</span><br><span class="line">    <span class="built_in">let</span> vlaue = sessionStorage.getItem(<span class="string">"teams"</span>);</span><br><span class="line">    <span class="built_in">return</span> typeof vlaue === <span class="string">"string"</span> ? JSON.parse(vlaue) : [];</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="built_in">set</span> teams(vlaue) &#123;</span><br><span class="line">    sessionStorage.setItem(<span class="string">"teams"</span>, JSON.stringify(vlaue));</span><br><span class="line">  &#125;,</span><br><span class="line">  get <span class="function"><span class="title">teamId</span></span>() &#123;</span><br><span class="line">    <span class="built_in">return</span> sessionStorage.getItem(<span class="string">"teamId"</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="built_in">set</span> teamId(vlaue) &#123;</span><br><span class="line">    sessionStorage.setItem(<span class="string">"teamId"</span>, vlaue);</span><br><span class="line">  &#125;,</span><br></pre></td></tr></table></figure>
+<p>这里切换团队之后页面刷新用了上一篇博客提到的provide/inject组合刷新的办法。</p>
+<p>③第三个功能是兄弟Header和Sidebar组件的通讯，因为做这个项目主要是学习为主，所以选择了借助中央事件总线：在外部新建一个utils/eventBus.js文件。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//eventBus.js</span><br><span class="line">import Vue from <span class="string">'vue'</span></span><br><span class="line"><span class="built_in">export</span> default new Vue();</span><br><span class="line"></span><br><span class="line">//Header.vue</span><br><span class="line">import eventBus from <span class="string">"../../utils/eventBus.js"</span>;</span><br><span class="line"><span class="function"><span class="title">extendNav</span></span>() &#123;</span><br><span class="line">//通过eventBus中央事件总线用<span class="variable">$emit</span>发送一个showNav事件</span><br><span class="line">eventBus.<span class="variable">$emit</span>(<span class="string">"showNav"</span>);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> //Sidebar.vue</span><br><span class="line"><span class="function"><span class="title">mounted</span></span>() &#123;</span><br><span class="line">//通过eventBus中央事件总线用<span class="variable">$on</span>监听组件1中发送的showNav事件，第二个参数为回调函数。</span><br><span class="line"> eventBus.<span class="variable">$on</span>(<span class="string">"showNav"</span>, this.change);</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>上述是最开始的做法，后面发现更简便的方法。<br>主要是省略了外部的js文件，把总线放在main.js里的vue实例中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">new Vue(&#123;</span><br><span class="line">data:&#123;</span><br><span class="line">eventBus:new Vue()</span><br><span class="line">&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>兄弟组件调用的时候,用<code>this.$root.eventBus.$on</code>代替<code>eventBus.$on</code></p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!--<footer class="footer">-->
+    <!--<ul class="list-inline text-center">-->
+        <!---->
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+    <!--</ul>-->
+    <!---->
+    <!--<p>-->
+        <!--<span id="busuanzi_container_site_pv">-->
+            <!--<span id="busuanzi_value_site_pv"></span>PV-->
+        <!--</span>-->
+        <!--<span id="busuanzi_container_site_uv">-->
+            <!--<span id="busuanzi_value_site_uv"></span>UV-->
+        <!--</span>-->
+        <!--Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>-->
+<!--</footer>-->
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.xml"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</html>

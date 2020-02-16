@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="biubiu的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        git&amp;GitHub - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <span>biubiu</span>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>SEARCH</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#git介绍"><span class="toc-text">git介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git命令行操作"><span class="toc-text">git命令行操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#本地库初始化"><span class="toc-text">本地库初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置签名"><span class="toc-text">设置签名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本操作"><span class="toc-text">基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#状态检查"><span class="toc-text">状态检查</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#移除暂存区"><span class="toc-text">移除暂存区</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加到暂存器"><span class="toc-text">添加到暂存器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#提交"><span class="toc-text">提交</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看历史任务"><span class="toc-text">查看历史任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#前进后退"><span class="toc-text">前进后退</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#reset-命令的三个参数对比"><span class="toc-text">reset 命令的三个参数对比</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#删除文件与恢复"><span class="toc-text">删除文件与恢复</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#比较文件差别"><span class="toc-text">比较文件差别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分支管理"><span class="toc-text">分支管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#分支操作"><span class="toc-text">分支操作</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#创建分支"><span class="toc-text">创建分支</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#查看分支"><span class="toc-text">查看分支</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#切换分支"><span class="toc-text">切换分支</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#合并分支"><span class="toc-text">合并分支</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GitHub"><span class="toc-text">GitHub</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#连接远程库"><span class="toc-text">连接远程库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#推送"><span class="toc-text">推送</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#克隆"><span class="toc-text">克隆</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#团队成员邀请"><span class="toc-text">团队成员邀请</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#拉取pull"><span class="toc-text">拉取pull</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#跨团队操作"><span class="toc-text">跨团队操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SSH登陆"><span class="toc-text">SSH登陆</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Git工作流"><span class="toc-text">Git工作流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#GitFlow工作流-常用"><span class="toc-text">GitFlow工作流(常用)</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        git&GitHub
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2020-02-14 15:26:23</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#学习笔记" title="学习笔记">学习笔记</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#git" title="git">git</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p><img src="/img/git/Git&GitHub.bmp"></p>
+<h2 id="git介绍"><a href="#git介绍" class="headerlink" title="git介绍"></a>git介绍</h2><p><strong>结构</strong></p>
+<p>工作区（本身文件）：写代码   = git add =&gt;  暂存区：临时存储   = git commit =&gt;  本地库（.git）：存储历史版本</p>
+<p><strong>Git和代码托管中心</strong></p>
+<p>代码托管中心(如GitHub):帮忙维护远程库</p>
+<p><strong>本地库和远程库</strong></p>
+<p><strong>团队内部协作</strong></p>
+<p><img src="/img/git/团队内协作.png"></p>
+<p><strong>跨团队协作</strong></p>
+<p>外团队人员<code>fork</code>该团队远程库A（复制新的远程库B），<code>clone</code>到本地修改后<code>push</code>到B，之后外团队人员<code>pull request</code> =&gt;  该团队人 审核 =&gt; <code>merge</code> 远程库A的内容更新成远程库B的内容。</p>
+<h2 id="git命令行操作"><a href="#git命令行操作" class="headerlink" title="git命令行操作"></a>git命令行操作</h2><h3 id="本地库初始化"><a href="#本地库初始化" class="headerlink" title="本地库初始化"></a>本地库初始化</h3><p>命令：git init<br>效果：出现隐藏文件.git<br>注意：.git目录中存放的是本地库相关的子目录和文件，不要删除，也不要乱修改</p>
+<h3 id="设置签名"><a href="#设置签名" class="headerlink" title="设置签名"></a>设置签名</h3><p>形式:<br>    用户名：XXX<br>    Email地址：XXXXX</p>
+<p>作用：区分不同开发人员的身份<br>辨析：这里设置的签名和代码托管中心的账号、密码没有任何关系<br>命令:<br>    项目级别/仓库级别：仅在当前本地库起作用<br>        <code>git config user.name XX</code><br>        <code>git config user.email XX</code><br>    系统用户级别：登陆当前操作系统的用户范围， <code>git config --global</code><br>        <code>git config --global user.name XX</code><br>        <code>git config --global user.email XX</code><br>    级别优先级：项目级别优于系统用户级别</p>
+<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><h4 id="状态检查"><a href="#状态检查" class="headerlink" title="状态检查"></a>状态检查</h4><p>命令: git status<br>作用：查看工作区、暂存区状态</p>
+<h4 id="移除暂存区"><a href="#移除暂存区" class="headerlink" title="移除暂存区"></a>移除暂存区</h4><p>命令: git rm –cached [filename]</p>
+<h4 id="添加到暂存器"><a href="#添加到暂存器" class="headerlink" title="添加到暂存器"></a>添加到暂存器</h4><p>命令：git add[filename]   添加所有git add .   添加所有修改的git add -A</p>
+<h4 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h4><p>命令：git commit-m”commit message”[filename]     提交所有git commit -m”版本留言描述”<br>作用：将暂存区的内容提交到本地库</p>
+<h4 id="查看历史任务"><a href="#查看历史任务" class="headerlink" title="查看历史任务"></a>查看历史任务</h4><p>命令：<br>    完整形式 git log<br>        若多屏显示控制方式：空格向下翻页 b向上翻页 q退出<br>    以一个漂亮的格式显示 git log –pretty=oneline/git log–oneline(后面的更简洁)<br>    git reflog :索引值更简洁，其中HEAD@{移动到当前版本需要多少步}<br>        <img src="/img/git/历史任务.png"></p>
+<h4 id="前进后退"><a href="#前进后退" class="headerlink" title="前进后退"></a>前进后退</h4><p>可以配合git reflog使用<br>本质:操作HEAD的指针，默认是指向最近的版本。<br>基于索引值操作（推荐）:<br>     git reset –hard [局部索引值]  例（上图）：git reset–hard a6ace91<br>使用^(异或)符号（只能后退）：<br>     git reset –hard HEAD^  注:一个^表示后退一步，n 个表示后退 n 步<br>使用~符号（只能后退）:<br>     git reset –hard HEAD~n  注:表示后退 n 步</p>
+<h5 id="reset-命令的三个参数对比"><a href="#reset-命令的三个参数对比" class="headerlink" title="reset 命令的三个参数对比"></a>reset 命令的三个参数对比</h5><p>–soft参数：</p>
+<ul>
+<li>仅仅在本地库移动 HEAD 指针</li>
+<li>只回退了commit的信息，如果还要提交，直接commit</li>
+</ul>
+<p>–mixed参数：① 在本地库移动 HEAD 指针 ② 重置暂存区</p>
+<ul>
+<li>默认方式</li>
+<li>git reset –mixed <commit> + git add . = git reset –soft <commit></commit></commit></li>
+</ul>
+<p>–hard参数：①在本地库移动 HEAD 指针 ② 重置暂存区 ③ 重置工作区</p>
+<ul>
+<li>彻底回退到某个版本，本地的源码也会变成上一个版本的内容</li>
+</ul>
+<h5 id="删除文件与恢复"><a href="#删除文件与恢复" class="headerlink" title="删除文件与恢复"></a>删除文件与恢复</h5><p>前提：删除前，文件存在时的状态提交到了本地库。<br>操作：rm [filename]<br>注：rm之后通过 git add [filename] 可把文件再次添加到缓存区<br>    可利用 git reset –hard[指针位置] 回退到之前版本找回文件。</p>
+<p>前提：删除的文件在暂存区，但还没有提交到本地库<br>命令: git reset –hard HEAD（刚刚创建时）</p>
+<h5 id="比较文件差别"><a href="#比较文件差别" class="headerlink" title="比较文件差别"></a>比较文件差别</h5><p>命令：git diff[文件名]<br>作用：将工作区中的文件和暂存区进行比较</p>
+<p>命令：git diff[本地库中历史版本][文件名]<br>作用：将工作区中的文件和本地库历史记录比较</p>
+<p>注意:不带文件名比较多个文件</p>
+<h3 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h3><p>优势：</p>
+<ul>
+<li>同时并行推进多个功能开发，提高开发效率</li>
+<li>各个分支在开发过程中，如果某一个分支开发失败，不会对其他分支有任何影响。失败的分支删除重新开始即可</li>
+</ul>
+<h4 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h4><h5 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h5><p>命令：git branch[分支名]</p>
+<h5 id="查看分支"><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h5><p>命令：git branch -v</p>
+<h5 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h5><p>命令：git checkout[分支名]</p>
+<h5 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h5><p>如把hot_fix上的修改合并到master上</p>
+<p>第一步：切换到合并的分支上 git checkout[master]<br>第二步：执行 merge 命令 git merge[hot_fix]</p>
+<p><strong>解决冲突</strong><br>合并时同时修改同一个文件的同一个地方</p>
+<p><img src="/img/git/冲突.png"></p>
+<p>第一步:自行修改冲突文件<br>第二步:git add[文件名]<br>第三步:git commit-m”日志信息”     注意：此时 commit 一定不能带具体文件名</p>
+<h3 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h3><h4 id="连接远程库"><a href="#连接远程库" class="headerlink" title="连接远程库"></a>连接远程库</h4><p>命令：<br>    git remote-v 查看当前所有远程地址别名<br>    git remote add [别名] [远程地址]   (常用别名：origin)<br>作用：下次上传可以直接用别名上传</p>
+<h4 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h4><p>命令：git push [别名][分支名]</p>
+<h4 id="克隆"><a href="#克隆" class="headerlink" title="克隆"></a>克隆</h4><p>命令：git clone 仓库地址<br>作用；完整的把远程库下载到本地；创建origin远程地址别名；初始化本地库。</p>
+<h4 id="团队成员邀请"><a href="#团队成员邀请" class="headerlink" title="团队成员邀请"></a>团队成员邀请</h4><p><img src="/img/git/邀请加入团队.png"></p>
+<p>变成团队成员就可以把自己的修改推送进入远程仓库了。</p>
+<h4 id="拉取pull"><a href="#拉取pull" class="headerlink" title="拉取pull"></a>拉取pull</h4><p>命令: git fetch[远程库地址别名][远程分支名]<br>      git merge[远程库地址别名/远程分支名]<br>      git pull[远程库地址别名][远程分支名]<br>作用: pull=fetch+merge。<br>      fetch 把远程库抓取下来，并没有修改本地文件。<br>      merge 把远程的master合并到本地的master，本地文件修改。</p>
+<p><strong>解决冲突</strong><br>要点：<table><tr><td bgcolor="pink">果不是基于GitHub远程库的最新版本所作的修改，不能推送，必须先拉取下来</td></tr></table>如<br>若pull下来之后进入冲突状态，其余同分支冲突处理办法一样。</p>
+<h4 id="跨团队操作"><a href="#跨团队操作" class="headerlink" title="跨团队操作"></a>跨团队操作</h4><p>外团队人员<code>fork</code>该团队远程库A（复制新的远程库B、外团队人员的仓库），<code>clone</code>到本地修改后<code>push</code>到B，之后外团队人员<code>pull request</code> （GitHub远程库B操作）=&gt;  该团队人（GitHub远程库A） 审核 =&gt; <code>merge</code> 远程库A的内容更新成远程库B的内容。</p>
+<h4 id="SSH登陆"><a href="#SSH登陆" class="headerlink" title="SSH登陆"></a>SSH登陆</h4><p>第一步：生成ssh（在家目录）<br>ssh-keygen ct rsa -C 邮箱账号         //注意C大写<br>注：在主目录下生成的密钥在 /c/Users/用户名/.ssh/id_rsa 里<br>第二步：查看并复制ssh（需在.ssh目录下执行 cd .ssh进入）<br>cat id_rsa.pub<br>第三步：复制密钥内容添加到 github 上</p>
+<p>使用ssh协议上传文件到仓库</p>
+<p>git init<br>git add .<br>git commit -m “ “<br>git remote add 别名 <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:…<br>git push -u 别名 master</p>
+<h3 id="Git工作流"><a href="#Git工作流" class="headerlink" title="Git工作流"></a>Git工作流</h3><p>在项目开发过程中使用的Git的方式</p>
+<h4 id="GitFlow工作流-常用"><a href="#GitFlow工作流-常用" class="headerlink" title="GitFlow工作流(常用)"></a>GitFlow工作流(常用)</h4><pre><code>Gitflow 工作流通过为功能开发、发布准备和维护设立了独立的分支，让发布 迭代过程更流畅。严格的分支模型也为大型项目提供了一些非常必要的结构。
+</code></pre>
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!--<footer class="footer">-->
+    <!--<ul class="list-inline text-center">-->
+        <!---->
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+    <!--</ul>-->
+    <!---->
+    <!--<p>-->
+        <!--<span id="busuanzi_container_site_pv">-->
+            <!--<span id="busuanzi_value_site_pv"></span>PV-->
+        <!--</span>-->
+        <!--<span id="busuanzi_container_site_uv">-->
+            <!--<span id="busuanzi_value_site_uv"></span>UV-->
+        <!--</span>-->
+        <!--Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>-->
+<!--</footer>-->
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.xml"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</html>

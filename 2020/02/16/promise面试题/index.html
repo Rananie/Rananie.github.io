@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="biubiu的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        promise面试题（深入理解调用顺序） - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <span>biubiu</span>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        promise面试题（深入理解调用顺序）
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-02-16 12:22:56</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#javascript" title="javascript">javascript</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#面试题" title="面试题">面试题</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p><strong>第一题</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(()=&gt;&#123;</span><br><span class="line">    console.log(1);</span><br><span class="line">&#125;,0)</span><br><span class="line">Promise.resolve().<span class="keyword">then</span>(()=&gt;&#123;</span><br><span class="line">    console.log(2);</span><br><span class="line">&#125;)</span><br><span class="line">Promise.resolve().<span class="keyword">then</span>(()=&gt;&#123;</span><br><span class="line">    console.log(3);</span><br><span class="line">&#125;)</span><br><span class="line">console.log(4);</span><br><span class="line">/*</span><br><span class="line">输出：4 2 3 1</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+<p><strong>第二题</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(() =&gt; &#123;</span><br><span class="line">    console.log(1);</span><br><span class="line">&#125;, 0)</span><br><span class="line">//Promise为构造函数</span><br><span class="line">new Promise(resolve =&gt; &#123;</span><br><span class="line">    console.log(2); //同步执行</span><br><span class="line">    resolve()//成功</span><br><span class="line">&#125;).then(() =&gt; &#123; //成功的回调</span><br><span class="line">    console.log(3);</span><br><span class="line">&#125;).then(() =&gt; &#123;//此处的then等上一个执行完之后再放入微队列执行</span><br><span class="line">    console.log(4);</span><br><span class="line">&#125;)</span><br><span class="line">console.log(5);//同步执行</span><br><span class="line">/*</span><br><span class="line">输出:2 5 3 4 1</span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 链式的then要等前一个then执行完毕才知道状态，才可以执行。</p>
+<p><strong>第三题</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">//定义了一个返回promise的函数</span><br><span class="line">   const first = () =&gt; (new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">        console.log(1);  //同步执行1</span><br><span class="line">        //返回promise的函数</span><br><span class="line">        <span class="built_in">let</span> p = new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">            console.log(2); //同步执行2</span><br><span class="line">            //放入宏队列1</span><br><span class="line">            setTimeout(() =&gt; &#123;</span><br><span class="line">                console.log(3);</span><br><span class="line">                resolve(4) //最后执行宏队列时状态已经修改，不再是等待，所以该行代码不执行</span><br><span class="line">            &#125;, 0)</span><br><span class="line">            resolve(5) //立刻执行，p的状态立刻成功</span><br><span class="line">        &#125;)</span><br><span class="line">        resolve(6) //first的状态变成成功</span><br><span class="line">        //成功的回调放入微队列1</span><br><span class="line">        p.then((arg) =&gt; &#123;</span><br><span class="line">            console.log(arg);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;))</span><br><span class="line">    //成功的回调放入为微队列2</span><br><span class="line">    first().<span class="keyword">then</span>((arg)=&gt;&#123;</span><br><span class="line">        console.log(arg);</span><br><span class="line">    &#125;)</span><br><span class="line">    console.log(7);//同步执行3</span><br><span class="line">    /*输出</span><br><span class="line">    1 2 7 5 6 3</span><br><span class="line">    开始：输出 1 2 7</span><br><span class="line">    宏[3]</span><br><span class="line">    微[5 6]</span><br><span class="line">    输出微队列：5 6</span><br><span class="line">    输出宏队列：3</span><br><span class="line">     */</span><br></pre></td></tr></table></figure>
+<p><strong>第四题</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">//加入宏队列1</span><br><span class="line">setTimeout(()=&gt;&#123;</span><br><span class="line">    console.log(0);</span><br><span class="line">&#125;,0)</span><br><span class="line">new Promise((resolve,reject) =&gt;&#123;</span><br><span class="line">    console.log(1); //同步执行1</span><br><span class="line">    resolve()</span><br><span class="line">    //成功的回调加入微队列1</span><br><span class="line">&#125;).then(()=&gt;&#123;</span><br><span class="line">    console.log(2);</span><br><span class="line">    new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">        console.log(3);</span><br><span class="line">        resolve()</span><br><span class="line">        //成功的回调加入微队列3</span><br><span class="line">    &#125;).then(()=&gt;&#123;</span><br><span class="line">        console.log(4);</span><br><span class="line">        //成功的回调加入微队列5</span><br><span class="line">    &#125;).then(()=&gt;&#123;</span><br><span class="line">        console.log(5);</span><br><span class="line">    &#125;)</span><br><span class="line">    //成功的回调加入微队列4</span><br><span class="line">&#125;).then(()=&gt;&#123;</span><br><span class="line">    console.log(6);</span><br><span class="line">&#125;)</span><br><span class="line">new Promise((resolve, reject) =&gt; &#123;</span><br><span class="line">    console.log(7); // 同步执行2</span><br><span class="line">    resolve()</span><br><span class="line">    //成功的回调加入微队列2</span><br><span class="line">&#125;).then(()=&gt;&#123;</span><br><span class="line">    console.log(8);</span><br><span class="line">&#125;)</span><br><span class="line">/*</span><br><span class="line">输出：1 7 2 3 8 4 6 5 0</span><br><span class="line">状态1：同步执行输出1 7 宏[0]  微[2 8]</span><br><span class="line">状态2,执行微任务1（整个then）：输出2 3 宏[0]  微[8 4 6]</span><br><span class="line">状态3,执行微任务2：输出 8 宏[0]  微[4 6]</span><br><span class="line">状态4,执行微任务3：输出4 宏[0]  微[6 5]</span><br><span class="line">....</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<p>这道题我错在6和5的顺序上面，不太懂为什么6在5前面。阅读了<a href="https://www.jianshu.com/p/aa3d8b3adde3" target="_blank" rel="noopener">一篇文章</a>之后才明白，下面是对知识点进行摘录+总结。</p>
+<p><strong>知识点1</strong></p>
+<p>当执行 then 方法时，如果前面的 promise 已经是 resolved 状态，则直接将回调放入微队列中。</p>
+<p>注意：then方法是同步执行的，但是then中的回调是异步执行的。</p>
+<p>在同步执行then方法时，会进行判断：</p>
+<ul>
+<li>如果前面的 promise 已经是 resolved 状态，则会立即将回调推入微队列</li>
+<li>如果前面的 promise 是 pending 状态则会将回调存储在 promise 的内部(不会被执行，也不会被放入微队列中)，一直等到 promise 被 resolve 才将回调推入微队列</li>
+</ul>
+<p><strong>知识点2</strong></p>
+<p>resolve的作用除了将当前的 promise 由 pending 变为 resolved，还会遍历之前通过 then 给这个 promise 注册的所有回调，将它们依次放入微队列中，很多人以为是由 then 方法来触发它保存回调，而事实上是由 promise 的 resolve 来触发的，then 方法只负责注册回调。</p>
+<p>对于 then 方法返回的 promise 它是没有 resolve 函数的，取而代之只要 then 中回调的代码执行完毕并获得同步返回值，这个 then 返回的 promise 就算被 resolve</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> new Promise((resolve,reject) =&gt;&#123;</span><br><span class="line">   console.log(1);</span><br><span class="line">   resolve()</span><br><span class="line">//第一个then</span><br><span class="line"> &#125;.then(()=&gt;&#123;</span><br><span class="line">   ...</span><br><span class="line"> //第二个then</span><br><span class="line"> &#125;).then(()=&gt;&#123;</span><br><span class="line"> ...</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
+<p>首先Promise是实例化，同步执行函数，打印1，执行resolve函数，将 promise 变为 resolved，但由于此时 then 方法还未执行。由知识点2：resolve会触发保存它的回调。then是同步的，所以会依次保存第一个then和第二个then</p>
+<p>[主]外部第一个 then，外部第二个 then [微] 空</p>
+<p>然后执行第一then,由于前面的promise已经被resolve了，所以将第一then的回调放入微队列。</p>
+<p>[主]外部第二个 then  [微]外部第一个 then的回调</p>
+<p>但是这个回调还没有执行，所以第一then返回的promise 仍为 pending 状态，所以同步执行第二个then。由于前面的 promise 是 pending 状态，所以外2then 的回调也不会被推入微任务队列也不会执行</p>
+<p>[主]空  [微]外一 then的回调</p>
+<p>现在主线程空了，执行微任务，也就外一 then的回调，首先打印出2，随后实例化内部promise，打印3，执行resolve函数<br>,遍历then保存。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">new Promise((resolve,reject) =&gt;&#123;</span><br><span class="line">....</span><br><span class="line">//外1</span><br><span class="line"> &#125;.then(()=&gt;&#123;</span><br><span class="line">  console.log(2);</span><br><span class="line">  new Promise((resolve, reject) =&gt;&#123;</span><br><span class="line">  console.log(3);</span><br><span class="line">   resolve()</span><br><span class="line">  &#125;.then(()=&gt;&#123;</span><br><span class="line">  //内部第一个then</span><br><span class="line">    console.log(4);</span><br><span class="line">  &#125;).then(()=&gt;&#123;</span><br><span class="line">  //内部第二个then</span><br><span class="line">   console.log(5);</span><br><span class="line">  &#125;)</span><br><span class="line"> &#125;</span><br><span class="line"> //外2</span><br><span class="line"> .then(()=&gt;&#123;</span><br><span class="line"> .....</span><br><span class="line"> &#125;)</span><br></pre></td></tr></table></figure>
+<p>[主]内1 then 内2的then  [微]空</p>
+<p>然后执行内1的then，由于前面的 promise 已被 resolve，所以将回调放入微任务队列中。</p>
+<p>[主]内2的then  [微]内1then的回调</p>
+<p>然后执行内2的then，因为内部第一个then的回调还未执行所以状态为pending，所以内2then 的回调和外2then 的回调一样，不注册不执行。</p>
+<p>[主]空  [微]内1then的回调</p>
+<p><strong>外1的回调全部执行完毕</strong>，这里尤其注意:内2then的回调没执行，但是内2then是执行了的。<br>外1then 返回的 promise 的状态由 pending 变为 resolved，同时遍历之前通过 then 给这个 promise 注册的所有回调，将它们的回调放入微任务队列中。</p>
+<p>[主]空  [微]内1then的回调 外2then 的回调</p>
+<p>主线程执行完毕，取出内1then的回调执行</p>
+<p>[主]内1then的回调  [微]外2then 的回调</p>
+<p>打印4，内1then返回的promise状态由 pending 变为 resolved，同时遍历之前通过 then 给这个 promise 注册的所有回调，将它们的回调放入微任务队列中。</p>
+<p>[主] 空 [微]外2then 的回调 内2的回调</p>
+<p>最后一点就不分析了，这就是为什么6要比5先输出的原因了。</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!--<footer class="footer">-->
+    <!--<ul class="list-inline text-center">-->
+        <!---->
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+    <!--</ul>-->
+    <!---->
+    <!--<p>-->
+        <!--<span id="busuanzi_container_site_pv">-->
+            <!--<span id="busuanzi_value_site_pv"></span>PV-->
+        <!--</span>-->
+        <!--<span id="busuanzi_container_site_uv">-->
+            <!--<span id="busuanzi_value_site_uv"></span>UV-->
+        <!--</span>-->
+        <!--Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>-->
+<!--</footer>-->
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.xml"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</html>

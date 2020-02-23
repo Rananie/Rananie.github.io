@@ -56,32 +56,32 @@
             <li >
                 <a href="/">
                     <i class="iconfont icon-shouye1"></i>
-                    <span>HOME</span>
+                    <span>主页</span>
                 </a>
             </li>
             <li >
                 <a href="/tags">
                     <i class="iconfont icon-biaoqian1"></i>
-                    <span>TAGS</span>
+                    <span>标签</span>
                 </a>
             </li>
             <li >
                 <a href="/archives">
                     <i class="iconfont icon-guidang2"></i>
-                    <span>ARCHIVES</span>
+                    <span>存档</span>
                 </a>
             </li>
             <li >
                 <a href="/about/">
                     <i class="iconfont icon-guanyu2"></i>
-                    <span>ABOUT</span>
+                    <span>关于</span>
                 </a>
             </li>
             
             <li>
                 <a id="search">
                     <i class="iconfont icon-sousuo1"></i>
-                    <span>SEARCH</span>
+                    <span>搜索</span>
                 </a>
             </li>
             
@@ -89,7 +89,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#enter回车"><span class="toc-text">enter回车</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件代理，事件委托"><span class="toc-text">事件代理，事件委托</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件源"><span class="toc-text">事件源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#es6-箭头函数"><span class="toc-text">es6 箭头函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#不绑定this"><span class="toc-text">不绑定this</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#es6-module模块"><span class="toc-text">es6 module模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#export"><span class="toc-text">export</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#import"><span class="toc-text">import</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js跳转"><span class="toc-text">js跳转</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常规的js页面跳转"><span class="toc-text">常规的js页面跳转</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#enter回车"><span class="toc-text">enter回车</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件代理，事件委托"><span class="toc-text">事件代理，事件委托</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件源"><span class="toc-text">事件源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js跳转"><span class="toc-text">js跳转</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常规的js页面跳转"><span class="toc-text">常规的js页面跳转</span></a></li></ol></li></ol>
 </div>
     
 </div>
@@ -100,7 +100,7 @@
         <div class="search-input">
             <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
             <input id="search-input"/>
-            <span id="begin-search">search</span>
+            <span id="begin-search">搜索</span>
         </div>
         <div class="search-result-container" id="search-result-container">
 
@@ -123,16 +123,16 @@
     </div>
 
     <div class="post-meta">
-        <span class="attr">Post：<span>2018-11-24 13:32:22</span></span>
+        <span class="attr">发布于：<span>2018-11-24 13:32:22</span></span>
         
-        <span class="attr">Tags：/
+        <span class="attr">标签：/
         
         <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
         <span>/</span>
         
         
         </span>
-        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
 </span>
 </span>
     </div>
@@ -154,48 +154,6 @@
 </li>
 <li><p>属性</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">console.log(e.target);</span><br><span class="line">console.log(e.target.id);</span><br><span class="line">console.log(e.target.tagName);</span><br><span class="line">console.log(e.target.nodeName);</span><br><span class="line"> console.log(e.target.classList);</span><br><span class="line">console.log(e.target.className);</span><br><span class="line">console.log(e.target.innerHTML);</span><br><span class="line">console.log(e.target.innerText);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="es6-箭头函数"><a href="#es6-箭头函数" class="headerlink" title="es6 箭头函数"></a>es6 箭头函数</h2><blockquote>
-<p>回调函数为匿名函数时，回调函数的this会指向window，需要对回调函数bind(this)。<br>回调函数为箭头函数时，回调函数的this会指向他的直接上层，本例中指向obj,objx。<br>回调函数就是一个参数，将这个函数作为参数传到另一个函数里面，当那个函数执行完之后，再执行传进去的这个函数。这个过程就叫做回调。</p>
-</blockquote>
-<h3 id="不绑定this"><a href="#不绑定this" class="headerlink" title="不绑定this"></a>不绑定this</h3><p>箭头函数的this其实就是在定义的时候就确定好的，以后不管怎么调用这个箭头函数，箭头函数的this始终为定义时的this</p>
-<ul>
-<li>函数体内的this对象，就是定义时所在的对象，而不是使用时所在的对象。所以说在箭头函数中的this指向是固定的</li>
-<li>最好不要用箭头函数作为对象的方法。</li>
-<li>不可以当作构造函数，也就是说，不可以使用new命令，否则会抛出一个错误。</li>
-<li><p>箭头函数还有一个比较有特点的地方就是其不绑定arguments,或者用rest参数代替</p>
-<p>  但是如果在箭头函数需要参数时，可以使用剩余参数来取代arguments</p>
-</li>
-</ul>
-<p>如果箭头函数的代码块部分多于一条语句，就要使用大括号将它们括起来，并且使用return语句返回。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="params">()</span> =&gt;</span> <span class="number">5</span>;</span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="keyword">var</span> f = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="number">5</span> &#125;;</span><br></pre></td></tr></table></figure></p>
-<p>由于大括号被解释为代码块，所以如果箭头函数直接返回一个对象，必须在对象外面加上括号，否则会报错。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 报错</span><br><span class="line">let getTempItem = id =&gt; &#123; id: id, name: &quot;Temp&quot; &#125;;</span><br><span class="line"></span><br><span class="line">// 不报错</span><br><span class="line">let getTempItem = id =&gt; (&#123; id: id, name: &quot;Temp&quot; &#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="es6-module模块"><a href="#es6-module模块" class="headerlink" title="es6 module模块"></a>es6 module模块</h2><p>通过export抛出，import引入</p>
-<h3 id="export"><a href="#export" class="headerlink" title="export"></a>export</h3><ul>
-<li><p>抛出一个变量</p>
-<pre><code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//写法一</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">let</span> firstName = <span class="string">'Michael'</span>;</span><br><span class="line"><span class="comment">//写法二</span></span><br><span class="line"><span class="keyword">let</span> firstName = <span class="string">'Michael'</span>;</span><br><span class="line"><span class="keyword">export</span> &#123;firstName&#125;;</span><br></pre></td></tr></table></figure>
-</code></pre></li>
-<li><p>as关键字重命名</p>
-<pre><code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">v1</span>(<span class="params"></span>) </span>&#123; ... &#125;</span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">  v1 <span class="keyword">as</span> streamV1,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-</code></pre></li>
-<li><p>抛出默认</p>
-<pre><code><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span>  xxx</span><br></pre></td></tr></table></figure>
-</code></pre></li>
-</ul>
-<h3 id="import"><a href="#import" class="headerlink" title="import"></a>import</h3><ul>
-<li><p>接收一个变量</p>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#123;firstName&#125; from &apos;./profile.js&apos;;</span><br></pre></td></tr></table></figure>
-</code></pre></li>
-<li><p>as关键字重命名</p>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import &#123; firstName as surname &#125; from &apos;./profile.js&apos;;</span><br></pre></td></tr></table></figure>
-</code></pre></li>
-<li><p>import命令输入的变量都是只读的，因为它的本质是输入接口，不可以修改</p>
-</li>
-<li><p>整体加载</p>
-<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import * as XXX from &apos;./profile.js&apos;;</span><br></pre></td></tr></table></figure>
-</code></pre></li>
-<li><p>引入默认抛出的接口，可以自己随便命名</p>
 </li>
 </ul>
 <h2 id="js跳转"><a href="#js跳转" class="headerlink" title="js跳转"></a>js跳转</h2><p><a href="https://www.cnblogs.com/Renyi-Fan/p/9130325.html" target="_blank" rel="noopener">https://www.cnblogs.com/Renyi-Fan/p/9130325.html</a></p>

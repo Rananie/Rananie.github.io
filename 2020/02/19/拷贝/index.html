@@ -56,32 +56,32 @@
             <li >
                 <a href="/">
                     <i class="iconfont icon-shouye1"></i>
-                    <span>HOME</span>
+                    <span>主页</span>
                 </a>
             </li>
             <li >
                 <a href="/tags">
                     <i class="iconfont icon-biaoqian1"></i>
-                    <span>TAGS</span>
+                    <span>标签</span>
                 </a>
             </li>
             <li >
                 <a href="/archives">
                     <i class="iconfont icon-guidang2"></i>
-                    <span>ARCHIVES</span>
+                    <span>存档</span>
                 </a>
             </li>
             <li >
                 <a href="/about/">
                     <i class="iconfont icon-guanyu2"></i>
-                    <span>ABOUT</span>
+                    <span>关于</span>
                 </a>
             </li>
             
             <li>
                 <a id="search">
                     <i class="iconfont icon-sousuo1"></i>
-                    <span>SEARCH</span>
+                    <span>搜索</span>
                 </a>
             </li>
             
@@ -100,7 +100,7 @@
         <div class="search-input">
             <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
             <input id="search-input"/>
-            <span id="begin-search">search</span>
+            <span id="begin-search">搜索</span>
         </div>
         <div class="search-result-container" id="search-result-container">
 
@@ -123,9 +123,9 @@
     </div>
 
     <div class="post-meta">
-        <span class="attr">Post：<span>2020-02-19 19:46:18</span></span>
+        <span class="attr">发布于：<span>2020-02-19 19:46:18</span></span>
         
-        <span class="attr">Tags：/
+        <span class="attr">标签：/
         
         <a class="tag" href="/tags/#学习笔记" title="学习笔记">学习笔记</a>
         <span>/</span>
@@ -135,7 +135,7 @@
         
         
         </span>
-        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
 </span>
 </span>
     </div>
@@ -146,7 +146,10 @@
 <p>浅拷贝：修改拷贝以后的数据会影响原数据，拷贝的引用。使得原数据不安全。<br>深拷贝：修改拷贝以后的数据不会影响原数据，拷贝的时候生成新数据。</p>
 <h2 id="拷贝数据的方法"><a href="#拷贝数据的方法" class="headerlink" title="拷贝数据的方法"></a>拷贝数据的方法</h2><p>1.引用类型直接赋值是浅拷贝<br>2.Object.assign()</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    a: &#123;</span><br><span class="line">        a1: &apos;a1&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">    b: &apos;b&apos;</span><br><span class="line">&#125;</span><br><span class="line">let ass = Object.assign(&#123;&#125;, obj);</span><br><span class="line">ass.a.a1 = &apos;aaa&apos;;</span><br><span class="line">ass.b=&quot;c&quot;</span><br><span class="line">console.log(obj);</span><br><span class="line">/*</span><br><span class="line">输出：a:&#123;a1:&quot;aaa&quot;&#125;,</span><br><span class="line">      b:&quot;b&quot;</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
-<p>说明:Obejct.assign()只能对一层进行深拷贝,如果拷贝的层数超过了一层的话，那么就会进行浅拷贝。</p>
+<p>说明: Obejct.assign()只能对一层进行深拷贝,如果拷贝的层数超过了一层的话，那么就会进行浅拷贝。</p>
+<p>这种克隆方式，只能克隆原始对象自身的值，不能克隆它的继承值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function clone(origin) &#123;</span><br><span class="line">  return Object.assign(&#123;&#125;, origin);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果要保持继承链。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function clone(origin) &#123;</span><br><span class="line">  //Object.getPrototypeOf方法返回指定对象的原型（内部[[Prototype]]属性的值）</span><br><span class="line">  let originProto = Object.getPrototypeOf(origin);</span><br><span class="line">  //Object.create方法创建一个新对象，使用现有的对象来提供新创建的对象的__proto__。</span><br><span class="line">  return Object.assign(Object.create(originProto), origin);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>3.三点运算符<br>对象的扩展运算符（…）用于取出参数对象的所有可遍历属性，拷贝到当前对象之中。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">    a: &#123;</span><br><span class="line">        a1: &apos;a1&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">    b: &apos;b&apos;</span><br><span class="line">&#125;</span><br><span class="line">let ass = &#123;...obj&#125;;</span><br><span class="line">ass.a.a1 = &apos;aaa&apos;;</span><br><span class="line">ass.b = &apos;bbb&apos;</span><br><span class="line">console.log(obj);</span><br><span class="line"> /*</span><br><span class="line">    输出：a:&#123;a1:&quot;aaa&quot;&#125;,</span><br><span class="line">          b:&quot;b&quot;</span><br><span class="line">    */</span><br></pre></td></tr></table></figure></p>
 <p>说明:扩展运算符只能对一层进行深拷贝,如果拷贝的层数超过了一层的话，那么就会进行浅拷贝。</p>
 <p>Object.assign(）和展开原算符对于深浅拷贝的结果是一样。</p>

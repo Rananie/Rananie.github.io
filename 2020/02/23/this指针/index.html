@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="biubiu的博客">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        this指针 - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/aircloud.css">
+    <link rel="stylesheet" href="/css/gitment.css">
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar">
+            <img src="/img/avatar.jpg" />
+        </div>
+        <div class="name">
+            <span>biubiu</span>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        this指针
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-02-23 12:35:06</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#学习笔记" title="学习笔记">学习笔记</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#javascript" title="javascript">javascript</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content no-indent">
+        <p>this是什么？</p>
+<ul>
+<li>任何函数本质上都是通过某个对象来调用的，如果没有直接指定就是window</li>
+<li>所有函数内部都有一个this</li>
+<li>它的值是调用函数的当前<strong>对象</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">function Person(color) &#123;</span><br><span class="line">    console.log(this);</span><br><span class="line">    this.color = color;</span><br><span class="line">    this.getColor = function () &#123;</span><br><span class="line">        console.log(this);</span><br><span class="line">        return this.color;</span><br><span class="line">    &#125;;</span><br><span class="line">    this.setColor = function (color) &#123;</span><br><span class="line">        console.log(this);</span><br><span class="line">        this.color = color;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//this是谁</span><br><span class="line">Person(&quot;red&quot;); //window</span><br><span class="line">let p  = new Person(&quot;yello&quot;) //Person的实例，p</span><br><span class="line">p.getColor();//P</span><br><span class="line">let obj= &#123;&#125;;</span><br><span class="line">p.setColor.call(obj,&quot;black&quot;) //obj</span><br><span class="line">let test = p.setColor;</span><br><span class="line">test()//window</span><br><span class="line"></span><br><span class="line">function fun1()&#123;</span><br><span class="line">    function fun2() &#123;</span><br><span class="line">        console.log(this);</span><br><span class="line">    &#125;</span><br><span class="line">    fun2()</span><br><span class="line">&#125;</span><br><span class="line">fun1()//window</span><br></pre></td></tr></table></figure>
+<p>new在执行时完成的4件事情：<br>1.在内存中创造一个新的空对象<br>2.让this指向这个新的对象<br>3.执行构造函数里面的代码，给这个新对象添加属性和方法<br>4.返回这个新对象(所以构造函数里面不需要return)</p>
+<p><a href="https://www.cnblogs.com/pssp/p/5216085.html" target="_blank" rel="noopener">这篇文章</a>对this的理解更为深刻，很有学习意义。</p>
+<blockquote>
+<p>window是js中的全局对象，我们创建的变量实际上是给window添加属性，所以这里可以用window点o对象。</p>
+</blockquote>
+<p>上面的那篇文章对<strong>最终this指向的是调用它的对象</strong>进行了更准确的描述</p>
+<p>var o = {<br>    a:10,<br>    b:{<br>        a:12,<br>        fn:function(){<br>            console.log(this.a); //12<br>        }<br>    }<br>}<br>o.b.fn();<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">**知识点1**：这个函数中包含多个对象，尽管这个函数是被最外层的对象所调用，this指向的也只是它上一级的对象</span><br></pre></td></tr></table></figure></p>
+<p>var o = {<br>    a:10,<br>    b:{<br>        fn:function(){<br>            console.log(this.a); //undefined<br>        }<br>    }<br>}<br>o.b.fn();<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">尽管对象b中没有属性a，这个this指向的也是对象b，因为this只会指向它的上一级对象，不管这个对象中有没有this要的东西。</span><br><span class="line"></span><br><span class="line">**知识点2**：this永远指向的是最后调用它的对象，也就是看它执行的时候是谁调用的</span><br></pre></td></tr></table></figure></p>
+<p>var o = {<br>    a:10,<br>    b:{<br>        a:12,<br>        fn:function(){<br>            console.log(this.a); //undefined<br>            console.log(this); //window<br>        }<br>    }<br>}<br>var j = o.b.fn;<br>j();<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">除此之外，文章还对this用法进行了补充，当this碰到return的时候</span><br><span class="line"></span><br><span class="line">**知识点3**当this遇见return时，如果返回值是一个对象，那么this指向的就是那个返回的对象，如果返回值不是一个对象那么this还是指向函数的实例。</span><br></pre></td></tr></table></figure></p>
+<p>function fn()<br>{<br>    this.user = ‘追梦子’;<br>    return function(){};<br>}<br>var a = new fn;<br>console.log(a.user); //undefined</p>
+<p>function fn()<br>{<br>    this.user = ‘追梦子’;<br>    return 1;<br>}<br>var a = new fn;<br>console.log(a.user); //追梦子</p>
+<p>function fn()<br>{<br>    this.user = ‘追梦子’;<br>    return null;<br>}<br>var a = new fn;<br>console.log(a.user); //追梦子<br><code>`</code></p>
+<p>还有一点就是虽然null也是对象，但是在这里this还是指向那个函数的实例，因为null比较特殊。</p>
+<p>注:因为平时严格模式用的比较少，所以等之后用到严格模式再进行补充</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+    </div>
+</div>
+    </div>
+</div>
+
+
+<!--<footer class="footer">-->
+    <!--<ul class="list-inline text-center">-->
+        <!---->
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+        <!---->
+
+    <!--</ul>-->
+    <!---->
+    <!--<p>-->
+        <!--<span id="busuanzi_container_site_pv">-->
+            <!--<span id="busuanzi_value_site_pv"></span>PV-->
+        <!--</span>-->
+        <!--<span id="busuanzi_container_site_uv">-->
+            <!--<span id="busuanzi_value_site_uv"></span>UV-->
+        <!--</span>-->
+        <!--Created By <a href="https://hexo.io/">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>-->
+<!--</footer>-->
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.xml"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/index.js"></script>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+</html>

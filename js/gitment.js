@@ -1,9 +1,3 @@
-/**
- * Created by Xiaotao.Nie on 11/04/2018.
- * All right reserved
- * IF you have any question please email onlythen@yeah.net
- */
-
 var Gitment =
     /******/ (function(modules) { // webpackBootstrap
     /******/ 	// The module cache
@@ -1179,9 +1173,9 @@ var Gitment =
                 for (var i = 0; i < l; i++) {
                     var id = list[i].__mapid;
                     if (i) {
-                        invariant(map[id] === i, "INTERNAL ERROR maps derivation.__mapid to index.md in list");
+                        invariant(map[id] === i, "INTERNAL ERROR maps derivation.__mapid to index in list");
                     } else {
-                        invariant(!(id in map), "INTERNAL ERROR observer on index.md 0 shouldnt be held in map.");
+                        invariant(!(id in map), "INTERNAL ERROR observer on index 0 shouldnt be held in map.");
                     }
                 }
                 invariant(list.length === 0 || Object.keys(map).length === list.length - 1, "INTERNAL ERROR there is no junk in map");
@@ -1972,7 +1966,7 @@ var Gitment =
                             impl.atom.reportObserved();
                             return impl.values[index];
                         }
-                        console.warn("[mobx.array] Attempt to read an array index.md (" + index + ") that is out of bounds (" + impl.values.length + "). Please check length first. Out of bound indices will not be tracked by MobX");
+                        console.warn("[mobx.array] Attempt to read an array index (" + index + ") that is out of bounds (" + impl.values.length + "). Please check length first. Out of bound indices will not be tracked by MobX");
                     }
                     return undefined;
                 };
@@ -2644,7 +2638,7 @@ var Gitment =
                 "m033": "`observe` doesn't support the fire immediately property for observable maps.",
                 "m034": "`mobx.map` is deprecated, use `new ObservableMap` or `mobx.observable.map` instead",
                 "m035": "Cannot make the designated object observable; it is not extensible",
-                "m036": "It is not possible to get index.md atoms from arrays",
+                "m036": "It is not possible to get index atoms from arrays",
                 "m037": "Hi there! I'm sorry you have just run into an exception.\nIf your debugger ends up here, know that some reaction (like the render() of an observer component, autorun or reaction)\nthrew an exception and that mobx caught it, to avoid that it brings the rest of your application down.\nThe original cause of the exception (the code that caused this reaction to run (again)), is still in the stack.\n\nHowever, more interesting is the actual stack trace of the error itself.\nHopefully the error is an instanceof Error, because in that case you can inspect the original stack of the error from where it was thrown.\nSee `error.stack` property, or press the very subtle \"(...)\" link you see near the console.error message that probably brought you here.\nThat stack is more interesting than the stack of this console.error itself.\n\nIf the exception you see is an exception you created yourself, make sure to use `throw new Error(\"Oops\")` instead of `throw \"Oops\"`,\nbecause the javascript environment will only preserve the original stack trace in the first form.\n\nYou can also make sure the debugger pauses the next time this very same exception is thrown by enabling \"Pause on caught exception\".\n(Note that it might pause on many other, unrelated exception as well).\n\nIf that all doesn't help you out, feel free to open an issue https://github.com/mobxjs/mobx/issues!\n",
                 "m038": "Missing items in this list?\n    1. Check whether all used values are properly marked as observable (use isObservable to verify)\n    2. Make sure you didn't dereference values too early. MobX observes props, not primitives. E.g: use 'person.name' instead of 'name' in your computation.\n"
             };
@@ -2962,11 +2956,11 @@ var Gitment =
                 }
 
                 // dirty
-                // use a blank img to trigger height calculating when element rendered
+                // use a blank image to trigger height calculating when element rendered
                 var imgTrigger = document.createElement('img');
                 var markdownBody = commentItem.querySelector('.gitment-comment-body');
                 imgTrigger.className = 'gitment-hidden';
-                imgTrigger.src = "data:img/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
+                imgTrigger.src = "data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==";
                 imgTrigger.onload = function () {
                     if (markdownBody.clientHeight > instance.maxCommentHeight) {
                         markdownBody.classList.add('gitment-comment-body-folded');
@@ -3419,7 +3413,7 @@ var Gitment =
                     }, options);
 
                     this.state.user.isLoggingIn = true;
-                    _utils.http.post('https://gh-oauth.imsun.net', {
+                    _utils.http.post('https://auth.baixiaotu.cc', {
                         code: code,
                         client_id: client_id,
                         client_secret: client_secret

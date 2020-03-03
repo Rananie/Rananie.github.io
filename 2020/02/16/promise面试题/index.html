@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="DING RANJIE" />
+  
+  
+  <title>promise面试题（深入理解调用顺序） | biubiu的博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="面试题,Javascript," />
+  
+
+  
+  <meta name="description" content="biubiu的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "DING RANJIE",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 不能放弃思考</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://biubiuins.github.io/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-02-16
+    </span>
+    
+      <span>
+        | <a href="/categories/面试题/"><i class="fa fa-bookmark"></i>面试题</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    promise面试题（深入理解调用顺序）
+  </h1>
+  
+  <article class="passage-article">
+    <p><strong>第一题</strong></p>
+<pre><code class="bash">    setTimeout(()=&gt;{
+        console.log(1);
+    },0)
+    Promise.resolve().then(()=&gt;{
+        console.log(2);
+    })
+    Promise.resolve().then(()=&gt;{
+        console.log(3);
+    })
+    console.log(4);
+    /*
+    输出：4 2 3 1
+     */
+</code></pre>
+<p><strong>第二题</strong></p>
+<pre><code>    setTimeout(() =&gt; {
+        console.log(1);
+    }, 0)
+    //Promise为构造函数
+    new Promise(resolve =&gt; {
+        console.log(2); //同步执行
+        resolve()//成功
+    }).then(() =&gt; { //成功的回调
+        console.log(3);
+    }).then(() =&gt; {//此处的then等上一个执行完之后再放入微队列执行
+        console.log(4);
+    })
+    console.log(5);//同步执行
+    /*
+    输出:2 5 3 4 1
+     */
+</code></pre><p><strong>注意：</strong> 链式的then要等前一个then执行完毕才知道状态，才可以执行。</p>
+<p><strong>第三题</strong></p>
+<pre><code class="bash">  //定义了一个返回promise的函数
+     const first = () =&gt; (new Promise((resolve, reject) =&gt; {
+          console.log(1);  //同步执行1
+          //返回promise的函数
+          let p = new Promise((resolve, reject) =&gt; {
+              console.log(2); //同步执行2
+              //放入宏队列1
+              setTimeout(() =&gt; {
+                  console.log(3);
+                  resolve(4) //最后执行宏队列时状态已经修改，不再是等待，所以该行代码不执行
+              }, 0)
+              resolve(5) //立刻执行，p的状态立刻成功
+          })
+          resolve(6) //first的状态变成成功
+          //成功的回调放入微队列1
+          p.then((arg) =&gt; {
+              console.log(arg);
+          })
+      }))
+      //成功的回调放入为微队列2
+      first().then((arg)=&gt;{
+          console.log(arg);
+      })
+      console.log(7);//同步执行3
+      /*输出
+      1 2 7 5 6 3
+      开始：输出 1 2 7
+      宏[3]
+      微[5 6]
+      输出微队列：5 6
+      输出宏队列：3
+       */
+</code></pre>
+<p><strong>第四题</strong></p>
+<pre><code>    //加入宏队列1
+    setTimeout(()=&gt;{
+        console.log(0);
+    },0)
+    new Promise((resolve,reject) =&gt;{
+        console.log(1); //同步执行1
+        resolve()
+        //成功的回调加入微队列1
+    }).then(()=&gt;{
+        console.log(2);
+        new Promise((resolve, reject) =&gt; {
+            console.log(3);
+            resolve()
+            //成功的回调加入微队列3
+        }).then(()=&gt;{
+            console.log(4);
+            //成功的回调加入微队列5
+        }).then(()=&gt;{
+            console.log(5);
+        })
+        //成功的回调加入微队列4
+    }).then(()=&gt;{
+        console.log(6);
+    })
+    new Promise((resolve, reject) =&gt; {
+        console.log(7); // 同步执行2
+        resolve()
+        //成功的回调加入微队列2
+    }).then(()=&gt;{
+        console.log(8);
+    })
+    /*
+    输出：1 7 2 3 8 4 6 5 0
+    状态1：同步执行输出1 7 宏[0]  微[2 8]
+    状态2,执行微任务1（整个then）：输出2 3 宏[0]  微[8 4 6]
+    状态3,执行微任务2：输出 8 宏[0]  微[4 6]
+    状态4,执行微任务3：输出4 宏[0]  微[6 5]
+    ....
+    */
+</code></pre><p>这道题我错在6和5的顺序上面，不太懂为什么6在5前面。阅读了<a href="https://www.jianshu.com/p/aa3d8b3adde3" target="_blank" rel="noopener">一篇文章</a>之后才明白，下面是对知识点进行摘录+总结。</p>
+<p><strong>知识点1</strong></p>
+<p>当执行 then 方法时，如果前面的 promise 已经是 resolved 状态，则直接将回调放入微队列中。</p>
+<p>注意：then方法是同步执行的，但是then中的回调是异步执行的。</p>
+<p>在同步执行then方法时，会进行判断：</p>
+<ul>
+<li>如果前面的 promise 已经是 resolved 状态，则会立即将回调推入微队列</li>
+<li>如果前面的 promise 是 pending 状态则会将回调存储在 promise 的内部(不会被执行，也不会被放入微队列中)，一直等到 promise 被 resolve 才将回调推入微队列</li>
+</ul>
+<p><strong>知识点2</strong></p>
+<p>resolve的作用除了将当前的 promise 由 pending 变为 resolved，还会遍历之前通过 then 给这个 promise 注册的所有回调，将它们依次放入微队列中，很多人以为是由 then 方法来触发它保存回调，而事实上是由 promise 的 resolve 来触发的，then 方法只负责注册回调。</p>
+<p>对于 then 方法返回的 promise 它是没有 resolve 函数的，取而代之只要 then 中回调的代码执行完毕并获得同步返回值，这个 then 返回的 promise 就算被 resolve</p>
+<pre><code> new Promise((resolve,reject) =&gt;{
+   console.log(1);
+   resolve()
+//第一个then
+ }.then(()=&gt;{
+   ...
+ //第二个then
+ }).then(()=&gt;{
+ ...
+ })
+</code></pre><p>首先Promise是实例化，同步执行函数，打印1，执行resolve函数，将 promise 变为 resolved，但由于此时 then 方法还未执行。由知识点2：resolve会触发保存它的回调。then是同步的，所以会依次保存第一个then和第二个then</p>
+<p>[主]外部第一个 then，外部第二个 then [微] 空</p>
+<p>然后执行第一then,由于前面的promise已经被resolve了，所以将第一then的回调放入微队列。</p>
+<p>[主]外部第二个 then  [微]外部第一个 then的回调</p>
+<p>但是这个回调还没有执行，所以第一then返回的promise 仍为 pending 状态，所以同步执行第二个then。由于前面的 promise 是 pending 状态，所以外2then 的回调也不会被推入微任务队列也不会执行</p>
+<p>[主]空  [微]外一 then的回调</p>
+<p>现在主线程空了，执行微任务，也就外一 then的回调，首先打印出2，随后实例化内部promise，打印3，执行resolve函数<br>,遍历then保存。</p>
+<pre><code> new Promise((resolve,reject) =&gt;{
+ ....
+ //外1
+  }.then(()=&gt;{
+   console.log(2);
+   new Promise((resolve, reject) =&gt;{
+   console.log(3);
+    resolve()
+   }.then(()=&gt;{
+   //内部第一个then
+     console.log(4);
+   }).then(()=&gt;{
+   //内部第二个then
+    console.log(5);
+   })
+  }
+  //外2
+  .then(()=&gt;{
+  .....
+  })
+</code></pre><p>[主]内1 then 内2的then  [微]空</p>
+<p>然后执行内1的then，由于前面的 promise 已被 resolve，所以将回调放入微任务队列中。</p>
+<p>[主]内2的then  [微]内1then的回调</p>
+<p>然后执行内2的then，因为内部第一个then的回调还未执行所以状态为pending，所以内2then 的回调和外2then 的回调一样，不注册不执行。</p>
+<p>[主]空  [微]内1then的回调</p>
+<p><strong>外1的回调全部执行完毕</strong>，这里尤其注意:内2then的回调没执行，但是内2then是执行了的。<br>外1then 返回的 promise 的状态由 pending 变为 resolved，同时遍历之前通过 then 给这个 promise 注册的所有回调，将它们的回调放入微任务队列中。</p>
+<p>[主]空  [微]内1then的回调 外2then 的回调</p>
+<p>主线程执行完毕，取出内1then的回调执行</p>
+<p>[主]内1then的回调  [微]外2then 的回调</p>
+<p>打印4，内1then返回的promise状态由 pending 变为 resolved，同时遍历之前通过 then 给这个 promise 注册的所有回调，将它们的回调放入微任务队列中。</p>
+<p>[主] 空 [微]外2then 的回调 内2的回调</p>
+<p>最后一点就不分析了，这就是为什么6要比5先输出的原因了。</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/Javascript/"><i class="fa fa-tags"></i>Javascript</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2020/02/16/宏队列与微队列/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2020/02/14/git-1/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

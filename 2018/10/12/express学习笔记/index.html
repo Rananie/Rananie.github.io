@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="DING RANJIE" />
+  
+  
+  <title>express学习笔记 | biubiu的博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="node," />
+  
+
+  
+  <meta name="description" content="biubiu的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "DING RANJIE",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 不能放弃思考</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://biubiuins.github.io/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2018-10-12
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    express学习笔记
+  </h1>
+  
+  <article class="passage-article">
+    <h1 id="express-学习笔记"><a href="#express-学习笔记" class="headerlink" title="express 学习笔记"></a>express 学习笔记</h1><hr>
+<h2 id="搭建简单服务器"><a href="#搭建简单服务器" class="headerlink" title="搭建简单服务器"></a>搭建简单服务器</h2><pre><code class="js">//express() 是一个由 express 模块导出的入口（top-level）函数
+let express = require(&#39;express&#39;);
+//创建一个express应用实例名app
+let app = express();
+// 设置端口号：3000
+//process.env.PORT：读取当前目录下环境变量port的值
+let port = process.env.PORT || 3000 ;
+//在端口号上开启服务
+app.listen(port,function () {
+    console.log(&quot;server start&quot;+port);
+});
+</code></pre>
+<h3 id="app-listen-port-hostname-backlog-callback"><a href="#app-listen-port-hostname-backlog-callback" class="headerlink" title="app.listen(port, [hostname], [backlog], [callback])"></a>app.listen(port, [hostname], [backlog], [callback])</h3><p>类似于node中的http.Server.listen()</p>
+<pre><code class="js">// 设置端口号：3000
+//process.env.PORT：读取当前目录下环境变量port的值
+let port = process.env.PORT || 3000 ;
+//在端口号上开启服务
+app.listen(port,function () {
+    console.log(&quot;server start&quot;+port);
+});
+</code></pre>
+<p>服务器启动时候，<br>默认端口3000：node app.js<br>设置端口8080：PORT=8080 node app.js</p>
+<h3 id="app-set-name-value"><a href="#app-set-name-value" class="headerlink" title="app.set(name,value)"></a>app.set(name,value)</h3><pre><code class="js">//设置 views 文件夹为存放视图文件的目录, 即存放模板文件的地方,__dirname 为全局变量,存储当前正在执行的脚本所在的目录。
+app.set(&#39;views&#39;, path.join(__dirname, &#39;views&#39;));
+app.set(&quot;views&quot;,&quot;./views&quot;);
+//设置使用的模板引擎
+app.set(&#39;view engine&#39;, &#39;ejs’)
+app.set(&quot;view engine&quot;,&quot;jade&quot;)
+npm install --save express-art-template
+//设置art模板引擎，后缀为art
+app.engine(&#39;art&#39;, require(&#39;express-art-template&#39;));
+</code></pre>
+<h3 id="app-get-name"><a href="#app-get-name" class="headerlink" title="app.get(name)"></a>app.get(name)</h3><p>返回name的value值</p>
+<pre><code class="js">//实例一
+app.get(&#39;title&#39;);
+// =&gt; undefined
+app.set(&#39;title&#39;, &#39;My Site&#39;);
+app.get(&#39;title&#39;);
+// =&gt; &quot;My Site&quot;
+//实例二
+app.set(&#39;port&#39;, process.env.PORT || 3000);
+var server = app.listen(app.get(&#39;port&#39;), function() {
+  console.log(&quot;server start&quot;+port);
+});
+</code></pre>
+<h3 id="app-get-path-callback-callback-…"><a href="#app-get-path-callback-callback-…" class="headerlink" title="app.get(path, callback [, callback …])"></a>app.get(path, callback [, callback …])</h3><h3 id="app-all-path-callback-callback-…"><a href="#app-all-path-callback-callback-…" class="headerlink" title="app.all(path, callback [, callback …])"></a>app.all(path, callback [, callback …])</h3><p>这种方法就像标准的app.METHOD()方法, 除了它匹配所有HTTP动词。<br>访问path路径的所有方法执行的回调函数.</p>
+<pre><code class="js">//* 表示匹配所有的路径
+app.all(&#39;*&#39;, function(req, res){
+  res.end(req.method + &#39;user&#39;)
+}
+//一般放在最后面防止前面的被覆盖
+</code></pre>
+<h2 id="请求与响应"><a href="#请求与响应" class="headerlink" title="请求与响应"></a>请求与响应</h2><pre><code class="js">//Express 应用使用回调函数的参数： request 和 response 对象来处理请求和响应的数据。
+app.get(&#39;/&#39;, function(req, res){
+  res.send(&#39;hello world&#39;);
+  res.status(404).send(错误请求)//访问这个路径是设定状态码为404
+  //通过res.send（）接口向客户端发送hello world，send只能响应一次，意思是只能出现一个send
+})
+</code></pre>
+<p>res.send（）只能出现一次<br>如果要响应多次，用node原生的write和end，但是如果只有write会处于一个挂起状态</p>
+<pre><code class="js">app.get(&#39;/&#39;, function(req, res){
+  res.write(&#39;hello world&#39;);
+  res.write(&#39;hello world&#39;);
+})
+</code></pre>
+<ul>
+<li>res.send有结束响应的作用</li>
+<li>res.write没有结束响应的作用，需要res.end结束中间件挂起<h3 id="response"><a href="#response" class="headerlink" title="response"></a>response</h3>下表中响应对象（res）的方法向客户端返回响应，终结请求响应的循环。如果在路由句柄中一个方法也不调用，来自客户端的请求会一直挂起。<br><img src="/img/express/response.jpg" width="80%"><h4 id="res-render"><a href="#res-render" class="headerlink" title="res.render()"></a>res.render()</h4><pre><code class="js">//设置 views 文件夹为存放视图文件的目录, 即存放模板文件的地方,__dirname 为全局变量,存储当前正在执行的脚本所在的目录。
+app.set(&#39;views&#39;, path.join(__dirname, &#39;views&#39;));
+app.set(&quot;views&quot;,&quot;./views&quot;);
+//第一个是渲染的views文件夹下面的index，第二个是传递的数据,注意需要设置模板引擎
+res.render(&quot;index&quot;,{},function(){})
+</code></pre>
+<h4 id="res-setHeader"><a href="#res-setHeader" class="headerlink" title="res.setHeader()"></a>res.setHeader()</h4><pre><code>//Content-Type的作用 该实体头的作用是让服务器告诉浏览器它发送的数据属于什么文件类型。
+res.setHeader(&quot;Content-Type&quot;,&#39;text/html;charset=utf-8&#39;)
+</code></pre><h4 id="res-redirect"><a href="#res-redirect" class="headerlink" title="res.redirect()"></a>res.redirect()</h4>调用redirect()方法后，其后的代码都不会被执行。<br>而使用redirect()设置的状态码不是301或302也不会发生跳转<pre><code>res.redirect([status,] path)
+//重定义到path所指定的URL，重定向时可以同时指定HTTP状态码，不指定状态码默认为302
+</code></pre><h4 id="res-location"><a href="#res-location" class="headerlink" title="res.location()"></a>res.location()</h4>location()方法本质上是调用了ServerResponse对象的setHeader()方法，但并没有设置状态码。<br>使用location()设置头信息，而不设置状态码或状态码不是301或302，并不会发生重定向<pre><code>res.location(path)
+</code></pre><h3 id="request"><a href="#request" class="headerlink" title="request"></a>request</h3><img src="/img/express/request.jpg" alt="response"><h4 id="req-query"><a href="#req-query" class="headerlink" title="req.query"></a>req.query</h4>处理 get 请求，获取 get 请求参数<pre><code class="js">// GET /search?q=tobi+ferret
+req.query.q
+// =&gt; &quot;tobi ferret&quot;
+// GET /shoes?order=desc&amp;shoe[color]=blue&amp;shoe[type]=converse
+req.query.order
+// =&gt; &quot;desc&quot;
+req.query.shoe.color
+// =&gt; &quot;blue&quot;
+req.query.shoe.type
+// =&gt; &quot;converse&quot;
+</code></pre>
+<h4 id="req-body"><a href="#req-body" class="headerlink" title="req.body"></a>req.body</h4>处理 post 请求，获取 post 请求体<pre><code class="js">// POST user[name]=tobi&amp;user[email]=tobi@learnboost.com
+req.body.user.name
+// =&gt; &quot;tobi&quot;
+req.body.user.email
+// =&gt; &quot;tobi@learnboost.com&quot;
+// POST { &quot;name&quot;: &quot;tobi&quot; }
+req.body.name
+// =&gt; &quot;tobi&quot;
+</code></pre>
+<h4 id="req-params"><a href="#req-params" class="headerlink" title="req.params"></a>req.params</h4>处理 /:xxx 形式的 get 或 post 请求，获取请求参数<pre><code class="js">// GET /user/tj
+req.params.name
+// =&gt; &quot;tj&quot;
+// GET /file/javascripts/jquery.js
+req.params[0]
+// =&gt; &quot;javascripts/jquery.js&quot;
+</code></pre>
+<h4 id="req-param-name"><a href="#req-param-name" class="headerlink" title="req.param(name)"></a>req.param(name)</h4>处理 get 和 post 请求，但查找优先级由高到低为 req.params→req.body→req.query<pre><code class="js">// ?name=tobi
+req.param(&#39;name&#39;)
+// =&gt; &quot;tobi&quot;
+// POST name=tobi
+req.param(&#39;name&#39;)
+// =&gt; &quot;tobi&quot;
+// /user/tobi for /user/:name
+req.param(&#39;name&#39;)
+// =&gt; &quot;tobi&quot;
+</code></pre>
+<h3 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h3>用于客户端与服务器路由匹配之前的中间操作，正常中间件放在路由上面，中间件通过next()往下走。<h4 id="app-use（-path-function）"><a href="#app-use（-path-function）" class="headerlink" title="app.use（[path],function）"></a>app.use（[path],function）</h4>利用express托管静态文件<br>node.js不能通过目录来引入文件，而express可以，public为静态目录<pre><code class="js">//设置public文件夹为存放静态文件的目录。
+let path=require(&quot;path&quot;)
+//ex4里面唯一的内置中间件
+app.use(express.static(path.join(__dirname, &#39;public&#39;)));
+</code></pre>
+一个中间件处理器，请求来了，让那些中间件先处理一遍</li>
+<li>没有挂载路径的中间件，应用的每个请求都会执行该中间件</li>
+<li>挂载至 /path 的中间件，任何指向 /path 的请求都会执行它<pre><code>app.use(&quot;/name&quot;,function(req,res,next){
+res.setHeader(&quot;Content-Type&quot;,&#39;text/html;charset=utf-8&#39;)
+next();
+})
+app.get(&quot;/name/n&quot;,function(req,res){
+})
+//也可以匹配到，在执行get请求/name/n时先执行上面的中间件
+</code></pre><h4 id="错误中间件"><a href="#错误中间件" class="headerlink" title="错误中间件"></a>错误中间件</h4>错误处理中间件和其他中间件定义类似，只是必须要使用 4 个参数(err, req, res, next)。即使不需要 next 对象，也必须在签名中声明它，否则中间件会被识别为一个常规中间件，不能处理错误。遇见错误之后直接执行错误中间件。<br>错误处理中间件应当在在其他 app.use() 和路由调用之后才能加载，一般放在路由的最底部，比如：<pre><code class="js">var bodyParser = require(&#39;body-parser&#39;);
+var methodOverride = require(&#39;method-override&#39;);
+app.use(bodyParser());
+app.use(methodOverride());
+app.use(function(err, req, res, next) {
+// 业务逻辑
+console.error(err.stack);
+res.status(500).send(&#39;Something broke!&#39;);
+});
+</code></pre>
+<h2 id="应用生成器"><a href="#应用生成器" class="headerlink" title="应用生成器"></a>应用生成器</h2><code>`</code>js<br>//安装<br>$ npm install express-generator -g<br>//view=XXX 使用引擎名字  myapp项目名称<br>$ express –view=pug myapp<br>//安装所有依赖<br>$ cd myapp<br>$ npm install</li>
+</ul>
+<p>//启动myapp项目<br>$ set DEBUG=myapp:* &amp; npm start</p>
+<h2 id=""><a href="#" class="headerlink" title="`"></a><code>`</code></h2><p>我的石墨文档链接：<a href="https://shimo.im/docs/TXeewzaE8Jsdgn0I/" target="_blank" rel="noopener">https://shimo.im/docs/TXeewzaE8Jsdgn0I/</a><br>练习的简易聊天室连接：<a href="https://github.com/biubiuins/demo_chat" target="_blank" rel="noopener">https://github.com/biubiuins/demo_chat</a></p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#express-学习笔记"><span class="toc-text">express 学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建简单服务器"><span class="toc-text">搭建简单服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#app-listen-port-hostname-backlog-callback"><span class="toc-text">app.listen(port, [hostname], [backlog], [callback])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app-set-name-value"><span class="toc-text">app.set(name,value)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app-get-name"><span class="toc-text">app.get(name)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app-get-path-callback-callback-…"><span class="toc-text">app.get(path, callback [, callback …])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#app-all-path-callback-callback-…"><span class="toc-text">app.all(path, callback [, callback …])</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#请求与响应"><span class="toc-text">请求与响应</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#response"><span class="toc-text">response</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#res-render"><span class="toc-text">res.render()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#res-setHeader"><span class="toc-text">res.setHeader()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#res-redirect"><span class="toc-text">res.redirect()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#res-location"><span class="toc-text">res.location()</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#request"><span class="toc-text">request</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#req-query"><span class="toc-text">req.query</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#req-body"><span class="toc-text">req.body</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#req-params"><span class="toc-text">req.params</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#req-param-name"><span class="toc-text">req.param(name)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#中间件"><span class="toc-text">中间件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#app-use（-path-function）"><span class="toc-text">app.use（[path],function）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#错误中间件"><span class="toc-text">错误中间件</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#应用生成器"><span class="toc-text">应用生成器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#"><span class="toc-text">`</span></a></li></ol></li></ol>
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/node/"><i class="fa fa-tags"></i>node</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2018/10/27/vue-book/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2018/10/11/project-email/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

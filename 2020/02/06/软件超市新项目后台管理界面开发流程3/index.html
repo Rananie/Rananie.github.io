@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="DING RANJIE" />
+  
+  
+  <title>软件超市项目后台管理界面开发流程3 | biubiu的博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="project,软件超市," />
+  
+
+  
+  <meta name="description" content="biubiu的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "DING RANJIE",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 不能放弃思考</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://biubiuins.github.io/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-02-06
+    </span>
+    
+      <span>
+        | <a href="/categories/project/"><i class="fa fa-bookmark"></i>project</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    软件超市项目后台管理界面开发流程3
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="vue全局配置"><a href="#vue全局配置" class="headerlink" title="vue全局配置"></a>vue全局配置</h2><p>项目有很多重复用到的变量和方法，新建一个global/index.js来存放。具体的实现是通过在Vue的原型上添加方法和属性，也就是使用<code>Vue.prototype</code>，最后要在main.js引入文件`import “./global”;</p>
+<h2 id="Messsage-vue"><a href="#Messsage-vue" class="headerlink" title="Messsage.vue"></a>Messsage.vue</h2><p>一级导航用于显示消息通知,里面包含了两个组件，一个用于分页的ProjectPagination，一个是用于消息提醒的MessageRemind。<br>这里实现了流程1提到的:如果有未读消息，进入管理页面后直接显示消息通知，如果没有未读消息，则显示第一个路由。</p>
+<pre><code class="bash">    //登陆之后是先跳转到message，此时的pageEnterStatetrue=true。
+    if (this.pageEnterState) {
+      //如果没有消息就跳到第一个路由
+      if (this.msgLen === 0) {
+        const route = this.$store.getters.addRouter;
+        this.$router.push(route[0].path);
+      } else {
+        //如果有消息就显示，tableData就是登陆时传给state的消息
+        this.data = this.tableData;
+        this.isLoading = false;
+      }
+      this.$store.commit(&quot;SET_PAGE_ENTER_STATE&quot;, false);
+    } else {
+      this.loadData();
+    }
+  }
+</code></pre>
+<h3 id="分页ProjectPagination"><a href="#分页ProjectPagination" class="headerlink" title="分页ProjectPagination"></a>分页ProjectPagination</h3><p>结合element-ui的pagination加上一些修改。前一篇博客中提到了父组件向子组件传值的方法，这里同时也用到了子组件向父组件传值的方法</p>
+<pre><code>&lt;!-- 分页器 --&gt;
+&lt;template&gt;
+  &lt;el-pagination class=&quot;x-page&quot; layout=&quot;total,sizes, prev, pager, next, jumper&quot; @current-change=&quot;handleCurrentChange&quot; @size-change=&quot;handleSizeChange&quot; :current-page.sync=&quot;currentPage&quot; :page-sizes=&quot;pageSizes&quot; :page-size=&quot;pageSize&quot; :total=&quot;total&quot;&gt;&lt;/el-pagination&gt;
+&lt;/template&gt;
+&lt;script&gt;
+export default {
+  name: &quot;ProjectPagination&quot;,
+  //接收父组件传来的值
+  props: {
+    //data为所有数据
+    data: Array,
+    //filterData做为一个筛选容器
+    filterData: Array
+  },
+  data() {
+    return {
+      //当前页数
+      currentPage: 1,
+      //默认的一页显示条数
+      pageBase: 10
+    };
+  },
+  computed: {
+    // 数据总数目
+    total() {
+      return this.data.length;
+    },
+    // 一页有多少条数据
+    pageSize() {
+      //如果基础数据大于总数，则显示总数
+      let size = this.total &gt;= this.pageBase ? this.pageBase : this.total;
+      return size;
+    },
+    // 提供每页条数的选择，返回值为一个数组
+    pageSizes() {
+      let count = Math.ceil(this.total / this.pageSize);
+      let sizes = [];
+      for (let i = 1; i &lt;= count; i++) {
+        sizes.push(this.pageSize * i);
+      }
+      return sizes;
+    }
+  },
+  methods: {
+  //pageSize改变执行，回调参数:每页条数
+    handleSizeChange(val) {
+      // 获取项目条数
+      //子组件像父组件传值，更新filterData。
+      this.$emit(&quot;update:filterData&quot;, this.data.slice(0, val));
+
+    },
+    // 页面页数改变
+    handleCurrentChange(val) {
+      // 获取下一页数据
+      this.$emit(
+        &quot;update:filterData&quot;,
+        this.data.slice((val - 1) * this.pageSize, val * this.pageSize)
+      );
+    }
+  },
+  created() {
+    //发送一个update:filterData，显示pageSize个数据
+    this.$emit(&quot;update:filterData&quot;, this.data.slice(0, this.pageSize));
+  },
+  watch: {
+    // 监控数据变化时获取数据
+    data() {
+      this.$emit(&quot;update:filterData&quot;, this.data.slice(0, this.pageSize));
+    }
+  },
+  //路由要求刷新
+  activated() {
+    if (this.$route.meta.isRefresh) {
+      this.currentPage = 1;
+    }
+  }
+};
+&lt;/script&gt;
+&lt;style scoped&gt;
+.x-page {
+  margin-top: 10px;
+  float: right;
+}
+&lt;/style&gt;
+
+</code></pre><h4 id="emit-update-prop-“newPropVulue”"><a href="#emit-update-prop-“newPropVulue”" class="headerlink" title="$emit(update: prop, “newPropVulue”)"></a>$emit(update: prop, “newPropVulue”)</h4><p>$emit(update: prop, “newPropVulue”)  这个模式，使子组件向父组件传达：更新属性，并抛出新的属性值。</p>
+<p>从上述代码中可以看出首先更新的值要是从父组件中接收的，也就是props里面的值。其次父组件该值需要写成</p>
+<pre><code>  &lt;ProjectPagination :data=&quot;data&quot; :filter-data=&quot;filterData&quot; @update:filter-data=&quot;filterData=$event&quot;&gt;&lt;/ProjectPagination&gt;
+</code></pre><p>更简单的写法是<code>.sync</code>修饰符</p>
+<pre><code> &lt;ProjectPagination :data=&quot;data&quot; :filter-data.sync=&quot;filterData&quot;&gt;&lt;/ProjectPagination&gt;
+</code></pre><p><strong>注意:</strong>这里有一个Vue.sync修饰符与$emit(update:xxx)写法的坑<br>使用.sync修饰符</p>
+<pre><code>//有效
+this.$emit(&quot;update:filterData&quot;, this.data.slice(0, val));
+//无效
+this.$emit(&quot;update:filter-Data&quot;, this.data.slice(0, val));
+</code></pre><p>不使用.sync修饰符</p>
+<pre><code>//无效
+this.$emit(&quot;update:filterData&quot;, this.data.slice(0, val));
+//有效
+this.$emit(&quot;update:filter-Data&quot;, this.data.slice(0, val));
+</code></pre><h3 id="MessageRemind"><a href="#MessageRemind" class="headerlink" title="MessageRemind"></a>MessageRemind</h3><p>消息提醒的MessageRemind使用了element-ui的消息提醒，这里最后的实现比较容易，但是在实现的过程中遇到了一个关于路由监控的坑。</p>
+<p>路由监听失效：需要在父路由的组件内才可以监听到子路由的信息。</p>
+<h2 id="Notice-vue"><a href="#Notice-vue" class="headerlink" title="Notice.vue"></a>Notice.vue</h2><p>仅管理员拥有的组件。主要有左边的导航和中间显示部分组成。显示公告列表，增删改查等实现比较容易就没有记录下来。</p>
+<p>这里记录一个文章显示的css，超出部分滚动，但不显示滚轮</p>
+<pre><code class="bash">  .article{
+    height: 100%;
+    overflow-x:hidden;
+    overflow-y: scroll;
+  }
+  //  -webkit-scrollbar css3新特性
+  .article::-webkit-scrollbar {
+    display: none;
+  }
+</code></pre>
+<p><strong>框架</strong></p>
+<pre><code class="bash"> &lt;template&gt;
+     &lt;div  class=&quot;notice&quot;&gt;
+       &lt;div class=&quot;nav&quot;&gt;
+       &lt;el-menu
+         default-active=&quot;publish&quot;
+         class=&quot;el-menu-vertical-demo&quot;
+         @select=&quot;handleSelect&quot;
+       &gt;
+         &lt;el-menu-item index=&quot;publish&quot; &gt;
+           &lt;i class=&quot;el-icon-edit-outline&quot;&gt;&lt;/i&gt;
+           &lt;span slot=&quot;title&quot;&gt;发布公告&lt;/span&gt;
+         &lt;/el-menu-item&gt;
+         &lt;el-menu-item index=&quot;allNotice&quot;&gt;
+           &lt;i class=&quot;el-icon-document&quot;&gt;&lt;/i&gt;
+           &lt;span slot=&quot;title&quot;&gt;所有公告&lt;/span&gt;
+         &lt;/el-menu-item&gt;
+         &lt;el-menu-item index=&quot;dustbin&quot;&gt;
+           &lt;i class=&quot;el-icon-delete&quot;&gt;&lt;/i&gt;
+           &lt;span slot=&quot;title&quot;&gt;回收站&lt;/span&gt;
+         &lt;/el-menu-item&gt;
+       &lt;/el-menu&gt;
+     &lt;/div&gt;
+       &lt;router-view class=&quot;view&quot;&gt;&lt;/router-view&gt;
+     &lt;/div&gt;
+ &lt;/template&gt;
+
+handleSelect(key) {
+let path=&#39;/notice/&#39;+key;
+this.$router.push({path:path})
+}
+
+</code></pre>
+<h3 id="富文本tinymce"><a href="#富文本tinymce" class="headerlink" title="富文本tinymce"></a>富文本tinymce</h3><p>默认显示的是发布公告,选用的是tinymce这款富文本。</p>
+<blockquote>
+<p><a href="https://biubiuins.github.io/2020/02/09/%E5%AF%8C%E6%96%87%E6%9C%ACtinymce/" target="_blank" rel="noopener">学习笔记</a></p>
+</blockquote>
+<h2 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h2><p><strong>问题1</strong>表单规则验证</p>
+<pre><code class="bash"> &lt;el-form-item label=&quot;学/工号&quot; prop=&quot;captainInformation.studentId&quot; &gt;
+    &lt;el-input v-model.number=&quot;form.captainInformation.studentId&quot; &gt;&lt;/el-input&gt;
+  &lt;/el-form-item&gt;
+
+   data() {
+        return {
+    form:{
+          teamName:&quot;&quot;,
+          captainInformation:{
+            name:&quot;&quot;,
+            studentId:&quot;&quot;,
+          },
+        },
+
+        rules: {
+          teamName: [
+            { required: true, message: &#39;请输入团队名称&#39;, trigger: &#39;blur&#39; },
+            { min: 3, max: 10, message: &#39;长度在 3 到 10 个字符&#39;, trigger: &#39;blur&#39; }
+          ],
+          //这个位置注意一定要加引号
+           &quot;captainInformation.studentId&quot;: [
+                      { required: true, message: &#39;请输入学号&#39;, trigger: &#39;blur&#39; },
+                       {type: &#39;integer&#39;, message: &#39;格式错误&#39;, trigger: &#39;blur&#39;}
+                    ],
+  }
+</code></pre>
+<p><strong>问题二</strong>过滤器</p>
+<p>后台传来的数据只有分数，未评分的分数为-1，这里需要将其显示成状态已完成或未评分，并且可以根据状态筛选数据。</p>
+<pre><code class="bash"> &lt;el-table-column prop=&quot;score&quot; sortable label=&quot;状态&quot; :filters=&quot;tags&quot; :filter-method=&quot;filterTag&quot;&gt;
+          &lt;template slot-scope=&quot;scope&quot;&gt;
+            &lt;el-tag disable-transitions style=&quot;font-size:12px&quot; :type=&quot;stateColor(scope.row.score)&quot;&gt;{{scope.row.score| filterState}}&lt;/el-tag&gt;
+          &lt;/template&gt;
+        &lt;/el-table-column&gt;
+
+//js
+ //筛选标签
+          filterTag(value, row) {
+            if (value === -1) {
+              return row.score === -1;
+            } else {
+              return row.score &gt;= value;
+            }
+        },
+   //过滤器
+      filters: {
+        filterState(val) {
+          return val === -1 ? &quot;未评分&quot; : &quot;已完成&quot;;
+        }
+      },
+</code></pre>
+<p><strong>问题三</strong>返回刷新问题<br>从详情返回列表，列表不需要刷新，而从其他页面进入列表，列表需要刷新。<br>首先需要了解两个生命周期：<br><img src="/img/软件超市/created与activated.png"></p>
+<pre><code>      // 数据缓存
+      beforeRouteEnter(to, from, next) {
+        //如果不是从teamDetail来的界面需要刷新
+        if (![&quot;teamDetail&quot;].includes(from.name)) {
+          to.meta.isRefresh = true;
+        }
+        next()
+      },
+      activated() {
+          //需要刷新的界面
+        if (this.$route.meta.isRefresh) {
+          // 先重置
+          this.$route.meta.isRefresh = false;
+          //重新获取数据
+          this.isLoading = true;
+          this.getLoadData();
+        }
+      },
+</code></pre><blockquote>
+<p>后面重复的操作比较多，多为增删查改，重复的东西将不在记录了。有关于vue我不熟悉的知识点，会重新学习了解之后更新博客。</p>
+</blockquote>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vue全局配置"><span class="toc-text">vue全局配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Messsage-vue"><span class="toc-text">Messsage.vue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分页ProjectPagination"><span class="toc-text">分页ProjectPagination</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#emit-update-prop-“newPropVulue”"><span class="toc-text">$emit(update: prop, “newPropVulue”)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MessageRemind"><span class="toc-text">MessageRemind</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Notice-vue"><span class="toc-text">Notice.vue</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#富文本tinymce"><span class="toc-text">富文本tinymce</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#项目"><span class="toc-text">项目</span></a></li></ol>
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/软件超市/"><i class="fa fa-tags"></i>软件超市</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2020/02/09/富文本tinymce/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2020/01/31/软件超市项目后台管理界面开发流程2/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

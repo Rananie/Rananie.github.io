@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="DING RANJIE" />
+  
+  
+  <title>less学习笔记 | biubiu的博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="css,笔记," />
+  
+
+  
+  <meta name="description" content="biubiu的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "DING RANJIE",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 不能放弃思考</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://biubiuins.github.io/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2019-05-13
+    </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    less学习笔记
+  </h1>
+  
+  <article class="passage-article">
+    <h1 id="less"><a href="#less" class="headerlink" title="less"></a>less</h1><blockquote>
+<p>参考文章:<a href="https://segmentfault.com/a/1190000012360995" target="_blank" rel="noopener">https://segmentfault.com/a/1190000012360995</a></p>
+</blockquote>
+<p> less属于css的一种预处理器（处理在浏览器运行前）,作为css的扩展，是一种动态样式语言。</p>
+<h2 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h2><p> //开头的注释，不会被编译到css文件中，以/<em> </em>/注释的内容会被编译到css文件</p>
+<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p> 以<code>@</code>开头定义变量，使用是直接 @定义的名称<br> 变量名必须使用大括号包裹<br> 声明变量（类比于写好的css引用）类似于混合方法  结构: @name: { 属性: 值 ;};  使用：@name();</p>
+<p> 使用@来申明一个变量: @pink:pink //不要添加引号</p>
+<ol>
+<li>作为普通属性值只是来使用：直接使用@pink</li>
+<li>作为选择器和属性名: @{selector的值}的形式（不常用）</li>
+<li>作为URL：@{url} （@images:’../img’ 注意要加引号）</li>
+<li><p>变量的延迟加载（一个块级域解析完再加载变量）</p>
+<pre><code>   /* Less */
+   @color: #999;
+   @bgColor: skyblue;//不要添加引号
+   @width: 50%;
+   #wrap {
+     color: @color;
+     width: @width;
+   }
+   /* 选择器变量 */
+     @mySelector: #wrap;
+      @Wrap: wrap;
+      @{mySelector}{ //变量名 必须使用大括号包裹
+        color: #999;
+        width: 50%;
+      }
+      .@{Wrap}{
+        color:#ccc;
+      }
+      #@{Wrap}{
+        color:#666;
+      }
+    /* url 变量*/
+     @images: &quot;../img&quot;;//需要加引号
+          body {
+            background: url(&quot;@{images}/dog.png&quot;);//变量名 必须使用大括号包裹
+          }
+
+   /* 声明变量 */
+         @background: {background:red;};
+         #main{
+             @background();
+         }
+         @Rules:{
+             width: 200px;
+             height: 200px;
+             border: solid 1px red;
+         };
+         #con{
+           @Rules();
+         }
+
+         /* 生成的 CSS */
+         #main{
+           background:red;
+         }
+         #con{
+           width: 200px;
+           height: 200px;
+           border: solid 1px red;
+         }
+</code></pre><h3 id="变量的运算"><a href="#变量的运算" class="headerlink" title="变量的运算"></a>变量的运算</h3><p>注意点：</p>
+</li>
+<li>加减法时，以第一个数据的单位为基准</li>
+<li><p>乘除法时，注意单位一定要统一</p>
+<h2 id="less嵌套规则"><a href="#less嵌套规则" class="headerlink" title="less嵌套规则"></a>less嵌套规则</h2><p>和html结构相似，层层嵌套<br><code>&amp;</code>代表的上一层选择器的名字</p>
+<pre><code>    /* Less */
+    #header{
+      &amp;:after{
+        content:&quot;Less is more!&quot;;
+      }
+      .title{
+        font-weight:bold;
+      }
+      &amp;_content{//理解方式：直接把 &amp; 替换成 #header
+        margin:20px;
+      }
+    }
+    /* 生成的 CSS */
+    #header::after{
+      content:&quot;Less is more!&quot;;
+    }
+    #header .title{ //嵌套了
+      font-weight:bold;
+    }
+    #header_content{//没有嵌套！
+        margin:20px;
+    }
+</code></pre><h2 id="less中的混合"><a href="#less中的混合" class="headerlink" title="less中的混合"></a>less中的混合</h2><p> 混合：将一系列的规则集引入另一个规则集中<br> 普通混合(编译到原生css中)<br> 不带输出的混合(加括号)<br> 混合使用<code>.</code>或 <code>#</code>的形式来定义；声明变量使用的是<code>@</code>来定义，@变量名（）来使用</p>
+<h3 id="普通混合"><a href="#普通混合" class="headerlink" title="普通混合"></a>普通混合</h3><p> 最好写成后面带（）的形式</p>
+<pre><code>/* Less */
+    .card { // 等价于 .card()
+        background: #f6f6f6;
+        -webkit-box-shadow: 0 1px 2px rgba(151, 151, 151, .58);
+        box-shadow: 0 1px 2px rgba(151, 151, 151, .58);
+    }
+    #wrap{
+      .card;//等价于.card();
+    }
+    //其中 .card 与 .card() 是等价的。
+</code></pre><h3 id="带参数的混合"><a href="#带参数的混合" class="headerlink" title="带参数的混合"></a>带参数的混合</h3><p>注意点：</p>
+<ol>
+<li>Less 可以使用默认参数，如果 没有传参数，那么将使用默认参数。冒号后面的是默认值<br><code>2. @arguments</code>代表全部参数，实参列表</li>
+<li><p>传的参数中必须带单位</p>
+<pre><code>/* Less */
+   .border(@a:10px,@b:50px,@c:30px,@color:#000){
+       border:solid 1px @color;
+       box-shadow: @arguments;//指代的是 全部参数
+   }
+   #main{
+       .border(0px,5px,30px,red);//必须带着单位
+   }
+   #wrap{
+       .border(0px);
+   }
+   /*  命名参数 */
+   #wrap{
+     .border(@color:black);
+       }
+   #content{
+     .border;//等价于 .border()
+   }
+
+   /* 生成的 CSS */
+   #main{
+       border:solid 1px red;
+       box-shadow:0px,5px,30px,red;
+   }
+   #wrap{
+       border:solid 1px #000;
+       box-shadow: 0px 50px 30px #000;
+   }
+   #content{
+       border:solid 1px #000;
+       box-shadow: 10px 50px 30px #000;
+   }
+
+</code></pre></li>
+</ol>
+<h3 id="匹配模式"><a href="#匹配模式" class="headerlink" title="匹配模式"></a>匹配模式</h3><p>注意点：</p>
+<ol>
+<li><p>第一个参数 <code>left</code> 要会找到方法中匹配程度最高的，如果匹配程度相同，将全部选择，并存在着样式覆盖替换。</p>
+</li>
+<li><p>如果匹配的参数 是变量， <code>@_</code>表示的会被调用任意标志的 。</p>
+</li>
+</ol>
+<pre><code>/* Less */
+      .triangle(top,@width:20px,@color:#000){
+          border-color:transparent  transparent @color transparent ;
+      }
+      .triangle(right,@width:20px,@color:#000){
+          border-color:transparent @color transparent  transparent ;
+      }
+
+      .triangle(bottom,@width:20px,@color:#000){
+          border-color:@color transparent  transparent  transparent ;
+      }
+      .triangle(left,@width:20px,@color:#000){
+          border-color:transparent  transparent  transparent @color;
+      }
+      .triangle(@_,@width:20px,@color:#000){
+          border-style: solid;
+          border-width: @width;
+      }
+      #main{
+          .triangle(left, 50px, #999)
+      }
+      /* 生成的 CSS */
+      #main{
+        border-color:transparent  transparent  transparent #999;
+        border-style: solid;
+        border-width: 50px;
+      }
+</code></pre><h2 id="方法的命名规范"><a href="#方法的命名规范" class="headerlink" title="方法的命名规范"></a>方法的命名规范</h2><p>注意点：</p>
+<ul>
+<li>在 CSS 中<code>&gt;</code> 选择器，选择的是 儿子元素，就是 必须与父元素 有直接血源的元素。</li>
+<li>在引入命令空间时，如使用 <code>&gt;</code> 选择器，父元素不能加 括号。</li>
+<li>不得单独使用命名空间的方法 必须先引入命名空间，才能使用 其中方法。</li>
+<li><p>子方法 可以使用上一层传进来的方法</p>
+<pre><code>   /* Less */
+   #card(){
+       background: #723232;
+       .d(@w:300px){
+           width: @w;
+
+           #a(@h:300px){
+               height: @h;//可以使用上一层传进来的方法
+               width: @w;
+           }
+       }
+   }
+   #wrap{
+       #card &gt; .d &gt; #a(100px); // 父元素不能加 括号
+   }
+   #main{
+       #card .d();
+   }
+   #con{
+       //不得单独使用命名空间的方法
+       //.d() 如果前面没有引入命名空间 #card ，将会报错
+
+       #card; // 等价于 #card();
+       .d(20px); //必须先引入 #card
+   }
+   /* 生成的 CSS */
+   #wrap{
+     height:100px;
+     width:300px;
+   }
+   #main{
+     width:300px;
+   }
+   #con{
+     width:20px;
+   }
+
+</code></pre></li>
+</ul>
+<h2 id="less的继承"><a href="#less的继承" class="headerlink" title="less的继承"></a>less的继承</h2><p>extend 是 Less 的一个伪类。它可继承 所匹配声明中的全部样式。<br>extend（这里放规则）是一个函数</p>
+<pre><code>      /* Less */
+      //规则的定义，没有参数
+      .animation{
+          transition: all .3s ease-out;
+          .hide{
+            transform:scale(0);
+          }
+      }
+      #main{
+          &amp;:extend(.animation);
+      }
+      #con{
+          &amp;:extend(.animation .hide);
+      }
+
+      /* 生成后的 CSS */
+      .animation,#main{
+        transition: all .3s ease-out;
+      }
+      .animation .hide , #con{
+          transform:scale(0);
+      }
+</code></pre><h3 id="all全局搜索替换"><a href="#all全局搜索替换" class="headerlink" title="all全局搜索替换"></a>all全局搜索替换</h3><p>使用选择器匹配到的 全部声明。</p>
+<pre><code>      /* Less */
+      #main{
+        width: 200px;
+      }
+      #main {
+        &amp;:after {
+          content:&quot;Less is good!&quot;;
+        }
+      }
+      #wrap:extend(#main all) {}
+
+      /* 生成的 CSS */
+      #main,#wrap{
+        width: 200px;
+      }
+      #main:after, #wrap:after {
+          content: &quot;Less is good!&quot;;
+      }
+</code></pre><ul>
+<li><p>从表面 看来，extend 与 方法 最大的差别，就是 extend 是同个选择器共用同一个声明，而 方法 是使用自己的声明。</p>
+</li>
+<li><p>~”XXXXX” less之中避免编译，让浏览器编译</p>
+</li>
+</ul>
+</li>
+</ol>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#less"><span class="toc-text">less</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#注释"><span class="toc-text">注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量"><span class="toc-text">变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#变量的运算"><span class="toc-text">变量的运算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less嵌套规则"><span class="toc-text">less嵌套规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less中的混合"><span class="toc-text">less中的混合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#普通混合"><span class="toc-text">普通混合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#带参数的混合"><span class="toc-text">带参数的混合</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#匹配模式"><span class="toc-text">匹配模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#方法的命名规范"><span class="toc-text">方法的命名规范</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#less的继承"><span class="toc-text">less的继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#all全局搜索替换"><span class="toc-text">all全局搜索替换</span></a></li></ol></li></ol></li></ol>
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/css/"><i class="fa fa-tags"></i>css</a>
+     
+      <a href="/tags/笔记/"><i class="fa fa-tags"></i>笔记</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2019/05/15/markdown学习笔记/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2019/04/19/element-ui总结/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

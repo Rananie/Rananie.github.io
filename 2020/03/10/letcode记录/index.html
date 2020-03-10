@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="DING RANJIE" />
+  
+  
+  <title>letcode记录（每日一题） | biubiu的博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="刷题笔记,其他," />
+  
+
+  
+  <meta name="description" content="biubiu的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "DING RANJIE",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 不能放弃思考</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://biubiuins.github.io/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-03-10
+    </span>
+    
+      <span>
+        | <a href="/categories/刷题笔记/"><i class="fa fa-bookmark"></i>刷题笔记</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    letcode记录（每日一题）
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="第一题：买卖股票的最佳时机"><a href="#第一题：买卖股票的最佳时机" class="headerlink" title="第一题：买卖股票的最佳时机"></a>第一题：买卖股票的最佳时机</h2><p>题目：给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。如果你最多只允许完成一笔交易（即买入和卖出一支股票），设计一个算法来计算你所能获取的最大利润。注意你不能在买入股票前卖出股票。<br>分析：最终需要比较的量是最大利润，比较的条件是先买入再卖出。<strong>如果出现元素比基数还小，那么该元素后面比它大的元素与该元素的差一定大于与基础的差。</strong><br>思路：设置当前基数为prices[0],循环数组当数组元素大于基数时，比较当前利润与之前的利润，大者保存；当元素小于基数时，小的元素作为新的基数。<br>代码：</p>
+<pre><code>var maxProfit = function(prices) {
+let price = prices[0],profit=0;
+for(let i=1;i&lt;prices.length;i++){
+    if(price&lt;prices[i]){
+        //当后面的大于前面时计算利润
+       profit = (prices[i]-price&gt;profit)?(prices[i]-price):profit;
+    }else{
+        //当后面的价格比当前的价格小时，改变price
+        price = prices[i];
+    }
+}
+ return profit;
+};
+</code></pre><p>性能分析：执行用时68ms，内存消耗35.8MB</p>
+<p><strong>总结</strong><br>改进1：比较大小时了用Math.max，写法更简单。</p>
+<p>学习1：看了其他人的解题思路，学习到了dp算法解题</p>
+<p><img src="/img/letcode/莱布尼兹.png"><br>结论:由牛顿莱布尼兹的思想可以得出，区间和可以转换成求差问题，求差问题，也可以转换成区间和的问题。<br>最大连续子数组和可以使用动态规划求解，dp[i]表示以i为结尾的最大连续子数组和，递推公式为<code>dp[i]=max(0,dp[i-1])</code></p>
+<pre><code>//dp粗糙版本
+var maxProfit = function(prices) {
+    if(prices.length&lt;=1) return 0
+    let diff = [] //记录数组相邻两元素差值
+    for (let i = 0; i &lt; prices.length-1; i++) {
+        diff[i] = prices[i+1] -prices[i]
+    }
+
+    let dp = new Array(prices.length).fill(0)
+    dp[0] = Math.max(0,diff[0])
+    let max = dp[0]
+    for (let i = 1; i &lt; diff.length; i++) {
+        //转换成区间求和问题
+        //差值累加，累加的最大值就是两个元素差的最大值
+        dp[i] = Math.max(0, dp[i-1]+diff[i])
+        max = Math.max(max,dp[i])
+    }
+    return max
+}
+</code></pre><p>解题的思路其实与我想的差不多，就是实现上面把求差问题，转换成了求和问题。</p>
+<pre><code>// 方法三：dp优化版
+var maxProfit = function(prices) {
+    let last = 0
+    let max = 0
+    for (let i = 0; i &lt; prices.length-1; i++) {
+    //累加值为正，说明该元素之前有比他小的
+    //累加值为负，说明该元素前面暂时没有比他小的
+    //累加值就是元素之间的差值，累计值最大的就是最大利润。
+        last = Math.max(0, last + prices[i+1]-prices[i])
+        max = Math.max(max,last)
+    }
+    return max
+}
+</code></pre>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一题：买卖股票的最佳时机"><span class="toc-text">第一题：买卖股票的最佳时机</span></a></li></ol>
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/其他/"><i class="fa fa-tags"></i>其他</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2020/03/04/MVC、MVP、MVVM/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

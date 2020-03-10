@@ -172,7 +172,8 @@
 <li>Node中可以使用所有的内建对象（String Number Boolean Math Date RegExp Function Object Array）而BOM（操作浏览器）和DOM（文档对象模型）都不能使用，但是可以用console也可以用定时器</li>
 <li>Node可以在后台来编写服务器，Node服务器都是单线程的服务器。</li>
 </ul>
-<p>补充：<br>BOM是浏览器对象模型，用来获取或设置浏览器的属性、行为，例如：新建窗口、获取屏幕分辨率、浏览器版本号等。简单的说：bom是浏览器可视窗口操作<br>DOM是文档对象模型，用来获取或设置文档中标签的属性，例如获取或者设置input表单的value值。 BOM的内容不多，主要还是DOM。 由于DOM的操作对象是文档（Document），所以dom和浏览器没有直接关系。<br>Window对象：是整个BOM的核心，所有对象和集合都以某种方式回接到window对象。Window对象表示整个浏览器窗口，但不必表示其中包含的内容。<br>Document对象：实际上是window对象的属性。这个对象的独特之处是唯一一个既属于BOM又属于DOM的对象。<br>node中有一个全局对象global，它的作用和网页中window类似，在全局创建的变量/方法都会作为global的属性/方法保存</p>
+<p>补充：</p>
+<p>node中有一个全局对象global，它的作用和网页中window类似，在全局创建的变量/方法都会作为global的属性/方法保存</p>
 <h2 id="CommonJS规范"><a href="#CommonJS规范" class="headerlink" title="CommonJS规范"></a>CommonJS规范</h2><p>CommonJS加载模块是<strong>同步</strong></p>
 <p><strong>知识点1</strong> Node中，一个js文件就是一个模块</p>
 <p>引入：require(路径)，<strong>使用相对路径，必须以<code>.</code>或<code>..</code>开头</strong><br>引入模块以后，该函数会<strong>返回一个对象</strong>，这个对象代表的是引入的模块。</p>

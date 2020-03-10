@@ -277,7 +277,7 @@ export default {
 <p>从上述代码中可以看出首先更新的值要是从父组件中接收的，也就是props里面的值。其次父组件该值需要写成</p>
 <pre><code>  &lt;ProjectPagination :data=&quot;data&quot; :filter-data=&quot;filterData&quot; @update:filter-data=&quot;filterData=$event&quot;&gt;&lt;/ProjectPagination&gt;
 </code></pre><p>更简单的写法是<code>.sync</code>修饰符</p>
-<pre><code> &lt;ProjectPagination :data=&quot;data&quot; :filter-data.sync=&quot;filterData&quot;&gt;&lt;/ProjectPagination&gt;
+<pre><code> &lt;ProjectPagination  :filter-data=&quot;filterData&quot; :filter-data.sync=&quot;filterData&quot;&gt;&lt;/ProjectPagination&gt;
 </code></pre><p><strong>注意:</strong>这里有一个Vue.sync修饰符与$emit(update:xxx)写法的坑<br>使用.sync修饰符</p>
 <pre><code>//有效
 this.$emit(&quot;update:filterData&quot;, this.data.slice(0, val));

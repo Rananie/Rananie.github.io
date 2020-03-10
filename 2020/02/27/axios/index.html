@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="学习笔记,其他," />
+    <meta name="keywords" content="学习笔记,ajax,库," />
   
 
   
@@ -195,8 +195,173 @@
 <blockquote>
 <p><a href="https://biubiuins.github.io/2020/03/01/XHR%E7%9A%84ajax%E5%B0%81%E8%A3%85/" target="_blank" rel="noopener">XHR的ajax简单封装</a></p>
 </blockquote>
-<h2 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h2><p><strong>特点</strong><br>1.基于promise的异步ajax请求库<br>2.浏览器端/node端都可以使用<br>3.支持请求/响应拦截器<br>4.支持请求取消<br>5.请求/响应数据转换<br>6.批量发送多个请求</p>
+<h2 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h2><p>axios的post请求头默认是<code>application/x-www-form-urlencoded</code>,如果data是对象,默认Json。<br>axios请求的方式可以通过函数axios(config)使用，也可以通过对象axios.get()使用</p>
+<p><strong>特点</strong><br>1.基于promise的异步ajax请求库（基于promise的 HTTP 库）<br>2.浏览器端/node端都可以使用<br>3.支持请求/响应拦截器<br>4.支持请求取消<br>5.请求/响应数据转换<br>6.批量发送多个请求</p>
+<h3 id="axios-create-config"><a href="#axios-create-config" class="headerlink" title="axios.create(config)"></a>axios.create(config)</h3><p>自定义配置新建一个新的axios实例，新axios只是没有取消请求和批量发请求的方法，其他所有语法都是一致的。</p>
+<pre><code> const instance = axios.create({
+        baseURL:&quot;http://localhost:3000&quot;
+    })
+    //使用instance发请求
+    instance({
+        url:&quot;/posts&quot; //请求端口3000
+    })
+</code></pre><p>这个语法的用处：<br>    需求：项目中有部分接口需要的配置与另一部分接口需要的配置不太一样<br>    解决：创建2个新的axios，每个都有自己特有的配置，分别应用到不同要求的接口请求中</p>
+<pre><code>   axios.default.baseURL = &quot;http://localhost:4000&quot;
+    axios({
+        url:&quot;/posts&quot; //请求的端口4000
+    })
+    const instance = axios.create({
+        baseURL:&quot;http://localhost:3000&quot;
+    })
+    //使用instance发请求
+    instance({
+        url:&quot;/posts&quot; //请求端口3000
+    })
+</code></pre><h3 id="axios的处理链流程"><a href="#axios的处理链流程" class="headerlink" title="axios的处理链流程"></a>axios的处理链流程</h3><p><strong>axios拦截器</strong></p>
+<p>请求拦截器<br>axios.interceptor.request.use(callback)<br>响应拦截器<br>axios.interceptor.response.use(callback)</p>
+<pre><code>   axios.interceptors.request.use(config=&gt;{
+        console.log(&quot;request interceptor1 &quot;);
+        //拦截请求，处理请求之后，必须要返回该配置，若不返回相当于axios请求没有添加配置
+        return config
+    },error=&gt;{
+        console.log(&quot;request interceptor1 err&quot;);
+        return Promise.reject(error)
+    })
+    axios.interceptors.request.use(config=&gt;{
+        console.log(&quot;request interceptor2 &quot;);
+        return config
+    },error=&gt;{
+        console.log(&quot;request interceptor2 err&quot;);
+        return Promise.reject(error)
+    })
+    axios.interceptors.response.use(response=&gt;{
+        console.log(&quot;response interceptor1 &quot;);
+        return response
+    },error=&gt;{
+        console.log(&quot;response interceptor1 err&quot;);
+        return Promise.reject(error)
+    })
+    axios.interceptors.response.use(response=&gt;{
+        console.log(&quot;response interceptor2 &quot;);
+        //拦截response结果处理之后，要返回结果
+        return response
+    },error=&gt;{
+        console.log(&quot;response interceptor2 err&quot;);
+        return Promise.reject(error)
+    })
 
+ axios.get(&quot;http://localhost:/posts&quot;).then(response =&gt;{
+     console.log(&quot;response data&quot;);
+ }).catch(error=&gt;{
+     console.log(&quot;response error&quot;);
+ })
+ /*
+ 输出
+request interceptor2
+request interceptor1
+response interceptor1 err
+response interceptor2 err
+response error
+ */
+</code></pre><p>注意点：<br>1.请求拦截器后添加先执行。<br>2.拦截请求，处理请求之后，必须要返回该配置，若不返回相当于axios请求没有添加配置<br>3.拦截response结果处理之后，要返回结果。</p>
+<h3 id="取消请求"><a href="#取消请求" class="headerlink" title="取消请求"></a>取消请求</h3><p>应用场景:如果发送请求2的时候，发现请求1还没有完成则取消请求1</p>
+<pre><code>let cancel //保存用于取消请求的函数
+function getProducts1(){
+    if (typeof cancel === &quot;function&quot;){
+        //需要使用取消请求时调用
+        //如果请求取消了，则该请求进入请求失败的流程，请求失败的error是Cancel对象类型，Cancel里面有message属性
+        cancel(&quot;这里可以传消息提示&quot;)
+    }
+    axios.get(&quot;/user&quot;,{
+        cancelToken:new axios.CancelToken(
+            //执行器回调，同步进行
+            c =&gt; {//c是用于取消当前请求的函数
+                cancel = c
+            }
+        )
+    }).then(response =&gt;{
+        cancel = null //如果请求完成就不要取消请求了
+    },error =&gt;{
+        if (axios.isCancel(error)){
+            // 取消请求
+            console.log(&quot;请求取消了&quot;,error.message);
+        }
+        else{
+            //请求本身出错
+            cancel = null
+            console.log(error);
+        }
+    })
+}
+function getProducts2(){
+    if (typeof cancel === &quot;function&quot;){
+  cancel(&quot;这里可以传消息提示&quot;)
+    }
+    axios.get(&quot;/user/1&quot;,{
+        cancelToken:new axios.CancelToken(
+            c =&gt; {cancel = c}
+        )
+    }).then(response =&gt;{
+        cancel = null
+    },error =&gt;{
+        if (axios.isCancel(error)){
+            console.log(&quot;请求取消了&quot;,error.message);
+        }
+        else{
+            cancel = null
+            console.log(error);
+        }
+    })
+}
+</code></pre><p>改进版本</p>
+<pre><code> //添加请求拦截器
+ axios.interceptors.request.use(config=&gt;{
+     if (typeof cancel === &quot;function&quot;){
+         cancel(&quot;这里可以传消息提示&quot;)
+     }
+     config.cancelToken =new axios.CancelToken(
+         c =&gt; {
+             cancel = c
+         }
+     )
+     return config
+ })
+ //添加响应拦截器
+axios.interceptors.response.use(
+    respose=&gt;{
+        cancel = null
+        return respose
+    },
+    error =&gt;{
+
+            if (axios.isCancel(error)){
+                console.log(&quot;请求取消了&quot;,error.message);
+                //中断promise链接
+                return new Promise(()=&gt;{})
+            }
+            else{
+                cancel = null
+                //将错误继续向下传递
+               // throw error
+                return Promise.reject(error)
+            }
+})
+let cancel
+function getProducts1(){
+    axios.get(&quot;/user&quot;).then(response =&gt;{
+         //其他数据响应
+    },error =&gt;{
+       //只需要处理请求失败
+    })
+}
+function getProducts2(){
+    axios.get(&quot;/user/1&quot;).then(response =&gt;{
+        //其他数据响应
+    },error =&gt;{
+        //只需要处理请求失败
+    })
+}
+</code></pre>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -204,14 +369,16 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP相关"><span class="toc-text">HTTP相关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XHR的理解和使用"><span class="toc-text">XHR的理解和使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#API"><span class="toc-text">API</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ajax"><span class="toc-text">ajax</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#axios"><span class="toc-text">axios</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTTP相关"><span class="toc-text">HTTP相关</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XHR的理解和使用"><span class="toc-text">XHR的理解和使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#API"><span class="toc-text">API</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ajax"><span class="toc-text">ajax</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#axios"><span class="toc-text">axios</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#axios-create-config"><span class="toc-text">axios.create(config)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#axios的处理链流程"><span class="toc-text">axios的处理链流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#取消请求"><span class="toc-text">取消请求</span></a></li></ol></li></ol>
   </div>
 </aside>
   
   
     <div class="passage-tags">
      
-      <a href="/tags/其他/"><i class="fa fa-tags"></i>其他</a>
+      <a href="/tags/ajax/"><i class="fa fa-tags"></i>ajax</a>
+     
+      <a href="/tags/库/"><i class="fa fa-tags"></i>库</a>
     
     </div>
   

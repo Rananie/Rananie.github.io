@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="DING RANJIE" />
+  
+  
+  <title>MVC、MVP、MVVM | biubiu的博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="学习笔记,其他," />
+  
+
+  
+  <meta name="description" content="biubiu的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "DING RANJIE",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 不能放弃思考</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://biubiuins.github.io/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-03-04
+    </span>
+    
+      <span>
+        | <a href="/categories/学习笔记/"><i class="fa fa-bookmark"></i>学习笔记</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    MVC、MVP、MVVM
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><h3 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h3><h4 id="后端MVC"><a href="#后端MVC" class="headerlink" title="后端MVC"></a>后端MVC</h4><p><strong>Web1.0时代</strong><br>并没有前端概念，开发一个web应用多数采用ASP.NET/Java/PHP编写，项目通常由多个aspx/jsp/php文件构成，每个文件中同时包含了HTML、CSS、JavaScript、C#/Java/PHP代码。也就是前后端混合。</p>
+<p>架构的好处：简单快捷<br>架构的去点：JSP代码难以维护</p>
+<p>为了让开发更加便捷，代码更容易维护，前后端职责更清晰。便衍生出MVC开发模式和框架，前端展示以模板的形式出现。典型的框架就是Spring、Structs、Hibernata，整体框架如图所示</p>
+<p><img src="/img/模式/MVC.png"></p>
+<p>但<strong>这里的MVC仅限于后端</strong>，前后端形成了一定的分离，前端只完成了后端开发中的view层（简单的静态页面）。</p>
+<p>这种模式存在问题：<br>1.前端页面开发效率不高<br>2.前后端职责不清</p>
+<p><strong>Web2.0时代</strong><br>随着Ajax技术的流行，前后端的职责就更加清晰。前端可以通过Ajax与后端进行数据交互。因此，整体的架构图也发成了变化：<br><img src="/img/模式/架构图1.png"></p>
+<p>架构的好处：减少了服务端负载和流量消耗，用户体验也更好了<br>架构的缺点：缺乏可行的开发模式承载更复杂的业务需求，页面内容都杂糅在一起，一旦应用规模增大，就会导致难以维护。因此，<strong>前端的MVC随之而来。</strong></p>
+<h4 id="前端MVC"><a href="#前端MVC" class="headerlink" title="前端MVC"></a>前端MVC</h4><p>前端的MVC与后端类似，具备View、Controller和Model</p>
+<ul>
+<li>Model：负责保存应用数据，与后端数据进行同步</li>
+<li>Controller：负责业务逻辑，根据用户行为对Model数据进行修改</li>
+<li>View：负责视图展示，将model中的数据可视化出来</li>
+</ul>
+<p><img src="/img/模式/MVC前端.png"></p>
+<ul>
+<li>View 传送指令到 Controller</li>
+<li>Controller 完成业务逻辑后，要求 Model 改变状态</li>
+<li>Model 将新的数据发送到 View，用户得到反馈</li>
+</ul>
+<p>由于单向流通，开发过程并不灵活。由于很多开发者都会在View中写一些逻辑代码，逐渐的就导致view中的内容越来越庞大，而controller变得越来越单薄。</p>
+<h3 id="MVP"><a href="#MVP" class="headerlink" title="MVP"></a>MVP</h3><p>在前端的变化中，MVP模式在前端开发中并不常见，因为Angular早早地将MVVM框架模式带入了前端。虽然MVP模式在前端开发并不常见，但是在安卓等原生开发中会考虑。</p>
+<p>MVP与MVC很接近，P指的是presenter（中间件），负责和Model/view进行双向交互。虽然分离了view和model，但容易导致presenter的体积增大，难以维护。<br>Model=》presenter=》view<br>Model《=presenter《=view</p>
+<h3 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h3><p>MVVM（Model-View-ViewModel）</p>
+<p><img src="/img/模式/MVVM.png"></p>
+<p>ViewModel通过实现一套数据响应式机制自动响应Model中数据变化；<br>同时ViewModel会实现一套更新策略自动将数据变化转化为视图更新；<br>通过事件监听响应view中用户交互修改Model中数据。<br>这样ViewModel中就减少了大量DOM操作代码。<br>MVVM在保持View和Model松耦合的同时，还减少了维护它们关系的代码，使用户专注于业务逻辑，兼顾开发效率和可维护性。<br>在 MVVM 中，UI 是通过数据驱动的，数据一旦改变就会相应的刷新对应的 UI，UI 如果改变，也会改变对应的数据。这种方式就可以在业务处理中只关心数据的流转，而无需直接和页面打交道。ViewModel 只关心数据和业务的处理，不关心 View 如何处理数据，在这种情况下，View 和 Model 都可以独立出来，任何一方改变了也不一定需要改变另一方，并且可以将一些可复用的逻辑放在一个 ViewModel 中，让多个 View 复用这个 ViewModel。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>这三者都是框架模式，它们设计的目标都是为了解决Model和View的耦合问题</li>
+<li>MVC模式出现在较早主要应用与后端，如Spring MVC等，优点是分成清晰，缺点是数据流混乱，灵活性带来的维护性问题。</li>
+<li>MVP模式是MVC的进化形态，Presenter作为中间层负责MV通信，解决了两者耦合问题，但P层过于臃肿会导致维护问题。</li>
+<li>MVVM模式在前端领域有广泛应用，它不仅解决MV耦合问题，还同时解决了维护两者映射关系的大量繁杂代码和DOM操作代码，在提高开发效率、可读性同时还保持了优越的性能表现</li>
+</ul>
+<p><strong>MVC</strong><br>分为三个部分</p>
+<ul>
+<li>View（视图）：用户界面</li>
+<li>Controller（控制器）：业务逻辑</li>
+<li>Model（模型）：数据保存</li>
+</ul>
+<p>通信方式：<br>View  ==传指令到==》 Controller  ==完成业务逻辑后，要求Model改变状态==》 Model ==将新的数据发送到View==》view</p>
+<p>特点：<br>1.单向通信，开发过程并不灵活。<br>2.控制器的代码却是越写越多。<br>3.由于写的代码较多,故不好进行性能测试。</p>
+<p><strong>MVP</strong></p>
+<p>通讯方式：<br>View =》 Presenter =》 Model<br>View 《= Presenter 《= Model</p>
+<p>特点：<br>1.双向通信<br>2.View与Model不发生联系，通过Presenter传递<br>3.View 非常薄，不部署任何业务逻辑，称为”被动视图”（Passive View），即没有任何主动性，而 Presenter非常厚，所有逻辑都部署在那里。</p>
+<p><strong>MVVM</strong></p>
+<p>MVVM基本与MVP一样，唯一的区别是，它采用双向绑定（data-binding）：View的变动，自动反映在 ViewModel，反之亦然。</p>
+<p>特点：<br>1.低耦合：分离视图（View）和模型（Model），降低代码耦合，提高视图或者逻辑的重用性<br>2.可复用：你可以把一些视图逻辑放在一个 ViewModel 里面，让很多 View 重用这段视图逻辑。<br>3.独立开发：开发人员可以专注于业务逻辑和数据的开发（ViewModel），设计人员可以专注于页面设计。<br>4.可测试：界面素来是比较难于测试的，而现在测试可以针对 ViewModel 来写。<br>5.双向绑定使得异常情况很难被调试。</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#综述"><span class="toc-text">综述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#MVC"><span class="toc-text">MVC</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#后端MVC"><span class="toc-text">后端MVC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#前端MVC"><span class="toc-text">前端MVC</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVP"><span class="toc-text">MVP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MVVM"><span class="toc-text">MVVM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol></li></ol>
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/其他/"><i class="fa fa-tags"></i>其他</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2020/03/10/letcode记录/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2020/03/03/JavaScript/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

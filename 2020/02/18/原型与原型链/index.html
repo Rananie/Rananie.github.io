@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="javascript,学习笔记," />
+    <meta name="keywords" content="学习笔记,Javascript," />
   
 
   
@@ -153,6 +153,10 @@
       <i class="fa fa-calendar"></i>2020-02-18
     </span>
     
+      <span>
+        | <a href="/categories/学习笔记/"><i class="fa fa-bookmark"></i>学习笔记</a>
+      </span>
+    
     
       <span>
         | <i class="fa fa-unlock-alt"></i>UNLOCK
@@ -250,21 +254,13 @@ console.log(Object instanceof Function)//true
 console.log(Object instanceof Object)//true
 console.log(Function instanceof Function)//true
 console.log(Function instanceof Object)//true
-
-### 7.Function和Object的关系
-
-1.Object, Function, Array等等这些都被称作是构造“函数”，他们都是函数。
-2.所有的函数都是构造函数Function的实例。
-3.原型链机制的的角度来说，那就是说所有的函数都能通过原型链找到创建他们的Function构造函数的构造原型Function.protorype对象
-
-所以
-</code></pre><p>console.log(Object instanceof Function)//true</p>
-<pre><code>
-4.Function.prototype是一个对象，所以他的构造函数是Object. 从原型链机制的的角度来说，那就是说所有的函数都能通过原型链找到创建他们的Object构造函数的构造原型Object.prototype对象
-
-所以
-</code></pre><p>console.log(Function instanceof Object)//true<br><code>`</code></p>
-
+</code></pre><h3 id="7-Function和Object的关系"><a href="#7-Function和Object的关系" class="headerlink" title="7.Function和Object的关系"></a>7.Function和Object的关系</h3><p>1.Object, Function, Array等等这些都被称作是构造“函数”，他们都是函数。<br>2.所有的函数都是构造函数Function的实例。<br>3.原型链机制的的角度来说，那就是说所有的函数都能通过原型链找到创建他们的Function构造函数的构造原型Function.protorype对象</p>
+<p>所以</p>
+<pre><code>console.log(Object instanceof Function)//true
+</code></pre><p>4.Function.prototype是一个对象，所以他的构造函数是Object. 从原型链机制的的角度来说，那就是说所有的函数都能通过原型链找到创建他们的Object构造函数的构造原型Object.prototype对象</p>
+<p>所以</p>
+<pre><code>console.log(Function instanceof Object)//true
+</code></pre>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -272,16 +268,14 @@ console.log(Function instanceof Object)//true
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#原型-prototype"><span class="toc-text">原型(prototype)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#显式原型与隐式原型"><span class="toc-text">显式原型与隐式原型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原型链"><span class="toc-text">原型链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原型链的属性问题"><span class="toc-text">原型链的属性问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充知识点"><span class="toc-text">补充知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-构造函数"><span class="toc-text">1.构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-静态成员与实例成员"><span class="toc-text">2.静态成员与实例成员</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-构造函数、实例、原型对象三者之间的关系"><span class="toc-text">3.构造函数、实例、原型对象三者之间的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-原型对象this指向"><span class="toc-text">4.原型对象this指向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-继承-ES5"><span class="toc-text">5.继承(ES5)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-instanceof函数"><span class="toc-text">6.instanceof函数</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#原型-prototype"><span class="toc-text">原型(prototype)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#显式原型与隐式原型"><span class="toc-text">显式原型与隐式原型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原型链"><span class="toc-text">原型链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原型链的属性问题"><span class="toc-text">原型链的属性问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充知识点"><span class="toc-text">补充知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-构造函数"><span class="toc-text">1.构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-静态成员与实例成员"><span class="toc-text">2.静态成员与实例成员</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-构造函数、实例、原型对象三者之间的关系"><span class="toc-text">3.构造函数、实例、原型对象三者之间的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-原型对象this指向"><span class="toc-text">4.原型对象this指向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-继承-ES5"><span class="toc-text">5.继承(ES5)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-instanceof函数"><span class="toc-text">6.instanceof函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Function和Object的关系"><span class="toc-text">7.Function和Object的关系</span></a></li></ol></li></ol>
   </div>
 </aside>
   
   
     <div class="passage-tags">
      
-      <a href="/tags/javascript/"><i class="fa fa-tags"></i>javascript</a>
-     
-      <a href="/tags/学习笔记/"><i class="fa fa-tags"></i>学习笔记</a>
+      <a href="/tags/Javascript/"><i class="fa fa-tags"></i>Javascript</a>
     
     </div>
   

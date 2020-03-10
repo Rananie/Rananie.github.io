@@ -6,7 +6,7 @@
   <meta name="author" content="DING RANJIE" />
   
   
-  <title>letcode记录（每日一题） | biubiu的博客</title>
+  <title>letcode记录 | biubiu的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -164,7 +164,7 @@
     
   </div>
   <h1 class="passage-title">
-    letcode记录（每日一题）
+    letcode记录
   </h1>
   
   <article class="passage-article">
@@ -184,8 +184,7 @@ for(let i=1;i&lt;prices.length;i++){
 };
 </code></pre><p>性能分析：执行用时68ms，内存消耗35.8MB</p>
 <p><strong>总结</strong><br>改进1：比较大小时了用Math.max，写法更简单。</p>
-<p>学习1：看了其他人的解题思路，学习到了dp算法解题</p>
-<p><img src="/img/letcode/莱布利兹.png"><br>结论:由牛顿莱布尼兹的思想可以得出，区间和可以转换成求差问题，求差问题，也可以转换成区间和的问题。<br>最大连续子数组和可以使用动态规划求解，dp[i]表示以i为结尾的最大连续子数组和，递推公式为<code>dp[i]=max(0,dp[i-1])</code></p>
+<p>学习1：看了其他人的解题思路，学习到了dp算法解题<br><img src="/img/letcode/莱布利兹.png"><br>结论:由牛顿莱布尼兹的思想可以得出，区间和可以转换成求差问题，求差问题，也可以转换成区间和的问题。<br>最大连续子数组和可以使用动态规划求解，dp[i]表示以i为结尾的最大连续子数组和，递推公式为<code>dp[i]=max(0,dp[i-1])</code></p>
 <pre><code>//dp粗糙版本
 var maxProfit = function(prices) {
     if(prices.length&lt;=1) return 0
@@ -219,7 +218,8 @@ var maxProfit = function(prices) {
     }
     return max
 }
-</code></pre>
+</code></pre><h3 id="阅读笔记《一个方法解决6道股票题》"><a href="#阅读笔记《一个方法解决6道股票题》" class="headerlink" title="阅读笔记《一个方法解决6道股票题》"></a>阅读笔记《一个方法解决6道股票题》</h3><p>日期：2020-03-11</p>
+
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -227,7 +227,7 @@ var maxProfit = function(prices) {
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一题：买卖股票的最佳时机"><span class="toc-text">第一题：买卖股票的最佳时机</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一题：买卖股票的最佳时机"><span class="toc-text">第一题：买卖股票的最佳时机</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#阅读笔记《一个方法解决6道股票题》"><span class="toc-text">阅读笔记《一个方法解决6道股票题》</span></a></li></ol></li></ol>
   </div>
 </aside>
   

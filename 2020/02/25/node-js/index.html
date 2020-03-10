@@ -6,7 +6,7 @@
   <meta name="author" content="DING RANJIE" />
   
   
-  <title>Node.js | biubiu的博客</title>
+  <title>Node.js（更新中） | biubiu的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -153,6 +153,10 @@
       <i class="fa fa-calendar"></i>2020-02-25
     </span>
     
+      <span>
+        | <a href="/categories/学习笔记/"><i class="fa fa-bookmark"></i>学习笔记</a>
+      </span>
+    
     
       <span>
         | <i class="fa fa-unlock-alt"></i>UNLOCK
@@ -160,7 +164,7 @@
     
   </div>
   <h1 class="passage-title">
-    Node.js
+    Node.js（更新中）
   </h1>
   
   <article class="passage-article">
@@ -172,13 +176,12 @@
 <li>Node中可以使用所有的内建对象（String Number Boolean Math Date RegExp Function Object Array）而BOM（操作浏览器）和DOM（文档对象模型）都不能使用，但是可以用console也可以用定时器</li>
 <li>Node可以在后台来编写服务器，Node服务器都是单线程的服务器。</li>
 </ul>
-<p>补充：</p>
-<p>node中有一个全局对象global，它的作用和网页中window类似，在全局创建的变量/方法都会作为global的属性/方法保存</p>
+<p>补充：<br>1.node中有一个全局对象global，它的作用和网页中window类似，在全局创建的变量/方法都会作为global的属性/方法保存<br>2.代码风格：建议无论有分号代码或者无分号代码，都建议如果一<code>（</code>、<code>[</code>、<code>\`</code>开头，最好都在前面补上一个分号。</p>
 <h2 id="CommonJS规范"><a href="#CommonJS规范" class="headerlink" title="CommonJS规范"></a>CommonJS规范</h2><p>CommonJS加载模块是<strong>同步</strong></p>
 <p><strong>知识点1</strong> Node中，一个js文件就是一个模块</p>
 <p>引入：require(路径)，<strong>使用相对路径，必须以<code>.</code>或<code>..</code>开头</strong><br>引入模块以后，该函数会<strong>返回一个对象</strong>，这个对象代表的是引入的模块。</p>
 <p>模块分成两大类：<br>核心模块：由node引擎提供的模块，核心模块的标识就是模块的名字<br>文件模块：由用户自己创建的模块，文件模块的标识为路径</p>
-<p><strong>知识点2</strong>在Node中，每一个js文件中的js代码都是独立运行在一个函数体中。所以如果想要其他文件访问，必须要将数据暴露出来<br>暴露：exports.x = “xxxx”</p>
+<p><strong>知识点2</strong>在Node中，<strong>每一个js文件中的js代码都是独立运行在一个函数体中</strong>。所以如果想要其他文件访问，必须要将数据暴露出来<br>暴露：exports.x = “xxxx”</p>
 <pre><code>//当node在执行模块中的代码时，它首先在代码的最顶部，添加如下代码
 function(exports,require,module.__filename,__dirname){
 //里面才是自己写的
@@ -341,8 +344,36 @@ rs.on(&quot;data&quot;,function (data) {
 
 </code></pre><p><strong>pipe()</strong><br>更简单的写法pipe(),<code>rs.pipe(ws)</code>在可读流rs与可写流ws之间架起一个管道，自动将可读流中的内容，直接输出可写流。</p>
 <h3 id="fs其他常用方法"><a href="#fs其他常用方法" class="headerlink" title="fs其他常用方法"></a>fs其他常用方法</h3><p>验证路径是否存在  fs.existsSync(path)   返回值：存在true，不存在false<br>获取文件状态  fs.stat(path,callback)/fs.statSync(path) 返回对象：文件的状态<br>删除文件  fs.unlink(path,callback)/fs.unlinkSync(path)<br>读取一个目录的目录结构 fs.readdir(path[,options],callback)/fs.readdirSync(path[,options]) 返回一个字符串数组，每一个元素就是一个文件夹或文件的名字<br>截断文件  fs.truncate(path,len,callback)/fs.truncateSync(path,len)   将文件修改成指定的len大小（一个汉字3个字节）<br>创建文件夹  fs.mkdir(path[,mode],callbcak)/fs.mkdirSync(path[,mode])<br>删除文件夹  fs.rmdir(path,callbcak)/fs.rmdirSync(path)<br>重命名文件/剪贴文件 fs.rename(oldPath(oldName),newPath,callback)/fs.renameSync(oldPath,newPath)<br>监视文件的修改 fs.watchFile(filename[,options],listener)  listener回调函数，当文件发生变化时，回调函数会执行。</p>
-<h2 id="http"><a href="#http" class="headerlink" title="http"></a>http</h2><p>url核心模块在为我们解析url地址时提供了非常方便的API</p>
-<p>url.parse()方法可以解析一个url地址，通过传第二个参数(true)把包含有查询字符串的query转化成对象</p>
+<h2 id="ip地址和端口号"><a href="#ip地址和端口号" class="headerlink" title="ip地址和端口号"></a>ip地址和端口号</h2><ul>
+<li>ip地址用来定位计算机</li>
+<li>端口号用来定位具体的应用程序</li>
+<li>一切需要联网通信的软件都会占用一个端口号</li>
+<li>端口号的范围从0-65536</li>
+<li>在计算中有写一些默认端口号，最好不要去使用。如：http服务的80</li>
+</ul>
+<h2 id="http"><a href="#http" class="headerlink" title="http"></a>http</h2><p>request 请求事件处理函数，需要接收两个参数：request，response。</p>
+<pre><code>const http = require(&quot;http&quot;)
+const server = http.createServer()
+server.on(&quot;request&quot;,function (request,response) {
+    console.log(&quot;请求路径是&quot; + request.url);
+    //在服务端默认发送的数据，其实是utf8编码的内容
+    //但是浏览器不知道是utf8的内容，在不知道服务器响应内容的编码的情况下会按照当前操作系统默认编码解析
+   //text/plain;普通文本
+
+    //response对象有一个方法：write可以用来给客服端发送响应数据；
+    //write可以使用多次，但最后一定要使用end来结束响应，否则客服端会一致等待
+    //响应的数据只能是二进制(默认)或字符串
+    fs.readFile(xxx,function(err,data){
+    response.setHeader(&#39;Content-type&#39;,&quot;text/html;charset=utf-8&quot;)
+    response.end(data)
+    })
+    }
+
+})
+server.listen(3000,function () {
+    console.log(&quot;服务器启动成功&quot;);
+})
+</code></pre><h2 id="url"><a href="#url" class="headerlink" title="url"></a>url</h2><p>url：统一资源定位符，url核心模块在为我们解析url地址时提供了非常方便的API<br>url.parse()方法可以解析一个url地址，通过传第二个参数(true)把包含有查询字符串的query转化成对象</p>
 <pre><code>const url = require(&quot;url&quot;)
 let httpUrl = &quot;https://sale.vmall.com/hwmate.html#abc?cid=10602&quot;
 let urlObj = url.parse(httpUrl)
@@ -375,14 +406,12 @@ console.log(url.resolve(targetUrl, httpUrl));
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#综述"><span class="toc-text">综述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CommonJS规范"><span class="toc-text">CommonJS规范</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#exports与module-exports的区别"><span class="toc-text">exports与module.exports的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#package"><span class="toc-text">package</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NPM（Node-Package-Manager）"><span class="toc-text">NPM（Node Package Manager）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Buffer（缓存区）"><span class="toc-text">Buffer（缓存区）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fs（文件系统）"><span class="toc-text">fs（文件系统）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#同步-异步文件写入"><span class="toc-text">同步/异步文件写入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用-简单的文件写入"><span class="toc-text">(常用)简单的文件写入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流式文件写入"><span class="toc-text">流式文件写入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件的读取"><span class="toc-text">文件的读取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fs其他常用方法"><span class="toc-text">fs其他常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http"><span class="toc-text">http</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#综述"><span class="toc-text">综述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CommonJS规范"><span class="toc-text">CommonJS规范</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#exports与module-exports的区别"><span class="toc-text">exports与module.exports的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#package"><span class="toc-text">package</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NPM（Node-Package-Manager）"><span class="toc-text">NPM（Node Package Manager）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Buffer（缓存区）"><span class="toc-text">Buffer（缓存区）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fs（文件系统）"><span class="toc-text">fs（文件系统）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#同步-异步文件写入"><span class="toc-text">同步/异步文件写入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用-简单的文件写入"><span class="toc-text">(常用)简单的文件写入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流式文件写入"><span class="toc-text">流式文件写入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件的读取"><span class="toc-text">文件的读取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fs其他常用方法"><span class="toc-text">fs其他常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ip地址和端口号"><span class="toc-text">ip地址和端口号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http"><span class="toc-text">http</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#url"><span class="toc-text">url</span></a></li></ol>
   </div>
 </aside>
   
   
     <div class="passage-tags">
-     
-      <a href="/tags/学习笔记/"><i class="fa fa-tags"></i>学习笔记</a>
      
       <a href="/tags/Node/"><i class="fa fa-tags"></i>Node</a>
     

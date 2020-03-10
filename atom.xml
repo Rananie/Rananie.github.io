@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-03-10T04:10:01.360Z</updated>
+  <updated>2020-03-10T04:18:35.083Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,15 +21,15 @@
     <link href="http://yoursite.com/2020/03/10/letcode%E8%AE%B0%E5%BD%95/"/>
     <id>http://yoursite.com/2020/03/10/letcode记录/</id>
     <published>2020-03-10T03:15:49.000Z</published>
-    <updated>2020-03-10T04:10:01.360Z</updated>
+    <updated>2020-03-10T04:18:35.083Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="第一题：买卖股票的最佳时机"><a href="#第一题：买卖股票的最佳时机" class="headerlink" title="第一题：买卖股票的最佳时机"></a>第一题：买卖股票的最佳时机</h2><p>题目：给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。如果你最多只允许完成一笔交易（即买入和卖出一支股票），设计一个算法来计算你所能获取的最大利润。注意你不能在买入股票前卖出股票。<br>分析：最终需要比较的量是最大利润，比较的条件是先买入再卖出。<strong>如果出现元素比基数还小，那么该元素后面比它大的元素与该元素的差一定大于与基础的差。</strong><br>思路：设置当前基数为prices[0],循环数组当数组元素大于基数时，比较当前利润与之前的利润，大者保存；当元素小于基数时，小的元素作为新的基数。<br>代码：</p><pre><code>var maxProfit = function(prices) {let price = prices[0],profit=0;for(let i=1;i&lt;prices.length;i++){    if(price&lt;prices[i]){        //当后面的大于前面时计算利润       profit = (prices[i]-price&gt;profit)?(prices[i]-price):profit;    }else{        //当后面的价格比当前的价格小时，改变price        price = prices[i];    }} return profit;};</code></pre><p>性能分析：执行用时68ms，内存消耗35.8MB</p><p><strong>总结</strong><br>改进1：比较大小时了用Math.max，写法更简单。</p><p>学习1：看了其他人的解题思路，学习到了dp算法解题</p><p><img src="/img/letcode/莱布尼兹.png"><br>结论:由牛顿莱布尼兹的思想可以得出，区间和可以转换成求差问题，求差问题，也可以转换成区间和的问题。<br>最大连续子数组和可以使用动态规划求解，dp[i]表示以i为结尾的最大连续子数组和，递推公式为<code>dp[i]=max(0,dp[i-1])</code></p><pre><code>//dp粗糙版本var maxProfit = function(prices) {    if(prices.length&lt;=1) return 0    let diff = [] //记录数组相邻两元素差值    for (let i = 0; i &lt; prices.length-1; i++) {        diff[i] = prices[i+1] -prices[i]    }    let dp = new Array(prices.length).fill(0)    dp[0] = Math.max(0,diff[0])    let max = dp[0]    for (let i = 1; i &lt; diff.length; i++) {        //转换成区间求和问题        //差值累加，累加的最大值就是两个元素差的最大值        dp[i] = Math.max(0, dp[i-1]+diff[i])        max = Math.max(max,dp[i])    }    return max}</code></pre><p>解题的思路其实与我想的差不多，就是实现上面把求差问题，转换成了求和问题。</p><pre><code>// 方法三：dp优化版var maxProfit = function(prices) {    let last = 0    let max = 0    for (let i = 0; i &lt; prices.length-1; i++) {    //累加值为正，说明该元素之前有比他小的    //累加值为负，说明该元素前面暂时没有比他小的    //累加值就是元素之间的差值，累计值最大的就是最大利润。        last = Math.max(0, last + prices[i+1]-prices[i])        max = Math.max(max,last)    }    return max}</code></pre>]]></content>
+    <content type="html"><![CDATA[<h2 id="第一题：买卖股票的最佳时机"><a href="#第一题：买卖股票的最佳时机" class="headerlink" title="第一题：买卖股票的最佳时机"></a>第一题：买卖股票的最佳时机</h2><p>时间：2020-03-10<br>题目：给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。如果你最多只允许完成一笔交易（即买入和卖出一支股票），设计一个算法来计算你所能获取的最大利润。注意你不能在买入股票前卖出股票。<br>分析：最终需要比较的量是最大利润，比较的条件是先买入再卖出。<strong>如果出现元素比基数还小，那么该元素后面比它大的元素与该元素的差一定大于与基础的差。</strong><br>思路：设置当前基数为prices[0],循环数组当数组元素大于基数时，比较当前利润与之前的利润，大者保存；当元素小于基数时，小的元素作为新的基数。<br>代码：</p><pre><code>var maxProfit = function(prices) {let price = prices[0],profit=0;for(let i=1;i&lt;prices.length;i++){    if(price&lt;prices[i]){        //当后面的大于前面时计算利润       profit = (prices[i]-price&gt;profit)?(prices[i]-price):profit;    }else{        //当后面的价格比当前的价格小时，改变price        price = prices[i];    }} return profit;};</code></pre><p>性能分析：执行用时68ms，内存消耗35.8MB</p><p><strong>总结</strong><br>改进1：比较大小时了用Math.max，写法更简单。</p><p>学习1：看了其他人的解题思路，学习到了dp算法解题</p><p><img src="/img/letcode/莱布利兹.png"><br>结论:由牛顿莱布尼兹的思想可以得出，区间和可以转换成求差问题，求差问题，也可以转换成区间和的问题。<br>最大连续子数组和可以使用动态规划求解，dp[i]表示以i为结尾的最大连续子数组和，递推公式为<code>dp[i]=max(0,dp[i-1])</code></p><pre><code>//dp粗糙版本var maxProfit = function(prices) {    if(prices.length&lt;=1) return 0    let diff = [] //记录数组相邻两元素差值    for (let i = 0; i &lt; prices.length-1; i++) {        diff[i] = prices[i+1] -prices[i]    }    let dp = new Array(prices.length).fill(0)    dp[0] = Math.max(0,diff[0])    let max = dp[0]    for (let i = 1; i &lt; diff.length; i++) {        //转换成区间求和问题        //差值累加，累加的最大值就是两个元素差的最大值        dp[i] = Math.max(0, dp[i-1]+diff[i])        max = Math.max(max,dp[i])    }    return max}</code></pre><p>解题的思路其实与我想的差不多，就是实现上面把求差问题，转换成了求和问题。</p><pre><code>// 方法三：dp优化版var maxProfit = function(prices) {    let last = 0    let max = 0    for (let i = 0; i &lt; prices.length-1; i++) {    //累加值为正，说明该元素之前有比他小的    //累加值为负，说明该元素前面暂时没有比他小的    //累加值就是元素之间的差值，累计值最大的就是最大利润。        last = Math.max(0, last + prices[i+1]-prices[i])        max = Math.max(max,last)    }    return max}</code></pre>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h2 id=&quot;第一题：买卖股票的最佳时机&quot;&gt;&lt;a href=&quot;#第一题：买卖股票的最佳时机&quot; class=&quot;headerlink&quot; title=&quot;第一题：买卖股票的最佳时机&quot;&gt;&lt;/a&gt;第一题：买卖股票的最佳时机&lt;/h2&gt;&lt;p&gt;题目：给定一个数组，它的第 i 个元素是一支给定股票
+        &lt;h2 id=&quot;第一题：买卖股票的最佳时机&quot;&gt;&lt;a href=&quot;#第一题：买卖股票的最佳时机&quot; class=&quot;headerlink&quot; title=&quot;第一题：买卖股票的最佳时机&quot;&gt;&lt;/a&gt;第一题：买卖股票的最佳时机&lt;/h2&gt;&lt;p&gt;时间：2020-03-10&lt;br&gt;题目：给定一个数组
       
     
     </summary>

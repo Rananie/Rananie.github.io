@@ -6,7 +6,7 @@
   <meta name="author" content="DING RANJIE" />
   
   
-  <title>letcode记录 | biubiu的博客</title>
+  <title>letcode记录(更新中) | biubiu的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -164,7 +164,7 @@
     
   </div>
   <h1 class="passage-title">
-    letcode记录
+    letcode记录(更新中)
   </h1>
   
   <article class="passage-article">
@@ -308,7 +308,7 @@ dp[-1][k][1] = dp[i][0][1] = -infinity
 状态转移方程：
 dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i])
 dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i]
-</code></pre><h2 id="第二题：买卖股票的最佳时机2"><a href="#第二题：买卖股票的最佳时机2" class="headerlink" title="第二题：买卖股票的最佳时机2"></a>第二题：买卖股票的最佳时机2</h2><p>时间：2020-03-12<br>题目：给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。尽可能地完成个更多交易（即买入和卖出一支股票），设计一个算法来计算你所能获取的最大利润。注意不能同时参与多笔交易<br>思路：<br>套上转移方式</p>
+</code></pre><h2 id="第二题：买卖股票的最佳时机2"><a href="#第二题：买卖股票的最佳时机2" class="headerlink" title="第二题：买卖股票的最佳时机2"></a>第二题：买卖股票的最佳时机2</h2><p>日期：2020-03-12<br>题目：给定一个数组，它的第 i 个元素是一支给定股票第 i 天的价格。尽可能地完成个更多交易（即买入和卖出一支股票），设计一个算法来计算你所能获取的最大利润。注意不能同时参与多笔交易<br>思路：<br>套上转移方式</p>
 <pre><code>dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i])
 dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])
 
@@ -345,11 +345,11 @@ dp[i][1] = max(dp[i-1][1], dp[i-1][0] - prices[i])
 </li>
 <li><p>算法流程</p>
 <ul>
-<li>便利整个股票交易日价格表prices，策略是所有上涨交易日都买卖（赚到所有）,所有下降日都不买</li>
+<li>遍历整个股票交易日价格表prices，策略是所有上涨交易日都买卖（赚到所有）,所有下降日都不买</li>
 </ul>
 </li>
 </ul>
-<p>1.设 tmp 为第 i-1 日买入与第 i 日卖出赚取的利润，即 tmp = prices[i] - prices[i-1] ；<br>2.当该天利润为正 tmp &gt; 0，则将利润加入总利润 profit；当利润为 00 或为负，则直接跳过；<br>3.遍历完成后，返回总利润 profit。</p>
+<p>1.设 tmp 为第 i-1 日买入与第 i 日卖出赚取的利润，即 tmp = prices[i] - prices[i-1] ；<br>2.当该天利润为正 tmp &gt; 0，则将利润加入总利润 profit；当利润为 0 或为负，则直接跳过；<br>3.遍历完成后，返回总利润 profit。</p>
 <p>代码:</p>
 <pre><code>  let maxProfit = function(prices) {
         let profit = 0,tmp;
@@ -359,6 +359,55 @@ dp[i][1] = max(dp[i-1][1], dp[i-1][0] - prices[i])
         }
         return profit
     };
+</code></pre><h2 id="第三题：最佳买卖股票时机含冷冻期"><a href="#第三题：最佳买卖股票时机含冷冻期" class="headerlink" title="第三题：最佳买卖股票时机含冷冻期"></a>第三题：最佳买卖股票时机含冷冻期</h2><p>日期：2020-03-16<br>题目：给定一个整数数组，其中第i个元素代表了第i天的股票价格。​<br>   设计一个算法计算出最大利润。在满足以下约束条件下，你可以尽可能地完成更多的交易（多次买卖一支股票）:</p>
+<pre><code>- 你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
+- 卖出股票后，你无法在第二天买入股票 (即冷冻期为 1 天)。
+</code></pre><p>思路：<br>最初状态转移方程是：</p>
+<pre><code>dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i])
+dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])
+</code></pre><p>这里的k=Infinity的，所以k-1也可以看成无穷与上一道一样。其次此题有冷冻期为1天，也就是当天持有股票的情况，要么是昨天就持有，要么是前天卖出。<br>所以转移方程为：</p>
+<pre><code>dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
+dp[i][1] = max(dp[i-1][1], dp[i-2][0] - prices[i])
+</code></pre><p>可以写出代码：</p>
+<pre><code>       let maxProfit = function(prices) {
+           let n = prices.length;
+           let dp = new Array(n)
+           if(n&lt;=1){
+               return 0;
+           }
+           for(let i=0;i&lt;n;i++){
+               dp[i] = new Array(2)
+               if (i===0){
+                   dp[i][0] = 0;
+                   dp[i][1] = -prices[i];
+                   continue;
+               }
+
+                 if (i===1){
+                   dp[i][0] = Math.max(dp[i-1][0], dp[i-1][1] + prices[i]);
+                   dp[i][1] = Math.max(dp[0][1], dp[0][0] -prices[i]  )
+                   continue;
+               }
+
+               dp[i][0] = Math.max(dp[i-1][0], dp[i-1][1] + prices[i]);
+               dp[i][1] = Math.max(dp[i-1][1], dp[i-2][0] - prices[i]);
+           }
+           return dp[n-1][0]
+       };
+</code></pre><p>这样写是很麻烦的，之前是只与相邻的两个状态有关，现在是与相邻的三个状态有关，所以还可以多添加一个变量存储第三个相邻值。</p>
+<pre><code>       let maxProfit = function(prices) {
+       let n = prices.length;
+       //dp_2_0表示dp[i-2][0]
+        let dp_i_0=dp_2_0=temp= 0,dp_i_1 = -Infinity
+        for(let i=0;i&lt;n;i++){
+            temp = dp_i_0;
+            dp_i_0 = Math.max(dp_i_0,dp_i_1 + prices[i])
+            dp_i_1 = Math.max(dp_i_1, dp_2_0-prices[i]);
+            dp_2_0 = temp
+
+        }
+        return (dp_i_0)
+    };
 </code></pre>
   </article>
   <aside class="table-content" id="site-toc">
@@ -367,7 +416,7 @@ dp[i][1] = max(dp[i-1][1], dp[i-1][0] - prices[i])
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一题：买卖股票的最佳时机"><span class="toc-text">第一题：买卖股票的最佳时机</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#阅读笔记《一个方法解决6道股票题》"><span class="toc-text">阅读笔记《一个方法解决6道股票题》</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二题：买卖股票的最佳时机2"><span class="toc-text">第二题：买卖股票的最佳时机2</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一题：买卖股票的最佳时机"><span class="toc-text">第一题：买卖股票的最佳时机</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#阅读笔记《一个方法解决6道股票题》"><span class="toc-text">阅读笔记《一个方法解决6道股票题》</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二题：买卖股票的最佳时机2"><span class="toc-text">第二题：买卖股票的最佳时机2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三题：最佳买卖股票时机含冷冻期"><span class="toc-text">第三题：最佳买卖股票时机含冷冻期</span></a></li></ol>
   </div>
 </aside>
   
@@ -425,7 +474,7 @@ dp[i][1] = max(dp[i-1][1], dp[i-1][0] - prices[i])
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2020/03/12/webpack/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
     <a href="/2020/03/04/MVC、MVP、MVVM/" data-enable="true">

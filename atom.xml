@@ -260,6 +260,32 @@
   </entry>
   
   <entry>
+    <title>unexpected-token&lt; 报错 （待补充）</title>
+    <link href="http://yoursite.com/2020/02/22/unexpected-token/"/>
+    <id>http://yoursite.com/2020/02/22/unexpected-token/</id>
+    <published>2020-02-22T06:13:48.000Z</published>
+    <updated>2020-03-22T07:03:51.649Z</updated>
+    
+    <content type="html"><![CDATA[<p>因为团队信息的后台返回数据格式发生了变化，前端字段应该做相应变化。<br>改完之后，本地是没有问题的，打包上线到服务器之后发现了报错了<code>Uncaught SyntaxError: Unexpected token &lt;</code></p><p><img src="\img\软件超市\报错图.png" alt="报错图"></p><p>所以原因要么在服务器，要么就是打包的问题。</p><p>首先进行排查的是文档类型，因为报错的三行都是与js相关。<br>点击控制台错误的代码提示，查看<code>network</code>对应的文件加载状态,发现返回的不是<code>js</code>形式。而是<code>doctype html</code>,那么很大概率是服务器把<code>js</code>文件当作<code>html</code>响应，导致解析错误。正常情况返回<code>content-type:applocation/javascript</code>，而现在的错误情况<code>js</code>文档的响应信息，变成了<code>text/html</code></p><p><img src="\img\软件超市\文档类型错误.png" alt="文档类型错误"><br><img src="\img\软件超市\文档类型错误1.png" alt="文档类型错误1"></p><p>把上一个版本部署上去，发现没问题。那么排除了服务器的问题，应该是打包的问题。</p><p>确定是打包的问题之后查看<code>config/index.js</code>,找到了原因。</p><p><img src="\img\软件超市\打包路径.png" alt="打包路径"></p><p><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>____</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>待更新<br>具体的原因等学了webpack之后来更新</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;因为团队信息的后台返回数据格式发生了变化，前端字段应该做相应变化。&lt;br&gt;改完之后，本地是没有问题的，打包上线到服务器之后发现了报错了&lt;code&gt;Uncaught SyntaxError: Unexpected token &amp;lt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img s
+      
+    
+    </summary>
+    
+      <category term="project" scheme="http://yoursite.com/categories/project/"/>
+    
+    
+      <category term="软件超市" scheme="http://yoursite.com/tags/%E8%BD%AF%E4%BB%B6%E8%B6%85%E5%B8%82/"/>
+    
+  </entry>
+  
+  <entry>
     <title>拷贝</title>
     <link href="http://yoursite.com/2020/02/19/%E6%8B%B7%E8%B4%9D/"/>
     <id>http://yoursite.com/2020/02/19/拷贝/</id>
@@ -758,32 +784,6 @@ npm install @tinymce/tinymce-vue -S
         &lt;p&gt;在通过v-html把后台传过来的内容渲染到页面之后，发现后台传来的图片是限制了宽和高的。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&quot;\img\软件超市\图1.png&quot; alt=&quot;视图1&quot;&gt;&lt;/p&gt;
 &lt;p&gt;通过查资料发现，这里解析是把v-html传来的数据作为了一个新的组件，所以在s
-      
-    
-    </summary>
-    
-      <category term="project" scheme="http://yoursite.com/categories/project/"/>
-    
-    
-      <category term="软件超市" scheme="http://yoursite.com/tags/%E8%BD%AF%E4%BB%B6%E8%B6%85%E5%B8%82/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>unexpected-token&lt; 报错 （待补充）</title>
-    <link href="http://yoursite.com/2019/06/26/unexpected-token/"/>
-    <id>http://yoursite.com/2019/06/26/unexpected-token/</id>
-    <published>2019-06-26T11:13:48.000Z</published>
-    <updated>2020-03-22T06:51:34.090Z</updated>
-    
-    <content type="html"><![CDATA[<p>因为团队信息的后台返回数据格式发生了变化，前端字段应该做相应变化。<br>改完之后，本地是没有问题的，打包上线到服务器之后发现了报错了<code>Uncaught SyntaxError: Unexpected token &lt;</code></p><p><img src="\img\软件超市\报错图.png" alt="报错图"></p><p>所以原因要么在服务器，要么就是打包的问题。</p><p>首先进行排查的是文档类型，因为报错的三行都是与js相关。<br>点击控制台错误的代码提示，查看<code>network</code>对应的文件加载状态,发现返回的不是<code>js</code>形式。而是<code>doctype html</code>,那么很大概率是服务器把<code>js</code>文件当作<code>html</code>响应，导致解析错误。正常情况返回<code>content-type:applocation/javascript</code>，而现在的错误情况<code>js</code>文档的响应信息，变成了<code>text/html</code></p><p><img src="\img\软件超市\文档类型错误.png" alt="文档类型错误"><br><img src="\img\软件超市\文档类型错误1.png" alt="文档类型错误1"></p><p>把上一个版本部署上去，发现没问题。那么排除了服务器的问题，应该是打包的问题。</p><p>确定是打包的问题之后查看<code>config/index.js</code>,找到了原因。</p><p><img src="\img\软件超市\打包路径.png" alt="打包路径"></p><p><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>____</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>待更新<br>具体的原因等学了webpack之后来更新</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;因为团队信息的后台返回数据格式发生了变化，前端字段应该做相应变化。&lt;br&gt;改完之后，本地是没有问题的，打包上线到服务器之后发现了报错了&lt;code&gt;Uncaught SyntaxError: Unexpected token &amp;lt;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img s
       
     
     </summary>

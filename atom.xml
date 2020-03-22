@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-03-12T14:21:57.755Z</updated>
+  <updated>2020-03-16T06:59:28.604Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,20 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title></title>
-    <link href="http://yoursite.com/2020/03/12/webpack/"/>
-    <id>http://yoursite.com/2020/03/12/webpack/</id>
-    <published>2020-03-12T09:40:26.953Z</published>
-    <updated>2020-03-12T14:21:57.755Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>letcode记录(更新中)</title>
@@ -85,9 +71,9 @@
     <link href="http://yoursite.com/2020/03/03/JavaScript/"/>
     <id>http://yoursite.com/2020/03/03/JavaScript/</id>
     <published>2020-03-03T09:17:03.000Z</published>
-    <updated>2020-03-10T08:38:50.443Z</updated>
+    <updated>2020-03-16T09:44:53.707Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p><a href="https://github.com/biubiuins" target="_blank" rel="noopener">学习整理的demo库</a></p></blockquote><h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p>JavaScript（实现） = ECMAScript（标准） + DOM + BOM</p><p>BOM是浏览器对象模型，用来获取或设置浏览器的属性、行为，例如：新建窗口、获取屏幕分辨率、浏览器版本号等。简单的说：bom是浏览器可视窗口操作<br>DOM是文档对象模型，用来获取或设置文档中标签的属性，例如获取或者设置input表单的value值。 BOM的内容不多，主要还是DOM。 由于DOM的操作对象是文档（Document），所以dom和浏览器没有直接关系。<br>Window对象：是整个BOM的核心，所有对象和集合都以某种方式回接到window对象。Window对象表示整个浏览器窗口，但不必表示其中包含的内容。<br>Document对象：实际上是window对象的属性。这个对象的独特之处是唯一一个既属于BOM又属于DOM的对象。</p><p><strong>编写基本要求</strong><br>1.html不区别大小写，而JavaScript严格区别大小写<br>2.如果不写分号，浏览器会自动添加，但是会消耗系统资源，所以开发中必须写分号<br>3.JS中会忽略多个空格和换行，所以我们可以利用空格和换行对代码进行格式化</p><p><strong>基本语法</strong></p><p>1.字面量与变量<br>字面量：一些不可改变的值，可直接使用，比如：1 2 3 4 5 ，一般不用<br>变量：变量可以保存字面量，且可以任意改变，所以一般用变量</p><p>2.标识符<br>在JS中所有可以由我们自主命名，比如：变量名、函数名、属性名<br>可以是字符、数字（不可开头）、__、$<br>不可以是ES中的关键字或保留字<br>标识符一般采用驼峰命名法</p><p>3.数据类型<br>基本数据类型： Undefined、Null、Boolean、Number、String和Symbol(ES6)<br>引用数据类型： Object(Array, Date, RegExp, Function)</p><p>字符串中可以使用\进行转义字符</p><p>数字的最大值：Number.MAX_VALUE,最小正值：Number.MIN_VALUE<br>超过最大值返回Infinity表示正无穷。<br>NAN（类型仍然是number）是一个特殊的数字，表示NOT A NUMBER。<br>JS进行浮点运算，可能得到一个不精确的结果（不要用JS进行对精确度比较高的运算）</p><p>Null类型的值只有一个null，null专门用来表示为空的对象，所以使用typeof会返回Object<br>Undefined类型的值只有一个undefined，当声明一个变量，但并不给变量赋值时返回undefined</p><p><strong>强制类型转化</strong>主要指其他数据类型转换成String，Number，Boolean<br>转化成String：<br>1.<code>XXX.toString</code>返回转换结果(null,undefined没有该方法)。<br>2.调用String(需要转化的值)函数，对于Number和Boolean实际上调用的是toString方法，对于null/undefined直接转化为”null/undefined”。<br>转化成Number：<br>1.调用Number(需要转化的值)函数，如果有非数字类容/undefined转换NaN，空串/null/false转换成0,true转换成1<br>2.对于字符串，parseInt():把一个字符串转换成整数。parseFloat():把一个字符串转化成浮点数。非字符串将其转化成字符串再操作，返回转化结果。</p>]]></content>
+    <content type="html"><![CDATA[<blockquote><p><a href="https://github.com/biubiuins" target="_blank" rel="noopener">学习整理的demo库</a></p></blockquote><h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p>JavaScript（实现） = ECMAScript（标准） + DOM + BOM</p><p>BOM是浏览器对象模型，用来获取或设置浏览器的属性、行为，例如：新建窗口、获取屏幕分辨率、浏览器版本号等。简单的说：bom是浏览器可视窗口操作<br>DOM是文档对象模型，用来获取或设置文档中标签的属性，例如获取或者设置input表单的value值。 BOM的内容不多，主要还是DOM。 由于DOM的操作对象是文档（Document），所以dom和浏览器没有直接关系。<br>Window对象：是整个BOM的核心，所有对象和集合都以某种方式回接到window对象。Window对象表示整个浏览器窗口，但不必表示其中包含的内容。<br>Document对象：实际上是window对象的属性。这个对象的独特之处是唯一一个既属于BOM又属于DOM的对象。</p><p><strong>编写基本要求</strong><br>1.html不区别大小写，而JavaScript严格区别大小写<br>2.如果不写分号，浏览器会自动添加，但是会消耗系统资源，所以开发中必须写分号<br>3.JS中会忽略多个空格和换行，所以我们可以利用空格和换行对代码进行格式化</p><p><strong>基本语法</strong></p><p>1.字面量与变量<br>字面量：一些不可改变的值，可直接使用，比如：1 2 3 4 5 ，一般不用<br>变量：变量可以保存字面量，且可以任意改变，所以一般用变量</p><p>2.标识符<br>在JS中所有可以由我们自主命名，比如：变量名、函数名、属性名<br>可以是字符、数字（不可开头）、__、$<br>不可以是ES中的关键字或保留字<br>标识符一般采用驼峰命名法</p><p>3.数据类型<br>基本数据类型： Undefined、Null、Boolean、Number、String和Symbol(ES6)<br>引用数据类型： Object(Array, Date, RegExp, Function)</p><p>字符串中可以使用\进行转义字符</p><p>数字的最大值：Number.MAX_VALUE,最小正值：Number.MIN_VALUE<br>超过最大值返回Infinity表示正无穷。<br>NAN（类型仍然是number）是一个特殊的数字，表示NOT A NUMBER。<br>JS进行浮点运算，可能得到一个不精确的结果（不要用JS进行对精确度比较高的运算）</p><p>Null类型的值只有一个null，null专门用来表示为空的对象，所以使用typeof会返回Object<br>Undefined类型的值只有一个undefined，当声明一个变量，但并不给变量赋值时返回undefined</p><p><strong>强制类型转化</strong>主要指其他数据类型转换成String，Number，Boolean<br>转化成String：<br>1.<code>XXX.toString</code>返回转换结果(null,undefined没有该方法)。<br>2.调用String(需要转化的值)函数，对于Number和Boolean实际上调用的是toString方法，对于null/undefined直接转化为”null/undefined”。<br>3.所以非数字类型的运算都转化成数字类型再运算，但是加法中的字符串除外，所以可以利用字符串拼串<code>x+&quot;&quot;</code>（技巧），<br>转化成Number：<br>1.调用Number(需要转化的值)函数，如果有非数字类容/undefined转换NaN，空串/null/false转换成0,true转换成1<br>2.对于字符串，parseInt():把一个字符串转换成整数,第二个参数可以指定数字的进制。parseFloat():把一个字符串转化成浮点数。非字符串将其转化成字符串再操作，返回转化结果。<br>3.由于任何值做减法、乘法、除法运算时都会自动转化为Number，所以可以利用<code>x - 0</code><br>转化为布尔值：<br>1.调用Boolean(需要转化的值)函数：0、NaN、空串、null、undefined都是false<br>2.两个取反操作可以转化成布尔值。</p>]]></content>
     
     <summary type="html">
     
@@ -247,7 +233,7 @@
     <link href="http://yoursite.com/2020/02/23/this%E6%8C%87%E9%92%88/"/>
     <id>http://yoursite.com/2020/02/23/this指针/</id>
     <published>2020-02-23T04:35:06.000Z</published>
-    <updated>2020-02-23T06:09:54.673Z</updated>
+    <updated>2020-03-16T07:49:11.686Z</updated>
     
     <content type="html"><![CDATA[<p>this是什么？</p><ul><li>任何函数本质上都是通过某个对象来调用的，如果没有直接指定就是window</li><li>所有函数内部都有一个this</li><li>它的值是调用函数的当前<strong>对象</strong></li></ul><pre><code>function Person(color) {    console.log(this);    this.color = color;    this.getColor = function () {        console.log(this);        return this.color;    };    this.setColor = function (color) {        console.log(this);        this.color = color;    }}//this是谁Person(&quot;red&quot;); //windowlet p  = new Person(&quot;yello&quot;) //Person的实例，pp.getColor();//Plet obj= {};p.setColor.call(obj,&quot;black&quot;) //objlet test = p.setColor;test()//windowfunction fun1(){    function fun2() {        console.log(this);    }    fun2()}fun1()//window</code></pre><p>new在执行时完成的4件事情：<br>1.在内存中创造一个新的空对象<br>2.让this指向这个新的对象<br>3.执行构造函数里面的代码，给这个新对象添加属性和方法<br>4.返回这个新对象(所以构造函数里面不需要return)</p><p><a href="https://www.cnblogs.com/pssp/p/5216085.html" target="_blank" rel="noopener">这篇文章</a>对this的理解更为深刻，很有学习意义。</p><blockquote><p>window是js中的全局对象，我们创建的变量实际上是给window添加属性，所以这里可以用window点o对象。</p></blockquote><p>上面的那篇文章对<strong>最终this指向的是调用它的对象</strong>进行了更准确的描述</p><p>var o = {<br>    a:10,<br>    b:{<br>        a:12,<br>        fn:function(){<br>            console.log(this.a); //12<br>        }<br>    }<br>}<br>o.b.fn();</p><pre><code>**知识点1**：这个函数中包含多个对象，尽管这个函数是被最外层的对象所调用，this指向的也只是它上一级的对象</code></pre><p>var o = {<br>    a:10,<br>    b:{<br>        fn:function(){<br>            console.log(this.a); //undefined<br>        }<br>    }<br>}<br>o.b.fn();</p><pre><code>尽管对象b中没有属性a，这个this指向的也是对象b，因为this只会指向它的上一级对象，不管这个对象中有没有this要的东西。**知识点2**：this永远指向的是最后调用它的对象，也就是看它执行的时候是谁调用的</code></pre><p>var o = {<br>    a:10,<br>    b:{<br>        a:12,<br>        fn:function(){<br>            console.log(this.a); //undefined<br>            console.log(this); //window<br>        }<br>    }<br>}<br>var j = o.b.fn;<br>j();</p><pre><code>除此之外，文章还对this用法进行了补充，当this碰到return的时候**知识点3**当this遇见return时，如果返回值是一个对象，那么this指向的就是那个返回的对象，如果返回值不是一个对象那么this还是指向函数的实例。</code></pre><p>function fn()<br>{<br>    this.user = ‘追梦子’;<br>    return function(){};<br>}<br>var a = new fn;<br>console.log(a.user); //undefined</p><p>function fn()<br>{<br>    this.user = ‘追梦子’;<br>    return 1;<br>}<br>var a = new fn;<br>console.log(a.user); //追梦子</p><p>function fn()<br>{<br>    this.user = ‘追梦子’;<br>    return null;<br>}<br>var a = new fn;<br>console.log(a.user); //追梦子<br><code>`</code></p><p>还有一点就是虽然null也是对象，但是在这里this还是指向那个函数的实例，因为null比较特殊。</p><p>注:因为平时严格模式用的比较少，所以等之后用到严格模式再进行补充</p>]]></content>
     
@@ -266,10 +252,10 @@
     
     </summary>
     
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
     
-      <category term="学习笔记" scheme="http://yoursite.com/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+      <category term="Javascript" scheme="http://yoursite.com/tags/Javascript/"/>
     
   </entry>
   
@@ -445,9 +431,9 @@
     <link href="http://yoursite.com/2020/02/14/git-1/"/>
     <id>http://yoursite.com/2020/02/14/git-1/</id>
     <published>2020-02-14T07:26:23.000Z</published>
-    <updated>2020-03-03T06:14:31.009Z</updated>
+    <updated>2020-03-21T06:49:57.983Z</updated>
     
-    <content type="html"><![CDATA[<p><img src="/img/git/Git&GitHub.bmp"></p><h2 id="git介绍"><a href="#git介绍" class="headerlink" title="git介绍"></a>git介绍</h2><p><strong>结构</strong></p><p>工作区（本身文件）：写代码   = git add =&gt;  暂存区：临时存储   = git commit =&gt;  本地库（.git）：存储历史版本</p><p><strong>Git和代码托管中心</strong></p><p>代码托管中心(如GitHub):帮忙维护远程库</p><p><strong>本地库和远程库</strong></p><p><strong>团队内部协作</strong></p><p><img src="/img/git/团队内协作.png"></p><p><strong>跨团队协作</strong></p><p>外团队人员<code>fork</code>该团队远程库A（复制新的远程库B），<code>clone</code>到本地修改后<code>push</code>到B，之后外团队人员<code>pull request</code> =&gt;  该团队人 审核 =&gt; <code>merge</code> 远程库A的内容更新成远程库B的内容。</p><h2 id="git命令行操作"><a href="#git命令行操作" class="headerlink" title="git命令行操作"></a>git命令行操作</h2><h3 id="本地库初始化"><a href="#本地库初始化" class="headerlink" title="本地库初始化"></a>本地库初始化</h3><p>命令：git init<br>效果：出现隐藏文件.git<br>注意：.git目录中存放的是本地库相关的子目录和文件，不要删除，也不要乱修改</p><h3 id="设置签名"><a href="#设置签名" class="headerlink" title="设置签名"></a>设置签名</h3><p>形式:<br>    用户名：XXX<br>    Email地址：XXXXX</p><p>作用：区分不同开发人员的身份<br>辨析：这里设置的签名和代码托管中心的账号、密码没有任何关系<br>命令:<br>    项目级别/仓库级别：仅在当前本地库起作用<br>        <code>git config user.name XX</code><br>        <code>git config user.email XX</code><br>    系统用户级别：登陆当前操作系统的用户范围， <code>git config --global</code><br>        <code>git config --global user.name XX</code><br>        <code>git config --global user.email XX</code><br>    级别优先级：项目级别优于系统用户级别</p><h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><h4 id="状态检查"><a href="#状态检查" class="headerlink" title="状态检查"></a>状态检查</h4><p>命令: git status<br>作用：查看工作区、暂存区状态</p><h4 id="移除暂存区"><a href="#移除暂存区" class="headerlink" title="移除暂存区"></a>移除暂存区</h4><p>命令: git rm –cached [filename]</p><h4 id="添加到暂存器"><a href="#添加到暂存器" class="headerlink" title="添加到暂存器"></a>添加到暂存器</h4><p>命令：git add[filename]   添加所有git add .   添加所有修改的git add -A</p><h4 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h4><p>命令：git commit-m”commit message”[filename]     提交所有git commit -m”版本留言描述”<br>作用：将暂存区的内容提交到本地库</p><h4 id="查看历史任务"><a href="#查看历史任务" class="headerlink" title="查看历史任务"></a>查看历史任务</h4><p>命令：<br>    完整形式 git log<br>        若多屏显示控制方式：空格向下翻页 b向上翻页 q退出<br>    以一个漂亮的格式显示 git log –pretty=oneline/git log–oneline(后面的更简洁)<br>    git reflog :索引值更简洁，其中HEAD@{移动到当前版本需要多少步}<br>        <img src="/img/git/历史任务.png"></p><h4 id="前进后退"><a href="#前进后退" class="headerlink" title="前进后退"></a>前进后退</h4><p>可以配合git reflog使用<br>本质:操作HEAD的指针，默认是指向最近的版本。<br>基于索引值操作（推荐）:<br>     git reset –hard [局部索引值]  例（上图）：git reset–hard a6ace91<br>使用^(异或)符号（只能后退）：<br>     git reset –hard HEAD^  注:一个^表示后退一步，n 个表示后退 n 步<br>使用~符号（只能后退）:<br>     git reset –hard HEAD~n  注:表示后退 n 步</p><h5 id="reset-命令的三个参数对比"><a href="#reset-命令的三个参数对比" class="headerlink" title="reset 命令的三个参数对比"></a>reset 命令的三个参数对比</h5><p>–soft参数：</p><ul><li>仅仅在本地库移动 HEAD 指针</li><li>只回退了commit的信息，如果还要提交，直接commit</li></ul><p>–mixed参数：① 在本地库移动 HEAD 指针 ② 重置暂存区</p><ul><li>默认方式</li><li>git reset –mixed <commit> + git add . = git reset –soft <commit></commit></commit></li></ul><p>–hard参数：①在本地库移动 HEAD 指针 ② 重置暂存区 ③ 重置工作区</p><ul><li>彻底回退到某个版本，本地的源码也会变成上一个版本的内容</li></ul><h5 id="删除文件与恢复"><a href="#删除文件与恢复" class="headerlink" title="删除文件与恢复"></a>删除文件与恢复</h5><p>前提：删除前，文件存在时的状态提交到了本地库。<br>操作：rm [filename]<br>注：rm之后通过 git add [filename] 可把文件再次添加到缓存区<br>    可利用 git reset –hard[指针位置] 回退到之前版本找回文件。</p><p>前提：删除的文件在暂存区，但还没有提交到本地库<br>命令: git reset –hard HEAD（刚刚创建时）</p><h5 id="比较文件差别"><a href="#比较文件差别" class="headerlink" title="比较文件差别"></a>比较文件差别</h5><p>命令：git diff[文件名]<br>作用：将工作区中的文件和暂存区进行比较</p><p>命令：git diff[本地库中历史版本][文件名]<br>作用：将工作区中的文件和本地库历史记录比较</p><p>注意:不带文件名比较多个文件</p><h3 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h3><p>优势：</p><ul><li>同时并行推进多个功能开发，提高开发效率</li><li>各个分支在开发过程中，如果某一个分支开发失败，不会对其他分支有任何影响。失败的分支删除重新开始即可</li></ul><h4 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h4><h5 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h5><p>命令：git branch[分支名]</p><h5 id="查看分支"><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h5><p>命令：git branch -v</p><h5 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h5><p>命令：git checkout[分支名]</p><h5 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h5><p>如把hot_fix上的修改合并到master上</p><p>第一步：切换到合并的分支上 git checkout[master]<br>第二步：执行 merge 命令 git merge[hot_fix]</p><p><strong>解决冲突</strong><br>合并时同时修改同一个文件的同一个地方</p><p><img src="/img/git/冲突.png"></p><p>第一步:自行修改冲突文件<br>第二步:git add[文件名]<br>第三步:git commit-m”日志信息”     注意：此时 commit 一定不能带具体文件名</p><h3 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h3><h4 id="连接远程库"><a href="#连接远程库" class="headerlink" title="连接远程库"></a>连接远程库</h4><p>命令：<br>    git remote-v 查看当前所有远程地址别名<br>    git remote add [别名] [远程地址]   (常用别名：origin)<br>作用：下次上传可以直接用别名上传</p><h4 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h4><p>命令：git push [别名][分支名]</p><h4 id="克隆"><a href="#克隆" class="headerlink" title="克隆"></a>克隆</h4><p>命令：git clone 仓库地址<br>作用；完整的把远程库下载到本地；创建origin远程地址别名；初始化本地库。</p><h4 id="团队成员邀请"><a href="#团队成员邀请" class="headerlink" title="团队成员邀请"></a>团队成员邀请</h4><p><img src="/img/git/邀请加入团队.png"></p><p>变成团队成员就可以把自己的修改推送进入远程仓库了。</p><h4 id="拉取pull"><a href="#拉取pull" class="headerlink" title="拉取pull"></a>拉取pull</h4><p>命令: git fetch[远程库地址别名][远程分支名]<br>      git merge[远程库地址别名/远程分支名]<br>      git pull[远程库地址别名][远程分支名]<br>作用: pull=fetch+merge。<br>      fetch 把远程库抓取下来，并没有修改本地文件。<br>      merge 把远程的master合并到本地的master，本地文件修改。</p><p><strong>解决冲突</strong><br>要点：<table><tr><td bgcolor="pink">果不是基于GitHub远程库的最新版本所作的修改，不能推送，必须先拉取下来</td></tr></table>如<br>若pull下来之后进入冲突状态，其余同分支冲突处理办法一样。</p><h4 id="跨团队操作"><a href="#跨团队操作" class="headerlink" title="跨团队操作"></a>跨团队操作</h4><p>外团队人员<code>fork</code>该团队远程库A（复制新的远程库B、外团队人员的仓库），<code>clone</code>到本地修改后<code>push</code>到B，之后外团队人员<code>pull request</code> （GitHub远程库B操作）=&gt;  该团队人（GitHub远程库A） 审核 =&gt; <code>merge</code> 远程库A的内容更新成远程库B的内容。</p><h4 id="SSH登陆"><a href="#SSH登陆" class="headerlink" title="SSH登陆"></a>SSH登陆</h4><p>第一步：生成ssh（在家目录）<br>ssh-keygen ct rsa -C 邮箱账号         //注意C大写<br>注：在主目录下生成的密钥在 /c/Users/用户名/.ssh/id_rsa 里<br>第二步：查看并复制ssh（需在.ssh目录下执行 cd .ssh进入）<br>cat id_rsa.pub<br>第三步：复制密钥内容添加到 github 上</p><p>使用ssh协议上传文件到仓库</p><p>git init<br>git add .<br>git commit -m “ “<br>git remote add 别名 <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:…<br>git push -u 别名 master</p><h3 id="Git工作流"><a href="#Git工作流" class="headerlink" title="Git工作流"></a>Git工作流</h3><p>在项目开发过程中使用的Git的方式</p><h4 id="GitFlow工作流-常用"><a href="#GitFlow工作流-常用" class="headerlink" title="GitFlow工作流(常用)"></a>GitFlow工作流(常用)</h4><pre><code>Gitflow 工作流通过为功能开发、发布准备和维护设立了独立的分支，让发布 迭代过程更流畅。严格的分支模型也为大型项目提供了一些非常必要的结构。</code></pre>]]></content>
+    <content type="html"><![CDATA[<p><img src="/img/git/Git&GitHub.bmp"></p><h2 id="git介绍"><a href="#git介绍" class="headerlink" title="git介绍"></a>git介绍</h2><p><strong>结构</strong></p><p>工作区（本身文件）：写代码   = git add =&gt;  暂存区：临时存储   = git commit =&gt;  本地库（.git）：存储历史版本</p><p><strong>Git和代码托管中心</strong></p><p>代码托管中心(如GitHub):帮忙维护远程库</p><p><strong>本地库和远程库</strong></p><p><strong>团队内部协作</strong></p><p><img src="/img/git/团队内协作.png"></p><p><strong>跨团队协作</strong></p><p>外团队人员<code>fork</code>该团队远程库A（复制新的远程库B），<code>clone</code>到本地修改后<code>push</code>到B，之后外团队人员<code>pull request</code> =&gt;  该团队人 审核 =&gt; <code>merge</code> 远程库A的内容更新成远程库B的内容。</p><h2 id="git命令行操作"><a href="#git命令行操作" class="headerlink" title="git命令行操作"></a>git命令行操作</h2><h3 id="本地库初始化"><a href="#本地库初始化" class="headerlink" title="本地库初始化"></a>本地库初始化</h3><p>命令：git init<br>效果：出现隐藏文件.git<br>注意：.git目录中存放的是本地库相关的子目录和文件，不要删除，也不要乱修改</p><h3 id="设置签名"><a href="#设置签名" class="headerlink" title="设置签名"></a>设置签名</h3><p>形式:<br>    用户名：XXX<br>    Email地址：XXXXX</p><p>作用：区分不同开发人员的身份<br>辨析：这里设置的签名和代码托管中心的账号、密码没有任何关系<br>命令:<br>    项目级别/仓库级别：仅在当前本地库起作用<br>        <code>git config user.name XX</code><br>        <code>git config user.email XX</code><br>    系统用户级别：登陆当前操作系统的用户范围， <code>git config --global</code><br>        <code>git config --global user.name XX</code><br>        <code>git config --global user.email XX</code><br>    级别优先级：项目级别优于系统用户级别</p><h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><h4 id="状态检查"><a href="#状态检查" class="headerlink" title="状态检查"></a>状态检查</h4><p>命令: git status<br>作用：查看工作区、暂存区状态</p><h4 id="移除暂存区"><a href="#移除暂存区" class="headerlink" title="移除暂存区"></a>移除暂存区</h4><p>命令: git rm –cached [filename]</p><h4 id="添加到暂存器"><a href="#添加到暂存器" class="headerlink" title="添加到暂存器"></a>添加到暂存器</h4><p>命令：git add[filename]   添加所有git add .   添加所有修改的git add -A</p><h4 id="提交"><a href="#提交" class="headerlink" title="提交"></a>提交</h4><p>命令：git commit-m”commit message”[filename]     提交所有git commit -m”版本留言描述”<br>作用：将暂存区的内容提交到本地库</p><h4 id="查看历史任务"><a href="#查看历史任务" class="headerlink" title="查看历史任务"></a>查看历史任务</h4><p>命令：<br>    完整形式 git log<br>        若多屏显示控制方式：空格向下翻页 b向上翻页 q退出<br>    以一个漂亮的格式显示 git log –pretty=oneline/git log–oneline(后面的更简洁)<br>    git reflog :索引值更简洁，其中HEAD@{移动到当前版本需要多少步}<br>        <img src="/img/git/历史任务.png"></p><h4 id="前进后退"><a href="#前进后退" class="headerlink" title="前进后退"></a>前进后退</h4><p>可以配合git reflog使用<br>本质:操作HEAD的指针，默认是指向最近的版本。<br>基于索引值操作（推荐）:<br>     git reset –hard [局部索引值]  例（上图）：git reset–hard a6ace91<br>使用^(异或)符号（只能后退）：<br>     git reset –hard HEAD^  注:一个^表示后退一步，n 个表示后退 n 步<br>使用~符号（只能后退）:<br>     git reset –hard HEAD~n  注:表示后退 n 步</p><h5 id="reset-命令的三个参数对比"><a href="#reset-命令的三个参数对比" class="headerlink" title="reset 命令的三个参数对比"></a>reset 命令的三个参数对比</h5><p>–soft参数：</p><ul><li>仅仅在本地库移动 HEAD 指针</li><li>只回退了commit的信息，如果还要提交，直接commit</li></ul><p>–mixed参数：① 在本地库移动 HEAD 指针 ② 重置暂存区</p><ul><li>默认方式</li><li>git reset –mixed <commit> + git add . = git reset –soft <commit></commit></commit></li></ul><p>–hard参数：①在本地库移动 HEAD 指针 ② 重置暂存区 ③ 重置工作区</p><ul><li>彻底回退到某个版本，本地的源码也会变成上一个版本的内容</li></ul><h5 id="删除文件与恢复"><a href="#删除文件与恢复" class="headerlink" title="删除文件与恢复"></a>删除文件与恢复</h5><p>前提：删除前，文件存在时的状态提交到了本地库。<br>操作：rm [filename]<br>注：rm之后通过 git add [filename] 可把文件再次添加到缓存区<br>    可利用 git reset –hard[指针位置] 回退到之前版本找回文件。</p><p>前提：删除的文件在暂存区，但还没有提交到本地库<br>命令: git reset –hard HEAD（刚刚创建时）</p><h5 id="比较文件差别"><a href="#比较文件差别" class="headerlink" title="比较文件差别"></a>比较文件差别</h5><p>命令：git diff[文件名]<br>作用：将工作区中的文件和暂存区进行比较</p><p>命令：git diff[本地库中历史版本][文件名]<br>作用：将工作区中的文件和本地库历史记录比较</p><p>注意:不带文件名比较多个文件</p><h3 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h3><p>优势：</p><ul><li>同时并行推进多个功能开发，提高开发效率</li><li>各个分支在开发过程中，如果某一个分支开发失败，不会对其他分支有任何影响。失败的分支删除重新开始即可</li></ul><h4 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h4><h5 id="创建分支"><a href="#创建分支" class="headerlink" title="创建分支"></a>创建分支</h5><p>命令：git branch[分支名]</p><h5 id="查看分支"><a href="#查看分支" class="headerlink" title="查看分支"></a>查看分支</h5><p>命令：git branch -v</p><h5 id="切换分支"><a href="#切换分支" class="headerlink" title="切换分支"></a>切换分支</h5><p>命令：git checkout[分支名]</p><h5 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h5><p>如把hot_fix上的修改合并到master上</p><p>第一步：切换到合并的分支上 git checkout[master]<br>第二步：执行 merge 命令 git merge[hot_fix]</p><p><strong>解决冲突</strong><br>合并时同时修改同一个文件的同一个地方</p><p><img src="/img/git/冲突.png"></p><p>第一步:自行修改冲突文件<br>第二步:git add[文件名]<br>第三步:git commit-m”日志信息”     注意：此时 commit 一定不能带具体文件名</p><h3 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h3><h4 id="连接远程库"><a href="#连接远程库" class="headerlink" title="连接远程库"></a>连接远程库</h4><p>命令：<br>    git remote-v 查看当前所有远程地址别名<br>    git remote add [别名] [远程地址]   (常用别名：origin)<br>作用：下次上传可以直接用别名上传</p><h4 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h4><p>命令：git push [别名][分支名]</p><h4 id="克隆"><a href="#克隆" class="headerlink" title="克隆"></a>克隆</h4><p>命令：git clone 仓库地址<br>作用；完整的把远程库下载到本地；创建origin远程地址别名；初始化本地库。</p><h4 id="团队成员邀请"><a href="#团队成员邀请" class="headerlink" title="团队成员邀请"></a>团队成员邀请</h4><p><img src="/img/git/邀请加入团队.png"></p><p>变成团队成员就可以把自己的修改推送进入远程仓库了。</p><h4 id="拉取pull"><a href="#拉取pull" class="headerlink" title="拉取pull"></a>拉取pull</h4><p>命令: git fetch[远程库地址别名][远程分支名]<br>      git merge[远程库地址别名/远程分支名]<br>      git pull[远程库地址别名][远程分支名]<br>作用: pull=fetch+merge。<br>      fetch 把远程库抓取下来，并没有修改本地文件。<br>      merge 把远程的master合并到本地的master，本地文件修改。</p><p><strong>解决冲突</strong><br>要点：<table><tr><td bgcolor="pink">如果不是基于GitHub远程库的最新版本所作的修改，不能推送，必须先拉取下来</td></tr></table>如<br>若pull下来之后进入冲突状态，其余同分支冲突处理办法一样。</p><h4 id="跨团队操作"><a href="#跨团队操作" class="headerlink" title="跨团队操作"></a>跨团队操作</h4><p>外团队人员<code>fork</code>该团队远程库A（复制新的远程库B、外团队人员的仓库），<code>clone</code>到本地修改后<code>push</code>到B，之后外团队人员<code>pull request</code> （GitHub远程库B操作）=&gt;  该团队人（GitHub远程库A） 审核 =&gt; <code>merge</code> 远程库A的内容更新成远程库B的内容。</p><h4 id="SSH登陆"><a href="#SSH登陆" class="headerlink" title="SSH登陆"></a>SSH登陆</h4><p>第一步：生成ssh（在家目录）<br>ssh-keygen ct rsa -C 邮箱账号         //注意C大写<br>注：在主目录下生成的密钥在 /c/Users/用户名/.ssh/id_rsa 里<br>第二步：查看并复制ssh（需在.ssh目录下执行 cd .ssh进入）<br>cat id_rsa.pub<br>第三步：复制密钥内容添加到 github 上</p><p>使用ssh协议上传文件到仓库</p><p>git init<br>git add .<br>git commit -m “ “<br>git remote add 别名 <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:…<br>git push -u 别名 master</p><h3 id="Git工作流"><a href="#Git工作流" class="headerlink" title="Git工作流"></a>Git工作流</h3><p>在项目开发过程中使用的Git的方式</p><h4 id="GitFlow工作流-常用"><a href="#GitFlow工作流-常用" class="headerlink" title="GitFlow工作流(常用)"></a>GitFlow工作流(常用)</h4><pre><code>Gitflow 工作流通过为功能开发、发布准备和维护设立了独立的分支，让发布 迭代过程更流畅。严格的分支模型也为大型项目提供了一些非常必要的结构。</code></pre>]]></content>
     
     <summary type="html">
     
@@ -678,34 +664,6 @@ npm install @tinymce/tinymce-vue -S
   </entry>
   
   <entry>
-    <title>正则表达式</title>
-    <link href="http://yoursite.com/2019/07/15/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
-    <id>http://yoursite.com/2019/07/15/正则表达式/</id>
-    <published>2019-07-15T14:57:10.000Z</published>
-    <updated>2019-07-22T15:29:26.719Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><p><strong>修饰符</strong></p><table><thead><tr><th>修饰符</th><th>描述</th></tr></thead><tbody><tr><td>i</td><td>执行对大小写不敏感的匹配。</td></tr><tr><td>g</td><td>执行全局匹配（查找所有匹配而非在找到第一个匹配后停止）。</td></tr><tr><td>m</td><td>执行多行匹配。</td></tr></tbody></table><p><strong>元字符</strong></p><p><img src="\img\js\元字符.png" alt="元字符"></p><p><strong>方括号</strong></p><p><img src="\img\js\方括号.png" alt="方括号"></p><p><strong>量词</strong></p><p><img src="\img\js\量词.png" alt="量词"></p><ul><li>js里面的正则只有前瞻，头部的（后），尾部的（前），所以前瞻就是后面紧跟着的</li><li>匹配有贪婪模式（尽可能多的匹配），非贪婪模式（尽可能少的匹配），默认为贪婪模式，非贪婪模式需要在量词后面加？</li></ul><p><a href="https://www.cnblogs.com/zxin/archive/2013/01/26/2877765.html" target="_blank" rel="noopener">常用正则表达</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;基本语法&quot;&gt;&lt;a href=&quot;#基本语法&quot; class=&quot;headerlink&quot; title=&quot;基本语法&quot;&gt;&lt;/a&gt;基本语法&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;修饰符&lt;/strong&gt;&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;修饰符&lt;/th&gt;
-&lt;th
-      
-    
-    </summary>
-    
-    
-      <category term="js" scheme="http://yoursite.com/tags/js/"/>
-    
-  </entry>
-  
-  <entry>
     <title>js遍历方法总结</title>
     <link href="http://yoursite.com/2019/07/04/js%E7%9A%84%E9%81%8D%E5%8E%86/"/>
     <id>http://yoursite.com/2019/07/04/js的遍历/</id>
@@ -812,11 +770,37 @@ npm install @tinymce/tinymce-vue -S
   </entry>
   
   <entry>
+    <title>unexpected-token&lt; 报错 （待补充）</title>
+    <link href="http://yoursite.com/2019/06/26/unexpected-token/"/>
+    <id>http://yoursite.com/2019/06/26/unexpected-token/</id>
+    <published>2019-06-26T11:13:48.000Z</published>
+    <updated>2020-03-22T06:51:34.090Z</updated>
+    
+    <content type="html"><![CDATA[<p>因为团队信息的后台返回数据格式发生了变化，前端字段应该做相应变化。<br>改完之后，本地是没有问题的，打包上线到服务器之后发现了报错了<code>Uncaught SyntaxError: Unexpected token &lt;</code></p><p><img src="\img\软件超市\报错图.png" alt="报错图"></p><p>所以原因要么在服务器，要么就是打包的问题。</p><p>首先进行排查的是文档类型，因为报错的三行都是与js相关。<br>点击控制台错误的代码提示，查看<code>network</code>对应的文件加载状态,发现返回的不是<code>js</code>形式。而是<code>doctype html</code>,那么很大概率是服务器把<code>js</code>文件当作<code>html</code>响应，导致解析错误。正常情况返回<code>content-type:applocation/javascript</code>，而现在的错误情况<code>js</code>文档的响应信息，变成了<code>text/html</code></p><p><img src="\img\软件超市\文档类型错误.png" alt="文档类型错误"><br><img src="\img\软件超市\文档类型错误1.png" alt="文档类型错误1"></p><p>把上一个版本部署上去，发现没问题。那么排除了服务器的问题，应该是打包的问题。</p><p>确定是打包的问题之后查看<code>config/index.js</code>,找到了原因。</p><p><img src="\img\软件超市\打包路径.png" alt="打包路径"></p><p><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>____</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>待更新<br>具体的原因等学了webpack之后来更新</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;因为团队信息的后台返回数据格式发生了变化，前端字段应该做相应变化。&lt;br&gt;改完之后，本地是没有问题的，打包上线到服务器之后发现了报错了&lt;code&gt;Uncaught SyntaxError: Unexpected token &amp;lt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img s
+      
+    
+    </summary>
+    
+      <category term="project" scheme="http://yoursite.com/categories/project/"/>
+    
+    
+      <category term="软件超市" scheme="http://yoursite.com/tags/%E8%BD%AF%E4%BB%B6%E8%B6%85%E5%B8%82/"/>
+    
+  </entry>
+  
+  <entry>
     <title>css总结</title>
     <link href="http://yoursite.com/2019/05/18/css%E6%80%BB%E7%BB%93/"/>
     <id>http://yoursite.com/2019/05/18/css总结/</id>
     <published>2019-05-18T14:01:07.000Z</published>
-    <updated>2019-05-30T14:47:03.404Z</updated>
+    <updated>2020-03-16T07:49:11.649Z</updated>
     
     <content type="html"><![CDATA[<p>在学习的过程中，对css有了更深一步的了解，把遇见过的问题、经常使用到的样式做一个总结。</p><h2 id="清除默认样式"><a href="#清除默认样式" class="headerlink" title="清除默认样式"></a>清除默认样式</h2><p><a href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css" target="_blank" rel="noopener">http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css</a></p><h2 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h2><ul><li>方法一<br>  给受影响的盒子添加clear属性，添加了clear的属性不可以添加margin-top</li><li><p>方法二</p><pre><code>  浮动元素::after{    content:&quot;&quot;;    display:block;    height:0;    visibility:hidden;    clear:both  }  浮动元素{    *zoom:1;//兼容IE6  }</code></pre><h2 id="盒子的问题"><a href="#盒子的问题" class="headerlink" title="盒子的问题"></a>盒子的问题</h2></li><li><p>在默认布局的垂直方向上，外边距有合并现象(BFC块级，水平方向也可以，但是块级都是占一行的，而浮动成水平的 BFC的区域不会与float box重叠)</p></li><li>嵌套盒子时，里面的盒子设置margin-top时，父盒子一起被顶下来。<br>  解决办法：父盒子添加border，或者overflow：hidden</li></ul><h2 id="图片的问题"><a href="#图片的问题" class="headerlink" title="图片的问题"></a>图片的问题</h2><ul><li><p>自适应图片</p><pre><code>  max-width:100%;  height:auto;  display:block</code></pre></li><li><p>设置图片img的width和height的时候，指定其中一个另外一个自动算出来</p></li><li><p>当图片宽度大于父元素宽度时，居中：父元素text-align：center,子元素：margin：0，-100%</p></li></ul><h2 id="居中"><a href="#居中" class="headerlink" title="居中"></a>居中</h2><p><strong>浮动之后的高宽不设定则有内容撑开</strong></p><ol><li><p>居中元素有宽度</p><pre><code> .center { width: 960px; margin-left: auto; margin-right: auto; }</code></pre></li><li><p>margin:0 auto 使用场景<br>块级元素：给定要居中的块级元素的宽度<br>行内元素：<br> <br><br>①设置display:block。<br> <br><br>②给定要居中的行内元素的宽度。（行内元素设置成块级元素后可以对其宽高进行设置）<br> <br></p><p> <strong>所有元素也可以通过对父元素设置 text-align：center；的方式来实现居中。(而对于块元素来说，对要居中的元素自身进行设置text-align:center也能实现居中——而无需对其父元素进行设置) 。</strong></p><p>  <strong>浮动、绝对定位、固定定位的盒子失效。</strong></p></li></ol><ol start="3"><li>脱离文档流元素的水平垂直<br> margin:auto或者按圆点定位定在正中间，margin设置成负的宽高的一般</li></ol><p>   法二：</p><pre><code>```div{      width: 300px;      height: 300px;      position: relative;      border: 1px solid #465468; } img{      position: absolute;      margin: auto;      top: 0;      left: 0;      right: 0;      bottom: 0; } ```</code></pre><ol start="4"><li><p>指定宽高元素水平居中</p><p>还可以定位到50% 50% 改变margin-left/margin-top为元素的一半定位（元素加padding，可以结合box-sizing）</p><pre><code> #test{ position:absolute; left:0; right:0; bottom:0; top:0 margin:auto; width:100px height:100px }</code></pre></li><li><p>图片的垂直居中</p><pre><code>//img的外部包含元素 如divdiv{  text-align:center;} div:after{ content:&quot;&quot;; display:inline-block; height:100% vertical-align:middle;}img{ vertical-align:middle}</code></pre></li></ol><h2 id="其余"><a href="#其余" class="headerlink" title="其余"></a>其余</h2><ol><li>超出省略号</li></ol><p>盒子不可以仅由内容撑开的时候</p><pre><code>white-space:nowrap //不换行overflow：hidden//超出部分截掉text-overflow:ellipsis //省略号</code></pre><ol start="2"><li>禁止滚动条</li></ol><pre><code>html,body{height:100%overflow:hidden}</code></pre>]]></content>
     
@@ -830,10 +814,10 @@ npm install @tinymce/tinymce-vue -S
     
     </summary>
     
+      <category term="总结" scheme="http://yoursite.com/categories/%E6%80%BB%E7%BB%93/"/>
+    
     
       <category term="css" scheme="http://yoursite.com/tags/css/"/>
-    
-      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
     
   </entry>
   
@@ -920,7 +904,7 @@ npm install @tinymce/tinymce-vue -S
     <link href="http://yoursite.com/2018/12/18/js%E9%A1%B5%E9%9D%A2%E5%B1%9E%E6%80%A7/"/>
     <id>http://yoursite.com/2018/12/18/js页面属性/</id>
     <published>2018-12-18T14:03:56.000Z</published>
-    <updated>2018-12-18T14:09:59.640Z</updated>
+    <updated>2020-03-16T07:49:11.528Z</updated>
     
     <content type="html"><![CDATA[<h2 id="页面属性"><a href="#页面属性" class="headerlink" title="页面属性"></a>页面属性</h2><ul><li><p>offsetWidth /offsetHeight</p><pre><code>  //js对元素操作，只能获取不可以改变  //获取对象自身的宽度和高度 ，包括内容、边框和内边距，即：offsetWidth = width +     border + padding  box.offsetWidth  //注意：和 div.style.width 的区别，其只能获取到行内的数值  div.style.width</code></pre></li><li>offsetLeft 和 offsetTop</li></ul><p>距离第一个有定位的父级盒子左边和上边的距离，<br><strong>注意：父级盒子必须要有定位，如果没有，则最终以body为准！</strong><br>offsetLeft和offsetTop从从父标签的padding开始计算，不包括border。即：从子盒子边框到定位父盒子边框的距离。</p><ul><li>offsetParent</li></ul><p>返回当前对象的父级（带有定位）盒子，若爷爷也有则选择进近的</p><ul><li>clientWidth/clientHeight</li></ul><p>网页可见区域宽和高</p><ul><li>clientLeft，clientTop</li></ul><p>返回的是元素边框的borderWidth，<br>如果不指定一个边框或者不定位改元素，其值就为0</p><ul><li>document.body.scrollWidth;</li><li>document.body.scrollHeight;</li></ul><p>网页正文全文宽<br>网页正文全文高</p><ul><li>document.body.scrollTop;</li></ul><p>网页被卷去的高</p><ul><li>document.body.scrollLeft;</li></ul><p>网页被卷去的左</p><p><strong>区别</strong></p><ul><li><p>left和top分析：</p><ul><li>clientLeft: 左边边框的宽度；clientTop: 上边边框的宽度</li><li>offsetLeft: 当前元素距离有定位的父盒子左边的距离；offsetTop: 当前元素距离有定位的父盒子上边的距离</li><li>scrollLeft: 左边滚动的长度; scrollTop: 上边滚动的长度;</li></ul></li><li><p>width和height分析</p><ul><li>clientWidth\/Height: 内容 + 内边距</li><li>offsetWidth\/Height: 内容 + 内边距 + 边框</li><li>scrollWidth\/Height: 滚动内容的宽度和高度</li></ul></li></ul>]]></content>
     
@@ -935,8 +919,10 @@ npm install @tinymce/tinymce-vue -S
     
     </summary>
     
+      <category term="总结" scheme="http://yoursite.com/categories/%E6%80%BB%E7%BB%93/"/>
     
-      <category term="javascript" scheme="http://yoursite.com/tags/javascript/"/>
+    
+      <category term="Javascript" scheme="http://yoursite.com/tags/Javascript/"/>
     
   </entry>
   
@@ -945,7 +931,7 @@ npm install @tinymce/tinymce-vue -S
     <link href="http://yoursite.com/2018/12/09/vuex%E6%B5%81%E7%A8%8B%E6%80%BB%E7%BB%93/"/>
     <id>http://yoursite.com/2018/12/09/vuex流程总结/</id>
     <published>2018-12-09T14:04:49.000Z</published>
-    <updated>2019-01-28T11:26:14.393Z</updated>
+    <updated>2020-03-16T07:49:11.589Z</updated>
     
     <content type="html"><![CDATA[<p>对如何异步显示数据效果的编码流程进行了总结</p><ol><li><p>ajax<br>ajax请求函数，抛出接口</p></li><li><p>vuex</p><ul><li><p>store里面新建index完成基本配置</p><pre><code>/*vuex最核心的管理对象store组装模块并导出 store 的地方*/// 首先引入Vue及Vueximport Vue from &#39;vue&#39;import Vuex from &#39;vuex&#39;// 引入四个基本模块import state from &#39;./state&#39;import mutations from &#39;./mutations&#39;import actions from &#39;./actions&#39;import getters from &#39;./getters&#39;// 一定要声明使用插件Vue.use(Vuex)// 把 store 对象提供给 “store” 选项，这可以把 store 的实例注入所有的子组件export default new Vuex.Store({state,mutations,actions,getters})</code></pre></li></ul></li></ol><pre><code>- 现在Vue对象里面挂载store```import store from &#39;./store&#39;new Vue({    el: &#39;#app&#39;,    components: { App },    template: &#39;&lt;App/&gt;&#39;,    store //所有的组件都多了一个$store})```- 在store下新建state.js    state：用于存储状态对象    ```    export default {    user:{}    }    ```- 在store下新建mutation-types.js    mutation是操作state状态的，mutation-types是存放操作state的方法名    ```    export const RECEIVE_USER_INFO = &#39;receive_user_info&#39; // 接收用户信息    ```- 在store下新建actions.js    action是通过操作mutation间接更新state的多个方法的对象    起连接作用。    异步获取数据。(注意需要引入api接口函数)把数据传给mutation。(因为mutation的方法名是放在mutation-types里面，所以注意要引入mutation-types里面对应的方法名)    ```    import {    reqUserInfo,    } from &#39;../api&#39;    import {      RECEIVE_USER_INFO,    } from &#39;./mutation-types&#39;     // 异步获取用户信息     async getUserInfo ({commit}) {      const result = await reqUserInfo()      //如果请求成功，返回code=0      if (result.code === 0) {       const userInfo = result.data       //提交mutation       //把结果{userInfo}提交给RECEIVE_USER_INFO方法       commit(RECEIVE_USER_INFO, {userInfo})        }      },    ```    参数除了commit以外，还可以有state`{commit,state}`- 在store里面新建mutations.js    mutations直接对state进行操作，`[方法名](state,{param}){}` 默认第一个参数state，所以需要引入vue与方法名    ```    import Vue from &#39;vue&#39;    import {      RECEIVE_USER_INFO,      } from &#39;./mutation-types&#39;    export default {      [RECEIVE_USER_INFO] (state, {userInfo}) {        state.userInfo = userInfo      }      }    ```</code></pre><ol start="3"><li>使用数据</li></ol><p>一般放在<code>computed</code>中进行接收，有利于state的值发生改变的时候及时响应给子组件。</p><ul><li>mapState辅助函数<pre><code> mapState返回的是一个对象 其实就是返回值:{return this.$store.XXXX}</code></pre></li></ul><pre><code>   当一个组件需要获取多个状态时候，用mapState辅助函数更为方便   ```   import { mapState } from &#39;vuex&#39;   export default {   computed:mapState({   //方法一：箭头函数   count: state =&gt; state.count;   //方法二：传字符串参数&#39;count&#39;等同于‘state=&gt;state.count’   count:&#39;count&#39;;   //方法三，使用this获取局部状态，必须使用常规函数   count(state){    return this.count   }   })   }   ```当映射的计算属性的名称与 state 的子节点名称相同时，我们也可以给 mapState 传一个字符串数组。    ```    computed:mapState([ &quot;count&quot;])    ```</code></pre><ul><li><p>…mapState()</p><pre><code>  ...mapState是state的语法糖，使用时需要从vuex中引入  ```  computed:{  ...mapState({})  }  ```</code></pre></li><li><p>mapGetters 辅助函数</p><p>  mapGetters辅助函数仅仅是将store中的getter映射到局部属性</p><pre><code>  import { mapGetters } from &#39;vuex&#39;  export default {    // ...    computed: {    // 使用对象展开运算符将 getter 混入 computed 对象中      ...mapGetters([        &#39;doneTodosCount&#39;,        &#39;anotherGetter&#39;,        // ...      ])    }  }</code></pre></li></ul><ul><li>mapActions<br>  类似mapState</li></ul><ul><li><p>getter计算属性</p><pre><code>```computed: { doneTodosCount () {   return this.$store.state.todos.filter(todo =&gt; todo.done).length   } } ```</code></pre><p> 如果有多个组件需要用到这个属性，可以在store里面定义‘getter’，可以说是store的计算属性，像计算属性一样，getter的返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算</p><pre><code>  const store = new Vuex.Store({    state: {      todos: [        { id: 1, text: &#39;...&#39;, done: true },        { id: 2, text: &#39;...&#39;, done: false }      ]    },    getters: {    //state作为第一个参数      doneTodos: state =&gt; {        return state.todos.filter(todo =&gt; todo.done)      }      //可以接收其他getter作为第二个参数        doneTodosCount: (state, getters) =&gt; {          return getters.doneTodos.length        }        //可以通过让getter返回一个函数，来实现给getter传参,对store里的数组进行查询时非常有作用         getTodoById: (state) =&gt; (id) =&gt; {            return state.todos.find(todo =&gt; todo.id === id)          }          //store.getters.getTodoById(2) // -&gt; { id: 2, text: &#39;...&#39;, done: false }    }  })  //在组件中使用，同计算属性的调用，不用加括号  this.$store.getters.doneTodosCount</code></pre></li></ul><ul><li><p>dispatch方法</p><p> dispatch(actionName,data)分发调用action，第一个参数是方法名，第二个是数据<br> 触发store里面的action对应方法名的函数</p><pre><code> this.$store.dispatch(&quot;&quot;)</code></pre></li></ul>]]></content>
     
@@ -966,8 +952,10 @@ npm install @tinymce/tinymce-vue -S
     
     </summary>
     
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
-      <category term="vue" scheme="http://yoursite.com/tags/vue/"/>
+    
+      <category term="ajax" scheme="http://yoursite.com/tags/ajax/"/>
     
   </entry>
   
@@ -1027,7 +1015,7 @@ npm install @tinymce/tinymce-vue -S
     <link href="http://yoursite.com/2018/11/11/vuex/"/>
     <id>http://yoursite.com/2018/11/11/vuex/</id>
     <published>2018-11-11T06:38:13.000Z</published>
-    <updated>2018-11-11T07:03:41.218Z</updated>
+    <updated>2020-03-16T07:49:11.726Z</updated>
     
     <content type="html"><![CDATA[<h1 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h1><p>主要是状态管理，将数据统一管理(state)</p><p> <img src="/img/vue/liucheng.jpg" alt="流程图"></p><h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><ul><li>状态对象 stat</li><li>操作state 直接更新state的多个方法对象 mutations</li><li>操作mutations 间接更新state的多个方法对象 actions</li><li>包含多个基于state的getter计算属性的对象 getters</li><li>包含n个mutations的type名称常量 mutations-type</li></ul><h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><pre><code class="js">import Vuex from &#39;vuex&#39;Vue.use(Vuex)</code></pre><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>共享的数据</p><pre><code>const state={};</code></pre><p>建立统一数据容器，唯一的容器</p><pre><code>let store = new Vuex.Store({    state})</code></pre><p>store(容器)注册到实例上，main.js里面，所有的组件都会有一个属性this.$store</p><pre><code>new Vue({store,})</code></pre><p>在组件中使用，加不加this都一样</p><pre><code>{{this.$store.state.XXX}}</code></pre><h2 id="state-单向数据流"><a href="#state-单向数据流" class="headerlink" title="state(单向数据流)"></a>state(单向数据流)</h2><p> 注意,在组件中最好不要直接更改共享的数据，共享的数据仅仅给组件染</p><h2 id="mutation"><a href="#mutation" class="headerlink" title="mutation"></a>mutation</h2><p> 通过mutation(管理员)来更改状态，可以在store里面设置成严格模式<br> <code>strict：true</code>，mutation不支持异步</p><ol><li>告诉mutations需要更改,mutations相当于methods<pre><code class="js">const mutations={    add(state,count){        //state是自动放入的，默认指的就是当前的state        //操作state的属性        state.XXX +=count    }}let store = new Vuex.Store({state，mutations,strict：true})</code></pre></li><li>组件通过mutations提交,第一个参数是与mutatioons里面的方法绑定，第二个参数是自定义参数<pre><code>this.$store.commit(&#39;add&#39;,2)</code></pre></li></ol><h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>打印日志</p><pre><code>import logger from &#39;vuex/dist/logger&#39;const store = new Vuex.store({    plugins:[logger()]})</code></pre><h2 id="整理"><a href="#整理" class="headerlink" title="整理"></a>整理</h2><p>src下面创建一个store文件\index.js</p><pre><code class="js">import Vue from &#39;vue&#39;import Vuex from &#39;vuex&#39;Vue.use(Vuex)import logger from &#39;vuex/dist/logger&#39;const state={};import mutations from &#39;./mutations&#39;export default new Vuex.Store({    state，    mutations,    strict：true,    plugins:[logger()]    })</code></pre><p>store下面再创建一个mutations.js,里面存放mutations的相关</p><pre><code>import * as Types from &#39;mutations.types.js&#39;const mutations = { // [方法名](state,{param}){}[Types.INCREMENT](state){   state.count+=1},[Types.DECREMENT](state){    state.count-=1}};export default mutations;</code></pre><p>宏(一般大写)<br>store下面再创建一个mutations.types.js里面存放mutations的方法的名字，方便查找</p><pre><code>//增加export const INCREMENT=&#39;INCREMENT&#39;//减少export const DECREMENT=&#39;DECREMENT&#39;</code></pre><p>组件中引入同mutations.js中引入一样,只不过不加中括号<br>import * as Types from ‘mutations.types.js’</p><p>Types.INCREMENT<br>Types.DECREMENT</p><h2 id="getters"><a href="#getters" class="headerlink" title="getters"></a>getters</h2><p>相当于computed,如果数据多了可以模仿mutations的抽离</p><pre><code>const getters={ val(state){ state.count%2?&#39;奇数&#39;:&#39;偶数&#39; }};export default new Vuex.store({getters,})//引用时{{$store.getters.val}}</code></pre><h2 id="actions"><a href="#actions" class="headerlink" title="actions"></a>actions</h2><ul><li>和后台交互的异步action，后台数据也需要修改</li></ul><p>Action 类似于 mutation，不同在于：</p><ul><li>Action 提交的是 mutation，而不是直接变更状态。</li><li>Action 可以包含任意异步操作。</li></ul><ol><li>引入api以及mutation-types</li><li><p>异步获取数据</p><ul><li>异步获取地址</li><li>发送异步ajax请求</li><li><p>提交一个mutation</p><pre><code>//async 方法名({commit,参数可选}{})// 异步获取地址async getAddress ({commit, state}) {// 从state状态中获取到经纬度用来设置reqAddress的参数（看接口文档）const geohash = state.latitude + &#39;,&#39; + state.longitude// 1. 发送异步ajax请求const result = await reqAddress(geohash)// 2. 根据结果提交一个mutationcommit(RECEIVE_ADDRESS, {address: result.data})},</code></pre></li></ul></li></ol>]]></content>
     
@@ -1040,6 +1028,8 @@ npm install @tinymce/tinymce-vue -S
       
     
     </summary>
+    
+      <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
       <category term="vue" scheme="http://yoursite.com/tags/vue/"/>
@@ -1072,30 +1062,6 @@ npm install @tinymce/tinymce-vue -S
   </entry>
   
   <entry>
-    <title>demo_vue-book</title>
-    <link href="http://yoursite.com/2018/10/27/vue-book/"/>
-    <id>http://yoursite.com/2018/10/27/vue-book/</id>
-    <published>2018-10-27T07:33:54.000Z</published>
-    <updated>2018-10-27T08:51:35.280Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="vue-book"><a href="#vue-book" class="headerlink" title="vue-book"></a>vue-book</h1><hr><p>接下来会学习vuex，在学习一门预处理语言，之后用我学过的所有东西做一个练习的项目<br>vue学习之后，用vue-cli做的一个练习。<br>这是学习vue的过程中走通了一遍流程，但还有很多功能没有实现</p><ul><li>上拉下拉刷新</li><li>图片的懒加载</li><li>打包之后如何上线</li><li>vuex的学习</li><li>如何连接数据库等</li></ul><p>github:<a href="https://github.com/biubiuins/vue-book" target="_blank" rel="noopener">https://github.com/biubiuins/vue-book</a></p><h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><ul><li>npm install vue</li><li>npm install -g webpack</li><li>npm install -g vue-cli</li><li>npm install less less-loader axios vuex bootstrap</li></ul><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul><li>build 打包后的脚本文件</li><li>src 源码文件</li><li>mock后台代码，模拟数据</li><li>src/api 代表的是所有的接口,获取数据给前端调用</li><li>src/base 基础组件</li><li>src/components 页面组件<br><img src="/img/vue-book/lujing.jpg" width="90%"><h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h3>根据页面划分了5个页面组件</li><li>首页 Home.vue</li><li>列表 List.vue</li><li>收藏 Collect.vue</li><li>添加 Add.vue</li><li>详情 Detail.vue</li></ul><p>配置路由，配置路由映射表并new个实例,挂载在根组件上，router-view显示在App.vue<br>router/index.js</p><p><font color="red">Vue.use()是用来安装Vue插件</font></p><pre><code class="js">import Vue from &#39;vue&#39;import Router from &#39;vue-router&#39;Vue.use(Router);</code></pre><blockquote><p>这里用了模板，将会另外写一篇，关于前端的模板与node的</p></blockquote><h3 id="导航"><a href="#导航" class="headerlink" title="导航"></a>导航</h3><p>base/Tab.vue<br>scoped 表示是当前组件的样式，并不是全局的</p><pre><code>&lt;style scoped lang=&quot;less&quot;&gt;</code></pre><blockquote><p>less预处理语言，学习之后会写一篇博客</p></blockquote><p>点击导航之后会通过to跳转页面，并且样式改变<br>这里需要注意<br>/home 确切激活，仅仅这个路径有效。router-link-exact-active<br>/home /home/a 都可以。router-link-active</p><pre><code>&lt;router-link to=&quot;/add&quot;&gt;&lt;i class=&quot;iconfont icon-add&quot;&gt;&lt;/i&gt;&lt;span&gt;添加&lt;/span&gt;&lt;/router-link&gt;</code></pre><p>基础组件Tab挂载在App.vue上（导航很多页面都需要），并在App.vue上写全局的样式，清除默认样式。<br>新学习到的清除输入框和按钮的默认样式</p><pre><code>input，button{appearance:none;}</code></pre><p>App.vue的组件中有<code>name: &#39;App&#39;</code>，这里<code>name: &#39;app&#39;</code> 相当于一个全局 ID。可以不写，写了可以提供更好的调试信息。<br>页面渲染也是在App.vue中实现的</p><h4 id="图标"><a href="#图标" class="headerlink" title="图标"></a>图标</h4><p><a href="http://www.iconfont.cn/home/index?spm=a313x.7781069.1998910419.2" target="_blank" rel="noopener">http://www.iconfont.cn/home/index?spm=a313x.7781069.1998910419.2</a><br>图标打包好了之后在index.html中引入\<br>iconfont是必须类名表明是个icon，后面根据页面选择</p><pre><code>&lt;i class=&quot;iconfont icon-shouye&quot;&gt;&lt;/i&gt;&lt;span&gt;首页&lt;/span&gt;</code></pre><h3 id="头部"><a href="#头部" class="headerlink" title="头部"></a>头部</h3><p>base/Mheader.vue<br>头部的标题不是全部一样的，并且比如首页是没有返回键的，所以这里用到的插槽和父组件给子组件传值<br>这里用Home.vue-Mheader.vue为例</p><ol><li>在父组件上挂载Mheader.vue</li><li>&lt;Mheader.vue&gt;首页，首页需要显示出来，需要在子组件Mheader.vue中放个匿名插槽接收</li><li>父组件需要传递一个值告诉子组件是否显示返回键。子组件接收back，不需要验证的时候用数组，需要验证的时候用对象。<pre><code>&lt;i class=&quot;iconfont icon-fanhui&quot; v-if=&quot;back&quot;&gt;&lt;/i&gt;...props:{back:{type:Boolean,default:false}}</code></pre></li><li>点击返回键，返回上一个操作<pre><code>this.$router.go(-1);</code></pre></li></ol><ul><li>扩展一下,back也可以返回。this.$router.back()</li><li>强制跳转页面，在后面追加，点返回还可以回去。this.$router.push(‘/XXX’)</li><li>路由替换，将原来的替换。this.$router.replace(‘/XXX’)<h3 id="轮播图"><a href="#轮播图" class="headerlink" title="轮播图"></a>轮播图</h3>base/Swiper.vue<br>安装依赖<pre><code>npm install vue-awesome-swiper --save-dev</code></pre>在main.js中引入vue-awesome-swiper插件<pre><code>import VueAwesomeSwiper from &#39;vue-awesome-swiper&#39;import &#39;swiper/dist/css/swiper.css&#39;Vue.use(VueAwesomeSwiper)</code></pre><h3 id="后台获取图片信息"><a href="#后台获取图片信息" class="headerlink" title="后台获取图片信息"></a>后台获取图片信息</h3>mock/sliders.js 存放图片连接<br>mock/server.js 配置服务器<br>url.parse()可以将一个完整的URL地址，分为很多部分，常用的有：host、port、pathname、path、query。<pre><code>let sliders = require(&#39;./sliders&#39;)http.createServer((req,res)=&gt;{let{pathname,query} = url.parse(req.url);if (pathname === &#39;/sliders&#39;){   res.setHeader(&#39;Content-Type&#39;,&#39;application/json;charset=utf-8&#39;)   res.end(JSON.stringify(sliders))}}</code></pre>但是当前段发起ajax请求的时候，是8080端口请求3000端口的数据，所以有跨域的问题，这里需要在服务器中加入跨域头<pre><code>res.setHeader(&quot;Access-Control-Allow-Origin&quot;, &quot;*&quot;);res.setHeader(&quot;Access-Control-Allow-Headers&quot;, &quot;Content-Type,Content-Length, Authorization, Accept,X-Requested-With&quot;);res.setHeader(&quot;Access-Control-Allow-Methods&quot;,&quot;PUT,POST,GET,DELETE,OPTIONS&quot;);res.setHeader(&quot;X-Powered-By&quot;,&#39; 3.2.1&#39;)if(req.method==&quot;OPTIONS&quot;) return res.end();/*让options请求快速返回*/</code></pre><h3 id="轮播图的api"><a href="#轮播图的api" class="headerlink" title="轮播图的api"></a>轮播图的api</h3></li></ul><pre><code class="js">import axios from &#39;axios&#39;;//设置基本的默认请求路径axios.defaults.baseURL =&#39;http://localhost:3000&#39;;//获取轮播图数据export let getSliders=()=&gt;{ //因为设置了了efaults.baseURL，所以它请求的路径其实是http://localhost:3000/sliders,返回的是一个promise对象 return axios.get(&#39;/sliders&#39;)}</code></pre><blockquote><p>axios 笔记待整理</p></blockquote><h3 id="前端获取数据"><a href="#前端获取数据" class="headerlink" title="前端获取数据"></a>前端获取数据</h3><p>获取的数据父子组件传值，传给子组件，子组件渲染出图片<br>如果给接收到的data一个新的名字 slider {data：slider}</p><pre><code>async created(){ let {data} = await getSliders().then() this.sliders=data},</code></pre><blockquote><p>async/await 已整理</p></blockquote><h3 id="热门图书-删除图书"><a href="#热门图书-删除图书" class="headerlink" title="热门图书/删除图书"></a>热门图书/删除图书</h3><ul><li>先写服务端，确保数据能正常返回</li><li>增加api方法，实现调取数据的功能</li><li>在哪个组件中应用这个api，如果是一个基础组件需要这些数据，在使用这个组件的父级中调用这个方法，将数据传递给基础组件</li></ul><h3 id="详情页面"><a href="#详情页面" class="headerlink" title="详情页面"></a>详情页面</h3><p>如果用对象作为to的属性，并且使用了参数，必须给路由起个名字，通过名字跳转<br>router/index.js</p><pre><code> {path:&#39;/detail/:bid&#39;,component:Detail,name:&#39;detail&#39;}</code></pre><p>component/List.vue<br>需要配置路径参数，点击哪个li跳转哪个详情<br>这是跳转用到router-link，把之前的li改为router-link，</p><ul><li>params是路径参数</li><li>循环组件，需要加上key</li><li>router-link是a标签，这里需要的是li，在taf里面修改<pre><code>&lt;router-link v-for=&quot;(book,index) in books&quot; :to=&quot;{name:&#39;detail&#39;,params:{bid:book.bookId}}&quot; :key=&quot;index&quot; tag=&quot;li&quot; &gt;</code></pre>因为点击li跳转，删除按钮也在li里面，所以这个应该阻止删除按钮<br>冒泡<pre><code>&lt;button @click.stop=&quot;remove(book.bookId)&quot;&gt;删除&lt;/button&gt;</code></pre>component/Detail.vue<pre><code>//获取通过传过来的参数$route.params.XXX</code></pre>获取当前id的图书信息渲染到界面。</li><li>问题一:</li></ul><p>当修改的时候，价格原本是数字，修改之后会变成字符串,加上数字的修饰符</p><pre><code>```&lt;input type=&quot;text&quot; v-model.number=&quot;book.bookPrice&quot; id=&quot;bookPrice&quot;&gt;```</code></pre><ul><li>问题二<br>修改url的时候，页面没有刷新，因为模板已经渲染出来了，不会在走created办法。所以，需要监控url的变化，路径参数发生变化，通过监控参数的变化来发送ajax<pre><code>  watch:{  //路径参数发生变化，通过监控参数的变化来发送ajax  $route(){       this.getData() ;     }  }</code></pre></li><li>问题三<br>如果没有找到对应id的书，那返回的是空对象，如果是空，需要跳转回列表页<br>Object.keys()，该方法返回一个数组,里面是对象的所有属性。如果是空对象那么返回一个空数组。<pre><code>  Object.keys(this.book).length&gt;0?void 0:this.$ruoter.push(&#39;/List&#39;)</code></pre>  处理一下url,server.js查询book的条件变一下<pre><code>  if (!isNaN(id))</code></pre></li></ul><p>数据改变之后，需要用put更新数据<br>PUT：<br>参数1：url:/book?id=3<br>参数2：请求体发送<br>server.js获取put/post请求体中的数据<br>使用这两个事件就可以获取来自服务器端的响应内容。</p><ul><li>data，数据传递时触发，</li><li>end，没有更多数据提供时触发<pre><code>let str = &quot;&quot;;  res.on(&#39;data&#39;,(chunk)=&gt;{      str += chunk;  });  res.on(&#39;end&#39;,()=&gt;{      console.log(str);  });</code></pre><h3 id="添加页面"><a href="#添加页面" class="headerlink" title="添加页面"></a>添加页面</h3>同详情页面</li></ul><h2 id="优化与其他功能"><a href="#优化与其他功能" class="headerlink" title="优化与其他功能"></a>优化与其他功能</h2><h3 id="loading"><a href="#loading" class="headerlink" title="loading"></a>loading</h3><p>轮播图和热门图书是分开获取的，这里改成一起获取<br>api/index</p><pre><code>return axios.all([getSliders(),getHotBook()])</code></pre><p>数据返回的是一个数组，里面是两个promise对象。</p><p>新建base/Loading.vue,挂载在Home.vue<br><a href="https://www.cnblogs.com/lhb25/p/loading-spinners-animated-with-css3.html" target="_blank" rel="noopener">https://www.cnblogs.com/lhb25/p/loading-spinners-animated-with-css3.html</a></p><h3 id="实现页面缓存"><a href="#实现页面缓存" class="headerlink" title="实现页面缓存"></a>实现页面缓存</h3><p>分页面缓存，路由元信息。<br>在配置路由映射的时候有meta(备注)属性,这条对象可以通过<code>this.$route</code>获取</p><pre><code> {path:&#39;/home&#39;,component:Home,meta:{keepAlive:true}},</code></pre><p>修改APP.vue,写两个router-view，一个用于，显示缓存的，一个用于显示一般的</p><pre><code>&lt;template&gt;  &lt;div id=&quot;app&quot;&gt;    &lt;keep-alive&gt;     &lt;router-view v-if=&quot;$route.meta.keepAlive&quot;&gt;&lt;/router-view&gt;    &lt;/keep-alive&gt;    &lt;router-view v-if=&quot;!$route.meta.keepAlive&quot;&gt;&lt;/router-view&gt;      &lt;Tab&gt;&lt;/Tab&gt;  &lt;/div&gt;&lt;/template&gt;</code></pre><h3 id="实现路由动画"><a href="#实现路由动画" class="headerlink" title="实现路由动画"></a>实现路由动画</h3><p>给router-view外面包裹一个<transition name="fadeIn"></transition>标签,注意点：一个只能包裹一个标签<br>写css样式</p><pre><code class="js">  .fadeIn-enter{    opacity: 0;  }  .fadeIn-enter-active{    transition:all 0.3s;  }  .fadeIn-leave-active{    transition: all 0.3s;    opacity: 0;  }</code></pre><h3 id="下拉加载更多"><a href="#下拉加载更多" class="headerlink" title="下拉加载更多"></a>下拉加载更多</h3><h3 id="打包上线"><a href="#打包上线" class="headerlink" title="打包上线"></a>打包上线</h3><h3 id="history路由"><a href="#history路由" class="headerlink" title="history路由"></a>history路由</h3><p>在路由中改变mode:’history’</p><h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><p>router/index<br>meta:{title:XXX}<br>main.js<br>全局钩子，在进入路由之前每一次都会执行此方法。有拦截的作用<br>router.beforeEach(function(from.to,next){<br>   document.title = to.meta.title;<br>   next();<br>});</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;vue-book&quot;&gt;&lt;a href=&quot;#vue-book&quot; class=&quot;headerlink&quot; title=&quot;vue-book&quot;&gt;&lt;/a&gt;vue-book&lt;/h1&gt;&lt;hr&gt;
-&lt;p&gt;接下来会学习vuex，在学习一门预处理语言，之后用我学过的所有东西做一个练习的项目
-      
-    
-    </summary>
-    
-    
-      <category term="vue" scheme="http://yoursite.com/tags/vue/"/>
-    
-  </entry>
-  
-  <entry>
     <title>express学习笔记</title>
     <link href="http://yoursite.com/2018/10/12/express%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     <id>http://yoursite.com/2018/10/12/express学习笔记/</id>
@@ -1116,29 +1082,6 @@ npm install @tinymce/tinymce-vue -S
     
     
       <category term="node" scheme="http://yoursite.com/tags/node/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>project_email</title>
-    <link href="http://yoursite.com/2018/10/11/project-email/"/>
-    <id>http://yoursite.com/2018/10/11/project-email/</id>
-    <published>2018-10-11T07:16:32.000Z</published>
-    <updated>2018-10-12T06:37:09.143Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="邮件收发项目"><a href="#邮件收发项目" class="headerlink" title="邮件收发项目"></a>邮件收发项目</h2><p>大二上开始学html，css，js之后做的暑假做的前端页面，很感谢老师可以给一个练手的机会，在做的过程中发现了很多问题，以及项目完成之后的收获。<br>&nbsp;&nbsp;&nbsp;&nbsp;虽然是一个很简单的界面，但是之前学习的时候不太仔细，也没有demo练习，还是做的磕磕绊绊，还好最后做的差不多了。TAT<br>&nbsp;&nbsp;针对过程中的问题，阅读了很多关于语法规范的文章，js，jq又重新学习了一遍（练习了很多），大二下期基本在学习之中度过的。希望在以后的项目中可以有所进步，彻底的实现前后端分离！！！</p><h2 id="项目相关"><a href="#项目相关" class="headerlink" title="项目相关"></a>项目相关</h2><ul><li>完成时间：大二上期寒假  2018-3月左右</li><li>bootsrap框架，layui框架，jquery</li></ul><h2 id="项目不足"><a href="#项目不足" class="headerlink" title="项目不足"></a>项目不足</h2><ul><li>语法不规范，复用性不强，后面修改过一次感觉修改起来很复杂</li><li>js不熟练，项目之后大二下期又重新开始学习了一遍js，并写了总结 (<a href="https://biubiuins.github.io/2018/10/11/summary-2018-9/" target="_blank" rel="noopener">https://biubiuins.github.io/2018/10/11/summary-2018-9/</a>)</li><li><p>技术不足，没有实现前后端分离</p><h2 id="主要功能"><a href="#主要功能" class="headerlink" title="主要功能"></a>主要功能</h2></li><li><p>首页 <a href="http://mailroom.sicau.edu.cn/email/public/" target="_blank" rel="noopener">http://mailroom.sicau.edu.cn/email/public/</a></p><ul><li>bootsrap做了响应式，用了ajax请求数据</li></ul></li><li>管理页面（需要登陆仅提供图片）<br><img src="/img/project_email/admin.png" width="85%"><ul><li>实现全选与批量删除</li><li>点击已取之后，重新获取数据（保证筛选邮件之后点击已取仍显示的是筛选之后的邮件)</li><li>邮件类型默认显示上一次选择的类型，可输入筛选的下拉框<br><img src="/img/project_email/admin1.png" width="85%"></li><li>超级管理员界面实现了原生js模态框，并做了根据屏幕居中</li></ul></li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;邮件收发项目&quot;&gt;&lt;a href=&quot;#邮件收发项目&quot; class=&quot;headerlink&quot; title=&quot;邮件收发项目&quot;&gt;&lt;/a&gt;邮件收发项目&lt;/h2&gt;&lt;p&gt;大二上开始学html，css，js之后做的暑假做的前端页面，很感谢老师可以给一个练手的机会，在做的过程中发现
-      
-    
-    </summary>
-    
-    
-      <category term="project" scheme="http://yoursite.com/tags/project/"/>
     
   </entry>
   

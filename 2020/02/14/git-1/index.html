@@ -225,7 +225,7 @@
 <h4 id="团队成员邀请"><a href="#团队成员邀请" class="headerlink" title="团队成员邀请"></a>团队成员邀请</h4><p><img src="/img/git/邀请加入团队.png"></p>
 <p>变成团队成员就可以把自己的修改推送进入远程仓库了。</p>
 <h4 id="拉取pull"><a href="#拉取pull" class="headerlink" title="拉取pull"></a>拉取pull</h4><p>命令: git fetch[远程库地址别名][远程分支名]<br>      git merge[远程库地址别名/远程分支名]<br>      git pull[远程库地址别名][远程分支名]<br>作用: pull=fetch+merge。<br>      fetch 把远程库抓取下来，并没有修改本地文件。<br>      merge 把远程的master合并到本地的master，本地文件修改。</p>
-<p><strong>解决冲突</strong><br>要点：<table><tr><td bgcolor="pink">果不是基于GitHub远程库的最新版本所作的修改，不能推送，必须先拉取下来</td></tr></table>如<br>若pull下来之后进入冲突状态，其余同分支冲突处理办法一样。</p>
+<p><strong>解决冲突</strong><br>要点：<table><tr><td bgcolor="pink">如果不是基于GitHub远程库的最新版本所作的修改，不能推送，必须先拉取下来</td></tr></table>如<br>若pull下来之后进入冲突状态，其余同分支冲突处理办法一样。</p>
 <h4 id="跨团队操作"><a href="#跨团队操作" class="headerlink" title="跨团队操作"></a>跨团队操作</h4><p>外团队人员<code>fork</code>该团队远程库A（复制新的远程库B、外团队人员的仓库），<code>clone</code>到本地修改后<code>push</code>到B，之后外团队人员<code>pull request</code> （GitHub远程库B操作）=&gt;  该团队人（GitHub远程库A） 审核 =&gt; <code>merge</code> 远程库A的内容更新成远程库B的内容。</p>
 <h4 id="SSH登陆"><a href="#SSH登陆" class="headerlink" title="SSH登陆"></a>SSH登陆</h4><p>第一步：生成ssh（在家目录）<br>ssh-keygen ct rsa -C 邮箱账号         //注意C大写<br>注：在主目录下生成的密钥在 /c/Users/用户名/.ssh/id_rsa 里<br>第二步：查看并复制ssh（需在.ssh目录下执行 cd .ssh进入）<br>cat id_rsa.pub<br>第三步：复制密钥内容添加到 github 上</p>
 <p>使用ssh协议上传文件到仓库</p>

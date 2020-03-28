@@ -6,12 +6,12 @@
   <meta name="author" content="DING RANJIE" />
   
   
-  <title>unexpected-token&lt; 报错 （待补充） | biubiu的博客</title>
+  <title>webpack学习笔记（3月28日更新） | biubiu的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="project,软件超市," />
+    <meta name="keywords" content="学习笔记,构建工具," />
   
 
   
@@ -150,11 +150,11 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-02-22
+      <i class="fa fa-calendar"></i>2020-03-28
     </span>
     
       <span>
-        | <a href="/categories/project/"><i class="fa fa-bookmark"></i>project</a>
+        | <a href="/categories/学习笔记/"><i class="fa fa-bookmark"></i>学习笔记</a>
       </span>
     
     
@@ -164,20 +164,120 @@
     
   </div>
   <h1 class="passage-title">
-    unexpected-token< 报错 （待补充）
+    webpack学习笔记（3月28日更新）
   </h1>
   
   <article class="passage-article">
-    <p>因为团队信息的后台返回数据格式发生了变化，前端字段应该做相应变化。<br>改完之后，本地是没有问题的，打包上线到服务器之后发现了报错了<code>Uncaught SyntaxError: Unexpected token &lt;</code></p>
-<p><img src="\img\软件超市\报错图.png" alt="报错图"></p>
-<p>所以原因要么在服务器，要么就是打包的问题。</p>
-<p>首先进行排查的是文档类型，因为报错的三行都是与js相关。<br>点击控制台错误的代码提示，查看<code>network</code>对应的文件加载状态,发现返回的不是<code>js</code>形式。而是<code>doctype html</code>,那么很大概率是服务器把<code>js</code>文件当作<code>html</code>响应，导致解析错误。正常情况返回<code>content-type:applocation/javascript</code>，而现在的错误情况<code>js</code>文档的响应信息，变成了<code>text/html</code></p>
-<p><img src="\img\软件超市\文档类型错误.png" alt="文档类型错误"><br><img src="\img\软件超市\文档类型错误1.png" alt="文档类型错误1"></p>
-<p>把上一个版本部署上去，发现没问题。那么排除了服务器的问题，应该是打包的问题。</p>
-<p>确定是打包的问题之后查看<code>config/index.js</code>,找到了原因。</p>
-<p><img src="\img\软件超市\打包路径.png" alt="打包路径"></p>
-<p><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>____</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>待更新<br>具体的原因等学了webpack之后来更新</p>
+    <h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p>Webpack是一种前端资源构建工具，一个静态模块打包器。将根据模块的依赖关系进行静态分析，打包生成对应的静态资源（bundle）</p>
+<p><strong>Webpack五个核心概念</strong></p>
+<ul>
+<li>Entry:入口指示Webpack以哪个文件为入口起点开始打包，分析构建内部依赖图。</li>
+<li>Output:输出指示Webpack打包后的资源bundles输出到哪里去，以及如何命名。</li>
+<li>Loader:Loader让Webpack能够去处理那些非JavaScript文件（Webpack自身只理解JavaScript/json）</li>
+<li>Plugins:插件可以用于执行范围更广的任务。插件的范围包括，从打包优化和压缩，一直到重新定义环境中的变量等。</li>
+<li>Mode:模式指示Webpack使用相应模式的配置<ul>
+<li>development：能让代码本地调式运行的环境</li>
+<li>production：能让代码优化上线运行的环境</li>
+</ul>
+</li>
+</ul>
+<p>示例：webpack.config.js</p>
+<pre><code>/*
+webpack.config.js webpack的配置文件
+作用：当运行webpack指令时，会加载里面的配置
+所有的构建工具都基于nodejs平台运行的，模块化默认采用commonjs
+ */
 
+/*
+loader：1.下载 2.配置（使用）
+plugins：1.下载 2.引入  3.使用
+ */
+
+//resolve用来拼接绝对路径的方法
+const  {resolve} = require(&quot;path&quot;)
+
+const HtmlWebpackPlugin =require(&quot;html-webpack-plugin&quot;);
+
+module.exports = {
+    //webpack配置
+    //入口起点
+    entry: &#39;./src/index.js&#39;,
+    //输出是对象
+    output:{
+        //输出文件名
+        filename: &quot;built.js&quot;,
+        //输出路径
+        //__dirname是nodejs的变量，代表当前文件的文件夹绝对路径
+        path:resolve(__dirname,&quot;build&quot;)
+    },
+    //loader配置
+    module:{
+        rules:[
+            //详细loader配置
+            //不同文件配置不同loader处理
+            {
+                //匹配哪些文件,以.css结尾的文件
+                test:/\.css$/,
+                //使用哪些loader进行处理
+                use:[
+                    //use数组中loader执行顺序：从后往前
+                    //创建style标签，将js中的样式资源插入进行，添加到head中生效
+                    &quot;style-loader&quot;,
+                    //将css文件变成commonjs模块加载js中，里面内容是样式字符串
+                    &quot;css-loader&quot;
+                ]
+            },
+            {
+               test:/\.less$/,
+               use:[&quot;style-loader&quot;,
+               &quot;css.loader&quot;,
+                   //将less文件编译成css文件
+                   //需要下载less-loader和less
+                   &#39;less-loader&#39;
+               ]
+            },
+            //处理图片资源
+            {
+                //问题：处理不了html中的img图片
+                test:/\.(jpg|png|gif)$/,
+                //使用一个loader时，可直接用loader引用，不用use
+                loader: &quot;url-loader&quot;,
+                options: {
+                    //图片大小小于8kb，就会被base64处理
+                    //优点：减少请求数量（减轻服务器压力）
+                    //缺点：图片体积会更大（文件请求速度更慢）
+                    limit:8*1024,
+                    //问题：因为url-loader默认使用es模块化解析，而html-loader引入图片是commonjs
+                    //解析时会出现问题：[object Module]
+                    //解决：关闭url-loader的es模块化，使用commonjs解析
+                    esModule:false
+                }
+            },
+            {
+                test:/\.html$/,
+                //处理html文件的img图片（负责引入img，从而能被url-loader进行处理）
+                loader:&quot;html-loader&quot;
+            }
+        ]
+    },
+    //plugins的配置
+    plugins: [
+        //html-webpack-plugin
+        //功能：默认会创建一个空的HTML，自动引入打包输出的所有资源（js/css）
+        //  new HtmlWebpackPlugin()
+        //需求：需要有结构的HTML文件
+        new HtmlWebpackPlugin({
+         //复制&quot;./src/index.html&quot;,并自动引入打包输出的所有资源（js/css）
+            template:&quot;./src/index.html&quot;
+        }
+        )
+        //详细pulgins的配置
+    ],
+    //模式
+    mode:&#39;development&#39;
+    // mode:&quot;production&quot;
+}
+</code></pre>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -185,14 +285,14 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#综述"><span class="toc-text">综述</span></a></li></ol>
   </div>
 </aside>
   
   
     <div class="passage-tags">
      
-      <a href="/tags/软件超市/"><i class="fa fa-tags"></i>软件超市</a>
+      <a href="/tags/构建工具/"><i class="fa fa-tags"></i>构建工具</a>
     
     </div>
   
@@ -243,10 +343,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/02/23/this指针/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/02/19/拷贝/" data-enable="true">
+    <a href="/2020/03/22/unexpected-token/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

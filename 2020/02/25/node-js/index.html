@@ -6,7 +6,7 @@
   <meta name="author" content="DING RANJIE" />
   
   
-  <title>Node.js（更新中） | biubiu的博客</title>
+  <title>Node.js（3.28更新） | biubiu的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -164,7 +164,7 @@
     
   </div>
   <h1 class="passage-title">
-    Node.js（更新中）
+    Node.js（3.28更新）
   </h1>
   
   <article class="passage-article">
@@ -211,6 +211,20 @@ function(exports,require,module.__filename,__dirname){
 <p>基本的操作：<br>查看版本：npm -v<br>搜索模块包：npm search 包名<br>安装包：npm install 包名 安装包并添加到依赖  （最好在要安装包的位置创建package.json文件）<br>        npm install 包名 -g 全局安装</p>
 <p>初始化package.json:npm init (名字不用大写)<br>删除包：npm remove 包名</p>
 <p>通过npm下载的包都在node_mudules文件夹中，直接通过包名即可引用。<br>node在使用模块名字来引入模块时，它会首先在当前目录的node_modules中寻找是否含有该模块，如果没有去上一级目录的node_modules中寻找，直到找到磁盘的根目录。</p>
+<p><strong>全局安装与本地安装</strong><br>npm install xxx # 本地安装<br>npm install xxx -g # 全局安装</p>
+<p>本地安装</p>
+<ol>
+<li>将安装包放在 ./node_modules 下（运行npm时所在的目录）</li>
+<li>可以通过 require() 来引入本地安装的包</li>
+</ol>
+<p>全局安装</p>
+<ol>
+<li>将安装包放在 /usr/local 下</li>
+<li>可以直接在命令行里使用</li>
+</ol>
+<p><strong>-d与-s的区别</strong><br>npm install -d 就是npm install –save-dev<br>npm insatll -s 就是npm install –save</p>
+<p>我们在使用npm install 安装模块或插件的时候，上述两种命令都可以把他们写入到 package.json 文件里面去。<br>首先dev是develop的简写，-save-dev安装的插件，被写入到 devDependencies 域里面去，而使用 –save 安装的插件，则是被写入到 dependencies区块里面去。devDependencies 里面的插件只用于开发环境，不用于生产环境，而dependencies  是需要发布到生产环境的。</p>
+<p>例子：比如我们写一个项目要依赖于jQuery，没有这个包的依赖运行就会报错，这时候就把这个依赖写入dependencies ；而我们使用的一些构建工具比如glup、webpack这些只是在开发中使用的包，上线以后就和他们没关系了，所以将它写入devDependencies。</p>
 <h2 id="Buffer（缓存区）"><a href="#Buffer（缓存区）" class="headerlink" title="Buffer（缓存区）"></a>Buffer（缓存区）</h2><p>Buffer的结构和数组很像，操作的方法也和数组类似。数组中不能存储二进制的文件，而Buffer专门用来存储二进制数据(图片/mp3/视频 二进制文件)</p>
 <p>使用：buffer不需要引入模块，直接使用即可</p>
 <p><strong>常用操作</strong><br>Buffer.from(str[,encoding])</p>

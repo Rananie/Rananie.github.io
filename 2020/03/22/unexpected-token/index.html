@@ -6,12 +6,12 @@
   <meta name="author" content="DING RANJIE" />
   
   
-  <title>归档 | 第2页 | biubiu的博客</title>
+  <title>unexpected-token&lt; 报错 （待补充） | biubiu的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo, Theme-AD" />
+    <meta name="keywords" content="project,软件超市," />
   
 
   
@@ -36,7 +36,7 @@
     welcome: {"enable":false,"interval":30},
     start_time: "2018-02-10",
     passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
-    is_post: false,
+    is_post: true,
     lock: false,
     author: "DING RANJIE",
     share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
@@ -146,72 +146,58 @@
 </nav>
 <div id="site-process"></div>
     <main>
-      <div class="timeline">
-  <h2 class="timeline-title">归档: 42篇</h2>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-03-22
+    </span>
+    
+      <span>
+        | <a href="/categories/project/"><i class="fa fa-bookmark"></i>project</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    unexpected-token< 报错 （待补充）
+  </h1>
   
+  <article class="passage-article">
+    <p>因为团队信息的后台返回数据格式发生了变化，前端字段应该做相应变化。<br>改完之后，本地是没有问题的，打包上线到服务器之后发现了报错了<code>Uncaught SyntaxError: Unexpected token &lt;</code></p>
+<p><img src="\img\软件超市\报错图.png" alt="报错图"></p>
+<p>所以原因要么在服务器，要么就是打包的问题。</p>
+<p>首先进行排查的是文档类型，因为报错的三行都是与js相关。<br>点击控制台错误的代码提示，查看<code>network</code>对应的文件加载状态,发现返回的不是<code>js</code>形式。而是<code>doctype html</code>,那么很大概率是服务器把<code>js</code>文件当作<code>html</code>响应，导致解析错误。正常情况返回<code>content-type:applocation/javascript</code>，而现在的错误情况<code>js</code>文档的响应信息，变成了<code>text/html</code></p>
+<p><img src="\img\软件超市\文档类型错误.png" alt="文档类型错误"><br><img src="\img\软件超市\文档类型错误1.png" alt="文档类型错误1"></p>
+<p>把上一个版本部署上去，发现没问题。那么排除了服务器的问题，应该是打包的问题。</p>
+<p>确定是打包的问题之后查看<code>config/index.js</code>,找到了原因。</p>
+<p><img src="\img\软件超市\打包路径.png" alt="打包路径"></p>
+<p><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>____</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>待更新<br>具体的原因等学了webpack之后来更新</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
     
-      <h3 class="timeline-subtitle">2020</h3>
-    
-    <div class="timeline-item">
-      <time>2020-02-23</time>
-      <a target="_self" href="/2020/02/23/this指针/">this指针</a>
-    </div>
+  </div>
+</aside>
   
-    
-    <div class="timeline-item">
-      <time>2020-02-19</time>
-      <a target="_self" href="/2020/02/19/拷贝/">拷贝</a>
-    </div>
   
+    <div class="passage-tags">
+     
+      <a href="/tags/软件超市/"><i class="fa fa-tags"></i>软件超市</a>
     
-    <div class="timeline-item">
-      <time>2020-02-18</time>
-      <a target="_self" href="/2020/02/18/原型与原型链面试题/">原型与原型链面试题</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-02-18</time>
-      <a target="_self" href="/2020/02/18/原型与原型链/">原型与原型链</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-02-17</time>
-      <a target="_self" href="/2020/02/17/es6/">es5/es6/es7</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-02-16</time>
-      <a target="_self" href="/2020/02/16/宏队列与微队列/">js异步:宏队列与微队列</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-02-16</time>
-      <a target="_self" href="/2020/02/16/promise面试题/">promise面试题（深入理解调用顺序）</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-02-14</time>
-      <a target="_self" href="/2020/02/14/git-1/">git&amp;GitHub</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-02-09</time>
-      <a target="_self" href="/2020/02/09/富文本tinymce/">富文本tinymce</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-02-06</time>
-      <a target="_self" href="/2020/02/06/软件超市新项目后台管理界面开发流程3/">软件超市项目后台管理界面开发流程3</a>
     </div>
   
 </div>
+
     </main>
     
     <div class="site-footer-wrapper">
@@ -257,15 +243,15 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/archives/" data-enable="true">
+    <a href="/2020/03/28/webpack学习笔记/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/archives/page/3/" data-enable="true">
+    <a href="/2020/03/10/letcode记录/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
   <div class="bottom-bar-right">
-    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
       <i class="fa fa-bars"></i>
     </a>
     

@@ -207,24 +207,6 @@ function(exports,require,module.__filename,__dirname){
 <li>doc 文档</li>
 <li>test单元测试<br>包描述文件：描述包的相关的信息，以供外部读取分析</li>
 </ul>
-<h3 id="NPM（Node-Package-Manager）"><a href="#NPM（Node-Package-Manager）" class="headerlink" title="NPM（Node Package Manager）"></a>NPM（Node Package Manager）</h3><p>CommonJS包规范是理论，NPM是其中一种实践。<br>对于Node而言，NPM帮助其完成了第三方模板的发布、安装、依赖等。借助NPM，Node与第三方模块之间形成了很好的一个生态系统。</p>
-<p>基本的操作：<br>查看版本：npm -v<br>搜索模块包：npm search 包名<br>安装包：npm install 包名 安装包并添加到依赖  （最好在要安装包的位置创建package.json文件）<br>        npm install 包名 -g 全局安装</p>
-<p>初始化package.json:npm init (名字不用大写)<br>删除包：npm remove 包名</p>
-<p>通过npm下载的包都在node_mudules文件夹中，直接通过包名即可引用。<br>node在使用模块名字来引入模块时，它会首先在当前目录的node_modules中寻找是否含有该模块，如果没有去上一级目录的node_modules中寻找，直到找到磁盘的根目录。</p>
-<p><strong>全局安装与本地安装</strong><br>npm install xxx # 本地安装<br>npm install xxx -g # 全局安装</p>
-<p>本地安装</p>
-<ol>
-<li>将安装包放在 ./node_modules 下（运行npm时所在的目录）</li>
-<li>可以通过 require() 来引入本地安装的包</li>
-</ol>
-<p>全局安装</p>
-<ol>
-<li>将安装包放在 /usr/local 下</li>
-<li>可以直接在命令行里使用</li>
-</ol>
-<p><strong>-d与-s的区别</strong><br>npm install -d 就是npm install –save-dev<br>npm insatll -s 就是npm install –save</p>
-<p>我们在使用npm install 安装模块或插件的时候，上述两种命令都可以把他们写入到 package.json 文件里面去。<br>首先dev是develop的简写，-save-dev安装的插件，被写入到 devDependencies 域里面去，而使用 –save 安装的插件，则是被写入到 dependencies区块里面去。devDependencies 里面的插件只用于开发环境，不用于生产环境，而dependencies  是需要发布到生产环境的。</p>
-<p>例子：比如我们写一个项目要依赖于jQuery，没有这个包的依赖运行就会报错，这时候就把这个依赖写入dependencies ；而我们使用的一些构建工具比如glup、webpack这些只是在开发中使用的包，上线以后就和他们没关系了，所以将它写入devDependencies。</p>
 <h2 id="Buffer（缓存区）"><a href="#Buffer（缓存区）" class="headerlink" title="Buffer（缓存区）"></a>Buffer（缓存区）</h2><p>Buffer的结构和数组很像，操作的方法也和数组类似。数组中不能存储二进制的文件，而Buffer专门用来存储二进制数据(图片/mp3/视频 二进制文件)</p>
 <p>使用：buffer不需要引入模块，直接使用即可</p>
 <p><strong>常用操作</strong><br>Buffer.from(str[,encoding])</p>
@@ -420,7 +402,7 @@ console.log(url.resolve(targetUrl, httpUrl));
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#综述"><span class="toc-text">综述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CommonJS规范"><span class="toc-text">CommonJS规范</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#exports与module-exports的区别"><span class="toc-text">exports与module.exports的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#package"><span class="toc-text">package</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NPM（Node-Package-Manager）"><span class="toc-text">NPM（Node Package Manager）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Buffer（缓存区）"><span class="toc-text">Buffer（缓存区）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fs（文件系统）"><span class="toc-text">fs（文件系统）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#同步-异步文件写入"><span class="toc-text">同步/异步文件写入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用-简单的文件写入"><span class="toc-text">(常用)简单的文件写入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流式文件写入"><span class="toc-text">流式文件写入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件的读取"><span class="toc-text">文件的读取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fs其他常用方法"><span class="toc-text">fs其他常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ip地址和端口号"><span class="toc-text">ip地址和端口号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http"><span class="toc-text">http</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#url"><span class="toc-text">url</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#综述"><span class="toc-text">综述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CommonJS规范"><span class="toc-text">CommonJS规范</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#exports与module-exports的区别"><span class="toc-text">exports与module.exports的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#package"><span class="toc-text">package</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Buffer（缓存区）"><span class="toc-text">Buffer（缓存区）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fs（文件系统）"><span class="toc-text">fs（文件系统）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#同步-异步文件写入"><span class="toc-text">同步/异步文件写入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用-简单的文件写入"><span class="toc-text">(常用)简单的文件写入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流式文件写入"><span class="toc-text">流式文件写入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件的读取"><span class="toc-text">文件的读取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fs其他常用方法"><span class="toc-text">fs其他常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ip地址和端口号"><span class="toc-text">ip地址和端口号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http"><span class="toc-text">http</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#url"><span class="toc-text">url</span></a></li></ol>
   </div>
 </aside>
   

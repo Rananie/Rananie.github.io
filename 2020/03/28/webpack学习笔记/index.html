@@ -6,12 +6,12 @@
   <meta name="author" content="DING RANJIE" />
   
   
-  <title>webpack学习笔记（3月28日更新） | biubiu的博客</title>
+  <title>webpack学习笔记（5月25日更新） | biubiu的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="学习笔记,构建工具," />
+    <meta name="keywords" content="学习笔记,前端,构建工具," />
   
 
   
@@ -164,7 +164,7 @@
     
   </div>
   <h1 class="passage-title">
-    webpack学习笔记（3月28日更新）
+    webpack学习笔记（5月25日更新）
   </h1>
   
   <article class="passage-article">
@@ -186,6 +186,7 @@
 webpack.config.js webpack的配置文件
 作用：当运行webpack指令时，会加载里面的配置
 所有的构建工具都基于nodejs平台运行的，模块化默认采用commonjs
+启动文件指令：webpack
  */
 
 /*
@@ -195,7 +196,7 @@ plugins：1.下载 2.引入  3.使用
 
 //resolve用来拼接绝对路径的方法
 const  {resolve} = require(&quot;path&quot;)
-
+//引用
 const HtmlWebpackPlugin =require(&quot;html-webpack-plugin&quot;);
 
 module.exports = {
@@ -236,11 +237,19 @@ module.exports = {
                    &#39;less-loader&#39;
                ]
             },
+            //打包其他资源（除了html/js/css资源以外的资源）
+            //字体不建议这种写法，因为需要排除的东西过多
+            {
+            //排除css、js、html以外的资源
+             exclude:/\.(css|js|html)$/,
+             loader:&quot;file-loader&quot;
+
+            }
             //处理图片资源
             {
-                //问题：处理不了html中的img图片
+                //问题：处理html中的img图片
                 test:/\.(jpg|png|gif)$/,
-                //使用一个loader时，可直接用loader引用，不用use
+                //使用一个loader时，可直接用loader引用，不用use,
                 loader: &quot;url-loader&quot;,
                 options: {
                     //图片大小小于8kb，就会被base64处理
@@ -250,7 +259,9 @@ module.exports = {
                     //问题：因为url-loader默认使用es模块化解析，而html-loader引入图片是commonjs
                     //解析时会出现问题：[object Module]
                     //解决：关闭url-loader的es模块化，使用commonjs解析
-                    esModule:false
+                    esModule:false,
+                    //打包之后文件名的hash值取10位，保持原来的后缀名
+                    name:&quot;[hash:10].[ext]&quot;
                 }
             },
             {
@@ -269,15 +280,36 @@ module.exports = {
         new HtmlWebpackPlugin({
          //复制&quot;./src/index.html&quot;,并自动引入打包输出的所有资源（js/css）
             template:&quot;./src/index.html&quot;
-        }
-        )
+        })
         //详细pulgins的配置
     ],
     //模式
     mode:&#39;development&#39;
     // mode:&quot;production&quot;
+
+
+    //启动devServer指令为：npx webpack-dev-server（需要安装对应的包）
+    //localhost:3000本地服务器查看
+    devServer:{
+     //构建后的路径
+     contentBase:resolve(__dirname,&quot;build&quot;),
+     //启动gzip压缩，使代码体积更小，运行更快。
+     compress:true,
+     //指定开发服务器的端口号
+     port:3000,
+     //自动打开默认浏览器
+     open:true
+    }
 }
-</code></pre>
+</code></pre><p><strong>总结：</strong></p>
+<ul>
+<li>module-&gt;rules-&gt;use 数组(使用多个loader)是从后往前执行的，使用一个可以直接用loader</li>
+<li>loader：①下载 ②配置（使用），plugins：①下载 ②引入 ③使用。</li>
+<li>url-loader可以用于图片和字体</li>
+<li>webpack需要实时打包，可使用开发服务器devServer实现自动化。</li>
+</ul>
+<h3 id="devServer"><a href="#devServer" class="headerlink" title="devServer"></a>devServer</h3><p>开发服务器 devServer用来实现自动化，比如自动编译，自动打开浏览器，自动刷新浏览器。只会在内存中编译打包，不会有任何输出文件，比如删除build后，使用devServer不会输出新的build文件。相当于打包后放在本地服务器上运行。</p>
+
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -285,7 +317,7 @@ module.exports = {
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#综述"><span class="toc-text">综述</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#综述"><span class="toc-text">综述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#devServer"><span class="toc-text">devServer</span></a></li></ol></li></ol>
   </div>
 </aside>
   
@@ -343,7 +375,7 @@ module.exports = {
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2020/05/25/npm包管理/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
     <a href="/2020/03/22/unexpected-token/" data-enable="true">

@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="学习笔记,前端,Node," />
+    <meta name="keywords" content="前端,Node," />
   
 
   
@@ -154,7 +154,7 @@
     </span>
     
       <span>
-        | <a href="/categories/学习笔记/"><i class="fa fa-bookmark"></i>学习笔记</a>
+        | <a href="/categories/前端/"><i class="fa fa-bookmark"></i>前端</a>
       </span>
     
     
@@ -168,8 +168,7 @@
   </h1>
   
   <article class="passage-article">
-    <p>NPM（Node Package Manager）</p>
-<p>CommonJS包规范是理论，NPM是其中一种实践。<br>npm是Node.js的软件包管理，对于Node而言，NPM帮助其完成了第三方模板的发布、安装、依赖等。借助NPM，Node与第三方模块之间形成了很好的一个生态系统。</p>
+    <p>NPM（Node Package Manager）<br>CommonJS包规范是理论（CommonJS的包规范 = 包结构+包描述文件），NPM是其中一种实践。<br>npm是Node.js的软件包管理，对于Node而言，NPM帮助其完成了第三方模板的发布、安装、依赖等。借助NPM，Node与第三方模块之间形成了很好的一个生态系统。</p>
 <p>基本的操作：<br>查看版本：npm -v<br>搜索模块包：npm search 包名<br>安装包：npm install 包名 安装包并添加到依赖  （最好在要安装包的位置创建package.json文件）<br>        npm install 包名 -g 全局安装</p>
 <p>初始化package.json:npm init (名字不用大写)<br>删除包：npm remove 包名</p>
 <p>通过npm下载的包都在node_mudules文件夹中，直接通过包名即可引用。<br>node在使用模块名字来引入模块时，它会首先在当前目录的node_modules中寻找是否含有该模块，如果没有去上一级目录的node_modules中寻找，直到找到磁盘的根目录。</p>
@@ -273,7 +272,7 @@ npx -p node@0.12.8
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2020/05/26/exports/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
     <a href="/2020/03/28/webpack学习笔记/" data-enable="true">

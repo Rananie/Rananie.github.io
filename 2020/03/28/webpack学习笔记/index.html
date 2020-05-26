@@ -6,7 +6,7 @@
   <meta name="author" content="DING RANJIE" />
   
   
-  <title>webpack学习笔记（5月25日更新） | biubiu的博客</title>
+  <title>webpack学习笔记（5月26日更新） | biubiu的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -164,7 +164,7 @@
     
   </div>
   <h1 class="passage-title">
-    webpack学习笔记（5月25日更新）
+    webpack学习笔记（5月26日更新）
   </h1>
   
   <article class="passage-article">
@@ -183,10 +183,13 @@
 </ul>
 <p>示例：webpack.config.js</p>
 <pre><code>/*
+开发环境配置，能让代码运行起来
+*/
+
+/*
 webpack.config.js webpack的配置文件
-作用：当运行webpack指令时，会加载里面的配置
+作用：当运行webpack指令时，会加载里面的配置，打包结果会输出出去
 所有的构建工具都基于nodejs平台运行的，模块化默认采用commonjs
-启动文件指令：webpack
  */
 
 /*
@@ -196,7 +199,7 @@ plugins：1.下载 2.引入  3.使用
 
 //resolve用来拼接绝对路径的方法
 const  {resolve} = require(&quot;path&quot;)
-//引用
+//引用处理html的插件
 const HtmlWebpackPlugin =require(&quot;html-webpack-plugin&quot;);
 
 module.exports = {
@@ -206,7 +209,7 @@ module.exports = {
     //输出是对象
     output:{
         //输出文件名
-        filename: &quot;built.js&quot;,
+        filename: &quot;js/built.js&quot;,
         //输出路径
         //__dirname是nodejs的变量，代表当前文件的文件夹绝对路径
         path:resolve(__dirname,&quot;build&quot;)
@@ -224,7 +227,7 @@ module.exports = {
                     //use数组中loader执行顺序：从后往前
                     //创建style标签，将js中的样式资源插入进行，添加到head中生效
                     &quot;style-loader&quot;,
-                    //将css文件变成commonjs模块加载js中，里面内容是样式字符串
+                    //将css文件变成commonjs模块加载js中，里面内容是样式字符串，所以css文件不会单独输出
                     &quot;css-loader&quot;
                 ]
             },
@@ -241,9 +244,11 @@ module.exports = {
             //字体不建议这种写法，因为需要排除的东西过多
             {
             //排除css、js、html以外的资源
-             exclude:/\.(css|js|html)$/,
+             exclude:/\.(css|js|html|less|jpg|png|gif)$/,
              loader:&quot;file-loader&quot;
-
+            options:{
+             name:&quot;[hash:10].[ext]&quot;
+            }
             }
             //处理图片资源
             {
@@ -261,19 +266,20 @@ module.exports = {
                     //解决：关闭url-loader的es模块化，使用commonjs解析
                     esModule:false,
                     //打包之后文件名的hash值取10位，保持原来的后缀名
-                    name:&quot;[hash:10].[ext]&quot;
+                    name:&quot;[hash:10].[ext]&quot;,
+                    //设置图片的输出路径
+                    outputPath:&quot;imgs&quot;
                 }
             },
-            {
+            { //处理html文件的img图片（负责引入img，从而能被url-loader进行处理）
                 test:/\.html$/,
-                //处理html文件的img图片（负责引入img，从而能被url-loader进行处理）
                 loader:&quot;html-loader&quot;
             }
         ]
     },
     //plugins的配置
     plugins: [
-        //html-webpack-plugin
+        //html-webpack-plugin 处理html资源
         //功能：默认会创建一个空的HTML，自动引入打包输出的所有资源（js/css）
         //  new HtmlWebpackPlugin()
         //需求：需要有结构的HTML文件
@@ -307,6 +313,7 @@ module.exports = {
 <li>loader：①下载 ②配置（使用），plugins：①下载 ②引入 ③使用。</li>
 <li>url-loader可以用于图片和字体</li>
 <li>webpack需要实时打包，可使用开发服务器devServer实现自动化。</li>
+<li>因为url-loader默认使用es模块化解析，而html-loader解析html中的图片的解析是commonjs。所以需要在url-loader中的选项配置中使用esModule:false关闭默认的es模块解析</li>
 </ul>
 <h3 id="devServer"><a href="#devServer" class="headerlink" title="devServer"></a>devServer</h3><p>开发服务器 devServer用来实现自动化，比如自动编译，自动打开浏览器，自动刷新浏览器。只会在内存中编译打包，不会有任何输出文件，比如删除build后，使用devServer不会输出新的build文件。相当于打包后放在本地服务器上运行。</p>
 

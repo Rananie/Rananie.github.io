@@ -177,36 +177,6 @@
 <li>Node可以在后台来编写服务器，Node服务器都是单线程的服务器。</li>
 </ul>
 <p>补充：<br>1.node中有一个全局对象global，它的作用和网页中window类似，在全局创建的变量/方法都会作为global的属性/方法保存<br>2.代码风格：建议无论有分号代码或者无分号代码，都建议如果一<code>（</code>、<code>[</code>、<code>\`</code>开头，最好都在前面补上一个分号。</p>
-<h2 id="CommonJS规范"><a href="#CommonJS规范" class="headerlink" title="CommonJS规范"></a>CommonJS规范</h2><p>CommonJS加载模块是<strong>同步</strong></p>
-<p><strong>知识点1</strong> Node中，一个js文件就是一个模块</p>
-<p>引入：require(路径)，<strong>使用相对路径，必须以<code>.</code>或<code>..</code>开头</strong><br>引入模块以后，该函数会<strong>返回一个对象</strong>，这个对象代表的是引入的模块。</p>
-<p>模块分成两大类：<br>核心模块：由node引擎提供的模块，核心模块的标识就是模块的名字<br>文件模块：由用户自己创建的模块，文件模块的标识为路径</p>
-<p><strong>知识点2</strong>在Node中，<strong>每一个js文件中的js代码都是独立运行在一个函数体中</strong>。所以如果想要其他文件访问，必须要将数据暴露出来<br>暴露：exports.x = “xxxx”</p>
-<pre><code>//当node在执行模块中的代码时，它首先在代码的最顶部，添加如下代码
-function(exports,require,module.__filename,__dirname){
-//里面才是自己写的
-}
-</code></pre><p>形参中</p>
-<ul>
-<li>exports：将变量或函数暴露到外部</li>
-<li>require：用来引入外部的模块</li>
-<li>module：代表当前模块本身</li>
-<li>__filename：当前模块的完整路径</li>
-<li>__dirname：当前模块所在文件夹的完整路径</li>
-</ul>
-<h3 id="exports与module-exports的区别"><a href="#exports与module-exports的区别" class="headerlink" title="exports与module.exports的区别"></a>exports与module.exports的区别</h3><p>本质上exports就是module的属性，module.exports===exports</p>
-<ul>
-<li>exports只能用.的方式来向外暴露内部变量</li>
-<li>module.exports即可以通过.，也可以直接赋值<br><code>原因是</code>module.exports<code>修改的是module对象，而</code>exports`修改的是变量（会改变指针的指向，本来两个是指向一个堆空间）</li>
-</ul>
-<h3 id="package"><a href="#package" class="headerlink" title="package"></a>package</h3><p>包是一个包装过规范的模块<br>CommonJS的包规范允许我们将一组相关的模块组合到一起，形成一组完整的工具。<br>CommonJS的包规范 = 包结构+包描述文件<br>包结构：用于组织包中的各种文件</p>
-<ul>
-<li>package.json 描述文件（必须）</li>
-<li>bin 可执行二进制文件</li>
-<li>lib js代码</li>
-<li>doc 文档</li>
-<li>test单元测试<br>包描述文件：描述包的相关的信息，以供外部读取分析</li>
-</ul>
 <h2 id="Buffer（缓存区）"><a href="#Buffer（缓存区）" class="headerlink" title="Buffer（缓存区）"></a>Buffer（缓存区）</h2><p>Buffer的结构和数组很像，操作的方法也和数组类似。数组中不能存储二进制的文件，而Buffer专门用来存储二进制数据(图片/mp3/视频 二进制文件)</p>
 <p>使用：buffer不需要引入模块，直接使用即可</p>
 <p><strong>常用操作</strong><br>Buffer.from(str[,encoding])</p>
@@ -402,7 +372,7 @@ console.log(url.resolve(targetUrl, httpUrl));
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#综述"><span class="toc-text">综述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CommonJS规范"><span class="toc-text">CommonJS规范</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#exports与module-exports的区别"><span class="toc-text">exports与module.exports的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#package"><span class="toc-text">package</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Buffer（缓存区）"><span class="toc-text">Buffer（缓存区）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fs（文件系统）"><span class="toc-text">fs（文件系统）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#同步-异步文件写入"><span class="toc-text">同步/异步文件写入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用-简单的文件写入"><span class="toc-text">(常用)简单的文件写入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流式文件写入"><span class="toc-text">流式文件写入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件的读取"><span class="toc-text">文件的读取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fs其他常用方法"><span class="toc-text">fs其他常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ip地址和端口号"><span class="toc-text">ip地址和端口号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http"><span class="toc-text">http</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#url"><span class="toc-text">url</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#综述"><span class="toc-text">综述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Buffer（缓存区）"><span class="toc-text">Buffer（缓存区）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#fs（文件系统）"><span class="toc-text">fs（文件系统）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#同步-异步文件写入"><span class="toc-text">同步/异步文件写入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用-简单的文件写入"><span class="toc-text">(常用)简单的文件写入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流式文件写入"><span class="toc-text">流式文件写入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件的读取"><span class="toc-text">文件的读取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fs其他常用方法"><span class="toc-text">fs其他常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ip地址和端口号"><span class="toc-text">ip地址和端口号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#http"><span class="toc-text">http</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#url"><span class="toc-text">url</span></a></li></ol>
   </div>
 </aside>
   

@@ -194,6 +194,10 @@
 <p>1.http明文传输，HTTPS加密传输更加安全。<br>2.使用的端口不同，一般http协议的端口为80，https的端口为443</p>
 <p><strong>问题6：SPDY的优点是什么？</strong><br>SPDY可以说是综合HTTPS与HTTP的传输协议。<br>1.多路复用，在一个连接里可以无限处理多个HTTP请求，降低延迟。<br>2.请求优先级，可以给请求分配优先级顺序。<br>3.压缩HTTP首部。<br>4.SPDY规定通信中使用SSL，提高数据传输的可靠性。<br>5.服务器推送，服务器可以主动向客户端推送数据，例如有一个sytle.css的请求，在客户端收到sytle.css数据的同时，服务端会将sytle.js的文件推送给客户端，当客户端再次尝试获取sytle.js时就可以直接从缓存中获取到</p>
 <p><strong>问题7：SPDY与HTTP2.0的区别是什么？</strong><br>HTTP2.0可以说是SPDY的升级版（基于SPDY设计的）<br>1.HTTP2.0支持明文 HTTP 传输，而 SPDY 强制使用 HTTPS<br>2.HTTP2.0消息头的压缩算法采用 HPACK，而非 SPDY 采用的 DEFLATE</p>
+<p><strong>WebSockt</strong></p>
+<p>WebSocket是由HTML5开始提供的Web浏览器与Web服务器之间全双工通信的协议，由于建立在HTTP基础上的协议，因此需要进行一次由客户端发起的HTTP连接，一旦确立WebSocket通信连接，即是全双工通信。</p>
+<p>WebSocket优点：<br>1.支持由服务器向客户端推送数据。（HTTP/2 只能推送静态资源,无法推送指定的信息）<br>2.WebSocket是持久连接，较少每次连接时的总开销。<br>3.WebSocket的首部信息很小，较少通信量。</p>
+<p><img src="/img/学习笔记/WebSocket.jpg"></p>
 <p><strong>总结</strong></p>
 <p>SPDY不是可以替代HTTP的协议，而是对HTTP协议的增强，SPDY强制使用HTTPS。HTTP2以SPDY2为基础进行改进，支持HTTP传输。HTTPS是身披SSL外壳的HTTP。</p>
 <p><strong>不管所用网络协议是什么版本，什么样的网络协议，最终的目标都应该是消除或减少不必要的网络延迟，将需要传输的数据压缩至最少。</strong></p>

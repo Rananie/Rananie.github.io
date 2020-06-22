@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-06-22T09:27:14.045Z</updated>
+  <updated>2020-06-22T15:04:02.764Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,20 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>clean</title>
-    <link href="http://yoursite.com/2020/06/22/clean/"/>
-    <id>http://yoursite.com/2020/06/22/clean/</id>
-    <published>2020-06-22T09:27:14.000Z</published>
-    <updated>2020-06-22T09:27:14.045Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>css总结（6.22更新）</title>
@@ -320,9 +306,9 @@
       <category term="学习笔记" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="库" scheme="http://yoursite.com/tags/%E5%BA%93/"/>
-    
       <category term="ajax" scheme="http://yoursite.com/tags/ajax/"/>
+    
+      <category term="库" scheme="http://yoursite.com/tags/%E5%BA%93/"/>
     
   </entry>
   

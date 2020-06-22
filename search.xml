@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[clean]]></title>
-    <url>%2F2020%2F06%2F22%2Fclean%2F</url>
-    <content type="text"></content>
-  </entry>
-  <entry>
     <title><![CDATA[css总结（6.22更新）]]></title>
     <url>%2F2020%2F06%2F20%2FCSS%2F</url>
     <content type="text"><![CDATA[目录 CSS盒模型 过渡约束 外边距折叠 轮廓和圆角 浮动 高度塌陷 BFC 居中 垂直居中 水平居中 CSS盒模型CSS将页面中的所有元素都设置为一个矩形的盒子，对页面的布局就变成了将不同的盒子摆放到不同的位置。 盒子 = 内容content + 内边距padding + 边框border + 外边距margin（看不见，其余为可见框） 由width和height决定的是content的大小。 块级元素盒模型控制布局的时候最好对块级元素进行布局，块级元素占一行。 过渡约束水平布局 一个元素在其父元素中，水平布局必须满足margin-left + border-left + width + padding-right + margin-right = 其父元素内容的宽度，不过相加结果不相等，则称为过渡约束。这七个值中有三个值可以设置为auto：width，margin-left，margin-right。等式会自动调整，宽度优先，左右平分：1.如果7个值无auto的情况，则浏览器会自动调整margin-right2.如果某个值为auto，则会自动调整auto的值是等式成立。3.如果一个宽度和一个外边距设置为auto，则优先把宽度调整到最大。4.如果两个外边距设置为auto，宽度固定，则会将外边距设置为相同的值。利用这个特点实现一个元素在其父元素水平居中。 (width:xx;margin:xx auto） 垂直布局 若父元素没设置高度，则默认父元素的高度被内容撑开。使用overflow属性来设置父元素如何处理溢出的子元素，设置在子元素。 overflow:visible //默认值，子元素会从父元素中溢出 overflow:hidden //溢出内同被裁剪不会显示 overflow:scroll //生成双向滚动条 overflow:auto //根据需要生成滚动条 overflow-x/overflow-y 外边距的折叠相邻的垂直方向外边距会发生重叠方向。兄弟元素间的相邻垂直外边距会取两者之间的绝对值较大值，若一正一负取和。兄弟元素之间的外边距重叠对开发有利，不需要处理。 父子元素的相邻外边距，子元素会传递给父元素(上边距)。 行内元素盒模型行内元素不支持设置宽度和高度，行内元素可以设置padding/border/margin，但是垂直方向padding/border/margin不会影响页面的布局。垂直方向取最大，水平方向取和。 使用display来设置元素的类型，与display:none相同的还有visibility：hidden。区别是前者隐藏后不占据位置，后者仍然占据位置只是不可见。 visibility：hidden //元素隐藏不显示，但是仍然占据位置 visibility：visible //元素可见 display:inline display:block //块元素占一行 display:inline-block //行内块元素，宽高生效但不占一行，尽量不用换行符会解析 display:none //元素不显示 display:table //将元素设置为一个表格 CSS3的盒模型CSS3新增box-sizing属性，该属性设置width与height的作用范围。 box-sizing: border-box //使用ie盒模型 box-sizing: content-box //使用标准盒模型，默认 box-sizing:padding-box //width/height设置的是左右padding+content 标准盒子模型的width/height设置的是content的高度与宽度。IE盒子模型的width/height设置的是content+左右padding+左右border之和。 可以记忆成属性值为什么从哪个地方开始到对应的地方结束 轮廓和圆角outline轮廓outline与border用法相同，轮廓outline不会影响布局，不会撑大盒子。 box-shadowbox-shadow用来设置元素的阴影，前两个值为左侧下侧偏移量，第三个值为模糊程度，第四个值为颜色，不会影响布局。 border-radiusborder-radius用来设置圆角，指定画圆的半径，值为50%则是一个圆。第一个值是x方向半径，第二个值是y方向半径。 浮动通过浮动float`可以使一个元素相对于父元素进行向左向右浮动，默认不会从父元素中移动。元素设置浮动以后，水平布局的等式**margin-left + border-left + width + padding-right + margin-right = 其父元素内容的宽度失效并且脱离文档流不占用文档流的位置。如果浮动元素上面是在文档流中的，则浮动元素从该位置后面进行排序，而不是上移。浮动元素不会超过它上一个浮动的兄弟元素高度，最多就是一样高。浮动元素不会盖住文字，文字会自动环绕在图片的周围。元素从文档流中脱离，会具有行内块元素的特性。 高度塌陷一般父元素的高度不会写死，高度根据子元素高度决定。当子元素浮动后，完全脱离文档流，子元素将无法撑起父元素的高度，导致父元素的高度丢失。 解决办法：BFCBlock Formatting Context 块级格式化环境，是CSS中的一个隐含的属性，可以为一个元素开启BFC，开启BFC该元素会变成一个独立的布局区域。 元素开启BFC后的特点：1.开启BFC的元素不会被浮动元素所覆盖。2.开启BFC的元素子元素和父元素外边距不会重叠。（不会发生子元素设置外边距，父元素跟着动的情况）3.开启BFC的元素可以包含浮动的子元素，使其不会发生高度塌陷。 启动特殊方式开启元素的BFC方法一：设置元素的浮动（不推荐）副作用：会从文档中脱离。方法二：变成行内块元素（不推荐）方法三：将元素的overflow设置为一个非visible的值，一般用hidden（常用方式） 居中垂直居中文字的垂直居中 要让文字在父元素中垂直居中，只需将父元素的line-height设置为和父元素的高度一样。 水平居中一个元素在父元素中水平居中,该代码写在该元素的样式中，该代码仅对块级元素有效。 width:xx; margin:xx auto 这种办法的原理是利用水平布局的**margin-left + border-left + width + padding-right + margin-right = 其父元素内容的宽度等式。 所有元素也可以通过对父元素设置 text-align：center；的方式来实现居中。而对于块元素来说，对要居中的元素自身进行设置text-align:center也能实现居中，而无需对其父元素进行设置。]]></content>
@@ -123,8 +118,8 @@
         <category>学习笔记</category>
       </categories>
       <tags>
-        <tag>库</tag>
         <tag>ajax</tag>
+        <tag>库</tag>
       </tags>
   </entry>
   <entry>

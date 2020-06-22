@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>css面试题（6.20） | Ranan的博客</title>
+  <title>css面试题（6.21） | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -164,7 +164,7 @@
     
   </div>
   <h1 class="passage-title">
-    css面试题（6.20）
+    css面试题（6.21）
   </h1>
   
   <article class="passage-article">
@@ -174,6 +174,11 @@
 <li>外边距折叠</li>
 </ul>
 </li>
+<li>浮动<ul>
+<li>高度塌陷</li>
+</ul>
+</li>
+<li>BFC</li>
 </ul>
 <h1 id="CSS盒模型"><a href="#CSS盒模型" class="headerlink" title="CSS盒模型"></a>CSS盒模型</h1><p><strong>CSS将页面中的所有元素都设置为一个矩形的盒子，</strong>对页面的布局就变成了将不同的盒子摆放到不同的位置。</p>
 <p>盒子 = 内容content + 内边距padding + 边框border + 外边距margin（看不见，其余为可见框）</p>
@@ -205,6 +210,7 @@ box-sizing: content-box //使用标准盒模型，默认
 box-sizing:padding-box  //width/height设置的是左右padding+content
 </code></pre><p>标准盒子模型的width/height设置的是content的高度与宽度。<br>IE盒子模型的width/height设置的是content+左右padding+左右border之和。</p>
 <p><strong>可以记忆成属性值为什么从哪个地方开始到对应的地方结束</strong></p>
+<h1 id="浮动"><a href="#浮动" class="headerlink" title="浮动"></a>浮动</h1><h2 id="高度塌陷"><a href="#高度塌陷" class="headerlink" title="高度塌陷"></a>高度塌陷</h2><p>一般父元素的高度不会写死，高度根据子元素高度决定。</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -213,7 +219,7 @@ box-sizing:padding-box  //width/height设置的是左右padding+content
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目录"><span class="toc-text">目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CSS盒模型"><span class="toc-text">CSS盒模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#块级元素盒模型"><span class="toc-text">块级元素盒模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#过渡约束"><span class="toc-text">过渡约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#外边距的折叠"><span class="toc-text">外边距的折叠</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#行内元素盒模型"><span class="toc-text">行内元素盒模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS3的盒模型"><span class="toc-text">CSS3的盒模型</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目录"><span class="toc-text">目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CSS盒模型"><span class="toc-text">CSS盒模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#块级元素盒模型"><span class="toc-text">块级元素盒模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#过渡约束"><span class="toc-text">过渡约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#外边距的折叠"><span class="toc-text">外边距的折叠</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#行内元素盒模型"><span class="toc-text">行内元素盒模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS3的盒模型"><span class="toc-text">CSS3的盒模型</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#浮动"><span class="toc-text">浮动</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#高度塌陷"><span class="toc-text">高度塌陷</span></a></li></ol></li></ol>
   </div>
 </aside>
   

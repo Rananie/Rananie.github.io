@@ -169,7 +169,6 @@
   
   <article class="passage-article">
     <p>在学习的过程中，对css有了更深一步的了解，把遇见过的问题、经常使用到的样式做一个总结。</p>
-<h2 id="清除默认样式"><a href="#清除默认样式" class="headerlink" title="清除默认样式"></a>清除默认样式</h2><p><a href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css" target="_blank" rel="noopener">http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css</a></p>
 <h2 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h2><ul>
 <li>方法一<br>  给受影响的盒子添加clear属性，添加了clear的属性不可以添加margin-top</li>
 <li><p>方法二</p>
@@ -209,32 +208,26 @@
  }
 
 </code></pre></li>
-<li><p>margin:0 auto 使用场景<br>块级元素：给定要居中的块级元素的宽度<br>行内元素：<br> <br><br>①设置display:block。<br> <br><br>②给定要居中的行内元素的宽度。（行内元素设置成块级元素后可以对其宽高进行设置）<br> <br></p>
-<p> <strong>所有元素也可以通过对父元素设置 text-align：center；的方式来实现居中。(而对于块元素来说，对要居中的元素自身进行设置text-align:center也能实现居中——而无需对其父元素进行设置) 。</strong></p>
-<p>  <strong>浮动、绝对定位、固定定位的盒子失效。</strong></p>
-</li>
+<li>margin:0 auto 使用场景<br>块级元素：给定要居中的块级元素的宽度<br>行内元素：<br> <br><br>①设置display:block。<br> <br><br>②给定要居中的行内元素的宽度。（行内元素设置成块级元素后可以对其宽高进行设置）<br> <br></li>
 </ol>
-<ol start="3">
-<li>脱离文档流元素的水平垂直<br> margin:auto或者按圆点定位定在正中间，margin设置成负的宽高的一般</li>
-</ol>
-<p>   法二：</p>
-<pre><code>```
-div{
-      width: 300px;
-      height: 300px;
-      position: relative;
-      border: 1px solid #465468;
- }
- img{
-      position: absolute;
-      margin: auto;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
- }
- ```
-</code></pre><ol start="4">
+<pre><code> **浮动、绝对定位、固定定位的盒子失效。**
+</code></pre><ol start="3">
+<li><p>脱离文档流元素的水平垂直<br> margin:auto或者按圆点定位定在正中间，margin设置成负的宽高的一般</p>
+<pre><code> div{
+       width: 300px;
+       height: 300px;
+       position: relative;
+       border: 1px solid #465468;
+  }
+  img{
+       position: absolute;
+       margin: auto;
+       top: 0;
+       left: 0;
+       right: 0;
+       bottom: 0;
+  }
+</code></pre></li>
 <li><p>指定宽高元素水平居中</p>
 <p>还可以定位到50% 50% 改变margin-left/margin-top为元素的一半定位（元素加padding，可以结合box-sizing）</p>
 <pre><code> #test{
@@ -286,7 +279,7 @@ overflow:hidden
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#清除默认样式"><span class="toc-text">清除默认样式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#清除浮动"><span class="toc-text">清除浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#盒子的问题"><span class="toc-text">盒子的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片的问题"><span class="toc-text">图片的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#居中"><span class="toc-text">居中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其余"><span class="toc-text">其余</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#清除浮动"><span class="toc-text">清除浮动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#盒子的问题"><span class="toc-text">盒子的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图片的问题"><span class="toc-text">图片的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#居中"><span class="toc-text">居中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其余"><span class="toc-text">其余</span></a></li></ol>
   </div>
 </aside>
   

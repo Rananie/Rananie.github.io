@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-06-22T15:04:02.764Z</updated>
+  <updated>2020-06-23T08:44:09.692Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>《在线》阅读笔记（6.23更新）</title>
+    <link href="http://yoursite.com/2020/06/23/%E3%80%8A%E5%9C%A8%E7%BA%BF%E3%80%8B%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
+    <id>http://yoursite.com/2020/06/23/《在线》阅读笔记/</id>
+    <published>2020-06-23T08:10:29.000Z</published>
+    <updated>2020-06-23T08:44:09.692Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>我以前不爱读书，现在看来只是不爱读榜单上的那些富有哲理的小说。6.23号开始读这本书，我有预感这可能会重塑我的网络观。读的很慢，会每天记录读后感，最后根据每天的读后感，重写最后的读后感。</p></blockquote><p>6.23</p><p>互联网的离线到在线，计算机到云计算，信息到数据是贯穿这本书的3个核心概念。王坚博士把<strong>在线</strong>定义为今天我们这个时代的关键词，读到后面的”互联网的渗透，让我们的生活在线了”让我对他的话有了一点理解和感悟。互联网的渗透，让我们的生活中的行为在互联网中进行实时反馈成数据，对数据进行分析与模拟，真正地利用数据做到更多的事情。<br><strong>互联网成为基础设施，数据成为生产资料，计算成为公共服务。</strong>这句话暂时是不能读懂的<br>互联网把万物、机器与人连接在一起，每一分钟每一秒都在产生新的资源，即数据。数据经由互联网的计算产生智能，进而推动科技，社会与生活的发展。数据其实不是一个新概念，新的是如何处理数据与利用数据。<br>读这本书的时间太晚了，同时也被王坚博士对互联网科技未来发展的理解感到震惊。他的理解我现在读到的都可以说是正确，很难想象在以前是怎样的眼界能看到现在。希望这本书在之后能给我带来更多的惊喜，</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;我以前不爱读书，现在看来只是不爱读榜单上的那些富有哲理的小说。6.23号开始读这本书，我有预感这可能会重塑我的网络观。读的很慢，会每天记录读后感，最后根据每天的读后感，重写最后的读后感。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;6.23&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="大数据" scheme="http://yoursite.com/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+  </entry>
   
   <entry>
     <title>css总结（6.22更新）</title>

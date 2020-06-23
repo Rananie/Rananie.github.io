@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>css总结（6.22更新） | Ranan的博客</title>
+  <title>css总结（6.23更新） | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -164,36 +164,66 @@
     
   </div>
   <h1 class="passage-title">
-    css总结（6.22更新）
+    css总结（6.23更新）
   </h1>
   
   <article class="passage-article">
     <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
+<li>伪类选择器</li>
 <li>CSS盒模型<ul>
 <li>过渡约束</li>
 <li>外边距折叠</li>
 <li>轮廓和圆角</li>
 </ul>
 </li>
-<li><p>浮动</p>
-<ul>
+<li>浮动<ul>
 <li>高度塌陷</li>
 <li>BFC</li>
+<li>清除浮动</li>
+<li>外边距折叠的解决</li>
+<li>clearfix</li>
 </ul>
 </li>
-<li><p>居中</p>
-<ul>
+<li>定位<ul>
+<li>层级</li>
+</ul>
+</li>
+<li>居中<ul>
 <li>垂直居中</li>
 <li>水平居中</li>
 </ul>
 </li>
 </ul>
+<h1 id="伪类选择器"><a href="#伪类选择器" class="headerlink" title="伪类选择器"></a>伪类选择器</h1><p>伪类带一个冒号，伪元素带两个冒号。</p>
+<p><strong>常见伪类</strong></p>
+<p>li:first-child<br>li:last-child<br>li:nth-child(n)  //n从1开始，2n/even选中偶数位，2n+1/odd奇数位</p>
+<p>这三个 排序是根据所有的子元素进行的，并不是li中的第几个。</p>
+<pre><code>li:first-child{
+    color: orange;
+}
+//第一个li元素并不会变色，因为在子元素中第一个元素是span
+&lt;span&gt;abc&lt;/span&gt;
+&lt;li&gt;ff&lt;/li&gt;
+&lt;li&gt;zz&lt;/li&gt;
+</code></pre><p>:first-of-type<br>:last-of-type<br>:nth-of-type()</p>
+<p>这几个伪类与上述相似，不过是在同类型元素中选择排序。</p>
+<p>:not()否定伪类</p>
+<pre><code>ul&gt;li:not(li:nth-of-type(3))
+//当前后相同时，也可以写成
+ul&gt;li:not(:nth-of-type(3))
+</code></pre><p><strong>超链接的伪类</strong></p>
+<p>:link 用来表示没访问过的链接（正常的链接）<br>:visited 用来表示访问过的链接，由于隐私的原因，该伪类只能改变颜色（所以不常用）<br>上述两个伪类只用于a标签<br>:hover 用来表示鼠标移入的状态<br>:active 用来鼠标点击</p>
+<p>顺序:lvha</p>
+<p><strong>伪元素</strong></p>
+<p>伪元素表示页面中一些特殊的并不真实存在的元素</p>
+<p>p::first- letter 表示标签p里的第一个字母<br>::first-line 表示第一行<br>::selection 表示选中的内容<br>div::before 表示div标签内的开始位置<br>div::after 表示div标签内的最后一个位置</p>
+<p>before,after添加的文字不可以被选中</p>
 <h1 id="CSS盒模型"><a href="#CSS盒模型" class="headerlink" title="CSS盒模型"></a>CSS盒模型</h1><p><strong>CSS将页面中的所有元素都设置为一个矩形的盒子，</strong>对页面的布局就变成了将不同的盒子摆放到不同的位置。</p>
 <p>盒子 = 内容content + 内边距padding + 边框border + 外边距margin（看不见，其余为可见框）</p>
 <p>由width和height决定的是content的大小。</p>
 <h2 id="块级元素盒模型"><a href="#块级元素盒模型" class="headerlink" title="块级元素盒模型"></a>块级元素盒模型</h2><p>控制布局的时候最好对块级元素进行布局，块级元素占一行。</p>
 <h3 id="过渡约束"><a href="#过渡约束" class="headerlink" title="过渡约束"></a>过渡约束</h3><p><strong>水平布局</strong></p>
-<p>一个元素在其父元素中，水平布局必须满足<strong>margin-left + border-left + width +  padding-right + margin-right =  其父元素内容的宽度，不过相加结果不相等，则称为过渡约束。</strong><br>这七个值中有三个值可以设置为auto：width，margin-left，margin-right。<br>等式会自动调整，宽度优先，左右平分：<br>1.如果7个值无auto的情况，则浏览器会自动调整margin-right<br>2.如果某个值为auto，则会自动调整auto的值是等式成立。<br>3.如果一个宽度和一个外边距设置为auto，则优先把宽度调整到最大。<br>4.如果两个外边距设置为auto，宽度固定，则会将外边距设置为相同的值。<strong>利用这个特点实现一个元素在其父元素水平居中。</strong>  (width:xx;margin:xx auto）</p>
+<p>一个元素在其父元素中，水平布局必须满足<strong>margin-left + border-left + padding-left + width +  padding-right + border-right + margin-right =  其父元素内容的宽度，如果相加结果不相等，则称为过渡约束。</strong><br>这七个值中可以设置为auto：width，margin。<br>如果发生过渡约束，等式会自动调整，宽度优先，左右平分：<br>1.如果7个值无auto的情况，则浏览器会自动调整margin-right<br>2.如果某个值为auto，则会自动调整auto的值是等式成立。<br>3.如果一个宽度和一个外边距设置为auto，则优先把宽度调整到最大。<br>4.如果两个外边距设置为auto，宽度固定，则会将外边距设置为相同的值。<strong>利用这个特点实现一个元素在其父元素水平居中。</strong>  (width:xx;margin:xx auto）</p>
 <p><strong>垂直布局</strong></p>
 <p>若父元素没设置高度，则默认父元素的高度被内容撑开。<br>使用overflow属性来设置父元素如何处理溢出的子元素，设置在子元素。</p>
 <pre><code>overflow:visible //默认值，子元素会从父元素中溢出
@@ -204,7 +234,7 @@ overflow-x/overflow-y
 </code></pre><h3 id="外边距的折叠"><a href="#外边距的折叠" class="headerlink" title="外边距的折叠"></a>外边距的折叠</h3><p>相邻的垂直方向外边距会发生重叠方向。<br>兄弟元素间的相邻垂直外边距会取两者之间的绝对值较大值，若一正一负取和。兄弟元素之间的外边距重叠对开发有利，不需要处理。</p>
 <p>父子元素的相邻外边距，子元素会传递给父元素(上边距)。</p>
 <h2 id="行内元素盒模型"><a href="#行内元素盒模型" class="headerlink" title="行内元素盒模型"></a>行内元素盒模型</h2><p>行内元素不支持设置宽度和高度，行内元素可以设置padding/border/margin，但是垂直方向padding/border/margin不会影响页面的布局。<br>垂直方向取最大，水平方向取和。</p>
-<p>使用display来设置元素的类型，与display:none相同的还有visibility：hidden。区别是前者隐藏后不占据位置，后者仍然占据位置只是不可见。</p>
+<p>使用display来设置元素的类型，与display:none相似的还有visibility：hidden。区别是前者隐藏后不占据位置，后者仍然占据位置只是不可见。</p>
 <pre><code>visibility：hidden  //元素隐藏不显示，但是仍然占据位置
 visibility：visible //元素可见
 display:inline
@@ -221,18 +251,121 @@ box-sizing:padding-box  //width/height设置的是左右padding+content
 <h2 id="轮廓和圆角"><a href="#轮廓和圆角" class="headerlink" title="轮廓和圆角"></a>轮廓和圆角</h2><p><strong>outline</strong><br>轮廓<code>outline</code>与<code>border</code>用法相同，轮廓<code>outline</code>不会影响布局，不会撑大盒子。</p>
 <p><strong>box-shadow</strong><br><code>box-shadow</code>用来设置元素的阴影，前两个值为左侧下侧偏移量，第三个值为模糊程度，第四个值为颜色，不会影响布局。</p>
 <p><strong>border-radius</strong><br><code>border-radius</code>用来设置圆角，指定画圆的半径，值为50%则是一个圆。第一个值是x方向半径，第二个值是y方向半径。</p>
-<h1 id="浮动"><a href="#浮动" class="headerlink" title="浮动"></a>浮动</h1><p>通过浮动<code>float`</code>可以使一个元素相对于<strong>父元素</strong>进行向左向右浮动，默认不会从<strong>父元素</strong>中移动。<br>元素设置浮动以后，水平布局的等式<strong>**margin-left + border-left + width +  padding-right + margin-right =  其父元素内容的宽度</strong>失效并且<strong>脱离文档流</strong>不占用文档流的位置。<br>如果浮动元素上面是在文档流中的，则浮动元素从该位置后面进行排序，而不是上移。<br>浮动元素不会超过它<strong>上一个浮动的兄弟元素高度</strong>，最多就是一样高。<br><strong>浮动元素不会盖住文字</strong>，文字会自动环绕在图片的周围。<br>元素从文档流中脱离，会具有<strong>行内块元素</strong>的特性。</p>
+<h1 id="浮动"><a href="#浮动" class="headerlink" title="浮动"></a>浮动</h1><p>通过浮动<code>float</code>可以使一个元素相对于<strong>父元素</strong>进行向左向右浮动，默认不会从<strong>父元素</strong>中移动。<br>元素设置浮动以后，水平布局的等式<strong>margin-left + border-left + padding-left + width +  padding-right + border-right + margin-right =  其父元素内容的宽度</strong>失效并且<strong>脱离文档流</strong>不占用文档流的位置。<br>如果浮动元素上面是在文档流中的，则浮动元素从该位置后面进行排序，而不是上移。<br>浮动元素不会超过它<strong>上一个浮动的兄弟元素高度</strong>，最多就是一样高。<br><strong>浮动元素不会盖住文字</strong>，文字会自动环绕在图片的周围。<br>元素从文档流中脱离，会具有<strong>行内块元素</strong>的特性。</p>
 <h2 id="高度塌陷"><a href="#高度塌陷" class="headerlink" title="高度塌陷"></a>高度塌陷</h2><p>一般父元素的高度不会写死，高度根据子元素高度决定。当子元素浮动后，完全脱离文档流，子元素将无法撑起父元素的高度，导致父元素的高度丢失。</p>
-<p><img src="/img/css/高度塌陷.png"></p>
+<pre><code>//style
+.box1{
+ border:10px red solid;
+}
+.box2{
+width:100px;
+height:100px;
+background-color:green;
+float:left
+}
+//html
+&lt;div class=&quot;box1&quot;&gt;
+   &lt;div class=&quot;box2&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p><img src="/img/css/高度塌陷.png"></p>
 <p>解决办法：BFC<br>Block Formatting Context 块级格式化环境，是CSS中的一个隐含的属性，可以为一个元素开启BFC，开启BFC该元素会变成一个独立的布局区域。</p>
-<p>元素开启BFC后的特点：<br>1.开启BFC的元素不会被浮动元素所覆盖。<br>2.开启BFC的元素子元素和父元素外边距不会重叠。（不会发生子元素设置外边距，父元素跟着动的情况）<br>3.开启BFC的元素可以包含浮动的子元素，使其不会发生高度塌陷。</p>
-<p>启动特殊方式开启元素的BFC<br>方法一：设置元素的浮动（不推荐）<br>副作用：会从文档中脱离。<br>方法二：变成行内块元素（不推荐）<br>方法三：将元素的<code>overflow</code>设置为一个非visible的值，一般用<code>hidden</code>（常用方式）</p>
-<h1 id="居中"><a href="#居中" class="headerlink" title="居中"></a>居中</h1><h2 id="垂直居中"><a href="#垂直居中" class="headerlink" title="垂直居中"></a>垂直居中</h2><p>文字的垂直居中</p>
+<p><strong>元素开启BFC后的特点</strong><br>1.开启BFC的元素不会被浮动元素所覆盖。<br>2.开启BFC的元素子元素和父元素外边距不会重叠。（不会发生子元素设置外边距，父元素跟着动的情况）<br>3.开启BFC的元素可以包含浮动的子元素，使其不会发生高度塌陷。</p>
+<p>启动特殊方式开启元素的BFC<br>方法一：设置元素的浮动（不推荐）<br>副作用：会从文档中脱离。<br>方法二：变成行内块元素（不推荐）<br><strong>方法三</strong>：将元素的<code>overflow</code>设置为一个非visible的值，一般用<code>hidden</code>（常用方式）</p>
+<h3 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h3><p>给<strong>受影响</strong>的盒子添加<code>clear</code>属性，<code>clear</code>元素的原理是设置清除浮动以后，浏览器会自动为元素添加上外边距，所以添加了clear的属性<strong>不可以手动添加margin-top</strong>。</p>
+<pre><code>clear:left //清除左侧浮动元素对当前元素的影响
+clear:right //清除右侧浮动元素对当前元素的影响
+clear:both //清除两侧中最大影响的那侧
+</code></pre><p><strong>高度塌陷的最终解决方案：使用after伪类</strong></p>
+<p>在父元素的后面添加一个空标签(行内元素)，清除浮动对其的影响并使其为块元素，浏览器自动改变margin-top使其可以撑开父元素。</p>
+<p>因为行内元素【如span】的padding-top,padding-bottom,margin-top,margin-bottom（垂直方向）属性设置无效。</p>
+<pre><code>//表示box1(父元素)盒子里面内容的最后
+.box1::after{
+content:&quot;&quot;;
+display:block;
+clear:both
+}
+</code></pre><p>使用这种思想同时可以解决外边距重叠的问题。</p>
+<pre><code>&lt;style&gt;
+  .box1{
+      width: 200px;
+      height: 200px;
+      background: green;
+  }
+    .box2{
+        width: 100px;
+        height: 100px;
+        background: orange;
+        margin-top: 100px;
+    }
+&lt;/style&gt;
+
+&lt;body&gt;
+&lt;div class=&quot;box1&quot;&gt;
+    &lt;div class=&quot;box2&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+</code></pre><p><img src="/img/css/外边距折叠.png"></p>
+<p>解决办法：让其外边距不相邻</p>
+<pre><code>//box1盒子内容的最前面
+.box1::before{
+content:&quot;&quot;;
+display:table;
+}
+</code></pre><p><strong>clearfix</strong>解决外边距重叠与高度塌陷的问题。</p>
+<pre><code>.clearfix::before,
+.clearfix::aftee{
+content:&quot;&quot;;
+display:table;
+clear:both;
+}
+</code></pre><h1 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h1><p>可以通过定位将元素摆到页面的任意位置（一般使用在微小的地方，大布局使用浮动），当元素开启了定位以后，可以通过偏移量(top bottom left right 仅对开启定位的元素有用)来设置元素的位置。</p>
+<p><code>positon</code>属性的值:</p>
+<ul>
+<li>static 默认值，元素是静止的没有开启定位</li>
+<li>relative 相对定位 absolute 绝对定位 fixed 固定定位</li>
+<li>sticky 粘滞定位</li>
+</ul>
+<p><strong>relative相对定位</strong></p>
+<p>开启绝对定位后，如果不设置偏移量元素不会发生变化<br>relative是参照于开启相对定位的元素在文档流中的位置（<strong>元素本身</strong>）进行定位的。<br>相对定位会提升元素的层次<br><strong>相对定位不会让元素脱离文档流</strong>并且不会改变元素的性质。**脱离文档流后，元素会变成行内块元素（不会独占一行，宽高属性生效）</p>
+<p><strong>absolute绝对定位</strong></p>
+<p>开启绝对定位后，如果不设置偏移量元素的位置不会发生变化。<strong>元素会从文档流中脱离</strong>，绝对定位的元素会提升层级。<br>absolute定位元素是相对与其包含块（块级元素）进行定位<br>正常情况下，包含块就是离当前元素最近的祖先块元素。绝对定位的包含块就是离它最近的<strong>开启了定位</strong>的祖先元素。</p>
+<p>absolute定位的特点是<strong>父相子绝</strong>，使用绝对定位的元素会向上寻找第一个使用相对定位的父元素。</p>
+<p>水平布局等式<strong>margin-left + border-left + padding-left + width +  padding-right + border-right + margin-right =  其父元素内容的宽度</strong></p>
+<p>当开启了绝对定位之后的水平布局等式变成了<strong>left + margin-left + border-left + padding-left + width +  padding-right + border-right + margin-right + right =  其父元素内容的宽度</strong><br>这9个值中可以设置为auto：width，margin，left，right。<br>如果发生过渡约束，等式会自动调整，宽度优先，right/left其次，左右平分：<br>1.如果9个值无auto的情况，则浏览器会自动调整right<br>2.如果某个值为auto，则会自动调整auto的值是等式成立。<br>3.如果一个宽度和一个外边距设置为auto，则优先把宽度调整到最大。<br>4.如果两个外边距设置为auto，宽度固定，则会将外边距设置为相同的值。<strong>利用这个特点实现一个元素在其父元素水平居中。</strong>  (width:xx;margin:xx auto）</p>
+<p><strong>注意</strong>left和right的默认值是auto，所以如果不知道left和right，则等式不满足会自动调整这两个值。所以以上4点要在left/right设置的情况下进行。</p>
+<p>当我们开启决定定位后，垂直方向也需要满足垂直方向的等式也需要满足（正常的不会）,其规则类似水平布局。</p>
+<p>所以可以利用其特点，进行元素的垂直居中</p>
+<pre><code>//垂直居中的元素
+width:xxx;
+height:xxx;
+position:absolute; //父相子绝,在谁中间就给谁相对定位
+margin:auto
+left:0;
+right:0;
+top:0;
+bottom:0;
+</code></pre><p><strong>fixed固定定位</strong></p>
+<p>固定定位也是绝对定位的一种，所以固定定位的大部分特点都和绝对定位一样。<br>不同点是固定定位永远参照与<strong>浏览器的视口（可视区域，固定不动）</strong>进行定位</p>
+<p><strong>sticky粘滞定位</strong></p>
+<p>粘滞定位和相对定位的特点基本一致，不同的是粘滞定位当元素到达一定高度的时候固定住，常常和<code>top</code>结合。<br>sticky定位的元素元素仅在其父元素内生效且父元素的高度不能低于sticky定位 元素的高度，所以如果滚动到父元素的高度低于sticky定位元素的高度，该定位失效。</p>
+<h2 id="层级"><a href="#层级" class="headerlink" title="层级"></a>层级</h2><p>定位的层级大于浮动的层级</p>
+<p><code>z-index</code>属性可以来指定元素的层级，数越大层级越高。</p>
+<p>如果优先级一样，优先显示结构上靠下的元素。</p>
+<p>祖先元素的层级再高也不会盖住后代元素。</p>
+<h1 id="居中"><a href="#居中" class="headerlink" title="居中"></a>居中</h1><h2 id="垂直居中"><a href="#垂直居中" class="headerlink" title="垂直居中"></a>垂直居中</h2><p>1.文字的垂直居中</p>
 <p>要让文字在父元素中垂直居中，只需将父元素的<code>line-height</code>设置为和父元素的高度一样。</p>
-<h2 id="水平居中"><a href="#水平居中" class="headerlink" title="水平居中"></a>水平居中</h2><p>一个元素在父元素中水平居中,该代码写在<strong>该元素</strong>的样式中，该代码仅对块级元素有效。</p>
+<p>2.利用定位</p>
+<pre><code>//垂直居中的元素
+width:xxx;
+height:xxx;
+position:absolute; //父相子绝,在谁中间就给谁相对定位
+margin:auto
+top:0;
+bottom:0;
+</code></pre><h2 id="水平居中"><a href="#水平居中" class="headerlink" title="水平居中"></a>水平居中</h2><p>一个元素在父元素中水平居中,该代码写在<strong>该元素</strong>的样式中，该代码仅对块级元素有效。</p>
 <pre><code>width:xx;
 margin:xx auto
-</code></pre><p>这种办法的原理是利用水平布局的<strong>**margin-left + border-left + width +  padding-right + margin-right =  其父元素内容的宽度</strong>等式。</p>
+</code></pre><p>这种办法的原理是利用水平布局的<strong>margin-left + border-left + padding-left + width +  padding-right + border-right + margin-right =  其父元素内容的宽度</strong>等式。</p>
 <p>所有元素也可以通过对父元素设置 text-align：center；的方式来实现居中。<br>而对于块元素来说，对要<strong>居中的元素自身</strong>进行设置text-align:center也能实现居中，而无需对其父元素进行设置。</p>
 
   </article>
@@ -242,7 +375,7 @@ margin:xx auto
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目录"><span class="toc-text">目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CSS盒模型"><span class="toc-text">CSS盒模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#块级元素盒模型"><span class="toc-text">块级元素盒模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#过渡约束"><span class="toc-text">过渡约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#外边距的折叠"><span class="toc-text">外边距的折叠</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#行内元素盒模型"><span class="toc-text">行内元素盒模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS3的盒模型"><span class="toc-text">CSS3的盒模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#轮廓和圆角"><span class="toc-text">轮廓和圆角</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#浮动"><span class="toc-text">浮动</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#高度塌陷"><span class="toc-text">高度塌陷</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#居中"><span class="toc-text">居中</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#垂直居中"><span class="toc-text">垂直居中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#水平居中"><span class="toc-text">水平居中</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目录"><span class="toc-text">目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#伪类选择器"><span class="toc-text">伪类选择器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CSS盒模型"><span class="toc-text">CSS盒模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#块级元素盒模型"><span class="toc-text">块级元素盒模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#过渡约束"><span class="toc-text">过渡约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#外边距的折叠"><span class="toc-text">外边距的折叠</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#行内元素盒模型"><span class="toc-text">行内元素盒模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS3的盒模型"><span class="toc-text">CSS3的盒模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#轮廓和圆角"><span class="toc-text">轮廓和圆角</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#浮动"><span class="toc-text">浮动</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#高度塌陷"><span class="toc-text">高度塌陷</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#清除浮动"><span class="toc-text">清除浮动</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#定位"><span class="toc-text">定位</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#层级"><span class="toc-text">层级</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#居中"><span class="toc-text">居中</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#垂直居中"><span class="toc-text">垂直居中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#水平居中"><span class="toc-text">水平居中</span></a></li></ol></li></ol>
   </div>
 </aside>
   

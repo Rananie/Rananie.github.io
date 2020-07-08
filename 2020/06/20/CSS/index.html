@@ -6,12 +6,12 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>css总结（7.5号更新） | Ranan的博客</title>
+  <title>CSS学习笔记 | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="前端,CSS," />
+    <meta name="keywords" content="前端,CSS,学习笔记,CSS," />
   
 
   
@@ -164,7 +164,7 @@
     
   </div>
   <h1 class="passage-title">
-    css总结（7.5号更新）
+    CSS学习笔记
   </h1>
   
   <article class="passage-article">
@@ -197,6 +197,10 @@
 <li>居中<ul>
 <li>垂直居中</li>
 <li>水平居中</li>
+</ul>
+</li>
+<li>动画<ul>
+<li>过渡</li>
 </ul>
 </li>
 <li>其他<ul>
@@ -403,7 +407,7 @@ bottom:0;
 <pre><code>//垂直居中的元素
 width:xxx;
 height:xxx;
-position:absolute; //父相子绝,在谁中间就给谁相对定位
+position:absolute; //父相子绝,在谁中间就给谁相对定位，也可以实现垂直水平居中，原理是利用布局等式
 margin:auto
 top:0;
 bottom:0;
@@ -412,11 +416,63 @@ bottom:0;
 display:table-cell;
 //元素类的子元素垂直居中
 vertical-align:middle;
+</code></pre><p>4.利用transform</p>
+<p>当元素的大小并不明确的时候，以水平为例子，垂直类似。</p>
+<pre><code>.box{
+position:absolute;
+left:50%;//相对与包含块的50%
+transform:translateX(-50%)//相对于元素自身的50%
+}
 </code></pre><h2 id="水平居中"><a href="#水平居中" class="headerlink" title="水平居中"></a>水平居中</h2><p>一个元素在父元素中水平居中,该代码写在<strong>该元素</strong>的样式中，该代码仅对块级元素有效。</p>
 <pre><code>width:xx;
 margin:xx auto
 </code></pre><p>这种办法的原理是利用水平布局的<strong>margin-left + border-left + padding-left + width +  padding-right + border-right + margin-right =  其父元素内容的宽度</strong>等式。</p>
 <p>所有元素也可以通过对<strong>父元素</strong>设置 text-align：center；的方式来实现居中。<br>而对于块元素来说，对要<strong>居中的元素自身</strong>进行设置text-align:center也能实现居中，而无需对其父元素进行设置。</p>
+<h1 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h1><h2 id="过渡transition"><a href="#过渡transition" class="headerlink" title="过渡transition"></a>过渡transition</h2><p>过渡三要素:起始位置 过渡时间 终止位置</p>
+<p>transition-property        表示执行过渡的属性<br>transition-duration        指定用于过渡的持续时间<br>transition-timing-function 指定过渡的时序函数<br>transition-delay           指定过渡效果的延迟</p>
+<p>在简写中，如果有2个时间，则第一个为持续时间，第二个为延迟时间。</p>
+<h2 id="动画animation"><a href="#动画animation" class="headerlink" title="动画animation"></a>动画animation</h2><p>动画可以自动触发动态效果。设置动画效果，必须先设置一个关键帧，关键帧设置了动画执行每一个步骤。</p>
+<pre><code>//定义关键帧
+@keyframes name{
+//第一种
+from{}
+to{}
+//第二种
+0%{}
+5%{}
+}
+//使用动画
+animation-name...  //其余属性同transition
+animation-iteration-count //迭代次数
+animation-direction //动画方向
+animation-play-state //设置动画的执行状态 执行或者暂停
+animation-fill-mode //动画开始/停止的位置，默认动画执行完毕回到原来的位置
+</code></pre><p>使用图片实现动画的一些小技巧</p>
+<pre><code>.box{
+background-image:url(&quot;&quot;); //开启平铺
+animation:name 1s steps(几个图片就几次) infinite;
+}
+@keyframes name{
+from{
+background-position:0 0;
+}
+to{
+background-position:-图片的长度 0;
+}
+}
+</code></pre><h2 id="变形"><a href="#变形" class="headerlink" title="变形"></a>变形</h2><p>变形不会影响页面的布局，只会改变元素的形状或位置。</p>
+<p><strong>平移</strong></p>
+<p>可以与定位结合实现居中的效果。</p>
+<pre><code>//百分比是相对于自身计算的，并不是根据包含块
+transform:translateX()/translateY()/translateZ()
+</code></pre><p>Z轴平移，正常情况就是调整人和元素之间的距离，距离越大，元素离人越近。如果想要看见效果必须要设置网页的视距。一般设置在html，<code>perspective:1000px</code> 表示人眼距离网页的距离</p>
+<p><strong>旋转与缩放</strong></p>
+<p>通过旋转可以使元素<strong>沿轴旋转</strong>指定的角度<br>沿X轴转的时候，设置视距可以看见近大远小的效果。<br>转了轴也会跟着转。</p>
+<pre><code>transform:rotateZ（45deg）/rotateZ(.5turn)
+//旋转的背面是否可以看见
+backface-visibility:hidden;
+transform:scaleX() //缩放的是轴
+</code></pre><p>即使设置了视距可以看见近大远小的效果，但是仍然仅仅是2D的效果，如果想看见3D的效果还需要设置<code>transform-style:preserve-3d</code></p>
 <h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="三角形"><a href="#三角形" class="headerlink" title="三角形"></a>三角形</h2><p><code>border</code>四个方向的边框实际是一个<strong>梯形</strong>并不是矩形。当内容区域的高度宽度为0时，边框就会变成小三角形。</p>
 <pre><code> .box1{
     width: 0;
@@ -443,7 +499,6 @@ border-bottom-color:white
 display:block
 }
 </code></pre><p><img src="/img/css/三角形.png"></p>
-<p>过渡三要素:起始位置 过渡时间 终止位置</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -452,12 +507,14 @@ display:block
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目录"><span class="toc-text">目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#伪类选择器"><span class="toc-text">伪类选择器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#单位"><span class="toc-text">单位</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#字体"><span class="toc-text">字体</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CSS盒模型"><span class="toc-text">CSS盒模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#块级元素盒模型"><span class="toc-text">块级元素盒模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#过渡约束"><span class="toc-text">过渡约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#外边距的折叠"><span class="toc-text">外边距的折叠</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#行内元素盒模型"><span class="toc-text">行内元素盒模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS3的盒模型"><span class="toc-text">CSS3的盒模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#轮廓和圆角"><span class="toc-text">轮廓和圆角</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#浮动"><span class="toc-text">浮动</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#高度塌陷"><span class="toc-text">高度塌陷</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#清除浮动"><span class="toc-text">清除浮动</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#定位"><span class="toc-text">定位</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#层级"><span class="toc-text">层级</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#居中"><span class="toc-text">居中</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#垂直居中"><span class="toc-text">垂直居中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#水平居中"><span class="toc-text">水平居中</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#三角形"><span class="toc-text">三角形</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目录"><span class="toc-text">目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#伪类选择器"><span class="toc-text">伪类选择器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#单位"><span class="toc-text">单位</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#字体"><span class="toc-text">字体</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CSS盒模型"><span class="toc-text">CSS盒模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#块级元素盒模型"><span class="toc-text">块级元素盒模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#过渡约束"><span class="toc-text">过渡约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#外边距的折叠"><span class="toc-text">外边距的折叠</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#行内元素盒模型"><span class="toc-text">行内元素盒模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CSS3的盒模型"><span class="toc-text">CSS3的盒模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#轮廓和圆角"><span class="toc-text">轮廓和圆角</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#浮动"><span class="toc-text">浮动</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#高度塌陷"><span class="toc-text">高度塌陷</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#清除浮动"><span class="toc-text">清除浮动</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#定位"><span class="toc-text">定位</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#层级"><span class="toc-text">层级</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#居中"><span class="toc-text">居中</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#垂直居中"><span class="toc-text">垂直居中</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#水平居中"><span class="toc-text">水平居中</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#动画"><span class="toc-text">动画</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#过渡transition"><span class="toc-text">过渡transition</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动画animation"><span class="toc-text">动画animation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变形"><span class="toc-text">变形</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#三角形"><span class="toc-text">三角形</span></a></li></ol></li></ol>
   </div>
 </aside>
   
   
     <div class="passage-tags">
+     
+      <a href="/tags/学习笔记/"><i class="fa fa-tags"></i>学习笔记</a>
      
       <a href="/tags/CSS/"><i class="fa fa-tags"></i>CSS</a>
     

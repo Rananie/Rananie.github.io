@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>webpack学习笔记（5月28日更新） | Ranan的博客</title>
+  <title>webpack学习笔记（7.9更新） | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -150,7 +150,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-03-28
+      <i class="fa fa-calendar"></i>2020-07-09
     </span>
     
       <span>
@@ -164,7 +164,7 @@
     
   </div>
   <h1 class="passage-title">
-    webpack学习笔记（5月28日更新）
+    webpack学习笔记（7.9更新）
   </h1>
   
   <article class="passage-article">
@@ -370,7 +370,6 @@ npm i postcss-loader postcss-preset-env -D
                     //返回一个数组 postcss的插件
                     //此插件帮助postcss找到package.json中browserslist里面的配置，通过配置加载指定的css兼容性样式，默认找的是browerslist里面的生产环境
                     //如果要找开发环境的，就需要在webpack.config.js中设置node.js坏境变量process.env.NODE_ENV=&quot;development&quot;
-
                     require(&quot;postcss-preset-env&quot;)()
                     ]
                     }
@@ -616,12 +615,10 @@ module:{
 }
 </code></pre><p>babel缓存：第二次构建时，会读取之前的缓存，只重新构建变化的文件。<br>文件资源缓存：输出的文件(没使用hash)，缓存在浏览器，一定时间内不会重新获取。<br>1.hash:输出文件后面加上hash值（所有文件相同），这样在缓存期如果hash值变化（每次打包都会变化）都会重新获取。存在问题：重新打包就会改变hash，即使没有修改的文件。<br>2.chunkhash：根据chunk生成的hash值，如果打包来源于同一个chunk，那么hash就一样。存在问题css与js的hash值一样，因为css被打包进了js，所以同属于一个chunk。修改项目的文件，只有这个文件和于这个文件相关联的打包文件的hash码变化（css和js还是相同），其他的不变。<br>3.contenthash：根据文件的内容生成hash值，不同文件的hash值不一样。内容变化hash值才改变。</p>
 <pre><code>output:{
-...
 filename:&quot;js/built.[hash:10].js&quot;
 //filename:&quot;js/built.[chunkhash:10].js&quot;
 }
 
-....
 //兼容性处理
 {
 test:/\.js$/,
@@ -642,8 +639,102 @@ corejs:{version:3},
  cacheDirectory:true
  }
 },
-</code></pre><p>tree shaking：去除无用代码</p>
-<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>clean-webpack-plugin:在打包时，先删除原来的再进行打包新的。</p>
+</code></pre><p>tree shaking：去除没有使用的代码，减少代码体积<br>前提：必须使用ES6模块化且开发环境</p>
+<p>在package.json中配置”sideEffects”:false所有代码都可以进行tree shaking，但是有些版本可能会把css文件删掉，所以最好配置”sideEffects”:[“*.css”]</p>
+<h4 id="code-split代码分割"><a href="#code-split代码分割" class="headerlink" title="code split代码分割"></a>code split代码分割</h4><p>拆分文件按需加载</p>
+<pre><code>//第一种多入口页面
+module.exports={
+    entry:{
+        //多入口：有一个入口，输出就有一个bundle
+        main:&quot;./src/js/index.js&quot;,
+        test:&quot;./src/js/test.js&quot;
+    },
+    output:{
+        //[name]去入口文件的文件名
+        filename:&quot;js/[name].[contenthash:10].js&quot;,
+        path:Resolve(__dirname,&quot;build&quot;)
+    },
+    plugins:[...],
+    mode:&quot;production&quot;,
+}
+
+//第二种配置splitChunks
+module.exports={
+    entry:&quot;./src/js/index.js&quot;,
+    output:{...},
+    plugins:[...],
+    /* 
+    1.可以将node——mudules中代码单独打包成一个chunk输出
+    2.会自动分析多入口chunk中，有没有公共的文件，如果有会打包成单独的一个chunk不会重复打包
+    */
+    optimization:{
+        splitChunks:{
+            chunks:&quot;all&quot;
+        }
+    },
+    mode:&quot;production&quot;,
+}
+
+//第三种通过js代码，让某个文件被单独打包成一个chunk
+//import动态导入语法能将某个文件单独打包,添加该注释可以设置打包的名字
+//单页面常用这种方法
+
+import(/* webpackChunkName:&quot;test&quot; */ &quot;./test&quot;).then().catch()
+</code></pre><h4 id="懒加载和预加载"><a href="#懒加载和预加载" class="headerlink" title="懒加载和预加载"></a>懒加载和预加载</h4><p>懒加载当文件需要用时才加载<br>预加载等其他资源加载完毕，浏览器空闲了，在偷偷加载资源，ie会有兼容性问题<br>正常加载可以认为是并行加载，同时加载多个文件</p>
+<pre><code>//懒加载，当文件需要用时才加载
+//仅在点击按钮之后再加载，第二次加载直接从缓存中读取
+document.getElementById(&quot;btn&quot;).onclick=function(){
+import(&quot;./test&quot;).then().catch
+}
+//预加载,会提前加载在浏览器
+document.getElementById(&quot;btn&quot;).onclick=function(){
+import((/* webpackChunkName:&quot;test&quot;,webpackPrefetch:true */&quot;./test&quot;).then().catch
+}
+</code></pre><h4 id="PWA"><a href="#PWA" class="headerlink" title="PWA"></a>PWA</h4><p>PWA 逐进式网络开发应用程序，离线课访问<br>    workbox –&gt; workbox-weboack-plugin</p>
+<pre><code>//安装
+npm i workbox-weboack-plugin
+//引入清除文件插件
+const WorkboxWeboackPlugin = require(&#39;workbox-weboack-plugin&#39;);
+plugins:[
+    new WorkboxWeboackPlugin.GenerateSW({
+        /*
+        1.帮助serviceworker快速启动
+        2.删除旧的serviceworker
+        生成一个serviceworker配置文件，
+        */
+        clientsClaim:true,
+        skipWaiting:true
+    })
+]
+//一般在index.js里面注册serviceworker
+//——————————indexjs
+//注册serviceworker
+//处理兼容性问题
+if(&quot;serviceWorker&quot; in navigator){
+    window.addEventListener(&quot;load&quot;,()=&gt;{
+        navigator.serviceWorker.register(&#39;/service-worker.js&#39;)
+        .then(()=&gt;{})
+        .catch(()=&gt;{})
+    })
+}
+</code></pre><p>可能出现的问题<br>1.eslit不认识window、navigator全局变量<br>解决：需要修改package.json中eslintConfig配置</p>
+<pre><code>&quot;env&quot;:{
+    &quot;browser&quot;：true //支持浏览器端全局变量
+}
+</code></pre><p>2.sw代码必须运行在服务器上<br>npm i serve -g<br>serve -s build 启动服务器，将build目录下所有资源作为静态资源暴露出去</p>
+<h4 id="externals"><a href="#externals" class="headerlink" title="externals"></a>externals</h4><p>externals拒绝打包某资源，自己手动引入</p>
+<pre><code>module.exports={
+    entry:&quot;./src/js/index.js&quot;,
+    output:{...},
+    plugins:[...],
+    mode:&quot;production&quot;,
+    externals:{
+        //库名 -- npm包名
+        //想使用link在html中引入，拒绝jQuery被打包进来，拒绝被打包时需要手动引进来
+        jquery:&#39;jQuery&#39;
+    }
+}
+</code></pre><h4 id="clean-webpack-plugin"><a href="#clean-webpack-plugin" class="headerlink" title="clean-webpack-plugin"></a>clean-webpack-plugin</h4><p>clean-webpack-plugin:在打包时，先删除原来的再进行打包新的。</p>
 <pre><code>//安装
 npm i clean-webpack-plugin -D
 //引入清除文件插件
@@ -661,7 +752,6 @@ new CleanWebpackPlugin([
   dry: false    //启用删除文件
 }),
 ]
-
 </code></pre>
   </article>
   <aside class="table-content" id="site-toc">
@@ -670,7 +760,7 @@ new CleanWebpackPlugin([
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#综述"><span class="toc-text">综述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#开发环境"><span class="toc-text">开发环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#devServer"><span class="toc-text">devServer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生产环境"><span class="toc-text">生产环境</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mini-css-extract-plugin插件"><span class="toc-text">mini-css-extract-plugin插件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#css兼容与压缩"><span class="toc-text">css兼容与压缩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#js语法检查与兼容性"><span class="toc-text">js语法检查与兼容性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生产环境的基本配置"><span class="toc-text">生产环境的基本配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优化配置"><span class="toc-text">优化配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#开发环境性能优化"><span class="toc-text">开发环境性能优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生产环境性能优化"><span class="toc-text">生产环境性能优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#综述"><span class="toc-text">综述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#开发环境"><span class="toc-text">开发环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#devServer"><span class="toc-text">devServer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生产环境"><span class="toc-text">生产环境</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#mini-css-extract-plugin插件"><span class="toc-text">mini-css-extract-plugin插件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#css兼容与压缩"><span class="toc-text">css兼容与压缩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#js语法检查与兼容性"><span class="toc-text">js语法检查与兼容性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生产环境的基本配置"><span class="toc-text">生产环境的基本配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优化配置"><span class="toc-text">优化配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#开发环境性能优化"><span class="toc-text">开发环境性能优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生产环境性能优化"><span class="toc-text">生产环境性能优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#code-split代码分割"><span class="toc-text">code split代码分割</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#懒加载和预加载"><span class="toc-text">懒加载和预加载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PWA"><span class="toc-text">PWA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#externals"><span class="toc-text">externals</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#clean-webpack-plugin"><span class="toc-text">clean-webpack-plugin</span></a></li></ol></li></ol></li></ol>
   </div>
 </aside>
   
@@ -728,10 +818,10 @@ new CleanWebpackPlugin([
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/05/25/npm包管理/" data-enable="true">
+    <a href="/2020/07/09/JavaScript基础/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/03/22/unexpected-token/" data-enable="true">
+    <a href="/2020/07/08/less学习笔记/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

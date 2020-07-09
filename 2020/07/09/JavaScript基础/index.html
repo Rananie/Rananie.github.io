@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>JavaScript（更新中） | Ranan的博客</title>
+  <title>JavaScript基础（7.9更新） | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -150,7 +150,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-03-03
+      <i class="fa fa-calendar"></i>2020-07-09
     </span>
     
       <span>
@@ -164,7 +164,7 @@
     
   </div>
   <h1 class="passage-title">
-    JavaScript（更新中）
+    JavaScript基础（7.9更新）
   </h1>
   
   <article class="passage-article">
@@ -177,8 +177,12 @@
 <p>3.数据类型<br>基本数据类型： Undefined、Null、Boolean、Number、String和Symbol(ES6)<br>引用数据类型： Object(Array, Date, RegExp, Function)</p>
 <p>字符串中可以使用\进行转义字符</p>
 <p>数字的最大值：Number.MAX_VALUE,最小正值：Number.MIN_VALUE<br>超过最大值返回Infinity表示正无穷。<br>NAN（类型仍然是number）是一个特殊的数字，表示NOT A NUMBER。<br>JS进行浮点运算，可能得到一个不精确的结果（不要用JS进行对精确度比较高的运算）</p>
-<p>Null类型的值只有一个null，null专门用来表示为空的对象，所以使用typeof会返回Object<br>Undefined类型的值只有一个undefined，当声明一个变量，但并不给变量赋值时返回undefined</p>
-<p><strong>强制类型转化</strong>主要指其他数据类型转换成String，Number，Boolean<br>转化成String：<br>1.<code>XXX.toString</code>返回转换结果(null,undefined没有该方法)。<br>2.调用String(需要转化的值)函数，对于Number和Boolean实际上调用的是toString方法，对于null/undefined直接转化为”null/undefined”。<br>3.所以非数字类型的运算都转化成数字类型再运算，但是加法中的字符串除外，所以可以利用字符串拼串<code>x+&quot;&quot;</code>（技巧），<br>转化成Number：<br>1.调用Number(需要转化的值)函数，如果有非数字类容/undefined转换NaN，空串/null/false转换成0,true转换成1<br>2.对于字符串，parseInt():把一个字符串转换成整数,第二个参数可以指定数字的进制。parseFloat():把一个字符串转化成浮点数。非字符串将其转化成字符串再操作，返回转化结果。<br>3.由于任何值做减法、乘法、除法运算时都会自动转化为Number，所以可以利用<code>x - 0</code><br>转化为布尔值：<br>1.调用Boolean(需要转化的值)函数：0、NaN、空串、null、undefined都是false<br>2.两个取反操作可以转化成布尔值。</p>
+<p>注意：<br>Null类型的值只有一个null，null专门用来表示为空的对象，所以使用typeof会返回Object<br>Undefined类型的值只有一个undefined，当声明一个变量，但并不给变量赋值时返回undefined</p>
+<p><strong>强制类型转化</strong><br>主要指其他数据类型转换成String，Number，Boolean</p>
+<p>typeof 就是运算符，获得一个值的类型以字符串返回</p>
+<p>转化成String：<br>1.<code>XXX.toString</code>返回转换结果(null,undefined没有该方法)。<br>2.调用String(需要转化的值)函数，对于Number和Boolean实际上调用的是toString方法，对于null/undefined直接转化为”null/undefined”。<br>3.所以非数字类型的运算都转化成数字类型再运算，但是加法中的字符串除外，所以可以利用字符串拼串<code>x+&quot;&quot;</code>（技巧），</p>
+<p>转化成Number：<br>1.调用Number(需要转化的值)函数，如果有非数字类容/undefined转换NaN，空串/null/false转换成0,true转换成1<br>2.对于字符串，parseInt():把一个字符串转换成整数,第二个参数可以指定数字的进制。parseFloat():把一个字符串转化成浮点数。非字符串将其转化成字符串再操作，返回转化结果。<br>3.由于任何值做减法、乘法、除法运算时都会自动转化为Number，所以可以利用<code>x - 0</code></p>
+<p>转化为布尔值：<br>1.调用Boolean(需要转化的值)函数：0、NaN、空串、null、undefined都是false<br>2.两个取反操作可以转化成布尔值。</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -245,10 +249,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/03/04/MVC、MVP、MVVM/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/03/01/XHR的ajax封装/" data-enable="true">
+    <a href="/2020/07/09/webpack学习笔记/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

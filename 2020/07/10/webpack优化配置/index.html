@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ranan" />
+  
+  
+  <title>webpack优化配置 | Ranan的博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,工具,构建工具," />
+  
+
+  
+  <meta name="description" content="Ranan的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Ranan",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 不能放弃思考</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://biubiuins.github.io/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-07-10
+    </span>
+    
+      <span>
+        | <a href="/categories/前端/"><i class="fa fa-bookmark"></i>前端</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    webpack优化配置
+  </h1>
+  
+  <article class="passage-article">
+    <p><strong>开发环境性能优化</strong></p>
+<p>优化打包构建速度</p>
+<ul>
+<li>HMR 只重新构建发生变化的模块</li>
+</ul>
+<p>优化代码调试（错误在哪里）</p>
+<ul>
+<li>source-map</li>
+</ul>
+<p><strong>生产环境优化</strong></p>
+<p>优化打包构建速度 </p>
+<ul>
+<li>oneOf 找到一个loader就不会继续遍历了</li>
+<li>babel缓存 第二次构建时，会读取之前的缓存，只重新构建变化的文件</li>
+<li>多进程打包</li>
+<li>externals 让某些库不打包，通过link引入</li>
+<li>dll 让某些库不打包（把库单独先打包好），后面直接用</li>
+</ul>
+<p>代码分为node_modules别人的库，和源代码，源代码可以通过import拆分打包，node_modules可以通过dll拆分打包</p>
+<p>优化代码运行的性能</p>
+<ul>
+<li>缓存（hash-chunkhash-contenthash）</li>
+<li>tree shaking 去掉没有使用的代码</li>
+<li>code split 代码分割</li>
+<li>懒加载/预加载（js代码）</li>
+<li>pwa 离线也可以访问</li>
+</ul>
+<h4 id="开发环境性能优化"><a href="#开发环境性能优化" class="headerlink" title="开发环境性能优化"></a>开发环境性能优化</h4><p>HMR：hot module replacement 热模块替换，作用：一个模块发生变化，只会重新打包这一个模块（而不是打包所有模块）<br>HTML文件：默认不使用HMR功能，同时会导致问题：html文件不能热更新了。解决办法:修改entry入口，将html文件引入之后html可以热更新了，但是仍然不能使用HMR功能。（html不用做HMR功能）<br>样式文件：可以使用HMR功能是因为style-loader内部实现了，所以在开发环境可以使用style-loader，而在生产环境为了把 css单独提取成一个文件就不使用了。<br>js文件：默认不能使用HMR功能–&gt;需要修改js代码，添加支持HMR功能的代码。（不适用过于麻烦）</p>
+<pre><code>module.exports={
+   entry:[&quot;./src/js/index.js&quot;,&quot;./src/index.html&quot;]
+
+    ....
+
+    devServer:{
+     contentBase:resolve(__dirname,&quot;build&quot;),
+     compress:true,
+     port:3000,
+     open:true,
+     //开启HMR功能
+     //当修改webpack配置，新配置想要生效，必须重启服务器。
+     hot:true
+    }
+    }
+</code></pre><p>source-map：<strong>提供源代码到构建后代码映射的技术</strong>，如果构建后代码出错了，会通过映射追踪到源代码错误。</p>
+<p>[inline-|hidden-|eval-][nosources-][cheap-[module]]source-map<br>source-map：外部，错误代码准确信息和可以追踪源代码的错误位置。<br>inline-source-map:内联，只生成一个内联的source-map，错误代码准确信息，可以追踪源代码的错误位置。<br>hidden-source-map:外部，错误代码错误原因，不能追踪到源代码的错误，只能提示到构建后代码的错误位置。<br>eval-source-map:内联，每一个文件都生成对应的source-map，错误代码准备信息和可以追踪源代码的错误位置。<br>nosources-source-map:外部，错误代码准确信息，但是查看不了源代码。<br>cheap-source-map：外部，错误代码准确信息可以追踪源代码的错误位置，只精确到行，精确不到列。<br>cheap-module-source-map：外部，错误代码准确信息可以追踪源代码的错误位置，module会将loader的source map加入<br>内联和外部的区别：1.外部生成了文件，内联没有（直接在生成的输出js中） 2.内联构建速度快3.内联会让体积变得非常大，所以在生成环境不适用内联。</p>
+<p><strong>推荐</strong><br>开发坏境：速度快，调试更友好。<br>      速度快(eval&gt;inline&gt;cheap&gt;…)eval-cheap-source-map&gt;eval-source-map..<br>      调试友好 source-map cheap-module-source-map<br>      一般使用：eval-source-map</p>
+<p>生成环境：源代码要不要隐藏？调试要不要更友好？<br>      源代码隐L藏：hidden-source-map（只隐藏源代码，会提示构建后代码的错误信息） nosources-source-map（全部隐藏）<br>      一般使用source-map </p>
+<pre><code>module.exports = {
+.....
+//devtool:&quot;source-map&quot;
+devtool:&quot;inline-source-map&quot;
+}
+</code></pre><h4 id="生产环境性能优化"><a href="#生产环境性能优化" class="headerlink" title="生产环境性能优化"></a>生产环境性能优化</h4><p>oneOf：oneOf以下的loader只会匹配一个，一旦匹配到，则不会在继续匹配下面的loader了。不能有两个配置处理同一种类型的文件，所以之前的两个js处理loader需要有一个放在外部。</p>
+<pre><code>module.exports = {
+module:{
+ rules:[
+ {eslint...},
+ {
+   oneOf:[{...},{另外一个js...}...]
+ }
+ ]
+}
+
+}
+</code></pre><p>babel缓存：第二次构建时，会读取之前的缓存，只重新构建变化的文件。<br>文件资源缓存：输出的文件(没使用hash)，缓存在浏览器，一定时间内不会重新获取。<br>1.hash:输出文件后面加上hash值（所有文件相同），这样在缓存期如果hash值变化（每次打包都会变化）都会重新获取。存在问题：重新打包就会改变hash，即使没有修改的文件。<br>2.chunkhash：根据chunk生成的hash值，如果打包来源于同一个chunk，那么hash就一样。存在问题css与js的hash值一样，因为css被打包进了js，所以同属于一个chunk。修改项目的文件，只有这个文件和于这个文件相关联的打包文件的hash码变化（css和js还是相同），其他的不变。<br>3.contenthash：根据文件的内容生成hash值，不同文件的hash值不一样。内容变化hash值才改变。</p>
+<pre><code>output:{
+filename:&quot;js/built.[hash:10].js&quot;
+//filename:&quot;js/built.[chunkhash:10].js&quot;
+}
+
+//兼容性处理
+{
+test:/\.js$/,
+exclude:/node_modules/,
+loader: &quot;babel-loader&quot;,
+options: {
+presets:[
+&quot;@babel/preset-env&quot;,
+ {
+useBuiltIns:&quot;usage&quot;,
+corejs:{version:3},
+  targets:{
+  chrome:&quot;60&quot;,
+   }
+   }
+    ],
+ //开启babel缓存
+ cacheDirectory:true
+ }
+},
+</code></pre><p>tree shaking：去除没有使用的代码，减少代码体积<br>前提：必须使用ES6模块化且开发环境</p>
+<p>在package.json中配置”sideEffects”:false所有代码都可以进行tree shaking，但是有些版本可能会把css文件删掉，所以最好配置”sideEffects”:[“*.css”]</p>
+<h4 id="code-split代码分割"><a href="#code-split代码分割" class="headerlink" title="code split代码分割"></a>code split代码分割</h4><p>拆分文件按需加载</p>
+<pre><code>//第一种多入口页面
+module.exports={
+    entry:{
+        //多入口：有一个入口，输出就有一个bundle
+        main:&quot;./src/js/index.js&quot;,
+        test:&quot;./src/js/test.js&quot;
+    },
+    output:{
+        //[name]去入口文件的文件名
+        filename:&quot;js/[name].[contenthash:10].js&quot;,
+        path:Resolve(__dirname,&quot;build&quot;)
+    },
+    plugins:[...],
+    mode:&quot;production&quot;,
+}
+
+//第二种配置splitChunks
+module.exports={
+    entry:&quot;./src/js/index.js&quot;,
+    output:{...},
+    plugins:[...],
+    /* 
+    1.可以将node——mudules中代码单独打包成一个chunk输出
+    2.会自动分析多入口chunk中，有没有公共的文件，如果有会打包成单独的一个chunk不会重复打包
+    */
+    optimization:{
+        splitChunks:{
+            chunks:&quot;all&quot;
+        }
+    },
+    mode:&quot;production&quot;,
+}
+
+//第三种通过js代码，让某个文件被单独打包成一个chunk
+//import动态导入语法能将某个文件单独打包,添加该注释可以设置打包的名字
+//单页面常用这种方法
+
+import(/* webpackChunkName:&quot;test&quot; */ &quot;./test&quot;).then().catch()
+</code></pre><h4 id="懒加载和预加载"><a href="#懒加载和预加载" class="headerlink" title="懒加载和预加载"></a>懒加载和预加载</h4><p>懒加载当文件需要用时才加载<br>预加载等其他资源加载完毕，浏览器空闲了，在偷偷加载资源，ie会有兼容性问题<br>正常加载可以认为是并行加载，同时加载多个文件</p>
+<pre><code>//懒加载，当文件需要用时才加载
+//仅在点击按钮之后再加载，第二次加载直接从缓存中读取
+document.getElementById(&quot;btn&quot;).onclick=function(){
+import(&quot;./test&quot;).then().catch
+}
+//预加载,会提前加载在浏览器
+document.getElementById(&quot;btn&quot;).onclick=function(){
+import((/* webpackChunkName:&quot;test&quot;,webpackPrefetch:true */&quot;./test&quot;).then().catch
+}
+</code></pre><h4 id="PWA"><a href="#PWA" class="headerlink" title="PWA"></a>PWA</h4><p>PWA 逐进式网络开发应用程序，离线课访问<br>    workbox –&gt; workbox-weboack-plugin</p>
+<pre><code>//安装
+npm i workbox-weboack-plugin
+//引入清除文件插件
+const WorkboxWeboackPlugin = require(&#39;workbox-weboack-plugin&#39;);
+plugins:[
+    new WorkboxWeboackPlugin.GenerateSW({
+        /*
+        1.帮助serviceworker快速启动
+        2.删除旧的serviceworker
+        生成一个serviceworker配置文件，
+        */
+        clientsClaim:true,
+        skipWaiting:true
+    })
+]
+//一般在index.js里面注册serviceworker
+//——————————indexjs
+//注册serviceworker
+//处理兼容性问题
+if(&quot;serviceWorker&quot; in navigator){
+    window.addEventListener(&quot;load&quot;,()=&gt;{
+        navigator.serviceWorker.register(&#39;/service-worker.js&#39;)
+        .then(()=&gt;{})
+        .catch(()=&gt;{})
+    })
+}
+</code></pre><p>可能出现的问题<br>1.eslit不认识window、navigator全局变量<br>解决：需要修改package.json中eslintConfig配置</p>
+<pre><code>&quot;env&quot;:{
+    &quot;browser&quot;：true //支持浏览器端全局变量
+}
+</code></pre><p>2.sw代码必须运行在服务器上<br>npm i serve -g<br>serve -s build 启动服务器，将build目录下所有资源作为静态资源暴露出去</p>
+<h4 id="externals"><a href="#externals" class="headerlink" title="externals"></a>externals</h4><p>externals拒绝打包某资源，自己手动引入</p>
+<pre><code>module.exports={
+    entry:&quot;./src/js/index.js&quot;,
+    output:{...},
+    plugins:[...],
+    mode:&quot;production&quot;,
+    externals:{
+        //库名 -- npm包名
+        //想使用link在html中引入，拒绝jQuery被打包进来，拒绝被打包时需要手动引进来
+        jquery:&#39;jQuery&#39;
+    }
+}
+</code></pre><h4 id="DLL"><a href="#DLL" class="headerlink" title="DLL"></a>DLL</h4><p>使用dll技术，对某些库（第三方）进行单独打包<br>当运行webpack时，默认查找webpack.config.js 配置文件<br>需求：需要运行wbpack.dll.js文件<br>–&gt; webpack –config webpack.dll.js</p>
+<pre><code>//————————webpack.dll.js
+const{ resolve } =require(&quot;path&quot;);
+const webpack = require(&quot;webpack&quot;);
+module.exports = {
+entry:{
+//最终打包生成的name为属性名，属性值为要打包的库
+ jquery:[&#39;jquery&#39;]
+},
+output:{
+    filename:&#39;[name].js&#39;,
+    path:resolve(__dirname),&#39;dll&#39;,
+    library:&quot;[name]_[hash]&quot;  //打包的库里面向外暴露出去的内容叫什么
+},
+//以上内容专门用于打包jquery
+
+plugins:[
+    //打包生成一个 manifest.json --&gt; 提供和jquery映射
+ new webpack.DllPlugin(
+     name:&#39;[name]_[hash]&#39;,//映射库的暴露的内容名称
+     path:resolve(__dirname,&quot;dll/manifest.json&quot;) //输出文件的路径
+     })
+] ，
+mode:&quot;production&quot;
+}
+</code></pre><p>打包之后配置webpack.config.js,这样可以重复打包webpack.config.js时不再打包jquery库了</p>
+<pre><code>//-----webpack.config.js
+const webpack = require(&quot;webpack&quot;);
+const AddAssetHtmlWebpackPlugin = require(&quot;add-asset-html-webpack-plugin&quot;)
+....
+//告诉webpack哪些库不参与打包，同时使用时的名称也要变
+new webpack.DllReferencePlugin({
+    manifest:resolve(__dirname,&quot;dll/manifest.json&quot;)
+}),
+//将某个文件打包输出去，并在html中自动引入该文件
+new AddAssetHtmlWebpackPlugin({
+filepath:resolve(__dirname,&quot;dll/jquery.js&quot;)
+})
+</code></pre><h4 id="clean-webpack-plugin"><a href="#clean-webpack-plugin" class="headerlink" title="clean-webpack-plugin"></a>clean-webpack-plugin</h4><p>clean-webpack-plugin:在打包时，先删除原来的再进行打包新的。</p>
+<pre><code>//安装
+npm i clean-webpack-plugin -D
+//引入清除文件插件
+const CleanWebpackPlugin = require(&#39;clean-webpack-plugin&#39;);
+//使用
+plugins:[
+//匹配删除的文件
+new CleanWebpackPlugin([
+  &#39;dist&#39;,         //删除dist文件夹
+  &#39;build/*.*&#39;,    //删除build文件夹下的所有文件
+],{
+  //下面可以省略
+  root: __dirname,  //根目录
+  verbose:  true,  //开启在控制台输出信息
+  dry: false    //启用删除文件
+}),
+]
+</code></pre>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#开发环境性能优化"><span class="toc-text">开发环境性能优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生产环境性能优化"><span class="toc-text">生产环境性能优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#code-split代码分割"><span class="toc-text">code split代码分割</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#懒加载和预加载"><span class="toc-text">懒加载和预加载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PWA"><span class="toc-text">PWA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#externals"><span class="toc-text">externals</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DLL"><span class="toc-text">DLL</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#clean-webpack-plugin"><span class="toc-text">clean-webpack-plugin</span></a></li></ol>
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/构建工具/"><i class="fa fa-tags"></i>构建工具</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2020/07/09/JavaScript基础/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

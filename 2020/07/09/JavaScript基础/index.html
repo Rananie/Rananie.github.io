@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>JavaScript基础（7.9更新） | Ranan的博客</title>
+  <title>JavaScript基础（7.10更新） | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -164,7 +164,7 @@
     
   </div>
   <h1 class="passage-title">
-    JavaScript基础（7.9更新）
+    JavaScript基础（7.10更新）
   </h1>
   
   <article class="passage-article">
@@ -183,6 +183,8 @@
 <p>转化成String：<br>1.<code>XXX.toString</code>返回转换结果(null,undefined没有该方法)。<br>2.调用String(需要转化的值)函数，对于Number和Boolean实际上调用的是toString方法，对于null/undefined直接转化为”null/undefined”。<br>3.所以非数字类型的运算都转化成数字类型再运算，但是加法中的字符串除外，所以可以利用字符串拼串<code>x+&quot;&quot;</code>（技巧），</p>
 <p>转化成Number：<br>1.调用Number(需要转化的值)函数，如果有非数字类容/undefined转换NaN，空串/null/false转换成0,true转换成1<br>2.对于字符串，parseInt():把一个字符串转换成整数,第二个参数可以指定数字的进制。parseFloat():把一个字符串转化成浮点数。非字符串将其转化成字符串再操作，返回转化结果。<br>3.由于任何值做减法、乘法、除法运算时都会自动转化为Number，所以可以利用<code>x - 0</code></p>
 <p>转化为布尔值：<br>1.调用Boolean(需要转化的值)函数：0、NaN、空串、null、undefined都是false<br>2.两个取反操作可以转化成布尔值。</p>
+<p>布尔值运算：<br>&amp;&amp; js中的“与运算”属于短路的与，如果第一个值为false，则不会看第二个值。<br>|| js中的“或运算”属于短路的或，如果第一个值为true，则不会检查第二个值。</p>
+<p>对于非布尔值进行与或运算时，会将其转化成布尔值运算后返回原数值，结合短路原则分析返回的数值。</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -249,10 +251,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2020/07/10/webpack优化配置/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/07/09/webpack学习笔记/" data-enable="true">
+    <a href="/2020/07/09/webpack基本配置/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

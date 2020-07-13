@@ -195,7 +195,7 @@
 <li>懒加载/预加载（js代码）</li>
 <li>pwa 离线也可以访问</li>
 </ul>
-<h4 id="开发环境性能优化"><a href="#开发环境性能优化" class="headerlink" title="开发环境性能优化"></a>开发环境性能优化</h4><p>HMR：hot module replacement 热模块替换，作用：一个模块发生变化，只会重新打包这一个模块（而不是打包所有模块）<br>HTML文件：默认不使用HMR功能，同时会导致问题：html文件不能热更新了。解决办法:修改entry入口，将html文件引入之后html可以热更新了，但是仍然不能使用HMR功能。（html不用做HMR功能）<br>样式文件：可以使用HMR功能是因为style-loader内部实现了，所以在开发环境可以使用style-loader，而在生产环境为了把 css单独提取成一个文件就不使用了。<br>js文件：默认不能使用HMR功能–&gt;需要修改js代码，添加支持HMR功能的代码。（不适用过于麻烦）</p>
+<h4 id="开发环境性能优化"><a href="#开发环境性能优化" class="headerlink" title="开发环境性能优化"></a>开发环境性能优化</h4><p>HMR：hot module replacement 热模块替换，作用：一块发生变化，只会重新打包这一个模块（而不是打包所有模块）<br>HTML文件：默认不使用HMR功能，同时会导致问题：html文件不能热更新了。解决办法:修改entry入口，将html文件引入之后html可以热更新了，但是仍然不能使用HMR功能。（html不用做HMR功能）<br>样式文件：可以使用HMR功能是因为style-loader内部实现了，所以在开发环境可以使用style-loader，而在生产环境为了把 css单独提取成一个文件就不使用了。<br>js文件：默认不能使用HMR功能–&gt;需要修改js代码，添加支持HMR功能的代码。（不适用过于麻烦）</p>
 <pre><code>module.exports={
    entry:[&quot;./src/js/index.js&quot;,&quot;./src/index.html&quot;]
 
@@ -475,7 +475,7 @@ new CleanWebpackPlugin([
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2020/07/12/webpack详细配置/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
     <a href="/2020/07/09/JavaScript基础/" data-enable="true">

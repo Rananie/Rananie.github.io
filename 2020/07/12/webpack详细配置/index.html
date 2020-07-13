@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ranan" />
+  
+  
+  <title>webpack详细配置 | Ranan的博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,工具,构建工具," />
+  
+
+  
+  <meta name="description" content="Ranan的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Ranan",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 不能放弃思考</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://biubiuins.github.io/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-07-12
+    </span>
+    
+      <span>
+        | <a href="/categories/前端/"><i class="fa fa-bookmark"></i>前端</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    webpack详细配置
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="entry"><a href="#entry" class="headerlink" title="entry"></a>entry</h2><p>entry入口起点，值有三种情况<br>1.string —–&gt;’./src/index.js’<br>打包形成一个chunk，输出一个bundle文件,此时的chunk默认名称是main</p>
+<p>2.array  —–&gt;[‘./src/index.js’,’./src/add.js’]<br>所有入口文件最终只会形成一个chunk，输出一个bundle文件，此时的chunk默认名称是main<br>作用：HMR功能中html热更新生效</p>
+<p>3.object  —–&gt;{index:’./src/index.js’,add:’./src/add.js’}<br>有几个入口文件就形成几个chunk，输出几个bundle，chunk的名称是key</p>
+<p>特殊用法：2.3结合,value值为一个数组</p>
+<pre><code>//----------string
+module.exports={
+    entry:&quot;./src/js/index.js&quot;,
+    output:{
+        //默认的chunk名称是main
+        filename:&quot;js/[name].js&quot;,
+        path:Resolve(__dirname,&quot;build&quot;)
+    },
+    plugins:[new HtmlWebpackPlugin()],
+    mode:&quot;development&quot;,
+}
+</code></pre><h2 id="output"><a href="#output" class="headerlink" title="output"></a>output</h2><p>library一般结合DLL使用</p>
+<pre><code>module.exports={
+    entry:&quot;./src/js/index.js&quot;,
+    output:{
+        //文件名称（指定名称+目录）
+        filename:&quot;js/[name].js&quot;,
+
+        //输出文件目录，将来所有资源输出的公共目录
+        path:Resolve(__dirname,&quot;build&quot;),
+
+        //所有资源引入公共路径前缀 --&gt;imgs/a.jpg --&gt; /imgs/a.jpg  默认不加一般用于生产环境 
+        publicPath:&quot;/&quot;,
+
+        //非入口chunk的名称  import动态导入 optimization设置
+        chunkFilename:&quot;js/[name]_chunk.js&quot;,
+
+        //整个库向外暴露的变量名
+        //main.js  (function(modules){...} ---&gt; var main = (function(modules){...}
+        library:&#39;[name]&#39;
+
+        //变量名添加到哪个上，之后如何引入window-browser global-node conmmojs
+        //var main =... --&gt; window[&quot;main&quot;] = ...
+        libraryTarget:&#39;window&#39;
+    },
+    plugins:[new HtmlWebpackPlugin()],
+    mode:&quot;development&quot;,
+}
+</code></pre><h2 id="module"><a href="#module" class="headerlink" title="module"></a>module</h2><p>Loader让Webpack能够去处理那些非JavaScript文件（Webpack自身只理解JavaScript/json）</p>
+<pre><code>module.exports={
+    entry:&quot;./src/js/index.js&quot;,
+    output:{
+        filename:&quot;js/[name].js&quot;,
+        path:Resolve(__dirname,&quot;build&quot;)
+    },
+    module:{
+        //loader配置
+        rules:[
+
+            {
+              test:/\.js$/,
+
+              //多个loader用use
+              use:[,]
+              //单个loeader用loader
+              //loader:&quot;&quot;
+
+              //排除node_modules下的js文件
+              exclude:/node_modules/,
+
+              //只检查src下的js文件
+              include:resolve(__dirname,&quot;src&quot;),
+
+              //优先执行 pre 延后执行 post 默认无顺序
+              enforce:&quot;post&quot;,
+
+              //配置属性
+              options:{}
+            },
+            {
+                //以下配置只会执行一个
+                oneOf:[]
+            }
+        ]
+    }
+    plugins:[new HtmlWebpackPlugin()],
+    mode:&quot;development&quot;,
+}
+</code></pre><h2 id="resolve"><a href="#resolve" class="headerlink" title="resolve"></a>resolve</h2><pre><code>module.exports={
+    entry:&quot;./src/js/index.js&quot;,
+    output:{
+        filename:&quot;js/[name].js&quot;,
+        path:Resolve(__dirname,&quot;build&quot;)
+    },
+    module:{
+        rules:[]
+    }
+    plugins:[new HtmlWebpackPlugin()],
+    mode:&quot;development&quot;,
+    //解析模块的规则
+    resolve:{
+        //配置解析模块路径别名，vue里面的@，避免使用../../../过多的情况
+        //优点 简写路径 缺点 路径没有提示
+        alias:{
+            @:resolve(__dirname,src/css)
+        },
+
+        //配置省略文件路径的后缀名
+        extensions:[&#39;.js&#39;,&#39;.json&#39;],
+
+        //告诉webpack解析模块是去找哪个目录
+        //可以直接写出找的路径，也可以仅写文件名一层一层去找
+        modules:[resolve(__dirname,&quot;../../node_modules&quot;),&#39;node_modules&#39;]
+
+    }
+}
+</code></pre><h2 id="devServer"><a href="#devServer" class="headerlink" title="devServer"></a>devServer</h2><p>dev是develop的简写，用于<strong>开发坏境</strong></p>
+<p>利用devServer快速开启一个服务器。</p>
+<p>只有在通过devServer启动webpack时，配置文件里的devServer才会生效，因为这些参数所对应的功能都是devServer提供的，webpack本事并不认识devServer的配置项。</p>
+<pre><code>module.exports={
+    entry:&quot;./src/js/index.js&quot;,
+    output:{
+        filename:&quot;js/[name].js&quot;,
+        path:Resolve(__dirname,&quot;build&quot;)
+    },
+    module:{
+        rules:[]
+    }
+    plugins:[new HtmlWebpackPlugin()],
+    mode:&quot;development&quot;,
+    resolve:{},
+    devServer:{
+        //运行代码的目录
+        contentBase:resolve(__dirname,&#39;build&#39;),
+
+        //监视contentBase目录下的所有文件，一旦文件发生变化就会reload
+        watchContentBase:true,
+        //监视文件的一些配置
+        watchOptions:{
+        //忽略文件
+        ignored:/node_modules/,
+
+        },
+
+        //启动gzip的压缩
+        compress:true,
+
+        //端口,域名
+        port:5000,
+        host:&#39;localhost&#39;,
+
+        //自动打开浏览器
+        open:true,
+
+        //开启HMR功能
+        hot:true,
+
+        //不显示启动服务器日志信息
+        clientLogLevel:&quot;none&quot;,
+        //除了一些基本启动信息以外，其他内容都不显示
+        quiet:true,
+        //如果出错了，不要全屏提示
+        overlay:false,
+
+        //浏览器和代理服务器没有跨域问题，和服务器有跨域问题，通过代理服务器转发
+        //服务器代理 --&gt; 解决开放环境跨域问题
+        proxy:{
+            //一旦devServer(5000)接收到/api/xxx的请求，就会把请求转发到另外一个服务器(3000)
+            &#39;/api&#39;:{
+                target:&#39;http://localhost:3000&#39;,
+                //发送请求时，请求路径重写：将/api/xxx --&gt; /xxx
+                pathRewrite:{
+                    &quot;^/api&quot;:&#39;&#39;
+                }
+            }
+        }
+    }
+}
+</code></pre><h2 id="optimization"><a href="#optimization" class="headerlink" title="optimization"></a>optimization</h2><p>用于<strong>生产环境</strong></p>
+<pre><code>module.exports={
+    entry:&quot;./src/js/index.js&quot;,
+    output:{
+        filename:&quot;js/[name].[contenthash:10].js&quot;,
+        path:Resolve(__dirname,&quot;build&quot;),
+        chunkFilename:&#39;js/[name].[contenthash:10]_chunk.js&#39;
+    },
+    module:{
+        rules:[]
+    }
+    plugins:[new HtmlWebpackPlugin()],
+    mode:&quot;production&quot;,
+    resolve:{ },
+    optimization:{
+        splitChunk:&#39;all&#39;,
+
+        //以下为默认值
+
+        //分割的chunk最小为30kb
+        minSize:30 * 1024,
+        maxSize:0, //最大没有限制
+        minChunks:1, //要提取的chunk最少被引用一次
+        maxAsyncRequests:5,//按需加载时并行加载的文件的最大数量
+        maxInitialRequests:3,//入口js文件最大并行请求数量
+        automaticNameDelimiter:&quot;~&quot;,//名称连接符
+        name:true, //可以使用命名规则
+        cacheGroups:{
+            //分割chunk的组
+            vendors:{
+                //node_modules文件会被打包到vendors组的chunk中 --&gt;vendors~xxx.js
+                //上面的规则对分组里的都生效
+                test:/[\\/]node_modules[\\/]/,
+                //优先级
+                priority:-10
+            },
+            default:{
+                //要提取的chunk最少被引用2次
+                minChunks:2,
+                priority:-20,
+                //如果当前要打包的模块，和之前已经被提取的模块是同一个，直接复用不用重新打包模块
+                reuseExistingChunk:true
+            }
+        },
+        //将当前模块记录其他模块的hash单独打包为一个文件runtime
+        //解决缓存失效的问题
+        runtimeChunk:{
+            name: entrypoint =&gt; `runtime-${entrypoint.name}`
+        },
+        //配置生成环境的压缩方案:js和css
+        minimizer:[
+            //需要下载引入
+        new TerserWebpackPlugin({
+            //开启缓存
+            cache:true,
+            //开启多进程打包
+            parallel:true,
+            //启动source-map
+            sourceMap:true
+
+        })
+        ]
+
+
+    }
+}
+</code></pre><p>存在问题使用contenthash，当index.js动态引入a.js打包成两个chunk，输出的main.js中记录了a.js的hash值，所以a变化时重新打包时hash变化，main.js也会变会重新打包。导致缓存失效。</p>
+<p>解决办法：设置runtimeChunk</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#entry"><span class="toc-text">entry</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#output"><span class="toc-text">output</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#module"><span class="toc-text">module</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#resolve"><span class="toc-text">resolve</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#devServer"><span class="toc-text">devServer</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#optimization"><span class="toc-text">optimization</span></a></li></ol>
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/构建工具/"><i class="fa fa-tags"></i>构建工具</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2020/07/13/webpack5/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2020/07/10/webpack优化配置/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

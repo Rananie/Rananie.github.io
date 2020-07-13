@@ -6,12 +6,12 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>分类 | Ranan的博客</title>
+  <title>webpack5 | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo, Theme-AD" />
+    <meta name="keywords" content="前端,工具,构建工具," />
   
 
   
@@ -36,12 +36,12 @@
     welcome: {"enable":false,"interval":30},
     start_time: "2018-02-10",
     passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
-    is_post: false,
+    is_post: true,
     lock: false,
     author: "Ranan",
     share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
     mathjax: false,
-    page_type: "categories",
+    page_type: "",
     root: "/"
   };
 </script>
@@ -147,12 +147,107 @@
 <div id="site-process"></div>
     <main>
       
-  <div class="set">
-  <h3 style="text-align: left;">
-    <i class="fa fa-bookmark"></i>
-    共 12 个分类
-  </h3>
-  <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/">前端</a><span class="category-list-count">35</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/前端/JavaScript/">JavaScript</a><span class="category-list-count">15</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/工具/">工具</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/库/">库</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/Node/">Node</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/Vue/">Vue</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/CSS/">CSS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端/HTML/">HTML</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/project/">project</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/读书笔记/">读书笔记</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/刷题笔记/">刷题笔记</a><span class="category-list-count">1</span></li></ul>
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-07-13
+    </span>
+    
+      <span>
+        | <a href="/categories/前端/"><i class="fa fa-bookmark"></i>前端</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    webpack5
+  </h1>
+  
+  <article class="passage-article">
+    <p>下载webpack5</p>
+<p>npm i webpack@next webpack-cli -D</p>
+<p>开发环境</p>
+<pre><code>//---------webpack4写法
+const {resolve} = require(&quot;path&quot;)
+module.exports={
+    entry:&quot;./src/js/index.js&quot;,
+    output:{
+        //默认的chunk名称是main
+        filename:&quot;js/[name].js&quot;,
+        path:Resolve(__dirname,&quot;build&quot;)
+    },
+    mode:&quot;development&quot;,
+}
+
+//--------webpack5写法
+module.exports=
+{     
+    //其余值为默认值
+    mode:&quot;development&quot;,
+}
+</code></pre><p>生产环境</p>
+<p>1.用了es6模块化<br>2.production模式</p>
+<p>满足以上条件webpack4会自动tree shaking<br>但是在实际中依赖关系复杂时webpack4的tree shaking会失效<br>webpack5对此进行了优化tree shaking会更加强大</p>
+<pre><code>//---------webpack4写法
+const {resolve} = require(&quot;path&quot;)
+module.exports={
+    entry:&quot;./src/js/index.js&quot;,
+    output:{
+        //默认的chunk名称是main
+        filename:&quot;js/[name].js&quot;,
+        path:Resolve(__dirname,&quot;build&quot;)
+    },
+    mode:&quot;production&quot;
+}
+
+//--------webpack5写法
+module.exports=
+{     
+    mode:&quot;production&quot;,
+}
+</code></pre><p>webpack5主要的关注内容：</p>
+<ul>
+<li>通过持久缓存提高构建性能</li>
+<li>使用更好的算法和默认值来改善长期缓存</li>
+<li>通过更好的tree shaking和代码生成来改善捆绑包的大小</li>
+</ul>
+<p><strong>Output</strong></p>
+<p>webpack 4默认只能输出ES5代码<br>webpack 5设置<code>output.ecmaVersion:2015</code>来胜出ES6/ES2015的代码</p>
+<p><strong>SplitChunk</strong></p>
+<pre><code>//webpack4 统一设置
+minSize:30000
+
+//webpack5
+minSize:{
+    javascript:30000
+    style:5000
+}
+</code></pre><p><strong>cache</strong></p>
+<p>可以通过配置cache实现长久缓存，让第二次打包性能更加高效</p>
+<p>之前的webpack总是在第一次构建是输出全部文件，但是监视重新构造时只更新修改的文件。<br>webpack5在第一次构建时会找到输出文件看是否有变化，从而决定要不要输出全部文件。</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/构建工具/"><i class="fa fa-tags"></i>构建工具</a>
+    
+    </div>
+  
 </div>
 
     </main>
@@ -203,12 +298,12 @@
     <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2020/07/12/webpack详细配置/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
   <div class="bottom-bar-right">
-    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
       <i class="fa fa-bars"></i>
     </a>
     

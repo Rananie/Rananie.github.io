@@ -267,7 +267,7 @@ arr.toString();//1,2,3
 </code></pre><p>JSON.stringify更对用于对象，toString()更对用于数组</p>
 <p><a href="https://www.cnblogs.com/echolun/p/9631836.html" target="_blank" rel="noopener">参考文章</a></p>
 <h2 id="如何实现深拷贝？"><a href="#如何实现深拷贝？" class="headerlink" title="如何实现深拷贝？"></a>如何实现深拷贝？</h2><p>拷贝的数据里面不能有引用类型。如果有，只要拿到的是基本数据类型，然后再去赋值，就可以实现深拷贝</p>
-<h3 id="如何判断数据类型"><a href="#如何判断数据类型" class="headerlink" title="如何判断数据类型"></a>如何判断数据类型</h3><p><code>typeof</code>返回的数据类型:String,Number,Boolean,Undefined,Object(Array,null也是),Function，不能准确的确定数据的类型。</p>
+<h3 id="如何判断数据类型"><a href="#如何判断数据类型" class="headerlink" title="如何判断数据类型"></a>如何判断数据类型</h3><p><code>typeof</code>返回的数据类型:<strong>String,Number,Boolean,Undefined,Object(Array,null也是),Function</strong>，不能准确的确定数据的类型。</p>
 <p><strong>1</strong> Object.prototype.toString.call()</p>
 <p><code>Object.prototype.toString.call()</code>可以区分各种类型，但它无法区分自定义对象类型，自定义类型可以采用instanceof区分。</p>
 <pre><code>console.log(Object.prototype.toString.call(&quot;jerry&quot;));//[object String]
@@ -393,10 +393,10 @@ function  clone(target) {
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/02/23/this指针/" data-enable="true">
+    <a href="/2020/02/23/回调函数/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/02/18/原型与原型链/" data-enable="true">
+    <a href="/2020/02/17/es6/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>unexpected-token&lt; 报错 （待补充） | Ranan的博客</title>
+  <title>unexpected-token&lt; 报错 | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -164,7 +164,7 @@
     
   </div>
   <h1 class="passage-title">
-    unexpected-token< 报错 （待补充）
+    unexpected-token< 报错
   </h1>
   
   <article class="passage-article">
@@ -176,7 +176,7 @@
 <p>把上一个版本部署上去，发现没问题。那么排除了服务器的问题，应该是打包的问题。</p>
 <p>确定是打包的问题之后查看<code>config/index.js</code>,找到了原因。</p>
 <p><img src="\img\软件超市\打包路径.png" alt="打包路径"></p>
-<p><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>____</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>待更新<br>具体的原因等学了webpack之后来更新</p>
+<p>默认的是在路径前面添加/,但是此项目的路由设置了所有路径都会跳转到/manage/xx,所以需要在修改assetPublicPath属性。</p>
 
   </article>
   <aside class="table-content" id="site-toc">

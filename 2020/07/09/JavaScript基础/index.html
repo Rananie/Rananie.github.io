@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>JavaScript基础（7.10更新） | Ranan的博客</title>
+  <title>JavaScript基础（7.15更新） | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -164,17 +164,19 @@
     
   </div>
   <h1 class="passage-title">
-    JavaScript基础（7.10更新）
+    JavaScript基础（7.15更新）
   </h1>
   
   <article class="passage-article">
     <h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p>JavaScript（实现） = ECMAScript（标准） + DOM + BOM</p>
-<p>BOM是浏览器对象模型，用来获取或设置浏览器的属性、行为，例如：新建窗口、获取屏幕分辨率、浏览器版本号等。简单的说：bom是浏览器可视窗口操作<br>DOM是文档对象模型，用来获取或设置文档中标签的属性，例如获取或者设置input表单的value值。 BOM的内容不多，主要还是DOM。 由于DOM的操作对象是文档（Document），所以dom和浏览器没有直接关系。<br>Window对象：是整个BOM的核心，所有对象和集合都以某种方式回接到window对象。Window对象表示整个浏览器窗口，但不必表示其中包含的内容。<br>Document对象：实际上是window对象的属性。这个对象的独特之处是唯一一个既属于BOM又属于DOM的对象。</p>
+<p>BOM是浏览器对象模型，用来获取或设置浏览器的属性、行为，例如：新建窗口、获取屏幕分辨率、浏览器版本号等。简单的说：bom是浏览器可视窗口操作<br>DOM是文档对象模型，用来获取或设置文档中标签的属性，例如获取或者设置input表单的value值。 BOM的内容不多，主要还是DOM。 由于DOM的操作对象是文档（Document），所以dom和浏览器没有直接关系。</p>
+<p>Window对象：是整个BOM的核心，所有对象和集合都以某种方式回接到window对象。Window对象表示整个浏览器窗口，但不必表示其中包含的内容。<br>Document对象：实际上是window对象的属性。这个对象的独特之处是唯一一个既属于BOM又属于DOM的对象。</p>
 <p><strong>编写基本要求</strong><br>1.html不区别大小写，而JavaScript严格区别大小写<br>2.如果不写分号，浏览器会自动添加，但是会消耗系统资源，所以开发中必须写分号<br>3.JS中会忽略多个空格和换行，所以我们可以利用空格和换行对代码进行格式化</p>
 <p><strong>基本语法</strong></p>
 <p>1.字面量与变量<br>字面量：一些不可改变的值，可直接使用，比如：1 2 3 4 5 ，一般不用<br>变量：变量可以保存字面量，且可以任意改变，所以一般用变量</p>
 <p>2.标识符<br>在JS中所有可以由我们自主命名，比如：变量名、函数名、属性名<br>可以是字符、数字（不可开头）、__、$<br>不可以是ES中的关键字或保留字<br>标识符一般采用驼峰命名法</p>
-<p>3.数据类型<br>基本数据类型： Undefined、Null、Boolean、Number、String和Symbol(ES6)<br>引用数据类型： Object(Array, Date, RegExp, Function)</p>
+<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><p>基本数据类型： Undefined、Null、Boolean、Number、String和Symbol(ES6)<br>引用数据类型： Object(Array, Date, RegExp, Function)</p>
+<p>基本数据类型栈内存中保存的是值，引用数据类型栈内存中保存的是堆内存的地址。</p>
 <p>字符串中可以使用\进行转义字符</p>
 <p>数字的最大值：Number.MAX_VALUE,最小正值：Number.MIN_VALUE<br>超过最大值返回Infinity表示正无穷。<br>NAN（类型仍然是number）是一个特殊的数字，表示NOT A NUMBER。<br>JS进行浮点运算，可能得到一个不精确的结果（不要用JS进行对精确度比较高的运算）</p>
 <p>注意：<br>Null类型的值只有一个null，null专门用来表示为空的对象，所以使用typeof会返回Object<br>Undefined类型的值只有一个undefined，当声明一个变量，但并不给变量赋值时返回undefined</p>
@@ -185,7 +187,62 @@
 <p>转化为布尔值：<br>1.调用Boolean(需要转化的值)函数：0、NaN、空串、null、undefined都是false<br>2.两个取反操作可以转化成布尔值。</p>
 <p>布尔值运算：<br>&amp;&amp; js中的“与运算”属于短路的与，如果第一个值为false，则不会看第二个值。<br>|| js中的“或运算”属于短路的或，如果第一个值为true，则不会检查第二个值。</p>
 <p>对于非布尔值进行与或运算时，会将其转化成布尔值运算后返回原数值，结合短路原则分析返回的数值。</p>
+<p><strong>条件分支</strong></p>
+<p>switch</p>
+<pre><code>switch(值，不会转化){
+    case 值:  //switch判值,严格判等===
+        代码块;
+        break;
+    default:
+        代码块; //类似else
+}
 
+switch(true){ 
+//case可以为表达式
+case score &gt;= 90 &amp;&amp; score &lt;100:
+    alert(&quot;a&quot;)
+    break;
+}
+
+</code></pre><p>break只会出现在switch和循环语句中，在switch中代表跳出switch语句，在循环中，会跳出离它最近的那一层循环。</p>
+<p><strong>continue与break</strong></p>
+<p>continue:立刻结束本次循环，执行下次循环<br>break:在循环中，跳出离它最近的<strong>整个循环</strong></p>
+<h3 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h3><p><strong>in 运算符</strong><br>“属性名” in 对象<br>通过该运算符可以检查一个对象中是否含有指定的属性<br>如果对象中没有但原型中有，也会返回true</p>
+<p><strong>hasOwnProperty</strong><br>对象的hasOwnProperty来检查对象自身中是否含有该属性</p>
+<p>比较两个引用数据类型时，比较的是<strong>内存地址</strong>。</p>
+<pre><code>let obj = new Object();
+let obj2 = new Object();
+obj.name = &quot;ranan&quot;;
+obj2.name = &quot;ranan&quot;;
+console.log(obj.name == obj2.name)
+//输出false
+</code></pre><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p><strong>函数也是一个对象</strong></p>
+<p>使用函数声明来创建一个函数，调用函数时解析器不会检查实参的类型与数量。</p>
+<pre><code>function fun(){
+    return ;//返回值，执行了后面的代码将不会执行，默认返回undefined
+}
+
+//匿名函数赋值形式，最好叫上分号
+let fun = function{};
+
+//第一个括号是表示这个函数是一个整体 框起来，第二个括号表执行。
+(function(){})()
+
+</code></pre><p>return 可以结束整个函数，后面的代码将不会被执行。</p>
+<p><strong>构造函数</strong></p>
+<p>构造函数习惯首字母大写，构造函数通过new构造。构造函数也被成为类，通过构造函数创建的对象称为实例</p>
+<p><strong>new在执行时完成的4件事情：</strong><br>1.在内存中创造一个新的空对象,在堆内存中分配空间<br>2.让this指向这个新的对象<br>3.执行构造函数里面的代码，给这个新对象添加属性和方法<br>4.返回这个新对象(所以构造函数里面不需要return)</p>
+<p><strong>instanceof</strong><br>通过instanceof可以检查一个对象是否一个类的实例<br>所有的对象都是Object的后代</p>
+<pre><code>console.log(对象 instanceof Person)
+</code></pre><p><strong>构造函数使用的优化</strong><br>构造函数方法存在浪费内存的问题，在构造函数中的复杂数据类型（比如函数），实例化对象的时候，会专门开辟一个空间来存放。那么当实例对象过多的时候，就会开辟更多的空间来存放。<br>解决办法:将共享的方法在<strong>全局作用域</strong>中定义<br>存在的问题：将函数定义在全局作用域，污染了全局作用域的命名空间并且不安全。<br>解决办法:当我们希望所有的对象使用同一个函数时，最好使用<code>prototype</code>，这也是为什么方法一般定义在原型中，属性一般通过构造函数定义在对象本身。<br><a href="https://biubiuins.github.io/2020/02/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/" target="_blank" rel="noopener">原型</a></p>
+<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><p>1.全局作用域</p>
+<pre><code>- 全局作用域在页面打开时创建，在页面关闭时销魂
+- 全局作用域中有一个全局对象window
+- 在全局作用域中，创建的变量/函数都会作为window对象的属性/方法
+</code></pre><p>2.函数作用域</p>
+<pre><code>- 调用函数时创建函数作用域，函数执行完毕后函数作用域销毁
+- 每调用一次函数就会创建一个新的函数作用域
+</code></pre>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -193,7 +250,7 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#综述"><span class="toc-text">综述</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#综述"><span class="toc-text">综述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对象"><span class="toc-text">对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域"><span class="toc-text">作用域</span></a></li></ol></li></ol>
   </div>
 </aside>
   

@@ -150,7 +150,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-02-18
+      <i class="fa fa-calendar"></i>2020-07-15
     </span>
     
       <span>
@@ -168,41 +168,21 @@
   </h1>
   
   <article class="passage-article">
-    <h2 id="原型-prototype"><a href="#原型-prototype" class="headerlink" title="原型(prototype)"></a>原型(prototype)</h2><p><img src="/img/js/原型.png"></p>
-<p><img src="/img/js/prototype.png"></p>
+    <h2 id="原型-prototype"><a href="#原型-prototype" class="headerlink" title="原型(prototype)"></a>原型(prototype)</h2><p><img src="/img/js/原型.png"><br>此图中的实例对象也称为原型对象</p>
+<p>我们所创建的每一个函数，解析器都会向函数中添加一个属性<code>prototype</code></p>
+<p>函数的<code>prototype</code>属性，这个属性指向着一个对象(原型对象),<strong>原型对象相当于一个公共的区域，所有同一个类的实例都可以访问到这个原型对象，所以我们可以将对象中共有的内容，统一设置到原型对象中。</strong></p>
+<p>如果函数作为普通函数调用<code>prototype</code>没有任何作用。<br>如果函数作为构造函数调用，它所创建的对象中都有一个属性<br><code>__proto__</code>指向构造函数的原型对象。</p>
 <p><strong>注</strong><br>理解一定要把握对象的<strong>proto</strong>指向的是构造函数的prototype（原型）。</p>
-<h3 id="显式原型与隐式原型"><a href="#显式原型与隐式原型" class="headerlink" title="显式原型与隐式原型"></a>显式原型与隐式原型</h3><p>每个对象都有隐式原型<strong>proto</strong>这个属性，而function既有隐式原型（<em>proto</em>）又有显式原型（prototype），因为函数在js里面既是函数也是对象</p>
-<p>函数的<code>prototype</code>属性，默认指向Object实例对象(称为:原型对象)，原型上的方法是给实例对象用的。</p>
-<p>prototype也是一个原型对象，只要是对象就有<strong>proto</strong>.</p>
-<pre><code>function Fn() {
-}
-console.log(Fn.prototype);
-//输出{constructor：...,__proto__}
-//所以Fn.prototype也是一个实例对象，是Object的
-</code></pre><p><strong>对象的隐式原型的值为其对应构造函数的显式原型的值，<code>prototype</code>与<code>__proto__</code>里面保存一样的地址值。</strong></p>
+<p><strong>显式原型与隐式原型</strong></p>
+<p>每个对象都有隐式原型<strong>proto</strong>这个属性，而function既有隐式原型（<em>proto</em>）又有显式原型（prototype），因为函数在js里面既是函数也是对象。</p>
+<p>prototype也是一个对象，只要是对象就有<strong>proto</strong>.</p>
+<p><img src="/img/js/原型1.png"></p>
+<p><strong>对象的隐式原型的值为其对应构造函数的显式原型的值，<code>prototype</code>与<code>__proto__</code>里面保存一样的地址值。</strong></p>
 <pre><code>function Fn(){}
 let fn = new Fn()
 //左边显式原型,右边为隐式原型
 Fn.prototype === fn.__proto__
-</code></pre><p><strong>总结</strong></p>
-<ul>
-<li>函数的prototype属性在定义函数时自动添加，默认值是一个空Object实例对象。（Object.prototype不满足。）</li>
-<li>实例对象上的<strong>proto</strong>在创建实例对象时自动添加，默认值为构造函数的prototype属性</li>
-<li>程序员能直接操作显式原型，但不能直接操作隐式原型(ES6之前)</li>
-<li>原型对象通常用来对原来的内置对象进行扩展自定义方法。比如给数组增加自定义求偶数和的功能</li>
-</ul>
-<h2 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h2><p><img src="/img/js/原型链.jpg"><br><img src="/img/js/原型链.png"></p>
-<p>当访问一个对象的属性时，先在自身属性中查找，找到返回。如果没有，在沿<strong>proto</strong>这条链往上找，找到返回，如果最终没有找到，返回undefined,所以Object的原型对象是原型链的尽头。</p>
-<p>Object的<strong>proto</strong>指向Function的prototype,而Object的prototype没有<strong>proto</strong>，这就是真正的原型。</p>
-<p>function声明的变量、Function和Object都有prototype， 有prototype的东西可以产生实例（即可以作为new 后边的值）。</p>
-<p>别名：隐式原型链，一直沿隐式原型找。作用：查找对象的属性（方法）</p>
-<pre><code class="bash">function Foo(){}
-//也可以写成
-let Foo = new Function()
-Function = new Function()
-//所以Function也是Function的实例对象
-</code></pre>
-<p>由上面的代码可以知道，所有函数的<strong>ptoto</strong>都是一样的，所有的函数都是Function的实例对象。</p>
+</code></pre><h2 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h2><p>当访问一个对象的属性时，先在自身属性中查找，找到返回。如果没有，则会去原型对象中寻找，找到返回，如果最终没有找到，返回undefined,所以Object的原型对象是原型链的尽头，Object的原型对象没有原型。</p>
 <p>所有对象都有<strong>proto</strong>属性，是用来通过<strong>proto</strong>找到它的原型即prototype，function声明的变量的<strong>proto</strong>指向Function的prototype，其它对象的<strong>proto</strong>指向Object的prototype</p>
 <p><strong>原型继承</strong><br>构造函数的实例对象自动拥有构造函数原型对象的属性(方法)，原理是利用原型链</p>
 <h3 id="原型链的属性问题"><a href="#原型链的属性问题" class="headerlink" title="原型链的属性问题"></a>原型链的属性问题</h3><pre><code>function Fn() {}
@@ -215,14 +195,10 @@ console.log(fn1.a, fn2.a);
 </code></pre><p>打印fn1与fn2的结果</p>
 <p><img src="/img/js/打印.png"></p>
 <p><strong>说明</strong><br>读取对象的属性值时：会自动到原型链中查找。设置对象的属性值时：不会查找原型链，如果当前对象中没有此属性，直接添加此属性并设置其值。所以方法一般定义在原型中，属性一般通过构造函数定义在对象本身。</p>
-<h2 id="补充知识点"><a href="#补充知识点" class="headerlink" title="补充知识点"></a>补充知识点</h2><h3 id="1-构造函数"><a href="#1-构造函数" class="headerlink" title="1.构造函数"></a>1.构造函数</h3><p>构造函数是一种特殊的函数，主要用来初始化对象，即为对象成员变量赋初始值，它总与new一起使用。我们可以把对象中一些公共的属性和方法抽取出来，然后封装到这个函数里面。</p>
-<p>new在执行时完成的4件事情：<br>1.在内存中创造一个新的空对象<br>2.让this指向这个新的对象<br>3.执行构造函数里面的代码，给这个新对象添加属性和方法<br>4.返回这个新对象(所以构造函数里面不需要return)</p>
-<p>构造函数方法存在浪费内存的问题，在构造函数中的复杂数据类型（比如函数），实例化对象的时候，会专门开辟一个空间来存放。那么当实例对象过多的时候，就会开辟更多的空间来存放。当我们希望所有的对象使用同一个函数时，最好使用<code>prototype</code>，这也是为什么方法一般定义在原型中，属性一般通过构造函数定义在对象本身。</p>
-<h3 id="2-静态成员与实例成员"><a href="#2-静态成员与实例成员" class="headerlink" title="2.静态成员与实例成员"></a>2.静态成员与实例成员</h3><p>实例成员就是构造函数内部通过this添加的成员。实例成员只能通过实例化的对象来访问。（不可以通过构造函数来访问实例成员）<br>静态成员在构造函数本身上添加的成员(<code>Fn.xxx=&quot;xxx&quot;</code>)。静态成员只能通过函数对象访问。（不可以通过实例对象来访问）</p>
-<h3 id="3-构造函数、实例、原型对象三者之间的关系"><a href="#3-构造函数、实例、原型对象三者之间的关系" class="headerlink" title="3.构造函数、实例、原型对象三者之间的关系"></a>3.构造函数、实例、原型对象三者之间的关系</h3><p><code>__proto__</code>和原型对象中(xx.prototype)都有一个属性<code>constructor</code>，它指向函数对象（xx.prototype.constructor===xx）。主要用来记录该对象引用哪个构造函数</p>
+<h2 id="补充知识点"><a href="#补充知识点" class="headerlink" title="补充知识点"></a>补充知识点</h2><h3 id="1-静态成员与实例成员"><a href="#1-静态成员与实例成员" class="headerlink" title="1.静态成员与实例成员"></a>1.静态成员与实例成员</h3><p>实例成员就是构造函数内部通过this添加的成员。实例成员只能通过实例化的对象来访问。（不可以通过构造函数来访问实例成员）<br>静态成员在构造函数本身上添加的成员(<code>Fn.xxx=&quot;xxx&quot;</code>)。静态成员只能通过函数对象访问。（不可以通过实例对象来访问）</p>
+<h3 id="2-构造函数、实例、原型对象三者之间的关系"><a href="#2-构造函数、实例、原型对象三者之间的关系" class="headerlink" title="2.构造函数、实例、原型对象三者之间的关系"></a>2.构造函数、实例、原型对象三者之间的关系</h3><p><code>__proto__</code>和原型对象中(xx.prototype)都有一个属性<code>constructor</code>，它指向函数对象（xx.prototype.constructor===xx）。主要用来记录该对象引用哪个构造函数</p>
 <p><img src="/img/js/三者关系.png"></p>
-<h3 id="4-原型对象this指向"><a href="#4-原型对象this指向" class="headerlink" title="4.原型对象this指向"></a>4.原型对象this指向</h3><p>1.在构造函数中，里面this指向的是对象实例<br>2.原型对象的this也是指向对象实例</p>
-<h3 id="5-继承-ES5"><a href="#5-继承-ES5" class="headerlink" title="5.继承(ES5)"></a>5.继承(ES5)</h3><p>补充：call()函数，调用这个函数并改变运行时this的指向，<code>调用函数.call(参数)</code>，第一个参数：当前调用函数this的指向对象。后面的参数为传递给调用函数的参数。</p>
+<h3 id="3-继承-ES5"><a href="#3-继承-ES5" class="headerlink" title="3.继承(ES5)"></a>3.继承(ES5)</h3><p>补充：call()函数，调用这个函数并改变运行时this的指向，<code>调用函数.call(参数)</code>，第一个参数：当前调用函数this的指向对象。后面的参数为传递给调用函数的参数。</p>
 <p>如：obj1.(method).call(obj2,argument1,argument2)<br>call的作用就是把obj1的方法放到obj2上使用，后面的argument1..这些做为参数传入。</p>
 <p>ES6之前没有提供extends继承。可以通过构造函数+原型对象模拟实现继承，被称为组合继承。<br>核心原理:通过 call()把父类型的this指向子类型的this，这样就可以实现子类型继承父类型的属性</p>
 <pre><code>//父构造函数 this指向父构造函数的对象实例
@@ -244,17 +220,7 @@ Son.prototype = new Father();
 //所以还需要constructor指回原来的构造函数
 Son.prototype.constructor = Son
 </code></pre><p><img src="/img/js/继承.png"></p>
-<h3 id="6-instanceof函数"><a href="#6-instanceof函数" class="headerlink" title="6.instanceof函数"></a>6.instanceof函数</h3><p>表达式: A instanceof B(A为实例对象，B为构造函数)<br>原理:如果B的显式原型对象在A对象的原型链上，返回true，否则返回false</p>
-<pre><code>function Fn(){}
-let f1 = new Foo()
-console.log(f1 instanceof Foo) //true
-console.log(f1 instanceof Object)//true
-
-console.log(Object instanceof Function)//true
-console.log(Object instanceof Object)//true
-console.log(Function instanceof Function)//true
-console.log(Function instanceof Object)//true
-</code></pre><h3 id="7-Function和Object的关系"><a href="#7-Function和Object的关系" class="headerlink" title="7.Function和Object的关系"></a>7.Function和Object的关系</h3><p>1.Object, Function, Array等等这些都被称作是构造“函数”，他们都是函数。<br>2.所有的函数都是构造函数Function的实例。<br>3.原型链机制的的角度来说，那就是说所有的函数都能通过原型链找到创建他们的Function构造函数的构造原型Function.protorype对象</p>
+<h3 id="4-Function和Object的关系"><a href="#4-Function和Object的关系" class="headerlink" title="4.Function和Object的关系"></a>4.Function和Object的关系</h3><p>1.Object, Function, Array等等这些都被称作是构造“函数”，他们都是函数。<br>2.所有的函数都是构造函数Function的实例。<br>3.原型链机制的的角度来说，那就是说所有的函数都能通过原型链找到创建他们的Function构造函数的构造原型Function.protorype对象</p>
 <p>所以</p>
 <pre><code>console.log(Object instanceof Function)//true
 </code></pre><p>4.Function.prototype是一个对象，所以他的构造函数是Object. 从原型链机制的的角度来说，那就是说所有的函数都能通过原型链找到创建他们的Object构造函数的构造原型Object.prototype对象</p>
@@ -268,7 +234,7 @@ console.log(Function instanceof Object)//true
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#原型-prototype"><span class="toc-text">原型(prototype)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#显式原型与隐式原型"><span class="toc-text">显式原型与隐式原型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原型链"><span class="toc-text">原型链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原型链的属性问题"><span class="toc-text">原型链的属性问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充知识点"><span class="toc-text">补充知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-构造函数"><span class="toc-text">1.构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-静态成员与实例成员"><span class="toc-text">2.静态成员与实例成员</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-构造函数、实例、原型对象三者之间的关系"><span class="toc-text">3.构造函数、实例、原型对象三者之间的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-原型对象this指向"><span class="toc-text">4.原型对象this指向</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-继承-ES5"><span class="toc-text">5.继承(ES5)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-instanceof函数"><span class="toc-text">6.instanceof函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Function和Object的关系"><span class="toc-text">7.Function和Object的关系</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#原型-prototype"><span class="toc-text">原型(prototype)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原型链"><span class="toc-text">原型链</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原型链的属性问题"><span class="toc-text">原型链的属性问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#补充知识点"><span class="toc-text">补充知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-静态成员与实例成员"><span class="toc-text">1.静态成员与实例成员</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-构造函数、实例、原型对象三者之间的关系"><span class="toc-text">2.构造函数、实例、原型对象三者之间的关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-继承-ES5"><span class="toc-text">3.继承(ES5)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Function和Object的关系"><span class="toc-text">4.Function和Object的关系</span></a></li></ol></li></ol>
   </div>
 </aside>
   
@@ -326,10 +292,10 @@ console.log(Function instanceof Object)//true
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/02/19/拷贝/" data-enable="true">
+    <a href="/2020/07/15/call-apply-bind/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/02/17/es6/" data-enable="true">
+    <a href="/2020/07/15/this指针/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>JavaScript的遍历 | Ranan的博客</title>
+  <title>JavaScript的常用方法 | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -164,19 +164,17 @@
     
   </div>
   <h1 class="passage-title">
-    JavaScript的遍历
+    JavaScript的常用方法
   </h1>
   
   <article class="passage-article">
-    <h2 id="数组的遍历"><a href="#数组的遍历" class="headerlink" title="数组的遍历"></a>数组的遍历</h2><p>语法中有thisValue参数的，可以接收第二个参数，用来绑定回调函数内部的this变量，将回调函数内部的this对象，指向第二个参数，间接操作这个参数（一般是数组）。以map为例子</p>
-<pre><code>var arr = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;];
-
-[1, 2].map(function (e) {
-    return this[e];
-}, arr)
- // [&#39;b&#39;, &#39;c&#39;]
-</code></pre><h3 id="forEach"><a href="#forEach" class="headerlink" title="forEach()"></a>forEach()</h3><p>语法: array.forEach(function(currentValue, index, arr), thisValue)</p>
-<p> 调用数组的每个元素，并将元素传递给回调函数。<br> <strong>没有返回一个新数组。不能中断，对空数组是不会执行回调函数。</strong></p>
+    <h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><h2 id="数组的遍历"><a href="#数组的遍历" class="headerlink" title="数组的遍历"></a>数组的遍历</h2><h3 id="forEach"><a href="#forEach" class="headerlink" title="forEach()"></a>forEach()</h3><p>语法: array.forEach(function(currentValue, index, array){})<br>调用数组的每个元素，并将元素传递给回调函数。<br>第一个参数，当前遍历的元素。<br>第二个参数，当前遍历的元素索引<br>第三个元素，当前遍历的数组</p>
+<p><strong>特点</strong></p>
+<ul>
+<li>不返回新数组</li>
+<li>不能中断</li>
+<li>对空数组不执行回调</li>
+</ul>
 <h3 id="map"><a href="#map" class="headerlink" title="map()"></a>map()</h3><p>语法: array.map(function(currentValue,index,arr), thisValue)</p>
 <p>按照原始数组元素顺序依次处理元素，结果放在一个新数组里返回。<br><strong>返回一个新数组，不会改变原始数组</strong></p>
 <pre><code>/*------从接口得到数据------*/
@@ -237,7 +235,36 @@ console.log(arr, sum);
 <p><strong>如果没有提供initialValue，reduce 会从索引1的地方开始执行 callback 方法，跳过第一个索引。如果提供initialValue，从索引0开始</strong></p>
 <p>对空数组来说，不设置初始值会报错，设置了初始值不会报错，所以一般来说我们提供初始值通常更安全。</p>
 <p>使用场景也很多，具体可以看 <a href="https://www.jianshu.com/p/e375ba1cfc47" target="_blank" rel="noopener">参考文档</a></p>
-<h2 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h2><ul>
+<h2 id="数组的其他方法"><a href="#数组的其他方法" class="headerlink" title="数组的其他方法"></a>数组的其他方法</h2><h3 id="slice-与splice"><a href="#slice-与splice" class="headerlink" title="slice()与splice()"></a>slice()与splice()</h3><p>语法:array.slice(start,end)<br>第一个参数截取开始的位置索引，包含<br>第二个参数为结束的位置索引，不包含</p>
+<ul>
+<li>不修改原数组</li>
+<li>返回截取的新数组</li>
+</ul>
+<p>语法:array.splice(start,length,increase1,increase2..)<br>删除数组中的指定元素，并为数组添加新元素<br>第一个参数是开始的索引<br>第二个参数是删除的数量<br>第三个参数及以后是新添加的元素，添加的位置在开始索引之前。</p>
+<ul>
+<li>修改原数组</li>
+<li>返回值为删除的元素，有添加的元素返回值是整个数组</li>
+</ul>
+<h3 id="concat"><a href="#concat" class="headerlink" title="concat()"></a>concat()</h3><p>语法:array.concat(array2,array3..)<br>concat()可以连接两个或多个数组</p>
+<ul>
+<li>不修改原数组</li>
+<li>返回值为新数组</li>
+</ul>
+<h3 id="join"><a href="#join" class="headerlink" title="join()"></a>join()</h3><p>语法:arrayy.join(连接符)<br>join()将数组转换为一个字符串，默认逗号</p>
+<ul>
+<li>不修改原数组</li>
+<li>返回值为转换的字符串</li>
+</ul>
+<h3 id="reverse"><a href="#reverse" class="headerlink" title="reverse()"></a>reverse()</h3><p>语法:array.reverse()<br>反转数组</p>
+<ul>
+<li>修改元素组</li>
+</ul>
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h3><p>语法:array.sort()<br>对数组中的元素进行排序,默认按照Unicode编码进行排序，默认升序</p>
+<ul>
+<li>修改原数组</li>
+</ul>
+<p>指定排序的规则,浏览器将会分别使用数组中的元素作为实参去调用回调函数，回调函数需要定义两个形参。<br>浏览器根据回调函数的返回值来决定元素的顺序，返回值大于0则元素a、b交换位置<br>语法:array.sort(function(a,b){<br>    //a一定在b前面,比如升序<br>    return a&gt;b?1: 0<br>    //return a-b 更简单<br>})</p>
+<h1 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h1><ul>
 <li>Object.keys() 返回一个由一个给定对象的自身可枚举<strong>属性组成的数组</strong></li>
 <li>Object.getOwnPropertyNames() 返回一个数组,包含对象自身的所有属性(不含Symbol属性,但是包括不可枚举属性)</li>
 <li>for of 主要来遍历可迭代的对象（包括Array, Map, Set, arguments等），它主要用来获取对象的<strong>属性值</strong>，</li>
@@ -255,7 +282,38 @@ console.log(arr, sum);
   console.log(i)
   //i为属性名  
 }
-</code></pre><p>for in 循环遍历对象自身的和继承的可枚举属性(不含Symbol属性).<br>for..in主要获取对象的<strong>属性名</strong><br>for in不适合遍历数组</p>
+</code></pre><p>for in 循环遍历对象自身的和继承的可枚举属性(不含Symbol属性)<br>for..in主要获取对象的<strong>属性名</strong><br>for in不适合遍历数组</p>
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><p><a href="https://biubiuins.github.io/2020/07/15/call-apply-bind/" target="_blank" rel="noopener">bind/call/apply</a></p>
+<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><p>在底层字符串是以<strong>字符数组</strong>的形式保存的[“h”,”e”]</p>
+<h2 id="charAt"><a href="#charAt" class="headerlink" title="charAt()"></a>charAt()</h2><p>语法：string.charAt()<br>根据索引获取指定的字符，返回值为获取的字符</p>
+<h2 id="concat-1"><a href="#concat-1" class="headerlink" title="concat()"></a>concat()</h2><p>语法:string.concat(str1，str2….)<br>连接一个或多个字符串，返回值为新的字符串</p>
+<h2 id="indexof"><a href="#indexof" class="headerlink" title="indexof()"></a>indexof()</h2><p>语法:string.indexof(“x”,start)<br>在string中寻找x的位置，找到返回索引，没找到返回-1<br>第一个参数为查找的字符<br>第二个参数为开始查找的位置<br>indexof()是从前往后找<br>lastindexof()是从后往前找</p>
+<h2 id="slice-substring"><a href="#slice-substring" class="headerlink" title="slice()/substring()"></a>slice()/substring()</h2><p>语法:string.slice(start,end)<br>第一个参数截取开始的位置索引，包含<br>第二个参数为结束的位置索引，不包含</p>
+<p>如果为-1值的是从后往前的第一个</p>
+<ul>
+<li>不修改原字符串</li>
+<li>返回截取的字符串</li>
+</ul>
+<p>语法:string.substring(start,end)</p>
+<p>与slice类似<br>区别：</p>
+<ul>
+<li>substring不可以传递负值，传了默认为0</li>
+<li>如果第二个参数小于第一个参数，会自动调整参数的位置</li>
+</ul>
+<h2 id="split"><a href="#split" class="headerlink" title="split()"></a>split()</h2><p>语法：string.split(“,”)/string.split(/[0-9]/)<br>join()的功能相反,可以将一个字符串拆分为一个数组<br>参数为拆分规则,如例子的根据字符串里的逗号拆分数组,参数可以是正则表达式</p>
+<ul>
+<li>不修改原字符串</li>
+<li>返回值为数组</li>
+</ul>
+<h2 id="toUpperCase-toLowerCase"><a href="#toUpperCase-toLowerCase" class="headerlink" title="toUpperCase()/toLowerCase()"></a>toUpperCase()/toLowerCase()</h2><p>语法：string.toUpperCase()</p>
+<p>字符串转换成大写</p>
+<ul>
+<li>不修改原字符串</li>
+<li>返回转化的大写字符串</li>
+</ul>
+<blockquote>
+<p>剩下与正则有关的方法写在《正则表达式》这篇blog</p>
+</blockquote>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -264,7 +322,7 @@ console.log(arr, sum);
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数组的遍历"><span class="toc-text">数组的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#forEach"><span class="toc-text">forEach()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#map"><span class="toc-text">map()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#filter"><span class="toc-text">filter()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#every-some"><span class="toc-text">every()/some()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reduce-reduceRight"><span class="toc-text">reduce()/reduceRight()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象"><span class="toc-text">对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#for-in"><span class="toc-text">for in</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#数组的遍历"><span class="toc-text">数组的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#forEach"><span class="toc-text">forEach()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#map"><span class="toc-text">map()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#filter"><span class="toc-text">filter()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#every-some"><span class="toc-text">every()/some()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reduce-reduceRight"><span class="toc-text">reduce()/reduceRight()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组的其他方法"><span class="toc-text">数组的其他方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#slice-与splice"><span class="toc-text">slice()与splice()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#concat"><span class="toc-text">concat()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#join"><span class="toc-text">join()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reverse"><span class="toc-text">reverse()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sort"><span class="toc-text">sort()</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#对象"><span class="toc-text">对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#for-in"><span class="toc-text">for in</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#charAt"><span class="toc-text">charAt()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#concat-1"><span class="toc-text">concat()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#indexof"><span class="toc-text">indexof()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#slice-substring"><span class="toc-text">slice()/substring()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#split"><span class="toc-text">split()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#toUpperCase-toLowerCase"><span class="toc-text">toUpperCase()/toLowerCase()</span></a></li></ol></li></ol>
   </div>
 </aside>
   
@@ -322,7 +380,7 @@ console.log(arr, sum);
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2019/07/16/js的字符串/" data-enable="true">
+    <a href="/2019/08/01/MongoDB学习笔记/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
     <a href="/2019/06/29/keep-alive/" data-enable="true">

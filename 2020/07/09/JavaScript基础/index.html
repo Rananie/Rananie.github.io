@@ -216,9 +216,42 @@ obj.name = &quot;ranan&quot;;
 obj2.name = &quot;ranan&quot;;
 console.log(obj.name == obj2.name)
 //输出false
-</code></pre><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p><strong>函数也是一个对象</strong></p>
-<p>使用函数声明来创建一个函数，调用函数时解析器不会检查实参的类型与数量。</p>
+</code></pre><p>当我们直接在页面中打印一个对象时，实际上是输出对象的toString()的返回值。</p>
+<p>在JS中拥有自动的垃圾回收机制，我们需要将不用的对象设置为null</p>
+<p><strong>Date对象</strong></p>
+<pre><code>//返回的当前代码执行的时间
+new Date() 
+//需要在构造函数中传递一个表示时间的字符串作为参数
+let d = new Date(&quot;12/03/2016 11:10:30&quot;)
+//获得当前的日期
+d.getDate()
+//0表示周日
+d.getDay()
+//0表示1月
+d.getMonth()
+//获得当前对象的时间戳，从1970.1.1 0 0 0 到当前日期的毫秒数
+d.getTime()
+//获得当前的时间戳
+Date.new()
+</code></pre><p><strong>Math对象</strong><br>但是它不是构造函数，仅做工具使用</p>
+<pre><code>Math.ceil(1.5) //2 向上取整
+Math.floor(1.5) //1 向下取整
+Math.round(1.4) //1 四舍五入
+//0~1的随机数
+//生成一个0-y之间的随机数 Math.round(Math.random()*y)
+//生成一个x-y之间的随机数Math.round(Math.random*(y-x)+x)
+Math.random() 
+
+//获取多个数中的最大值
+Math.max(10,20,52) //返回值为最大值
+</code></pre><p><strong>包装类</strong><br>JS中提供让那个了三个包装类，通过三个包装类可以将基本数据类型转为对象</p>
+<p>String() 可以将基本数据类型字符串转化成String对象<br>Number() 可以将基本数据类型数字转化成Number对象<br>Boolean() 可以将基本数据类型布尔值转化成Boolean对象</p>
+<p>方法和属性只能添加给对象，不能添加给基本数据类型。<br>包装类的作用：当我们对一些基本数据类型的值去调用属性和方法时，浏览器会<strong>临时</strong>使用包装类将其转换成对象，调用完了在转化回来。</p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p><strong>函数也是一个对象</strong></p>
+<p>使用函数声明来创建一个函数，调用函数时解析器不会检查实参的类型与数量。<br>在调用函数时，浏览器每次都会传递进两个隐含的参数<br>1.函数的上下文对象 this<br>2.封装<strong>实参</strong>的对象 arguments 是一个类数组对象/有length、可以通过索引操作的对象</p>
+<p>补充:arguments.callee()方法的意思是：调用函数本身。</p>
 <pre><code>function fun(){
+    arguments.callee()//调用fun函数本身
     return ;//返回值，执行了后面的代码将不会执行，默认返回undefined
 }
 
@@ -232,10 +265,21 @@ let fun = function{};
 <p><strong>构造函数</strong></p>
 <p>构造函数习惯首字母大写，构造函数通过new构造。构造函数也被成为类，通过构造函数创建的对象称为实例</p>
 <p><strong>new在执行时完成的4件事情：</strong><br>1.在内存中创造一个新的空对象,在堆内存中分配空间<br>2.让this指向这个新的对象<br>3.执行构造函数里面的代码，给这个新对象添加属性和方法<br>4.返回这个新对象(所以构造函数里面不需要return)</p>
-<p><strong>instanceof</strong><br>通过instanceof可以检查一个对象是否一个类的实例<br>所有的对象都是Object的后代</p>
-<pre><code>console.log(对象 instanceof Person)
-</code></pre><p><strong>构造函数使用的优化</strong><br>构造函数方法存在浪费内存的问题，在构造函数中的复杂数据类型（比如函数），实例化对象的时候，会专门开辟一个空间来存放。那么当实例对象过多的时候，就会开辟更多的空间来存放。<br>解决办法:将共享的方法在<strong>全局作用域</strong>中定义<br>存在的问题：将函数定义在全局作用域，污染了全局作用域的命名空间并且不安全。<br>解决办法:当我们希望所有的对象使用同一个函数时，最好使用<code>prototype</code>，这也是为什么方法一般定义在原型中，属性一般通过构造函数定义在对象本身。<br><a href="https://biubiuins.github.io/2020/02/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/" target="_blank" rel="noopener">原型</a></p>
-<h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><p>1.全局作用域</p>
+<p><strong>instanceof</strong><br>对象 instanceof Person<br>通过instanceof可以检查一个对象是否一个类的实例<br>所有的对象都是Object的后代</p>
+<p><strong>构造函数使用的优化</strong><br>构造函数方法存在浪费内存的问题，在构造函数中的复杂数据类型（比如函数），实例化对象的时候，会专门开辟一个空间来存放。那么当实例对象过多的时候，就会开辟更多的空间来存放。<br>解决办法:将共享的方法在<strong>全局作用域</strong>中定义<br>存在的问题：将函数定义在全局作用域，污染了全局作用域的命名空间并且不安全。<br>解决办法:当我们希望所有的对象使用同一个函数时，最好使用<code>prototype</code>，这也是为什么方法一般定义在原型中，属性一般通过构造函数定义在对象本身。<br><a href="https://biubiuins.github.io/2020/02/18/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/" target="_blank" rel="noopener">原型</a></p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p><strong>数组也是一个对象</strong></p>
+<pre><code>naw Array(10)//创建一个长度为10的数组
+arr = [[1,2,3],[4,5,6]] //二维数组]
+
+//向数组的末尾添加数据，返回值为新数组的长度
+arr.push(&quot;添加的元素&quot;,&quot;添加的元素2&quot;)
+//删除数组的最后一个元素，返回值为被删除的元素
+arr.pop()
+//向数组的开头添加一个或多个元素，返回值为新数组的长度
+arr.unshift(&quot;添加的元素&quot;,&quot;添加的元素2&quot;)
+//删除数组的第一个元素，返回值为被删除的元素
+arr.shift()
+</code></pre><h3 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h3><p>1.全局作用域</p>
 <pre><code>- 全局作用域在页面打开时创建，在页面关闭时销魂
 - 全局作用域中有一个全局对象window
 - 在全局作用域中，创建的变量/函数都会作为window对象的属性/方法
@@ -250,7 +294,7 @@ let fun = function{};
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#综述"><span class="toc-text">综述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对象"><span class="toc-text">对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域"><span class="toc-text">作用域</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#综述"><span class="toc-text">综述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对象"><span class="toc-text">对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域"><span class="toc-text">作用域</span></a></li></ol></li></ol>
   </div>
 </aside>
   

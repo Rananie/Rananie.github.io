@@ -169,7 +169,7 @@
   
   <article class="passage-article">
     <p>解析器在调用函数时，每次都会向函数内部传递一个隐含的参数this，this指向的是一个对象。<br>根据函数的调用方式不同，this会指向不同的对象。</p>
-<p><strong>它的值是调用函数的当前对象，谁调用指向谁</strong>,如果没调用时，没有指明是哪个对象调用的则是window。</p>
+<p>任何函数本质上都是通过某个对象来调用的。<br><strong>它的值是调用函数的当前对象，谁调用指向谁</strong>,如果没调用时，没有指明是哪个对象调用的则是window。</p>
 <pre><code>function Person(color) {
     console.log(this);
     this.color = color;

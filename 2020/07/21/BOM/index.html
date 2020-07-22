@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>summary_js | Ranan的博客</title>
+  <title>DOM | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -150,7 +150,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2018-11-24
+      <i class="fa fa-calendar"></i>2020-07-21
     </span>
     
       <span>
@@ -164,69 +164,21 @@
     
   </div>
   <h1 class="passage-title">
-    summary_js
+    DOM
   </h1>
   
   <article class="passage-article">
-    <h2 id="enter回车"><a href="#enter回车" class="headerlink" title="enter回车"></a>enter回车</h2><blockquote>
-<p>持续更新</p>
-</blockquote>
-<p>在修改项目的过程中，学习到了关于表单enter键提交是否可以触发</p>
-<ul>
-<li>如果type是submit，一个文本或者多个文本都会提交</li>
-<li>如果是button，仅一个文本的时候提交</li>
-<li>type为image的按钮，等同于type为submit的效果</li>
-<li>用button时，fx和IE有不同的表现。radio和checkbox在FX下也会触发提交表单，在IE下不会</li>
-</ul>
-<h2 id="事件代理，事件委托"><a href="#事件代理，事件委托" class="headerlink" title="事件代理，事件委托"></a>事件代理，事件委托</h2><p>利用的是冒泡原理，与事件源。<br>还可以用来给动态添加的元素绑定事件</p>
-<h3 id="事件源"><a href="#事件源" class="headerlink" title="事件源"></a>事件源</h3><ul>
-<li>兼容<pre><code> let e = e || window.event;
- var target = e.target || e.srcElement;
-</code></pre></li>
-<li>属性<pre><code>  console.log(e.target);
-  console.log(e.target.id);
-  console.log(e.target.tagName);
-  console.log(e.target.nodeName);
-   console.log(e.target.classList);
-  console.log(e.target.className);
-  console.log(e.target.innerHTML);
-  console.log(e.target.innerText);
-</code></pre></li>
-</ul>
-<h2 id="js跳转"><a href="#js跳转" class="headerlink" title="js跳转"></a>js跳转</h2><p><a href="https://www.cnblogs.com/Renyi-Fan/p/9130325.html" target="_blank" rel="noopener">https://www.cnblogs.com/Renyi-Fan/p/9130325.html</a></p>
-<p>js对打开的页面ULR进行跳转，</p>
-<ul>
-<li>location的href属性</li>
-<li>open 方法</li>
-<li>histoty的三个方法</li>
-<li>location的assign方法</li>
-</ul>
-<h3 id="常规的js页面跳转"><a href="#常规的js页面跳转" class="headerlink" title="常规的js页面跳转"></a>常规的js页面跳转</h3><ul>
-<li><p>在原来的窗口中直接跳转</p>
-<pre><code>  window.location.href=&quot;你所要跳转的页面&quot;;
-</code></pre></li>
-<li><p>在新窗口中打开页面用</p>
-<pre><code>  window.open(&#39;你所要跳转的页面&#39;);
-  //open属性的参数　&#39;page.html&#39; 弹出窗口的文件名；&#39;newwindow&#39; 弹出窗口的名字（不是文件名），非必须，可用空&#39;代替；height=100 窗口高度；width=500 窗口宽度；top=0 窗口距离屏幕上方的象素值；left=0 窗口距离屏幕左侧的象素值。
-</code></pre></li>
-</ul>
-<p>##[object Object]</p>
-<p>这个不是两个对象的意思，是对象的字符串形式，是隐式调用了Object对象的toString()方法，形式是”[object Object]”.<br>[object objcet]      自定义的对象   没有覆盖toString方法，返回默认<br>[object]            window对象      覆盖了toString方法，显式调用返回[object Object]<br>123                  字条串         覆盖了toString方法，显式调用返回[object String]</p>
-<p>在我做项目的时候遇见了一个问题，把对象放进cookie之后，cookie存储的格式变成了object Object<br>,解决办法是转化成字符串之后存入,使用时再解析成json对象</p>
-<ul>
-<li>JSON.parse()【从一个字符串中解析出json对象】<pre><code>  //定义一个字符串
-  var data=&#39;{&quot;name&quot;:&quot;goatling&quot;}&#39;
-  //解析对象​
-  ​JSON.parse(data)
-  结果是：
-  ​name:&quot;goatling&quot;
-</code></pre></li>
-<li>JSON.stringify()【从一个对象中解析出字符串】<pre><code>  var data={name:&#39;goatling&#39;}
-  JSON.stringify(data)
-  结果是：
-  &#39;{&quot;name&quot;:&quot;goatling&quot;}&#39;
-</code></pre></li>
-</ul>
+    <p>BOM 浏览器对象模型，可以通过js代码操作浏览器</p>
+<p>BOM对象<br>window代表的是整个浏览器窗口，同时window也是网页中的全局对象<br>navigator代表的当前浏览器的信息，通过该对象识别不同的浏览器<br>location代表当前浏览器的地址栏信息，可以操作页面重定向<br>history代表浏览器的历史记录，可以通过该对象操作浏览器的历史记录，由于隐私获取不到具体的历史记录，只能操作浏览器后退与前进，只在当次访问时有效<br>screen代表用户的屏幕信息</p>
+<p>这些BOM对象在浏览器中作为window对象的属性保存，可以通过window对象来使用，也可以直接使用。</p>
+<h2 id="navigator"><a href="#navigator" class="headerlink" title="navigator"></a>navigator</h2><p>由于历史原因，navigator对象中的大部分属性都已经不能帮助我们识别浏览器了。<br>一般只会使用userAgent属性来判断浏览器的信息<br>/chrom/i.test(navigator.userAgent) 测试是否是chrom浏览器,但是最新的IE判断不出来了</p>
+<h2 id="history"><a href="#history" class="headerlink" title="history"></a>history</h2><p>history.length 可以获取当前访问了的页面数<br>history.back() 返回上一个页面，类似浏览器的回退按钮<br>history.forword() 可以跳转到下一个页面，类似浏览器前进<br>history.go(整数) 可以跳转到指定页面 -1回退一个界面，1前进一个页面</p>
+<h2 id="location"><a href="#location" class="headerlink" title="location"></a>location</h2><p>如果直接打印location，则可以获得当前页面的完整路径<br>通过location修改的路径，会有历史记录(可回退)。</p>
+<p>location.assign(path) 用来跳转到其他页面，类似直接修改location路径。<br>location.reload() 刷新页面，默认会情况缓存。<br>location.replace(path) 用新页面代替当前页面，不会生成历史记录。</p>
+<h2 id="window"><a href="#window" class="headerlink" title="window"></a>window</h2><p><strong>定时器</strong></p>
+<p>setInterval(回调函数,时间)<br>回调函数每个一段时间就被调用一次。<br>返回一个Number类型的数据，用于标识定时器，利用返回值可以关闭定时器<br>clearInterval(标识是哪一个定时器)，可以接收任意参数，如果参数不是一个有效的标识，也不会报错只是什么 都不做。</p>
+<p>为了防止开启多个定时器，导致定时器重叠，<strong>在开启定时器之前，需要将上一个定时器关闭。</strong></p>
+<p><strong>延时调用</strong><br>延时调用一个函数不马上执行，而是隔一段时间后在执行，而且只会执行一次<br>setTimeout(回调函数,时间)<br>clearTimeout(标识是哪一个定时器)</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -235,7 +187,7 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#enter回车"><span class="toc-text">enter回车</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件代理，事件委托"><span class="toc-text">事件代理，事件委托</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#事件源"><span class="toc-text">事件源</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#js跳转"><span class="toc-text">js跳转</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常规的js页面跳转"><span class="toc-text">常规的js页面跳转</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#navigator"><span class="toc-text">navigator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#history"><span class="toc-text">history</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#location"><span class="toc-text">location</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#window"><span class="toc-text">window</span></a></li></ol>
   </div>
 </aside>
   
@@ -293,10 +245,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2018/12/09/vuex流程总结/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2018/11/11/vuex/" data-enable="true">
+    <a href="/2020/07/18/DOM/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

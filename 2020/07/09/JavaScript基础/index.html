@@ -286,7 +286,10 @@ arr.shift()
 </code></pre><p>2.函数作用域</p>
 <pre><code>- 调用函数时创建函数作用域，函数执行完毕后函数作用域销毁
 - 每调用一次函数就会创建一个新的函数作用域
-</code></pre>
+</code></pre><h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h2><p>js中的对象只有JS自己支持,其他的语言都不认识，可以转换成任何语言都认识的字符串。<br>JSON就是一个特殊格式的字符串，并可以转换成任意语言中的对象。<br>JSON分为对象、数组  ‘{“属性名”：”属性值”}’ ‘[“值”]’  对象的属性名一定要加引号<br>JSON允许的值字符串、数值、布尔值、null、普通对象、数组</p>
+<p>JSON.parse(json字符串) JSON字符串转换为JS中的对象返回<br>JSON.stringify(js对象) JS对象转换为JSON字符串</p>
+<p>eval() 这个函数可以用来执行一段字符串形式的JS代码，并将结果值返回，如果执行的字符串中含有{},它会将{}当成代码块，需要给字符串加()。<br>此方法常用于IE7以下JSON失效的情况，此方法不要使用性能比较差并且不安全。</p>
+
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -294,7 +297,7 @@ arr.shift()
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#综述"><span class="toc-text">综述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对象"><span class="toc-text">对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域"><span class="toc-text">作用域</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#综述"><span class="toc-text">综述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#对象"><span class="toc-text">对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作用域"><span class="toc-text">作用域</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON"><span class="toc-text">JSON</span></a></li></ol>
   </div>
 </aside>
   

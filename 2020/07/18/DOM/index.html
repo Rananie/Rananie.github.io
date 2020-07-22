@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ranan" />
+  
+  
+  <title>DOM | Ranan的博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,JavaScript,JavaScript," />
+  
+
+  
+  <meta name="description" content="Ranan的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Ranan",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 不能放弃思考</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://biubiuins.github.io/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-07-18
+    </span>
+    
+      <span>
+        | <a href="/categories/前端/"><i class="fa fa-bookmark"></i>前端</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    DOM
+  </h1>
+  
+  <article class="passage-article">
+    <p>DOM全程Document Object Model文档对象模型。文档表示的是整个的HTML网页文档;对象表示将网页中的每一个部分都转换成了一个对象;模型来表示对象之间的关系,方便我们获取对象。</p>
+<p>Document对象：实际上是window对象的属性。这个对象的独特之处是唯一一个既属于BOM又属于DOM的对象。在页面中可以直接使用，代表的是整个网页。</p>
+<p><strong>注意点</strong></p>
+<p>1.取消默认行为可以通过在响应函数的最后return false来取消默认行为，或者使用event.preventDefault()<br>2.如果需要读取元素节点属性，直接使用 元素.属性名，但是class属性不能采用这种方式，需要使用className。<br>3.window.onload = function(){<br>//页面加载完之后再执行，确保所有的DOM对象已经加载完毕<br>}</p>
+<h2 id="DOM查询"><a href="#DOM查询" class="headerlink" title="DOM查询"></a>DOM查询</h2><p>innerText 获取到元素内部的文本内容，会自动将html标签去除<br>innerHTML 获取到元素内部的文本内容，会保存html标签</p>
+<p><strong>获取元素节点，通过document对象调用</strong><br>document.getElementById() 通过id获取dom<br>document.getElementsByClassName() 通过类名获取dom<br>document.getElementsByName() 通过name属性获取dom<br>document.getElementsByTagName() 通过标签名获取dom<br>document.querySelector()  该方法总会返回唯一的一个元素document.querySelectorAll() 返回数组。</p>
+<p><strong>获得元素节点的子节点，通过具体的元素节点调用</strong><br>getElementsByTagName() 方法，返回当前节点指定标签名的后代节点<br>childNodes 属性，表示当前节点的所有子节点,会获取包括文本节点在内的所有结点，DOM标签与标签之间的换行也会看成文本结点。<br>children 属性可以获取当前元素的所有子元素<br>firstChild 属性，表示当前节点的第一个子节点，包括空白文本结点<br>firstElementChild 属性获取当前元素的第一个子元素<br>lastChild  属性，表示当前节点的最后一个子节点</p>
+<p><strong>获取父节点和兄弟结点,通过具体的节点调用</strong><br>parentNode 属性，表示当前节点的父节点<br>previousSibling 属性，表示当前节点的前一个兄弟节点，可能会获取到空白文本<br>previousElementSibling 属性，表示当前节点的前一个兄弟元素<br>nextSibling 属性，表示当前节点的后一个兄弟节点</p>
+<p><strong>补充</strong><br>获取body,document中有一个属性body，它保存的就是body的引用<code>document.body</code></p>
+<p>获取html,<code>document.documentElement</code></p>
+<h2 id="DOM-增删改"><a href="#DOM-增删改" class="headerlink" title="DOM 增删改"></a>DOM 增删改</h2><p>document.createElement() 参数为标签名，用于创建一个元素节点对象，并返回创建好的对象<br>document.createTextNode() 参数为文本内容，根据内容创建文本节点，并返回新的节点<br>父节点.appendChild() 向一个父节点中添加新的子节点<br>父节点.insetBefore() 在指定的子节点前插入新的子节点,(新节点,旧节点)<br>父节点.replaceChild() 使用指定的子节点替换已有的子节点，(新节点,旧节点)<br>父节点.removeChild() 删除一个子节点</p>
+<h2 id="DOM操作css"><a href="#DOM操作css" class="headerlink" title="DOM操作css"></a>DOM操作css</h2><p>js通常返回的是<strong>不带单位的数值</strong></p>
+<p><strong>内联样式</strong></p>
+<p>语法:元素.style.样式名 = 样式值</p>
+<p>如果css的样式名中含有-,需要改成驼峰命名法。<br>通过style属性<strong>设置/读取</strong>的样式都是<strong>内联样式</strong>，内联样式有很高的优先级。</p>
+<p>通过style属性来修改元素的样式，每修改一个样式，浏览器需要重新渲染一次页面</p>
+<p>如果要同时修改多个样式，直接通过类名修改<br>对象.className = “”</p>
+<p><strong>当前正在显示的样式</strong><br>语法:元素.currentStyle.样式名</p>
+<p>只有ie浏览器支持,没设置的值获取默认值，其他浏览器可以使用<code>window.getComputedStyle()</code>来获取。</p>
+<p>第一个参数是要获取样式的元素<br>第二个参数可以传递伪元素，一般都传null<br>返回值是当前元素对应的样式的对象,后接样式名获取样式<br>如果该样式没设置获取到的是真实值而不是默认值</p>
+<p><strong>通过以上两种方式获取到的样式都是只读的,如果需要修改只能使用style属性</strong></p>
+<p><strong>处理兼容性问题</strong></p>
+<p>定义一个函数来获取指定元素当前的样式，参数obj要获取样式的元素，style要获取的样式名字符串</p>
+<pre><code>function getStyle(obj,style){
+if(window.getComputedStyle){
+//正常浏览器有getComputedStyle方法
+return getComputedStyle(obj,null)[style]
+}
+else{
+//IE8浏览器没有定义getComputedStyle
+return obj.currentStyle[style]
+}
+}
+</code></pre><p><strong>注意</strong>if里面用getComputedStyle不行，要用window.getComputedStyle<br>没使用window时getComputedStyle是一个变量需要去作用域中寻找，没定义就是用会报错，后续代码不会执行<br>使用window之后属于属性，没找到属性返回undefined</p>
+<p><strong>其他样式相关属性</strong></p>
+<p>element.clientWidth/clientHeight<br>这两个属性可以获取元素的<strong>可见(内容和内边距)</strong>宽度和高度,返回的是<strong>数字，不带px</strong>，因为包括的是可见区域所以设置起来无法分配,所以这两个属性都是只读属性。<br>element.offsetWidth/offsetHeight<br>获取元素的整个大小,包括内容、内边距、边框，其他特点与clientWidth/clientHeight属性相似。</p>
+<p>element.offsetParent<br>可以获取当前元素的<strong>定位</strong>父元素,都没有定位返回body<br>element.offsetLeft/offsetTOP<br>当前元素相对于其定位的水平偏移量和垂直偏移量<br>element.scrollHeight/scrollLeft/scrollTop/scrollWidth<br>表示元素整个滚动区域的宽度/高度,可以获取滚动条滚动的距离<br>当满足下面等式的时候，说明滚动条滚动到最底，水平滚动条类似。<br>总长度 - 看不见的长度 = 可见的长度<br>element.scrollHeight - element.scrollTop = clientHeight </p>
+<h2 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h2><p>当事件的响应函数被触发时，浏览器每次都会将一个<strong>事件对象</strong>(event)作为实参传递给响应函数，封装当前事件相关的一切信息，比如：鼠标坐标，键盘哪个键被按。但是IE8不会传,事件对象作为window对象的属性保存的window.event</p>
+<p>可以使用 event = event || window.event 来解决兼容性问题</p>
+<p><strong>事件对象</strong><br>event.clientX 可以获取鼠标指针的水平坐标，返回数值，不带单位<br>event.clientY 可以获取鼠标指针的垂直坐标，返回数值，不带单位<br>用于获取鼠标在当前的<strong>可见窗口</strong>的坐标<br>event.pageX/event.pageY获取鼠标相对于<strong>当前页面</strong>(document)的坐标,但是IE8不支持，可以通过对top = scrollTop + clientX实现<br>offsetX/offsetY  screenX/screenY<br><img src="/img/js/event.png"></p>
+<p>补充:chrome认为浏览器的滚动条是body的，通过body.scrollTop获取，但是火狐等浏览器认为是html的，通过documentElement.scrollTop获取</p>
+<blockquote>
+<p>现在浏览器的滚动条都是html的了</p>
+</blockquote>
+<p>event.wheelDalta 获得滚轮的方向 正向上滚，负向下滚<br>event.target 触发事件的对象<br>event.keyCode 获取按键的编码 event.altKey/ctrlKey/shiftKey判断alt/ctrl/shift是否被按下</p>
+<p>onscroll 该事件会在元素的滚动条滚动时触发<br>onmousemove 该事件会在鼠标在元素中移动时被触发<br>onmousedown 该事件会在鼠标按下被触发<br>onmouseup 该事件会在鼠标弹上被触发<br>onwheel 该事件会在鼠标滚轮滚动时被触发</p>
+<p>键盘事件一般绑定给可以获取焦点的对象或者是document<br>onkeydown 键盘按下触发，一直按着不松手会连续触发，<strong>在文本框中输入内容，属于onkeydown的默认行为</strong>根据此性质可以限定文本框内容输入的类型<br>onkeyup  按键被松开，不会连续触发</p>
+<p><strong>事件的冒泡</strong><br>所谓的冒泡指的是事件向上传递，当后代元素上的事件被触发时，其祖先元素的相同事件也会被触发。<br>在开发中大部分情况冒泡都是有用的，如果不希望发生事件冒泡可以通过事件对象取消冒泡<br>event.cancelBubble = true</p>
+<p><strong>事件的委派</strong><br>需求场景：给a标签绑点点击事件，后添加的a标签也有该绑定事件。<br>解决:可以尝试把时间绑定到元素共有的祖先元素。<br>事件委派利用了冒泡，从父元素到子元素</p>
+<p><strong>事件的绑定</strong></p>
+<p>对象.事件 = 函数 的形式绑定响应函数，同时只能为一个事件绑定一个响应函数</p>
+<p>addEventListener可以为一个事件同时绑定多个响应函数，后面的不会覆盖前面的<br>对象.addEventListener() 第一个参数事件的字符串，不要on，第二个参数时间触发时的回调函数，第三个参数是否在捕获阶段触发事件，一般都是false</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM查询"><span class="toc-text">DOM查询</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM-增删改"><span class="toc-text">DOM 增删改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DOM操作css"><span class="toc-text">DOM操作css</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#事件"><span class="toc-text">事件</span></a></li></ol>
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2020/07/21/BOM/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2020/07/16/正则表达式/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

@@ -190,7 +190,8 @@
       alert(i)
         }
     }
-</code></pre><p>但是点击按钮之后发现每个按钮都打印的3。因为点击之后的函数是回调函数，需要放在宏队列中执行，而for循环已经执行结束(i已经等于3了)<br>ES6之前的解决办法：<br>解决办法1：将btn所对应的下标保存在btn上</p>
+</code></pre><p>但是点击按钮之后发现每个按钮都打印的3。<strong>因为点击之后的函数是回调函数，需要放在宏队列中执行</strong>，而for循环已经执行结束(i已经等于3了)</p>
+<p>ES6之前的解决办法：<br>解决办法1：将btn所对应的下标保存在btn上</p>
 <pre><code> var btns = document.getElementsByTagName(&quot;button&quot;);
    //遍历加监听
    for (var i = 0,length=btns.length;i&lt;length;i++) {
@@ -200,7 +201,7 @@
       alert(this.index)
         }
     }
-</code></pre><p>解决办法2:闭包</p>
+</code></pre><p>解决办法2:闭包 </p>
 <pre><code>    var btns = document.getElementsByTagName(&quot;button&quot;);
      for (var i = 0;i&lt;btns.length;i++) {
          var btn = btns[i];
@@ -212,8 +213,9 @@
          })(i)//这个i是全局i
      }
 </code></pre><p>问题1:如何产生闭包？<br>当一个嵌套的内部(子)函数引用了嵌套的外部(父)函数的变量(函数)时，就产生了闭包。</p>
-<p>问题2：闭包到底是什么?<br>(用chrome调试查看)<br>理解1：闭包是嵌套的内部函数<br>理解2：包含被引用变量(函数)的对象<br>注意:闭包存在于嵌套函数的内部函数中</p>
-<p>问题3：产生闭包的条件<br>1.函数嵌套<br>2.内部函数引用了外部函数的数据<br>3.执行外部函数</p>
+<p>问题2：闭包到底是什么?<br>(用chrome调试查看)<br>闭包是嵌套的内部函数<br>注意:闭包存在于嵌套函数的内部函数中</p>
+<p>问题3：产生闭包的条件<br>1.函数嵌套<br>2.内部函数引用了外部函数的数据</p>
+<p>函数定义时就会产生闭包，调用一次外部函数产生一个新的闭包。做闭包的题的时候仔细分析哪个变量导致闭包且是否有新的闭包产生。</p>
 <h2 id="常见的闭包"><a href="#常见的闭包" class="headerlink" title="常见的闭包"></a>常见的闭包</h2><p>1.将函数作为另一个函数的返回值</p>
 <pre><code>function fn1() {
     var a = 2
@@ -241,8 +243,7 @@ showDelay(&quot;xxx&quot;,2000) //产生了闭包
 <li>使用函数内部的变量在函数执行完后，仍然存活在内存中(延长了局部变量的生命周期)</li>
 <li>让函数外部可以操作(读写)到函数内部的数据</li>
 </ul>
-<p>问题1：函数执行完毕后，函数内部声明的局部变量是否还存在？<br>一般是不存在，存在于闭包中的变量才可能存在<br>问题2：在函数外部能直接访问函数内部的局部变量吗？<br>不能，但我们可以通过闭包让外部操作它</p>
-<h2 id="闭包的声明周期"><a href="#闭包的声明周期" class="headerlink" title="闭包的声明周期"></a>闭包的声明周期</h2><p>产生：在嵌套内部函数定义执行完成时就产生了(不是在调用)<br>死亡：在嵌套的内部函数成为垃圾对象时</p>
+<h2 id="闭包的生命周期"><a href="#闭包的生命周期" class="headerlink" title="闭包的生命周期"></a>闭包的生命周期</h2><p>产生：在嵌套内部函数定义执行完成时就产生了(不是在调用)<br>死亡：在嵌套的内部函数成为垃圾对象时</p>
 <pre><code>function fn1() {
     var a = 2//此时闭包就已经产生了(函数提升，内部函数对象已经创建了)
   function fn2() {
@@ -291,7 +292,7 @@ window.module2 = {doSomething,doOtherthing}
 //其他界面调用时，直接module2.doSomethig
 </code></pre><h2 id="闭包的缺点及解决"><a href="#闭包的缺点及解决" class="headerlink" title="闭包的缺点及解决"></a>闭包的缺点及解决</h2><p>缺点：<br>函数执行完后，函数内的局部变量没有释放，占用内存时间会变长。(容易造成内存泄漏)<br>解决：<br>能不用闭包就不用，及时释放（让内部函数称为垃圾对象–&gt;回收闭包）</p>
 <h3 id="内存溢出"><a href="#内存溢出" class="headerlink" title="内存溢出"></a>内存溢出</h3><p>一种程序运行出现的错误。<br>当程序运行需要的内存超过了剩余的内存时，就会抛出溢出的错误。</p>
-<h3 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h3><p>占用的内存没有及时释放，内存泄漏积累对了就容易导致内存溢出。<br>常见的内存泄漏：意外的全局变量，没有及时清理的计时器（如启动循环定时器后不清理）或回调函数，闭包。</p>
+<h3 id="内存泄漏"><a href="#内存泄漏" class="headerlink" title="内存泄漏"></a>内存泄漏</h3><p>占用的内存没有及时释放就是内存泄露，内存泄漏积累多了就容易导致内存溢出。<br>常见的内存泄漏：意外的全局变量，没有及时清理的计时器（如启动循环定时器后不清理）或回调函数，闭包。</p>
 <pre><code>let intervalId = setInterval(function(){//启动循环定时器后不清理
  console.log(&quot;---&quot;)
 },1000)
@@ -307,7 +308,7 @@ var object = {
         }
     }
 }
-console.log(object.getNameFunc()());//The Window
+console.log(object.getNameFunc()());//The Window 
 
 
 var name = &quot;The Window&quot;;
@@ -329,7 +330,7 @@ console.log(object.getNameFunc()());//My object
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常见的闭包"><span class="toc-text">常见的闭包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包的作用"><span class="toc-text">闭包的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包的声明周期"><span class="toc-text">闭包的声明周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包的应用"><span class="toc-text">闭包的应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包的缺点及解决"><span class="toc-text">闭包的缺点及解决</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#内存溢出"><span class="toc-text">内存溢出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存泄漏"><span class="toc-text">内存泄漏</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常见的闭包"><span class="toc-text">常见的闭包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包的作用"><span class="toc-text">闭包的作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包的生命周期"><span class="toc-text">闭包的生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包的应用"><span class="toc-text">闭包的应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包的缺点及解决"><span class="toc-text">闭包的缺点及解决</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#内存溢出"><span class="toc-text">内存溢出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存泄漏"><span class="toc-text">内存泄漏</span></a></li></ol></li></ol>
   </div>
 </aside>
   

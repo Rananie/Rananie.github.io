@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>js异步:宏队列与微队列 | Ranan的博客</title>
+  <title>class类 | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -150,7 +150,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-02-16
+      <i class="fa fa-calendar"></i>2020-07-26
     </span>
     
       <span>
@@ -164,45 +164,83 @@
     
   </div>
   <h1 class="passage-title">
-    js异步:宏队列与微队列
+    class类
   </h1>
   
   <article class="passage-article">
-    <p>异步执行的函数放入队列中执行。队列分为宏队列与微队列。</p>
-<p>宏队列：用来保存执行的宏任务（回调），比如：dom事件回调，ajax回调，定时器回调<br>微队列：用来保存执行的微任务（回调），比如：promise回调，mutation回调</p>
-<p>1.JS为单线程引擎，必须先执行所有的初始化同步任务代码。<br>2.每次取出第一个宏任务执行前，都要将所有的微任务执行完毕。</p>
-<p>注:取到栈里执行，若有嵌套的情况如下列代码，执行第一个setTimeout回调时，把里面的微任务放入微队列，执行第二宏任务前，先将所有的微任务执行完毕。</p>
-<pre><code class="bash"> setTimeout(()=&gt;{ //会立即放入宏队列
-        console.log(&quot;timeout callback1()&quot;);
-        Promise.resolve(3).then(
-            value =&gt;{ //会立即放入微队列
-                console.log(&quot;Promise onResolved3()&quot;,value);
-            }
-        )
-    },0)
-    setTimeout(()=&gt;{ //会立即放入宏队列
-        console.log(&quot;timeout callback2()&quot;);
-    },0)
-    Promise.resolve(1).then(
-        value =&gt;{ //会立即放入微队列
-            console.log(&quot;Promise onResolved1()&quot;,value);
-        }
-    )
-    Promise.resolve(2).then(
-        value =&gt;{ //会立即放入微队列
-            console.log(&quot;Promise onResolved2()&quot;,value);
-        }
-    )
-    /*
-    输出:Promise onResplved(),1
-          Promise onResplved(),2
-          timeout callback1()
-          Promise onResolved3()
-          timeout callback2()
-)
-     */
-</code></pre>
+    <p>ES6的class可以看作只是一个语法糖，只是<br>让对象原型的写法更加清晰，更像面向对象编程的语言。</p>
+<pre><code>//定义一个人物的类
+class Person{
+//类的构造方法
+ constructor(){}
+ //其余方法的写法必须使用该语法。方法名(){}
+ call(){
 
+ }
+}
+</code></pre><p>构造方法名字不能修改且当new实例对象时，会自动执行。<br><strong>注意</strong> 类里面方法的写法。方法名(){}</p>
+<pre><code>console.log(typeof Person);//function
+console.log(Person===Person.prototype.constructor);//true
+</code></pre><p>从上面的代码可以看出类实质上就是一个函数，可以任务ES6的类就是构造函数的另外一种写法。<br>实际上类的所有方法都定义在类的prototype属性上。<br>constructor内的属性可以称为实例属性（和前面说的实例成员一样）,constructor外声明的属性都是定义在原型上的，可以称为原型属性（即定义在class上)</p>
+<p><strong>注意</strong>  <code>class</code>不存在变量提升，所以需要先定义再使用</p>
+<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><p>实例对象和函数对象的属性是独立的，实例对象的属性和该构造函数的原型上的属性是相通的。</p>
+<p>实例对象和函数对象的独立属性称为<strong>静态成员/方法</strong>，只能函数对象使用。在ES6中，在方法/属性前加上<strong>static关键字</strong>，该类属性属于类不属于识类对象。</p>
+<pre><code>class Foo{
+  static classMethod() {
+    return &#39;hello&#39;;
+  }
+}
+//Foo.classMethod()使用
+</code></pre><h3 id="私有属性"><a href="#私有属性" class="headerlink" title="私有属性"></a>私有属性</h3><p>私有属性前面加<code>#</code>,私有属性类外部直接获取不到结果会报错，只能通过类里面使用。</p>
+<pre><code>class Person{
+  //公有属性
+  name;
+  //私有属性
+  #age;
+  constructor(name,age,weight){
+    this.name = name;
+    this.#age = age ;
+    this.#weight = weight;
+  }
+}
+</code></pre><h3 id="extends继承"><a href="#extends继承" class="headerlink" title="extends继承"></a>extends继承</h3><p>ES5的继承</p>
+<pre><code>function Father(name,age){
+    this.name = name;
+    this.age = age;
+}
+Father.prototype.money= ()=&gt;{
+    console.log(&#39;父亲要上班&#39;);
+}
+function  Son(name,age) {
+    Father.call(this,name,age)
+}
+Son.prototype = new Father();
+Son.prototype.constructor = Son
+</code></pre><p>ES6的extends继承</p>
+<pre><code>class Son extends Father{
+//子类的构造方法
+constructor(name,age,height){
+// 调用父类的构造方法，这里也要注意参数
+//父类的方法也会继承
+  super(name,age)
+  //子类自己的方法
+  this.height = height;
+}
+}
+</code></pre><p>子类继承父类相当于子类的<strong>proto</strong>指向父类Father。</p>
+<h2 id="get和set"><a href="#get和set" class="headerlink" title="get和set"></a>get和set</h2><pre><code>class Phone{
+    get price(){
+        console.log(&quot;该属性被读取了&quot;)
+        return &quot;属性调用的返回值&quot;
+    }
+    set price(newVal){
+         console.log(&quot;该属性被修改了&quot;)
+    }
+}
+let s = new Phone()
+s.price
+s.price = &quot;free&quot;
+</code></pre>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -210,7 +248,7 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#static"><span class="toc-text">static</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#私有属性"><span class="toc-text">私有属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extends继承"><span class="toc-text">extends继承</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#get和set"><span class="toc-text">get和set</span></a>
   </div>
 </aside>
   
@@ -268,10 +306,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/02/17/es6/" data-enable="true">
+    <a href="/2020/07/27/对象的方法/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/02/14/git-1/" data-enable="true">
+    <a href="/2020/07/26/迭代器/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

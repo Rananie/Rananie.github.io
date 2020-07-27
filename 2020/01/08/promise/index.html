@@ -168,8 +168,7 @@
   </h1>
   
   <article class="passage-article">
-    <p> 这里记录了学习promise的笔记，如果有更深刻的理解会不断更新。</p>
-<h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><h3 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h3><h4 id="1-函数对象与实例对象"><a href="#1-函数对象与实例对象" class="headerlink" title="1.函数对象与实例对象"></a>1.函数对象与实例对象</h4><p>函数对象：将函数作为对象使用<br>实例对象：new函数产生的对象</p>
+    <h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><h3 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h3><h4 id="1-函数对象与实例对象"><a href="#1-函数对象与实例对象" class="headerlink" title="1.函数对象与实例对象"></a>1.函数对象与实例对象</h4><p>函数对象：将函数作为对象使用<br>实例对象：new函数产生的对象</p>
 <blockquote>
 <p>括号左边是函数，点左边是对象</p>
 </blockquote>
@@ -324,6 +323,8 @@ value=&gt;{
 <blockquote>
 <p>自定义promise链接：<a href="https://github.com/biubiuins/promise-/tree/master" target="_blank" rel="noopener">https://github.com/biubiuins/promise-/tree/master</a></p>
 </blockquote>
+<h3 id="promise方法"><a href="#promise方法" class="headerlink" title="promise方法"></a>promise方法</h3><p><strong>Promise.allSettled()</strong></p>
+<p>改方法接收promise数组，返回promise对象</p>
 <h2 id="async与await"><a href="#async与await" class="headerlink" title="async与await"></a>async与await</h2><h3 id="1-async-函数"><a href="#1-async-函数" class="headerlink" title="1.async 函数"></a>1.async 函数</h3><p>async是’异步’的简写，用于申明这个函数是异步的。<br>函数的返回值为Promise对象，promise对象的结果由async函数执行的返回值决定。</p>
 <h3 id="2-await-表达式"><a href="#2-await-表达式" class="headerlink" title="2.await 表达式"></a>2.await 表达式</h3><p>await相当于then的语法糖。<br>当await后面的表达式为promise，await 就忙起来了，它会阻塞后面的代码，等着 Promise 对象 resolve，得到的结果就是promise成功的value。如果右侧表达不是promise，得到的结果就是它本身。</p>
 <p><strong>注意：</strong></p>
@@ -340,7 +341,7 @@ value=&gt;{
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise"><span class="toc-text">Promise</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#预备知识"><span class="toc-text">预备知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-函数对象与实例对象"><span class="toc-text">1.函数对象与实例对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-两种类型的回调函数"><span class="toc-text">2.两种类型的回调函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-error处理"><span class="toc-text">3.error处理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise的理解和使用"><span class="toc-text">Promise的理解和使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#async与await"><span class="toc-text">async与await</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-async-函数"><span class="toc-text">1.async 函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-await-表达式"><span class="toc-text">2.await 表达式</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Promise"><span class="toc-text">Promise</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#预备知识"><span class="toc-text">预备知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-函数对象与实例对象"><span class="toc-text">1.函数对象与实例对象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-两种类型的回调函数"><span class="toc-text">2.两种类型的回调函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-error处理"><span class="toc-text">3.error处理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise的理解和使用"><span class="toc-text">Promise的理解和使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#promise方法"><span class="toc-text">promise方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#async与await"><span class="toc-text">async与await</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-async-函数"><span class="toc-text">1.async 函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-await-表达式"><span class="toc-text">2.await 表达式</span></a></li></ol></li></ol>
   </div>
 </aside>
   

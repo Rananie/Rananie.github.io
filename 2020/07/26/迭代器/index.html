@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ranan" />
+  
+  
+  <title>迭代器 | Ranan的博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,JavaScript,JavaScript," />
+  
+
+  
+  <meta name="description" content="Ranan的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Ranan",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 不能放弃思考</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://biubiuins.github.io/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-07-26
+    </span>
+    
+      <span>
+        | <a href="/categories/前端/"><i class="fa fa-bookmark"></i>前端</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    迭代器
+  </h1>
+  
+  <article class="passage-article">
+    <p>iterator是一种接口机制，为各种不同的数据结构提供统一的访问机制。任何数据结构只要部署了iterator接口(对象里面的一个属性)，就可以用来完成遍历操作。</p>
+<p>iterator接口是解构赋值，三点运算符，生成器，<code>for-of</code>循环的基础，主要供<code>for-of</code>消费。</p>
+<p>默认具有iterator接口的数据结构有以下几个，注意普通对象默认是没有iterator接口的（可以自己创建iterator接口让普通对象也可以迭代）</p>
+<ul>
+<li>Array</li>
+<li>Map</li>
+<li>Set</li>
+<li>String</li>
+<li>TypedArray（类数组）</li>
+<li>函数的 arguments 对象</li>
+<li>NodeList 对象</li>
+</ul>
+<p>工作原理:<br>1.symbol.iterator对应的函数创建一个指针对象，指向数据结构的起始位置。<br>2.第一次调用next方法，指针自动指向数据结构的第一个成员<br>3.接下来不断调用next方法，直到指向最后一个成员<br>4.每次调用next方法返回的是一个包含value和done的对象</p>
+<p>注意：第一个next方法是symbol.iterator对应函数执行的返回值，每次调用next方法返回的是一个包含value和done的对象{value:当前成员的值，done：布尔值}其中done对用的布尔值表示当前的数据的结构是否遍历结束。当遍历结束的时候返回的value值是undefined，done值为true</p>
+<pre><code>let zimu = [a,b,c,d]
+//返回一个iterator对象,该对象对象里面有next方法
+let iterator = zimu[Symbol.iterator](); 
+//调用对象的next方法,返回值{value:a,done:false}
+console.log(iterator.next()); 
+</code></pre><p>1.可迭代的数据结构会有一个[Symbol.iterator]方法,<br>2.[Symbol.iterator]执行后返回一个iterator对象</p>
+<p>自定义部署iterator接口</p>
+<pre><code>let obj = {
+    data: [&quot;a&quot;, &quot;b&quot;],
+    [Symbol.iterator]() {
+        const self = this //用于返回值对象
+        let index = 0 //索引变量
+        return {//遍历器对象，返回iterator对象
+            next() {
+                if (index &lt; self.data.length) {
+                    return {
+                        value: self.data[index++],
+                        done: false
+                    }
+                } else {
+                    return {
+                        value: undefined,
+                        done: true
+                    }
+                }
+
+            }
+        }
+    }
+}
+</code></pre><h3 id="for-of"><a href="#for-of" class="headerlink" title="for..of"></a>for..of</h3><p>以前我们遍历数组中的元素的时，最开始使用的是for</p>
+<pre><code>let arr = [1,2,3]
+for(let i = 0;i&lt;arr.length;i++){
+console.log(arr[i])
+//输出1，2，3
+}
+</code></pre><p>自ES5之后，可以使用<code>forEach</code></p>
+<pre><code>arr.forEach(function (value) {
+    console.log(value);
+    //输出1，2，3
+});
+</code></pre><p>但是<code>foeEach</code>有两个缺点：<br>1.不能使用<code>break</code>语句中断循环<br>2.不能使用<code>return</code>语句返回到外层函数</p>
+<p>ES6增加了<code>for-of</code>循坏，是现在简洁、最直接的<strong>遍历数组</strong>元素的语法。<code>for-of</code>不仅仅可以遍历数组，<strong>具有iterator接口的，都可以使用<code>for-of</code>进行遍历</strong></p>
+<pre><code>for (var value of arr) {
+      console.log(value); // 1,2,3
+}
+</code></pre><p>与<code>for-in</code>的区别：<br>1.for-in 获取的是对象的键名，for-of获取的是键值<br>2.for-in 会遍历对象的<strong>整个原型链</strong>,性能非常差不推荐使用。</p>
+<p><strong>使用场景</strong></p>
+<p>1.对数组和Set结构进行结构赋值时<br>2.扩展运算符<br>3.yieId后面跟的是一个可遍历的结构<br>4.由于数组的遍历会调用遍历器接口，所以任何接收数组作为参数的场合其实都调用了遍历器接口。</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#for-of"><span class="toc-text">for..of</span></a></li></ol>
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2020/07/26/class类/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2020/07/24/箭头函数/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

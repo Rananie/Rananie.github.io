@@ -171,7 +171,7 @@
     <p><strong>函数对象的call方法与apply方法</strong></p>
 <p>函数对象：函数像对象一样去使用,<code>函数.xx</code>。</p>
 <p>共同点：<br>1.这两个方法都是函数对象的方法，需要通过函数对象来调用<br>2.当对函数调用 call()和apply()时，都会执行该函数<br>3.call()和apply()的第一个参数为对象，执行call()与apply的函数对象里的this指向第一个参数</p>
-<p>不同点：<br>call()方法方法可以将实参在第一个参数对象之后一次传递<br>apply()方法需要将实参封装到一个数组中统一传递</p>
+<p>不同点：<br>call()方法方法可以将实参在第一个参数对象之后依次传递<br>apply()方法需要将实参封装到一个数组中统一传递</p>
 <p><strong>bind()、call()、apple()的区别</strong></p>
 <ul>
 <li>都能指定函数中的this</li>
@@ -186,6 +186,8 @@ function f(data,data2) {
 }
 f.call(obj,33,22) //{name:&quot;ranan&quot;} 55
 f.apply(obj,[33,22])//{name:&quot;ranan&quot;} 55
+//所以apply通常用于将数组转化为函数的参数
+
 let bar=f.bind(obj) //bind不调用函数
 bar(33,22)//{name:&quot;ranan&quot;} 55
 

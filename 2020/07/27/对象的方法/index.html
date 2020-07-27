@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ranan" />
+  
+  
+  <title>对象的方法 | Ranan的博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,JavaScript,JavaScript," />
+  
+
+  
+  <meta name="description" content="Ranan的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Ranan",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 不能放弃思考</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://biubiuins.github.io/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-07-27
+    </span>
+    
+      <span>
+        | <a href="/categories/前端/"><i class="fa fa-bookmark"></i>前端</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    对象的方法
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="对象的原有方法"><a href="#对象的原有方法" class="headerlink" title="对象的原有方法"></a>对象的原有方法</h2><h2 id="对象的扩展属性"><a href="#对象的扩展属性" class="headerlink" title="对象的扩展属性"></a>对象的扩展属性</h2><p><strong>Obejct.setPrototypeOf/getPrototypeOf</strong></p>
+<p>Obejct.setPrototypeOf(对象，对象的原型指向的元素)<br>设置原型<strong>proto</strong></p>
+<p>Object.getPrototypeOf(对象)<br>获取指定对象的<strong>proto</strong>指向的值,没有返回null</p>
+<p> <strong>Object.is(v1,v2)</strong></p>
+<p>判断对象v1与v2是否完全相等。</p>
+<pre><code>console.log(0 === -0)  //true
+console.log(NaN == NaN)//false NaN与任何数都不相等
+console.log(Object.is(0,-0)) //false
+console.log(Object.is(NaN,NaN))//true
+</code></pre><p>由上面代码可知该方式是以字符串是否相等来判断的</p>
+<p><strong>Object.assign(target,source1,source2..)</strong></p>
+<p>这个Object静态方法允许我们进行多个对象的合并，遍历需要合并给target的对象（仅可枚举属性），用等号进行赋值(这里可能有深浅拷贝的问题)</p>
+<p><strong>注意</strong>如果目标对象与源对象有同名属性，或多个源对象有同名属性，则后面的属性会覆盖前面的属性。</p>
+<pre><code>const target = { a: 1, b: 1 };
+const source1 = { b: 2, c: 2 };
+const source2 = { c: 3 };
+Object.assign(target, source1, source2);
+target // {a:1, b:2, c:3}
+</code></pre><p><strong>常见用途</strong></p>
+<p>1.<a href="https://biubiuins.github.io/2020/02/19/%E6%8B%B7%E8%B4%9D/" target="_blank" rel="noopener">关于拷贝的用法</a><br>2.为属性指定默认值</p>
+<pre><code>```
+const DEFAULTS = {
+  logLevel: 0,
+  outputFormat: &#39;html&#39;
+};
+//options对象是用户提供的参数。
+function processContent(options) {
+  options = Object.assign({}, DEFAULTS, options);
+  console.log(options);
+  // ...
+}
+```
+</code></pre><p><strong>Object.keys(obj)</strong><br>获取对象所有的键名，返回数组</p>
+<p><strong>Object.values(obj)</strong><br>获取对象所有的值，返回数组</p>
+<p><strong>Object.entries(obj)</strong><br>返回数组[[键名，键值],[键名，键值]]，此方法可以用于创建Map对象。</p>
+<pre><code>const m = new Map(Object.entries(obj))
+</code></pre><p><strong>Object.fromEntries()</strong><br>用于创建一个对象，参数为二维数组或者Map</p>
+<pre><code>Object.fromEntries([
+    [&quot;name&quot;,&quot;ranan&quot;], 
+    [&quot;like&quot;,&quot;pink&quot;,&quot;white&quot;]
+])
+//{name:&quot;ranan&quot;,like:&quot;pink,white&quot;}
+</code></pre><p>Object.entries(obj)/Object.fromEntries(二维数组)互为逆运算。</p>
+<p><strong>Object.create(prototype,[descriptors])</strong></p>
+<p>作用：以指定对象为原型创建新的对象。为新的对象指定新的属性，并对属性进行描述</p>
+<p>第一个参数指定原型，第二个参数为实例添加属性。</p>
+<pre><code>let obj = {name:&quot;ranan&quot;,age:2}
+//第一个参数指定原型，第二参数为实例添加属性
+let obj1 = Object.create(obj,{sex:{
+    value:&quot;女&quot;,//value指定值
+    //属性的描述
+    writable:true,//标识当前属性是否可以被删除，默认为false
+    configurable:true,//表示当前属性是否可以被删除，默认为false
+    enumerable:true,//标识当前属性是否能用for-in枚举，默认false
+    }})
+
+//obj1的原型__proto__指向obj  
+console.log(obj1);
+</code></pre><p>克隆保持原型链</p>
+<pre><code>function clone(origin) {
+  //Object.getPrototypeOf方法返回指定对象的原型（内部[[Prototype]]属性的值）
+  let originProto = Object.getPrototypeOf(origin);
+  //Object.create方法创建一个新对象，originProto为原型创建新对象
+  return Object.assign(Object.create(originProto, origin));
+</code></pre><p>getOwnPropertyDescriptor/getOwnPropertyDescriptors就是获取内部属性的描述,可以用于深层次的克隆。</p>
+<pre><code>const obj = Object.create(null,{
+    //内部属性的描述
+    name:{
+        value:&#39;尚硅谷&#39;,
+        //属性特性
+        writable:true, //修改
+        configurable:true //删除
+        enumerable:true //枚举
+    }
+})
+</code></pre><p>如果不指定configurable, writable, enumerable ，则这些属性默认值为false，如果不指定value, get, set，则这些属性默认值为undefined。</p>
+<p><strong>Object.defineProperties(object,descriptors)</strong></p>
+<p>作用:为指定的object对象扩展多个属性</p>
+<p>一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象。</p>
+<p>Object的defineProperty/defineProperties主要功能就是用来定义或修改这些内部属性。</p>
+<p>语法: Object.defineProperty(obj, prop, descriptor)</p>
+<p>obj: 需要被操作的目标对象<br>prop: 目标对象需要定义或修改的属性的名称<br>descriptor: 将被定义或修改的属性的描述符</p>
+<pre><code>var obj = new Object();
+
+Object.defineProperty(obj, &#39;name&#39;, {
+    configurable: false,
+    writable: true,
+    enumerable: true,
+    value: &#39;张三&#39;
+})
+
+console.log(obj.name)  //张三
+</code></pre><p>语法: Object.defineProperties(obj, props)</p>
+<p>obj: 将要被添加属性或修改属性的对象<br>props: 该对象的一个或多个键值对定义了将要为对象添加或修改的属性的具体配置</p>
+<p>方法直接在一个对象上定义一个或多个新的属性或修改现有属性，并返回该对象。</p>
+<pre><code>var obj = new Object();
+Object.defineProperties(obj, {
+    name: {
+        value: &#39;张三&#39;,
+        configurable: false,
+        writable: true,
+        enumerable: true
+    },
+    age: {
+        value: 18,
+        configurable: true
+    }
+})
+
+console.log(obj.name, obj.age) // 张三, 18
+</code></pre><p>该方法的存储器属性(setter,getter)可以实现简单的数据双向绑定</p>
+<pre><code>&lt;body&gt;
+
+   &lt;input type=&quot;text&quot; id=&quot;input1&quot;&gt;
+
+
+&lt;div&gt;
+    上面输入的数据是
+    &lt;span id=&quot;span&quot;&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;script&gt;
+
+    let oInput1 = document.getElementById(&#39;input1&#39;);
+    let oSpan = document.getElementById(&#39;span&#39;);
+    let obj = {};
+    Object.defineProperties(obj, {
+    //惰性求值，get之后才有值
+        val1: {
+            configurable: true,//可修改
+            get: function() {
+                oInput1.value = 0;
+                oSpan.innerHTML = 0;
+                return 0
+            },
+            set: function(newValue) {
+                oSpan.innerHTML = newValue
+            }
+        },
+
+    })
+    //设置默认值为0 调用get方法
+    oInput1.value = obj.val1;
+    oInput1.addEventListener(&#39;keyup&#39;, function() {
+        //调用set方法
+        obj.val1 = oInput1.value;
+    }, false)
+&lt;/script&gt;
+</code></pre><h4 id="get-set-propertyName"><a href="#get-set-propertyName" class="headerlink" title="get/set propertyName(){}"></a>get/set propertyName(){}</h4><p>对象本身的两个方法，用法和上面的get/set一样</p>
+<pre><code>let obj = {firstName:&quot;xx&quot;,lastName:&quot;xx&quot;, get fullName(){
+return this.firstName+ this.lastName
+}}
+</code></pre>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的原有方法"><span class="toc-text">对象的原有方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的扩展属性"><span class="toc-text">对象的扩展属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#get-set-propertyName"><span class="toc-text">get/set propertyName(){}</span></a></li></ol></li></ol></li></ol>
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2020/07/27/拷贝/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2020/07/26/class类/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

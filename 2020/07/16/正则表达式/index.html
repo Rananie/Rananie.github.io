@@ -218,7 +218,46 @@ str = str.replace(/^\s*|\s*$/g,&quot;&quot;)
 <p><a href="mailto:hello.nihao@qbc.com.cn" target="_blank" rel="noopener">hello.nihao@qbc.com.cn</a></p>
 <p>任意字母数字下划线 \w{3,}<br>.任意字母数字下划线 (.\w+)*<br>@<br>任意字母数字 [A-Za-z0-9]+<br>.任意字母(2-5位) .任意字母(2-5位)   (.[A-Za-z]{2,5}){1,2}</p>
 <pre><code>let emailReg=/^\w{3,}(\.\w+)*@[A-Za-z0-9]+/ (\.[A-Za-z]{2,5}){1,2}$/
-</code></pre>
+</code></pre><h2 id="贪婪与懒惰"><a href="#贪婪与懒惰" class="headerlink" title="贪婪与懒惰"></a>贪婪与懒惰</h2><p>贪婪模式:匹配尽可能多的字符<br>懒惰模式:匹配尽可能少的字符，会不断的回溯</p>
+<p>常用场景<code>.*</code>与<code>.*?</code>，使用?来表示使用懒惰模式匹配</p>
+<h2 id="正则扩展"><a href="#正则扩展" class="headerlink" title="正则扩展"></a>正则扩展</h2><h3 id="exec"><a href="#exec" class="headerlink" title="exec()"></a>exec()</h3><p><strong>捕获()括号包裹的内容</strong></p>
+<p>语法:RegExpObject.exec(string)<br>方法用于检索字符串中的正则表达式的匹配。<br>如果 exec() 找到了匹配的文本，则返回一个结果数组。否则，返回 null。<br>不管是否/g开启全局，<strong>只返回匹配的第一个</strong>。<br>如果要返回匹配的多个可以使用while(reg.exec(str))或者使用String.prototype.matchAll()方法。</p>
+<pre><code>let str = `&lt;ul&gt;
+          &lt;li&gt;
+            &lt;a&gt;ranan&lt;/a&gt;
+            &lt;p&gt;喜欢粉色&lt;/p&gt;
+         &lt;/li&gt;
+         &lt;li&gt;
+            &lt;a&gt;linin&lt;/a&gt;
+            &lt;p&gt;喜欢白色&lt;/p&gt;
+         &lt;/li&gt;
+         &lt;/ul&gt;
+         `
+const reg = /&lt;li&gt;.*?&lt;a&gt;(.*?)&lt;\/a&gt;.*?&lt;p&gt;(.*?)&lt;\/p&gt;/s
+
+const result = reg.exec(str)
+
+console.log(result);
+//输出一个数组，第一个元素是匹配的文本，第二个值第一个(.*?)返回值，第三个值第二个(.*?)返回值
+</code></pre><p><strong>命名捕获分组</strong></p>
+<p>通过?&lt;对捕获到的元素进行命名&gt;,返回的数组中有一个groups属性。</p>
+<pre><code>let str = &#39;&lt;a href=&quot;http://www.baidu.com&quot;&gt;百度&lt;/a&gt;&#39;
+const reg = /&lt;a href=&quot;(?&lt;url&gt;.*)&quot;&gt;(?&lt;text&gt;.*)&lt;\/a&gt;/
+const result = reg.exec(str)
+console.log(result)
+//数组前面3个返回值与上述方法相同，[....,goups:{url:http://www.baidu.com},text:&quot;尚硅谷&quot;]
+//result.groups使用。
+</code></pre><p><strong>反向断言</strong></p>
+<p>判断匹配结果是否正确</p>
+<p>正向断言,常用表示(?=pattern),从当前匹配位置开始测试后面(<strong>右边</strong>)匹配字符串是否成立。(?!patter)为其否定写法。</p>
+<pre><code>//正向断言
+let str = &#39;JS51566哈哈哈11嗯嗯&#39;
+const reg = /\d+(?=嗯)/ 
+const result = reg.exec(str) //输出[11]
+</code></pre><p>反向断言，常见表达式(?&lt; pattern)或者(?&lt;!pattern),表示当前位置<strong>左边</strong>将出现匹配字符</p>
+<p><strong>dotAll模式</strong></p>
+<p><code>.</code> 代表元字符查找单个字符，除了换行和行结束符。<br>dotAll /正则/s，新增修饰符s使<code>.</code>可以匹配任意字符。</p>
+
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -226,7 +265,7 @@ str = str.replace(/^\s*|\s*$/g,&quot;&quot;)
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#正则表达式"><span class="toc-text">正则表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串和正则相关的方法"><span class="toc-text">字符串和正则相关的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#split"><span class="toc-text">split()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#search"><span class="toc-text">search()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#match"><span class="toc-text">match()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replace"><span class="toc-text">replace()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用正则"><span class="toc-text">常用正则</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#正则表达式"><span class="toc-text">正则表达式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串和正则相关的方法"><span class="toc-text">字符串和正则相关的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#split"><span class="toc-text">split()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#search"><span class="toc-text">search()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#match"><span class="toc-text">match()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replace"><span class="toc-text">replace()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用正则"><span class="toc-text">常用正则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#贪婪与懒惰"><span class="toc-text">贪婪与懒惰</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#正则扩展"><span class="toc-text">正则扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#exec"><span class="toc-text">exec()</span></a></li></ol></li></ol>
   </div>
 </aside>
   

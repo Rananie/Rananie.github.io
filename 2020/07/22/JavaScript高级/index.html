@@ -172,7 +172,8 @@
 <p>undefined -&gt; ‘undefined’<br>string -&gt; ‘string’<br>boolean -&gt;’boolean’<br>null -&gt; ‘object’  因为该类型只有一个值，所以可以用=== 来判断类型<br>object -&gt;’object’<br>object(function) -&gt; ‘function’<br>object(array) -&gt;’object’</p>
 <p><strong>总结</strong><br>typeof不能明确的区别null和object、object和array</p>
 <h3 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h3><p>可以使用instanceof对对象进行细分</p>
-<p>A instanceof 构造函数<br>通过instanceof可以检查一个对象是否一个类的实例<br>所有的对象都是Object的后代</p>
+<p>A instanceof 构造函数</p>
+<p>通过instanceof可以检查一个对象是否一个构造函数的实例，instanceof原来是寻找实例对象A的原型链</p>
 <p>function -&gt; Function object -&gt; Object array-&gt; Array</p>
 <p><strong>综合例题</strong></p>
 <pre><code>let a = {
@@ -191,8 +192,54 @@ console.log(a.age);
 //函数执行完毕函数作用域销毁，obj自动释放，obj所指对象的空间在后面的某个时刻由垃圾回收器回收
 </code></pre><h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h3><p><a href="https://biubiuins.github.io/2020/02/23/%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/" target="_blank" rel="noopener">回调函数</a></p>
 <h3 id="立即执行函数"><a href="#立即执行函数" class="headerlink" title="立即执行函数"></a>立即执行函数</h3><p>防止污染全局命名空间,编写js模块<br>匿名函数自调用;(function(){})()</p>
+<p><strong>分号的问题</strong><br>需要加分号的语句,一般js最终执行时会压缩。<br>1.小括号开头的前一条语句，如匿名函数自调用<br>2.中括号开头的前一条语句</p>
 <h2 id="this指针"><a href="#this指针" class="headerlink" title="this指针"></a>this指针</h2><p><a href="https://biubiuins.github.io/2020/07/15/this%E6%8C%87%E9%92%88/" target="_blank" rel="noopener">this指针</a></p>
-
+<h2 id="原型与原型链"><a href="#原型与原型链" class="headerlink" title="原型与原型链"></a>原型与原型链</h2><p><a href="https://biubiuins.github.io/2020/07/15/%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/" target="_blank" rel="noopener">原型与原型链</a></p>
+<h2 id="变量提升与函数提升"><a href="#变量提升与函数提升" class="headerlink" title="变量提升与函数提升"></a>变量提升与函数提升</h2><p>通过var声明的变量，会被提升。定义的函数，可以在定义语句前执行，这就是函数提升。</p>
+<pre><code>var a=3
+function fu(){
+    console.log(a)
+    var a = 4 
+    //输出undefined 局部函数定义个变量a会提升到函数的最开始
+}
+fn()
+</code></pre><p>在全局代码执行前，JS引擎会创建一个栈来存储管理所有的执行上下文。在全局执行上下文(window)确定后，将其添加到栈中，在函数执行上下文(调用函数时产生)，将其添加到栈中。在当前函数执行完后，函数执行上下文出栈，最后所有代码执行完后，栈中只剩下window</p>
+<p>作用域是静态的，开始就存在且不会变化。函数上下文是动态的。</p>
+<pre><code>var x = 10;
+//fn作用域，开始就存在了
+function fn(){
+    console.log(x)
+}
+//show作用域
+function show(f){
+    var x = 20
+    f() //执行时先在fn的作用域里面找x是不存在的，然后再从全局作用域中找 所以输出10
+}
+show(fn) //输出10
+</code></pre><p><strong>全局执行上下文</strong></p>
+<p>在执行全局代码前，将window确定为全局执行上下文<br>对全局数据进行预处理:<br>var 定义的全局变量 -&gt; undefined 添加为window的属性<br>function 声明的全局函数 -&gt; 赋值，添加为window的方法<br>this -&gt; 赋值(window)<br>开始执行全局代码</p>
+<p><strong>函数执行上下文</strong><br>在调用函数，准备执行函数体之前，创建对应的函数执行上下文对象（虚拟对象，因为函数执行完毕会销毁）<br>对局部数据进行预处理:<br>1.函数的上下文对象 this<br>2.封装<strong>实参</strong>的对象 arguments 是一个类数组对象/有length、可以通过索引操作的对象<br>3.形参变量 -&gt; 赋值 -&gt; 添加为执行上下文的属性<br>其余类似全局执行上下文</p>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p><a href="https://biubiuins.github.io/2020/02/23/%E9%97%AD%E5%8C%85/" target="_blank" rel="noopener">闭包</a></p>
+<h2 id="宏队列与微队列"><a href="#宏队列与微队列" class="headerlink" title="宏队列与微队列"></a>宏队列与微队列</h2><p><a href="https://biubiuins.github.io/2020/02/16/%E5%AE%8F%E9%98%9F%E5%88%97%E4%B8%8E%E5%BE%AE%E9%98%9F%E5%88%97/" target="_blank" rel="noopener">宏队列与微队列</a></p>
+<p><strong>H5 Web Workers(多线程)</strong></p>
+<p>Web Workers 是 HTML5 提供的一个javascript多线程解决方案（常用于计算），但是子线程完全受主线程控制，且不得操作DOM，所以这个新标准并没有改变javascript单线程的本质。</p>
+<p>1.创建一个分线程执行的js文件</p>
+<p><strong>分线程的全局对象不再是window了</strong>，所以分线程不得操作DOM</p>
+<pre><code>var onmessage = function(event){
+    //不能用函数声明，只能用赋值的形式
+    var upper = event.data //通过event.data获得主线程发来的数据
+    postMessage(upper) //将数据发给主线程
+}
+</code></pre><p>2.在主线程中的js中发消息并设置回调</p>
+<pre><code>//创建一个Woker对象
+var worker = new Worker(&quot;分线程执行的js文件地址&quot;)
+//向分线程发送消息
+worker.postMessage(&quot;向分线程执行的js发送数据&quot;)
+//接收worker传过来的数据函数
+worker.onmessage = function(event){
+    alert(event.data) //分线程返回的数据在event.data里面
+}
+</code></pre>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -200,7 +247,7 @@ console.log(a.age);
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#判断数据类型"><span class="toc-text">判断数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#typeof"><span class="toc-text">typeof</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#instanceof"><span class="toc-text">instanceof</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#回调函数"><span class="toc-text">回调函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#立即执行函数"><span class="toc-text">立即执行函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#this指针"><span class="toc-text">this指针</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#判断数据类型"><span class="toc-text">判断数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#typeof"><span class="toc-text">typeof</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#instanceof"><span class="toc-text">instanceof</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数"><span class="toc-text">函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#回调函数"><span class="toc-text">回调函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#立即执行函数"><span class="toc-text">立即执行函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#this指针"><span class="toc-text">this指针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#原型与原型链"><span class="toc-text">原型与原型链</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量提升与函数提升"><span class="toc-text">变量提升与函数提升</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#闭包"><span class="toc-text">闭包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#宏队列与微队列"><span class="toc-text">宏队列与微队列</span></a></li></ol>
   </div>
 </aside>
   
@@ -258,7 +305,7 @@ console.log(a.age);
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2020/07/24/es6/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
     <a href="/2020/07/21/BOM/" data-enable="true">

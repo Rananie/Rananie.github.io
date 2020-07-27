@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ranan" />
+  
+  
+  <title>字符串的方法 | Ranan的博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,JavaScript,JavaScript," />
+  
+
+  
+  <meta name="description" content="Ranan的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Ranan",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 不能放弃思考</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://biubiuins.github.io/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-07-27
+    </span>
+    
+      <span>
+        | <a href="/categories/前端/"><i class="fa fa-bookmark"></i>前端</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    字符串的方法
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="字符串的属性"><a href="#字符串的属性" class="headerlink" title="字符串的属性"></a>字符串的属性</h2><h3 id="split"><a href="#split" class="headerlink" title="split()"></a>split()</h3><p>语法：string.split(“,”)/string.split(/[0-9]/)<br>join()的功能相反,可以将一个字符串拆分为一个数组<br>参数为拆分规则,如例子的根据字符串里的逗号拆分数组,参数可以是正则表达式</p>
+<p>默认全拆<br>不修改原字符串，返回值为数组</p>
+<pre><code>let str=&quot;1a2b3c4d5e6f&quot;
+let result = str.split(/[0-9]/)
+//输出[a,b,c,d,e,f]
+</code></pre><h3 id="search"><a href="#search" class="headerlink" title="search()"></a>search()</h3><p>语法:string.search(搜索的内容)<br>搜索字符串中是否含有指定内容,返回<strong>第一次</strong>(g失效)出现的索引或者-1<br>参数是指定内容可以是正则表达式</p>
+<h3 id="match"><a href="#match" class="headerlink" title="match()"></a>match()</h3><p>语法:string.match(条件)<br>根据正则表达式，从一个字符串中将符合条件的内容提取出来,返回值是<strong>数组</strong></p>
+<p>默认返回符合条件的第一个内容<br>要找所有内容，开启全局匹配模式<br>可以为一个正则表达式设置多个匹配模式，顺序无所谓</p>
+<pre><code>let str=&quot;1a2b3c4d5e6f&quot;
+let result = str.match(/[0-9]/g)
+//输出[1,2,3,4,5,6]
+</code></pre><h3 id="replace"><a href="#replace" class="headerlink" title="replace()"></a>replace()</h3><p>语法:string.search(被替换的内容，新的内容)<br>可以将字符串中指定内容替换为新内容，被替换的内容可以是正则表达式。</p>
+<p>默认只替换第一个<br>不影响原来的字符串，返回新的字符串</p>
+<p><strong>可以使用它去空格</strong></p>
+<pre><code>//会去掉全部的空格
+str = str.replace(/\s/g,&quot;&quot;)
+//去掉开头的空格
+str = str.replace(/^\s*/,&quot;&quot;)
+//去掉结尾的空格
+str = str.replace(/\s*$/,&quot;&quot;)
+//去掉开头和结尾的空格
+str = str.replace(/^\s*|\s*$/g,&quot;&quot;)
+</code></pre><p>这里去掉字符串的头尾空格可以使用字符串的<strong>trim()</strong>方法</p>
+<h2 id="字符串的扩展属性"><a href="#字符串的扩展属性" class="headerlink" title="字符串的扩展属性"></a>字符串的扩展属性</h2><p><strong>string.includes(str)</strong></p>
+<p>判断是否包含指定的字符串<br>返回值：包含true,不包含false</p>
+<p><strong>string.startsWith(str)</strong></p>
+<p>判断是否以指定字符串开头<br>返回值：是true,否false</p>
+<p><strong>string.endsWith(str)</strong></p>
+<p>判断是否以指定字符串结尾<br>返回值：是true,否false</p>
+<p><strong>string.repeat(count)</strong></p>
+<p>指定目标字符串重复的次数<br>返回值:重复后的字符串</p>
+<p><strong>string.trim()/string.trimStart()/string.trimEnd()</strong></p>
+<p>trim()清除字符串左侧与右侧的空格<br>trimStart()清除字符串左侧的空格<br>trimEnd()清除字符串右侧的空格</p>
+<p><strong>String.prototype.matchAll() 实用</strong></p>
+<p>常用来获取正则批量匹配的结果，返回可迭代对象，可以用for of进行遍历或者扩展运算符展开。<br><strong>爬虫常用</strong></p>
+<pre><code>let str = `&lt;ul&gt;
+          &lt;li&gt;
+            &lt;a&gt;ranan&lt;/a&gt;
+            &lt;p&gt;喜欢粉色&lt;/p&gt;
+         &lt;/li&gt;
+         &lt;li&gt;
+            &lt;a&gt;linin&lt;/a&gt;
+            &lt;p&gt;喜欢白色&lt;/p&gt;
+         &lt;/li&gt;
+         &lt;/ul&gt;
+         `
+const reg = /&lt;li&gt;.*?&lt;a&gt;(.*?)&lt;\/a&gt;.*?&lt;p&gt;(.*?)&lt;\/p&gt;/sg
+const result = str.matchAll(reg)
+for (let v of result) {
+  console.log(v);  
+}
+//输出[exec匹配返回的结果1],[exec匹配返回的结果2]
+</code></pre>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串的属性"><span class="toc-text">字符串的属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#split"><span class="toc-text">split()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#search"><span class="toc-text">search()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#match"><span class="toc-text">match()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#replace"><span class="toc-text">replace()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串的扩展属性"><span class="toc-text">字符串的扩展属性</span></a></li></ol>
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2020/07/27/数组的方法/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2020/07/27/拷贝/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

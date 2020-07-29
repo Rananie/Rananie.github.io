@@ -150,7 +150,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-01-08
+      <i class="fa fa-calendar"></i>2020-07-28
     </span>
     
       <span>
@@ -202,18 +202,18 @@ console.log(&quot;setTimeout()之后&quot;)
 <h4 id="3-error处理"><a href="#3-error处理" class="headerlink" title="3.error处理"></a>3.error处理</h4><p><strong>错误类型</strong></p>
 <p>Error:所有错误的父类型<br>子类型(常见的)：<br>ReferenceError: 引入错误，引用的变量不存在<br>TypeError: 数据类型不正确的错误<br>RangeError：数据值不在其所允许的范围内。<br>SyntaxError：语法错误</p>
 <p><strong>错误处理</strong></p>
-<p>若没有捕获error，后续的代码是不会执行的<br>捕获错误:try{}catch(error){}<br>抛出错误:throw error()</p>
+<p>若没有捕获error，后续的代码是不会执行的<br>捕获错误:try{}catch(error){}<br>抛出错误:throw new Error(message)</p>
 <pre><code class="bash">//抛出错误，自己定义错误
 function something(){
 if(Date.now()%2 ===1){
   console.log(&quot;当前时间为奇数,可以执行任务&quot;)
 }else{
-//自己定义时间为偶数时为错误, 抛出的错误由调用来处理比如：打印，显示消息框等
 //  throw new Error(里面为传出的message) 固定格式
   throw new Error(&#39;当前时间为偶数，无法执行任务&#39;)
 }
+
 try{
-  something{}
+  something()
 } catch(error){
 //error下面两个属性message与stack
 console.log(error.message)//错误相关信息
@@ -227,22 +227,27 @@ console.log(error.stack)//函数调用栈记录信息
 <li>pending变为resolved（成功）</li>
 <li>pending变为rejected (失败)</li>
 </ol>
-<p>说明：只有这两种变化，且一个Promise对象只能改变一次。无论是成功还是失败，都会有一个结果数据。成功的结果数据一般称为value，失败的结果数据一般称为reason</p>
-<p>   <img src="/img/软件超市/软件超市项目后台管理界面开发流程4.png" width="50%"></p>
+<p>说明：只有这两种变化，且<strong>一个Promise对象只能改变一次</strong>。无论是成功还是失败，都会有一个结果数据。成功的结果数据一般称为value，失败的结果数据一般称为reason</p>
+<p><img src="/img/js/promise.png"></p>
 <pre><code class="bash">//1.创建一个新的promise对象,里面传一个回调函数
-const p = new Promise((resolve,reject)=&gt;{ //执行器函数 同步回调
-//2.执行异步操作
+
+const p = new Promise((resolve,reject)=&gt;{ //执行器函数excutor 同步回调
+
+//2.执行异步操作,promise常用于封装异步函数。
 setTimeout(()=&gt;{
 const time = Date.now() //如果当前时间是偶数代表成功，否则代表失败
 if(time%2 ==0){
+
 //3.1 如果成功了，调用resolve(value)
   resolve(&quot;成功的数据,time=&quot;+time)
 }else{
+
 //3.2 如果失败了，调用reject（reason）
  reject(&quot;成功的数据,time=&quot;+time)
 }
 },1000);
 })
+
 p.then(
  value =&gt;{
  //接收得到成功的value数据  onResolved
@@ -257,28 +262,25 @@ p.then(
 </code></pre>
 <p><strong>优势</strong></p>
 <ol>
-<li><p>指令回调函数的方式更加灵活：旧的，必须在启动异步任务前指定;promise：启动异步任务 =&gt; 返回peomise对象 =&gt; 给promise对象绑定回调函数(甚至可以在异步执行之后才指定他的回调函数)</p>
+<li><p>指定回调函数的方式更加灵活。旧的，必须在启动异步任务前指定回调函数;promise：启动异步任务 =&gt; 返回peomise对象 =&gt; 给promise对象绑定回调函数(甚至可以在异步执行之后才指定他的回调函数)</p>
 </li>
 <li><p>支持链式调用，可以解决回调地狱问题（回调函数嵌套调用，不便于阅读/不便于异常）。</p>
 </li>
 </ol>
-<p>简便写法，Promise还有一些对象方法，这里就不进行记录了。</p>
-<pre><code>const p1 = new Promise((resolve,reject)=&gt;{
-  resolve(1)
-})
-const p2 = Promise.reject(2)
-p2.catch(reason=&gt;{console.log(reason)})
-</code></pre><p><strong>几个关键问题</strong></p>
-<p>1.如何改变promise的状态？<br>（1）resolve(value):如果当前是pending就会变为resolved<br>（2）reject（reason）：如果当前是pending就会变为rejected<br>（3）抛出异常：如果当前是pending就会被成rejected <code>throw new Error(&quot;出错了&quot;)</code> reason值是你抛出的东西</p>
-<p>2.一个promise指定多个成功/失败的回调函数，都会调用吗？<br>当promise改变为对应状态时会调用</p>
+<p><strong>几个关键问题</strong></p>
+<p>1.如何改变promise的状态？<br>（1）resolve(value):如果当前是pending就会变为resolved<br>（2）reject（reason）：如果当前是pending就会变为rejected<br>（3）抛出异常(throw)：如果当前是pending就会变成rejected <code>throw new Error(&quot;出错了&quot;)</code> reason值是你抛出的东西</p>
+<p>2.一个promise指定多个成功/失败的回调函数，都会调用吗？</p>
+<p>当promise改变为对应状态时<strong>都会</strong>调用</p>
 <p>3.改变promise状态和指定回调函数谁先执行。</p>
-<pre><code>new Promise((resolve,reject)=&gt;{
+<pre><code class="bash">/*---------先指定回调函数后改状态------------*/
+new Promise((resolve,reject)=&gt;{
  setTimeout(()&gt;{
   resolve(1)//后改变的状态，同时指定数据，异步执行回调函数
  },1000);
 }).then(//先指定回调函数，保存当前指定的回调函数
 value=&gt;{},reason=&gt;{}
 )
+
 /*---------先改状态后指定回调函数------------*/
 new Promise((resolve,reject)=&gt;{ //同步回调
   resolve(1)//先改变的状态，同时指定数据
@@ -286,53 +288,29 @@ new Promise((resolve,reject)=&gt;{ //同步回调
 }).then(//异步回调
 value=&gt;{},reason=&gt;{}//后指定回调函数，异步执行回调函数
 )
-</code></pre><p>4.promise.then()返回的新的promise的结果状态由什么决定</p>
-<pre><code class="bash">new Promise((resolve,reject)=&gt;{
-  //1.resolve(1)
-  //2.reject(1)
-);
-}).then(
-value=&gt;{
- console.log(&#39;onResolved1()&#39;,value)
- //3.return 2
- //4.return Promise.resolve(3)
- //5.return Promise.reject(4)
- //6 throw 5
-},reason=&gt;{
- console.log(&#39;onRejected1()&#39;,reason)
-}
-).then(
-value=&gt;{
- console.log(&#39;onResolved2()&#39;,value)
-},reason=&gt;{
- console.log(&#39;onRejected2()&#39;,reason)
-}
-)
-//1.输出onResolved1() 1 onResolved2() undefined
-//2.输出onRejected1() 1  onResolved2() undefined （ 其余情况结合1.3 1.4 1.5 1.6 ）
-//1.3 输出onResolved1() 1 onResolved2() 2
-//1.4 输出onResolved1() 1 onResolved2() 3
-//1.5 输出onResolved1() 1 onRejected2() 4
-//1.6 输出onResolved1() 1 onRejected2() 5
 </code></pre>
-<ol start="5">
-<li>promise异常传透和中止</li>
-</ol>
-<p>当使用promise的then链式调用时，可以在最后指定失败的回调，因为没有处理异常相当于 <code>reason =&gt; {throw reason}</code>。会一层一层往下寻找异常处理（知道找到）。</p>
-<p>当使用promise的then链式调用时，若想中断promise链，可一返回<code>new Promise(()=&gt;{})</code>返回一个处于pending的promise。</p>
+<p>4.promise.then()返回的新的promise的结果状态由什么决定</p>
+<p>then方法返回的结构也是promise，返回的promise的状态由then执行的回调函数结果决定。</p>
+<p>回调函数中return的值是非promise类型的数据，则返回的promise的状态为成功，value为return值。<br>若return的值是新promise，由返回的promise状态决定。</p>
+<p>5.promise异常传透和中止</p>
+<p>当使用promise的then链式调用时，可以在最后指定失败的回调，因为没有处理异常相当于 <code>reason =&gt; {throw reason}</code>，会一层一层往下寻找异常处理直到找到。</p>
+<p>当使用promise的then链式调用时，若想中断promise链，可以<code>return new Promise(()=&gt;{})</code>返回一个处于pending的promise。</p>
 <blockquote>
 <p>自定义promise链接：<a href="https://github.com/biubiuins/promise-/tree/master" target="_blank" rel="noopener">https://github.com/biubiuins/promise-/tree/master</a></p>
 </blockquote>
-<h3 id="promise方法"><a href="#promise方法" class="headerlink" title="promise方法"></a>promise方法</h3><p><strong>Promise.allSettled()</strong></p>
-<p>改方法接收promise数组，返回promise对象</p>
-<h2 id="async与await"><a href="#async与await" class="headerlink" title="async与await"></a>async与await</h2><h3 id="1-async-函数"><a href="#1-async-函数" class="headerlink" title="1.async 函数"></a>1.async 函数</h3><p>async是’异步’的简写，用于申明这个函数是异步的。<br>函数的返回值为Promise对象，promise对象的结果由async函数执行的返回值决定。</p>
+<h3 id="promise方法"><a href="#promise方法" class="headerlink" title="promise方法"></a>promise方法</h3><p><strong>Promise.resolve()/reject()</strong></p>
+<p>Promise.resolve()：该方法返回一个新的成功的promise，值为参数<br>Promise.reject():该方法返回一个新的失败的promise，值为参数。</p>
+<p><strong>Promise.race()</strong></p>
+<p>返回一个新的promise，第一个完成的promise的结果就是最终返回的promise结果。</p>
+<p><strong>Promise.allSettled()</strong></p>
+<p>该方法接收promise数组，返回promise对象，该对象的状态永远为成功，该对象的值为一个数组，数组的元素为参数中每一个promise的当前值与当前状态。</p>
+<p><strong>Promise.all(iterable)</strong></p>
+<p>包含n个promise的数组(可迭代对象)，返回一个新的promise，所有promise都成功返回的新的promise状态才成功。<br>成功则返回一个数组，里面包含参数中promise成功的返回值，顺序与参数顺序一致。<br>失败则返回失败的原因。</p>
+<h2 id="async与await"><a href="#async与await" class="headerlink" title="async与await"></a>async与await</h2><p>本质:Generator语法糖，async取代Generator函数的星号*.await取代的是yield</p>
+<p>ES7的async/await进一步的优化Promise的写法，async函数始终返回一个Promise，await可以实现一个”等待”的功能，async/await被称为异步编程的终极解决方案，即用同步的形式书写异步代码，并且能够更优雅的实现异步代码顺序执行。</p>
+<h3 id="1-async-函数"><a href="#1-async-函数" class="headerlink" title="1.async 函数"></a>1.async 函数</h3><p>async是’异步’的简写，用于申明这个函数是异步的。<br>函数的返回值为<strong>Promise对象</strong>，promise对象的结果由async函数执行的<strong>返回值</strong>决定。</p>
 <h3 id="2-await-表达式"><a href="#2-await-表达式" class="headerlink" title="2.await 表达式"></a>2.await 表达式</h3><p>await相当于then的语法糖。<br>当await后面的表达式为promise，await 就忙起来了，它会阻塞后面的代码，等着 Promise 对象 resolve，得到的结果就是promise成功的value。如果右侧表达不是promise，得到的结果就是它本身。</p>
-<p><strong>注意：</strong></p>
-<ul>
-<li>await必须放在async函数里面</li>
-<li>await只能得到成功的结果，失败的结果需用try-catch</li>
-<li>try catch只能捕获同步代码，不能捕获异步代码，在async函数内，使用await可以捕获异步代码，这里实际上是异步代码变成了同步代码。</li>
-</ul>
+<p><strong>注意：</strong><br>1.await必须放在async函数里面<br>2.await只能得到成功的结果，失败的结果需用try-catch<br>3.try catch只能捕获同步代码，不能捕获异步代码，在async函数内，使用await可以捕获异步代码，这里实际上是异步代码变成了同步代码。</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -399,10 +377,10 @@ value=&gt;{
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/01/29/Cookie、LocalStorage、sessionStorage/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2019/08/01/MongoDB学习笔记/" data-enable="true">
+    <a href="/2020/07/28/promise链式调用顺序/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

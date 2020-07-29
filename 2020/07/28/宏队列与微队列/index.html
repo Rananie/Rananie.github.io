@@ -150,7 +150,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-07-24
+      <i class="fa fa-calendar"></i>2020-07-28
     </span>
     
       <span>
@@ -170,7 +170,7 @@
   <article class="passage-article">
     <p>异步执行的函数(回调函数)放入队列中执行。队列分为宏队列与微队列。</p>
 <p>宏队列：用来保存执行的宏任务（回调），比如：dom事件回调，ajax回调，定时器回调<br>微队列：用来保存执行的微任务（回调），比如：promise回调，mutation回调</p>
-<p>1.JS为单线程引擎，必须先执行所有的初始化同步任务代码。<br>2.每次取出第一个宏任务执行前，都要将所有的微任务执行完毕。</p>
+<p>1.JS为单线程引擎，必须先执行所有的初始化同步任务代码。<br>2.每次取出第一个宏任务<strong>执行前</strong>，都要将所有的微任务执行完毕。</p>
 <p>注:取到栈里执行，若有嵌套的情况如下列代码，执行第一个setTimeout回调时，把里面的微任务放入微队列，执行第二宏任务前，先将所有的微任务执行完毕。</p>
 <pre><code> setTimeout(()=&gt;{ //会立即放入宏队列
         console.log(&quot;timeout callback1()&quot;);
@@ -267,10 +267,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/07/24/箭头函数/" data-enable="true">
+    <a href="/2020/07/28/promise链式调用顺序/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/07/24/es6/" data-enable="true">
+    <a href="/2020/07/27/数组的方法/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

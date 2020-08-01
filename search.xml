@@ -24,15 +24,12 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[hexo遇见的坑]]></title>
-    <url>%2F2020%2F07%2F30%2Fhexo%E7%9A%84%E5%9D%91%2F</url>
-    <content type="text"><![CDATA[今天发现博客无法访问，报错是ERR_CONNECTION_REFUSED。开始慢慢寻找原因。 先重新上传了本地库，发现可以上传成功并且hexo s启动后本地可以访问。然后用手机流量可以访问博客。那么问题就到了PC端。ping了网址发现是127.0.0.1,检查了浏览器没开代理。通过朋友的帮助，在hosts文件中，添加185.199.111.153 biubiuins.github.io，让DNS在解析该域名时解析成前面的ip。]]></content>
+    <title><![CDATA[奇奇怪怪的坑们]]></title>
+    <url>%2F2020%2F07%2F30%2F%E5%A5%87%E5%A5%87%E6%80%AA%E6%80%AA%E7%9A%84%E5%9D%91%E4%BB%AC%2F</url>
+    <content type="text"><![CDATA[7.30 hexo拒绝访问今天发现博客无法访问，报错是ERR_CONNECTION_REFUSED。开始慢慢寻找原因。 先重新上传了本地库，发现可以上传成功并且hexo s启动后本地可以访问。然后用手机流量可以访问博客。那么问题就到了PC端。ping了网址发现是127.0.0.1,检查了浏览器没开代理。通过朋友的帮助，在hosts文件中，添加185.199.111.153 biubiuins.github.io，让DNS在解析该域名时解析成前面的ip。]]></content>
       <categories>
         <category>其他</category>
       </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[Promise]]></title>

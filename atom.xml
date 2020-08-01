@@ -73,28 +73,25 @@
   </entry>
   
   <entry>
-    <title>hexo遇见的坑</title>
-    <link href="http://yoursite.com/2020/07/30/hexo%E7%9A%84%E5%9D%91/"/>
-    <id>http://yoursite.com/2020/07/30/hexo的坑/</id>
+    <title>奇奇怪怪的坑们</title>
+    <link href="http://yoursite.com/2020/07/30/%E5%A5%87%E5%A5%87%E6%80%AA%E6%80%AA%E7%9A%84%E5%9D%91%E4%BB%AC/"/>
+    <id>http://yoursite.com/2020/07/30/奇奇怪怪的坑们/</id>
     <published>2020-07-30T08:56:46.000Z</published>
-    <updated>2020-07-30T10:51:03.801Z</updated>
+    <updated>2020-08-01T15:10:49.519Z</updated>
     
-    <content type="html"><![CDATA[<p>今天发现博客无法访问，报错是ERR_CONNECTION_REFUSED。开始慢慢寻找原因。</p><p>先重新上传了本地库，发现可以上传成功并且<code>hexo s</code>启动后本地可以访问。<br>然后用手机流量可以访问博客。那么问题就到了PC端。<br>ping了网址发现是127.0.0.1,检查了浏览器没开代理。<br>通过朋友的帮助，在hosts文件中，添加<code>185.199.111.153 biubiuins.github.io</code>，让DNS在解析该域名时解析成前面的ip。</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="7-30-hexo拒绝访问"><a href="#7-30-hexo拒绝访问" class="headerlink" title="7.30 hexo拒绝访问"></a>7.30 hexo拒绝访问</h2><p>今天发现博客无法访问，报错是ERR_CONNECTION_REFUSED。开始慢慢寻找原因。</p><p>先重新上传了本地库，发现可以上传成功并且<code>hexo s</code>启动后本地可以访问。<br>然后用手机流量可以访问博客。那么问题就到了PC端。<br>ping了网址发现是127.0.0.1,检查了浏览器没开代理。<br>通过朋友的帮助，在hosts文件中，添加<code>185.199.111.153 biubiuins.github.io</code>，让DNS在解析该域名时解析成前面的ip。</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;今天发现博客无法访问，报错是ERR_CONNECTION_REFUSED。开始慢慢寻找原因。&lt;/p&gt;
-&lt;p&gt;先重新上传了本地库，发现可以上传成功并且&lt;code&gt;hexo s&lt;/code&gt;启动后本地可以访问。&lt;br&gt;然后用手机流量可以访问博客。那么问题就到了PC端。&lt;br&gt;p
+        &lt;h2 id=&quot;7-30-hexo拒绝访问&quot;&gt;&lt;a href=&quot;#7-30-hexo拒绝访问&quot; class=&quot;headerlink&quot; title=&quot;7.30 hexo拒绝访问&quot;&gt;&lt;/a&gt;7.30 hexo拒绝访问&lt;/h2&gt;&lt;p&gt;今天发现博客无法访问，报错是ERR_CONNECTI
       
     
     </summary>
     
       <category term="其他" scheme="http://yoursite.com/categories/%E5%85%B6%E4%BB%96/"/>
     
-    
-      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
     
   </entry>
   

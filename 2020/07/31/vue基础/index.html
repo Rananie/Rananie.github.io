@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ranan" />
+  
+  
+  <title>vue基础 | Ranan的博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="前端,Vue,Vue," />
+  
+
+  
+  <meta name="description" content="Ranan的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Ranan",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 不能放弃思考</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://biubiuins.github.io/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-07-31
+    </span>
+    
+      <span>
+        | <a href="/categories/前端/"><i class="fa fa-bookmark"></i>前端</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    vue基础
+  </h1>
+  
+  <article class="passage-article">
+    <p><strong>创建vue实例</strong></p>
+<pre><code class="bash">//————html
+&lt;div id=&quot;app&quot;&gt;
+&lt;a href = &quot;msg&quot;&gt;&lt;/a&gt;
+&lt;button v-on:click=&quot;test&quot;&gt;test&lt;/button&gt;
+&lt;/div&gt;
+//——————js
+const vm =new Vue({  //配置对象:属性名是一些特定的名称
+  el:&quot;#app&quot; ,   //值是选择器 element 用来查找根元素 该根元素所覆盖的htlm+js为模板页面
+  data:{  //包含多个可变数据的对象,为模板页面提供数据
+    msg:&quot;xxx&quot;
+  },
+  //data还可以是函数，一定要有返回值
+  //data(){return{}}
+  methods:{ //包含n个事件回调函数
+    test(event){
+      event.target.innerHTML
+    }
+  }
+})
+</code></pre>
+<p>vm会自动拥有data中所有属性，页面中可以直接访问使用不用使用this<br>数据代理:由vm对象来<strong>代理</strong>对data中所有属性的操作</p>
+<p><strong>问题1：js以什么形式存在</strong><br>    指令:vue自定义标签属性 例子:v-model<br>    插值:动态显示数据，可以写表达式 例子:</p>
+<p>知识点1:强制数据绑定v-bind:<br>  为某个标签属性绑定动态data时，要在属性前面添加:</p>
+<p>知识点2:绑定事件监听v-on:<br>  简写@事件名=”回调函数” 也可以写成@事件名=”回调函数(参数)” methods里面常常放回调函数</p>
+<p><strong>Object.definePropertiy</strong></p>
+<p>该方法的存储器属性(setter,getter)可以实现简单的数据双向绑定</p>
+<pre><code>const p = {
+    firstName:&quot;A&quot;,
+    lastName:&quot;B&quot;
+    //还可以在这直接写get/set
+    //get fullName(){}
+}
+Object.defineProperty(p,&quot;fullName&quot;,{
+   //当读取属性值时自动调用(回调)，函数返回值作为属性值
+   get(){
+     //this是对象p
+        return this.firstName +&#39;-&#39;+ this.lastName       },
+   //当设置属性时自动调取,监视属性值的变化
+   set(value){
+        const names = value.split(&quot;-&quot;)
+        this.firstName = names[0]
+        this.lastName = name[1]
+   }
+})
+console.log(p.fullName);
+</code></pre><p><strong>computed</strong></p>
+<p>计算属性，通过已有数据(依赖数据)计算动态产生一个要显示的结果数据，相当于使用了属性的get方法。<br>执行的时机：<br>  1.初始显示第一次执行，得到初始值显示<br>  2.依赖数据发生改变就会再次调用。</p>
+<p>注意：所有vue控制的回调函数的this都是vm或者组件对象。</p>
+<pre><code>computed：{
+  //计算属性的套路
+ filterPersons(){
+    //1.得到依赖的数据
+    const {searchName,persons} = this
+    //2.进行计算处理，产生结果数据并返回
+    const newPersons = persons.filter(p =&gt; p.name.includes(searchName))
+    return newPersons
+    }
+}
+</code></pre><p><strong>问题2:如果页面中需要fullName多次渲染，是否computed里的fullName函数会执行多次？</strong></p>
+<p>答：不会执行多次，计算属性会先去缓存取，取不到在执行一次getter计算，计算的结果放入缓存。</p>
+<p><strong>问题3:用什么结构来缓存计算属性？</strong><br>用对象来缓存计算属性，对象的属性名永远是<strong>字符串</strong>。</p>
+<p><strong>getter和setter</strong><br>属性的set方法称为setter、属性的get方法称为getter,如果要自己设置get与set，那么该计算属性后面接对象。</p>
+<pre><code>computed：{
+  fulllName:{
+      get(){
+      return this.firstName +&#39;-&#39;+ this.lastName  
+      }
+      set(value){
+       const names = value.split(&quot;-&quot;)
+        this.firstName = names[0]
+        this.lastName = name[1]
+      }
+  }
+}
+</code></pre><p><strong>总结</strong><br>1.只用getter，计算属性就是一个函数<br>2.使用getter/setter，计算属性是一个包含geeter的setter的对象</p>
+<p><strong>watch监视</strong></p>
+<p>当监视的属性变化时自动调用，初始显示的时候不调用。</p>
+<pre><code>//用于监视vm的哪个属性的变化
+watch:{
+firstName(newValue,oldValue)=&gt;{
+//当firstName发生改变时自动调用
+}
+}
+</code></pre><p>深度监视:</p>
+<p><strong>class动态绑定/style动态绑定</strong></p>
+<p>动态绑定的class会和静态绑定的class合并。</p>
+<pre><code>//值为字符串 
+&lt;p :class=&quot;classA&quot;&gt;
+//动态绑定多个class
+&lt;p :class=&quot;{classA:true,classB:false}&quot;&gt;
+//hasA，hasB是data里面的变量，通常操作hasA，hasB变量的改变改变样式
+&lt;p :class=&quot;{classA:hasA,classB:hsaB}&quot;&gt;
+
+//style的值为对象
+&lt;p :style = &quot;{color:myColor,fontSize:mySize+&#39;px&#39;}&quot;&gt;
+</code></pre><p>使用场景:<br>值为字符串 –&gt; 类名不确定时使用<br>值为对象 –&gt; 类名确定，不确定是否有该类的样式</p>
+<p><strong>重点:HTML不区分大小写，所以HTML之中用连接线写法，而Js之中用驼峰写法</strong></p>
+<p><strong>条件渲染</strong></p>
+<p>v-if/v-else的标签二选一，</p>
+<p>v-show是通过改变标签的样式实现显示与隐藏的</p>
+<p><strong>v-for遍历</strong></p>
+<pre><code>&lt;li v-for = &quot;(p,index) in persons&quot; :key=&quot;p.id&quot;&gt;&lt;/li&gt;
+
+data:{ 
+ persons:[]
+},
+methods:{
+  updataP(index,newP){
+    //这种方法不会更新页面
+    //this.persons[index] = newP
+    //这种方法可以更新页面
+    this.persons[index].name = newP.age
+    this.persons.splice(index,1,newp)
+   }
+}
+</code></pre><p><strong>问题4：vue的数据绑定如何实现</strong><br>1.vue会监视data中所有层次的属性<br>2.对象中的属性数据通过添加set方法来实现监视<br>3.数组中的元素也实现了监视data的数据,重写数组一系列更新元素的方法。首先调用原生对应的方法对元素进行处理，再更新界面。</p>
+<p>重写的数组方法:push()、pop()、shift()、unshift()、splice()、sort()、reverse()</p>
+<blockquote>
+<p>在定义数据时，可以考虑根据状态赋值，如数组排序，比如有不排序，升序，降序三种状态，可以考虑用一个数字来表示该状态 0-不排序、1-升序、2-降序</p>
+</blockquote>
+<p><strong>事件处理</strong></p>
+<p>1.绑定监听</p>
+<p>当函数需要操作事件对象时，可以显示的传<code>$event</code></p>
+<pre><code>&lt;button @click=&quot;test(&#39;x&#39;,$event)&quot;&gt;&lt;/buuton&gt;
+</code></pre><p>2.事件修饰符</p>
+<p>阻止(prevent)事件的默认行为 / 停止(stop)事件冒泡 / once 只触发一次</p>
+<pre><code>&lt;button @click.prevent=&quot;test(&#39;x&#39;)&quot;&gt;&lt;/buuton&gt;
+</code></pre><p>3.按键修饰符</p>
+<p>@keyup.enter 表示回车按键起来时执行</p>
+<p>还可以自定义按键修饰符</p>
+<pre><code>Vue.config.keyCodes.f1 = 112
+//@key.f1=&quot;&quot;使用
+</code></pre>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/Vue/"><i class="fa fa-tags"></i>Vue</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2020/07/31/python/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2020/07/30/hexo的坑/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

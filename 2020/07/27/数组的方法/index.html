@@ -192,11 +192,11 @@
 <ul>
 <li>修改元素组</li>
 </ul>
-<h3 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h3><p>语法:array.sort()<br>对数组中的元素进行排序,默认按照Unicode编码进行排序，默认升序</p>
+<h3 id="sort"><a href="#sort" class="headerlink" title="sort()"></a>sort()</h3><p>语法:array.sort()<br>对数组中的元素进行排序,默认按照Unicode编码进行排序，默认<strong>升序</strong></p>
 <ul>
 <li>修改原数组</li>
 </ul>
-<p>指定排序的规则,浏览器将会分别使用数组中的元素作为实参去调用回调函数，回调函数需要定义两个形参。<br>浏览器根据回调函数的返回值来决定元素的顺序，返回值大于0则元素a、b交换位置<br>语法:array.sort(function(a,b){<br>    //a一定在b前面,比如升序<br>    return a&gt;b?1: 0<br>    //return a-b 更简单<br>})</p>
+<p>指定排序的规则,浏览器将会分别使用数组中的元素作为实参去调用回调函数，回调函数需要定义两个形参。<br>浏览器根据回调函数的返回值来决定元素的顺序，<br><strong>返回值大于0</strong>则元素a、b交换位置,其余不变<br>语法:array.sort(function(a,b){<br>    //a一定在b前面,比如升序<br>    return a&gt;b?1: 0<br>    //return a-b 更简单<br>})</p>
 <h2 id="数组的扩展"><a href="#数组的扩展" class="headerlink" title="数组的扩展"></a>数组的扩展</h2><p><strong>Array.from(v)</strong></p>
 <p>把v的伪数组(字符串也可)转换为真数组<br>类数组(伪数组)最基本的要求就是具有length属性的对象,该类数组对象的属性名必须为数值型或字符串型的数字。</p>
 <pre><code>let arrayLike = {
@@ -241,7 +241,7 @@ console.log(arr.flat())//输出[1,2,3,4,5,6,[7,8]]
 <li>不能中断</li>
 <li>对空数组不执行回调</li>
 </ul>
-<h3 id="Array-prototype-map"><a href="#Array-prototype-map" class="headerlink" title="Array.prototype.map()"></a>Array.prototype.map()</h3><p>语法: array.map(function(currentValue,index,arr), thisValue)</p>
+<h3 id="for-in-for-of"><a href="#for-in-for-of" class="headerlink" title="for-in/for-of"></a>for-in/for-of</h3><h3 id="Array-prototype-map"><a href="#Array-prototype-map" class="headerlink" title="Array.prototype.map()"></a>Array.prototype.map()</h3><p>语法: array.map(function(currentValue,index,arr), thisValue)</p>
 <p>按照原始数组元素顺序依次处理元素，结果放在一个新数组里返回。</p>
 <pre><code>/*------从接口得到数据------*/
 const users=res.items.map(item =&gt; ({
@@ -254,8 +254,13 @@ const users=res.items.map(item =&gt; ({
 <ul>
 <li>返回新数组，不改变原始数组。</li>
 </ul>
+<h3 id="for-of-for-in"><a href="#for-of-for-in" class="headerlink" title="for-of / for-in"></a>for-of / for-in</h3><p><code>for-of</code>不仅仅可以遍历数组，<strong>具有iterator接口的，都可以使用<code>for-of</code>进行遍历</strong></p>
+<pre><code>for (var value of arr) {
+      console.log(value); // 1,2,3
+}
+</code></pre><p>与<code>for-in</code>的区别：<br>1.for-in 获取的是<strong>键名</strong>，数组的键名是索引，for-of获取的是<strong>键值</strong><br>2.for-in 会遍历对象的整个原型链,性能非常差不推荐使用。</p>
 <h3 id="Array-prototype-filter"><a href="#Array-prototype-filter" class="headerlink" title="Array.prototype.filter()"></a>Array.prototype.filter()</h3><p>语法：array.filter(function(currentValue,index,arr), thisValue)</p>
-<p>创建一个新的数组，指定数组中符合条件的放入新数组。</p>
+<p>创建一个新的数组，指定数组中符合条件的元素放入新数组。</p>
 <p><strong>返回一个新数组，按照约定条件筛选数组元素时比较常用</strong></p>
 <pre><code>/*-----去重问题----*/
 var arr = [1, 2, 2, 3, 4, 5, 5, 6, 7, 7,8,8,0,8,6,3,4,56,2];
@@ -314,7 +319,7 @@ console.log(arr, sum);
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数组的方法"><span class="toc-text">数组的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#slice-与splice"><span class="toc-text">slice()与splice()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#concat"><span class="toc-text">concat()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#join"><span class="toc-text">join()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reverse"><span class="toc-text">reverse()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sort"><span class="toc-text">sort()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组的扩展"><span class="toc-text">数组的扩展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组的遍历"><span class="toc-text">数组的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Array-prototype-forEach"><span class="toc-text">Array.prototype.forEach()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Array-prototype-map"><span class="toc-text">Array.prototype.map()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Array-prototype-filter"><span class="toc-text">Array.prototype.filter()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#every-some"><span class="toc-text">every()/some()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reduce-reduceRight"><span class="toc-text">reduce()/reduceRight()</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数组的方法"><span class="toc-text">数组的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#slice-与splice"><span class="toc-text">slice()与splice()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#concat"><span class="toc-text">concat()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#join"><span class="toc-text">join()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reverse"><span class="toc-text">reverse()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sort"><span class="toc-text">sort()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组的扩展"><span class="toc-text">数组的扩展</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数组的遍历"><span class="toc-text">数组的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Array-prototype-forEach"><span class="toc-text">Array.prototype.forEach()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for-in-for-of"><span class="toc-text">for-in/for-of</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Array-prototype-map"><span class="toc-text">Array.prototype.map()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#for-of-for-in"><span class="toc-text">for-of / for-in</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Array-prototype-filter"><span class="toc-text">Array.prototype.filter()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#every-some"><span class="toc-text">every()/some()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#reduce-reduceRight"><span class="toc-text">reduce()/reduceRight()</span></a></li></ol></li></ol>
   </div>
 </aside>
   

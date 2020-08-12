@@ -214,6 +214,7 @@ return obj.currentStyle[style]
 </blockquote>
 <p>event.wheelDalta 获得滚轮的方向 正向上滚，负向下滚<br>event.target 触发事件的对象<br>event.keyCode 获取按键的编码 event.altKey/ctrlKey/shiftKey判断alt/ctrl/shift是否被按下</p>
 <p>onscroll 该事件会在元素的滚动条滚动时触发<br>onmousemove 该事件会在鼠标在元素中移动时被触发<br>onmousedown 该事件会在鼠标按下被触发<br>onmouseup 该事件会在鼠标弹上被触发<br>onwheel 该事件会在鼠标滚轮滚动时被触发</p>
+<p>onmouseenter/onmouseleave 与 onmouseover/onmouseout 区别是前面的一组移入子元素是不会触发的</p>
 <p>键盘事件一般绑定给可以获取焦点的对象或者是document<br>onkeydown 键盘按下触发，一直按着不松手会连续触发，<strong>在文本框中输入内容，属于onkeydown的默认行为</strong>根据此性质可以限定文本框内容输入的类型<br>onkeyup  按键被松开，不会连续触发</p>
 <p><strong>事件的冒泡</strong><br>所谓的冒泡指的是事件向上传递，当后代元素上的事件被触发时，其祖先元素的相同事件也会被触发。<br>在开发中大部分情况冒泡都是有用的，如果不希望发生事件冒泡可以通过事件对象取消冒泡<br>event.cancelBubble = true</p>
 <p><strong>事件的委派</strong><br>需求场景：给a标签绑点点击事件，后添加的a标签也有该绑定事件。<br>解决:可以尝试把时间绑定到元素共有的祖先元素。<br>事件委派利用了冒泡，从父元素到子元素</p>

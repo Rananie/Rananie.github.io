@@ -181,7 +181,10 @@
 </ul>
 </li>
 </ul>
+<p><strong>生产环境和开发环境</strong><br>使用生产环境:npm run build 实际用的webpack<br>在内存中进行编译打包，生成内存中的打包文件。<br>保存到本地，也就是在本地生成打包文件</p>
+<p>使用开发环境:npm run dev 实际用的webpack-dev-server<br>在内存中进行编译打包，生成内存中的打包文件。<br>启动服务器，运行内存中的打包文件，可以通过浏览器虚拟地址访问</p>
 <h3 id="开发环境"><a href="#开发环境" class="headerlink" title="开发环境"></a>开发环境</h3><p>示例：webpack.config.js</p>
+<p>webpack-dev-server 修改代码自动打包</p>
 <pre><code>/*
 开发环境配置，能让代码运行起来
 */
@@ -205,7 +208,10 @@ const HtmlWebpackPlugin =require(&quot;html-webpack-plugin&quot;);
 module.exports = {
     //webpack配置
     //入口起点
-    entry: &#39;./src/index.js&#39;,
+    entry: {
+        filename:static/js/[name].js,
+        path:path.resolve(__dirname.&#39;dist&#39;)
+    },
     //输出是对象
     output:{
         //输出文件名
@@ -284,8 +290,9 @@ module.exports = {
         //  new HtmlWebpackPlugin()
         //需求：需要有结构的HTML文件
         new HtmlWebpackPlugin({
-         //复制&quot;./src/index.html&quot;,并自动引入打包输出的所有资源（js/css）
-            template:&quot;./src/index.html&quot;
+         //复制&quot;index.html&quot;,并自动引入打包输出的所有资源（js/css）
+            template:&quot;index.html&quot;
+            path:&quot;index.html&quot;
         })
         //详细pulgins的配置
     ],
@@ -417,7 +424,7 @@ fix:true
 &quot;eslintConfig&quot;:{
 &quot;extends&quot;:&quot;airbnb-base&quot;
 }
-</code></pre><p>兼容性处理：babel-loader @babel/preset-env @babel/core<br>基本的js兼容性处理 –&gt; @babel/preset-env 问题：只能转换基本语法，promise不能<br>全部js兼容性处理 –&gt; @babel/polyfill 被弃用，体积还会变大。<br>需要做兼容行处理的就做：按需加载 –&gt;corejs</p>
+</code></pre><p>兼容性处理ES6：babel-loader @babel/preset-env @babel/core<br>基本的js兼容性处理 –&gt; @babel/preset-env 问题：只能转换基本语法，promise不能<br>全部js兼容性处理 –&gt; @babel/polyfill 被弃用，体积还会变大。<br>需要做兼容行处理的就做：按需加载 –&gt;corejs</p>
 <pre><code>{
 test:/\.js$/,
 //一定要排除
@@ -432,7 +439,7 @@ options:{
 npm i core-js -D
 //配置
 presets:[
-[&quot;@babel/preset-env&quot;,
+[&quot;@babel/preset-env&quot;, //预设包:包含多个常用插件的包
 {
 //按需加载
  useBuiltIns:&quot;usage&quot;,
@@ -465,6 +472,7 @@ minify:{
 }
 })
 </code></pre><h4 id="生产环境的基本配置"><a href="#生产环境的基本配置" class="headerlink" title="生产环境的基本配置"></a>生产环境的基本配置</h4><p>正常来讲，一个文件只能被一个loader处理，当一个文件要被多个loader处理，那么一定要指定loader执行的先后顺序:先执行eslint,在执行babel。</p>
+<p>配置vue的相关信息可以在vue官网文档查看，注意vue.esm.js文件的设置</p>
 <pre><code>const {resolve} = require(&quot;path&quot;)
 //用于将css从js中抽离成单独文件
 const MiniCssExtractPlugin = require(&quot;mini-css-extract-plugin&quot;)
@@ -543,7 +551,7 @@ module.exports={
                 loader: &quot;url-loader&quot;,
                 options: {
                     limit:8*1024,
-                    name:&quot;[hash:10].[ext]&quot;,
+                    name:&quot;[name].[hash:10].[ext]&quot;,
                     outputPath:&quot;imgs&quot;,
                     esModule:false
                 }

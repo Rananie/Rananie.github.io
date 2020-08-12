@@ -190,7 +190,7 @@ const vm =new Vue({  //配置对象:属性名是一些特定的名称
 })
 </code></pre>
 <p>vm会自动拥有data中所有属性，页面中可以直接访问使用不用使用this<br>数据代理:由vm对象来<strong>代理</strong>对data中所有属性的操作</p>
-<p><strong>问题1：js以什么形式存在</strong><br>    指令:vue自定义标签属性 例子:v-model<br>    插值:动态显示数据，可以写表达式 例子:</p>
+<p><strong>问题1：js以什么形式存在</strong><br>    指令:vue自定义标签属性 例子:v-model<br>    插值:动态显示数据，可以写表达式</p>
 <p>知识点1:强制数据绑定v-bind:<br>  为某个标签属性绑定动态data时，要在属性前面添加:</p>
 <p>知识点2:绑定事件监听v-on:<br>  简写@事件名=”回调函数” 也可以写成@事件名=”回调函数(参数)” methods里面常常放回调函数</p>
 <p><strong>Object.definePropertiy</strong></p>
@@ -245,15 +245,26 @@ console.log(p.fullName);
 }
 </code></pre><p><strong>总结</strong><br>1.只用getter，计算属性就是一个函数<br>2.使用getter/setter，计算属性是一个包含geeter的setter的对象</p>
 <p><strong>watch监视</strong></p>
-<p>当监视的属性变化时自动调用，初始显示的时候不调用。</p>
+<p>当监视的属性变化时自动调用，<strong>初始显示的时候不调用。</strong></p>
 <pre><code>//用于监视vm的哪个属性的变化
 watch:{
 firstName(newValue,oldValue)=&gt;{
 //当firstName发生改变时自动调用
+},
+//一般监视
+todos(){}
+}
+</code></pre><p>假设监视的todos是一个数组，数组内部发生变化，但todos数组在内存中存的是地址，地址并没有改变，这种监视叫做一般监视。<br>如果想要监视todos以及todos里面的数据变化，可以使用深度监视。</p>
+<p>深度监视:</p>
+<pre><code>watch:{
+todos:{
+  deep:true,  //深度监视
+  handler(value){
+    //监视的回调函数，value最新的todos值
+  }
 }
 }
-</code></pre><p>深度监视:</p>
-<p><strong>class动态绑定/style动态绑定</strong></p>
+</code></pre><p><strong>class动态绑定/style动态绑定</strong></p>
 <p>动态绑定的class会和静态绑定的class合并。</p>
 <pre><code>//值为字符串 
 &lt;p :class=&quot;classA&quot;&gt;
@@ -289,6 +300,9 @@ methods:{
 <blockquote>
 <p>在定义数据时，可以考虑根据状态赋值，如数组排序，比如有不排序，升序，降序三种状态，可以考虑用一个数字来表示该状态 0-不排序、1-升序、2-降序</p>
 </blockquote>
+<blockquote>
+<p>如果两个不同的事件回调函数里面操作大部分相同，也可以尝试参数用true/false来表示不同的事件</p>
+</blockquote>
 <p><strong>事件处理</strong></p>
 <p>1.绑定监听</p>
 <p>当函数需要操作事件对象时，可以显示的传<code>$event</code></p>
@@ -301,7 +315,84 @@ methods:{
 <p>还可以自定义按键修饰符</p>
 <pre><code>Vue.config.keyCodes.f1 = 112
 //@key.f1=&quot;&quot;使用
-</code></pre>
+</code></pre><p><strong>声明周期钩子(回调)函数</strong><br>钩子函数都是自己定义</p>
+<p>beforeCreate()</p>
+<p>在这两个回调之间，vue会实现<strong>数据代理</strong>，后面可以通过vm读取data中的数据。</p>
+<p>created()</p>
+<p>beforeMount() 在显示前执行一次</p>
+<p>这期间，会把之前模块中解析的内容批量替换el里的内容</p>
+<p>mounted() 在第一次显示之后执行1次,同一个组件对象只执行一次。</p>
+<p>这里的更新指的是<strong>页面更新</strong>,通常通过数据改变触发页面更新，也就是一下两个回调<strong>都发生在数据改变后</strong>，只不过一个页面还没有更新，一个页面更新完毕</p>
+<p>beforeUpdate() 读老页面<br>updated()  读新页面</p>
+<p>beforeDestroy() 销毁前执行1次</p>
+<p>常用的声明周期方法<br>created()/mounted() 常用于异步请求,发送ajax请求，启动定时器等异步任务<br>beforeDestory() 做收尾工作，清除定时器等</p>
+<p><strong>过渡和动画</strong></p>
+<p>transition标签，需要有过渡和动画的标签部分需要包裹在transition标签内。</p>
+<p><img src="/img/vue/动画.png"></p>
+<p>在x-enter-active里面写transition/animation样式，定义进入动画的过渡<br>在x-leave-active里面写transition/animation样式，定义离开动画的过渡</p>
+<pre><code>&lt;transition name:&quot;自定义过渡的动画名称如:fade&quot;&gt;
+...
+&lt;transition&gt;
+</code></pre><p><strong>过滤器</strong></p>
+<p>功能:对要显示的数据进行特定格式化后再显示，没有改变原有数据。<br>语法:</p>
+<pre><code>Vue.filter(filterName,function(value被处理的数据,formatStr传过来的值{return 显示的数})
+</code></pre><p>在html使用</p>
+<pre><code>{{xxx | filterName(formatStr)}}
+</code></pre><p><strong>常用内置指令</strong><br>指令的作用是操作标签</p>
+<p>v-if:如果为true，当前标签才会输出到页面<br>v-show:通过控制display样式来控制显示/隐藏<br>v-for:遍历数组/对象<br>v-on:绑定事件监听，简写@<br>v-model:双向数据绑定<br>ref:为某个元素/组件注册一个唯一标识，vue对象通过$refs属性访问这个元素/组件对象<br>v-html:更新元素的innerHTML，会解析标签<br>v-text:更新元素的textContent</p>
+<p>自定义标签</p>
+<p>1.注册全局指定</p>
+<pre><code>Vue.directive(&quot;指令名称如:xxx&quot;,function(el,binding){
+  //el:指令属性所在的标签元素对象
+  //binding:包含指令相关信息数据的对象，如指令名，指令值等
+})
+</code></pre><p>2.定义局部指令<br>指令在vue实例上的局部指令</p>
+<pre><code>new Vue({
+  directives:{
+  //&quot;xxx&quot;:function() ES6中省略fuction和冒号
+  &quot;xxx&quot;(el,binding){}
+  }
+})
+
+</code></pre><p><strong>插件</strong><br>每个插件对象都必须有一个install方法，该方法通过Vue.use(插件名)调用。<br>所以声明使用Vue插件，Vue.use(插件名)内部调用插件的install方法来安装插件。</p>
+<p><strong>单文件组件</strong></p>
+<p><strong>组件中的data必须用函数返回对象的形式</strong>,因为每个组件标签都会产生一个实例，如果直接会对象形式，每个组件就共享了data中的数据，而使用函数返回对象的形式，每个组件通过调用data函数使用独立的数据。</p>
+<p>保证对一个组件的多个实例对象的data对象不是共有的，而是各自的data对象。</p>
+<p>每个组件只能有一个<strong>根标签</strong>,一个组件对象就是一个小的vm，组件内回调函数的this是指向组件对象，模板中获取数据读取组件对象的对应属性值。</p>
+<p>单文件vue组件，后缀名为vue</p>
+<pre><code>&lt;template&gt;&lt;/template&gt;
+&lt;script&gt;
+//1.引入组件 import
+export default{
+  //声明接收属性，该属性在组件标签中传值
+  //接收的所有标签属性都会成功组件对象的属性
+  props:[]/{},
+
+  data(){
+    return{
+
+    }
+  },
+  methods:{},
+  watch:{},
+  //2.注册组件
+  components:{
+    //组件名
+  },
+  filters:{},
+  directive{},
+
+}
+&lt;/script&gt;
+&lt;style scoped&gt;&lt;/style&gt;
+</code></pre><p>引入组件时的<strong>问题:什么时候加./什么时候不加？</strong></p>
+<p>不加时直接用模块名引入的是第三方库，默认从node_modules里面找，如果是自己定义的组件不是第三方引用的则需要添加</p>
+<p>组件化编码的基本流程<br>1.拆分界面，抽取组件<br>2.编写静态组件<br>3.编写动态组件，初始化数据、动态显示初始化界面、实现与用户交互功能</p>
+<p>设置数据 -&gt; 类型，名称，位置如果是哪些组件用则交给共有的父组件。<br>数据的更新-&gt; data数据定义在哪个组件，更新数据的行为就定义在哪个组件，如果子组件要更新父组件的数据，调用父组件的更新函数来更新父组件的数据。一个组件接收属性数据不是用来直接修改，只是用来读取显示的。</p>
+<p><strong>问题：组件对象和vm之间的关系</strong></p>
+<p>所有组件对象的原型对象都是不同的vm,所有的vm都是Vue的实例、都有一个共同的原型对象。</p>
+<p><a href="">组件传值</a></p>
+
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">

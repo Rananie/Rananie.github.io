@@ -6,12 +6,12 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>Cookie、LocalStorage、sessionStorage的区别 | Ranan的博客</title>
+  <title>vue组件通信 | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="前端,JavaScript,JavaScript," />
+    <meta name="keywords" content="前端,Vue,Vue," />
   
 
   
@@ -150,7 +150,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-01-29
+      <i class="fa fa-calendar"></i>2020-08-06
     </span>
     
       <span>
@@ -164,40 +164,78 @@
     
   </div>
   <h1 class="passage-title">
-    Cookie、LocalStorage、sessionStorage的区别
+    vue组件通信
   </h1>
   
   <article class="passage-article">
-    <p>注意数组和对象要转化成JSON格式</p>
-<p><strong>主要区别</strong></p>
-<p><img src="/img/js/Cookie.png" width="70%"></p>
-<p><strong>方法</strong></p>
-<p>localStorage和sessionStorage都具有相同的操作方法，例如setItem、getItem和removeItem等</p>
-<p>setItem存储value</p>
-<pre><code class="bash">sessionStorage.setItem(&quot;key&quot;, &quot;value&quot;);
-localStorage.setItem(&quot;key&quot;, &quot;value&quot;);
-</code></pre>
-<p>getItem获取value</p>
-<pre><code class="bash">let value = sessionStorage.getItem(&quot;key&quot;);
-let key = localStorage.getItem(&quot;key&quot;);
-</code></pre>
-<p>removeItem删除key</p>
-<pre><code class="bash">sessionStorage.removeItem(&quot;key&quot;);
-localStorage.removeItem(&quot;key&quot;);
-</code></pre>
-<p>clear清除所有的key/value</p>
-<pre><code class="bash">sessionStorage.clear();
-localStorage.clear();
-</code></pre>
-<p>localStorage和sessionStorage的key和length属性实现遍历</p>
-<pre><code class="bash">let storage = window.localStorage;
-for(var i=0, len=storage.length; i&lt;len;i++){
-    var key = storage.key(i);
-    var value = storage.getItem(key);
-    console.log(key + &quot;=&quot; + value);
+    <p>一个组件接收属性数据不是用来直接修改，只是用来读取显示的，所以子组件最好不要直接修改父组件的值，通常通过set来设置。</p>
+<h2 id="父子组件传值"><a href="#父子组件传值" class="headerlink" title="父子组件传值"></a>父子组件传值</h2><h3 id="父传子"><a href="#父传子" class="headerlink" title="父传子"></a>父传子</h3><p>父组件传值</p>
+<p>通过动态绑定数据传值</p>
+<pre><code>&lt;Person :age =&quot;age&quot; /&gt;
+</code></pre><p>子组件接收<br>语法:props:[]/{}</p>
+<pre><code>//更详细的查看文档
+props:{
+    //简单的检测类型
+    height:Number,
+    //检测类型+其他验证
+    age:{
+        typr:Number,
+        default:0,
+        required:true
+    }
 }
-</code></pre>
+</code></pre><h4 id="slot"><a href="#slot" class="headerlink" title="slot"></a>slot</h4><p>父组件 -&gt; 子组件  <strong>带数据的标签结构</strong></p>
+<p>插槽相当于占位,本身不显示。<br>传给插槽的是静态页面,相关的数据等解析是在父组件解析好了再传给子组件的,所以需要的数据和方法都定义在父组件。</p>
+<pre><code>//子组件
+&lt;slot name=&quot;slotName&quot;&gt;如果父组件没传默认显示的内容&lt;/slot&gt;
 
+//父组件在子组件的标签体内传值
+&lt;Son&gt;
+    &lt;h1 slot=&quot;slotName&quot;&gt;
+    如果子组件有多个插槽，可以指定传给哪个插槽
+    &lt;/h1&gt;
+&lt;/Son&gt;
+</code></pre><h3 id="子传父"><a href="#子传父" class="headerlink" title="子传父"></a>子传父</h3><p>1.如果子组件要更新父组件的数据，调用父组件的更新函数来更新父组件的数据。</p>
+<p>自定义vue事件</p>
+<p>this.$emit(“myEvent”,value) 表示子组件向父组件分发myEvent事件</p>
+<p>父组件监听(以-命名)myEvent事件后，触发doSomething回调函数调用</p>
+<pre><code>//@ 绑定事件监听
+&lt;my-component @my-event=&quot;doSomething&quot;&gt;&lt;/my-component&gt;
+</code></pre><p>2.this.$emit(update: prop, “newPropVulue”)  </p>
+<p>使子组件向父组件传达：更新属性，并抛出新的属性值。</p>
+<p>从上述代码中可以看出首先更新的值要是从父组件中接收的，也就是props里面的值。其次父组件该值需要写成</p>
+<pre><code>  &lt;ProjectPagination :filter-data=&quot;filterData&quot; @update:filter-data=&quot;filterData=$event&quot;&gt;&lt;/ProjectPagination&gt;
+</code></pre><p>更简单的写法是<code>.sync</code>修饰符</p>
+<pre><code> &lt;ProjectPagination  :filter-data=&quot;filterData&quot; :filter-data.sync=&quot;filterData&quot;&gt;&lt;/ProjectPagination&gt;
+</code></pre><p><strong>注意:</strong><br>这里有一个Vue.sync修饰符与$emit(update:xxx)写法的坑</p>
+<p>使用.sync修饰符</p>
+<pre><code>//有效
+this.$emit(&quot;update:filterData&quot;, this.data.slice(0, val));
+//无效
+this.$emit(&quot;update:filter-Data&quot;, this.data.slice(0, val));
+</code></pre><p>不使用.sync修饰符</p>
+<pre><code>//无效
+this.$emit(&quot;update:filterData&quot;, this.data.slice(0, val));
+//有效
+this.$emit(&quot;update:filter-Data&quot;, this.data.slice(0, val));
+</code></pre><h2 id="兄弟组件传值"><a href="#兄弟组件传值" class="headerlink" title="兄弟组件传值"></a>兄弟组件传值</h2><p>所有组件对象的原型对象都是不同的vm,所有的vm都是Vue的实例、都有一个共同的原型对象。</p>
+<p>又根据这个特点，利用原型链实现子孙组件通信与兄弟组件通信</p>
+<p>用来分发事件以及绑定事件监听的全局对象被称为全局事件总线(Global Event Bus)</p>
+<pre><code>//在vue原型上创建一个全局事件总线对象，所有的组件都可以看见这个事件总线
+Vue.prototype.$globalEventBus = new Vue()
+//可以优化，不用再创建一个vue实例
+new Vue({ 
+  beforeCreate(){
+    Vue.prototype.$globalEventBus = this
+  }
+})
+
+//一个组件分发事件
+this.$globalEventBus.$emit(&quot;分发事件名&quot;,value)
+
+//一个组件进行事件监听
+this.$globalEventBus.$on(&quot;监听的事件名&quot;,function触发的回调函数)
+</code></pre>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -205,14 +243,14 @@ for(var i=0, len=storage.length; i&lt;len;i++){
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#父子组件传值"><span class="toc-text">父子组件传值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#父传子"><span class="toc-text">父传子</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#slot"><span class="toc-text">slot</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#子传父"><span class="toc-text">子传父</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#兄弟组件传值"><span class="toc-text">兄弟组件传值</span></a></li></ol>
   </div>
 </aside>
   
   
     <div class="passage-tags">
      
-      <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
+      <a href="/tags/Vue/"><i class="fa fa-tags"></i>Vue</a>
     
     </div>
   
@@ -263,10 +301,10 @@ for(var i=0, len=storage.length; i&lt;len;i++){
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/01/29/软件超市项目后台管理界面开发流程/" data-enable="true">
+    <a href="/2020/08/12/vue-router/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2019/08/01/MongoDB学习笔记/" data-enable="true">
+    <a href="/2020/07/31/python/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

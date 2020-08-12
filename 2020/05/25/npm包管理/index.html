@@ -184,7 +184,7 @@
 <li>可以直接在命令行里使用</li>
 </ol>
 <h3 id="问题2：-d与-s的区别"><a href="#问题2：-d与-s的区别" class="headerlink" title="问题2：-d与-s的区别"></a>问题2：-d与-s的区别</h3><p>npm install -d 就是npm install –save-dev<br>npm insatll -s 就是npm install –save</p>
-<p>我们在使用npm install 安装模块或插件的时候，上述两种命令都可以把他们写入到 package.json 文件里面去。<br>首先dev是develop的简写，-save-dev安装的插件，被写入到 devDependencies 域里面去，而使用 –save 安装的插件，则是被写入到 dependencies区块里面去。devDependencies 里面的插件只用于开发环境，不用于生产环境，而dependencies是需要发布到生产环境的。</p>
+<p>我们在使用npm install 安装模块或插件的时候，上述两种命令都可以把他们写入到 package.json 文件里面去。<br>首先dev是develop的简写，-save-dev安装的插件，被写入到 devDependencies 域里面去，<br>而使用 –save 或者默认没写 安装的插件，则是被写入到 dependencies区块里面去。devDependencies 里面的插件只用于开发环境，不用于生产环境，而dependencies是生产环境也就是项目运行在服务器需要的插件。</p>
 <p>例子：比如我们写一个项目要依赖于jQuery，没有这个包的依赖运行就会报错，这时候就把这个依赖写入dependencies ；而我们使用的一些<strong>构建工具比如glup、webpack这些只是在开发中使用的包</strong>，上线以后就和他们没关系了，所以将它写入devDependencies。</p>
 <h3 id="问题3：什么是npx"><a href="#问题3：什么是npx" class="headerlink" title="问题3：什么是npx"></a>问题3：什么是npx</h3><p>npm从5.2版本，增加了npx命令。npx主要作用是调用项目内部安装的模块和方法。<br>现在的工具包一般都安装在局部，而不是全局。</p>
 <pre><code>//安装在开发环境的webpack-dev-server
@@ -194,6 +194,7 @@ npx webpack-dev-server
 </code></pre><p>npx的原理是运行的时候会到<strong>node_modules/.bin路径和path里面，查看命令是否存在</strong>。</p>
 <p>注意：Bash内置的命令不在Path中，所以类似cd的Bash命令不可以使用npx。</p>
 <p>npx还可以运行一些需要全局安装的依赖（但不安装该依赖），npx将会把该依赖下载到一个临时目录，使用以后再删除，<strong>所以可以避免全局安装模块。</strong></p>
+<p>可以在package.json中scripts属性中配置命令如”build”:webpack ,npm run build 实现npx同样的效果。</p>
 <p>–no-install与–ignore-existing参数</p>
 <p>–no-install:可以时npx强制使用本地模块，不下载远程模块，所以如果本地不存在该模块，就会报错。<br>–ignore-existing:可以使npx强制安装使用远程模块，忽略本地的同名模块。</p>
 <p>-p参数用于指定npx所要安装的模块。</p>

@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>vue-router | Ranan的博客</title>
+  <title>vue-router学习笔记 | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -164,7 +164,7 @@
     
   </div>
   <h1 class="passage-title">
-    vue-router
+    vue-router学习笔记
   </h1>
   
   <article class="passage-article">
@@ -211,15 +211,20 @@ new Vue({
         children:[
             {   //动态路由
                 path:&quot;/home/news/detail/:id&quot;
+            },
+            {   
+                //进入/home后自动显示当前的子路由
+                path:&quot;&quot;,
+                redirect:&quot;/home/news&quot;
             }
         ]
     ]  
     }
 </code></pre><p><strong>path加/和不加/有什么区别</strong></p>
 <p>/xx就是根路径。下面代码去到children是/#/child而不是/#/fa/child。而不以斜杠开头的，都会被当成普通的字符串拼到当前路径的后面。</p>
-<pre><code>path: /fa
+<pre><code>path: &quot;/fa&quot;
 children: {
-    path: /child
+    path: &quot;/child&quot;
 }
 </code></pre><p><strong>路径参数</strong><br>1.query参数，跟在路径?后面<br>2.params参数</p>
 <p><strong>动态路由及监视</strong></p>
@@ -234,9 +239,72 @@ children: {
 <p><strong>编程式路由导航</strong></p>
 <p>声明式:router-link<br>编程式:$router.push()/replace()</p>
 <p>push往栈中放元素，repalce是替换栈顶元素。</p>
-<h2 id="router-link"><a href="#router-link" class="headerlink" title="router-link"></a>router-link</h2><p>router-link-active 表示当前被选中的link的类名</p>
-<p><strong>router-link与a标签的区别</strong><br><code>a</code>点击之后，会发送普通的HTTP请求,刷新页面。<br>路由链接点击后不会发送请求，不会刷新页面会局部更新组件。</p>
+<p><strong>命名路由</strong></p>
+<pre><code> path:&quot;/home&quot;,
+ component:
+ redirect: //重定向路由
+ name:&quot;home&quot;
+</code></pre><p>通过name关键字对该路由进行命名，在<code>router-link</code>中的路径可以直接使用命名路由<code>:to:&quot;{name:home,params:{id}}&quot;</code>来使用,第一个表示跳转之后的路由，第二个表示传递该路由的参数，这种写法也可以使用在编程式路由导航之中。</p>
+<p><strong>props</strong></p>
+<p>可以将路由参数映射成props<br>在路径配置中设置props之后，会自动把接收的parmas参数以标签属性传入路由组件</p>
+<pre><code>// 之前通过$route来获取参数
+ID：{{$route.params.id}}
 
+//将路由参数映射成props
+props:[&quot;id&quot;]
+
+routes:[
+    // 在路径中设置props之后，会自动把接收的parmas参数以标签属性传入路由组件
+    //布尔写法
+    {path:&#39;/user/:id&#39;,props:true}
+    //函数写法,可以获取query参数
+    {
+     path:&#39;/user/:id&#39;,
+     //函数返回的对象中的所有属性都会以标签属性传入组件中
+     props:(route) =&gt; ({
+         id:route.params.id,
+         name:route.query.name
+     })
+    }
+]
+</code></pre><p><strong>router-link</strong></p>
+<p>router-link-active 表示当前被选中的link的类名</p>
+<p><strong>router-link与a标签的区别</strong><br><code>a</code>点击之后，会发送普通的HTTP请求,刷新页面。<br>路由链接点击后不会发送请求，不会刷新页面会局部更新组件。</p>
+<h3 id="HTML5-history模式"><a href="#HTML5-history模式" class="headerlink" title="HTML5 history模式"></a>HTML5 history模式</h3><pre><code>const router = new VueRouter({
+    mode:&quot;history&quot;,
+    //应用中所有路由
+    routes:[...]
+})
+</code></pre><p><strong>history模式与history模式</strong></p>
+<p>hash模式<br>    路径:<a href="http://localhost:8000/#/home" target="_blank" rel="noopener">http://localhost:8000/#/home</a><br>    发送请求的路径:<a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a><br>    响应:返回index页面 -&gt; path(/home)被解析为前台路由路径</p>
+<p>hash模式无论在什么路径下请求的都是根路径，#之后的路径发请求的时候<strong>不会携带</strong>。</p>
+<p>history模式<br>    路径:<a href="http://localhost:8000/home" target="_blank" rel="noopener">http://localhost:8000/home</a><br>    发送请求的路径:<a href="http://localhost:8000/home" target="_blank" rel="noopener">http://localhost:8000/home</a><br>    响应: 404错误<br>    希望: 如果没有对应的资源，返回index页面 -&gt; path(/home)被解析为前台路由路径<br>    解决办法:添加配置<br>            devServer:true,<br>            output:publicPath:”/“</p>
+<pre><code>//webpack.config.js
+module.exports = {
+    //开发服务器配置
+    devServer:{
+        //更详细的可以看文档
+        //fallback：planB的意思
+        histortApiFallback:true
+    }
+    //可能还需要配置出口的publicPath:&quot;/&quot;，引入打包文件的路径左侧以/开头
+}
+
+</code></pre><h3 id="缓存路由组件keep-alive"><a href="#缓存路由组件keep-alive" class="headerlink" title="缓存路由组件keep-alive"></a>缓存路由组件keep-alive</h3><p>路由组件对象在访问对应路径的时候创建，默认情况下，切换到其他路由对象会死亡释放，再切换回来是重新创建的组件对象</p>
+<p><code>&lt;keep-alive&gt;</code>能在组件切换的过程中将状态保留在内存中，防止重复渲染DOM。</p>
+<p>设置了keepAlive缓存的组件：</p>
+<ol>
+<li>第一次进入：beforeRouterEnter -&gt;created-&gt;…-&gt;activated-&gt;…-&gt;deactivated</li>
+<li>后续进入时：beforeRouterEnter -&gt;activated-&gt;deactivated</li>
+<li><code>activated</code>和<code>deactivated</code>仅在keepAlive缓存的组件里被激活<br>只有第一次进入该组件时，才会走created钩子，而需要缓存的组件中activated是每次都会走的钩子函数。</li>
+</ol>
+<p>属性<br>1.include: 字符串或正则表达式。只有匹配的组件会被缓存。<br>2.exclude: 字符串或正则表达式。任何匹配的组件都不会被缓存。</p>
+<pre><code>// 需要对组件对象进行name命名
+
+&lt;keepAlive exclude=&quot;组件的name名&quot;&gt;
+
+&lt;/keepAlive&gt;
+</code></pre>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -244,7 +312,7 @@ children: {
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#路由配置"><span class="toc-text">路由配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#router-link"><span class="toc-text">router-link</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#路由配置"><span class="toc-text">路由配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTML5-history模式"><span class="toc-text">HTML5 history模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缓存路由组件keep-alive"><span class="toc-text">缓存路由组件keep-alive</span></a></li></ol></li></ol>
   </div>
 </aside>
   
@@ -302,7 +370,7 @@ children: {
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2020/08/13/js常用操作总结/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
     <a href="/2020/08/06/vue组件通信/" data-enable="true">

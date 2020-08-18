@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>vuex | Ranan的博客</title>
+  <title>vuex学习笔记 | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -150,7 +150,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2018-11-11
+      <i class="fa fa-calendar"></i>2020-08-18
     </span>
     
       <span>
@@ -164,35 +164,74 @@
     
   </div>
   <h1 class="passage-title">
-    vuex
+    vuex学习笔记
   </h1>
   
   <article class="passage-article">
-    <h1 id="vuex"><a href="#vuex" class="headerlink" title="vuex"></a>vuex</h1><p>主要是状态管理，将数据统一管理(state)</p>
-<p> <img src="/img/vue/liucheng.jpg" alt="流程图"></p>
-<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><ul>
-<li>状态对象 stat</li>
-<li>操作state 直接更新state的多个方法对象 mutations</li>
-<li>操作mutations 间接更新state的多个方法对象 actions</li>
-<li>包含多个基于state的getter计算属性的对象 getters</li>
-<li>包含n个mutations的type名称常量 mutations-type</li>
-</ul>
-<h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><pre><code class="js">import Vuex from &#39;vuex&#39;
+    <p><a href="/img/vue/liucheng.jpg">流程图</a></p>
+<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><pre><code class="js">//store/index.js
+/*
+vuex最核心的管理对象模块
+*/
+import Vue from &#39;vue&#39;
+import Vuex from &#39;vuex&#39;
 Vue.use(Vuex)
-</code></pre>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>共享的数据</p>
-<pre><code>const state={};
-</code></pre><p>建立统一数据容器，唯一的容器</p>
-<pre><code>let store = new Vuex.Store({
-    state
+//这部分可以单独写成一个文件，然后通过import引入
+const state = {}
+const mutations = {
+    FN(state){
+      //state状态更新  
+    }
+}
+const actions = {
+    fn({commit,state}){
+        commit(&quot;FN&quot;)
+    }
+}
+//依赖state里面的属性，计算生成的属性写在getters里面
+const getters = {
+    xxx(state){
+        //计算
+    }
+}
+
+//建立统一数据容器，唯一的容器
+let store = new Vuex.Store({
+    state,
+    mutations,
+    actions,
+    getters
 })
-</code></pre><p>store(容器)注册到实例上，main.js里面，所有的组件都会有一个属性this.$store</p>
-<pre><code>new Vue({
+</code></pre>
+<ul>
+<li>stat:状态对象 </li>
+<li>mutations:<ul>
+<li>操作state,直接更新state的多个方法对象</li>
+<li>只操作state,若组件中只需要修改state无异步无逻辑操作，可以直接操作mutations</li>
+</ul>
+</li>
+<li>actions<ul>
+<li>commit–&gt; 操作mutations 间接更新state的多个方法对象</li>
+<li>异步操作、逻辑代码处理、发送请求 </li>
+</ul>
+</li>
+<li>getters:包含多个基于state的getter计算属性的对象 </li>
+<li>mutations-type:包含n个mutations的type名称常量 </li>
+</ul>
+<p>store 对象中的属性<br>1.state 包含所有state数据的对象<br>2.getters 包含所有getter计算属性的对象<br>3.dispatch(actionName,data) 触发action调用<br>4.commit(mutationName,data) 触发mutation调用</p>
+<p>store(容器)注册到实例上，main.js里面，所有的组件都会有一个属性$store</p>
+<pre><code class="js">import store from &#39;&#39;
+new Vue({
 store,
 })
-</code></pre><p>在组件中使用，加不加this都一样</p>
-<pre><code>{{this.$store.state.XXX}}
-</code></pre><h2 id="state-单向数据流"><a href="#state-单向数据流" class="headerlink" title="state(单向数据流)"></a>state(单向数据流)</h2><p> 注意,在组件中最好不要直接更改共享的数据，共享的数据仅仅给组件染</p>
+
+//----------组件对象中
+//在组件中使用
+{{$store.state.XXX}}
+//在js中使用
+this.$store.xxx
+</code></pre>
+<h2 id="state-单向数据流"><a href="#state-单向数据流" class="headerlink" title="state(单向数据流)"></a>state(单向数据流)</h2><p> 注意,在组件中最好不要直接更改共享的数据，共享的数据仅仅给组件染</p>
 <h2 id="mutation"><a href="#mutation" class="headerlink" title="mutation"></a>mutation</h2><p> 通过mutation(管理员)来更改状态，可以在store里面设置成严格模式<br> <code>strict：true</code>，mutation不支持异步</p>
 <ol>
 <li>告诉mutations需要更改,mutations相当于methods<pre><code class="js">const mutations={
@@ -299,7 +338,7 @@ commit(RECEIVE_ADDRESS, {address: result.data})
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#vuex"><span class="toc-text">vuex</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#模块"><span class="toc-text">模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#引入"><span class="toc-text">引入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#state-单向数据流"><span class="toc-text">state(单向数据流)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mutation"><span class="toc-text">mutation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插件"><span class="toc-text">插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整理"><span class="toc-text">整理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#getters"><span class="toc-text">getters</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#actions"><span class="toc-text">actions</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本使用"><span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#state-单向数据流"><span class="toc-text">state(单向数据流)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mutation"><span class="toc-text">mutation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插件"><span class="toc-text">插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整理"><span class="toc-text">整理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#getters"><span class="toc-text">getters</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#actions"><span class="toc-text">actions</span></a></li></ol>
   </div>
 </aside>
   
@@ -357,10 +396,10 @@ commit(RECEIVE_ADDRESS, {address: result.data})
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2018/12/09/vuex流程总结/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2020/08/13/js常用操作总结/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

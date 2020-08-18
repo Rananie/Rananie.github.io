@@ -313,11 +313,13 @@ console.log(obj.name, obj.age) // 张三, 18
         obj.val1 = oInput1.value;
     }, false)
 &lt;/script&gt;
-</code></pre><h4 id="get-set-propertyName"><a href="#get-set-propertyName" class="headerlink" title="get/set propertyName(){}"></a>get/set propertyName(){}</h4><p>对象本身的两个方法，用法和上面的get/set一样</p>
+</code></pre><p><strong>get/set propertyName(){}</strong></p>
+<p>对象本身的两个方法，用法和上面的get/set一样</p>
 <pre><code>let obj = {firstName:&quot;xx&quot;,lastName:&quot;xx&quot;, get fullName(){
 return this.firstName+ this.lastName
 }}
-</code></pre>
+</code></pre><p><strong>判断对象是否是数组/对象的元素/属性</strong><br>格式： 变量 in 对象/数组<br>当是数组时，变量指的是索引(不常用)<br>当是对象时，变量指的是对象的属性名</p>
+
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -325,7 +327,7 @@ return this.firstName+ this.lastName
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的扩展属性"><span class="toc-text">对象的扩展属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#get-set-propertyName"><span class="toc-text">get/set propertyName(){}</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#对象的扩展属性"><span class="toc-text">对象的扩展属性</span></a></li></ol>
   </div>
 </aside>
   

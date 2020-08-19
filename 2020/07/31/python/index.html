@@ -437,12 +437,24 @@ def say_hello():
     代码块
 # 执行的结果是被装饰器装饰后的结果  
 say_hello()    
-</code></pre><h2 id="可变对象"><a href="#可变对象" class="headerlink" title="可变对象"></a>可变对象</h2><p>变量中保存的对象id，只有在为变量重新赋值才会改变。<br>可变对象指的是对象的值可变<br>列表中的对象改变，该改变的是值，并没有重新给列表赋值</p>
+</code></pre><p><strong>可变对象</strong></p>
+<p>列表、字典</p>
+<p>变量中保存的对象id，只有在为变量重新赋值才会改变。<br>可变对象指的是对象的值可变<br>列表中的对象改变，该改变的是值，并没有重新给列表赋值</p>
 <pre><code># 改对象
 a[0] = 10
 # 改变量
 a = [1,2,3]
-</code></pre><h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><p>time()可以用来获取当前的时间，返回的单位是秒</p>
+</code></pre><h2 id="对象Object"><a href="#对象Object" class="headerlink" title="对象Object"></a>对象Object</h2><p>对象由三部分组成<br>1.对象的标识，不可变(id)<br>2.对象的类型，不可变(type)<br>3.对象的值(value)</p>
+<p><strong>面向对象</strong><br>面向对象的语言就是语言中的所有操作都是通过对象来进行的</p>
+<h3 id="类class"><a href="#类class" class="headerlink" title="类class"></a>类class</h3><pre><code># class 类名([父类]):
+#    代码块
+class MyClass():
+    pass
+# mc为类Myclass的实例    
+mc = MyClass()
+</code></pre><p><strong>isinstance()函数</strong></p>
+<p>isinstance(mc,MyClass) 用来检查mc(第一个参数)是否是MyClass(第二个参数)的实例，返回布尔值</p>
+<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><p>time()可以用来获取当前的时间，返回的单位是秒</p>
 <pre><code>from time import *
 begin = time()  
 </code></pre>
@@ -453,7 +465,7 @@ begin = time()
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础"><span class="toc-text">基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符-操作符"><span class="toc-text">运算符(操作符)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程控制语句"><span class="toc-text">流程控制语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环语句"><span class="toc-text">循环语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#序列"><span class="toc-text">序列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#列表"><span class="toc-text">列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#序列-sequence"><span class="toc-text">序列(sequence)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元组tuple"><span class="toc-text">元组tuple</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典-dict"><span class="toc-text">字典 dict</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合set"><span class="toc-text">集合set</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数-function"><span class="toc-text">函数 function</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#可变对象"><span class="toc-text">可变对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模块"><span class="toc-text">模块</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础"><span class="toc-text">基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符-操作符"><span class="toc-text">运算符(操作符)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程控制语句"><span class="toc-text">流程控制语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环语句"><span class="toc-text">循环语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#序列"><span class="toc-text">序列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#列表"><span class="toc-text">列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#序列-sequence"><span class="toc-text">序列(sequence)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元组tuple"><span class="toc-text">元组tuple</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典-dict"><span class="toc-text">字典 dict</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合set"><span class="toc-text">集合set</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数-function"><span class="toc-text">函数 function</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象Object"><span class="toc-text">对象Object</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类class"><span class="toc-text">类class</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模块"><span class="toc-text">模块</span></a></li></ol>
   </div>
 </aside>
   

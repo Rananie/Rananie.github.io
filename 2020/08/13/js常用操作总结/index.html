@@ -171,12 +171,28 @@
     <h2 id="判断对象是否是数组-对象的元素-属性"><a href="#判断对象是否是数组-对象的元素-属性" class="headerlink" title="判断对象是否是数组/对象的元素/属性"></a>判断对象是否是数组/对象的元素/属性</h2><p><strong>(常用于对象) in</strong></p>
 <p>格式： 变量 in 对象/数组<br>当是数组时，变量指的是索引(不常用)<br>当是对象时，变量指的是对象的属性名</p>
 <p><strong>(对象)Object.prototype.hasOwnProperty(value)</strong></p>
-<p>格式:object.hasOwnProperty(value)<br>该方法只能判断字右属性是否存在，对于继承属性会返回false</p>
+<p>格式:object.hasOwnProperty(value)<br>该方法只能判断对象自身属性是否存在，对于继承属性会返回false</p>
 <p><strong>(常用于数组和字符串) Array.prototype.includes(value)</strong></p>
 <p>格式:array/string.includes(value)</p>
 <p>返回值为布尔值。<br>以前判断用indexOf返回的是数字。</p>
 <p><strong>(常用于数组和字符串) Array.prototype.indexOf(value)/lastIndexOf(value)</strong></p>
 <p>返回value在数组中出现的第一个下标和最后一下下标，没有出现则返回-1<br>应用场景：<br>两个方法结合判断下标是否相等，可以用来判断数组中唯一出现的值</p>
+<h2 id="将伪数组转化成真数组"><a href="#将伪数组转化成真数组" class="headerlink" title="将伪数组转化成真数组"></a>将伪数组转化成真数组</h2><p>使用场景:所有dom元素获取的标签都是<strong>伪数组</strong>,当需要对伪数组进行遍历的时候就需要转化成真数组。</p>
+<p>伪数组:最基本的要求就是具有<strong>length属性的对象</strong>,length属性的值为数字下标的个数,对象的属性名必须为数值型或字符串型的数字。</p>
+<pre><code>obj={
+    &quot;0&quot;:&quot;zhang&quot;,
+    &quot;1&quot;:18,
+    length:2
+</code></pre><p><strong>Array.from(lis)</strong></p>
+<p>此方法是ES6的语法</p>
+<p>返回一个真数组，第一个参数为伪数组,还可以接受第二个参数，作用类似于数组的map方法，用来对每个元素进行处理，将处理后的值放入返回的数组。</p>
+<p><strong>扩展运算符</strong></p>
+<p>ES6的语法</p>
+<pre><code>let newArr= [...obj]
+</code></pre><p><strong>[].slice.call(lis)</strong></p>
+<p>此方法是ES5的语法</p>
+<p>[].slice.call(obj) = Array.protype.slice.call(obj)</p>
+<p>[].slice()  slice会通过索引位置获取新的数组，该方法不会修改原数组，只是返回一个新的子数组。没传参数相当于返回一个浅拷贝。该方法内部是通过for循环和length结合实现的，可以改变为伪数组调用<br>call会把this的指向改为传进去的obj，call()会立即调用slice函数<br>此方法会让obj/伪数组拥有slice()方法且立即调用该方法</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -185,7 +201,7 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#判断对象是否是数组-对象的元素-属性"><span class="toc-text">判断对象是否是数组/对象的元素/属性</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#判断对象是否是数组-对象的元素-属性"><span class="toc-text">判断对象是否是数组/对象的元素/属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#将伪数组转化成真数组"><span class="toc-text">将伪数组转化成真数组</span></a></li></ol>
   </div>
 </aside>
   

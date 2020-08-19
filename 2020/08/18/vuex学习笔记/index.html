@@ -168,7 +168,7 @@
   </h1>
   
   <article class="passage-article">
-    <p><a href="/img/vue/liucheng.jpg">流程图</a></p>
+    <p><a href="/img/vue/流程.png">流程图</a></p>
 <h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><pre><code class="js">//store/index.js
 /*
 vuex最核心的管理对象模块
@@ -231,105 +231,66 @@ store,
 //在js中使用
 this.$store.xxx
 </code></pre>
-<h2 id="state-单向数据流"><a href="#state-单向数据流" class="headerlink" title="state(单向数据流)"></a>state(单向数据流)</h2><p> 注意,在组件中最好不要直接更改共享的数据，共享的数据仅仅给组件染</p>
-<h2 id="mutation"><a href="#mutation" class="headerlink" title="mutation"></a>mutation</h2><p> 通过mutation(管理员)来更改状态，可以在store里面设置成严格模式<br> <code>strict：true</code>，mutation不支持异步</p>
-<ol>
-<li>告诉mutations需要更改,mutations相当于methods<pre><code class="js">const mutations={
-    add(state,count){
-        //state是自动放入的，默认指的就是当前的state
-        //操作state的属性
-        state.XXX +=count
+<h3 id="使用map函数简化store使用"><a href="#使用map函数简化store使用" class="headerlink" title="使用map函数简化store使用"></a>使用map函数简化store使用</h3><p>map函数，参数是数组，返回值为对象。<br>使用的前提是计算属性/方法名等要和store里面的名字一致。</p>
+<pre><code>import {mapState,mapGetters,mapMutations,mapActions} from &quot;vuex&quot;
+//常用mapState，mapGetters
+computer:{
+    count(){
+        return this.$store.state.count
+    }
+    //使用map函数
+    ...mapState([&#39;count&#39;]) //返回值{count(){return this.$store.state[&#39;count&#39;]}},...解构出来
+    ...mapGetters([&#39;evenOrOdd&#39;])//返回值{evenOrOdd(){return this.$store.getters[&#39;evenOrOdd&#39;]}},...解构出来
+}
+methods:{
+    increment(){
+        this.$store.commit(&#39;INCREMENT&#39;)
+    }
+    //使用map函数写法
+    ...mapMutations({increment:&#39;INCREMENT&#39;})
+}
+</code></pre><h3 id="拆分文件"><a href="#拆分文件" class="headerlink" title="拆分文件"></a>拆分文件</h3><p>store/index.js  vuex最核心的管理对象store</p>
+<pre><code>import Vue from &#39;vue&#39;
+import Vuex from &#39;vuex&#39;
+import state .....  //引入state,getters等文件
+
+export default new Vuex.Store({
+  state,
+  mutations,
+  actions,
+  getters
+})
+//此文件在项目根目录index.js里面进入store,并在Vue中注册store，让所以组件都能通过$store看到store对象
+</code></pre><p>store/state.js</p>
+<p>store/mutations-types 包含n个mutation函数名的常量模块</p>
+<pre><code>export const REQ_SUCCESS = &#39;req_success&#39;
+</code></pre><p>store/mutations.js  一个包含n个用于直接更新状态数据的方法的对象模块</p>
+<pre><code>
+import {REQ_SUCCESS} from &#39;./mutation-types&#39;
+export default{
+    //直接使用REQ_SUCCESS被解析成&#39;REQ_SUCCESS&#39;
+
+    [REQ_SUCCESS](state,y){
+           state.xxx = true
+           state.yyy = y  //y是从action里接收的数据
     }
 }
-let store = new Vuex.Store({
-state，
-mutations,
-strict：true
-})
-</code></pre>
-</li>
-<li>组件通过mutations提交,第一个参数是与mutatioons里面的方法绑定，第二个参数是自定义参数<pre><code>this.$store.commit(&#39;add&#39;,2)
-</code></pre></li>
-</ol>
-<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><p>打印日志</p>
-<pre><code>import logger from &#39;vuex/dist/logger&#39;
-const store = new Vuex.store({
-    plugins:[logger()]
-})
-</code></pre><h2 id="整理"><a href="#整理" class="headerlink" title="整理"></a>整理</h2><p>src下面创建一个store文件\index.js</p>
-<pre><code class="js">import Vue from &#39;vue&#39;
-import Vuex from &#39;vuex&#39;
-Vue.use(Vuex)
-import logger from &#39;vuex/dist/logger&#39;
-const state={};
-import mutations from &#39;./mutations&#39;
-export default new Vuex.Store({
-    state，
-    mutations,
-    strict：true,
-    plugins:[logger()]
-    })
-</code></pre>
-<p>store下面再创建一个mutations.js,里面存放mutations的相关</p>
-<pre><code>import * as Types from &#39;mutations.types.js&#39;
-const mutations = {
- // [方法名](state,{param}){}
-[Types.INCREMENT](state){
-   state.count+=1
-},
-[Types.DECREMENT](state){
-    state.count-=1
+</code></pre><p>store/actions.js 一个包含n个用于间接更新状态数据的方法的对象模块，可以包含异步和逻辑处理代码</p>
+<pre><code>import {REQ_SUCCESS} from &#39;./mutation-types&#39;
+export default{
+    //搜索的异步action，包含了异步代码的action
+    async search({commit},params){
+        //params用于异步ajax请求获取数据的参数
+        //如果成功了，提交请求成功的mutation
+        //这种写法传递的数据y本身
+        commit(REQ_SUCCESS,y)
 
+        //还可以通过对象的形式来传递
+        commit(REQ_SUCCESS,{y})
+        //这种写法mutations里应该改成 [REQ_SUCCESS](state,{y})
+    }
 }
-};
-export default mutations;
-</code></pre><p>宏(一般大写)<br>store下面再创建一个mutations.types.js里面存放mutations的方法的名字，方便查找</p>
-<pre><code>//增加
-export const INCREMENT=&#39;INCREMENT&#39;
-//减少
-export const DECREMENT=&#39;DECREMENT&#39;
-</code></pre><p>组件中引入同mutations.js中引入一样,只不过不加中括号<br>import * as Types from ‘mutations.types.js’</p>
-<p>Types.INCREMENT<br>Types.DECREMENT</p>
-<h2 id="getters"><a href="#getters" class="headerlink" title="getters"></a>getters</h2><p>相当于computed,如果数据多了可以模仿mutations的抽离</p>
-<pre><code>const getters={
- val(state){
- state.count%2?&#39;奇数&#39;:&#39;偶数&#39;
- }
-};
-export default new Vuex.store({
-getters,
-})
-//引用时
-{{$store.getters.val}}
-</code></pre><h2 id="actions"><a href="#actions" class="headerlink" title="actions"></a>actions</h2><ul>
-<li>和后台交互的异步action，后台数据也需要修改</li>
-</ul>
-<p>Action 类似于 mutation，不同在于：</p>
-<ul>
-<li>Action 提交的是 mutation，而不是直接变更状态。</li>
-<li>Action 可以包含任意异步操作。</li>
-</ul>
-<ol>
-<li>引入api以及mutation-types</li>
-<li><p>异步获取数据</p>
-<ul>
-<li>异步获取地址</li>
-<li>发送异步ajax请求</li>
-<li><p>提交一个mutation</p>
-<pre><code>//async 方法名({commit,参数可选}{})
-// 异步获取地址
-async getAddress ({commit, state}) {
-// 从state状态中获取到经纬度用来设置reqAddress的参数（看接口文档）
-const geohash = state.latitude + &#39;,&#39; + state.longitude
-// 1. 发送异步ajax请求
-const result = await reqAddress(geohash)
-// 2. 根据结果提交一个mutation
-commit(RECEIVE_ADDRESS, {address: result.data})
-},
-</code></pre></li>
-</ul>
-</li>
-</ol>
+</code></pre><p>store/getters.js 一个包含n个基于state的getter计算属性方法的对象模块，</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -338,7 +299,7 @@ commit(RECEIVE_ADDRESS, {address: result.data})
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本使用"><span class="toc-text">基本使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#state-单向数据流"><span class="toc-text">state(单向数据流)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#mutation"><span class="toc-text">mutation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插件"><span class="toc-text">插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#整理"><span class="toc-text">整理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#getters"><span class="toc-text">getters</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#actions"><span class="toc-text">actions</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本使用"><span class="toc-text">基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用map函数简化store使用"><span class="toc-text">使用map函数简化store使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#拆分文件"><span class="toc-text">拆分文件</span></a></li></ol></li></ol>
   </div>
 </aside>
   
@@ -396,7 +357,7 @@ commit(RECEIVE_ADDRESS, {address: result.data})
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2020/08/19/mutations常量中括号/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
     <a href="/2020/08/13/js常用操作总结/" data-enable="true">

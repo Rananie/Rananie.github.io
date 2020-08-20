@@ -168,9 +168,9 @@
   </h1>
   
   <article class="passage-article">
-    <p><strong>调试</strong></p>
-<p>打断点可以打在一条语句开始的左边(浏览器)或者在代码中添加debugger语句，程序遇见断点就会暂停</p>
-<h2 id="数据代理"><a href="#数据代理" class="headerlink" title="数据代理"></a>数据代理</h2><pre><code>const vm = new Vue({
+    <h2 id="数据代理"><a href="#数据代理" class="headerlink" title="数据代理"></a>数据代理</h2><p><strong>实现更新显示</strong></p>
+<p>data对象的所有属性的操作由vm对象来代理操作<br>好处:通过vm对象就可以方便的操作data中的数据<br>实现：<br>1.通过<code>Object.defineProperty(vm,key,{})</code>给vm添加data对象的key<br>2.所有添加的属性都设置get/set方法<br>3.读/改vm对象时,通过get/set返回/修改data中对应的属性值</p>
+<pre><code>const vm = new Vue({
     data:{
         name:&#39;tom&#39;
     }
@@ -179,6 +179,17 @@ console.log(vm.name,vm._data.name) //tom 代理读
 
 vm.name = &#39;jack&#39;  //代理写
 console.log(vm._data.name) //jack
+</code></pre><h2 id="模板解析"><a href="#模板解析" class="headerlink" title="模板解析"></a>模板解析</h2><p><strong>实现初始化显示</strong></p>
+<p>基本流程:<br>使用DocumentFragment，一次页面更新批量处理DOM</p>
+<p>1.将el元素中的所有子节点保存到一个fragment容器<br>2.编译fragment中所有层次子节点</p>
+<pre><code>- 对表达式文本节点进行解析
+- 对元素节点的指令属性进行解析
+</code></pre><p>3.将编译好的fragment插入到el中</p>
+<p><strong>插值语法</strong></p>
+<p>1.根据正则对象得到匹配出的表达式字符串:子匹配/RegExp.$1<br>2.从data中取出表达式对应的属性值<br>3.将属性值设置为文本节点的textNode.textContent</p>
+<pre><code>&lt;p&gt;
+{{name}}
+&lt;/p&gt;
 </code></pre>
   </article>
   <aside class="table-content" id="site-toc">
@@ -187,7 +198,7 @@ console.log(vm._data.name) //jack
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据代理"><span class="toc-text">数据代理</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据代理"><span class="toc-text">数据代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模板解析"><span class="toc-text">模板解析</span></a></li></ol>
   </div>
 </aside>
   
@@ -245,7 +256,7 @@ console.log(vm._data.name) //jack
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2020/08/20/debug调试/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
     <a href="/2020/08/19/mutations常量中括号/" data-enable="true">

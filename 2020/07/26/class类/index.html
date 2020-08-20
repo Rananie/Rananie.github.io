@@ -174,8 +174,8 @@ class Person{
 //类的构造方法,es5写在构造函数上的
  constructor(){}
  //这里不需要逗号
- //其余(原型)方法的写法必须使用该语法(静态的可以不用)。方法名(){}
- //es5写在原型上的
+ //其余(原型)方法的写法必须使用该语法(静态的可以不用)。方法名(){}  es6简写
+ //es5写在原型上的,实例都可以使用
  call(){
 
  }
@@ -230,7 +230,8 @@ constructor(name,age,height){
 }
 }
 </code></pre><p>子类继承父类相当于子类的<strong>proto</strong>指向父类Father。</p>
-<h2 id="get和set"><a href="#get和set" class="headerlink" title="get和set"></a>get和set</h2><pre><code>class Phone{
+<p><strong>get和set</strong></p>
+<pre><code>class Phone{
     get price(){
         console.log(&quot;该属性被读取了&quot;)
         return &quot;属性调用的返回值&quot;
@@ -250,7 +251,7 @@ s.price = &quot;free&quot;
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#static"><span class="toc-text">static</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#私有属性"><span class="toc-text">私有属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extends继承"><span class="toc-text">extends继承</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#get和set"><span class="toc-text">get和set</span></a>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#static"><span class="toc-text">static</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#私有属性"><span class="toc-text">私有属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#extends继承"><span class="toc-text">extends继承</span></a></li></ol>
   </div>
 </aside>
   

@@ -221,6 +221,7 @@ str = str.replace(/^\s*|\s*$/g,&quot;&quot;)
 </code></pre><h2 id="贪婪与懒惰"><a href="#贪婪与懒惰" class="headerlink" title="贪婪与懒惰"></a>贪婪与懒惰</h2><p>贪婪模式:匹配尽可能多的字符<br>懒惰模式:匹配尽可能少的字符，会不断的回溯</p>
 <p>常用场景<code>.*</code>与<code>.*?</code>，使用?来表示使用懒惰模式匹配</p>
 <h2 id="正则扩展"><a href="#正则扩展" class="headerlink" title="正则扩展"></a>正则扩展</h2><h3 id="exec"><a href="#exec" class="headerlink" title="exec()"></a>exec()</h3><p><strong>捕获()括号包裹的内容</strong></p>
+<p>加了()表示子匹配，匹配外部大正则的情况下同时匹配()里的内容保存$1、$2…</p>
 <p>语法:RegExpObject.exec(string)<br>方法用于检索字符串中的正则表达式的匹配。<br>如果 exec() 找到了匹配的文本，则返回一个结果数组。否则，返回 null。<br>不管是否/g开启全局，<strong>只返回匹配的第一个</strong>。<br>如果要返回匹配的多个可以使用while(reg.exec(str))或者使用String.prototype.matchAll()方法。</p>
 <pre><code>let str = `&lt;ul&gt;
           &lt;li&gt;

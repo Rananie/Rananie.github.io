@@ -229,7 +229,7 @@ return obj.currentStyle[style]
 <p>对象.事件 = 函数 的形式绑定响应函数，同时只能为一个事件绑定一个响应函数</p>
 <p>addEventListener可以为一个事件同时绑定多个响应函数，后面的不会覆盖前面的<br>对象.addEventListener() 第一个参数事件的字符串，不要on，第二个参数时间触发时的回调函数，第三个参数是否在捕获阶段触发事件，一般都是false</p>
 <p><strong>DocumentFragment</strong><br>文档片段接口，高效批量更新多个节点(只更新一次)<br>一个fragment对象就是内存中的节点容器(只存在于内存中、页面不显示)</p>
-<p>用一个fragment对象包裹住需要更新的节点，处理fragment的所有子节点，将fragment添加为div的子节点(fragment不会进入div,fragment的所有子节点进入div)</p>
+<p>用一个fragment对象包裹住需要更新的节点（原处的节点消失了，因为节点的父节点只能有一个），处理fragment的所有子节点，将fragment添加为div的子节点(fragment不会进入div,fragment的所有子节点进入div)</p>
 <p>由于处理fragment的所有子节点都是在内存中进行的不更新界面，最后把fragment的所有子节点添加进div时才更新界面，所以实现了页面仅更新一次就批量操作多个节点。</p>
 
   </article>

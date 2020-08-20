@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>python-类 | Ranan的博客</title>
+  <title>python-class | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -164,7 +164,7 @@
     
   </div>
   <h1 class="passage-title">
-    python-类
+    python-class
   </h1>
   
   <article class="passage-article">
@@ -189,7 +189,51 @@ class Person:
 ranan = Person(&#39;biubiu&#39;)
 # 默认传递一个参数
 ranan.hello()
-</code></pre>
+</code></pre><h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>为了增加数据的安全性，引入了封装的概念，封装是面向对象的三大特性之一。</p>
+<p>封装指的是隐藏对象中一些不希望被外部访问到的属性或方法。</p>
+<p>封装的优点:<br>1.隐藏了属性名，使调用者无法随意的修改对象中的属性<br>2.增加了getter和setter方法，很好的控制了属性是否只读<br>3.使用setter方法设置属性，可以增加数据的验证，确保数据的值是正确的<br>4.使用getter方法获取属性，使用setter方法设置属性，可以在读取属性和修改属性的同时做一些其他的处理</p>
+<p>如何隐藏一个对象的属性名?</p>
+<pre><code>- 将对象的属性名，修改为一个外部不知道的名字
+</code></pre><p>如何获取/修改对象中的属性？</p>
+<pre><code>- 提供getter和setter方法使外部可以访问到属性
+- getter获取对象中的指定属性(get_属性名
+)
+</code></pre><pre><code>class Dog:
+    &#39;&#39;&#39;
+    表示狗的类
+    &#39;&#39;&#39;
+    def __init__(self,name):
+        self.hidden_name = name
+    def get_name(self):
+        return self.hidden_name    
+    def set_name(self,name):
+        self.hidden_name = name
+</code></pre><p><strong>隐藏属性</strong></p>
+<p>上述的方法其实通过hidden_name还是可以访问到，如果想彻底隐藏，可以为对象的属性使用双下划线开头<code>__xxx</code>，是对象的隐藏属性(私有属性)，隐藏属性只能在类内访问，类外不能访问。</p>
+<p>其实隐藏属性只不过是Python自动为属性改了名字，实际上是将名字修改成<code>_类名_属性名</code>。所以一般不用这种方式。</p>
+<p>一般我们会将一些私有属性以<code>—</code>开头结合封装假装是私有属性。</p>
+<p><strong>property装饰器</strong></p>
+<p>property装饰器用来将一个get方法，转换为对象的属性，让我们像调用属性一样使用get方法<br>使用property装饰的方法名必须和属性名一样,setter方法的装饰器:<code>@属性名.setter</code>(属性名不算上下划线，因为下划线仅仅表示这是一个私有属性)</p>
+<pre><code>class Dog:
+    &#39;&#39;&#39;
+    表示狗的类
+    &#39;&#39;&#39;
+    def __init__(self,name):
+        self._name = name
+    # def get_name(self):
+    #   return self.hidden_name    
+    @property
+    def name(self):
+        return _self.ame
+
+    @name.setter
+    def name(self,name):
+       self._name = name
+
+
+    print(p.name)
+    p.name = &#39;xxx&#39;    
+</code></pre><h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -197,7 +241,7 @@ ranan.hello()
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#封装"><span class="toc-text">封装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#继承"><span class="toc-text">继承</span></a></li></ol>
   </div>
 </aside>
   

@@ -222,7 +222,28 @@ new bindPerson(&quot;张三&quot;)
     value: &quot;Hello World!&quot;
 };
 o.f(); // Hello World！
-</code></pre>
+</code></pre><p><strong>总结</strong></p>
+<ul>
+<li>call()<ul>
+<li>立即调用函数</li>
+<li>从第二个参数开始依次传</li>
+<li>将函数内的this绑定为obj</li>
+</ul>
+</li>
+<li>bind()<ul>
+<li>将函数返回</li>
+<li>从第二个参数开始依次传</li>
+<li>将函数内的this绑定为obj</li>
+</ul>
+</li>
+<li>apply()<ul>
+<li>立即调用函数</li>
+<li>第二个参数是数组，传入的数据放入数组中</li>
+<li>将函数内的this绑定为obj</li>
+</ul>
+</li>
+</ul>
+
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">

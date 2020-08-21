@@ -190,7 +190,32 @@ console.log(vm._data.name) //jack
 <pre><code>&lt;p&gt;
 {{name}}
 &lt;/p&gt;
-</code></pre>
+</code></pre><p><strong>事件指令</strong><br>指令（Directives）带有前缀 <code>v-</code></p>
+<p>elementNode.addEventListener(“eventName”,callback.bind(vm))</p>
+<p>1.从指令中取出事件名<br>2.根据指令的值从methods中得到对应的事件处理函数对象<br>3.给当前节点绑定指定事件名和回调函数的DOM事件监听<br>4.解析完之后在节点中移除指令属性</p>
+<pre><code>// button.addEventListener(&quot;click&quot;,this.test.bind(vm))
+//test里面的this指向vm
+&lt;button v-on:click=&quot;test&quot;&gt;&lt;/button&gt;
+</code></pre><p><strong>一般指令</strong><br>1.得到指令名和指令值<br>2.从data中根据表达式得到对应的值<br>3.根据指令名确定需要操作元素节点的属性<br>    v-text -&gt; elementNode.textContent = value<br>    v-html -&gt; elementNode.innerHTML = value<br>    v-class -&gt; elementNode.className += value<br>4.将得到的表达式的值设置到对应的属性上<br>5.移除元素的指令属性</p>
+<h2 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h2><p><strong>数据绑定</strong></p>
+<p>数据绑定:一旦更新了data中的某个属性数据，所有界面上直接使用或间接使用了此属性的节点都会更新</p>
+<p><strong>数据劫持</strong></p>
+<blockquote>
+<p>数据绑定是实现的效果，数据劫持是实现数据绑定的一种技术</p>
+</blockquote>
+<p>数据劫持是vue中用来实现数据绑定的一种技术。<br>基本思想:通过defineProperty()来监视data中所有的属性(任意层次)数据的变化，一旦变化就去更新界面。</p>
+<p><strong>发布者-订阅者模式</strong></p>
+<p>发布者:observer对象，对data中所有层次属性进行监视，包含监视data数据的setter方法。发生变化更新data中的数据，并通知dep。</p>
+<p>订阅器(中间者):dep对象，个数与data中的属性一一对应，每个属性的setter都引用了对应的dep对象用于通知dep数据发生了改变，并且每个dep对象与watcher建立了n:n关系。dep接收到发布者通知后通知对应的watcher订阅者。</p>
+<p>订阅者:watcher对象，包含更新对应节点的回调函数。个数与模板表达式(插值/一般指令)一一对应。更新对应的节点。</p>
+<p>watcher -&gt; dep 用于判断当前watcher与dep关系是否已经建立<br>dep -&gt; watcher 用于通知watcher对象更新对应的节点。</p>
+<p>黑色初始化，红色数据发生变化<br><img src="/img/vue/MVVM.png"></p>
+<h2 id="双向数据绑定"><a href="#双向数据绑定" class="headerlink" title="双向数据绑定"></a>双向数据绑定</h2><p>双向数据绑定是建立在单向数据绑定(model-&gt;view)的基础上</p>
+<p>实现流程:<br>1.解析v-model指令时，给当前元素添加input监听<br>2.当input的value发生改变时，将最新值保存到表达式在data中对应的属性上-&gt;触发数据绑定</p>
+<p><strong>什么是单向数据绑定？什么是双向数据绑定?</strong></p>
+<p>双向数据绑定:model改变view自动更新，view改变model自动更新。<br>单向数据绑定:model -&gt; view</p>
+<p>单向绑定：插值形式，v-bind也是单向绑定<br>双向绑定：表单的v-model，用户对View层的更改会直接同步到Model层</p>
+
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -198,7 +223,7 @@ console.log(vm._data.name) //jack
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据代理"><span class="toc-text">数据代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模板解析"><span class="toc-text">模板解析</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数据代理"><span class="toc-text">数据代理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模板解析"><span class="toc-text">模板解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据绑定"><span class="toc-text">数据绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#双向数据绑定"><span class="toc-text">双向数据绑定</span></a></li></ol>
   </div>
 </aside>
   

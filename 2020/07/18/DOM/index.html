@@ -174,9 +174,12 @@
 <p>1.取消默认行为可以通过在响应函数的最后return false来取消默认行为，或者使用event.preventDefault()<br>2.如果需要读取元素节点属性，直接使用 元素.属性名，但是class属性不能采用这种方式，需要使用className。<br>3.window.onload = function(){<br>//页面加载完之后再执行，确保所有的DOM对象已经加载完毕<br>}</p>
 <p>node.nodeType 得到节点类型</p>
 <pre><code class="js">//比如:&lt;div id=&quot;test&quot;&gt;xxxx&lt;/div&gt;
+//标签节点
 const elementNode = ducument.getElementById(&quot;test&quot;)
+//属性节点
 const attrNode = elementNode.getAttributeNode(&quot;id&quot;)
 //textNode.textContent === xxxx
+//文本节点
 const textNode = elementNode.firstChild
 </code></pre>
 <h2 id="DOM查询"><a href="#DOM查询" class="headerlink" title="DOM查询"></a>DOM查询</h2><p>innerText 获取到元素内部的文本内容，会自动将html标签去除<br>innerHTML 获取到元素内部的文本内容，会保存html标签</p>

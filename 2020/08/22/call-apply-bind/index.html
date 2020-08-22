@@ -6,12 +6,12 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>python-class | Ranan的博客</title>
+  <title>call-apply-bind | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="python,python," />
+    <meta name="keywords" content="前端,JavaScript,JavaScript," />
   
 
   
@@ -150,11 +150,11 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-08-20
+      <i class="fa fa-calendar"></i>2020-08-22
     </span>
     
       <span>
-        | <a href="/categories/python/"><i class="fa fa-bookmark"></i>python</a>
+        | <a href="/categories/前端/"><i class="fa fa-bookmark"></i>前端</a>
       </span>
     
     
@@ -164,76 +164,127 @@
     
   </div>
   <h1 class="passage-title">
-    python-class
+    call-apply-bind
   </h1>
   
   <article class="passage-article">
-    <p>类是type类型的对象，定义类实际上就是定义了一个type类型的对象。<br>类和对象都是对现实生活中的事物或程序中内容的抽象</p>
-<p><strong>方法的每次被调用时，默认传递一个参数(调用方法的实例对象本身，类似this)，所以方法中至少要定义一个形参</strong></p>
-<p><strong>使用类创建实例对象的流程</strong><br>1.创建一个变量mc<br>2.在内存中创建一个新对象(type=Person)<br>3.调用init方法<br>4.将新对象的id赋值给变量ranan</p>
-<p><strong>类的定义</strong></p>
-<p>1.属性和方法的查找流程：先找自身对象 -&gt; 再找类对象<br>2.类中定义的属性和方法都是公共的，任何该类实例都可以访问。但是方法中不能直接访问类中的属性</p>
-<p>所以一般情况下，属性保存到实例对象中，方法保存到类对象中。</p>
-<p><strong>类的<strong>init</strong>方法</strong><br>类中有一些特殊方法,以<code>__</code>开头，<code>__</code>结尾。<br>特殊方法不需要自己调用。</p>
-<p>类的init方法类似与构造器,调用类创建对象时，类后边的所有参数都会依次传递到init()中</p>
-<pre><code># class 类名([父类]):
-# 没父类括号也可以省略
-#    代码块
-class Person:
-    def __init__(self,name):
-        self.name = name
-    def hello(self):
-        print(&quot;你好!&quot;)
-# mc为类Myclass的实例  
-# 调用Person等于调用init  
-ranan = Person(&#39;biubiu&#39;)
-# 默认传递一个参数
-ranan.hello()
-</code></pre><h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>为了增加数据的安全性，引入了封装的概念，封装是面向对象的三大特性之一。</p>
-<p>封装指的是隐藏对象中一些不希望被外部访问到的属性或方法。</p>
-<p>封装的优点:<br>1.隐藏了属性名，使调用者无法随意的修改对象中的属性<br>2.增加了getter和setter方法，很好的控制了属性是否只读<br>3.使用setter方法设置属性，可以增加数据的验证，确保数据的值是正确的<br>4.使用getter方法获取属性，使用setter方法设置属性，可以在读取属性和修改属性的同时做一些其他的处理</p>
-<p>如何隐藏一个对象的属性名?</p>
-<pre><code>- 将对象的属性名，修改为一个外部不知道的名字
-</code></pre><p>如何获取/修改对象中的属性？</p>
-<pre><code>- 提供getter和setter方法使外部可以访问到属性
-- getter获取对象中的指定属性(get_属性名
-)
-</code></pre><pre><code>class Dog:
-    &#39;&#39;&#39;
-    表示狗的类
-    &#39;&#39;&#39;
-    def __init__(self,name):
-        self.hidden_name = name
-    def get_name(self):
-        return self.hidden_name    
-    def set_name(self,name):
-        self.hidden_name = name
-</code></pre><p><strong>隐藏属性</strong></p>
-<p>上述的方法其实通过hidden_name还是可以访问到，如果想彻底隐藏，可以为对象的属性使用双下划线开头<code>__xxx</code>，是对象的隐藏属性(私有属性)，隐藏属性只能在类内访问，类外不能访问。</p>
-<p>其实隐藏属性只不过是Python自动为属性改了名字，实际上是将名字修改成<code>_类名_属性名</code>。所以一般不用这种方式。</p>
-<p>一般我们会将一些私有属性以<code>—</code>开头结合封装假装是私有属性。</p>
-<p><strong>property装饰器</strong></p>
-<p>property装饰器用来将一个get方法，转换为对象的属性，让我们像调用属性一样使用get方法<br>使用property装饰的方法名必须和属性名一样,setter方法的装饰器:<code>@属性名.setter</code>(属性名不算上下划线，因为下划线仅仅表示这是一个私有属性)</p>
-<pre><code>class Dog:
-    &#39;&#39;&#39;
-    表示狗的类
-    &#39;&#39;&#39;
-    def __init__(self,name):
-        self._name = name
-    # def get_name(self):
-    #   return self.hidden_name    
-    @property
-    def name(self):
-        return _self.ame
+    <p><strong>函数对象的call方法与apply方法</strong></p>
+<p>函数对象：函数像对象一样去使用,<code>函数.xx</code>。</p>
+<p>共同点：<br>1.这两个方法都是函数对象的方法，需要通过函数对象来调用<br>2.当对函数调用 call()和apply()时，都会执行该函数<br>3.call()和apply()的第一个参数为对象，执行call()与apply的函数对象里的this指向第一个参数</p>
+<p>不同点：<br>call()方法方法可以将实参在第一个参数对象之后依次传递<br>apply()方法需要将实参封装到一个数组中统一传递</p>
+<p><strong>bind()、call()、apple()的区别</strong></p>
+<ul>
+<li>都能指定函数中的this</li>
+<li>Array.prototype.call()/Array.prototype.apply()是立即调用函数，Array.prototype.bind()是将函数返回</li>
+<li>Array.prototype.call(obj)/Array.prototype.bind()从第二个参数开始依次传，Array.prototype.apply(obj)第二个参数是数组，传入的数据放入数组中</li>
+</ul>
+<pre><code>let obj ={name:&quot;ranan&quot;}
+function f(data,data2) {
+    console.log(this);
+    console.log(data + data2);
+    return data+data2
+}
+f.call(obj,33,22) //{name:&quot;ranan&quot;} 55
+f.apply(obj,[33,22])//{name:&quot;ranan&quot;} 55
+//所以apply通常用于将数组转化为函数的参数
 
-    @name.setter
-    def name(self,name):
-       self._name = name
+let bar=f.bind(obj) //bind不调用函数
+bar(33,22)//{name:&quot;ranan&quot;} 55
 
+//上面也可以写成
+f.bind(obj)(33,22)//{name:&quot;ranan&quot;} 55
+</code></pre><p><strong>Function.prototype.bind(obj)</strong></p>
+<p>作用:将函数内的this绑定为obj，并将函数返回(并不调用)</p>
+<ul>
+<li>返回原函数的拷贝，我们称这个拷贝的函数为绑定函数。</li>
+<li>将函数中的this固定为调用bind方法时的第一个参数，</li>
+<li>绑定this之后，无论有哪个对象调用绑定函数，绑定函数中的this依旧之前绑定的第一个参数</li>
+<li>如果绑定函数作为构造函数，已经捆绑的this会被忽略掉，this依然指向实例对象</li>
+</ul>
+<pre><code>function Person(name){
+this.name = name;
+}
+var bindPerson = Person.bind({name:&quot;绑定函数&quot;}) 
+new bindPerson(&quot;张三&quot;)          
+// Person {name: &quot;张三&quot;}
+</code></pre><p><strong>通常用于指定回调函数的this，因为apply与call会立即调用</strong></p>
+<p><strong>使用场景</strong></p>
+<p>保持上下文的方法</p>
+<pre><code>var o={
+    f: function () {
+        var self=this;
+        var fff=function() {
+            console.log(this.value);
+             // bind(this) 中 this 指向的是o，这里也可直接写成 bind(o)
+        }.bind(this);
+        fff();
+    },
+    value: &quot;Hello World!&quot;
+};
+o.f(); // Hello World！
+</code></pre><p><strong>总结</strong></p>
+<ul>
+<li>call()<ul>
+<li>立即调用函数</li>
+<li>从第二个参数开始依次传</li>
+<li>将函数内的this绑定为obj</li>
+<li>undefined/null this指向window</li>
+</ul>
+</li>
+<li>bind()<ul>
+<li>将函数返回</li>
+<li>从第二个参数开始依次传,指定返回函数的参数</li>
+<li>将函数内的this绑定为obj</li>
+<li>undefined/null this指向window</li>
+</ul>
+</li>
+<li>apply()<ul>
+<li>立即调用函数</li>
+<li>第二个参数是数组，传入的数据放入数组中</li>
+<li>将函数内的this绑定为obj</li>
+<li>undefined/null this指向window</li>
+</ul>
+</li>
+</ul>
+<p><strong>应用</strong><br>call()/bind():根据伪数组生成真数据<br>bind():vue中的事件回调函数内部</p>
+<p><strong>自定义</strong></p>
+<pre><code class="js">Function.prototype.call = function (obj,...args) {
+    //参数被封装成数组
+    //处理obj是undefined与null的情况
+    if (obj === undefined || obj === null) {
+        obj = window
+    }
+    //给obj添加一个方法tempFn,this指的是fn函数对象 
+    obj.tempFn = this
+    //fn里的this指向obj
+    const result = obj.tempFn(...args)
+    //调用后，删除obj上的该方法
+    delete obj.tempFn
+    return result
+}
+Function.prototype.apply = function (obj,args) {
+    console.log(&#39;apply调用&#39;,args);   
+    //处理obj是undefined与null的情况
+    if (obj === undefined || obj === null) {
+    obj = window
+    }
+    //给obj添加一个方法tempFn,this指的是fn函数对象 
+    obj.tempFn = this
+    //fn里的this指向obj
+    const result = obj.tempFn(...args)
+    //调用后，删除obj上的该方法
+    delete obj.tempFn
+    return result 
+}
+Function.prototype.bind = function (obj,...args) {
+    //返回新函数
+    return (...args2) =&gt; {
+    //调用原来函数，指定this为obj，参数列表由args和atgs2依次组成
+      return this.call(obj,...args,...args2)
+    }
+}
+</code></pre>
 
-    print(p.name)
-    p.name = &#39;xxx&#39;    
-</code></pre><h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -241,14 +292,14 @@ ranan.hello()
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#封装"><span class="toc-text">封装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#继承"><span class="toc-text">继承</span></a></li></ol>
+    
   </div>
 </aside>
   
   
     <div class="passage-tags">
      
-      <a href="/tags/python/"><i class="fa fa-tags"></i>python</a>
+      <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
     
     </div>
   
@@ -299,10 +350,10 @@ ranan.hello()
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/08/22/函数节流和防抖/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/08/20/debug调试/" data-enable="true">
+    <a href="/2020/08/22/函数节流和防抖/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

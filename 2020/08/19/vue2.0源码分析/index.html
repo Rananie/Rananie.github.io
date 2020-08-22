@@ -209,7 +209,7 @@ console.log(vm._data.name) //jack
 <p>订阅器(中间者):dep对象，个数与data中的属性一一对应，每个属性的setter都引用了对应的dep对象用于通知dep数据发生了改变，并且每个dep对象与watcher建立了n:n关系。dep接收到发布者通知后通知对应的watcher订阅者。</p>
 <p>订阅者:watcher对象，包含更新对应节点的回调函数。个数与模板表达式(插值/一般指令)一一对应。更新对应的节点。</p>
 <p>watcher -&gt; dep 用于判断当前watcher与dep关系是否已经建立<br>dep -&gt; watcher 用于通知watcher对象更新对应的节点。</p>
-<p>黑色初始化，红色数据发生变化<br><img src="/img/vue/MVVM.png"></p>
+<p>黑色初始化，红色数据发生变化<br><img src="/img/vue/mvvm.png"></p>
 <h2 id="双向数据绑定"><a href="#双向数据绑定" class="headerlink" title="双向数据绑定"></a>双向数据绑定</h2><p>双向数据绑定是建立在单向数据绑定(model-&gt;view)的基础上</p>
 <p>实现流程:<br>1.解析v-model指令时，给当前元素添加input监听<br>2.当input的value发生改变时，将最新值保存到表达式在data中对应的属性上-&gt;触发数据绑定</p>
 <p><strong>什么是单向数据绑定？什么是双向数据绑定?</strong></p>

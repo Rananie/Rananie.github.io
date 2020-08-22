@@ -260,7 +260,7 @@ function fn()
 }
 var a = new fn;
 console.log(a.user); //xx
-</code></pre><p>还有一点就是虽然null也是对象，但是在这里this还是指向那个函数的实例，因为null比较特殊。</p>
+</code></pre><p><strong>知识点4</strong><br>Dom事件回调的函数里this是发生事件的标签<br>undefined与null调用的this仍然指向window</p>
 
   </article>
   <aside class="table-content" id="site-toc">

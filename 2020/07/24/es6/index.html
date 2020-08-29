@@ -441,7 +441,8 @@ data.default.fun()
 //解构赋值形式,如果重复了可以使用as别名
 import {name,fun} from &quot;path&quot;
 import {name as na,function} from &quot;path&quot;
-import {default as data} from &quot;path&quot; //默认暴露的写法，必须要写别名
+//默认暴露的写法，必须要写别名
+import {default as data} from &quot;path&quot; 
 //简便形式 针对默认暴露
 import data from &quot;path&quot;
 console.log(data) //输出{name : &quot;ranan&quot; ,fun : functio(){}}

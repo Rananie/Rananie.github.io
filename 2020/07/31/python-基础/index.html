@@ -448,11 +448,69 @@ a = [1,2,3]
 <p><strong>面向对象</strong></p>
 <p>面向对象的语言就是语言中的所有操作都是通过对象来进行的</p>
 <h3 id="类class"><a href="#类class" class="headerlink" title="类class"></a>类class</h3><p><a href="https://biubiuins.github.io/2020/08/20/python-%E7%B1%BB/" target="_blank" rel="noopener">class</a></p>
-<p><strong>isinstance()函数</strong></p>
-<p>isinstance(mc,MyClass) 用来检查mc(第一个参数)是否是MyClass(第二个参数)的实例，返回布尔值</p>
-<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><p>time()可以用来获取当前的时间，返回的单位是秒</p>
+<p><strong>isinstance()/issubclass()函数</strong></p>
+<p>isinstance(mc,MyClass) 用来检查mc(第一个参数)是否是MyClass(第二个参数)的实例，返回布尔值<br>issubclass()用来检查第一个参数是否是第二个参数的子类</p>
+<h2 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h2><p>程序运行过程中产生的垃圾会影响到程序运行的运行性能，所以这些垃圾必须被及时清理。<br>在Python中有自动的垃圾回收机制，它会自动将这些没有被引用的对象删除，所以不用手动处理垃圾回收<br>程序结束之后，对象也会被自动回收</p>
+<h2 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h2><p>在Python中一个py文件就是一个模块，模块名要符合标识符的规范。<br>语法: import 模块名  – 模块名为python文件的名字<br>可以引用同一个模块多次，但是模块的实例只会创建一次。<br>在每一个模块内部都有一个<strong>name</strong>属性，通过这个属性可以获取到模块的名字,<strong>name</strong>属性值为<strong>main</strong>的模块是主模块，一个程序中只会有一个主模块，主模块就是直接通过python执行的模块</p>
+<p>模块中添加了_的变量，通过<code>import *</code>引入是看不见该变量的</p>
+<pre><code># 给模块起别名
+import test_module as test
+print (test.__name__)  # 输出test_module
+print (__name__)  # 输出__main__
+
+# 访问模块中的变量:模块名.属性/方法()
+
+# 引入模块中的部分内容
+# 语法 from 模块名 import 变量,变量
+from m import Person,test
+# 引入模块中所有内容，一般不会使用
+from m import * 
+
+
+# 也可以为引入的变量使用别名
+# 语法: from 模块名 import 变量名 as 别名
+
+
+# 测试代码，当前文件为主模块的时候才需要执行
+if __name__ == &#39;__main__&#39;:
+    # 测试代码
+</code></pre><p><strong>time模块</strong></p>
+<p>time()可以用来获取当前的时间，返回的单位是秒</p>
 <pre><code>from time import *
-begin = time()  
+begin = time() 
+</code></pre><p><strong>pprint模块</strong></p>
+<p>pprint 模式给我们提供了一个方法pprint()该方法可以用来对打印的数据做简单的格式化。</p>
+<h3 id="包package"><a href="#包package" class="headerlink" title="包package"></a>包package</h3><p>包也是一个模块，当我们模块中代码过多时，或者一个模块需要被分解为多个模块时，就需要使用包</p>
+<p>普通的模块就是一个py文件，而包是一个文件夹。包中必须要一个<code>__init__.py</code>,在这个中可以包含有包的主要的内容</p>
+<pre><code># 这个包里有很多模块，这里引入a.py ,b.py
+form package_test import a,b
+</code></pre><p><code>__pycache__</code>是模块的缓存文件，py代码在执行前，需要被解析器先转换为机器码，然后再执行，python会在编译一次以后，将转化后的机器码保存到缓存文件中</p>
+<h3 id="python标准库"><a href="#python标准库" class="headerlink" title="python标准库"></a>python标准库</h3><p>sys模块，可以获取到python解析器的信息<br>os模块让我可以对操作系统进行访问</p>
+<pre><code># 引入sys模块
+import sys
+
+# 获取执行代码时，命令行中包含的参数(指令后面紧跟的)
+# 该属性是一个列表，列表保存了当前命令的所有参数
+sys.argv
+
+# 当前程序中引入的所有模块，modules是一个字典，key为模块名，value是模块对象
+sys.modules
+
+# 该属性是一个保存了模块的搜索路径的列表，有点类似环境变量path
+sys.path
+
+# 表示当前python运行的平台
+sys.platform
+
+# 用来退出程序
+sys.exit(&quot;提示语句&quot;)
+
+# 通过这个属性可以获取到系统的环境变量
+os.environ
+os.environ[&#39;path&#39;]
+
+# 可以执行操作系统的命令
+os.system(&quot;命令名&quot;)
 </code></pre>
   </article>
   <aside class="table-content" id="site-toc">
@@ -461,7 +519,7 @@ begin = time()
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础"><span class="toc-text">基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符-操作符"><span class="toc-text">运算符(操作符)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程控制语句"><span class="toc-text">流程控制语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环语句"><span class="toc-text">循环语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#序列"><span class="toc-text">序列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#列表"><span class="toc-text">列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#序列-sequence"><span class="toc-text">序列(sequence)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元组tuple"><span class="toc-text">元组tuple</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典-dict"><span class="toc-text">字典 dict</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合set"><span class="toc-text">集合set</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数-function"><span class="toc-text">函数 function</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象Object"><span class="toc-text">对象Object</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类class"><span class="toc-text">类class</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模块"><span class="toc-text">模块</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础"><span class="toc-text">基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符-操作符"><span class="toc-text">运算符(操作符)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程控制语句"><span class="toc-text">流程控制语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环语句"><span class="toc-text">循环语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#序列"><span class="toc-text">序列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#列表"><span class="toc-text">列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#序列-sequence"><span class="toc-text">序列(sequence)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元组tuple"><span class="toc-text">元组tuple</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典-dict"><span class="toc-text">字典 dict</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合set"><span class="toc-text">集合set</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数-function"><span class="toc-text">函数 function</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象Object"><span class="toc-text">对象Object</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类class"><span class="toc-text">类class</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#垃圾回收"><span class="toc-text">垃圾回收</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模块"><span class="toc-text">模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#包package"><span class="toc-text">包package</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#python标准库"><span class="toc-text">python标准库</span></a></li></ol></li></ol>
   </div>
 </aside>
   

@@ -176,20 +176,29 @@
 <p>所以一般情况下，属性保存到实例对象中，方法保存到类对象中。</p>
 <p><strong>类的<strong>init</strong>方法</strong><br>类中有一些特殊方法,以<code>__</code>开头，<code>__</code>结尾。<br>特殊方法不需要自己调用。</p>
 <p>类的init方法类似与构造器,调用类创建对象时，类后边的所有参数都会依次传递到init()中</p>
+<p><strong>实例方法</strong><br>实例方法:以self为第一个参数的方法<br>实例调用时，会自动将当前调用对象作为self传入<br>当通过类调用时，不会自动传递self，必须手动传入   </p>
+<p><strong>类方法</strong><br>在类内部使用@classmethod 来修饰的方法属于类方法<br>类方法的第一个参数是cls(class),也会被自动传入，cls就是当前的类对象<br>类方法可以通过类去调用，也可以通过实例调用，没有区别</p>
+<p><strong>静态方法</strong><br>在类中使用 @staticmethod来修饰的方法属于静态方法，静态方法不需要任何默认参数。<br>静态方法可以通过类和实例去调用，静态方法基本是一个和当前类无关的方法，只是一个保存到当前类中的函数，一般都是一些工具方法。</p>
 <pre><code># class 类名([父类]):
 # 没父类括号也可以省略
 #    代码块
 class Person:
     def __init__(self,name):
         self.name = name
+
     def hello(self):
         print(&quot;你好!&quot;)
+    @classmethod
+    def test(cls):
+        print(&quot;这是类方法&quot;)
+
 # mc为类Myclass的实例  
 # 调用Person等于调用init  
 ranan = Person(&#39;biubiu&#39;)
 # 默认传递一个参数
 ranan.hello()
-</code></pre><h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>为了增加数据的安全性，引入了封装的概念，封装是面向对象的三大特性之一。</p>
+</code></pre><p>类属性:属于类<br>实例属性:只能通过实例对象来访问和修改，属于实例<br>类方法:第一个参数cls<br>实例方法:第一个参数self<br>静态方法:不默认传参</p>
+<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>为了增加数据的安全性，引入了封装的概念，封装是面向对象的三大特性之一。</p>
 <p>封装指的是隐藏对象中一些不希望被外部访问到的属性或方法。</p>
 <p>封装的优点:<br>1.隐藏了属性名，使调用者无法随意的修改对象中的属性<br>2.增加了getter和setter方法，很好的控制了属性是否只读<br>3.使用setter方法设置属性，可以增加数据的验证，确保数据的值是正确的<br>4.使用getter方法获取属性，使用setter方法设置属性，可以在读取属性和修改属性的同时做一些其他的处理</p>
 <p>如何隐藏一个对象的属性名?</p>
@@ -233,7 +242,47 @@ ranan.hello()
 
     print(p.name)
     p.name = &#39;xxx&#39;    
-</code></pre><h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2>
+</code></pre><h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>继承是面向对象的三大特性之一，子类可以直接继承父类中的所有的属性和方法。<br>继承之后子类的实例也是父类的实例。<br>class 类名(父类):    –如果创建类时,省略了父类，则默认父类为object</p>
+<p><strong>super()</strong><br>如果子类有自己init，希望可以直接调用父类的init来初始化父类中定义的属性<br>super()可以用来获取当前类的父类，super()返回对象调用父类方法时，不需要传递self</p>
+<pre><code>class Animal:
+    def __init__(self,name):
+        pass
+class Dog(Animal):
+    def __init__(self,name,age):
+        super().__init__(name)
+        self._age = age      
+</code></pre><p><strong>多重继承</strong></p>
+<p>在开发中没有特殊情况，应该避免使用多重继承，因为多重继承会让代码过于复杂</p>
+<p><code>__bases__</code>这个属性可以用来获取当前类的所有父类,返回一个元组。</p>
+<p><strong>在python中，一个类可以同时有多个父类</strong>,如果多个父类中有同名方法，则会先在第一个父类中寻找、然后找第二个……</p>
+<pre><code>class Dog(Animal1,Animal2):
+    pass
+</code></pre><h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>多态是面向对象的三大特征之一，多态从字面上理解是多种形态，比如狗(狼狗，藏獒….都是狗的形态),一个对象可以使用不同的形态去呈现。</p>
+<pre><code># 对于say_hello()这个函数来说，只要对象中含有name属性，就可以作为参数传递
+# 这个函数并不会考虑对象的类型，只要有name属性即可
+def say_hello(obj)
+    print(&quot;你好%s&quot;%obj.name)
+
+# say_hello2违反了多态，因为要求对象是A的实例
+# 违反了多态的函数，只适用一种类型的对象，函数的适应性
+def say_hello2(obj2)
+    if isinstance(obj,A):
+        print(&quot;你好%s&quot;%obj.name)   
+</code></pre><p>鸭子类型：如果一个东西，走路像鸭子，叫声像鸭子，那么它就是鸭子？？</p>
+<h2 id="特殊方法"><a href="#特殊方法" class="headerlink" title="特殊方法"></a>特殊方法</h2><p>特殊方法一般不需要手动调用，在一些特殊情况下自动调用</p>
+<p><code>__new__</code>在创建对象时调用<br><code>__ninit__(self,[....])</code>初始化对象时调用<br><code>__del__(self)</code>对象删除前调用</p>
+<p>当我们打印一个对象时，实际上打印的是对象中的特殊方法<code>__str__(self)</code>的返回值，这个方法将对象转换成字符串的时候调用<br><code>__repr__(self)</code>在当前对象使用repr()函数时调用，它的作用是指定对象在交互模式中输出的效果</p>
+<pre><code>class Person:
+    # __gt__会在对象做大于比较的时候调用，该方法的返回值将会作为比较的结果  self&gt;ohter,self是比较左边的，other是比较右边的
+    def __gt__(self,other):
+        return self.age &gt; other.age
+
+
+p1 = Person()
+# print(p1) 实际上等于 print(str(p1)),调用了对象内部的__str__(self) 特殊方法
+print(p1)
+print(repr(p1))
+</code></pre>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -241,7 +290,7 @@ ranan.hello()
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#封装"><span class="toc-text">封装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#继承"><span class="toc-text">继承</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#封装"><span class="toc-text">封装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#继承"><span class="toc-text">继承</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#多态"><span class="toc-text">多态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#特殊方法"><span class="toc-text">特殊方法</span></a></li></ol>
   </div>
 </aside>
   

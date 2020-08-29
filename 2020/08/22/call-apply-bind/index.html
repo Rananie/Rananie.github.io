@@ -262,8 +262,7 @@ o.f(); // Hello World！
     delete obj.tempFn
     return result
 }
-Function.prototype.apply = function (obj,args) {
-    console.log(&#39;apply调用&#39;,args);   
+Function.prototype.apply = function (obj,args) {  
     //处理obj是undefined与null的情况
     if (obj === undefined || obj === null) {
     obj = window
@@ -350,7 +349,7 @@ Function.prototype.bind = function (obj,...args) {
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2020/08/24/数组声明式系列方法/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
     <a href="/2020/08/22/函数节流和防抖/" data-enable="true">

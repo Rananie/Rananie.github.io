@@ -176,8 +176,39 @@
 <p>理解:<br>    在函数需要频繁触发时，函数执行依次后，只有大于设定的执行周期后才会执行第二次，适合多次事件按时间做平均分配触发<br>场景：<br>    窗口调整resize<br>    页面滚动scroll<br>    DOM元素的拖拽功能实现mousemove<br>    抢购疯狂点击click</p>
 <p><strong>函数防抖(debounce)</strong><br>理解：<br>    在函数需要频繁触发时，在规定时间内，只让最后一次生效，前面的当作抖动不生效<br>场景:<br>    输入框实时搜索联想keyup、input</p>
 <p><strong>自定义</strong></p>
-<pre><code>
+<pre><code class="js">//用来返回节流函数的工具函数   
+function throttle(callback,delay){
+let pre = 0
+return function(event){
+     //Dom事件回调的函数里this是发生事件的标签
+     //节流函数/真正的事件回调函数
+    const current = Date.now() //当前时间
+     //事件触发后，节流函数也会被返回，只是满足一定的条件再调用
+    if (current - pre &gt; delay) { //只有离上一次调用callback的时间差大于delay
+     //callback()是window调用的，所以callback函数里的this是window
+    callback.call(this,event) 
+     //记录此次调用的时间
+    pre = current
+    }
+}
+}
+//用来返回防抖函数的工具函数 
+function debounce(callback,delay){  
+    //事件发生指定时间后才调用处理事件的回调函数
+    return function (event) {
+        //如果上次事件还没有真正处理，又重复触发就取消它
+        if(callback.hasOwnProperty(&quot;timeoutId&quot;)){
+        clearTimeout(callback.timeoutId)
+        }
+        callback.timeoutId = setTimeout(() =&gt; {
+            callback.call(this,event)  
+            //标记事件已经正在处理
+            delete callback.timeoutId
+        }, delay); 
+    }
+}
 </code></pre>
+
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">

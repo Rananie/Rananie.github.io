@@ -6,12 +6,12 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>MongoDB学习笔记 | Ranan的博客</title>
+  <title>python-文件 | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="数据库,MongoDB," />
+    <meta name="keywords" content="python,python," />
   
 
   
@@ -150,11 +150,11 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2019-08-01
+      <i class="fa fa-calendar"></i>2020-08-30
     </span>
     
       <span>
-        | <a href="/categories/数据库/"><i class="fa fa-bookmark"></i>数据库</a>
+        | <a href="/categories/python/"><i class="fa fa-bookmark"></i>python</a>
       </span>
     
     
@@ -164,50 +164,21 @@
     
   </div>
   <h1 class="passage-title">
-    MongoDB学习笔记
+    python-文件
   </h1>
   
   <article class="passage-article">
-    <p>MongoDB是非关系型数据库文档数据库，存的<strong>类似JSON</strong>的结构。</p>
-<p>启动服务器，db存放数据库，我创建在D盘的。</p>
-<pre><code>mongod --dbpath D:\mongoDB\data\db
-/*-----默认端口号27017-----*/
-mongod --dbpath D:\mongoDB\data\db --port XXX
-</code></pre><p>注意两个概念：</p>
-<ol>
-<li>数据库的服务器。服务器用来保存数据，mongod启动服务器</li>
-<li>数据库的客户端。客户端用来操作服务器，对数据惊醒增删改查的操作，mongo启动</li>
-</ol>
-<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>数据库：存放集合。<br>集合：类似数组，在集合中存放文档。<br>文档：文档是数据库中的最小单位，存储和操作内容都是文档。</p>
-<h2 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h2><p>use 数据库名 //进入数据库</p>
-<h3 id="增加"><a href="#增加" class="headerlink" title="增加"></a>增加</h3><p>插入一个放对象db.<collection>.insert({数据})//db.<collection>.insertOne()<br>插入多个放数组db.<collection>.insert([{},{}]) //db .<collection>.insertMang()</collection></collection></collection></collection></p>
-<p>//插入多条可以配合使用for循环</p>
-<pre><code>var arr =[];
-for (var i=1;i&lt;=20000;i++){
-arr.push({num:i});
-}
-db.numbers.insert(arr)
-</code></pre><h3 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h3><p>db.<collection>.find({条件})，为空查询所有。</collection></p>
-<pre><code>/*----名字为张三并且年龄为28的文档,返回的是一个数组--*/
-db.stus.find({name:&quot;张三&quot;,age:28})
-/*----查询符合条件的第一个集合，返回的是一个对象--*/
-db.stus.findOne({age:28})
-/*-----返回符合条件的文档数量----*/
-db.&lt;collection&gt;.find().count()
-</code></pre><p>MongoDB支持通过内嵌文档的属性进行查询，通过点（.）连接。但是此属性名必须是用引号。</p>
-<pre><code>hobby:{movies:[111,222],XXX}
-
-//查找的是hobby里面的moovies里面的值有111
-db.users.find(‘hobby.movies’:&#39;111&#39;)
-
-</code></pre><h3 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h3><p>db.<collection>.update(查询条件，新对象,{修改的配置选项，可选})。update默认会使用新对象来替换旧对象。所以不常用。<strong>默认情况下只会修改一个</strong> ，实际上既可修改单个，也可修改多个。<br>db.<collection>.updateMany()。 修改多条<br>db.<collection>.updateOne()。 修改单条<br>db.collection.replaceOne()。替换单条</collection></collection></collection></p>
-<p>常与<code>$set</code>结合使用来修改文档中的指定属性，没有的属性名会自动创建。<code>unset</code>可以删除响应属性。</p>
-<pre><code>db.stus.update({name:&quot;李四&quot;},{$set:{gender:&quot;女&quot;}，{add:&quot;哈哈哈&quot;}})
-//若值为一个数组,$push往数组中添加。不考虑是否重复
-//$addToSet 向数组中添加一个新元素。 重复的就不会添加。
-db.stus.update({name:&quot;李四&quot;},{$push:{hobby.movies’:&#39;333&#39;}})
-</code></pre><h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p>db.collection.remove()  删除符合条件的所有文档，第二个参数可选：删除配置（比如只删除一个）。<strong>必须传参，但如果传递空对象，则所有文档都删除（清空集合，性能太差）</strong><br>db.collection.deleteMany()<br>db.collection.deleteOne()<br>db.collection.drop() 删除集合<br>db.dropDatabase()删除数据库</p>
-<p><strong>一般数据是不会删除的，而是在数据中添加一个字段，表示是否删除</strong></p>
+    <h2 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h2><p><strong>open()函数</strong></p>
+<p>通过open函数来打开一个文件<br>参数：<br>    file 打开文件的名字(路径),如果在同一目录下直接使用文件名即可<br>    encoding：文本文件的编码默认None，utf-8中文编码encoding = ‘utf-8’<br>    mode:默认是读取文件,’r’只读;’w’可写,覆盖性的写;’a’追加内容;”+”为操作符增加功能’r+’可读可写、文件不存在报错…;x用来新建文件、文件存在则报错。读取模式写在r/w/a后面，默认是r读取文本文件，b读取二进制文件<br>返回值：<br>    代表当前打开文件的对象,可以看作是一个文件的标识符</p>
+<p><strong>read()方法</strong><br>文件标识符.read()用来获取文件中的内容，将内容全部保存为一个字符串返回。<br>    如果读取的文件太大的话，会一次性将文件的内容加载到内存中，容易导致内存泄露，所以对于较大的文件，不要直接调用read()<br>    read()第一个参数size，读取文本文件时，size是以字符为单位的，读取二进制文件时，size用来指定用读取的字符数量，默认-1<br>    如果多次调用read()会继续上一次读的内容继续往下读，如果已经读取到了文件的最后，则会返回’’空串</p>
+<p><strong>readline()方法/readlines()方法</strong><br>文件标识符.readline()用来读取一行内容<br>文件标识符.readlines()该方法用于一行一行读取内容，会一次性将读取的内容封装到一个列表中返回<br>for t in file_obj采用迭代也可以一行一行读</p>
+<p><strong>write()方法</strong><br>如果操作的是一个文本文件的话，则write()需要传递一个字符串作为参数，返回值是写入字符的个数<br>文件标识符.write(string),一个文件多次调用write则会接着往后写</p>
+<p><strong>with as语句</strong></p>
+<p>文件标识符.close()用来关闭文件</p>
+<p>with … as 语句,可以自动关闭文件<br>with open(file_name) as file_obj:<br>    pass  </p>
+<pre><code># 在with语句中可以直接使用file_obj做文件的标识符
+# 这个文件只能在with中使用，一旦with结束则文件会自动close
+</code></pre><p><strong>tell()/seek()方法</strong><br>文件标识符.tell()用来查看当前读取的位置<br>文件标识符.seek()用来修改当前读取的位置，第一参数是要切换到的位置，第二个参数是计算位置方式0从头计算、1从当前位置开始计算、2从最后位置开始计算</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -216,14 +187,14 @@ db.stus.update({name:&quot;李四&quot;},{$push:{hobby.movies’:&#39;333&#39;}}
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#基本操作"><span class="toc-text">基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#增加"><span class="toc-text">增加</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#查询"><span class="toc-text">查询</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改"><span class="toc-text">修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除"><span class="toc-text">删除</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础"><span class="toc-text">基础</span></a></li></ol>
   </div>
 </aside>
   
   
     <div class="passage-tags">
      
-      <a href="/tags/MongoDB/"><i class="fa fa-tags"></i>MongoDB</a>
+      <a href="/tags/python/"><i class="fa fa-tags"></i>python</a>
     
     </div>
   
@@ -274,10 +245,10 @@ db.stus.update({name:&quot;李四&quot;},{$push:{hobby.movies’:&#39;333&#39;}}
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/01/29/Cookie、LocalStorage、sessionStorage/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2019/06/28/软件超市-返回/" data-enable="true">
+    <a href="/2020/08/24/数组声明式系列方法/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

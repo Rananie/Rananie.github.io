@@ -511,6 +511,47 @@ os.environ[&#39;path&#39;]
 
 # 可以执行操作系统的命令
 os.system(&quot;命令名&quot;)
+# os.listdir(path=&quot;.&quot;)获取当前目录的目录结构,返回一个列表，列表中的每一个元素都是文件夹/文件名
+r = os.listdir()
+# os.getcwd()获取当前所在的目录
+r = os.getcwd
+</code></pre><h2 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h2><p>Python是希望在出现异常时,我们可以编写代码来对异常进行处理，避免因为异常导致整个程序的终止。</p>
+<p>try-except语句，try必须、except和finally至少有一个。</p>
+<pre><code>try:
+    代码块，可能出现错误的语句
+except:
+    代码块，出现错误以后的处理方式
+else:
+    代码块，没出错时要执行的语句
+finally:
+    代码块，该代码块总会执行
+</code></pre><p><strong>异常的传播</strong></p>
+<p>函数中出现异常时，如果函数中对异常进行了处理，异常将不会传播；如果函数中没有对异常进行处理，异常会传播到函数的调用处。<br>在异常传播时，实际上就是把异常对象抛给了调用处，如NameError类的对象专门用来处理变量错误的异常。</p>
+<p><strong>异常对象</strong></p>
+<p>如果except后不跟任何内容(默认Exception)，此时会捕获到所有的异常;如果except后跟着一个异常的类型，那么此时只会捕获该类型的异常<br>一个try后可能跟n个except,类似elif,可以跟n个但只执行一个except<br>Exception是所有异常类的父类，效果等于except后不跟任何内容<br>可以在异常类后面跟着一个as xx,此时xx就是异常对象</p>
+<pre><code>try:
+    print(c)
+    print(10/0)
+except NameError as err:
+    print(&quot;出现NameError异常&quot;) 
+except ZeroDivisionError:
+    print(&quot;出现ZeroDivisionError异常&quot;)
+finally:
+    print(&quot;无论是否出现异常，该子句都会执行&quot;)
+</code></pre><p><strong>抛出异常</strong></p>
+<p>可以使用raise语句来抛出异常，raise语句后需要跟一个异常类或者异常类的实例。<br>也可以自定义异常类，主要创建一个类继承Exception就可</p>
+<pre><code>class MyError(Exception):
+    pass
+
+def add(a,b):
+    # 如果a和b中有负数，就向调用出抛出异常
+    if a&lt;0 or b&lt;0
+        # 抛出异常类
+        raise Exception
+        # 抛出异常类的实例
+        raise MyError(&quot;两个参数中不能有负数&quot;)
+    r = a + b
+    return r
 </code></pre>
   </article>
   <aside class="table-content" id="site-toc">
@@ -519,7 +560,7 @@ os.system(&quot;命令名&quot;)
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础"><span class="toc-text">基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符-操作符"><span class="toc-text">运算符(操作符)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程控制语句"><span class="toc-text">流程控制语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环语句"><span class="toc-text">循环语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#序列"><span class="toc-text">序列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#列表"><span class="toc-text">列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#序列-sequence"><span class="toc-text">序列(sequence)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元组tuple"><span class="toc-text">元组tuple</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典-dict"><span class="toc-text">字典 dict</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合set"><span class="toc-text">集合set</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数-function"><span class="toc-text">函数 function</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象Object"><span class="toc-text">对象Object</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类class"><span class="toc-text">类class</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#垃圾回收"><span class="toc-text">垃圾回收</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模块"><span class="toc-text">模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#包package"><span class="toc-text">包package</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#python标准库"><span class="toc-text">python标准库</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础"><span class="toc-text">基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运算符-操作符"><span class="toc-text">运算符(操作符)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#流程控制语句"><span class="toc-text">流程控制语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#循环语句"><span class="toc-text">循环语句</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#序列"><span class="toc-text">序列</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#列表"><span class="toc-text">列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#序列-sequence"><span class="toc-text">序列(sequence)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元组tuple"><span class="toc-text">元组tuple</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#字典-dict"><span class="toc-text">字典 dict</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#集合set"><span class="toc-text">集合set</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数-function"><span class="toc-text">函数 function</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#对象Object"><span class="toc-text">对象Object</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#类class"><span class="toc-text">类class</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#垃圾回收"><span class="toc-text">垃圾回收</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模块"><span class="toc-text">模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#包package"><span class="toc-text">包package</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#python标准库"><span class="toc-text">python标准库</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常"><span class="toc-text">异常</span></a></li></ol>
   </div>
 </aside>
   

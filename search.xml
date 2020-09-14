@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[9.14主要元素]]></title>
+    <title><![CDATA[9.14数组-主要元素]]></title>
     <url>%2F2020%2F09%2F14%2F9-14%E4%B8%BB%E8%A6%81%E5%85%83%E7%B4%A0%2F</url>
     <content type="text"><![CDATA[题目: 数组中占比超过一半的元素称之为主要元素。给定一个整数数组，找到它的主要元素。若没有，返回-1 示例: 输入：[1,2,5,9,5,9,5,5,5] 输出：5 输入：[3,2] 输出：-1 思路 首先需要知道数组的长度，其次是查询一个元素出现的次数比较是否超过数组长度的一半，若超过则输出该元素，如果没有超过，查询下一个元素。 实现过程 var majorityElement = function(nums) { let flag = 1 let number = nums.length/2 if(nums.length == 1){ return nums[0] } for(let i = 0;i&lt;nums.length;i++){ //获取到当前比较的元素 let current = nums [i] //如果当前元素是第一次出现则查询次数，如果不是第一次出现，则执行下一次循环 if(nums.indexOf(current) != i){ //不是第一次出现,则执行下一次循环 continue } for(let j = i+1;j&lt;nums.length;j++){ //获取到该元素的后续元素 if(current == nums [j]){ flag ++ } if(flag &gt; number){ console.log(flag) //如果次数已经超过了一半则直接返回该元素 return current } } } return -1 }; 其他方法 评论中提及最多的是使用Map容器，Map容器是一组key不重复的键值对的结构。 var majorityElement = function (nums) { //初始化一个max的作用是当前数组的元素仅一个时比较 let len = nums.length / 2, m = new Map(), max = 0 for (let num of nums) { //设置key为num，如果该key已经存在，当前值+1 m.set(num, m.has(num) ? m.get(num) + 1 : 1) //比较当前元素出现的次数与之前出现元素的最大次数 max = Math.max(max, m.get(num)) if (max &gt; len) { return num } } return -1 };]]></content>
       <categories>
         <category>刷题笔记</category>
       </categories>
-      <tags>
-        <tag>数组</tag>
-      </tags>
   </entry>
   <entry>
-    <title><![CDATA[9.13转置矩阵]]></title>
+    <title><![CDATA[9.13数组-转置矩阵]]></title>
     <url>%2F2020%2F09%2F13%2F9-13%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5%2F</url>
     <content type="text"><![CDATA[题目:给定一个矩阵A,返回A的转置矩阵。矩阵的转置是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。 示例： 输入：[[1,2,3],[4,5,6],[7,8,9]] 输出：[[1,4,7],[2,5,8],[3,6,9]] 输入：[[1,2,3],[4,5,6]] 输出：[[1,4],[2,5],[3,6]] 思路: 通过观察矩阵,发现当i(行数)=j(列数)时数字处于对角位置,不需要置换(也可以置换统一处理,置换后不影响);当i ≠ j 时,i与j需要发生置换。 实现过程 let transpose = function (A) { let newArray = new Array(A.length) for (let i = 0; i &lt; A.length; i++) { //得到每一行元素 for (let j = 0; j &lt; A[i].length; j++) { //得到每一个元素 newArray[j][i] = A[i][j] } } return newArray }; let test = [ [1, 2, 3], [4, 5, 6], [7, 8, 9] ] console.log(transpose(test)); 问题1:报错:Cannot set property ‘0’ of undefined原因:需要先初始化数组,再进行赋值。 修改版本: var transpose = function(A) { let newArray = [] //根据A[0]的长度，为新数组创建一系列内部空数组 for (let i =0; i &lt; A[0].length; i++) { newArray[i] = [] } console.log(&#39;newArray&#39;,newArray); for(let i=0;i&lt;A.length;i++){ //得到每一行元素 for(let j=0;j&lt;A[i].length;j++){ //得到每一个元素 newArray[j][i] = A[i][j] } } return newArray }; 反思优化 看了别人的代码，发现可以在以下方面进行优化。初始化新数组的时候，如果使用arr[i][j] = A[j][i],可以少进行一次循环。这里可以多思考一下，现在才开始感觉思维并不是很开阔。 var transpose = function (A) { var rows = A.length var cols = A[0].length var arr = [] for (var i = 0; i &lt; cols; i++) { arr[i] = [] for (var j = 0; j &lt; rows; j++) { arr[i][j] = A[j][i] } } return arr } 还看见了一个更精简的。Array.from把v的伪数组(字符串也可)转换为真数组,第一个参数为有length属性的伪数组，第二个参数作用类似于数组的map方法，用来对每个元素进行处理，将处理后的值放入返回的数组。暂时可以理解但自己想不出来。 var transpose = function(A) { return Array.from({length:A[0].length},(v,i)=&gt;A.map(v=&gt;v[i])) };]]></content>
       <categories>
         <category>刷题笔记</category>
       </categories>
-      <tags>
-        <tag>数组</tag>
-      </tags>
   </entry>
   <entry>
     <title><![CDATA[自定义拷贝]]></title>

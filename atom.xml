@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-09-14T08:02:03.597Z</updated>
+  <updated>2020-10-06T12:59:42.012Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,62 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Java总结</title>
+    <link href="http://yoursite.com/2020/09/25/Java%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2020/09/25/Java总结/</id>
+    <published>2020-09-25T07:39:35.000Z</published>
+    <updated>2020-10-06T12:59:42.012Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="equals"><a href="#equals" class="headerlink" title="equals / =="></a>equals / ==</h2><p>String.equals</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;equals&quot;&gt;&lt;a href=&quot;#equals&quot; class=&quot;headerlink&quot; title=&quot;equals / ==&quot;&gt;&lt;/a&gt;equals / ==&lt;/h2&gt;&lt;p&gt;String.equals&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java基础(学习中)</title>
+    <link href="http://yoursite.com/2020/09/25/Java%E5%9F%BA%E7%A1%80/"/>
+    <id>http://yoursite.com/2020/09/25/Java基础/</id>
+    <published>2020-09-25T07:33:54.000Z</published>
+    <updated>2020-10-08T06:00:34.777Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="第一章-Java概述"><a href="#第一章-Java概述" class="headerlink" title="第一章 Java概述"></a>第一章 Java概述</h2><p><strong>java特点</strong><br>1.面向对象:类与对象两个基本概念，封装、继承与多态三大特点<br>2.健壮性：吸收了c/c++语言的优点，去掉了其影响程序健壮性的部分<br>3.跨平台:不同版本的JVM(java虚拟器)</p><p><strong>java两种核心机制</strong><br>1.Java虚拟机 Java Virtal Machines<br>2.垃圾回收机制 Garbage Collection</p><p>Java程序还是会出现内存泄露和内存溢出问题</p><p><strong>JDK、JRE</strong></p><p>JDK(Java Development Kit) Java开发工具包：是提供给Java开发人员使用，其中包含了java的开发工具与JRE  –&gt; JDK = JRE + 开发工具集(javac.exe,java.exe,javadoc.exe)</p><p>JRE(Java Runtime Environment) Java运行环境:包括java虚拟机和hava程序所需的核心类库等，如果想要运行一个开发好的Java程序，只需要JRE即可 –&gt; JRE = JVM + Java SE标准类库</p><p>JDK的开发工具完成Java程序，JRE运行</p><p>java  -javac 文件名.java 编译-&gt; .class文件（字节码文件） -java 字节码文件名 运行-&gt; 结果</p><p><strong>注释</strong></p><p>单行注释<code>//</code><br>多行注释<code>/**/</code><br>文档注释<code>/** */</code>,注释内容可以被<br>JDK提供的工具javadoc所解析(javadoc -d 生成的文件夹名字 -author -version 文件名)，生成一套以网页文件形式体现的说明文档</p><p><strong>注意</strong></p><p>1.在一个java源文件中可以有多个类，但只能给与<strong>文件名一样的类添加public</strong><br>2.每一行执行语句都以<code>;</code>结束<br>3.程序的入口是main()方法，格式是固定的</p><pre><code class="java">public static void main(String[] args){    System.out.println(&quot;输出语句换行&quot;);    System.out.print(&quot;输出语句不换行&quot;);}</code></pre><p>4.编译之后会生成一个或多个字节码文件，字节码文件的文件名与java源文件中的类名相同</p><h2 id="第二章-基本语法"><a href="#第二章-基本语法" class="headerlink" title="第二章 基本语法"></a>第二章 基本语法</h2><p><strong>Java命名规范(建议)</strong><br>包名：所有小写xxxyyy<br>类名、接口名：驼峰命名法(第一个单词首字母大写)XxxYyy<br>变量名、方法名：第一个单词首字母小写，其余单词首字母大写xxxYyy<br>常量名：所有字母都大写，多单词用下划线连接xxx_yyy</p><p><strong>变量</strong><br>1.Java中每个变量必须先声明并初始化后使用<br>2.变量的作用域:其定义所在的一对<code>{}</code>内<br>3.变量是程序中最基本的存储单元。包含变量类型、变量名和存储的值 –&gt; 数据类型 变量名 = 变量值</p><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>按数据类型分类:<br><img src="/img/Java/数据类型.png"></p><p>1.string是class类型<br>2.定义long型变量，必须以”l”或”L”结尾<br>3.定义float型变量，变量要以”f”或”F”结尾<br>4.char型初始化要有值,单引号括住</p><p>按声明的位置不同:</p><ul><li>成员变量,在方法体外,类体内声明的变量<ul><li>实例变量,不以static修饰</li><li>类变量,以static修饰</li></ul></li><li>局部变量,在方法体内部声明的变量</li></ul><p><strong>基本数据类型之间的运算规则</strong><br>前提:这里讨论7种基本数据类型变量间的运算，不包含布尔类型。</p><p>1.自动类型提升<br>    byte/short/char -&gt; int -&gt; long -&gt; float-&gt;double<br>    当byte/short/char三种类型(同类型也是)做运算时,结果至少用int接收<br>    java在做运算时，如果操作数均在int范围内，那么一律在int的空间内运算<br>2.强制类型转换  - 自动类型提升的逆运算<br>(强制转换的类型)xx </p><p><strong>特殊情况</strong><br>情况1: long l = 12315465111  会把12315465111当作int型(此时会编译失败因为超出int的范围),类型提升到long型<br>情况2: 浮点型默认的是double,所以float型后面一定需要添加f/F</p><p><strong>String</strong><br>1.String属于引用数据类型,双引号括住<br>2.String可以与其他类型做连接运算</p><p><strong>运算符</strong><br>只有单目运算符、三元运算符、赋值运算符是从右向左运算的</p><p>%：取余运算结果的符号与被模数的符号相同<br>++/–/+=/-=/..：不会改变变量本身的数据类型<br>=:支持连续赋值</p><pre><code class="Java">int n =10n += (n++) + (++n)// n = n + (n++) + (++n)// n = 10 + 10 + 12 </code></pre><p>逻辑运算符(操作数是布尔类型)-常用短路与/短路或<br><img src="/img/Java/逻辑运算符.png"></p><p>位运算符 - 最高效方式的计算 2*8? 2&lt;&lt;3 或 8&lt;&lt;1<br><img src="/img/Java/位运算符.png"></p><p>交换两个变量的值<br>1.使用临时变量<br>2.m = (m^n)^n 有局限性:适用于数值类型 m = 原来n的值</p><p>三元运算符：(条件表达式)?表达式1：表达式2</p><h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><p><strong>Scanner类</strong><br>1.导包: import java.util.Scanner<br>2.Scanner实例化<code>Scanner scan = new Scanner(System.in)</code><br>3.调用Scanner类的相关方法(next()/nextXxx())，来获取指定类型的变量</p><pre><code class="java">//使用scanner从键盘获取int型数据import java.util.Scanner;class ScannerTest{    public static void main(String[] args){        Scanner scan = new Scanner(System.in);        String num = scan.next();    }}</code></pre><p><strong>随机数</strong><br>Math.random() [0.0,1.0)<br>公式:[a,b] –&gt; Math.random()*(b-a+1) + a</p><p><strong>switch</strong><br>根据switch表达式中的值，依次匹配case中的常量，有break才退出,没有会向下执行。<br>switch结构中的表达式只能是byte、short、char、int、枚举类型、String类型</p><pre><code class="java">switch(表达式){    //合并    case 常量1:    case 常量2:        语句;    default:        语句;}</code></pre><p><strong>循坏</strong><br>循环结构的4个要素:<br>①初始化条件<br>②循环条件<br>③循环体<br>④迭代条件</p><pre><code>for(①;②;③){    ④}//for循环和while循环可以相互转化①while(②){    ③;    ④; }</code></pre><p>技巧：循环嵌套时，外层控制行数，内层控制列数</p><p><strong>break和continue/return</strong></p><p>break: swich-case/循环结构  - 默认结束当前循环<br>continue: 循环结构  - 默认结束当次循环</p><p>如果要结束外层的for，可以通过标签实现</p><pre><code>label:for(..){    for(..){        ....        break label; //结束指定标识的一层循环结构    }}</code></pre><p>return:并非专门用于结束循环的,当一个方法执行到一个return语句时,这个方法将被结束。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;第一章-Java概述&quot;&gt;&lt;a href=&quot;#第一章-Java概述&quot; class=&quot;headerlink&quot; title=&quot;第一章 Java概述&quot;&gt;&lt;/a&gt;第一章 Java概述&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;java特点&lt;/strong&gt;&lt;br&gt;1.面向对象:类与对象
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
     <title>9.14数组-主要元素</title>
     <link href="http://yoursite.com/2020/09/14/9-14%E4%B8%BB%E8%A6%81%E5%85%83%E7%B4%A0/"/>
     <id>http://yoursite.com/2020/09/14/9-14主要元素/</id>
     <published>2020-09-14T07:11:01.000Z</published>
-    <updated>2020-09-14T08:02:03.597Z</updated>
+    <updated>2020-10-08T05:55:27.517Z</updated>
     
     <content type="html"><![CDATA[<p><strong>题目:</strong> </p><p>数组中占比超过一半的元素称之为主要元素。给定一个整数数组，找到它的主要元素。若没有，返回-1</p><p>示例:</p><pre><code>输入：[1,2,5,9,5,9,5,5,5]输出：5输入：[3,2]输出：-1</code></pre><p><strong>思路</strong></p><p>首先需要知道数组的长度，其次是查询一个元素出现的次数比较是否超过数组长度的一半，若超过则输出该元素，如果没有超过，查询下一个元素。</p><p><strong>实现过程</strong></p><pre><code>var majorityElement = function(nums) {let flag = 1let number = nums.length/2if(nums.length == 1){    return nums[0]}for(let i = 0;i&lt;nums.length;i++){    //获取到当前比较的元素    let current = nums [i]    //如果当前元素是第一次出现则查询次数，如果不是第一次出现，则执行下一次循环    if(nums.indexOf(current) != i){        //不是第一次出现,则执行下一次循环        continue    }    for(let j = i+1;j&lt;nums.length;j++){        //获取到该元素的后续元素        if(current == nums [j]){            flag ++        }        if(flag &gt; number){            console.log(flag)            //如果次数已经超过了一半则直接返回该元素            return current        }    }  }return -1};</code></pre><p><strong>其他方法</strong></p><p>评论中提及最多的是使用Map容器，Map容器是一组key不重复的键值对的结构。</p><pre><code>var majorityElement = function (nums) {    //初始化一个max的作用是当前数组的元素仅一个时比较    let len = nums.length / 2, m = new Map(), max = 0    for (let num of nums) {        //设置key为num，如果该key已经存在，当前值+1        m.set(num, m.has(num) ? m.get(num) + 1 : 1)        //比较当前元素出现的次数与之前出现元素的最大次数        max = Math.max(max, m.get(num))        if (max &gt; len) {            return num        }    }    return -1};</code></pre>]]></content>
     
@@ -43,6 +94,8 @@
       <category term="刷题笔记" scheme="http://yoursite.com/categories/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/"/>
     
     
+      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
+    
   </entry>
   
   <entry>
@@ -50,7 +103,7 @@
     <link href="http://yoursite.com/2020/09/13/9-13%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/"/>
     <id>http://yoursite.com/2020/09/13/9-13转置矩阵/</id>
     <published>2020-09-13T07:35:32.000Z</published>
-    <updated>2020-09-14T08:01:55.697Z</updated>
+    <updated>2020-10-08T05:55:40.866Z</updated>
     
     <content type="html"><![CDATA[<p><strong>题目:</strong><br>给定一个矩阵A,返回A的转置矩阵。<br>矩阵的转置是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。</p><p>示例：</p><pre><code>输入：[[1,2,3],[4,5,6],[7,8,9]]输出：[[1,4,7],[2,5,8],[3,6,9]]输入：[[1,2,3],[4,5,6]]输出：[[1,4],[2,5],[3,6]]</code></pre><p><strong>思路:</strong></p><p>通过观察矩阵,发现当i(行数)=j(列数)时数字处于对角位置,不需要置换(也可以置换统一处理,置换后不影响);当i ≠ j 时,i与j需要发生置换。 </p><p><strong>实现过程</strong></p><pre><code class="js">let transpose = function (A) {let newArray = new Array(A.length)for (let i = 0; i &lt; A.length; i++) {//得到每一行元素    for (let j = 0; j &lt; A[i].length; j++) {    //得到每一个元素     newArray[j][i] = A[i][j]    }    }    return newArray };let test = [    [1, 2, 3],    [4, 5, 6],    [7, 8, 9]]console.log(transpose(test));</code></pre><p>问题1:<br>报错:Cannot set property ‘0’ of undefined<br>原因:需要先初始化数组,再进行赋值。</p><p>修改版本:</p><pre><code class="js">var transpose = function(A) {let newArray = []//根据A[0]的长度，为新数组创建一系列内部空数组for (let i =0; i &lt; A[0].length; i++) {     newArray[i] = [] }console.log(&#39;newArray&#39;,newArray); for(let i=0;i&lt;A.length;i++){//得到每一行元素    for(let j=0;j&lt;A[i].length;j++){    //得到每一个元素    newArray[j][i] = A[i][j]    }}return newArray};</code></pre><p><strong>反思优化</strong></p><p>看了别人的代码，发现可以在以下方面进行优化。<br>初始化新数组的时候，如果使用<code>arr[i][j] = A[j][i]</code>,可以少进行一次循环。这里可以多思考一下，现在才开始感觉思维并不是很开阔。</p><pre><code>var transpose = function (A) {    var rows = A.length    var cols = A[0].length    var arr = []    for (var i = 0; i &lt; cols; i++) {        arr[i] = []        for (var j = 0; j &lt; rows; j++) {            arr[i][j] = A[j][i]        }    }    return arr}</code></pre><p>还看见了一个更精简的。<br>Array.from把v的伪数组(字符串也可)转换为真数组,第一个参数为有length属性的伪数组，第二个参数作用类似于数组的map方法，用来对每个元素进行处理，将处理后的值放入返回的数组。<br>暂时可以理解但自己想不出来。</p><pre><code class="js">var transpose = function(A) {    return Array.from({length:A[0].length},(v,i)=&gt;A.map(v=&gt;v[i]))};</code></pre>]]></content>
     
@@ -68,6 +121,8 @@
     
       <category term="刷题笔记" scheme="http://yoursite.com/categories/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/"/>
     
+    
+      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
     
   </entry>
   

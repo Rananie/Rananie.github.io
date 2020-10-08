@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-10-08T06:00:34.777Z</updated>
+  <updated>2020-10-08T06:05:06.672Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>10.8循环-100以内的质数</title>
+    <link href="http://yoursite.com/2020/10/08/10-8100%E4%BB%A5%E5%86%85%E7%9A%84%E8%B4%A8%E6%95%B0/"/>
+    <id>http://yoursite.com/2020/10/08/10-8100以内的质数/</id>
+    <published>2020-10-08T05:55:22.000Z</published>
+    <updated>2020-10-08T06:05:06.672Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>思路</strong><br>质数：只能被1和它本身整除的自然数</p><p>利用循环,如果这个数可以与其他数取余为0，说明不是质数。</p><p>不是质数的数都可以拆成两个数相乘,也就是成对出现的，所有循环的条件到这个数的根号就行了</p><pre><code>public class PrimeNumber {    public static void main(String[] args) {        for(int i= 3 ;i&lt;=100;i++){            boolean isFlag = true;            //优化二：对本身是质数的自然数是有效的            for (int j =2;j &lt;= Math.sqrt(i);j++){                if(i%j==0){                    //可以除尽，说明不是质数退出当前循环                    isFlag = false;                    break;//优化1：只对本身非质数的自然数是有效的                }            }            if(isFlag){                System.out.println(i + &quot;是质数&quot;);            }        }    }}</code></pre><p><strong>优化</strong><br>利用标签可以有更加简单的写法</p><pre><code>public class PrimeNumber {    public static void main(String[] args) {       label:for(int i= 3 ;i&lt;=100;i++){            for (int j =2;j &lt;= Math.sqrt(i);j++){                if(i%j==0){                    continue label;                }            }                System.out.println(i + &quot;是质数&quot;);        }    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;思路&lt;/strong&gt;&lt;br&gt;质数：只能被1和它本身整除的自然数&lt;/p&gt;
+&lt;p&gt;利用循环,如果这个数可以与其他数取余为0，说明不是质数。&lt;/p&gt;
+&lt;p&gt;不是质数的数都可以拆成两个数相乘,也就是成对出现的，所有循环的条件到这个数的根号就行了&lt;/p&gt;
+&lt;pre&gt;
+      
+    
+    </summary>
+    
+      <category term="刷题笔记" scheme="http://yoursite.com/categories/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>Java基础(学习中)</title>

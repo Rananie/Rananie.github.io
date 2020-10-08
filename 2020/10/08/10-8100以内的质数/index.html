@@ -6,12 +6,12 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>归档: 2020/1 | Ranan的博客</title>
+  <title>10.8循环-100以内的质数 | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo, Theme-AD" />
+    <meta name="keywords" content="刷题笔记,Java," />
   
 
   
@@ -36,7 +36,7 @@
     welcome: {"enable":false,"interval":30},
     start_time: "2018-02-10",
     passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
-    is_post: false,
+    is_post: true,
     lock: false,
     author: "Ranan",
     share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
@@ -146,30 +146,85 @@
 </nav>
 <div id="site-process"></div>
     <main>
-      <div class="timeline">
-  <h2 class="timeline-title">归档: 65篇</h2>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-10-08
+    </span>
+    
+      <span>
+        | <a href="/categories/刷题笔记/"><i class="fa fa-bookmark"></i>刷题笔记</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    10.8循环-100以内的质数
+  </h1>
   
+  <article class="passage-article">
+    <p><strong>思路</strong><br>质数：只能被1和它本身整除的自然数</p>
+<p>利用循环,如果这个数可以与其他数取余为0，说明不是质数。</p>
+<p>不是质数的数都可以拆成两个数相乘,也就是成对出现的，所有循环的条件到这个数的根号就行了</p>
+<pre><code>public class PrimeNumber {
+    public static void main(String[] args) {
+
+        for(int i= 3 ;i&lt;=100;i++){
+            boolean isFlag = true;
+            //优化二：对本身是质数的自然数是有效的
+            for (int j =2;j &lt;= Math.sqrt(i);j++){
+                if(i%j==0){
+                    //可以除尽，说明不是质数退出当前循环
+                    isFlag = false;
+                    break;//优化1：只对本身非质数的自然数是有效的
+                }
+            }
+            if(isFlag){
+                System.out.println(i + &quot;是质数&quot;);
+            }
+        }
+    }
+}
+</code></pre><p><strong>优化</strong><br>利用标签可以有更加简单的写法</p>
+<pre><code>public class PrimeNumber {
+    public static void main(String[] args) {
+
+       label:for(int i= 3 ;i&lt;=100;i++){
+            for (int j =2;j &lt;= Math.sqrt(i);j++){
+                if(i%j==0){
+                    continue label;
+                }
+            }
+                System.out.println(i + &quot;是质数&quot;);
+        }
+    }
+}
+</code></pre>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
     
-      <h3 class="timeline-subtitle">2020</h3>
-    
-    <div class="timeline-item">
-      <time>2020-01-31</time>
-      <a target="_self" href="/2020/01/31/软件超市项目后台管理界面开发流程2/">软件超市项目后台管理界面开发流程2</a>
-    </div>
+  </div>
+</aside>
   
-    
-    <div class="timeline-item">
-      <time>2020-01-29</time>
-      <a target="_self" href="/2020/01/29/软件超市项目后台管理界面开发流程/">软件超市项目后台管理界面开发流程1</a>
-    </div>
   
+    <div class="passage-tags">
+     
+      <a href="/tags/Java/"><i class="fa fa-tags"></i>Java</a>
     
-    <div class="timeline-item">
-      <time>2020-01-29</time>
-      <a target="_self" href="/2020/01/29/Cookie、LocalStorage、sessionStorage/">Cookie、LocalStorage、sessionStorage的区别</a>
     </div>
   
 </div>
+
     </main>
     
     <div class="site-footer-wrapper">
@@ -218,12 +273,12 @@
     <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2020/09/25/Java基础/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
   <div class="bottom-bar-right">
-    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
       <i class="fa fa-bars"></i>
     </a>
     

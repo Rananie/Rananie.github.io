@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-10-08T06:05:06.672Z</updated>
+  <updated>2020-10-09T02:59:30.511Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,62 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>10.9循环-完数</title>
+    <link href="http://yoursite.com/2020/10/09/10-9%E5%BE%AA%E7%8E%AF-%E5%AE%8C%E6%95%B0/"/>
+    <id>http://yoursite.com/2020/10/09/10-9循环-完数/</id>
+    <published>2020-10-09T02:38:26.000Z</published>
+    <updated>2020-10-09T02:59:30.511Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>题目</strong><br>一个数如果恰好等于它的因子(除去这个数本身的其他约数)之和，这个数就称为”完数”。例如6=1+2+3，找出1000以内的所有完数。</p><p><strong>思路</strong><br>需要找因子</p><p>1.由于因子的成对出现，所以找到这个数的开根号为止<br>2.1是任何数的因子且1不是完数,所以从2开始找<br>3.需要一个变量来记录因子和,是因子就加上，最后和这个数比较</p><pre><code>public class wanshu {    public static void main(String[] args) {        for (int i=2;i&lt;=1000;i++){            //因为1是所有数的因子，所以因子之和从1开始            int total = 1;            //为了避免每次循环都计算            double end = Math.sqrt(i);            for (int j=2;j &lt;= end;j++){                if ( i%j ==0){                    total = total + j + i/j ;                }            }            if (i == total){                System.out.println(i + &quot;是完数&quot;);            }        }    }}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;题目&lt;/strong&gt;&lt;br&gt;一个数如果恰好等于它的因子(除去这个数本身的其他约数)之和，这个数就称为”完数”。例如6=1+2+3，找出1000以内的所有完数。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;思路&lt;/strong&gt;&lt;br&gt;需要找因子&lt;/p&gt;
+&lt;p&gt;1.由于因
+      
+    
+    </summary>
+    
+      <category term="刷题笔记" scheme="http://yoursite.com/categories/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java总结(学习中)</title>
+    <link href="http://yoursite.com/2020/10/09/Java%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2020/10/09/Java总结/</id>
+    <published>2020-10-09T02:34:20.000Z</published>
+    <updated>2020-10-09T03:09:46.666Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="辨析"><a href="#辨析" class="headerlink" title="辨析"></a>辨析</h2><p>1.break和continue的相同点与不同点</p><table><thead><tr><th style="text-align:center"></th><th style="text-align:center">使用场景</th><th style="text-align:center">作用 </th></tr></thead><tbody><tr><td style="text-align:center">break</td><td style="text-align:center">switch-case和循环</td><td style="text-align:center">结束当前循环</td></tr><tr><td style="text-align:center">continue</td><td style="text-align:center">循环</td><td style="text-align:center">结束本次循环</td></tr></tbody></table>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;辨析&quot;&gt;&lt;a href=&quot;#辨析&quot; class=&quot;headerlink&quot; title=&quot;辨析&quot;&gt;&lt;/a&gt;辨析&lt;/h2&gt;&lt;p&gt;1.break和continue的相同点与不同点&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&quot;text-alig
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>10.8循环-100以内的质数</title>
@@ -49,9 +105,9 @@
     <link href="http://yoursite.com/2020/09/25/Java%E5%9F%BA%E7%A1%80/"/>
     <id>http://yoursite.com/2020/09/25/Java基础/</id>
     <published>2020-09-25T07:33:54.000Z</published>
-    <updated>2020-10-08T06:00:34.777Z</updated>
+    <updated>2020-10-09T11:28:58.700Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="第一章-Java概述"><a href="#第一章-Java概述" class="headerlink" title="第一章 Java概述"></a>第一章 Java概述</h2><p><strong>java特点</strong><br>1.面向对象:类与对象两个基本概念，封装、继承与多态三大特点<br>2.健壮性：吸收了c/c++语言的优点，去掉了其影响程序健壮性的部分<br>3.跨平台:不同版本的JVM(java虚拟器)</p><p><strong>java两种核心机制</strong><br>1.Java虚拟机 Java Virtal Machines<br>2.垃圾回收机制 Garbage Collection</p><p>Java程序还是会出现内存泄露和内存溢出问题</p><p><strong>JDK、JRE</strong></p><p>JDK(Java Development Kit) Java开发工具包：是提供给Java开发人员使用，其中包含了java的开发工具与JRE  –&gt; JDK = JRE + 开发工具集(javac.exe,java.exe,javadoc.exe)</p><p>JRE(Java Runtime Environment) Java运行环境:包括java虚拟机和hava程序所需的核心类库等，如果想要运行一个开发好的Java程序，只需要JRE即可 –&gt; JRE = JVM + Java SE标准类库</p><p>JDK的开发工具完成Java程序，JRE运行</p><p>java  -javac 文件名.java 编译-&gt; .class文件（字节码文件） -java 字节码文件名 运行-&gt; 结果</p><p><strong>注释</strong></p><p>单行注释<code>//</code><br>多行注释<code>/**/</code><br>文档注释<code>/** */</code>,注释内容可以被<br>JDK提供的工具javadoc所解析(javadoc -d 生成的文件夹名字 -author -version 文件名)，生成一套以网页文件形式体现的说明文档</p><p><strong>注意</strong></p><p>1.在一个java源文件中可以有多个类，但只能给与<strong>文件名一样的类添加public</strong><br>2.每一行执行语句都以<code>;</code>结束<br>3.程序的入口是main()方法，格式是固定的</p><pre><code class="java">public static void main(String[] args){    System.out.println(&quot;输出语句换行&quot;);    System.out.print(&quot;输出语句不换行&quot;);}</code></pre><p>4.编译之后会生成一个或多个字节码文件，字节码文件的文件名与java源文件中的类名相同</p><h2 id="第二章-基本语法"><a href="#第二章-基本语法" class="headerlink" title="第二章 基本语法"></a>第二章 基本语法</h2><p><strong>Java命名规范(建议)</strong><br>包名：所有小写xxxyyy<br>类名、接口名：驼峰命名法(第一个单词首字母大写)XxxYyy<br>变量名、方法名：第一个单词首字母小写，其余单词首字母大写xxxYyy<br>常量名：所有字母都大写，多单词用下划线连接xxx_yyy</p><p><strong>变量</strong><br>1.Java中每个变量必须先声明并初始化后使用<br>2.变量的作用域:其定义所在的一对<code>{}</code>内<br>3.变量是程序中最基本的存储单元。包含变量类型、变量名和存储的值 –&gt; 数据类型 变量名 = 变量值</p><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>按数据类型分类:<br><img src="/img/Java/数据类型.png"></p><p>1.string是class类型<br>2.定义long型变量，必须以”l”或”L”结尾<br>3.定义float型变量，变量要以”f”或”F”结尾<br>4.char型初始化要有值,单引号括住</p><p>按声明的位置不同:</p><ul><li>成员变量,在方法体外,类体内声明的变量<ul><li>实例变量,不以static修饰</li><li>类变量,以static修饰</li></ul></li><li>局部变量,在方法体内部声明的变量</li></ul><p><strong>基本数据类型之间的运算规则</strong><br>前提:这里讨论7种基本数据类型变量间的运算，不包含布尔类型。</p><p>1.自动类型提升<br>    byte/short/char -&gt; int -&gt; long -&gt; float-&gt;double<br>    当byte/short/char三种类型(同类型也是)做运算时,结果至少用int接收<br>    java在做运算时，如果操作数均在int范围内，那么一律在int的空间内运算<br>2.强制类型转换  - 自动类型提升的逆运算<br>(强制转换的类型)xx </p><p><strong>特殊情况</strong><br>情况1: long l = 12315465111  会把12315465111当作int型(此时会编译失败因为超出int的范围),类型提升到long型<br>情况2: 浮点型默认的是double,所以float型后面一定需要添加f/F</p><p><strong>String</strong><br>1.String属于引用数据类型,双引号括住<br>2.String可以与其他类型做连接运算</p><p><strong>运算符</strong><br>只有单目运算符、三元运算符、赋值运算符是从右向左运算的</p><p>%：取余运算结果的符号与被模数的符号相同<br>++/–/+=/-=/..：不会改变变量本身的数据类型<br>=:支持连续赋值</p><pre><code class="Java">int n =10n += (n++) + (++n)// n = n + (n++) + (++n)// n = 10 + 10 + 12 </code></pre><p>逻辑运算符(操作数是布尔类型)-常用短路与/短路或<br><img src="/img/Java/逻辑运算符.png"></p><p>位运算符 - 最高效方式的计算 2*8? 2&lt;&lt;3 或 8&lt;&lt;1<br><img src="/img/Java/位运算符.png"></p><p>交换两个变量的值<br>1.使用临时变量<br>2.m = (m^n)^n 有局限性:适用于数值类型 m = 原来n的值</p><p>三元运算符：(条件表达式)?表达式1：表达式2</p><h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><p><strong>Scanner类</strong><br>1.导包: import java.util.Scanner<br>2.Scanner实例化<code>Scanner scan = new Scanner(System.in)</code><br>3.调用Scanner类的相关方法(next()/nextXxx())，来获取指定类型的变量</p><pre><code class="java">//使用scanner从键盘获取int型数据import java.util.Scanner;class ScannerTest{    public static void main(String[] args){        Scanner scan = new Scanner(System.in);        String num = scan.next();    }}</code></pre><p><strong>随机数</strong><br>Math.random() [0.0,1.0)<br>公式:[a,b] –&gt; Math.random()*(b-a+1) + a</p><p><strong>switch</strong><br>根据switch表达式中的值，依次匹配case中的常量，有break才退出,没有会向下执行。<br>switch结构中的表达式只能是byte、short、char、int、枚举类型、String类型</p><pre><code class="java">switch(表达式){    //合并    case 常量1:    case 常量2:        语句;    default:        语句;}</code></pre><p><strong>循坏</strong><br>循环结构的4个要素:<br>①初始化条件<br>②循环条件<br>③循环体<br>④迭代条件</p><pre><code>for(①;②;③){    ④}//for循环和while循环可以相互转化①while(②){    ③;    ④; }</code></pre><p>技巧：循环嵌套时，外层控制行数，内层控制列数</p><p><strong>break和continue/return</strong></p><p>break: swich-case/循环结构  - 默认结束当前循环<br>continue: 循环结构  - 默认结束当次循环</p><p>如果要结束外层的for，可以通过标签实现</p><pre><code>label:for(..){    for(..){        ....        break label; //结束指定标识的一层循环结构    }}</code></pre><p>return:并非专门用于结束循环的,当一个方法执行到一个return语句时,这个方法将被结束。</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="第一章-Java概述"><a href="#第一章-Java概述" class="headerlink" title="第一章 Java概述"></a>第一章 Java概述</h2><p><strong>java特点</strong><br>1.面向对象:类与对象两个基本概念，封装、继承与多态三大特点<br>2.健壮性：吸收了c/c++语言的优点，去掉了其影响程序健壮性的部分<br>3.跨平台:不同版本的JVM(java虚拟器)</p><p><strong>java两种核心机制</strong><br>1.Java虚拟机 Java Virtal Machines<br>2.垃圾回收机制 Garbage Collection</p><p>Java程序还是会出现内存泄露和内存溢出问题</p><p><strong>JDK、JRE</strong></p><p>JDK(Java Development Kit) Java开发工具包：是提供给Java开发人员使用，其中包含了java的开发工具与JRE  –&gt; JDK = JRE + 开发工具集(javac.exe,java.exe,javadoc.exe)</p><p>JRE(Java Runtime Environment) Java运行环境:包括java虚拟机和hava程序所需的核心类库等，如果想要运行一个开发好的Java程序，只需要JRE即可 –&gt; JRE = JVM + Java SE标准类库</p><p>JDK的开发工具完成Java程序，JRE运行</p><p>java  -javac 文件名.java 编译-&gt; .class文件（字节码文件） -java 字节码文件名 运行-&gt; 结果</p><p><strong>注释</strong></p><p>单行注释<code>//</code><br>多行注释<code>/**/</code><br>文档注释<code>/** */</code>,注释内容可以被<br>JDK提供的工具javadoc所解析(javadoc -d 生成的文件夹名字 -author -version 文件名)，生成一套以网页文件形式体现的说明文档</p><p><strong>注意</strong></p><p>1.在一个java源文件中可以有多个类，但只能给与<strong>文件名一样的类添加public</strong><br>2.每一行执行语句都以<code>;</code>结束<br>3.程序的入口是main()方法，格式是固定的</p><pre><code class="java">public static void main(String[] args){    System.out.println(&quot;输出语句换行&quot;);    System.out.print(&quot;输出语句不换行&quot;);}</code></pre><p>4.编译之后会生成一个或多个字节码文件，字节码文件的文件名与java源文件中的类名相同</p><h2 id="第二章-基本语法"><a href="#第二章-基本语法" class="headerlink" title="第二章 基本语法"></a>第二章 基本语法</h2><p><strong>Java命名规范(建议)</strong><br>包名：所有小写xxxyyy<br>类名、接口名：驼峰命名法(第一个单词首字母大写)XxxYyy<br>变量名、方法名：第一个单词首字母小写，其余单词首字母大写xxxYyy<br>常量名：所有字母都大写，多单词用下划线连接xxx_yyy</p><p><strong>变量</strong><br>1.Java中每个变量必须先声明并初始化后使用<br>2.变量的作用域:其定义所在的一对<code>{}</code>内<br>3.变量是程序中最基本的存储单元。包含变量类型、变量名和存储的值 –&gt; 数据类型 变量名 = 变量值</p><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>按数据类型分类:<br><img src="/img/Java/数据类型.png"></p><p>1.string是class类型<br>2.定义long型变量，必须以”l”或”L”结尾<br>3.定义float型变量，变量要以”f”或”F”结尾<br>4.char型初始化要有值,单引号括住</p><p>按声明的位置不同:</p><ul><li>成员变量,在方法体外,类体内声明的变量<ul><li>实例变量,不以static修饰</li><li>类变量,以static修饰</li></ul></li><li>局部变量,在方法体内部声明的变量</li></ul><p><strong>基本数据类型之间的运算规则</strong><br>前提:这里讨论7种基本数据类型变量间的运算，不包含布尔类型。</p><p>1.自动类型提升<br>    byte/short/char -&gt; int -&gt; long -&gt; float-&gt;double<br>    当byte/short/char三种类型(同类型也是)做运算时,结果至少用int接收<br>    java在做运算时，如果操作数均在int范围内，那么一律在int的空间内运算<br>2.强制类型转换  - 自动类型提升的逆运算<br>(强制转换的类型)xx </p><p><strong>特殊情况</strong><br>情况1: long l = 12315465111  会把12315465111当作int型(此时会编译失败因为超出int的范围),类型提升到long型<br>情况2: 浮点型默认的是double,所以float型后面一定需要添加f/F</p><p><strong>String</strong><br>1.String属于引用数据类型,双引号括住<br>2.String可以与其他类型做连接运算</p><p><strong>运算符</strong><br>只有单目运算符、三元运算符、赋值运算符是从右向左运算的</p><p>%：取余运算结果的符号与被模数的符号相同<br>++/–/+=/-=/..：不会改变变量本身的数据类型<br>=:支持连续赋值</p><pre><code class="Java">int n =10n += (n++) + (++n)// n = n + (n++) + (++n)// n = 10 + 10 + 12 </code></pre><p>逻辑运算符(操作数是布尔类型)-常用短路与/短路或<br><img src="/img/Java/逻辑运算符.png"></p><p>位运算符 - 最高效方式的计算 2*8? 2&lt;&lt;3 或 8&lt;&lt;1<br><img src="/img/Java/位运算符.png"></p><p>交换两个变量的值<br>1.使用临时变量<br>2.m = (m^n)^n 有局限性:适用于数值类型 m = 原来n的值</p><p>三元运算符：(条件表达式)?表达式1：表达式2</p><h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><p><strong>Scanner类</strong><br>1.导包: import java.util.Scanner<br>2.Scanner实例化<code>Scanner scan = new Scanner(System.in)</code><br>3.调用Scanner类的相关方法(next()/nextXxx())，来获取指定类型的变量</p><pre><code class="java">//使用scanner从键盘获取int型数据import java.util.Scanner;class ScannerTest{    public static void main(String[] args){        Scanner scan = new Scanner(System.in);        String num = scan.next();    }}</code></pre><p><strong>随机数</strong><br>Math.random() [0.0,1.0)<br>公式:[a,b] –&gt; Math.random()*(b-a+1) + a</p><p><strong>switch</strong><br>根据switch表达式中的值，依次匹配case中的常量，有break才退出,没有会向下执行。<br>switch结构中的表达式只能是byte、short、char、int、枚举类型、String类型</p><p>注意:在case中不要定义重复的变量，switch下的变量作用域是同一个</p><pre><code class="java">switch(表达式){    //合并    case 常量1:    case 常量2:        语句;    default:        语句;}</code></pre><p><strong>循坏</strong><br>循环结构的4个要素:<br>①初始化条件<br>②循环条件<br>③循环体<br>④迭代条件</p><pre><code>for(①;②;③){    ④}//for循环和while循环可以相互转化①while(②){    ③;    ④; }</code></pre><p>技巧：循环嵌套时，外层控制行数，内层控制列数</p><p><strong>break和continue/return</strong></p><p>break: swich-case/循环结构  - 默认结束当前循环<br>continue: 循环结构  - 默认结束当次循环</p><p>如果要结束外层的for，可以通过标签实现</p><pre><code>label:for(..){    for(..){        ....        break label; //结束指定标识的一层循环结构    }}</code></pre><p>return:并非专门用于结束循环的,当一个方法执行到一个return语句时,这个方法将被结束。</p><h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>数组长度一旦确定就不能修改</p><p><strong>一维数组的使用</strong><br>1.声明和初始化,初始化时要指定长度<br>2.数组的长度,属性length<br>3.数组元素的默认初始化值 -&gt; 数组元素整型:0,浮点型0.0，char型(ACSII=0),布尔型false(0),引用数据类型null</p><pre><code>//静态初始化//int ids[] = 这种写法也可以int[] ids = new int[]{1001,1002,1003}int arr[] = {1234,5}; //类型推断//动态初始化,分配了5个空间String[] names = new String[5];</code></pre><p><strong>一维数组的内存解析</strong><br>栈(stack):局部变量。<br>堆(heap):new出来的结构,对象、数组。</p><p><img src="/img/Java/数组的内存解析.png"></p><p>(初步理解,忽略了String在常量池)</p><p>当局部变量没用之后，会依次出栈，堆里的空间会在一个不确定的时间被回收。</p><p><strong>二维数组的使用</strong></p><pre><code>//静态初始化,可以省略new int[][]int[][] arr = new int[][]{{123},{4,5}};int arr[][] = {{123},{4,5}}; //类型推断//动态初始化[[0,0],[0,0],[0,0]]String[][] arr2 = new String[3][2]//动态初始化String[][] arr2 = new String[3][]</code></pre>]]></content>
     
     <summary type="html">
     
@@ -1818,7 +1874,7 @@ npm install @tinymce/tinymce-vue -S
     <link href="http://yoursite.com/2019/05/15/markdown%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     <id>http://yoursite.com/2019/05/15/markdown学习笔记/</id>
     <published>2019-05-15T14:19:13.000Z</published>
-    <updated>2020-07-09T08:12:45.540Z</updated>
+    <updated>2020-10-09T03:01:54.004Z</updated>
     
     <content type="html"><![CDATA[<p>写博客的时候有些不常用的语法会有遗漏，今天重新学习markdown常用语法并把记录下来。</p><h2 id="综述"><a href="#综述" class="headerlink" title="综述"></a>综述</h2><p>   兼容HTML。不在 Markdown 涵盖范围之内的标签，都可以直接在文档里面用 HTML 撰写。<br>   <span id="jump">用于瞄点测试</span></p><h2 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h2><h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><p>方法一：</p><pre><code>```# 第一级标题 `&lt;h1&gt;`## 第二级标题 `&lt;h2&gt;`### 第三级标题 `&lt;h3&gt;`#### 第二四级标题 `&lt;h4&gt;`##### 第五级标题 `&lt;h5&gt;`###### 第六级标题 `&lt;h6&gt;````</code></pre><p>方法二：</p><p>任何数量的 = 和 - 都可以有效果。</p><pre><code>```一级标题=二级标题-```</code></pre><h3 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h3><p><strong>如果* 和 _ 两边都有空白的话，它们就只会被当成普通的符号</strong><br>如果要在文字前后直接插入普通的星号或底线，可以用反斜线。</p><p>斜体 <code>*内容*</code>或者<code>_内容_</code>   （em）<br>加粗 <code>**内容**</code>或者<code>__内容__</code>   （strong）<br>倾斜加粗 <code>***内容***</code><br>删除线 <code>~~内容~~</code></p><h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>行内式</p><pre><code>```[我的博客](https://biubiuins.github.io/)自动生成连接  &lt;https://biubiuins.github.io/&gt;```</code></pre><p>效果：<br><a href="https://biubiuins.github.io/" target="_blank" rel="noopener">我的博客</a><br>自动生成连接  <a href="https://biubiuins.github.io/" target="_blank" rel="noopener">https://biubiuins.github.io/</a></p><p>添加图片形式和链接类似。</p><pre><code>```格式：![图片描述](url)![GitHub set up](http://zh.mweb.im/asset/img/set-up-git.gif)```</code></pre><p>效果：</p><p><img src="http://zh.mweb.im/asset/img/set-up-git.gif" alt="GitHub set up"></p><h3 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h3><p>可以在一行中用三个以上的星号、减号、底线来建立一个分隔线，行内不能有其他东西。你也可以在星号或是减号中间插入空格。</p><h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><ol><li>只要简单地缩进 4 个空格或是 1 个制表符就可以。 <strong>需要和普通段落之间存在空行！</strong></li><li>`内容`</li><li>多行代码块与语法高亮：在需要高亮的代码块的前一行及后一行使用三个单反引号`包裹，就可以了。</li><li>代码块中包含html代码。在代码区块里面， &amp; 、&lt; 和 > 会自动转成 HTML 实体</li></ol><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><ol><li>在被引用的文本前加上&gt;符号，以及一个空格就可以了，如果只输入了一个&gt;符号会产生一个空白的引用。</li><li>引用可以嵌套</li><li>引用的区块内也可以使用其他的Markdown 语法</li></ol><h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p><strong>符号后面一定要有一个空格，起到缩进的作用。</strong><br>还需要注意的是在使用列表时，只要是数字后面加上英文的点，就会无意间产生列表，比如2017.12.30 这时候想表达的是日期，有些软件把它被误认为是列表。解决方式：在每个点前面加上\就可以了。</p><ol><li>无序列表<br>使用 *，+，- 表示无序列表。</li><li>有序列表<br>使用数字和一个英文句点表示有序列表。</li></ol><h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><pre><code class="html">姓名|分数-|-张三|50李四|80</code></pre><p>效果：</p><table><thead><tr><th>姓名</th><th>分数</th></tr></thead><tbody><tr><td>张三</td><td>50</td></tr><tr><td>李四</td><td>80</td></tr></tbody></table><p>表格对齐方式：我们可以指定表格单元格的对齐方式，冒号在左边表示左对齐，右边表示有对齐，两边都有表示居中。</p><pre><code class="html">姓名|分数:-|-:张三|50李四|80</code></pre><p>效果：</p><table><thead><tr><th style="text-align:left">姓名</th><th style="text-align:right">分数</th></tr></thead><tbody><tr><td style="text-align:left">张三</td><td style="text-align:right">50</td></tr><tr><td style="text-align:left">李四</td><td style="text-align:right">80</td></tr></tbody></table><h3 id="反斜杠"><a href="#反斜杠" class="headerlink" title="反斜杠"></a>反斜杠</h3><p>Markdown 支持以下这些符号前面加上反斜杠来帮助插入普通的符号：</p><pre><code>\   反斜线`   反引号*   星号_   底线{}  花括号[]  方括号()  括弧#   井字号+   加号-   减号.   英文句点!   惊叹号</code></pre><h2 id="常用技巧"><a href="#常用技巧" class="headerlink" title="常用技巧"></a>常用技巧</h2><h3 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h3><p>方法1: 连续两个以上空格+回车<br>方法2：使用html语言换行标签</p><h3 id="其他特殊字符"><a href="#其他特殊字符" class="headerlink" title="其他特殊字符"></a>其他特殊字符</h3><p><a href="https://unicode-table.com/cn/" target="_blank" rel="noopener">unicode字符编码</a></p><h3 id="内容目录"><a href="#内容目录" class="headerlink" title="内容目录"></a>内容目录</h3><p>在段落中填写 <code>[TOC]</code> 以显示全文内容的目录结构，需要独占一行才能生效。</p><h3 id="字体样式"><a href="#字体样式" class="headerlink" title="字体样式"></a>字体样式</h3><p>Size：规定文本的尺寸大小。可能的值：从 1 到 7 的数字。浏览器默认值是 3。</p><pre><code class="html">&lt;font face=&quot;STCAIYUN&quot;&gt;我是华文彩云&lt;/font&gt;&lt;font color=gray size=5&gt;color=gray&lt;/font&gt;&lt;font color=#0099ff size=5 face=&quot;黑体&quot;&gt;color=#0099ff size=5 face=&quot;黑体&quot;&lt;/font&gt;</code></pre><p>背景色需要借助 table, tr, td 等表格标签的 bgcolor 属性来实现背景色的功能。</p><pre><code class="html">&lt;table&gt;&lt;tr&gt;&lt;td bgcolor=pink&gt;背景色是：pink&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</code></pre><p>效果：</p><table><tr><td bgcolor="pink">背景色是：pink</td></tr></table><h3 id="瞄点"><a href="#瞄点" class="headerlink" title="瞄点"></a>瞄点</h3><p>自定义瞄点</p><p>标签形式的锚点目标的id特性值中是不能含有中文字符；</p><pre><code>//建立一个跳转链接[说明文字](#jump)//需要跳转到的位置&lt;span id = &quot;jump&quot;&gt;跳转到的位置&lt;/span&gt;</code></pre><p>效果：<a href="#jump">瞄点</a></p><p>Markdown会自动给每一个h1~h6标题生成一个锚，其id就是标题内容。如<a href="#表格">表格</a></p>]]></content>
     
@@ -1832,9 +1888,7 @@ npm install @tinymce/tinymce-vue -S
     
     </summary>
     
-      <category term="前端" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF/"/>
-    
-      <category term="工具" scheme="http://yoursite.com/categories/%E5%89%8D%E7%AB%AF/%E5%B7%A5%E5%85%B7/"/>
+      <category term="其他" scheme="http://yoursite.com/categories/%E5%85%B6%E4%BB%96/"/>
     
     
   </entry>

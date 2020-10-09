@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>10.8循环-100以内的质数 | Ranan的博客</title>
+  <title>10.9数组练习 | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -150,7 +150,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-10-08
+      <i class="fa fa-calendar"></i>2020-10-09
     </span>
     
       <span>
@@ -164,47 +164,70 @@
     
   </div>
   <h1 class="passage-title">
-    10.8循环-100以内的质数
+    10.9数组练习
   </h1>
   
   <article class="passage-article">
-    <p><strong>思路</strong><br>质数：只能被1和它本身整除的自然数</p>
-<p>利用循环,如果这个数可以与其他数取余为0，说明不是质数。</p>
-<p>不是质数的数都可以拆成两个数相乘,也就是成对出现的，所有循环的条件到这个数的根号就行了</p>
-<pre><code>public class PrimeNumber {
+    <h2 id="杨辉三角"><a href="#杨辉三角" class="headerlink" title="杨辉三角"></a>杨辉三角</h2><p><strong>题目</strong><br>使用二维数组打印一个杨辉三角形(二维数组的内容输出是一个杨辉三角)<br>杨辉三角形:<br>1<br>1 1<br>1 2 1<br>1 3 3 1<br>1 4 6 4 1</p>
+<p><strong>思路</strong><br>1.第一个有1个元素,第n行有n个元素<br>2.第一行的第一个元素和最后一个元素都是1<br>3.从第三行开始，对于非第一个元素和最后一个元素的元素的元素 arr[i][j] = arr[i-1][j-1] + arr[i-1][j]</p>
+<p><strong>代码</strong></p>
+<pre><code class="java">public class YangHuiTriangle {
     public static void main(String[] args) {
+        //1.声明并初始化二维数组
+        int yangHui[][] = new int[10][];
+        //2.给数组的元素赋值
+        for (int i=0;i&lt;yangHui.length;i++){
+            //第n行有n个元素
+            yangHui[i] = new int [i+1];
+            //首位数组赋值
+            yangHui[i][0] = yangHui[i][i] = 1;
+            //非首位元素赋值
+                for (int j=1;j &lt; yangHui[i].length-1;j++){
+                    yangHui[i][j] = yangHui[i-1][j-1] + yangHui[i-1][j];
+            }
 
-        for(int i= 3 ;i&lt;=100;i++){
-            boolean isFlag = true;
-            //优化二：对本身是质数的自然数是有效的
-            for (int j =2;j &lt;= Math.sqrt(i);j++){
-                if(i%j==0){
-                    //可以除尽，说明不是质数退出当前循环
-                    isFlag = false;
-                    break;//优化1：只对本身非质数的自然数是有效的
-                }
+        }
+        //3.输出二维数组
+        for(int i=0;i&lt;yangHui.length;i++){
+            for(int j=0;j&lt;yangHui[i].length;j++){
+                System.out.print(yangHui[i][j] + &quot; &quot;);
             }
-            if(isFlag){
-                System.out.println(i + &quot;是质数&quot;);
-            }
+            System.out.println();
         }
     }
 }
-</code></pre><p><strong>优化</strong><br>利用标签可以有更加简单的写法</p>
-<pre><code>public class PrimeNumber {
-    public static void main(String[] args) {
 
-       label:for(int i= 3 ;i&lt;=100;i++){
-            for (int j =2;j &lt;= Math.sqrt(i);j++){
-                if(i%j==0){
-                    continue label;
+</code></pre>
+<h2 id="常见算法"><a href="#常见算法" class="headerlink" title="常见算法"></a>常见算法</h2><p>1.创建一个长度为6的int型数组，要求数组元素的值都在1-30之间，且是随机赋值。同时要求元素的值各不相同。<br>思路：赋值之后与数组前面的元素比较，相同则重新赋值</p>
+<pre><code class="java">public class Test {
+    public static void main(String[] args) {
+        int arr [] = new int[6];
+        for (int i=0;i&lt;arr.length;i++){
+            arr[i] = (int)(Math.random()*30)+1;
+            //与该元素前面的元素进行比较
+            for (int j =0;j&lt;i;j++){
+                if (arr[i]==arr[j]){
+                    //说明相同了
+                    i--;
+                    break;
                 }
             }
-                System.out.println(i + &quot;是质数&quot;);
+        }
+        //输出
+        for (int i = 0;i &lt; arr.length;i++){
+            System.out.println(arr[i]);
         }
     }
 }
 </code></pre>
+<h3 id="数组的复制-反转-查找"><a href="#数组的复制-反转-查找" class="headerlink" title="数组的复制/反转/查找"></a>数组的复制/反转/查找</h3><p>数组的复制(区别于数组变量的赋值)</p>
+<pre><code>int[] array1,array2;
+array1 = new int[]{1,2,3,4,5};
+array2 = new int[array1.length];
+for(int i=0;i&lt;array2.length;i++){
+    array2[i] = array1[i];
+}
+</code></pre><h3 id="数组元素的排序算法"><a href="#数组元素的排序算法" class="headerlink" title="数组元素的排序算法"></a>数组元素的排序算法</h3>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -212,7 +235,7 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#杨辉三角"><span class="toc-text">杨辉三角</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见算法"><span class="toc-text">常见算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数组的复制-反转-查找"><span class="toc-text">数组的复制/反转/查找</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组元素的排序算法"><span class="toc-text">数组元素的排序算法</span></a></li></ol></li></ol>
   </div>
 </aside>
   
@@ -270,10 +293,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/10/09/Java总结/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/09/25/Java基础/" data-enable="true">
+    <a href="/2020/10/09/Java总结/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

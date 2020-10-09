@@ -204,7 +204,7 @@
 <p><strong>特殊情况</strong><br>情况1: long l = 12315465111  会把12315465111当作int型(此时会编译失败因为超出int的范围),类型提升到long型<br>情况2: 浮点型默认的是double,所以float型后面一定需要添加f/F</p>
 <p><strong>String</strong><br>1.String属于引用数据类型,双引号括住<br>2.String可以与其他类型做连接运算</p>
 <p><strong>运算符</strong><br>只有单目运算符、三元运算符、赋值运算符是从右向左运算的</p>
-<p>%：取余运算结果的符号与被模数的符号相同<br>++/–/+=/-=/..：不会改变变量本身的数据类型<br>=:支持连续赋值</p>
+<p>%：取余运算结果的符号与被模数的符号相同<br>++/–/+=/-=/..：不会改变变量本身的数据类型<br>=:支持连续赋值,类型相同可以赋值(或者变量提升),赋值时会先检查类型是否相同</p>
 <pre><code class="Java">int n =10
 n += (n++) + (++n)
 // n = n + (n++) + (++n)
@@ -265,22 +265,19 @@ int[] ids = new int[]{1001,1002,1003}
 int arr[] = {1234,5}; //类型推断
 //动态初始化,分配了5个空间
 String[] names = new String[5];
-</code></pre><p><strong>一维数组的内存解析</strong><br>栈(stack):局部变量。<br>堆(heap):new出来的结构,对象、数组。</p>
-<p><img src="/img/Java/数组的内存解析.png"></p>
-<p>(初步理解,忽略了String在常量池)</p>
+</code></pre><p><strong>一维数组的内存解析</strong><br>栈(stack):局部变量。<br>堆(heap):new出来的结构,对象、数组。<br>方法区：常量池 +</p>
+<p>String在常量池<br><img src="/img/Java/数组的内存解析0.png"></p>
 <p>当局部变量没用之后，会依次出栈，堆里的空间会在一个不确定的时间被回收。</p>
 <p><strong>二维数组的使用</strong></p>
 <pre><code>//静态初始化,可以省略new int[][]
 int[][] arr = new int[][]{{123},{4,5}};
 int arr[][] = {{123},{4,5}}; //类型推断
-
-
 //动态初始化[[0,0],[0,0],[0,0]]
 String[][] arr2 = new String[3][2]
 //动态初始化
 String[][] arr2 = new String[3][]
+</code></pre><p><img src="/img/Java/数组的内存解析1.png"></p>
 
-</code></pre>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -346,7 +343,7 @@ String[][] arr2 = new String[3][]
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/10/08/10-8100以内的质数/" data-enable="true">
+    <a href="/2020/10/08/10-8循环-质数.完数/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
     <a href="/2020/09/14/9-14主要元素/" data-enable="true">

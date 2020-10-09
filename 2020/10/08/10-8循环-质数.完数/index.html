@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>10.9循环-完数 | Ranan的博客</title>
+  <title>10.8循环-质数/完数 | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -150,7 +150,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-10-09
+      <i class="fa fa-calendar"></i>2020-10-08
     </span>
     
       <span>
@@ -164,11 +164,47 @@
     
   </div>
   <h1 class="passage-title">
-    10.9循环-完数
+    10.8循环-质数/完数
   </h1>
   
   <article class="passage-article">
-    <p><strong>题目</strong><br>一个数如果恰好等于它的因子(除去这个数本身的其他约数)之和，这个数就称为”完数”。例如6=1+2+3，找出1000以内的所有完数。</p>
+    <h2 id="质数"><a href="#质数" class="headerlink" title="质数"></a>质数</h2><p><strong>思路</strong><br>质数：只能被1和它本身整除的自然数</p>
+<p>利用循环,如果这个数可以与其他数取余为0，说明不是质数。</p>
+<p>不是质数的数都可以拆成两个数相乘,也就是成对出现的，所有循环的条件到这个数的根号就行了</p>
+<pre><code>public class PrimeNumber {
+    public static void main(String[] args) {
+
+        for(int i= 3 ;i&lt;=100;i++){
+            boolean isFlag = true;
+            //优化二：对本身是质数的自然数是有效的
+            for (int j =2;j &lt;= Math.sqrt(i);j++){
+                if(i%j==0){
+                    //可以除尽，说明不是质数退出当前循环
+                    isFlag = false;
+                    break;//优化1：只对本身非质数的自然数是有效的
+                }
+            }
+            if(isFlag){
+                System.out.println(i + &quot;是质数&quot;);
+            }
+        }
+    }
+}
+</code></pre><p><strong>优化</strong><br>利用标签可以有更加简单的写法</p>
+<pre><code>public class PrimeNumber {
+    public static void main(String[] args) {
+
+       label:for(int i= 3 ;i&lt;=100;i++){
+            for (int j =2;j &lt;= Math.sqrt(i);j++){
+                if(i%j==0){
+                    continue label;
+                }
+            }
+                System.out.println(i + &quot;是质数&quot;);
+        }
+    }
+}
+</code></pre><h2 id="完数"><a href="#完数" class="headerlink" title="完数"></a>完数</h2><p><strong>题目</strong><br>一个数如果恰好等于它的因子(除去这个数本身的其他约数)之和，这个数就称为”完数”。例如6=1+2+3，找出1000以内的所有完数。</p>
 <p><strong>思路</strong><br>需要找因子</p>
 <p>1.由于因子的成对出现，所以找到这个数的开根号为止<br>2.1是任何数的因子且1不是完数,所以从2开始找<br>3.需要一个变量来记录因子和,是因子就加上，最后和这个数比较</p>
 <pre><code>public class wanshu {
@@ -197,7 +233,7 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#质数"><span class="toc-text">质数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完数"><span class="toc-text">完数</span></a></li></ol>
   </div>
 </aside>
   
@@ -255,10 +291,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2020/10/09/Java总结/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/10/09/Java总结/" data-enable="true">
+    <a href="/2020/09/25/Java基础/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

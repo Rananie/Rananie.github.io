@@ -227,7 +227,80 @@ array2 = new int[array1.length];
 for(int i=0;i&lt;array2.length;i++){
     array2[i] = array1[i];
 }
-</code></pre><h3 id="数组元素的排序算法"><a href="#数组元素的排序算法" class="headerlink" title="数组元素的排序算法"></a>数组元素的排序算法</h3>
+</code></pre><p>数组的反转</p>
+<pre><code>for(int i=0,j=arr.length-1;i&lt;j;i++,j++){
+    String temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+}
+</code></pre><h3 id="数组元素的排序算法"><a href="#数组元素的排序算法" class="headerlink" title="数组元素的排序算法"></a>数组元素的排序算法</h3><p>内部排序：所有操作都在内存中完成<br>外部排序：借助外部存储器由多次内部排序组成</p>
+<p>交换排序:冒泡排序、快速排序</p>
+<p><strong>冒泡排序</strong><br>冒泡排序思想:依次比较相邻元素的排序码，发现逆序则交换，使排序码较大的元素往后移</p>
+<p>因为排序的过程中，各元素不断接近自己的位置，所以如果一趟比较下来没有进行过交换说明有序，因此需要在排序过程中设置一个标志swap判断元素是否进行过交换，从而较少不必要的比较</p>
+<p>1.最多进行length-1趟<br>2.每趟是的比较次数arr.length-1-i<br>3.比较的是相邻的两个元素<br>4.结束条件:某一趟没有交换元素</p>
+<pre><code>//时间复杂度O(n^2)
+public class BubbleSort {
+
+    public static void main(String [] args){
+        int[] arr = new int[]{0,1,2,3,4};
+        boolean swap = false;
+        //冒泡排序,最多进行arr.length-1趟
+        for(int i=0;i&lt;arr.length-1;i++){
+            for (int j = 0; j&lt;arr.length-1-i;j++){
+                //比较次数arr.length-1-i
+                if (arr[j] &gt; arr[j+1]){
+                    //每趟都是相邻元素比较
+                    int temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                    swap = true;
+                }
+
+            }
+            //某趟没有交换元素说明有序可以直接退出
+            if (!swap){
+                break;
+            }
+        }
+    }
+}
+</code></pre><p><strong>快速排序</strong><br>内排序中速度最快的排序方法，冒泡排序的升级版，时间复杂度O(nlog(n))</p>
+<p>基本思想(大规模化小规模使用同样的办法-递归)：<br>1.任取一个元素(如:第一个)为中心pivot<br>2.所有比它小的元素放前,比它大的放后,形成左右两个子表<br>3.对各子表重新选择中心元素并依此规律调整<br>4.直到每个子表的元素只剩下一个</p>
+<p><img src="/img/Java/挖坑法.png"></p>
+<pre><code>//时间复杂度O(nlogn)
+public class QuickSort {
+    //实现快排的代码
+    public static void subSort(int[] data,int start,int end){
+        //当开始位置小于结束位置时，可以开始排序
+        if(start &lt;end){
+            int pivot = data[start];
+            //记录需要进行排序的下标
+            int low = start,high = end;
+
+            while (low &lt; high){
+                //从右往左找，找到一个比基准数小的数
+                while (low&lt;high &amp;&amp; pivot&lt;=data[high]){
+                    high--;
+                }
+                //找到比基数小的,填左边坑
+                data[low] = data[high];
+                //从做往右找，找到一个比基准数大的数
+                while (low &lt; high &amp;&amp; pivot &gt;= data[low]) {
+                    low++;
+                }
+                //填右边坑
+                data[high] = data[low];
+            }//low = high跳出循环
+            //基准数找到正确的位置
+            data[low] = pivot;
+            //处理所有比基准数小的数字
+            subSort(data,start,low);
+            //处理所有比基准数大的数字
+            subSort(data,low+1,end);
+    }
+    }
+}
+</code></pre>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -293,7 +366,7 @@ for(int i=0;i&lt;array2.length;i++){
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2020/10/11/Java面向对象/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
     <a href="/2020/10/09/Java总结/" data-enable="true">

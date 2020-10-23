@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-10-23T12:19:42.936Z</updated>
+  <updated>2020-10-23T12:51:38.037Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://yoursite.com/2020/10/23/10-24pla%E7%AE%97%E6%B3%95/"/>
     <id>http://yoursite.com/2020/10/23/10-24pla算法/</id>
     <published>2020-10-23T12:15:19.000Z</published>
-    <updated>2020-10-23T12:19:42.936Z</updated>
+    <updated>2020-10-23T12:51:38.037Z</updated>
     
     <content type="html"><![CDATA[<p>机器学习的第一次作业,思路还是比较好懂的,就是补了好多numpy的知识。</p><pre><code>from matplotlib import pyplot as pltimport numpy as np# 生成数据def generateData(loc1,scale1,loc2,scale2):    # 此产生两组正态分布数据,每组为形状为10行2列    nD1=np.random.normal(loc1,loc2,size=(10,2))    nD2=np.random.normal(scale1,scale2,size=(10,2))    # 将返回的元组转换成np中的数组形式,x的数据    data1X=np.array(nD1)    data2X=np.array(nD2)    # y的数据,打的标记希望的数据    data1Y = np.ones(10)    data2Y = np.negative(np.ones(10))    # 产生训练数据    data1 = np.c_[data1X,data1Y]    data2 = np.c_[data2X,data2Y]    return data1,data2def pla():    # 初始化向量,cout为计数器，    W = np.ones(3)    data1,data2 = generateData(8,1,3,1)    data = np.vstack((data1, data2)) # 合并成一个矩阵    # 插入列向量[1,1,...,1]，实现w=[b,w1,w2] * [1,x1,x2],用于运算    data = np.c_[np.ones(20), data]    while True:        iscompleted = True        for i in range(0, len(data)):            X = data[i][:-1]            # 两个矩阵相乘的结果,通过函数计算得到的Y            Y = np.dot(W,X)            if np.sign(Y) == np.sign(data[i][-1]):                continue            # 有错则退出循环            iscompleted = False            # 计算之后修正w            W = W + data[i][-1] * X        if iscompleted:            break    # 画图    # 去第一个元素为x,第二个元素为y    plt.plot(data1[:,0],data1[:,1],&quot;yo&quot;)    plt.plot(data2[:,0],data2[:,1],&quot;bo&quot;)    # x是二维数组 wx = w·（x,y) = (b,w1,w2)·(1,x,y) 推出y的表达式    y = -W[1] / W[2] * data[:,1] - W[0] / W[2]    plt.plot(data[:,1], y, c=&#39;g&#39;)    plt.show()if __name__==&#39;__main__&#39;:    pla()</code></pre>]]></content>
     

@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Java,Java," />
+    <meta name="keywords" content="大数据,Java,Java," />
   
 
   
@@ -154,7 +154,7 @@
     </span>
     
       <span>
-        | <a href="/categories/Java/"><i class="fa fa-bookmark"></i>Java</a>
+        | <a href="/categories/大数据/"><i class="fa fa-bookmark"></i>大数据</a>
       </span>
     
     
@@ -265,8 +265,8 @@ int[] ids = new int[]{1001,1002,1003}
 int arr[] = {1234,5}; //类型推断
 //动态初始化,分配了5个空间
 String[] names = new String[5];
-</code></pre><p><strong>一维数组的内存解析</strong><br>栈(stack):局部变量。<br>堆(heap):new出来的结构,对象、数组、对象实体<br>方法区：常量池(String…) + 类信息 + 静态变量…</p>
-<p><img src="/img/Java/数组的内存解析0.png"></p>
+</code></pre><p><strong>一维数组的内存解析</strong><br>虚拟机栈(stack):局部变量。<br>堆(heap):new出来的结构,对象(非static的成员变量)、数组<br>方法区：常量池(String…) + 类信息(方法) + 静态变量…</p>
+<p><img 两src="/img/Java/数组的内存解析0.png"></p>
 <p>当局部变量没用之后，会依次出栈，堆里的空间会在一个不确定的时间被回收。</p>
 <p><strong>二维数组的使用</strong></p>
 <pre><code>//静态初始化,可以省略new int[][]
@@ -284,7 +284,11 @@ String[][] arr2 = new String[3][]
 int [] arr = new int[] {1,2}
 arr = null
 System.out.print(arr[0])
-</code></pre><h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3>
+</code></pre><h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><p>String存放在常量池中(不可变的字符序列),在底层以char[]存放(数组长度不能改-&gt; string是不可变的字符序列)<br>修改String类型变量，是新建了一个char[]数组把新的地址赋值给该变量</p>
+<pre><code>//可以不用new
+String s1 = &quot;hello&quot;;
+String s2 = new String()
+</code></pre>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -292,7 +296,7 @@ System.out.print(arr[0])
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一章-Java概述"><span class="toc-text">第一章 Java概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二章-基本语法"><span class="toc-text">第二章 基本语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流程控制"><span class="toc-text">流程控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#面向对象"><span class="toc-text">面向对象</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一章-Java概述"><span class="toc-text">第一章 Java概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二章-基本语法"><span class="toc-text">第二章 基本语法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#流程控制"><span class="toc-text">流程控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#面向对象"><span class="toc-text">面向对象</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String"><span class="toc-text">String</span></a></li></ol></li></ol>
   </div>
 </aside>
   

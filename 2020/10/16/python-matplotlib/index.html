@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ranan" />
+  
+  
+  <title>python-matplotlib | Ranan的博客</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="python,python," />
+  
+
+  
+  <meta name="description" content="Ranan的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Ranan",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+      <span class="site-header-brand-motto"> | 不能放弃思考</span>
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://biubiuins.github.io/" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-10-16
+    </span>
+    
+      <span>
+        | <a href="/categories/python/"><i class="fa fa-bookmark"></i>python</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    python-matplotlib
+  </h1>
+  
+  <article class="passage-article">
+    <p>完成机器学习pla算法和pocket算法作业的时候,想要把数据可视化出来,发现需要用到matplotlib,此篇博客记录matplotlib的学习笔记。</p>
+<p>matplotlib专门用于开发2D(3D)图表,mat-matrix矩阵、plot画图、lib-library库</p>
+<h2 id="matplotlib"><a href="#matplotlib" class="headerlink" title="matplotlib"></a>matplotlib</h2><h3 id="matplotlib的三层结构"><a href="#matplotlib的三层结构" class="headerlink" title="matplotlib的三层结构"></a>matplotlib的三层结构</h3><p>1.容器层<br>    1.1画板层Canvas 一般不会接触<br>    1.2画布层Figure:plt.figure() 一个画布上可以创建多个绘图区<br>    1.3绘图区/坐标系axes:plt.subplots<br>        x、y轴张成的区域<br>        2.辅助显示层:图表的一些标注,辅助图表的显示<br>        3.图像层:画不同的图表</p>
+<p>matplotlib.pyplot的函数(类似与matlab的画图函数)作用于当前图形(figure)的当前坐标系(axes)</p>
+<p>简单的案例:</p>
+<pre><code># 创建画布
+plt.figure(figsize=(长,宽),dpi=)
+    # figsize:设置画布大小
+    # dpi：图形的清晰度
+    # 返回fig对象
+# 绘制图像
+x = [1,2,3,4,5]
+plt.plot(x,[5,4,3,2,1]) # 对此调用就可以画多个图标
+plt.xticks(x[::5]) # 准备x的刻度说明  
+# 保存图片
+plt.savefig(&quot;test.png&quot;)
+# 显示图像
+plt.show()
+</code></pre><p><strong>注意</strong><br>1.plt.show()会释放figure资源,如果在显示图片之后保存图片将只能保存空图片<br>2.显示中文需要下载字体<br>    2.1安装字体<br>    2.2删除matplotlib缓存文件<br>    2.3配置文件<br><a href="https://www.zhihu.com/question/25404709" target="_blank" rel="noopener">解决的教程</a></p>
+<p><strong>辅助显示层</strong><br>编辑坐标轴<br>plt.xticks(x,<strong>kwargs)<br>x:要显示的刻度值,后面参数可以传显示的值<br>plt.yticks(y,</strong>kwargs)<br>y:要显示的刻度值</p>
+<pre><code>from matplotlib import pyplot as plt
+import random
+
+x = range(10)
+y = [random.uniform(15,18) for i in x]
+x_ticks_label = [&quot;11点{}分&quot;.format(i) for i in x]
+
+plt.figure()
+plt.plot(x,y)
+# x的刻度说明
+plt.xticks(x[::3],x_ticks_label[::3])
+plt.show() # 展现图片
+</code></pre><p>网格显示<br>plt.grid(True,linestyle=”–”,alpha=0.5)<br>参数1:是否显示网格<br>参数2:线条风格<br>参数3:透明度</p>
+<p>添加描述信息<br>plt.xlabel(“描述信息”)<br>plt.ylabel(“描述信息”)<br>plt.title(“”)</p>
+<p><strong>图像层</strong></p>
+<p>多次调用就可以画多个图表</p>
+<p>图例不仅需要在图像层修改还需要在辅助层修改plt.legend(loc=”low right”),可以空参</p>
+<p><strong>绘图区</strong></p>
+<p>figure axes = matplotlib.subplots(nrows=1,ncols=1,**fig_kw)创建一个带有多个axes(坐标系/绘图区)的图,返回一个图对象和绘图区</p>
+<pre><code>figure, axes = plt.subplots(nrows=1,ncols=1,**fig_kw) # 返回两个实例对象
+# axes[0].方法的形式来画图,具体的可以看文档
+</code></pre><h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><p>散点图scatter:用两组数据构成多个坐标点，考察坐标点的分布，判断两变量之间是否存在某种关联趋势<br>plt.scatter(x,y)</p>
+<p>柱状图bar:统计/对比<br>plt.bar(x,y,width,align=”center”,**kwargs)<br>对比形式的柱状图:<br>1.调用两次bar<br>2.两个bar的x要岔开,否则画出来的柱状图会覆盖</p>
+<p>直方图histogram:分布状态</p>
+<p>饼图:分类数据的占比情况</p>
+<h2 id="numpy"><a href="#numpy" class="headerlink" title="numpy"></a>numpy</h2><p>numpy中在数值计算,多用于多维数组上执行数值运算</p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p><strong>numpy.array()</strong></p>
+<p>Python中的list容器，可以当成数组使用，但由于里面的元素可以是任何对象，因此列表中保存的是对象的指针，保存一个简单的列表[1,2,3]，需要三个指针和三个整数对象，结构不高效<br>Python中提供的array模块，只支持一维数组，不支持多维数组(矩阵)</p>
+<p>numpy.array(arr)<br>参数:数值<br>返回值:ndarray类型,也就是numpy里面的数组类型</p>
+<p><strong>numpy.arange()</strong><br>参数表示范围,根据范围返回一个可迭代的数组类型</p>
+<pre><code>numpy.arange(10) = np.array(range(10))
+# [0,1,2,3,4,6,7,8,9]
+a = numpy.arange(4,10,2)
+# [4,6,8] 从4开始到10结束,步长为2
+
+type(a) # 返回a的数据类型
+a.dtype # 数组中数据的类型
+a.shape # 返回一个元组(几个值就是几维的)，输出矩阵的形状
+</code></pre><h4 id="数组计算"><a href="#数组计算" class="headerlink" title="数组计算"></a>数组计算</h4><p><strong>np.r_[]/np._c[]</strong></p>
+<p>np.r_：是按列连接两个矩阵，就是把两矩阵上下相加，要求列数相等</p>
+<p>np.c_：是按行连接两个矩阵，就是把两矩阵左右相加，要求行数相等</p>
+<pre><code>import numpy as np
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+c = np.c_[a,b]
+
+print(np.r_[a,b])
+print(c)
+print(np.c_[c,a])
+
+# 结果：
+[1 2 3 4 5 6]
+
+[[1 4]
+ [2 5]
+ [3 6]]
+
+[[1 4 1]
+ [2 5 2]
+ [3 6 3]]
+
+</code></pre><p><strong>numpy.vstack(tup)</strong></p>
+<p>垂直按照行顺序把每个数组给堆叠起来,返回一个新的数组</p>
+<p>参数:元组、列表或者numpy数组<br>返回值:numpy的数组</p>
+<pre><code>a=[[1],[2],[3]]
+b=[[1],[2],[3]]
+c=[[1],[2],[3]]
+d=[[1],[2],[3]]
+print(np.vstack((a,b,c,d)))
+
+# 输出：
+[[1]
+ [2]
+ [3]
+ [1]
+ [2]
+ [3]
+ [1]
+ [2]
+ [3]
+ [1]
+ [2]
+ [3]]
+
+a=[1,2,3]
+b=[4,5,6]
+print(np.vstack((a,b)))
+
+# 输出：
+[[1 2 3]
+ [4 5 6]]
+
+</code></pre><h4 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h4><pre><code># 返回值是一个数组
+
+X = np.array ([[0, 1], [2, 3], [4, 5], [6, 7], [8, 9], [10, 11], [12, 13], [14, 15], [16, 17], [18, 19]])
+
+# X[:,0]就是取所有行的第0个数据
+print(X[:, 0])
+#输出：[ 0  2  4  6  8 10 12 14 16 18]
+
+#X[1,:]第一维中下标为1的元素的所有值
+print(X[1,:])
+#输出：[2 3]
+
+Y = np.array([[0,1,2],[3,4,5],[6,7,8],[9,10,11],[12,13,14],[15,16,17],[18,19,20]])
+
+#Y[:, m:n]，即取所有数据的第m到n-1列数据，含左不含右
+print (Y[:,1:3])
+&#39;&#39;&#39;
+输出：
+[[ 1  2]
+ [ 4  5]
+ [ 7  8]
+ [10 11]
+ [13 14]
+ [16 17]
+ [19 20]]
+</code></pre><p><strong>numpy.random.normal()</strong><br>numpy.random.normal(loc=0,scale=1e-2,size=shape)</p>
+<p>生成正态分布</p>
+<p>参数：<br>1.loc(float)：正态分布的均值，对应着这个分布的中心。loc=0说明这一个以Y轴为对称轴的正态分布，<br>2.scale(float)：正态分布的标准差，对应分布的宽度，scale越大，正态分布的曲线越矮胖，scale越小，曲线越高瘦。<br>3.size(int 或者整数元组):输出的形状,默认为None。如(10,2) -&gt; 输出一个10行2列的元组</p>
+<p>返回值:元组数据</p>
+<p>标准正太分布（μ=0, σ=1）:np.random.normal(loc=0, scale=1, size)</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#matplotlib"><span class="toc-text">matplotlib</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#matplotlib的三层结构"><span class="toc-text">matplotlib的三层结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对比"><span class="toc-text">对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#numpy"><span class="toc-text">numpy</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#数组"><span class="toc-text">数组</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数组计算"><span class="toc-text">数组计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#切片"><span class="toc-text">切片</span></a></li></ol></li></ol></li></ol>
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/python/"><i class="fa fa-tags"></i>python</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2020/10/19/linux学习笔记/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2020/10/11/Java面向对象/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

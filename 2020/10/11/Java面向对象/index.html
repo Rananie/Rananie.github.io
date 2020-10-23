@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Java,Java," />
+    <meta name="keywords" content="大数据,Java,Java," />
   
 
   
@@ -154,7 +154,7 @@
     </span>
     
       <span>
-        | <a href="/categories/Java/"><i class="fa fa-bookmark"></i>Java</a>
+        | <a href="/categories/大数据/"><i class="fa fa-bookmark"></i>大数据</a>
       </span>
     
     
@@ -171,10 +171,150 @@
     <p>Java类及类的成员:属性、方法、构造器;代码块、内部类<br>面向对象的三大特征:封装性、继承性、多态性<br>其他关键字:this、super、static、final、abstract、package、import、interface</p>
 <h2 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h2><p>类(Class)与对象(Object)是面向对象的核心概念。<br>类是对一类事务的抽象描述<br>对象是实际存在的该类事务的每个个体，也称为实例(instance)</p>
 <p>面向对象程序设计的重点是类的设计，也就是类的成员(属性与方法)的设计。</p>
-<p><strong>方法</strong></p>
+<p><strong>类的成员</strong></p>
+<ul>
+<li>实例变量,不以static修饰</li>
+<li>类变量,以static修饰</li>
+</ul>
 <p>类的实例化: 类名(变量类型) 类的实例名(变量) = new 类名()</p>
 <p>类中方法的声明: 权限修饰符(可省略) 返回值类型(没有就void) 方法名(形参类型 形参名,形参列表){方法体}</p>
 <p>权限修饰符:private、public、缺省、protected  –&gt; 封装性</p>
+<p><strong>成员变量与局部变量</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">位置</th>
+<th style="text-align:center">权限修饰符</th>
+<th style="text-align:center">默认初始化值</th>
+<th style="text-align:center">内存加载位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">成员变量</td>
+<td style="text-align:center">类的{}里</td>
+<td style="text-align:center">可以使用权限修饰符</td>
+<td style="text-align:center">根据其类型有默认初始化值</td>
+<td style="text-align:center">非static的 堆空间</td>
+</tr>
+<tr>
+<td style="text-align:center">局部变量</td>
+<td style="text-align:center">方法内、方法形参、构造器内、构造器形参、代码块内</td>
+<td style="text-align:center">不可以使用权限修饰符</td>
+<td style="text-align:center">没有默认初始化值,在调用局部变量前要显示赋值</td>
+<td style="text-align:center">栈空间</td>
+</tr>
+</tbody>
+</table>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p><strong>方法的重载(overload)</strong><br>同一个类中,允许存在同名方法,只要他们的参数个数或者参数类型不同。  -&gt; 两同一不同:同一个类、相同方法名，参数列表不同</p>
+<p>通过对象调用方法时，如何确定某一个指定的方法?    方法名 -&gt; 参数列表(参数的个数,数据类型及顺序)</p>
+<p><strong>方法的重写(override/overwrite)</strong><br>在子类中可以根据需要对从父类中继承来的方法进行重置、覆盖。</p>
+<p>重写的规定：<br>    方法声明：权限修饰符 返回值类型 方法名(形参列表) throws 异常的类型{<br>    //方法体<br>    }<br>1.子类重写继承的方法：要求方法名、形参列表要相同<br>2.子类重写的方法权限修饰符 &gt; =  父类被重写方法权限修饰符  –&gt; 子类不能重写父类中声明为private权限的方法<br>3.异常类型也是包含关系  子类 &lt;= 父类<br>4.返回值类型:基本数据类型同，引用数据类型同或子类<br>    父类void,子类void<br>    父类返回A类型,子类A类或A类的子类<br>    父类基本数据类型,子类相同的基本数据类型<br>5.重写争对的是非static  -&gt; static方法不能被覆盖,随类的加载而加载</p>
+<p><strong>可变个数的形参</strong></p>
+<p>格式:数据类型 … 变量名</p>
+<p>String …strs = String[] strs</p>
+<p>使用:<br>1.当调用可变个数形参的方法时，可以传参0,1,2…<br>2.也会与本类中方法名相同,形参不同的方法之间构成重载<br>3.此写法类似JS的三点运算符,所有参数会被封装成一个数组<br>4.可变个数形参在方法的形参中，必须声明在<strong>末尾</strong></p>
+<p><strong>方法参数的值传递机制-值传递</strong><br>基本数据类型:数据值<br>引用数据类型:地址值(含变量的数据类型 –&gt; 用于赋值的检查)</p>
+<h3 id="构造器-constructor"><a href="#构造器-constructor" class="headerlink" title="构造器(constructor)"></a>构造器(constructor)</h3><p>任何一个类都有构造器constructor,构造器与类同名</p>
+<p><strong>构造器的作用</strong><br>1.创建对象:new + 构造器<br>2.初始化对象的信息</p>
+<p><strong>构造器的说明</strong><br>1.如果没有显式的定义类的构造器,系统默认提供一个空参的构造器，<strong>空参的构造器权限跟类一样</strong><br>2.定义构造器的格式:权限修饰符 类名(形参列表) 不需要返回值类型<br>3.一个类中定义的多个构造器,彼此构成重载<br>4.显示定义了有参数的构造器之后,系统就不提供默认的空参构造器<br>5.一个类中至少有一个构造器</p>
+<pre><code>//创建类的对象: new + 构造器
+Person p = new Person()
+class Person{
+    //属性...
+    //构造器
+    public Person(){
+
+    }
+    //方法...
+}
+</code></pre><p><strong>属性赋值的先后顺序</strong></p>
+<p>1.默认初始化<br>2.显示初始化<br>3.构造器中初始化</p>
+<p><strong>JavaBean</strong><br>JavaBean是Java语言写成的可重用组件<br>JavaBean其实就是指符合如下标准的Java类:<br>①类是公共的<br>②有一个无参的公共的构造器<br>③有属性,且有对应的get、set方法</p>
+<h2 id="面向对象的特点"><a href="#面向对象的特点" class="headerlink" title="面向对象的特点"></a>面向对象的特点</h2><h3 id="封装与隐藏"><a href="#封装与隐藏" class="headerlink" title="封装与隐藏"></a>封装与隐藏</h3><p>为什么需要封装性？设计程序追求”高内聚，低耦合”<br>高内聚:类的内部数据操作细节自己完成，不允许外部干涉<br>低耦合:仅对外暴露少量的方法用于使用</p>
+<p><strong>封装性的体现</strong><br>1.将类的属性私(xx)有化(private),提供公共的(public)方法来获取(getxx)和设置(setxx)该私有属性<br>2.不对外暴露的私有方法<br>3.单例模式(将构造器私有化)</p>
+<p>封装性的体现，需要权限修饰符来配合<br>封装性:Java提供了4种权限修饰符来修饰类及类的内部结构，体现其在被调用时的可见性大小</p>
+<p><strong>权限修饰符</strong><br>1.权限从小到大 private、缺省、protected、public<br>2.4种权限可以用来修饰类的属性、方法、构造器、内部类<br>3.对于class的权限修饰只可以用public和default(缺省);public类可以在任意地方被访问,default类只可以被同一个包内部的类访问</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">修饰符</th>
+<th style="text-align:center">类内部</th>
+<th style="text-align:center">同一个包</th>
+<th style="text-align:center">不同包的子类</th>
+<th style="text-align:center">同一个工程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">private</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">- </td>
+</tr>
+<tr>
+<td style="text-align:center">(缺省)</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">protected</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">- </td>
+</tr>
+<tr>
+<td style="text-align:center">public</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+</tr>
+</tbody>
+</table>
+<p>不同包下的普通类(非子类)不能调用声明为private、缺省、protected权限的属性</p>
+<h3 id="继承性"><a href="#继承性" class="headerlink" title="继承性"></a>继承性</h3><p>继承在原有类的基础上进行扩展,一个子类只能有一个父类</p>
+<pre><code>public class Student extend Person{
+    //与Person重复的就不用写的
+}
+</code></pre><p><strong>继承性的好处</strong><br>1.减少了代码的冗余，提高了代码的复用性<br>2.便于功能的扩展<br>3.为多态性的使用提供前提</p>
+<h3 id="多态性"><a href="#多态性" class="headerlink" title="多态性"></a>多态性</h3><p>对象的多态性,<strong>父类的引用指向子类的对象</strong>,可以理解为一个事物的多种形态。</p>
+<p><strong>多态的使用(虚拟方法调用)</strong><br>1.当<strong>调用子父类同名同参数的方法</strong>(不能调用子类特有的,只能调用父类有的方法)时，实际执行的是子类重写父类的方法<br>2.在编译期,只能调用父类中声明的方法,但在运行期,我们实际执行的是子类重新父类的方法(方法编译时看左边,运行时看右边)<br>3.对象的多态性只适用与方法,不适用于属性(属性编译和运行都看左边) —&gt; 属性不会被重写,若同名则在内存中会出现两个</p>
+<p>虚拟方法调用</p>
+<p>常用场景:<br>当一个方法的形参是父类时,实参可以传子类的实例,调用时实际调用的是子类重写的方法,这样就不用分别定义形参是子类的该方法.</p>
+<pre><code>//方法编译看左,运行看右
+Person p = new Woman();
+Person p2 =  new man();
+//调用的是子类的eat方法,
+p.eat();
+</code></pre><p><strong>多态性的使用前提</strong><br>1.类的继承关系<br>2.方法的重写</p>
+<h4 id="Object类"><a href="#Object类" class="headerlink" title="Object类"></a>Object类</h4><p>Java.lang.Object类是所有类(除Object类本身)的祖先类</p>
+<h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><h3 id="this的使用"><a href="#this的使用" class="headerlink" title="this的使用"></a>this的使用</h3><p>this指向当前实例,可以理解为当前对象。</p>
+<p>this可以调用:属性、方法、构造器</p>
+<p>在类的方法中,我们可以使用’this.属性’或’this.方法’的方式,调用当前对象属性或方法,通常会省略’this.’，但如果方法的形参和类的属性同名时,必须显示用”this.变量”来表明是属性。</p>
+<p>this还可以用来调用构造器,在构造器中通过使用”this(形参列表)”来调用其他不同的构造器。”this(形参列表)”必须声明在当前构造器的<strong>首行</strong></p>
+<pre><code>public Person(){
+   //... 
+}
+public Person(String name){
+    this(); //调用空参,通过传不同类型的参数调用其他不同的构造器
+}
+</code></pre><h3 id="super关键字"><a href="#super关键字" class="headerlink" title="super关键字"></a>super关键字</h3><p>super理解为父类的，可以用来调用属性、方法、构造器</p>
+<p>this与super都是解决子类父类成员重名时，用谁的问题</p>
+<p><strong>super的使用</strong><br>1.子类重写父类的方法后,想使用父类的原方法可以使用super<br>2.super(形参列表)的形式调用父类中的构造器,必须声明在子类构造器的<strong>首行</strong><br>3.构造器首行没有显示声明this(形参列表)或super(形参列表),默认调用的super()</p>
+<h4 id="子类对象的实例化过程"><a href="#子类对象的实例化过程" class="headerlink" title="子类对象的实例化过程"></a>子类对象的实例化过程</h4><p>从结果上来看(继承性):<br>    子类继承父类以后,就获取了父类中声明的属性或方法<br>    创建子类的对象,在堆空间中,就会加载所有父类中声明的属性<br>从过程上来看:<br>    通过子类的构造器创建子类对象时，一定会直接或间接调用其父类的构造器，直到调用到java.lang.Object类中空参的构造器为止。<br>明确:虽然创建子类对象时,调用了父类的构造器但没有new,所以只创建了一个new子类出来的对象。</p>
+<h3 id="package的使用"><a href="#package的使用" class="headerlink" title="package的使用"></a>package的使用</h3><p>1.为了更好的实现项目中类的管理提供包的概念<br>2.使用package声明类或接口所属的包，声明在源文件的首行<br>3.包属于标识符，遵循标识符的命名规则、规范(都小写)<br>4.每’.’一次，就代表一层文件目录</p>
+<p>补充:同一个包下，不能命名同名的接口、类;不同的包下，可以命名同名的接口、类</p>
+<h4 id="MVC设计模式"><a href="#MVC设计模式" class="headerlink" title="MVC设计模式"></a>MVC设计模式</h4><p>MVC将整个程序分成视图模式层(view)、控制器层(controller)、数据模型层(model)三层</p>
+<p>模型层 model 主要处理数据<br>数据对象封装 model.bean/domain<br>数据库操作类 model.dao<br>数据库 model.db</p>
+<p>视图层 view 显示数据<br>相关工具栏 view.utils<br>自定义view view.ui</p>
+<p>控制层 controller 处理业务逻辑<br>应用界面相关 controller.activity<br>存放fragment controller.fragment<br>显示列表的适配器 controller.adapter<br>服务相关 controller.service<br>抽取的基类 controller.base</p>
+<h3 id="import关键字的使用"><a href="#import关键字的使用" class="headerlink" title="import关键字的使用"></a>import关键字的使用</h3><p>1.导入指定包下的类、接口(导入所有用通配符<em>)<br>2.声明在包声明和类声明之间<br>3.使用是的本包或者java.lang包下的，则可以省略import结构，<strong>用其他包的内容都要引用</strong><br>4.在源文件中使用了不同包下的同名类，至少一个类以全类名的方式使用(包名.类 …)<br>5.如果’xxx.</em>‘方式表明可以调用xxx包下的所有结构(当前层次)，但是如果使用的是xxx的子包仍然需要显示调用  –&gt; 只要跨包就要import<br>6.import static 导入指定类或接口中的静态结构 -&gt; import 落脚点是类或接口，import static 落脚点是类中的静态结构</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -183,7 +323,7 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#类和对象"><span class="toc-text">类和对象</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#类和对象"><span class="toc-text">类和对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造器-constructor"><span class="toc-text">构造器(constructor)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象的特点"><span class="toc-text">面向对象的特点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#封装与隐藏"><span class="toc-text">封装与隐藏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继承性"><span class="toc-text">继承性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多态性"><span class="toc-text">多态性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Object类"><span class="toc-text">Object类</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关键字"><span class="toc-text">关键字</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#this的使用"><span class="toc-text">this的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#super关键字"><span class="toc-text">super关键字</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#子类对象的实例化过程"><span class="toc-text">子类对象的实例化过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#package的使用"><span class="toc-text">package的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MVC设计模式"><span class="toc-text">MVC设计模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#import关键字的使用"><span class="toc-text">import关键字的使用</span></a></li></ol></li></ol>
   </div>
 </aside>
   
@@ -241,7 +381,7 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2020/10/16/python-matplotlib/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
     <a href="/2020/10/09/10-9数组练习/" data-enable="true">

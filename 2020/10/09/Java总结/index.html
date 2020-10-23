@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Java,Java," />
+    <meta name="keywords" content="大数据,Java,Java," />
   
 
   
@@ -154,7 +154,7 @@
     </span>
     
       <span>
-        | <a href="/categories/Java/"><i class="fa fa-bookmark"></i>Java</a>
+        | <a href="/categories/大数据/"><i class="fa fa-bookmark"></i>大数据</a>
       </span>
     
     
@@ -168,8 +168,7 @@
   </h1>
   
   <article class="passage-article">
-    <h2 id="辨析"><a href="#辨析" class="headerlink" title="辨析"></a>辨析</h2><p>1.break和continue的相同点与不同点</p>
-<table>
+    <h2 id="辨析"><a href="#辨析" class="headerlink" title="辨析"></a>辨析</h2><h3 id="1-break和continue的相同点与不同点"><a href="#1-break和continue的相同点与不同点" class="headerlink" title="1.break和continue的相同点与不同点"></a>1.break和continue的相同点与不同点</h3><table>
 <thead>
 <tr>
 <th style="text-align:center"></th>
@@ -190,11 +189,44 @@
 </tr>
 </tbody>
 </table>
-<p>2.面向过程(procedure oriented programming)与面向对象(object oriented programming)</p>
-<p>例子:人把大象装进冰箱</p>
+<h3 id="2-面向过程-procedure-oriented-programming-与面向对象-object-oriented-programming"><a href="#2-面向过程-procedure-oriented-programming-与面向对象-object-oriented-programming" class="headerlink" title="2.面向过程(procedure oriented programming)与面向对象(object oriented programming)"></a>2.面向过程(procedure oriented programming)与面向对象(object oriented programming)</h3><p>例子:人把大象装进冰箱</p>
 <p><strong>面向过程:强调的是功能行为,考虑怎么做</strong><br>①把冰箱门打开<br>②抬起大象，塞进冰箱<br>③把冰箱门关闭</p>
 <p><strong>面向对象:强调具备了功能的对象,考虑谁来做</strong><br>面向对象的三个点:封装（encapsulation），继承（Inheritance），多态（polymorphism）<br>实体：人、冰箱、冰箱<br>人{<br>  打开(冰箱){<br>    冰箱.打开();<br>  }<br>  抬起(大象){<br>    大象.进入(冰箱);<br>  }<br>  关闭(冰箱){<br>    冰箱.关闭();<br>  }<br>}<br>冰箱{<br>  打开(){}<br>  关闭(){}<br>}<br>大象{<br>  进入(冰箱){}<br>}</p>
-
+<h3 id="3-成员变量与局部变量的区别"><a href="#3-成员变量与局部变量的区别" class="headerlink" title="3.成员变量与局部变量的区别"></a>3.成员变量与局部变量的区别</h3><table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">位置</th>
+<th style="text-align:center">权限修饰符</th>
+<th style="text-align:center">默认初始化值</th>
+<th>内存加载位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">成员变量</td>
+<td style="text-align:center">类的{}里</td>
+<td style="text-align:center">可以使用权限修饰符</td>
+<td style="text-align:center">根据其类型有默认初始化值</td>
+<td>非static的 堆空间</td>
+</tr>
+<tr>
+<td style="text-align:center">局部变量</td>
+<td style="text-align:center">方法内、方法形参、构造器内、构造器形参、代码块内</td>
+<td style="text-align:center">不可以使用权限修饰符</td>
+<td style="text-align:center">没有默认初始化值,在调用局部变量前要显示赋值</td>
+<td>栈空间</td>
+</tr>
+</tbody>
+</table>
+<p>补充： 有默认初始化值-&gt; 数组元素、属性</p>
+<h3 id="4-区分方法的重载和重写"><a href="#4-区分方法的重载和重写" class="headerlink" title="4.区分方法的重载和重写"></a>4.区分方法的重载和重写</h3><p>重载：同类下同方法名不同形参列表的方法之间<br>重写：子类继承父类的方法之后，对父类的方法进行重写</p>
+<p><strong>待解决</strong><br>1.面向对象的编程思想？<br>2.equal与==的区别<br>3.toString方法的重写<br>4.new</p>
+<h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><h3 id="1-万事万物皆对象？"><a href="#1-万事万物皆对象？" class="headerlink" title="1.万事万物皆对象？"></a>1.万事万物皆对象？</h3><p>①在Java语言中，我们将功能、结构等封装到类中，通过类的实例化，来调用具体的结构<br>②在与前端后端交互时，前后端的结构在Java层交互时，都体现为类、对象</p>
+<h3 id="2-println参数为char数组时的重载"><a href="#2-println参数为char数组时的重载" class="headerlink" title="2.println参数为char数组时的重载"></a>2.println参数为char数组时的重载</h3><pre><code>char[] arr = new char[]{&#39;a&#39;,&#39;b&#39;,&#39;c&#39;};
+System.out.println(arr); 
+//输出abc 而不是地址值
+</code></pre>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -202,7 +234,7 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#辨析"><span class="toc-text">辨析</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#辨析"><span class="toc-text">辨析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-break和continue的相同点与不同点"><span class="toc-text">1.break和continue的相同点与不同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-面向过程-procedure-oriented-programming-与面向对象-object-oriented-programming"><span class="toc-text">2.面向过程(procedure oriented programming)与面向对象(object oriented programming)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-成员变量与局部变量的区别"><span class="toc-text">3.成员变量与局部变量的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-区分方法的重载和重写"><span class="toc-text">4.区分方法的重载和重写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#理解"><span class="toc-text">理解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-万事万物皆对象？"><span class="toc-text">1.万事万物皆对象？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-println参数为char数组时的重载"><span class="toc-text">2.println参数为char数组时的重载</span></a></li></ol></li></ol>
   </div>
 </aside>
   

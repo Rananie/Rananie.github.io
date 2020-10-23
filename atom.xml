@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-10-11T15:10:40.641Z</updated>
+  <updated>2020-10-23T12:19:42.936Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,13 +17,128 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>10-24pla算法</title>
+    <link href="http://yoursite.com/2020/10/23/10-24pla%E7%AE%97%E6%B3%95/"/>
+    <id>http://yoursite.com/2020/10/23/10-24pla算法/</id>
+    <published>2020-10-23T12:15:19.000Z</published>
+    <updated>2020-10-23T12:19:42.936Z</updated>
+    
+    <content type="html"><![CDATA[<p>机器学习的第一次作业,思路还是比较好懂的,就是补了好多numpy的知识。</p><pre><code>from matplotlib import pyplot as pltimport numpy as np# 生成数据def generateData(loc1,scale1,loc2,scale2):    # 此产生两组正态分布数据,每组为形状为10行2列    nD1=np.random.normal(loc1,loc2,size=(10,2))    nD2=np.random.normal(scale1,scale2,size=(10,2))    # 将返回的元组转换成np中的数组形式,x的数据    data1X=np.array(nD1)    data2X=np.array(nD2)    # y的数据,打的标记希望的数据    data1Y = np.ones(10)    data2Y = np.negative(np.ones(10))    # 产生训练数据    data1 = np.c_[data1X,data1Y]    data2 = np.c_[data2X,data2Y]    return data1,data2def pla():    # 初始化向量,cout为计数器，    W = np.ones(3)    data1,data2 = generateData(8,1,3,1)    data = np.vstack((data1, data2)) # 合并成一个矩阵    # 插入列向量[1,1,...,1]，实现w=[b,w1,w2] * [1,x1,x2],用于运算    data = np.c_[np.ones(20), data]    while True:        iscompleted = True        for i in range(0, len(data)):            X = data[i][:-1]            # 两个矩阵相乘的结果,通过函数计算得到的Y            Y = np.dot(W,X)            if np.sign(Y) == np.sign(data[i][-1]):                continue            # 有错则退出循环            iscompleted = False            # 计算之后修正w            W = W + data[i][-1] * X        if iscompleted:            break    # 画图    # 去第一个元素为x,第二个元素为y    plt.plot(data1[:,0],data1[:,1],&quot;yo&quot;)    plt.plot(data2[:,0],data2[:,1],&quot;bo&quot;)    # x是二维数组 wx = w·（x,y) = (b,w1,w2)·(1,x,y) 推出y的表达式    y = -W[1] / W[2] * data[:,1] - W[0] / W[2]    plt.plot(data[:,1], y, c=&#39;g&#39;)    plt.show()if __name__==&#39;__main__&#39;:    pla()</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;机器学习的第一次作业,思路还是比较好懂的,就是补了好多numpy的知识。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from matplotlib import pyplot as plt
+import numpy as np
+
+# 生成数据
+def generateData(loc1
+      
+    
+    </summary>
+    
+      <category term="刷题笔记" scheme="http://yoursite.com/categories/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python总结</title>
+    <link href="http://yoursite.com/2020/10/22/python%E6%80%BB%E7%BB%93/"/>
+    <id>http://yoursite.com/2020/10/22/python总结/</id>
+    <published>2020-10-22T11:54:25.000Z</published>
+    <updated>2020-10-22T12:02:01.300Z</updated>
+    
+    <content type="html"><![CDATA[<p>1.两个数组合成一个数组</p><p><strong>List extend()方法</strong></p><p>extend()函数用于在列表的后面追加新列表的值，用新列表扩展原来的列表。</p><p>list.extend(元素列表),没有返回值</p><p><strong>+操作符</strong></p><pre><code>c1 = [&quot;Red&quot;,&quot;Green&quot;,&quot;Blue&quot;]c2 = [&quot;Orange&quot;,&quot;Yellow&quot;,&quot;Indigo&quot;]c3 = c1 + c2# c3 = [&quot;Red&quot;,&quot;Green&quot;,&quot;Blue&quot;,&quot;Orange&quot;,&quot;Yellow&quot;,&quot;Indigo&quot;]</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;1.两个数组合成一个数组&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;List extend()方法&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;extend()函数用于在列表的后面追加新列表的值，用新列表扩展原来的列表。&lt;/p&gt;
+&lt;p&gt;list.extend(元素列表),没有返回值&lt;/p&gt;
+&lt;p&gt;
+      
+    
+    </summary>
+    
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux学习笔记(学习中)</title>
+    <link href="http://yoursite.com/2020/10/19/linux%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>http://yoursite.com/2020/10/19/linux学习笔记/</id>
+    <published>2020-10-19T09:00:19.000Z</published>
+    <updated>2020-10-22T08:58:49.511Z</updated>
+    
+    <content type="html"><![CDATA[<p>在Linux内核基础上进行开发包装,Linux的主要发行版:Ubuntu(乌班图)、RedHat(红帽)、CentOS…</p><p><strong>虚拟机连接的三种模式</strong></p><p>双击进去,crtl+alt退出</p><p>虚拟机网络连接的三种模式:</p><p>张三:192.168.14.100(windows)<br>李四:192.168.14.110</p><p>桥接模式:<br>1.大家都在同一个网段,相互可以通讯<br>2.因为ip地址有限,可能造成ip冲突</p><p>centos虚拟机张三:192.168.14.xxx,与李四在同一个网段相互可以通信</p><p>Nat网络地址转换模式:<br>1.虚拟机不占用其他的ip,不会ip冲突<br>2.内网的其他人不能和虚拟机通讯</p><p>王五:192.168.14.130(windows)<br>转换的新地址:192.168.20.33<br>centos虚拟机:192.168.20.xxx<br>王五可以通过转化成14网段与李四通讯,但李四找不到王五</p><p>主机模式:<br>单独的一台电脑</p><p><img src="/img/大数据/虚拟机网络连接的三种方.png"></p><h2 id="Linux的目录结构"><a href="#Linux的目录结构" class="headerlink" title="Linux的目录结构"></a>Linux的目录结构</h2><p>Linux的文件系统是采用树状目录结构，只有一个根目录，<strong>在Linux世界里，一切皆文件。</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在Linux内核基础上进行开发包装,Linux的主要发行版:Ubuntu(乌班图)、RedHat(红帽)、CentOS…&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;虚拟机连接的三种模式&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;双击进去,crtl+alt退出&lt;/p&gt;
+&lt;p&gt;虚拟机网络连接的三种模
+      
+    
+    </summary>
+    
+      <category term="大数据" scheme="http://yoursite.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+      <category term="linux" scheme="http://yoursite.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/linux/"/>
+    
+    
+      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>python-matplotlib</title>
+    <link href="http://yoursite.com/2020/10/16/python-matplotlib/"/>
+    <id>http://yoursite.com/2020/10/16/python-matplotlib/</id>
+    <published>2020-10-16T08:20:23.000Z</published>
+    <updated>2020-10-23T12:05:54.989Z</updated>
+    
+    <content type="html"><![CDATA[<p>完成机器学习pla算法和pocket算法作业的时候,想要把数据可视化出来,发现需要用到matplotlib,此篇博客记录matplotlib的学习笔记。</p><p>matplotlib专门用于开发2D(3D)图表,mat-matrix矩阵、plot画图、lib-library库</p><h2 id="matplotlib"><a href="#matplotlib" class="headerlink" title="matplotlib"></a>matplotlib</h2><h3 id="matplotlib的三层结构"><a href="#matplotlib的三层结构" class="headerlink" title="matplotlib的三层结构"></a>matplotlib的三层结构</h3><p>1.容器层<br>    1.1画板层Canvas 一般不会接触<br>    1.2画布层Figure:plt.figure() 一个画布上可以创建多个绘图区<br>    1.3绘图区/坐标系axes:plt.subplots<br>        x、y轴张成的区域<br>        2.辅助显示层:图表的一些标注,辅助图表的显示<br>        3.图像层:画不同的图表</p><p>matplotlib.pyplot的函数(类似与matlab的画图函数)作用于当前图形(figure)的当前坐标系(axes)</p><p>简单的案例:</p><pre><code># 创建画布plt.figure(figsize=(长,宽),dpi=)    # figsize:设置画布大小    # dpi：图形的清晰度    # 返回fig对象# 绘制图像x = [1,2,3,4,5]plt.plot(x,[5,4,3,2,1]) # 对此调用就可以画多个图标plt.xticks(x[::5]) # 准备x的刻度说明  # 保存图片plt.savefig(&quot;test.png&quot;)# 显示图像plt.show()</code></pre><p><strong>注意</strong><br>1.plt.show()会释放figure资源,如果在显示图片之后保存图片将只能保存空图片<br>2.显示中文需要下载字体<br>    2.1安装字体<br>    2.2删除matplotlib缓存文件<br>    2.3配置文件<br><a href="https://www.zhihu.com/question/25404709" target="_blank" rel="noopener">解决的教程</a></p><p><strong>辅助显示层</strong><br>编辑坐标轴<br>plt.xticks(x,<strong>kwargs)<br>x:要显示的刻度值,后面参数可以传显示的值<br>plt.yticks(y,</strong>kwargs)<br>y:要显示的刻度值</p><pre><code>from matplotlib import pyplot as pltimport randomx = range(10)y = [random.uniform(15,18) for i in x]x_ticks_label = [&quot;11点{}分&quot;.format(i) for i in x]plt.figure()plt.plot(x,y)# x的刻度说明plt.xticks(x[::3],x_ticks_label[::3])plt.show() # 展现图片</code></pre><p>网格显示<br>plt.grid(True,linestyle=”–”,alpha=0.5)<br>参数1:是否显示网格<br>参数2:线条风格<br>参数3:透明度</p><p>添加描述信息<br>plt.xlabel(“描述信息”)<br>plt.ylabel(“描述信息”)<br>plt.title(“”)</p><p><strong>图像层</strong></p><p>多次调用就可以画多个图表</p><p>图例不仅需要在图像层修改还需要在辅助层修改plt.legend(loc=”low right”),可以空参</p><p><strong>绘图区</strong></p><p>figure axes = matplotlib.subplots(nrows=1,ncols=1,**fig_kw)创建一个带有多个axes(坐标系/绘图区)的图,返回一个图对象和绘图区</p><pre><code>figure, axes = plt.subplots(nrows=1,ncols=1,**fig_kw) # 返回两个实例对象# axes[0].方法的形式来画图,具体的可以看文档</code></pre><h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><p>散点图scatter:用两组数据构成多个坐标点，考察坐标点的分布，判断两变量之间是否存在某种关联趋势<br>plt.scatter(x,y)</p><p>柱状图bar:统计/对比<br>plt.bar(x,y,width,align=”center”,**kwargs)<br>对比形式的柱状图:<br>1.调用两次bar<br>2.两个bar的x要岔开,否则画出来的柱状图会覆盖</p><p>直方图histogram:分布状态</p><p>饼图:分类数据的占比情况</p><h2 id="numpy"><a href="#numpy" class="headerlink" title="numpy"></a>numpy</h2><p>numpy中在数值计算,多用于多维数组上执行数值运算</p><h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p><strong>numpy.array()</strong></p><p>Python中的list容器，可以当成数组使用，但由于里面的元素可以是任何对象，因此列表中保存的是对象的指针，保存一个简单的列表[1,2,3]，需要三个指针和三个整数对象，结构不高效<br>Python中提供的array模块，只支持一维数组，不支持多维数组(矩阵)</p><p>numpy.array(arr)<br>参数:数值<br>返回值:ndarray类型,也就是numpy里面的数组类型</p><p><strong>numpy.arange()</strong><br>参数表示范围,根据范围返回一个可迭代的数组类型</p><pre><code>numpy.arange(10) = np.array(range(10))# [0,1,2,3,4,6,7,8,9]a = numpy.arange(4,10,2)# [4,6,8] 从4开始到10结束,步长为2type(a) # 返回a的数据类型a.dtype # 数组中数据的类型a.shape # 返回一个元组(几个值就是几维的)，输出矩阵的形状</code></pre><h4 id="数组计算"><a href="#数组计算" class="headerlink" title="数组计算"></a>数组计算</h4><p><strong>np.r_[]/np._c[]</strong></p><p>np.r_：是按列连接两个矩阵，就是把两矩阵上下相加，要求列数相等</p><p>np.c_：是按行连接两个矩阵，就是把两矩阵左右相加，要求行数相等</p><pre><code>import numpy as npa = np.array([1, 2, 3])b = np.array([4, 5, 6])c = np.c_[a,b]print(np.r_[a,b])print(c)print(np.c_[c,a])# 结果：[1 2 3 4 5 6][[1 4] [2 5] [3 6]][[1 4 1] [2 5 2] [3 6 3]]</code></pre><p><strong>numpy.vstack(tup)</strong></p><p>垂直按照行顺序把每个数组给堆叠起来,返回一个新的数组</p><p>参数:元组、列表或者numpy数组<br>返回值:numpy的数组</p><pre><code>a=[[1],[2],[3]]b=[[1],[2],[3]]c=[[1],[2],[3]]d=[[1],[2],[3]]print(np.vstack((a,b,c,d)))# 输出：[[1] [2] [3] [1] [2] [3] [1] [2] [3] [1] [2] [3]]a=[1,2,3]b=[4,5,6]print(np.vstack((a,b)))# 输出：[[1 2 3] [4 5 6]]</code></pre><h4 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h4><pre><code># 返回值是一个数组X = np.array ([[0, 1], [2, 3], [4, 5], [6, 7], [8, 9], [10, 11], [12, 13], [14, 15], [16, 17], [18, 19]])# X[:,0]就是取所有行的第0个数据print(X[:, 0])#输出：[ 0  2  4  6  8 10 12 14 16 18]#X[1,:]第一维中下标为1的元素的所有值print(X[1,:])#输出：[2 3]Y = np.array([[0,1,2],[3,4,5],[6,7,8],[9,10,11],[12,13,14],[15,16,17],[18,19,20]])#Y[:, m:n]，即取所有数据的第m到n-1列数据，含左不含右print (Y[:,1:3])&#39;&#39;&#39;输出：[[ 1  2] [ 4  5] [ 7  8] [10 11] [13 14] [16 17] [19 20]]</code></pre><p><strong>numpy.random.normal()</strong><br>numpy.random.normal(loc=0,scale=1e-2,size=shape)</p><p>生成正态分布</p><p>参数：<br>1.loc(float)：正态分布的均值，对应着这个分布的中心。loc=0说明这一个以Y轴为对称轴的正态分布，<br>2.scale(float)：正态分布的标准差，对应分布的宽度，scale越大，正态分布的曲线越矮胖，scale越小，曲线越高瘦。<br>3.size(int 或者整数元组):输出的形状,默认为None。如(10,2) -&gt; 输出一个10行2列的元组</p><p>返回值:元组数据</p><p>标准正太分布（μ=0, σ=1）:np.random.normal(loc=0, scale=1, size)</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;完成机器学习pla算法和pocket算法作业的时候,想要把数据可视化出来,发现需要用到matplotlib,此篇博客记录matplotlib的学习笔记。&lt;/p&gt;
+&lt;p&gt;matplotlib专门用于开发2D(3D)图表,mat-matrix矩阵、plot画图、lib-libr
+      
+    
+    </summary>
+    
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Java面向对象(学习中)</title>
     <link href="http://yoursite.com/2020/10/11/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/"/>
     <id>http://yoursite.com/2020/10/11/Java面向对象/</id>
     <published>2020-10-11T11:55:52.000Z</published>
-    <updated>2020-10-11T15:10:40.641Z</updated>
+    <updated>2020-10-20T10:02:41.639Z</updated>
     
-    <content type="html"><![CDATA[<p>Java类及类的成员:属性、方法、构造器;代码块、内部类<br>面向对象的三大特征:封装性、继承性、多态性<br>其他关键字:this、super、static、final、abstract、package、import、interface</p><h2 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h2><p>类(Class)与对象(Object)是面向对象的核心概念。<br>类是对一类事务的抽象描述<br>对象是实际存在的该类事务的每个个体，也称为实例(instance)</p><p>面向对象程序设计的重点是类的设计，也就是类的成员(属性与方法)的设计。</p><p><strong>方法</strong></p><p>类的实例化: 类名(变量类型) 类的实例名(变量) = new 类名()</p><p>类中方法的声明: 权限修饰符(可省略) 返回值类型(没有就void) 方法名(形参类型 形参名,形参列表){方法体}</p><p>权限修饰符:private、public、缺省、protected  –&gt; 封装性</p>]]></content>
+    <content type="html"><![CDATA[<p>Java类及类的成员:属性、方法、构造器;代码块、内部类<br>面向对象的三大特征:封装性、继承性、多态性<br>其他关键字:this、super、static、final、abstract、package、import、interface</p><h2 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h2><p>类(Class)与对象(Object)是面向对象的核心概念。<br>类是对一类事务的抽象描述<br>对象是实际存在的该类事务的每个个体，也称为实例(instance)</p><p>面向对象程序设计的重点是类的设计，也就是类的成员(属性与方法)的设计。</p><p><strong>类的成员</strong></p><ul><li>实例变量,不以static修饰</li><li>类变量,以static修饰</li></ul><p>类的实例化: 类名(变量类型) 类的实例名(变量) = new 类名()</p><p>类中方法的声明: 权限修饰符(可省略) 返回值类型(没有就void) 方法名(形参类型 形参名,形参列表){方法体}</p><p>权限修饰符:private、public、缺省、protected  –&gt; 封装性</p><p><strong>成员变量与局部变量</strong></p><table><thead><tr><th style="text-align:center">类型</th><th style="text-align:center">位置</th><th style="text-align:center">权限修饰符</th><th style="text-align:center">默认初始化值</th><th style="text-align:center">内存加载位置</th></tr></thead><tbody><tr><td style="text-align:center">成员变量</td><td style="text-align:center">类的{}里</td><td style="text-align:center">可以使用权限修饰符</td><td style="text-align:center">根据其类型有默认初始化值</td><td style="text-align:center">非static的 堆空间</td></tr><tr><td style="text-align:center">局部变量</td><td style="text-align:center">方法内、方法形参、构造器内、构造器形参、代码块内</td><td style="text-align:center">不可以使用权限修饰符</td><td style="text-align:center">没有默认初始化值,在调用局部变量前要显示赋值</td><td style="text-align:center">栈空间</td></tr></tbody></table><h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p><strong>方法的重载(overload)</strong><br>同一个类中,允许存在同名方法,只要他们的参数个数或者参数类型不同。  -&gt; 两同一不同:同一个类、相同方法名，参数列表不同</p><p>通过对象调用方法时，如何确定某一个指定的方法?    方法名 -&gt; 参数列表(参数的个数,数据类型及顺序)</p><p><strong>方法的重写(override/overwrite)</strong><br>在子类中可以根据需要对从父类中继承来的方法进行重置、覆盖。</p><p>重写的规定：<br>    方法声明：权限修饰符 返回值类型 方法名(形参列表) throws 异常的类型{<br>    //方法体<br>    }<br>1.子类重写继承的方法：要求方法名、形参列表要相同<br>2.子类重写的方法权限修饰符 &gt; =  父类被重写方法权限修饰符  –&gt; 子类不能重写父类中声明为private权限的方法<br>3.异常类型也是包含关系  子类 &lt;= 父类<br>4.返回值类型:基本数据类型同，引用数据类型同或子类<br>    父类void,子类void<br>    父类返回A类型,子类A类或A类的子类<br>    父类基本数据类型,子类相同的基本数据类型<br>5.重写争对的是非static  -&gt; static方法不能被覆盖,随类的加载而加载</p><p><strong>可变个数的形参</strong></p><p>格式:数据类型 … 变量名</p><p>String …strs = String[] strs</p><p>使用:<br>1.当调用可变个数形参的方法时，可以传参0,1,2…<br>2.也会与本类中方法名相同,形参不同的方法之间构成重载<br>3.此写法类似JS的三点运算符,所有参数会被封装成一个数组<br>4.可变个数形参在方法的形参中，必须声明在<strong>末尾</strong></p><p><strong>方法参数的值传递机制-值传递</strong><br>基本数据类型:数据值<br>引用数据类型:地址值(含变量的数据类型 –&gt; 用于赋值的检查)</p><h3 id="构造器-constructor"><a href="#构造器-constructor" class="headerlink" title="构造器(constructor)"></a>构造器(constructor)</h3><p>任何一个类都有构造器constructor,构造器与类同名</p><p><strong>构造器的作用</strong><br>1.创建对象:new + 构造器<br>2.初始化对象的信息</p><p><strong>构造器的说明</strong><br>1.如果没有显式的定义类的构造器,系统默认提供一个空参的构造器，<strong>空参的构造器权限跟类一样</strong><br>2.定义构造器的格式:权限修饰符 类名(形参列表) 不需要返回值类型<br>3.一个类中定义的多个构造器,彼此构成重载<br>4.显示定义了有参数的构造器之后,系统就不提供默认的空参构造器<br>5.一个类中至少有一个构造器</p><pre><code>//创建类的对象: new + 构造器Person p = new Person()class Person{    //属性...    //构造器    public Person(){    }    //方法...}</code></pre><p><strong>属性赋值的先后顺序</strong></p><p>1.默认初始化<br>2.显示初始化<br>3.构造器中初始化</p><p><strong>JavaBean</strong><br>JavaBean是Java语言写成的可重用组件<br>JavaBean其实就是指符合如下标准的Java类:<br>①类是公共的<br>②有一个无参的公共的构造器<br>③有属性,且有对应的get、set方法</p><h2 id="面向对象的特点"><a href="#面向对象的特点" class="headerlink" title="面向对象的特点"></a>面向对象的特点</h2><h3 id="封装与隐藏"><a href="#封装与隐藏" class="headerlink" title="封装与隐藏"></a>封装与隐藏</h3><p>为什么需要封装性？设计程序追求”高内聚，低耦合”<br>高内聚:类的内部数据操作细节自己完成，不允许外部干涉<br>低耦合:仅对外暴露少量的方法用于使用</p><p><strong>封装性的体现</strong><br>1.将类的属性私(xx)有化(private),提供公共的(public)方法来获取(getxx)和设置(setxx)该私有属性<br>2.不对外暴露的私有方法<br>3.单例模式(将构造器私有化)</p><p>封装性的体现，需要权限修饰符来配合<br>封装性:Java提供了4种权限修饰符来修饰类及类的内部结构，体现其在被调用时的可见性大小</p><p><strong>权限修饰符</strong><br>1.权限从小到大 private、缺省、protected、public<br>2.4种权限可以用来修饰类的属性、方法、构造器、内部类<br>3.对于class的权限修饰只可以用public和default(缺省);public类可以在任意地方被访问,default类只可以被同一个包内部的类访问</p><table><thead><tr><th style="text-align:center">修饰符</th><th style="text-align:center">类内部</th><th style="text-align:center">同一个包</th><th style="text-align:center">不同包的子类</th><th style="text-align:center">同一个工程</th></tr></thead><tbody><tr><td style="text-align:center">private</td><td style="text-align:center">Yes</td><td style="text-align:center">-</td><td style="text-align:center">-</td><td style="text-align:center">- </td></tr><tr><td style="text-align:center">(缺省)</td><td style="text-align:center">Yes</td><td style="text-align:center">Yes</td><td style="text-align:center">-</td><td style="text-align:center">-</td></tr><tr><td style="text-align:center">protected</td><td style="text-align:center">Yes</td><td style="text-align:center">Yes</td><td style="text-align:center">Yes</td><td style="text-align:center">- </td></tr><tr><td style="text-align:center">public</td><td style="text-align:center">Yes</td><td style="text-align:center">Yes</td><td style="text-align:center">Yes</td><td style="text-align:center">Yes</td></tr></tbody></table><p>不同包下的普通类(非子类)不能调用声明为private、缺省、protected权限的属性</p><h3 id="继承性"><a href="#继承性" class="headerlink" title="继承性"></a>继承性</h3><p>继承在原有类的基础上进行扩展,一个子类只能有一个父类</p><pre><code>public class Student extend Person{    //与Person重复的就不用写的}</code></pre><p><strong>继承性的好处</strong><br>1.减少了代码的冗余，提高了代码的复用性<br>2.便于功能的扩展<br>3.为多态性的使用提供前提</p><h3 id="多态性"><a href="#多态性" class="headerlink" title="多态性"></a>多态性</h3><p>对象的多态性,<strong>父类的引用指向子类的对象</strong>,可以理解为一个事物的多种形态。</p><p><strong>多态的使用(虚拟方法调用)</strong><br>1.当<strong>调用子父类同名同参数的方法</strong>(不能调用子类特有的,只能调用父类有的方法)时，实际执行的是子类重写父类的方法<br>2.在编译期,只能调用父类中声明的方法,但在运行期,我们实际执行的是子类重新父类的方法(方法编译时看左边,运行时看右边)<br>3.对象的多态性只适用与方法,不适用于属性(属性编译和运行都看左边) —&gt; 属性不会被重写,若同名则在内存中会出现两个</p><p>虚拟方法调用</p><p>常用场景:<br>当一个方法的形参是父类时,实参可以传子类的实例,调用时实际调用的是子类重写的方法,这样就不用分别定义形参是子类的该方法.</p><pre><code>//方法编译看左,运行看右Person p = new Woman();Person p2 =  new man();//调用的是子类的eat方法,p.eat();</code></pre><p><strong>多态性的使用前提</strong><br>1.类的继承关系<br>2.方法的重写</p><h4 id="Object类"><a href="#Object类" class="headerlink" title="Object类"></a>Object类</h4><p>Java.lang.Object类是所有类(除Object类本身)的祖先类</p><h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><h3 id="this的使用"><a href="#this的使用" class="headerlink" title="this的使用"></a>this的使用</h3><p>this指向当前实例,可以理解为当前对象。</p><p>this可以调用:属性、方法、构造器</p><p>在类的方法中,我们可以使用’this.属性’或’this.方法’的方式,调用当前对象属性或方法,通常会省略’this.’，但如果方法的形参和类的属性同名时,必须显示用”this.变量”来表明是属性。</p><p>this还可以用来调用构造器,在构造器中通过使用”this(形参列表)”来调用其他不同的构造器。”this(形参列表)”必须声明在当前构造器的<strong>首行</strong></p><pre><code>public Person(){   //... }public Person(String name){    this(); //调用空参,通过传不同类型的参数调用其他不同的构造器}</code></pre><h3 id="super关键字"><a href="#super关键字" class="headerlink" title="super关键字"></a>super关键字</h3><p>super理解为父类的，可以用来调用属性、方法、构造器</p><p>this与super都是解决子类父类成员重名时，用谁的问题</p><p><strong>super的使用</strong><br>1.子类重写父类的方法后,想使用父类的原方法可以使用super<br>2.super(形参列表)的形式调用父类中的构造器,必须声明在子类构造器的<strong>首行</strong><br>3.构造器首行没有显示声明this(形参列表)或super(形参列表),默认调用的super()</p><h4 id="子类对象的实例化过程"><a href="#子类对象的实例化过程" class="headerlink" title="子类对象的实例化过程"></a>子类对象的实例化过程</h4><p>从结果上来看(继承性):<br>    子类继承父类以后,就获取了父类中声明的属性或方法<br>    创建子类的对象,在堆空间中,就会加载所有父类中声明的属性<br>从过程上来看:<br>    通过子类的构造器创建子类对象时，一定会直接或间接调用其父类的构造器，直到调用到java.lang.Object类中空参的构造器为止。<br>明确:虽然创建子类对象时,调用了父类的构造器但没有new,所以只创建了一个new子类出来的对象。</p><h3 id="package的使用"><a href="#package的使用" class="headerlink" title="package的使用"></a>package的使用</h3><p>1.为了更好的实现项目中类的管理提供包的概念<br>2.使用package声明类或接口所属的包，声明在源文件的首行<br>3.包属于标识符，遵循标识符的命名规则、规范(都小写)<br>4.每’.’一次，就代表一层文件目录</p><p>补充:同一个包下，不能命名同名的接口、类;不同的包下，可以命名同名的接口、类</p><h4 id="MVC设计模式"><a href="#MVC设计模式" class="headerlink" title="MVC设计模式"></a>MVC设计模式</h4><p>MVC将整个程序分成视图模式层(view)、控制器层(controller)、数据模型层(model)三层</p><p>模型层 model 主要处理数据<br>数据对象封装 model.bean/domain<br>数据库操作类 model.dao<br>数据库 model.db</p><p>视图层 view 显示数据<br>相关工具栏 view.utils<br>自定义view view.ui</p><p>控制层 controller 处理业务逻辑<br>应用界面相关 controller.activity<br>存放fragment controller.fragment<br>显示列表的适配器 controller.adapter<br>服务相关 controller.service<br>抽取的基类 controller.base</p><h3 id="import关键字的使用"><a href="#import关键字的使用" class="headerlink" title="import关键字的使用"></a>import关键字的使用</h3><p>1.导入指定包下的类、接口(导入所有用通配符<em>)<br>2.声明在包声明和类声明之间<br>3.使用是的本包或者java.lang包下的，则可以省略import结构，<strong>用其他包的内容都要引用</strong><br>4.在源文件中使用了不同包下的同名类，至少一个类以全类名的方式使用(包名.类 …)<br>5.如果’xxx.</em>‘方式表明可以调用xxx包下的所有结构(当前层次)，但是如果使用的是xxx的子包仍然需要显示调用  –&gt; 只要跨包就要import<br>6.import static 导入指定类或接口中的静态结构 -&gt; import 落脚点是类或接口，import static 落脚点是类中的静态结构</p>]]></content>
     
     <summary type="html">
     
@@ -35,7 +150,9 @@
     
     </summary>
     
-      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
+      <category term="大数据" scheme="http://yoursite.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Java/"/>
     
     
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
@@ -72,24 +189,22 @@
     <link href="http://yoursite.com/2020/10/09/Java%E6%80%BB%E7%BB%93/"/>
     <id>http://yoursite.com/2020/10/09/Java总结/</id>
     <published>2020-10-09T02:34:20.000Z</published>
-    <updated>2020-10-11T12:38:24.961Z</updated>
+    <updated>2020-10-19T08:47:13.517Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="辨析"><a href="#辨析" class="headerlink" title="辨析"></a>辨析</h2><p>1.break和continue的相同点与不同点</p><table><thead><tr><th style="text-align:center"></th><th style="text-align:center">使用场景</th><th style="text-align:center">作用 </th></tr></thead><tbody><tr><td style="text-align:center">break</td><td style="text-align:center">switch-case和循环</td><td style="text-align:center">结束当前循环</td></tr><tr><td style="text-align:center">continue</td><td style="text-align:center">循环</td><td style="text-align:center">结束本次循环</td></tr></tbody></table><p>2.面向过程(procedure oriented programming)与面向对象(object oriented programming)</p><p>例子:人把大象装进冰箱</p><p><strong>面向过程:强调的是功能行为,考虑怎么做</strong><br>①把冰箱门打开<br>②抬起大象，塞进冰箱<br>③把冰箱门关闭</p><p><strong>面向对象:强调具备了功能的对象,考虑谁来做</strong><br>面向对象的三个点:封装（encapsulation），继承（Inheritance），多态（polymorphism）<br>实体：人、冰箱、冰箱<br>人{<br>  打开(冰箱){<br>    冰箱.打开();<br>  }<br>  抬起(大象){<br>    大象.进入(冰箱);<br>  }<br>  关闭(冰箱){<br>    冰箱.关闭();<br>  }<br>}<br>冰箱{<br>  打开(){}<br>  关闭(){}<br>}<br>大象{<br>  进入(冰箱){}<br>}</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="辨析"><a href="#辨析" class="headerlink" title="辨析"></a>辨析</h2><h3 id="1-break和continue的相同点与不同点"><a href="#1-break和continue的相同点与不同点" class="headerlink" title="1.break和continue的相同点与不同点"></a>1.break和continue的相同点与不同点</h3><table><thead><tr><th style="text-align:center"></th><th style="text-align:center">使用场景</th><th style="text-align:center">作用 </th></tr></thead><tbody><tr><td style="text-align:center">break</td><td style="text-align:center">switch-case和循环</td><td style="text-align:center">结束当前循环</td></tr><tr><td style="text-align:center">continue</td><td style="text-align:center">循环</td><td style="text-align:center">结束本次循环</td></tr></tbody></table><h3 id="2-面向过程-procedure-oriented-programming-与面向对象-object-oriented-programming"><a href="#2-面向过程-procedure-oriented-programming-与面向对象-object-oriented-programming" class="headerlink" title="2.面向过程(procedure oriented programming)与面向对象(object oriented programming)"></a>2.面向过程(procedure oriented programming)与面向对象(object oriented programming)</h3><p>例子:人把大象装进冰箱</p><p><strong>面向过程:强调的是功能行为,考虑怎么做</strong><br>①把冰箱门打开<br>②抬起大象，塞进冰箱<br>③把冰箱门关闭</p><p><strong>面向对象:强调具备了功能的对象,考虑谁来做</strong><br>面向对象的三个点:封装（encapsulation），继承（Inheritance），多态（polymorphism）<br>实体：人、冰箱、冰箱<br>人{<br>  打开(冰箱){<br>    冰箱.打开();<br>  }<br>  抬起(大象){<br>    大象.进入(冰箱);<br>  }<br>  关闭(冰箱){<br>    冰箱.关闭();<br>  }<br>}<br>冰箱{<br>  打开(){}<br>  关闭(){}<br>}<br>大象{<br>  进入(冰箱){}<br>}</p><h3 id="3-成员变量与局部变量的区别"><a href="#3-成员变量与局部变量的区别" class="headerlink" title="3.成员变量与局部变量的区别"></a>3.成员变量与局部变量的区别</h3><table><thead><tr><th style="text-align:center">类型</th><th style="text-align:center">位置</th><th style="text-align:center">权限修饰符</th><th style="text-align:center">默认初始化值</th><th>内存加载位置</th></tr></thead><tbody><tr><td style="text-align:center">成员变量</td><td style="text-align:center">类的{}里</td><td style="text-align:center">可以使用权限修饰符</td><td style="text-align:center">根据其类型有默认初始化值</td><td>非static的 堆空间</td></tr><tr><td style="text-align:center">局部变量</td><td style="text-align:center">方法内、方法形参、构造器内、构造器形参、代码块内</td><td style="text-align:center">不可以使用权限修饰符</td><td style="text-align:center">没有默认初始化值,在调用局部变量前要显示赋值</td><td>栈空间</td></tr></tbody></table><p>补充： 有默认初始化值-&gt; 数组元素、属性</p><h3 id="4-区分方法的重载和重写"><a href="#4-区分方法的重载和重写" class="headerlink" title="4.区分方法的重载和重写"></a>4.区分方法的重载和重写</h3><p>重载：同类下同方法名不同形参列表的方法之间<br>重写：子类继承父类的方法之后，对父类的方法进行重写</p><p><strong>待解决</strong><br>1.面向对象的编程思想？<br>2.equal与==的区别<br>3.toString方法的重写<br>4.new</p><h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><h3 id="1-万事万物皆对象？"><a href="#1-万事万物皆对象？" class="headerlink" title="1.万事万物皆对象？"></a>1.万事万物皆对象？</h3><p>①在Java语言中，我们将功能、结构等封装到类中，通过类的实例化，来调用具体的结构<br>②在与前端后端交互时，前后端的结构在Java层交互时，都体现为类、对象</p><h3 id="2-println参数为char数组时的重载"><a href="#2-println参数为char数组时的重载" class="headerlink" title="2.println参数为char数组时的重载"></a>2.println参数为char数组时的重载</h3><pre><code>char[] arr = new char[]{&#39;a&#39;,&#39;b&#39;,&#39;c&#39;};System.out.println(arr); //输出abc 而不是地址值</code></pre>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h2 id=&quot;辨析&quot;&gt;&lt;a href=&quot;#辨析&quot; class=&quot;headerlink&quot; title=&quot;辨析&quot;&gt;&lt;/a&gt;辨析&lt;/h2&gt;&lt;p&gt;1.break和continue的相同点与不同点&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th style=&quot;text-alig
+        &lt;h2 id=&quot;辨析&quot;&gt;&lt;a href=&quot;#辨析&quot; class=&quot;headerlink&quot; title=&quot;辨析&quot;&gt;&lt;/a&gt;辨析&lt;/h2&gt;&lt;h3 id=&quot;1-break和continue的相同点与不同点&quot;&gt;&lt;a href=&quot;#1-break和continue的相同点与不同点&quot; cla
       
     
     </summary>
     
-      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
+      <category term="大数据" scheme="http://yoursite.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Java/"/>
     
     
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
@@ -127,9 +242,9 @@
     <link href="http://yoursite.com/2020/09/25/Java%E5%9F%BA%E7%A1%80/"/>
     <id>http://yoursite.com/2020/09/25/Java基础/</id>
     <published>2020-09-25T07:33:54.000Z</published>
-    <updated>2020-10-11T14:55:44.466Z</updated>
+    <updated>2020-10-19T08:45:09.206Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="第一章-Java概述"><a href="#第一章-Java概述" class="headerlink" title="第一章 Java概述"></a>第一章 Java概述</h2><p><strong>java特点</strong><br>1.面向对象:类与对象两个基本概念，封装、继承与多态三大特点<br>2.健壮性：吸收了c/c++语言的优点，去掉了其影响程序健壮性的部分<br>3.跨平台:不同版本的JVM(java虚拟器)</p><p><strong>java两种核心机制</strong><br>1.Java虚拟机 Java Virtal Machines<br>2.垃圾回收机制 Garbage Collection</p><p>Java程序还是会出现内存泄露和内存溢出问题</p><p><strong>JDK、JRE</strong></p><p>JDK(Java Development Kit) Java开发工具包：是提供给Java开发人员使用，其中包含了java的开发工具与JRE  –&gt; JDK = JRE + 开发工具集(javac.exe,java.exe,javadoc.exe)</p><p>JRE(Java Runtime Environment) Java运行环境:包括java虚拟机和hava程序所需的核心类库等，如果想要运行一个开发好的Java程序，只需要JRE即可 –&gt; JRE = JVM + Java SE标准类库</p><p>JDK的开发工具完成Java程序，JRE运行</p><p>java  -javac 文件名.java 编译-&gt; .class文件（字节码文件） -java 字节码文件名 运行-&gt; 结果</p><p><strong>注释</strong></p><p>单行注释<code>//</code><br>多行注释<code>/**/</code><br>文档注释<code>/** */</code>,注释内容可以被<br>JDK提供的工具javadoc所解析(javadoc -d 生成的文件夹名字 -author -version 文件名)，生成一套以网页文件形式体现的说明文档</p><p><strong>注意</strong></p><p>1.在一个java源文件中可以有多个类，但只能给与<strong>文件名一样的类添加public</strong><br>2.每一行执行语句都以<code>;</code>结束<br>3.程序的入口是main()方法，格式是固定的</p><pre><code class="java">public static void main(String[] args){    System.out.println(&quot;输出语句换行&quot;);    System.out.print(&quot;输出语句不换行&quot;);}</code></pre><p>4.编译之后会生成一个或多个字节码文件，字节码文件的文件名与java源文件中的类名相同</p><h2 id="第二章-基本语法"><a href="#第二章-基本语法" class="headerlink" title="第二章 基本语法"></a>第二章 基本语法</h2><p><strong>Java命名规范(建议)</strong><br>包名：所有小写xxxyyy<br>类名、接口名：驼峰命名法(第一个单词首字母大写)XxxYyy<br>变量名、方法名：第一个单词首字母小写，其余单词首字母大写xxxYyy<br>常量名：所有字母都大写，多单词用下划线连接xxx_yyy</p><p><strong>变量</strong><br>1.Java中每个变量必须先声明并初始化后使用<br>2.变量的作用域:其定义所在的一对<code>{}</code>内<br>3.变量是程序中最基本的存储单元。包含变量类型、变量名和存储的值 –&gt; 数据类型 变量名 = 变量值</p><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>按数据类型分类:<br><img src="/img/Java/数据类型.png"></p><p>1.string是class类型<br>2.定义long型变量，必须以”l”或”L”结尾<br>3.定义float型变量，变量要以”f”或”F”结尾<br>4.char型初始化要有值,单引号括住</p><p>按声明的位置不同:</p><ul><li>成员变量,在方法体外,类体内声明的变量<ul><li>实例变量,不以static修饰</li><li>类变量,以static修饰</li></ul></li><li>局部变量,在方法体内部声明的变量</li></ul><p><strong>基本数据类型之间的运算规则</strong><br>前提:这里讨论7种基本数据类型变量间的运算，不包含布尔类型。</p><p>1.自动类型提升<br>    byte/short/char -&gt; int -&gt; long -&gt; float-&gt;double<br>    当byte/short/char三种类型(同类型也是)做运算时,结果至少用int接收<br>    java在做运算时，如果操作数均在int范围内，那么一律在int的空间内运算<br>2.强制类型转换  - 自动类型提升的逆运算<br>(强制转换的类型)xx </p><p><strong>特殊情况</strong><br>情况1: long l = 12315465111  会把12315465111当作int型(此时会编译失败因为超出int的范围),类型提升到long型<br>情况2: 浮点型默认的是double,所以float型后面一定需要添加f/F</p><p><strong>String</strong><br>1.String属于引用数据类型,双引号括住<br>2.String可以与其他类型做连接运算</p><p><strong>运算符</strong><br>只有单目运算符、三元运算符、赋值运算符是从右向左运算的</p><p>%：取余运算结果的符号与被模数的符号相同<br>++/–/+=/-=/..：不会改变变量本身的数据类型<br>=:支持连续赋值,类型相同可以赋值(或者变量提升),赋值时会先检查类型是否相同</p><pre><code class="Java">int n =10n += (n++) + (++n)// n = n + (n++) + (++n)// n = 10 + 10 + 12 </code></pre><p>逻辑运算符(操作数是布尔类型)-常用短路与/短路或<br><img src="/img/Java/逻辑运算符.png"></p><p>位运算符 - 最高效方式的计算 2*8? 2&lt;&lt;3 或 8&lt;&lt;1<br><img src="/img/Java/位运算符.png"></p><p>交换两个变量的值<br>1.使用临时变量<br>2.m = (m^n)^n 有局限性:适用于数值类型 m = 原来n的值</p><p>三元运算符：(条件表达式)?表达式1：表达式2</p><h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><p><strong>Scanner类</strong><br>1.导包: import java.util.Scanner<br>2.Scanner实例化<code>Scanner scan = new Scanner(System.in)</code><br>3.调用Scanner类的相关方法(next()/nextXxx())，来获取指定类型的变量</p><pre><code class="java">//使用scanner从键盘获取int型数据import java.util.Scanner;class ScannerTest{    public static void main(String[] args){        Scanner scan = new Scanner(System.in);        String num = scan.next();    }}</code></pre><p><strong>随机数</strong><br>Math.random() [0.0,1.0)<br>公式:[a,b] –&gt; Math.random()*(b-a+1) + a</p><p><strong>switch</strong><br>根据switch表达式中的值，依次匹配case中的常量，有break才退出,没有会向下执行。<br>switch结构中的表达式只能是byte、short、char、int、枚举类型、String类型</p><p>注意:在case中不要定义重复的变量，switch下的变量作用域是同一个</p><pre><code class="java">switch(表达式){    //合并    case 常量1:    case 常量2:        语句;    default:        语句;}</code></pre><p><strong>循坏</strong><br>循环结构的4个要素:<br>①初始化条件<br>②循环条件<br>③循环体<br>④迭代条件</p><pre><code>for(①;②;③){    ④}//for循环和while循环可以相互转化①while(②){    ③;    ④; }</code></pre><p>技巧：循环嵌套时，外层控制行数，内层控制列数</p><p><strong>break和continue/return</strong></p><p>break: swich-case/循环结构  - 默认结束当前循环<br>continue: 循环结构  - 默认结束当次循环</p><p>如果要结束外层的for，可以通过标签实现</p><pre><code>label:for(..){    for(..){        ....        break label; //结束指定标识的一层循环结构    }}</code></pre><p>return:并非专门用于结束循环的,当一个方法执行到一个return语句时,这个方法将被结束。</p><h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>数组长度一旦确定就不能修改</p><p><strong>一维数组的使用</strong><br>1.声明和初始化,初始化时要指定长度<br>2.数组的长度,属性length<br>3.数组元素的默认初始化值 -&gt;  整型(byte、short、int、long)0,浮点型(float、double)0.0，char型(ACSII=0),布尔型false(0),引用数据类型null。</p><pre><code>//静态初始化//int ids[] = 这种写法也可以int[] ids = new int[]{1001,1002,1003}int arr[] = {1234,5}; //类型推断//动态初始化,分配了5个空间String[] names = new String[5];</code></pre><p><strong>一维数组的内存解析</strong><br>栈(stack):局部变量。<br>堆(heap):new出来的结构,对象、数组、对象实体<br>方法区：常量池(String…) + 类信息 + 静态变量…</p><p><img src="/img/Java/数组的内存解析0.png"></p><p>当局部变量没用之后，会依次出栈，堆里的空间会在一个不确定的时间被回收。</p><p><strong>二维数组的使用</strong></p><pre><code>//静态初始化,可以省略new int[][]int[][] arr = new int[][]{{123},{4,5}};int arr[][] = {{123},{4,5}}; //类型推断//动态初始化[[0,0],[0,0],[0,0]]String[][] arr2 = new String[3][2]//动态初始化String[][] arr2 = new String[3][]</code></pre><p><img src="/img/Java/数组的内存解析1.png"></p><p><strong>Arrays工具类</strong><br>java.util.Arrays类为操作数组的工具类</p><p>Arrays.equals(arr1,arr2) 判断两个数组是否相等,返回布尔值<br>Arrays.toString(arr) 输出数组信息,返回String<br>Arrays.fill(arr,val) 将val填充到arr数组中,返回void<br>Arrays.sort(arr) 数组排序,返回void<br>Arrays.binarySearch(arr,key) 二分查找key,arr需要有序,返回数组下标int,没找到返回负数</p><p><strong>数组使用中的常见异常</strong><br>1.数组角标越界的异常:ArrayIndexOutOdBoundsException<br>2.空指针异常:NullPointerException</p><pre><code>//空指针异常举例子int [] arr = new int[] {1,2}arr = nullSystem.out.print(arr[0])</code></pre><h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3>]]></content>
+    <content type="html"><![CDATA[<h2 id="第一章-Java概述"><a href="#第一章-Java概述" class="headerlink" title="第一章 Java概述"></a>第一章 Java概述</h2><p><strong>java特点</strong><br>1.面向对象:类与对象两个基本概念，封装、继承与多态三大特点<br>2.健壮性：吸收了c/c++语言的优点，去掉了其影响程序健壮性的部分<br>3.跨平台:不同版本的JVM(java虚拟器)</p><p><strong>java两种核心机制</strong><br>1.Java虚拟机 Java Virtal Machines<br>2.垃圾回收机制 Garbage Collection</p><p>Java程序还是会出现内存泄露和内存溢出问题</p><p><strong>JDK、JRE</strong></p><p>JDK(Java Development Kit) Java开发工具包：是提供给Java开发人员使用，其中包含了java的开发工具与JRE  –&gt; JDK = JRE + 开发工具集(javac.exe,java.exe,javadoc.exe)</p><p>JRE(Java Runtime Environment) Java运行环境:包括java虚拟机和hava程序所需的核心类库等，如果想要运行一个开发好的Java程序，只需要JRE即可 –&gt; JRE = JVM + Java SE标准类库</p><p>JDK的开发工具完成Java程序，JRE运行</p><p>java  -javac 文件名.java 编译-&gt; .class文件（字节码文件） -java 字节码文件名 运行-&gt; 结果</p><p><strong>注释</strong></p><p>单行注释<code>//</code><br>多行注释<code>/**/</code><br>文档注释<code>/** */</code>,注释内容可以被<br>JDK提供的工具javadoc所解析(javadoc -d 生成的文件夹名字 -author -version 文件名)，生成一套以网页文件形式体现的说明文档</p><p><strong>注意</strong></p><p>1.在一个java源文件中可以有多个类，但只能给与<strong>文件名一样的类添加public</strong><br>2.每一行执行语句都以<code>;</code>结束<br>3.程序的入口是main()方法，格式是固定的</p><pre><code class="java">public static void main(String[] args){    System.out.println(&quot;输出语句换行&quot;);    System.out.print(&quot;输出语句不换行&quot;);}</code></pre><p>4.编译之后会生成一个或多个字节码文件，字节码文件的文件名与java源文件中的类名相同</p><h2 id="第二章-基本语法"><a href="#第二章-基本语法" class="headerlink" title="第二章 基本语法"></a>第二章 基本语法</h2><p><strong>Java命名规范(建议)</strong><br>包名：所有小写xxxyyy<br>类名、接口名：驼峰命名法(第一个单词首字母大写)XxxYyy<br>变量名、方法名：第一个单词首字母小写，其余单词首字母大写xxxYyy<br>常量名：所有字母都大写，多单词用下划线连接xxx_yyy</p><p><strong>变量</strong><br>1.Java中每个变量必须先声明并初始化后使用<br>2.变量的作用域:其定义所在的一对<code>{}</code>内<br>3.变量是程序中最基本的存储单元。包含变量类型、变量名和存储的值 –&gt; 数据类型 变量名 = 变量值</p><h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>按数据类型分类:<br><img src="/img/Java/数据类型.png"></p><p>1.string是class类型<br>2.定义long型变量，必须以”l”或”L”结尾<br>3.定义float型变量，变量要以”f”或”F”结尾<br>4.char型初始化要有值,单引号括住</p><p>按声明的位置不同:</p><ul><li>成员变量,在方法体外,类体内声明的变量<ul><li>实例变量,不以static修饰</li><li>类变量,以static修饰</li></ul></li><li>局部变量,在方法体内部声明的变量</li></ul><p><strong>基本数据类型之间的运算规则</strong><br>前提:这里讨论7种基本数据类型变量间的运算，不包含布尔类型。</p><p>1.自动类型提升<br>    byte/short/char -&gt; int -&gt; long -&gt; float-&gt;double<br>    当byte/short/char三种类型(同类型也是)做运算时,结果至少用int接收<br>    java在做运算时，如果操作数均在int范围内，那么一律在int的空间内运算<br>2.强制类型转换  - 自动类型提升的逆运算<br>(强制转换的类型)xx </p><p><strong>特殊情况</strong><br>情况1: long l = 12315465111  会把12315465111当作int型(此时会编译失败因为超出int的范围),类型提升到long型<br>情况2: 浮点型默认的是double,所以float型后面一定需要添加f/F</p><p><strong>String</strong><br>1.String属于引用数据类型,双引号括住<br>2.String可以与其他类型做连接运算</p><p><strong>运算符</strong><br>只有单目运算符、三元运算符、赋值运算符是从右向左运算的</p><p>%：取余运算结果的符号与被模数的符号相同<br>++/–/+=/-=/..：不会改变变量本身的数据类型<br>=:支持连续赋值,类型相同可以赋值(或者变量提升),赋值时会先检查类型是否相同</p><pre><code class="Java">int n =10n += (n++) + (++n)// n = n + (n++) + (++n)// n = 10 + 10 + 12 </code></pre><p>逻辑运算符(操作数是布尔类型)-常用短路与/短路或<br><img src="/img/Java/逻辑运算符.png"></p><p>位运算符 - 最高效方式的计算 2*8? 2&lt;&lt;3 或 8&lt;&lt;1<br><img src="/img/Java/位运算符.png"></p><p>交换两个变量的值<br>1.使用临时变量<br>2.m = (m^n)^n 有局限性:适用于数值类型 m = 原来n的值</p><p>三元运算符：(条件表达式)?表达式1：表达式2</p><h3 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h3><p><strong>Scanner类</strong><br>1.导包: import java.util.Scanner<br>2.Scanner实例化<code>Scanner scan = new Scanner(System.in)</code><br>3.调用Scanner类的相关方法(next()/nextXxx())，来获取指定类型的变量</p><pre><code class="java">//使用scanner从键盘获取int型数据import java.util.Scanner;class ScannerTest{    public static void main(String[] args){        Scanner scan = new Scanner(System.in);        String num = scan.next();    }}</code></pre><p><strong>随机数</strong><br>Math.random() [0.0,1.0)<br>公式:[a,b] –&gt; Math.random()*(b-a+1) + a</p><p><strong>switch</strong><br>根据switch表达式中的值，依次匹配case中的常量，有break才退出,没有会向下执行。<br>switch结构中的表达式只能是byte、short、char、int、枚举类型、String类型</p><p>注意:在case中不要定义重复的变量，switch下的变量作用域是同一个</p><pre><code class="java">switch(表达式){    //合并    case 常量1:    case 常量2:        语句;    default:        语句;}</code></pre><p><strong>循坏</strong><br>循环结构的4个要素:<br>①初始化条件<br>②循环条件<br>③循环体<br>④迭代条件</p><pre><code>for(①;②;③){    ④}//for循环和while循环可以相互转化①while(②){    ③;    ④; }</code></pre><p>技巧：循环嵌套时，外层控制行数，内层控制列数</p><p><strong>break和continue/return</strong></p><p>break: swich-case/循环结构  - 默认结束当前循环<br>continue: 循环结构  - 默认结束当次循环</p><p>如果要结束外层的for，可以通过标签实现</p><pre><code>label:for(..){    for(..){        ....        break label; //结束指定标识的一层循环结构    }}</code></pre><p>return:并非专门用于结束循环的,当一个方法执行到一个return语句时,这个方法将被结束。</p><h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>数组长度一旦确定就不能修改</p><p><strong>一维数组的使用</strong><br>1.声明和初始化,初始化时要指定长度<br>2.数组的长度,属性length<br>3.数组元素的默认初始化值 -&gt;  整型(byte、short、int、long)0,浮点型(float、double)0.0，char型(ACSII=0),布尔型false(0),引用数据类型null。</p><pre><code>//静态初始化//int ids[] = 这种写法也可以int[] ids = new int[]{1001,1002,1003}int arr[] = {1234,5}; //类型推断//动态初始化,分配了5个空间String[] names = new String[5];</code></pre><p><strong>一维数组的内存解析</strong><br>虚拟机栈(stack):局部变量。<br>堆(heap):new出来的结构,对象(非static的成员变量)、数组<br>方法区：常量池(String…) + 类信息(方法) + 静态变量…</p><p><img 两src="/img/Java/数组的内存解析0.png"></p><p>当局部变量没用之后，会依次出栈，堆里的空间会在一个不确定的时间被回收。</p><p><strong>二维数组的使用</strong></p><pre><code>//静态初始化,可以省略new int[][]int[][] arr = new int[][]{{123},{4,5}};int arr[][] = {{123},{4,5}}; //类型推断//动态初始化[[0,0],[0,0],[0,0]]String[][] arr2 = new String[3][2]//动态初始化String[][] arr2 = new String[3][]</code></pre><p><img src="/img/Java/数组的内存解析1.png"></p><p><strong>Arrays工具类</strong><br>java.util.Arrays类为操作数组的工具类</p><p>Arrays.equals(arr1,arr2) 判断两个数组是否相等,返回布尔值<br>Arrays.toString(arr) 输出数组信息,返回String<br>Arrays.fill(arr,val) 将val填充到arr数组中,返回void<br>Arrays.sort(arr) 数组排序,返回void<br>Arrays.binarySearch(arr,key) 二分查找key,arr需要有序,返回数组下标int,没找到返回负数</p><p><strong>数组使用中的常见异常</strong><br>1.数组角标越界的异常:ArrayIndexOutOdBoundsException<br>2.空指针异常:NullPointerException</p><pre><code>//空指针异常举例子int [] arr = new int[] {1,2}arr = nullSystem.out.print(arr[0])</code></pre><h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><p>String存放在常量池中(不可变的字符序列),在底层以char[]存放(数组长度不能改-&gt; string是不可变的字符序列)<br>修改String类型变量，是新建了一个char[]数组把新的地址赋值给该变量</p><pre><code>//可以不用newString s1 = &quot;hello&quot;;String s2 = new String()</code></pre>]]></content>
     
     <summary type="html">
     
@@ -140,7 +255,9 @@
     
     </summary>
     
-      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
+      <category term="大数据" scheme="http://yoursite.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/Java/"/>
     
     
       <category term="Java" scheme="http://yoursite.com/tags/Java/"/>

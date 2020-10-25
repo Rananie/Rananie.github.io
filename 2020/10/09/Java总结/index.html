@@ -220,8 +220,19 @@
 </tbody>
 </table>
 <p>补充： 有默认初始化值-&gt; 数组元素、属性</p>
-<h3 id="4-区分方法的重载和重写"><a href="#4-区分方法的重载和重写" class="headerlink" title="4.区分方法的重载和重写"></a>4.区分方法的重载和重写</h3><p>重载：同类下同方法名不同形参列表的方法之间<br>重写：子类继承父类的方法之后，对父类的方法进行重写</p>
-<p><strong>待解决</strong><br>1.面向对象的编程思想？<br>2.equal与==的区别<br>3.toString方法的重写<br>4.new</p>
+<h3 id="4-区分方法的重载和重写"><a href="#4-区分方法的重载和重写" class="headerlink" title="4.区分方法的重载和重写"></a>4.区分方法的重载和重写</h3><p>① 重载：同类下同方法名不同形参列表的方法之间，构造器可以重载<br>  重写：子类继承父类以后，可以对父类中同名同参数的方法，进行覆盖操作。构造器不能重载</p>
+<p>② 可以介绍一下重载和重写的具体规则<br>  重载:两同一不同 -&gt; 同一个类、相同方法名，参数列表不同<br>  重写:继承,同名同参数</p>
+<p>③ 重载：不表现为多态性<br>  重写:表现为多态性<br>  -&gt; 从编译和运行的角度看,编译器是知道同名不同参数列表的方法是不同得的方法,所以重载在编译时知道调用地址，所以是静态绑定的。而重写只有等方法调用的时候才知道具体的调用，所以是动态绑定的。</p>
+<p>如何定位到一个方法: 1.先看方法名 2.对比参数列表</p>
+<h3 id="5-final、finally、finalize的区别"><a href="#5-final、finally、finalize的区别" class="headerlink" title="5.final、finally、finalize的区别"></a>5.final、finally、finalize的区别</h3><p>finalize:当对象被回收前,垃圾回收器自动调用该对象的finalize方法</p>
+<h3 id="6-equals-与-的区别"><a href="#6-equals-与-的区别" class="headerlink" title="6.equals()与==的区别"></a>6.equals()与==的区别</h3><p>== : 运算符,基本数据类型比较数值(不一定数据类型一样),引用数据类型比较两个对象的地址值。 -&gt; == 符号使用时，左右两边的变量一致(可以通过某种方法统一)<br>equals(): 方法,只使用于引用数据类型,没重写equals()比较的是地址，重写的比较的是实体内容</p>
+<pre><code>int i =10
+double d = 10.0
+//存在自动类型提升
+//以 + 为例子，但是在其他运算符中也会存在自动类型提升
+i == d //true，
+</code></pre><p><strong>待解决</strong><br>1.面向对象的编程思想？</p>
+<p>  == 对于引用类型来讲，比较的是两个引用数据类型变量的地址值是否相同<br>3.toString方法的重写<br>4.new</p>
 <h2 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h2><h3 id="1-万事万物皆对象？"><a href="#1-万事万物皆对象？" class="headerlink" title="1.万事万物皆对象？"></a>1.万事万物皆对象？</h3><p>①在Java语言中，我们将功能、结构等封装到类中，通过类的实例化，来调用具体的结构<br>②在与前端后端交互时，前后端的结构在Java层交互时，都体现为类、对象</p>
 <h3 id="2-println参数为char数组时的重载"><a href="#2-println参数为char数组时的重载" class="headerlink" title="2.println参数为char数组时的重载"></a>2.println参数为char数组时的重载</h3><pre><code>char[] arr = new char[]{&#39;a&#39;,&#39;b&#39;,&#39;c&#39;};
 System.out.println(arr); 
@@ -234,7 +245,7 @@ System.out.println(arr);
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#辨析"><span class="toc-text">辨析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-break和continue的相同点与不同点"><span class="toc-text">1.break和continue的相同点与不同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-面向过程-procedure-oriented-programming-与面向对象-object-oriented-programming"><span class="toc-text">2.面向过程(procedure oriented programming)与面向对象(object oriented programming)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-成员变量与局部变量的区别"><span class="toc-text">3.成员变量与局部变量的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-区分方法的重载和重写"><span class="toc-text">4.区分方法的重载和重写</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#理解"><span class="toc-text">理解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-万事万物皆对象？"><span class="toc-text">1.万事万物皆对象？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-println参数为char数组时的重载"><span class="toc-text">2.println参数为char数组时的重载</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#辨析"><span class="toc-text">辨析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-break和continue的相同点与不同点"><span class="toc-text">1.break和continue的相同点与不同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-面向过程-procedure-oriented-programming-与面向对象-object-oriented-programming"><span class="toc-text">2.面向过程(procedure oriented programming)与面向对象(object oriented programming)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-成员变量与局部变量的区别"><span class="toc-text">3.成员变量与局部变量的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-区分方法的重载和重写"><span class="toc-text">4.区分方法的重载和重写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-final、finally、finalize的区别"><span class="toc-text">5.final、finally、finalize的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-equals-与-的区别"><span class="toc-text">6.equals()与==的区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#理解"><span class="toc-text">理解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-万事万物皆对象？"><span class="toc-text">1.万事万物皆对象？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-println参数为char数组时的重载"><span class="toc-text">2.println参数为char数组时的重载</span></a></li></ol></li></ol>
   </div>
 </aside>
   

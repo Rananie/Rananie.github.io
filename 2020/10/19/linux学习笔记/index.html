@@ -179,7 +179,42 @@
 <p>王五:192.168.14.130(windows)<br>转换的新地址:192.168.20.33<br>centos虚拟机:192.168.20.xxx<br>王五可以通过转化成14网段与李四通讯,但李四找不到王五</p>
 <p>主机模式:<br>单独的一台电脑</p>
 <p><img src="/img/大数据/虚拟机网络连接的三种方.png"></p>
+<p>startx 启动图形化界面</p>
 <h2 id="Linux的目录结构"><a href="#Linux的目录结构" class="headerlink" title="Linux的目录结构"></a>Linux的目录结构</h2><p>Linux的文件系统是采用树状目录结构，只有一个根目录，<strong>在Linux世界里，一切皆文件。</strong></p>
+<p>bin 是Binary的缩写,这个目录存放着最经常使用的命令<br>sbin s是Super User的意思,这里存放的是系统管理员使用的系统管理程序<br>home 存放普通用户的主目录，在Linux中每个用户都有一个自己的目录，一般该目录名是以用户的账号命名的<br>root 该目录为系统管理员，也称作超级权限者的用户主目录<br>etc 所有的系统管理所需要的配置文件和子目录<br>user 这个目录很重要，用户的很多应用程序和文件都放在这个目录下，类似windows下的program files目录<br>boot 存放的启动Linux使用的一些核心文件，包括一些连接文件以及镜像文件<br>proc/srv/sys 这些目录最好不要修改<br>media linux系统会自动识别一些设备,例如U盘、光驱等等，当识别后，linux会把识别的设备挂载到这个目录下<br>mut 系统提供该目录是为了让用户临时挂载别的文件系统的，可以将外部的存储挂载在mut上，然后进入该目录就可以查看里面的内容了<br>usr/local 给主机额外安装软件所安装的目录，一般是通过编译源码方式安装的程序<br>var 这个目录存放着在不断扩充的东西，习惯将经常被修改的目录放在这个目录下，包括各种日志文件</p>
+<h2 id="Linux操作"><a href="#Linux操作" class="headerlink" title="Linux操作"></a>Linux操作</h2><h3 id="远程登陆Linux"><a href="#远程登陆Linux" class="headerlink" title="远程登陆Linux"></a>远程登陆Linux</h3><p><strong>为什么需要远程登陆Linux</strong><br>1.Linux服务器是开发小组共享的<br>2.正式上线的项目是运行在公网的<br>3.因此程序员需要远程登陆到centos进行项目管理或者开发</p>
+<p><strong>XShell</strong><br>远程登陆Linux的软件(登陆后基本是命令行操作) XShell,前提是Linux启动了SSHD服务，该服务会监听22号端口</p>
+<p>1.首先需要知道需要连接的Linux的IP地址<br>2.在Xshell中新建会话 协议:SSH,端口号:22,主机:需要连接的Linux的IP地址<br>3.输入Linux的用户名和密码<br>注意：如果在Xshell中输入reboot重启的是Linux</p>
+<p><strong>SecureCRT</strong><br>用于远程登陆Linux的软件,在大数据开发中使用较多</p>
+<p>解决乱码问题: 会话选项 - 外观 - 编码UTF-8</p>
+<p><strong>Xftp</strong><br>远程上传文件到Linux与从Linux中下载文件的软件 XFtp</p>
+<p>1.操作步骤和上述一样,协议是SFTP端口号是22<br>2.解决乱码问题：设置中使用UTF-8编码</p>
+<h3 id="Vi与Vim编辑器"><a href="#Vi与Vim编辑器" class="headerlink" title="Vi与Vim编辑器"></a>Vi与Vim编辑器</h3><p>Vi文本编辑器，Vim是Vi的增强版本</p>
+<p><strong>vi和vim三种常见模式</strong></p>
+<p>正常模式：<br>    可以使用快捷键 -&gt; 以vim打开一个档案直接进入一般模式<br>插入模式/编辑模式:<br>    程序员可以输入内容 -&gt; 按i进入编辑模式<br>命令行模式：<br>    可以输入相关命令完成读取、存盘、替换、离开vim等  -&gt; 按：</p>
+<h3 id="开机、重启和用户登陆注销"><a href="#开机、重启和用户登陆注销" class="headerlink" title="开机、重启和用户登陆注销"></a>开机、重启和用户登陆注销</h3><p><strong>关机&amp;重启命令</strong></p>
+<p>shutdowm<br>    shutdown -h now:表示立即关机<br>    shutdown -h 1:表示一分钟后关机<br>    shutdown -r now:立即重启<br>halt<br>    效果等价与关机<br>reboot<br>    重启系统<br>sync<br>    将内存的数据同步到磁盘</p>
+<p><strong>用户登陆和注销</strong><br>1.登陆时尽量少用root账号登陆，因为系统管理员是最大的权限，避免操作失误。可以利用普通用户登陆，登陆后再用su-用户名命令来切换成系统管理员身份<br>2.在提示符下输入logout可注销用户(退出)</p>
+<p>使用细节：<br>1.logout注销指令在图形运行级别无效，在运行级别3下有效</p>
+<h3 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h3><p>用户家目录的概念<br>/home/目录下有各个用户对应的家目录，当用户登陆时，会自动进入到自己的家目录，如/home/ranan</p>
+<p><strong>添加用户</strong><br>一个用户至少属于一个用户组<br>基本语法: useradd [选项] 用户名</p>
+<p>使用细节:<br>1.如果在添加用户的时候没有指定分到哪个用户组，则会默认创建一个同名用户组<br>2.可以通过useradd -d 指定目录(不能是已经存在的目录) 新的用户名给新创建的用户指定家目录,如 useradd -d /home/ranan ran。没有指定的话就默认创建同名家目录。<br>3.useradd -g 用户组名 用户名 指定用户在哪个组</p>
+<p><strong>指定/修改密码</strong></p>
+<p>基本语法:passwd 用户名</p>
+<p><strong>删除用户</strong><br>使用root权限<br>基本语法:userdel [选项] 用户名</p>
+<p>userdel ranan  :保留家目录,删除用户<br>userdel -r ranan :删除家目录与用户</p>
+<p>使用细节:<br>实际开发中会保留家目录</p>
+<p><strong>查询用户信息</strong><br>基本语法:id 用户名<br>返回值:用户id号,所在组的id,所在组的名称</p>
+<p><strong>切换用户</strong><br>在操作Linux中,如果当前用户的权限不够，可以通过su -指令切换到高权限用户</p>
+<p>基本语法: su - 切换用户名<br>细节说明:<br>1.从权限高的用户切换到权限低的用户，不需要输入密码<br>2.当需要返回到原来用户时，使用exit指令</p>
+<p><strong>查看当前用户/登录用户</strong><br>基本语法:whoami</p>
+<h4 id="用户组"><a href="#用户组" class="headerlink" title="用户组"></a>用户组</h4><p><strong>新增组</strong><br>语法: groupadd 组名</p>
+<p><strong>删除组</strong><br>语法: groupdel 组名</p>
+<p><strong>修改用户的组</strong><br>语法：usermod -g 用户组 用户名</p>
+<p><strong>用户和组的相关文件</strong></p>
+<p>/etc/passwd文件 - 用户(user)配置文件<br>    记录用户的各种信息<br>    每行的含义：用户名:口令(密码):用户标识符(id):组标识号:家目录:shell</p>
+<p>/etc/group文件 - 组配置文件<br>    记录组的各种信息<br>    每行含义:组名:口令:组标识符:组内用户列表</p>
+<p>/etc/shadow文件 - 口令配置文件<br>    记录密码和登陆信息是加密文件<br>    每行含义:登录名:加密口令:最后一次修改时间:最小时间间隔:最大时间间隔:警告时间:不活动时间:失效时间:标志</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -188,7 +223,7 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux的目录结构"><span class="toc-text">Linux的目录结构</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux的目录结构"><span class="toc-text">Linux的目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux操作"><span class="toc-text">Linux操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#远程登陆Linux"><span class="toc-text">远程登陆Linux</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vi与Vim编辑器"><span class="toc-text">Vi与Vim编辑器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开机、重启和用户登陆注销"><span class="toc-text">开机、重启和用户登陆注销</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户管理"><span class="toc-text">用户管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#用户组"><span class="toc-text">用户组</span></a></li></ol></li></ol></li></ol>
   </div>
 </aside>
   

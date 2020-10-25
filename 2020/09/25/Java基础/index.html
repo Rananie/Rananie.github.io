@@ -266,7 +266,7 @@ int arr[] = {1234,5}; //类型推断
 //动态初始化,分配了5个空间
 String[] names = new String[5];
 </code></pre><p><strong>一维数组的内存解析</strong><br>虚拟机栈(stack):局部变量。<br>堆(heap):new出来的结构,对象(非static的成员变量)、数组<br>方法区：常量池(String…) + 类信息(方法) + 静态变量…</p>
-<p><img 两src="/img/Java/数组的内存解析0.png"></p>
+<p><img src="/img/Java/数组的内存解析0.png"></p>
 <p>当局部变量没用之后，会依次出栈，堆里的空间会在一个不确定的时间被回收。</p>
 <p><strong>二维数组的使用</strong></p>
 <pre><code>//静态初始化,可以省略new int[][]

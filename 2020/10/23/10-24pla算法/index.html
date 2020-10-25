@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>10-24pla算法 | Ranan的博客</title>
+  <title>10.24-10.25 pla算法/pocket算法 | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -164,39 +164,47 @@
     
   </div>
   <h1 class="passage-title">
-    10-24pla算法
+    10.24-10.25 pla算法/pocket算法
   </h1>
   
   <article class="passage-article">
     <p>机器学习的第一次作业,思路还是比较好懂的,就是补了好多numpy的知识。</p>
+<p><strong>pla算法</strong></p>
 <pre><code>from matplotlib import pyplot as plt
 import numpy as np
 
 # 生成数据
 def generateData(loc1,scale1,loc2,scale2):
-    # 此产生两组正态分布数据,每组为形状为10行2列
-    nD1=np.random.normal(loc1,loc2,size=(10,2))
-    nD2=np.random.normal(scale1,scale2,size=(10,2))
+    # 此产生两组正态分布数据,每组为形状为20行2列
+    nD1=np.random.normal(loc1,loc2,size=(20,2))
+    nD2=np.random.normal(scale1,scale2,size=(20,2))
     # 将返回的元组转换成np中的数组形式,x的数据
     data1X=np.array(nD1)
     data2X=np.array(nD2)
-    # y的数据,打的标记希望的数据
-    data1Y = np.ones(10)
-    data2Y = np.negative(np.ones(10))
+    # 区分两类正太分布数据
+    data1Y = np.ones(20)
+    data2Y = np.negative(np.ones(20))
     # 产生训练数据
     data1 = np.c_[data1X,data1Y]
     data2 = np.c_[data2X,data2Y]
-    return data1,data2
+    # 合并成一个矩阵
+    data = np.vstack((data1, data2))
+    return data1,data2,data
 
 def pla():
     # 初始化向量,cout为计数器，
     W = np.ones(3)
-    data1,data2 = generateData(8,1,3,1)
-    data = np.vstack((data1, data2)) # 合并成一个矩阵
+    cout = 0
+    data1,data2,data = generateData(10,2,3,2)
+
     # 插入列向量[1,1,...,1]，实现w=[b,w1,w2] * [1,x1,x2],用于运算
-    data = np.c_[np.ones(20), data]
+    data = np.c_[np.ones(40), data]
     while True:
         iscompleted = True
+        cout = cout + 1
+        if(cout&gt;5000):
+            print(&quot;线性不可分&quot;)
+            break
         for i in range(0, len(data)):
             X = data[i][:-1]
             # 两个矩阵相乘的结果,通过函数计算得到的Y
@@ -211,9 +219,10 @@ def pla():
             break
 
     # 画图
-    # 去第一个元素为x,第二个元素为y
+    # 取第一个元素为x,第二个元素为y
     plt.plot(data1[:,0],data1[:,1],&quot;yo&quot;)
     plt.plot(data2[:,0],data2[:,1],&quot;bo&quot;)
+
 
     # x是二维数组 wx = w·（x,y) = (b,w1,w2)·(1,x,y) 推出y的表达式
     y = -W[1] / W[2] * data[:,1] - W[0] / W[2]
@@ -222,6 +231,65 @@ def pla():
 
 if __name__==&#39;__main__&#39;:
     pla()
+</code></pre><p><strong>pocket算法</strong></p>
+<pre><code>from matplotlib import pyplot as plt
+import numpy as np
+
+def generateData(loc1,scale1,loc2,scale2):
+    # 此产生两组正态分布数据,每组为形状为10行2列
+    nD1=np.random.normal(loc1,loc2,size=(100,2))
+    nD2=np.random.normal(scale1,scale2,size=(100,2))
+    # 将返回的元组转换成np中的数组形式,x的数据
+    data1X=np.array(nD1)
+    data2X=np.array(nD2)
+    # 区分两类正太分布数据
+    data1Y = np.ones(100)
+    data2Y = np.negative(np.ones(100))
+    # 产生训练数据
+    data1 = np.c_[data1X,data1Y]
+    data2 = np.c_[data2X,data2Y]
+    # 合并成一个矩阵
+    data = np.vstack((data1, data2))
+    return data1,data2,data
+
+def compare(datas,w):
+    currentCount = 0
+    updateW = True
+    for i in range(0, len(datas)):
+        X = datas[i][:-1]
+        # 两个矩阵相乘的结果,通过函数计算得到的Y
+        Y = np.dot(w, X)
+        if np.sign(Y) == np.sign(datas[i][-1]):
+            currentCount = currentCount + 1
+        else:
+            if(updateW):
+                 w = w + (datas[i][-1]) * X
+            updateW = False
+    return {&#39;currentCount&#39;:currentCount,&#39;w&#39;:w}
+
+def main():
+    data1,data2,data = generateData(10,2,4,2)
+    data = np.c_[np.ones(200), data]
+    W = np.ones(3)
+    comparew = W  # 用于循环比较的
+    maxCount = 0
+    n = 500 # 迭代次数
+    while(n):
+        current = compare(data,comparew)
+        comparew = current[&#39;w&#39;]
+        if(current[&#39;currentCount&#39;] &gt; maxCount):
+            W = current[&#39;w&#39;]
+        n = n - 1
+    # 画图
+    # 取第一个元素为x,第二个元素为y
+    plt.plot(data1[:,0],data1[:,1],&quot;yo&quot;)
+    plt.plot(data2[:,0],data2[:,1],&quot;bo&quot;)
+    y = -W[1] / W[2] * data[:, 1] - W[0] / W[2]
+    plt.plot(data[:, 1], y, c=&#39;g&#39;)
+    plt.show()
+
+if __name__ == &#39;__main__&#39;:
+    main()
 </code></pre>
   </article>
   <aside class="table-content" id="site-toc">

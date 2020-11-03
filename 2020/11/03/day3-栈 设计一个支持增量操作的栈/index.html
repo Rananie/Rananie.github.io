@@ -6,12 +6,12 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>《在线》阅读笔记 | Ranan的博客</title>
+  <title>day3-栈 设计一个支持增量操作的栈 | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="读书笔记,大数据," />
+    <meta name="keywords" content="刷题笔记,Java," />
   
 
   
@@ -35,9 +35,9 @@
     leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
     welcome: {"enable":false,"interval":30},
     start_time: "2018-02-10",
-    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", "7755742ae43ceaea358cf4a9a08079ae26144c25a9b3324207eec21ec3b1d494", ],
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
     is_post: true,
-    lock: true,
+    lock: false,
     author: "Ranan",
     share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
     mathjax: false,
@@ -150,27 +150,78 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-06-23
+      <i class="fa fa-calendar"></i>2020-11-03
     </span>
     
       <span>
-        | <a href="/categories/读书笔记/"><i class="fa fa-bookmark"></i>读书笔记</a>
+        | <a href="/categories/刷题笔记/"><i class="fa fa-bookmark"></i>刷题笔记</a>
       </span>
     
     
       <span>
-        | <i class="fa fa-lock"></i>LOCK
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
       </span>
     
   </div>
   <h1 class="passage-title">
-    《在线》阅读笔记
+    day3-栈 设计一个支持增量操作的栈
   </h1>
   
   <article class="passage-article">
-    <p>互联网的离线到在线，计算机到云计算，信息到数据是贯穿这本书的3个核心概念。王坚博士把<strong>在线</strong>定义为今天我们这个时代的关键词，读到后面的”互联网的渗透，让我们的生活在线了”让我对他的话有了一点理解和感悟。互联网的渗透，让我们的生活中的行为在互联网中进行实时反馈成数据，对数据进行分析与模拟，真正地利用数据做到更多的事情。<br><strong>互联网成为基础设施，数据成为生产资料，计算成为公共服务。</strong><br>互联网把万物、机器与人连接在一起，每一分钟每一秒都在产生新的资源，即数据。数据经由互联网的计算产生智能，进而推动科技，社会与生活的发展。数据其实不是一个新概念，新的是如何处理数据与利用数据。<br>读这本书的时间太晚了，同时也被王坚博士对互联网科技未来发展的理解感到震惊。他的理解我现在读到的都可以说是正确，很难想象在以前是怎样的眼界能看到现在。希望这本书在之后能给我带来更多的惊喜，<br>回忆以前，最开始好像频繁使用的是座机，拥有一个移动的手机好像也是一件很了不起的事情。再到零几年，手机开始慢慢流行，但手机的常用的功能只是止步与通信或者是离线的小说阅读，像电脑对于我来说好像是从来没有听过的事情。在后面，互联网突然超速前进，智能手机与网上冲浪的盛行开始让人们沉迷于在网络中接触到的新东西，那时候对于普通人来说最流行的还是社交与游戏。现在，互联网开始慢慢成为生活中必不可少的东西，各种传统行业的在线化，生活慢慢开始在线，离开网络似乎变成了一件很难实现的事情。<br>我在不断的经历着在线带来的变化，也能很清晰的感受到网络时代的到来以及未来的发展一定离不开互联网。可是现在的经历很难让我在其中充当推动者的角色，哪怕是小小的一个推动者。经常会思考为什么会生活会这样变化?别人是怎么从中抓住机遇？以后到底会怎么样？我想不出结果，似乎也想不出自己的未来计划。是想要去接触更多的东西扩大眼界去做一个真正的对社会有用的人。如果仅仅有想法而不去做是很难把想法实际化的。我更像一个把自己圈在自己想法世界的人，有很多不足，也开始慢慢跨出那一步去改变自己这种状态。我希望渴望变得更好的愿望能促使我坚持下去。<br>谷歌曾把惊人的计算能力成为‘云’，云计算的核心思想基础就是把计算成为一种公共服务。我理解的云计算像是电网一样的一个集中式计算的平台，可以随处接入随时使用与无限扩展。云计算并不是真正的把计算传回本地，而是把你的请求传回到云（数据中心），处理之后再把结果传回给你，计算是在云上的计算设备完成的。<br>让大数据通过云计算产生价值。<br>城市大脑计划真的是一个很酷的决定，更加直白的让数据开始为社会产生价值。利用科技完成人们很难完成的事情，中国的未来真的很令人憧憬。读完了这本书有很多感想，但很难用我贫瘠的语言能力表述出来。似乎通过这本书，看见了未来。</p>
-<p>本书最喜欢的两句话<br><strong>坚持相信的，相信坚持的。</strong><br><strong>梦想永在凌云意意气风发，代码成就万事基积沙镇海。</strong></p>
-<p>现在还年轻，虽然无法拥有经历和学识带来的眼界，但热气腾腾的野心和时间似乎可以带我赶上技术创新的时代。未知总是能给人带来希望，希望勤奋、自律会一直贯穿我的研究生生涯甚至我的整个人生，衷心的祝愿自己。</p>
+    <p><strong>题目</strong></p>
+<p>实现自定义栈类 CustomStack ：</p>
+<p>CustomStack(int maxSize)：用 maxSize 初始化对象，maxSize 是栈中最多能容纳的元素数量，栈在增长到 maxSize 之后则不支持 push 操作。<br>void push(int x)：如果栈还未增长到 maxSize ，就将 x 添加到栈顶。<br>int pop()：弹出栈顶元素，并返回栈顶的值，或栈为空时返回 -1。<br>void inc(int k, int val)：栈底的 k 个元素的值都增加val。如果栈中元素总数小于 k ，则栈中的所有元素都增加 val 。</p>
+<p>示例</p>
+<pre><code>输入：
+[&quot;CustomStack&quot;,&quot;push&quot;,&quot;push&quot;,&quot;pop&quot;,&quot;push&quot;,&quot;push&quot;,&quot;push&quot;,&quot;increment&quot;,&quot;increment&quot;,&quot;pop&quot;,&quot;pop&quot;,&quot;pop&quot;,&quot;pop&quot;]
+[[3],[1],[2],[],[2],[3],[4],[5,100],[2,100],[],[],[],[]]
+输出：
+[null,null,null,2,null,null,null,null,null,103,202,201,-1]
+解释：
+CustomStack customStack = new CustomStack(3); // 栈是空的 []
+customStack.push(1);                          // 栈变为 [1]
+customStack.push(2);                          // 栈变为 [1, 2]
+customStack.pop();                            // 返回 2 --&gt; 返回栈顶值 2，栈变为 [1]
+customStack.push(2);                          // 栈变为 [1, 2]
+customStack.push(3);                          // 栈变为 [1, 2, 3]
+customStack.push(4);                          // 栈仍然是 [1, 2, 3]，不能添加其他元素使栈大小变为 4
+customStack.increment(5, 100);                // 栈变为 [101, 102, 103]
+customStack.increment(2, 100);                // 栈变为 [201, 202, 103]
+customStack.pop();                            // 返回 103 --&gt; 返回栈顶值 103，栈变为 [201, 202]
+customStack.pop();                            // 返回 202 --&gt; 返回栈顶值 202，栈变为 [201]
+customStack.pop();                            // 返回 201 --&gt; 返回栈顶值 201，栈变为 []
+customStack.pop();                            // 返回 -1 --&gt; 栈为空，返回 -1
+</code></pre><p><strong>代码</strong></p>
+<pre><code class="JAVA">class CustomStack {
+    private int length; //记录当前元素，默认为0
+    private int arr [];
+    public CustomStack(int maxSize) {
+        this.arr = new int [maxSize];
+    }
+
+    public void push(int x) {
+        if(length == arr.length){
+            //说明栈满了
+            return;
+        }
+        arr[length++] = x;
+    }
+
+    public int pop() {
+        if(length == 0){
+            return -1;
+        }
+        return arr[--length];
+    }
+
+    public void increment(int k, int val) {
+
+       int min = Math.min(k, length);
+        for(int i = 0; i &lt; min; i++)
+            arr[i] += val;
+    }
+}
+</code></pre>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -186,7 +237,7 @@
   
     <div class="passage-tags">
      
-      <a href="/tags/大数据/"><i class="fa fa-tags"></i>大数据</a>
+      <a href="/tags/Java/"><i class="fa fa-tags"></i>Java</a>
     
     </div>
   
@@ -237,10 +288,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/07/08/meta标签/" data-enable="true">
+    <a href="/2020/11/03/exp-数组/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/06/20/CSS/" data-enable="true">
+    <a href="/2020/11/03/设计模式/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

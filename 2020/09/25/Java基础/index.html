@@ -257,7 +257,7 @@ while(②){
     }
 }
 </code></pre><p>return:并非专门用于结束循环的,当一个方法执行到一个return语句时,这个方法将被结束。</p>
-<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>数组长度一旦确定就不能修改</p>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><p>数组长度一旦确定就不能修改<br>数组是一种特殊的类，因为它也继承了Object</p>
 <p><strong>一维数组的使用</strong><br>1.声明和初始化,初始化时要指定长度<br>2.数组的长度,属性length<br>3.数组元素的默认初始化值 -&gt;  整型(byte、short、int、long)0,浮点型(float、double)0.0，char型(ACSII=0),布尔型false(0),引用数据类型null。</p>
 <pre><code>//静态初始化
 //int ids[] = 这种写法也可以
@@ -284,7 +284,9 @@ String[][] arr2 = new String[3][]
 int [] arr = new int[] {1,2}
 arr = null
 System.out.print(arr[0])
-</code></pre><h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><p>String存放在常量池中(不可变的字符序列),在底层以char[]存放(数组长度不能改-&gt; string是不可变的字符序列)<br>修改String类型变量，是新建了一个char[]数组把新的地址赋值给该变量</p>
+</code></pre><h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><p><a href="https://biubiuins.github.io/2020/10/11/Java%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" target="_blank" rel="noopener">面向对象</a></p>
+<h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><p>String存放在常量池中(不可变的字符序列),在底层以char[]存放(数组长度不能改-&gt; string是不可变的字符序列)<br>修改String类型变量，是新建了一个char[]数组把新的地址赋值给该变量</p>
+<p>获取String的长度用length()方法，而数组有length属性。</p>
 <pre><code>//可以不用new
 String s1 = &quot;hello&quot;;
 String s2 = new String()

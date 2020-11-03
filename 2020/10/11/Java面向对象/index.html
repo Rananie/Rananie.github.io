@@ -325,7 +325,7 @@ public class Test{
 }
 </code></pre><p><strong>多态性的使用前提</strong><br>1.类的继承关系<br>2.方法的重写</p>
 <p><strong>向下转型</strong></p>
-<p>前提:存在子父类关系</p>
+<p>前提:存在子父类关系<br>目的:使用子类的特定方法</p>
 <p>有了多态性以后，内存中实际上是加载了子类的属性和方法，但是由于变量声明为父类类型，导致编译时，只能调用父类中声明的属性和方法。子类特有的属性和方法不能调用。</p>
 <pre><code>// 调用子类特有属性和方法
 //p的地址值指向new出来的空间，但是编译器只看的Person的属性和方法或者Person和Man共有的
@@ -361,11 +361,20 @@ public boolean equals(Object obj){
     }
 
 </code></pre><p>特殊：String类型在常量池,重新定义一个变量是，若在常量池中发现有内容一样的字符串，会直接把该字符串的地址赋值给该变量。new String()方法创建的字符串除外</p>
-<p><strong>toString()方法</strong><br>1.当我们打印一个引用对象时,实际上就是调用当前对象的toString(),输出地址<br>2.Object类中toString()的定义:</p>
+<p><strong>toString()方法</strong></p>
+<p>1.当我们打印一个引用对象时,实际上就是调用当前对象的toString(),输出地址<br>2.Object类中toString()的定义:</p>
 <pre><code>public String toString(){
     return getClass().getName() + &quot;@&quot; + Integer.toHexString((hashCode));
 }
 </code></pre><p>3.String、Date、File、包装类等都重写了Object类中的toString()方法，返回”实体内容”信息</p>
+<p>特例：</p>
+<pre><code class="JAVA">String s = &quot;abc&quot;;
+s = null ;
+System.out.println(s) //null
+System.out.println(s.toString) //出现空指针异常
+</code></pre>
+<p><strong>getClass方法</strong></p>
+<p>实例.getClass()方法,返回实例的直接父类</p>
 <h4 id="JUnit"><a href="#JUnit" class="headerlink" title="JUnit"></a>JUnit</h4><p>Java中的JUnit单元测试<br>1.使用JUnit<br>test目录(src同级)用于存放测试类，在此目录上右击鼠标并将此目录标记为Test Resources Root<br>选择要进行测试的类文件，在类文件中按下组合键CTRL+SHIFT+T弹出创建测试类的窗口或者右键goto -&gt; test<br>2.自动创建的Java类，进行单元测试<br>    此类是public<br>    此类提供公共的无参构造器(默认的不需要去写)<br>3.此类中声明单元测试方法<br>    此方法的权限是public,没有形参与返回值<br>4.此单元测试方法的上面需要声明注释@Test,并导入import org.junit.Test</p>
 <h4 id="包装类Wrapper"><a href="#包装类Wrapper" class="headerlink" title="包装类Wrapper"></a>包装类Wrapper</h4><p>包装类(封装类):针对八种基本数据类型定义相应的引用类型</p>
 <p><img src="/img/Java/包装类.png"></p>
@@ -379,7 +388,7 @@ int num0 = num1.intValue
 method(num1);
 
 //自动装箱
-int num 2 = 10
+int num2 = 10
 Integer in1 = num2
 //自动拆箱
 int num3 = in1
@@ -420,7 +429,7 @@ public void test(){
     Integer y = 128 ;
     System.out.println(x == y); //false
 }
-</code></pre><h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><h3 id="this的使用"><a href="#this的使用" class="headerlink" title="this的使用"></a>this的使用</h3><p>this指向当前实例,可以理解为当前对象。</p>
+</code></pre><h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><h3 id="this"><a href="#this" class="headerlink" title="this"></a>this</h3><p>this指向当前实例,可以理解为当前对象。</p>
 <p>this可以调用:属性、方法、构造器</p>
 <p>在类的方法中,我们可以使用’this.属性’或’this.方法’的方式,调用当前对象属性或方法,通常会省略’this.’，但如果方法的形参和类的属性同名时,必须显示用”this.变量”来表明是属性。</p>
 <p>this还可以用来调用构造器,在构造器中通过使用”this(形参列表)”来调用其他不同的构造器。”this(形参列表)”必须声明在当前构造器的<strong>首行</strong></p>
@@ -430,19 +439,43 @@ public void test(){
 public Person(String name){
     this(); //调用空参,通过传不同类型的参数调用其他不同的构造器
 }
-</code></pre><h3 id="super关键字"><a href="#super关键字" class="headerlink" title="super关键字"></a>super关键字</h3><p>super理解为父类的，可以用来调用属性、方法、构造器</p>
+</code></pre><h3 id="super"><a href="#super" class="headerlink" title="super"></a>super</h3><p>super理解为父类的，可以用来调用属性、方法、构造器</p>
 <p>this与super都是解决子类父类成员重名时，用谁的问题</p>
 <p><strong>super的使用</strong><br>1.子类重写父类的方法后,想使用父类的原方法可以使用super<br>2.super(形参列表)的形式调用父类中的构造器,必须声明在子类构造器的<strong>首行</strong><br>3.构造器首行没有显示声明this(形参列表)或super(形参列表),默认调用的super()</p>
 <h4 id="子类对象的实例化过程"><a href="#子类对象的实例化过程" class="headerlink" title="子类对象的实例化过程"></a>子类对象的实例化过程</h4><p>从结果上来看(继承性):<br>    子类继承父类以后,就获取了父类中声明的属性或方法<br>    创建子类的对象,在堆空间中,就会加载所有父类中声明的属性<br>从过程上来看:<br>    通过子类的构造器创建子类对象时，最先会直接或间接调用其父类的构造器(super在第一行)，直到调用到java.lang.Object类中空参的构造器为止,在调用自己的构造器。</p>
 <p>明确:虽然创建子类对象时,调用了父类的构造器但没有new,所以只创建了一个new子类出来的对象。</p>
-<h3 id="package的使用"><a href="#package的使用" class="headerlink" title="package的使用"></a>package的使用</h3><p>1.为了更好的实现项目中类的管理提供包的概念<br>2.使用package声明类或接口所属的包，声明在源文件的首行<br>3.包属于标识符，遵循标识符的命名规则、规范(都小写)<br>4.每’.’一次，就代表一层文件目录</p>
+<h3 id="package"><a href="#package" class="headerlink" title="package"></a>package</h3><p>1.为了更好的实现项目中类的管理提供包的概念<br>2.使用package声明类或接口所属的包，声明在源文件的首行<br>3.包属于标识符，遵循标识符的命名规则、规范(都小写)<br>4.每’.’一次，就代表一层文件目录</p>
 <p>补充:同一个包下，不能命名同名的接口、类;不同的包下，可以命名同名的接口、类</p>
 <h4 id="MVC设计模式"><a href="#MVC设计模式" class="headerlink" title="MVC设计模式"></a>MVC设计模式</h4><p>MVC将整个程序分成视图模式层(view)、控制器层(controller)、数据模型层(model)三层</p>
 <p>模型层 model 主要处理数据<br>数据对象封装 model.bean/domain<br>数据库操作类 model.dao<br>数据库 model.db</p>
 <p>视图层 view 显示数据<br>相关工具栏 view.utils<br>自定义view view.ui</p>
 <p>控制层 controller 处理业务逻辑<br>应用界面相关 controller.activity<br>存放fragment controller.fragment<br>显示列表的适配器 controller.adapter<br>服务相关 controller.service<br>抽取的基类 controller.base</p>
-<h3 id="import关键字的使用"><a href="#import关键字的使用" class="headerlink" title="import关键字的使用"></a>import关键字的使用</h3><p>1.导入指定包下的类、接口(导入所有用通配符<em>)<br>2.声明在包声明和类声明之间<br>3.使用是的本包或者java.lang包下的，则可以省略import结构，<strong>用其他包的内容都要引用</strong><br>4.在源文件中使用了不同包下的同名类，至少一个类以全类名的方式使用(包名.类 …)<br>5.如果’xxx.</em>‘方式表明可以调用xxx包下的所有结构(当前层次)，但是如果使用的是xxx的子包仍然需要显示调用  –&gt; 只要跨包就要import<br>6.import static 导入指定类或接口中的静态结构 -&gt; import 落脚点是类或接口，import static 落脚点是类中的静态结构</p>
-<h3 id="instanceof关键字"><a href="#instanceof关键字" class="headerlink" title="instanceof关键字"></a>instanceof关键字</h3><p>语法: a instanceof A 判断对象a是否是类A的实例(间接的也行)<br>返回值：是返回true,不是返回false</p>
+<h3 id="import"><a href="#import" class="headerlink" title="import"></a>import</h3><p>1.导入指定包下的类、接口(导入所有用通配符<em>)<br>2.声明在包声明和类声明之间<br>3.使用是的本包或者java.lang包下的，则可以省略import结构，<strong>用其他包的内容都要引用</strong><br>4.在源文件中使用了不同包下的同名类，至少一个类以全类名的方式使用(包名.类 …)<br>5.如果’xxx.</em>‘方式表明可以调用xxx包下的所有结构(当前层次)，但是如果使用的是xxx的子包仍然需要显示调用  –&gt; 只要跨包就要import<br>6.import static 导入指定类或接口中的静态结构 -&gt; import 落脚点是类或接口，import static 落脚点是类中的静态结构</p>
+<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><p>引入：编写一个类(无static)时，实际在描述其对象的属性和行为，而并没有产生实质上的对象，只有通过new关键字才会分配内存空间给对象，其方法才可以被外部调用。有时候希望无论是否产生了对象或无论产生了多少对象的情况下，<strong>某些特定的数据在内存空间里只有一份</strong>，所有对象共享。</p>
+<p>说明:<br>1.static可以用来修饰属性、方法、代码块、内部类<br>2.static修饰属性 -&gt; 静态变量/类变量<br>   属性按是否使用static修饰分为 静态属性 VS 非静态属性(实例变量)<br>   类的多个对象共享同一个静态变量<br>   静态变量随类的加载而加载早于对象的创建，由于类只加载一次(缓存在方法区)所以静态变量在内存中只会存在一份<strong>存在方法区的静态域中</strong> (方法区:类的加载信息、静态域、常量池)<br>3.使用static修饰方法 -&gt; 静态方法<br>   (从生命周期思考)<br>   静态方法随类的加载而加载,所以静态方法中不能使用this和super。<br>   静态方法中只能调用静态方法或静态属性 ，非静态方法中，既可以调用非静态的也可以调用静态的</p>
+<p><strong>总结</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">静态方法/类变量</th>
+<th style="text-align:center">非静态方法/实例变量 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">类</td>
+<td style="text-align:center">yes</td>
+<td style="text-align:center">no</td>
+</tr>
+<tr>
+<td style="text-align:center">对象</td>
+<td style="text-align:center">yes</td>
+<td style="text-align:center">yes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="instanceof关键字"><a href="#instanceof关键字" class="headerlink" title="instanceof关键字"></a>instanceof关键字</h3><p>语法: a instanceof A 判断对象a是否是类A的实例(间接的也行)<br>返回值：是返回true,不是返回false<br>说明：<br>1.要求a所属的类与类A必须是父子类关系，否则编译会出错。</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -451,7 +484,7 @@ public Person(String name){
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#类和对象"><span class="toc-text">类和对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造器-constructor"><span class="toc-text">构造器(constructor)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象的特点"><span class="toc-text">面向对象的特点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#封装与隐藏"><span class="toc-text">封装与隐藏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继承性"><span class="toc-text">继承性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多态性"><span class="toc-text">多态性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Object类"><span class="toc-text">Object类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JUnit"><span class="toc-text">JUnit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#包装类Wrapper"><span class="toc-text">包装类Wrapper</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关键字"><span class="toc-text">关键字</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#this的使用"><span class="toc-text">this的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#super关键字"><span class="toc-text">super关键字</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#子类对象的实例化过程"><span class="toc-text">子类对象的实例化过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#package的使用"><span class="toc-text">package的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MVC设计模式"><span class="toc-text">MVC设计模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#import关键字的使用"><span class="toc-text">import关键字的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#instanceof关键字"><span class="toc-text">instanceof关键字</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#类和对象"><span class="toc-text">类和对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造器-constructor"><span class="toc-text">构造器(constructor)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象的特点"><span class="toc-text">面向对象的特点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#封装与隐藏"><span class="toc-text">封装与隐藏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继承性"><span class="toc-text">继承性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多态性"><span class="toc-text">多态性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Object类"><span class="toc-text">Object类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JUnit"><span class="toc-text">JUnit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#包装类Wrapper"><span class="toc-text">包装类Wrapper</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关键字"><span class="toc-text">关键字</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#this"><span class="toc-text">this</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#super"><span class="toc-text">super</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#子类对象的实例化过程"><span class="toc-text">子类对象的实例化过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#package"><span class="toc-text">package</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MVC设计模式"><span class="toc-text">MVC设计模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#import"><span class="toc-text">import</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#static"><span class="toc-text">static</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#instanceof关键字"><span class="toc-text">instanceof关键字</span></a></li></ol></li></ol>
   </div>
 </aside>
   

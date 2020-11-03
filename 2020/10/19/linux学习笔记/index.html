@@ -215,6 +215,8 @@
 <p>/etc/passwd文件 - 用户(user)配置文件<br>    记录用户的各种信息<br>    每行的含义：用户名:口令(密码):用户标识符(id):组标识号:家目录:shell</p>
 <p>/etc/group文件 - 组配置文件<br>    记录组的各种信息<br>    每行含义:组名:口令:组标识符:组内用户列表</p>
 <p>/etc/shadow文件 - 口令配置文件<br>    记录密码和登陆信息是加密文件<br>    每行含义:登录名:加密口令:最后一次修改时间:最小时间间隔:最大时间间隔:警告时间:不活动时间:失效时间:标志</p>
+<h3 id="实用指令"><a href="#实用指令" class="headerlink" title="实用指令"></a>实用指令</h3><p><strong>指令运行级别</strong><br>常用运行级别是3和5,系统的运行级别配置文件/etc/inittab<br>0:关机<br>1:单用户(找回丢失密码)<br>2:多用户无网络服务<br>3:多用户有网络服务<br>4:保留<br>5:图形界面<br>6:重启</p>
+<p>命令:init [希望进入的级别号0123456] 切换到指定运行级别的指令</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -223,7 +225,7 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux的目录结构"><span class="toc-text">Linux的目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux操作"><span class="toc-text">Linux操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#远程登陆Linux"><span class="toc-text">远程登陆Linux</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vi与Vim编辑器"><span class="toc-text">Vi与Vim编辑器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开机、重启和用户登陆注销"><span class="toc-text">开机、重启和用户登陆注销</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户管理"><span class="toc-text">用户管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#用户组"><span class="toc-text">用户组</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux的目录结构"><span class="toc-text">Linux的目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux操作"><span class="toc-text">Linux操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#远程登陆Linux"><span class="toc-text">远程登陆Linux</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vi与Vim编辑器"><span class="toc-text">Vi与Vim编辑器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开机、重启和用户登陆注销"><span class="toc-text">开机、重启和用户登陆注销</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户管理"><span class="toc-text">用户管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#用户组"><span class="toc-text">用户组</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实用指令"><span class="toc-text">实用指令</span></a></li></ol></li></ol>
   </div>
 </aside>
   

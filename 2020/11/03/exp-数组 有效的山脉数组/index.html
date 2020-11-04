@@ -6,12 +6,12 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>归档 | 第6页 | Ranan的博客</title>
+  <title>exp-数组 有效的山脉数组 | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo, Theme-AD" />
+    <meta name="keywords" content="刷题笔记,Java," />
   
 
   
@@ -36,7 +36,7 @@
     welcome: {"enable":false,"interval":30},
     start_time: "2018-02-10",
     passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
-    is_post: false,
+    is_post: true,
     lock: false,
     author: "Ranan",
     share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
@@ -146,72 +146,125 @@
 </nav>
 <div id="site-process"></div>
     <main>
-      <div class="timeline">
-  <h2 class="timeline-title">归档: 79篇</h2>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-11-03
+    </span>
+    
+      <span>
+        | <a href="/categories/刷题笔记/"><i class="fa fa-bookmark"></i>刷题笔记</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    exp-数组 有效的山脉数组
+  </h1>
   
+  <article class="passage-article">
+    <p><strong>题目</strong></p>
+<p><a href="https://leetcode-cn.com/problems/shortest-distance-to-a-character/" target="_blank" rel="noopener">leetcode941</a></p>
+<p>给定一个整数数组 A，如果它是有效的山脉数组就返回 true，否则返回 false。</p>
+<p>让我们回顾一下，如果 A 满足下述条件，那么它是一个山脉数组：</p>
+<p>A.length &gt;= 3<br>在 0 &lt; i &lt; A.length - 1 条件下，存在 i 使得：<br>A[0] &lt; A[1] &lt; … A[i-1] &lt; A[i]<br>A[i] &gt; A[i+1] &gt; … &gt; A[A.length - 1]</p>
+<p><img src="/img/leetcode/mountain_array.png.png"></p>
+<p><strong>思路</strong></p>
+<p>1.先找到最大值记录下坐标i。<br>2.一个变量记录元素与最大值的差<br>3.i的左边，当前元素与最大值的差与变量比较，应该越来越大<br>4.i的右边，当前元素与最大值的差与变量比较，应该越来越小</p>
+<p><strong>代码</strong></p>
+<pre><code class="JAVA">class Solution {
+    public boolean validMountainArray(int[] A) {
+        int length = A.length;
+        int pre = -10000;
+        int next =  10000;
+        if(length == 0){
+            return false;
+        }
+        //找到最大值
+        int cur = A[0],index = 0;
+        for(int i = 1  ; i&lt;length ; i++){
+            if(A[i] &lt;= cur ){
+                break;
+            }
+            cur = A[i];
+            index = i ;
+        }
+        //如果最大值在第一个元素和最后一个返回false
+        if(index == 0 || index == length-1){
+            return false;
+        }
+        //循坏比较
+        for(int i = 0; i&lt;length;i++){
+            if(i&lt;index){
+                //说明在最大值的左边
+                if(A[i] - cur &lt;= pre){
+                return false ;
+                }
+                pre = A[i] - cur ;
+            }
+            if(i&gt;index){
+                //说明在最大值右边
+                if(A[i] == cur || A[i] - cur &gt;= next){
+                    return false;
+                }
+                next = A[i] - cur ;
+            }
+        }
+        return true;
+    }
+}
+</code></pre>
+<p><strong>优化</strong></p>
+<p>第二天起来看，感觉写的太复杂了。要多花时间在思考上面，而不是写代码QAQ<br>转换了下思维，可以从开头往右找峰值，找到峰值返回；然后从后面往左找峰值，找到峰值返回，再比较峰值数的索引是不是一样就行了。这样想想好像比之前的思路更简洁一点，至少代码是简洁了好多。</p>
+<pre><code class="JAVA">class Solution {
+    public boolean validMountainArray(int[] A) {
+        int length = A.length;
+        if(length &lt; 3){
+            return false;
+        } 
+        //左右两个指针
+        int left = 0,right = length-1;
+        //从左往又找最大值
+        while(left &lt; length-1 &amp;&amp; A[left] &lt; A[left+1]){
+            left++;
+        }
+        //从右往左找
+       while(right &gt; 0 &amp;&amp; A[right] &lt; A[right-1]){
+            right--;
+        }
+        if(left == 0 || right == length-1 ||left != right){
+            return false;
+        }
+        return true;
+    }
+}
+</code></pre>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
     
-      <h3 class="timeline-subtitle">2020</h3>
-    
-    <div class="timeline-item">
-      <time>2020-07-16</time>
-      <a target="_self" href="/2020/07/16/正则表达式/">正则表达式</a>
-    </div>
+  </div>
+</aside>
   
-    
-    <div class="timeline-item">
-      <time>2020-07-15</time>
-      <a target="_self" href="/2020/07/15/原型与原型链/">原型与原型链</a>
-    </div>
   
+    <div class="passage-tags">
+     
+      <a href="/tags/Java/"><i class="fa fa-tags"></i>Java</a>
     
-    <div class="timeline-item">
-      <time>2020-07-15</time>
-      <a target="_self" href="/2020/07/15/this指针/">this指针</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-07-13</time>
-      <a target="_self" href="/2020/07/13/webpack5/">webpack5</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-07-12</time>
-      <a target="_self" href="/2020/07/12/webpack详细配置/">webpack详细配置</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-07-10</time>
-      <a target="_self" href="/2020/07/10/webpack优化配置/">webpack优化配置</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-07-09</time>
-      <a target="_self" href="/2020/07/09/JavaScript基础/">JavaScript基础（7.15更新）</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-07-09</time>
-      <a target="_self" href="/2020/07/09/webpack基本配置/">webpack基本配置</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-07-08</time>
-      <a target="_self" href="/2020/07/08/less学习笔记/">Less学习笔记</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-07-08</time>
-      <a target="_self" href="/2020/07/08/meta标签/">meta标签</a>
     </div>
   
 </div>
+
     </main>
     
     <div class="site-footer-wrapper">
@@ -257,15 +310,15 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/archives/page/5/" data-enable="true">
+    <a href="/2020/11/04/note-滑动窗口法/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/archives/page/7/" data-enable="true">
+    <a href="/2020/11/03/day3-栈 设计一个支持增量操作的栈/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
   <div class="bottom-bar-right">
-    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
       <i class="fa fa-bars"></i>
     </a>
     

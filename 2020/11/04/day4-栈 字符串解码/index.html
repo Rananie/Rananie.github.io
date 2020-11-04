@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>exp-数组 有效的山脉数组 | Ranan的博客</title>
+  <title>day4-栈 字符串解码 | Ranan的博客</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -150,7 +150,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-11-03
+      <i class="fa fa-calendar"></i>2020-11-04
     </span>
     
       <span>
@@ -164,61 +164,37 @@
     
   </div>
   <h1 class="passage-title">
-    exp-数组 有效的山脉数组
+    day4-栈 字符串解码
   </h1>
   
   <article class="passage-article">
     <p><strong>题目</strong></p>
-<p>给定一个整数数组 A，如果它是有效的山脉数组就返回 true，否则返回 false。</p>
-<p>让我们回顾一下，如果 A 满足下述条件，那么它是一个山脉数组：</p>
-<p>A.length &gt;= 3<br>在 0 &lt; i &lt; A.length - 1 条件下，存在 i 使得：<br>A[0] &lt; A[1] &lt; … A[i-1] &lt; A[i]<br>A[i] &gt; A[i+1] &gt; … &gt; A[A.length - 1]</p>
-<p><img src="/img/leetcode/mountain_array.png.png"></p>
-<p><strong>思路</strong></p>
-<p>1.先找到最大值记录下坐标i。<br>2.一个变量记录元素与最大值的差<br>3.i的左边，当前元素与最大值的差与变量比较，应该越来越大<br>4.i的右边，当前元素与最大值的差与变量比较，应该越来越小</p>
+<p><a href="https://leetcode-cn.com/problems/shortest-distance-to-a-character/" target="_blank" rel="noopener">leetcode194.字符串解码</a></p>
+<p>给定一个经过编码的字符串，返回它解码后的字符串。<br>编码规则为: k[encoded_string]，表示其中方括号内部的 encoded_string 正好重复k次。注意k保证为正整数。</p>
+<p>你可以认为输入字符串总是有效的；输入字符串中没有额外的空格，且输入的方括号总是符合格式要求的。</p>
+<p>此外，你可以认为原始数据不包含数字，所有的数字只表示重复的次数 k ，例如不会出现像 3a 或 2[4] 的输入。</p>
+<p>示例 ：</p>
+<pre><code>输入：s = &quot;3[a]2[bc]&quot;
+输出：&quot;aaabcbc&quot;
+
+输入：s = &quot;3[a2[c]]&quot;
+输出：&quot;accaccacc&quot;
+
+输入：s = &quot;2[abc]3[cd]ef&quot;
+输出：&quot;abcabccdcdcdef&quot;
+
+输入：s = &quot;abc3[cd]xyz&quot;
+输出：&quot;abccdcdcdxyz&quot;
+</code></pre><p><strong>思路</strong></p>
+<p>看见方括号，首先想到用栈。</p>
+<p>题目给定的条件有四种可能出现的字符<br>1.字母<br>2.数字<br>3.[<br>4.]</p>
+<ul>
+<li>如果是字母 –&gt; 添加到 stack 当中</li>
+<li>如果是数字 –&gt; 添加到 stack 中 </li>
+<li>如果是 [ –&gt; 说明重复字符串开始 </li>
+<li>如果是 ] –&gt; 说明重复字符串结束 –&gt; 将重复字符串重复前一步储存的数字遍</li>
+</ul>
 <p><strong>代码</strong></p>
-<pre><code class="JAVA">class Solution {
-    public boolean validMountainArray(int[] A) {
-        int length = A.length;
-        int pre = -10000;
-        int next =  10000;
-        if(length == 0){
-            return false;
-        }
-        //找到最大值
-        int cur = A[0],index = 0;
-        for(int i = 1  ; i&lt;length ; i++){
-            if(A[i] &lt;= cur ){
-                break;
-            }
-            cur = A[i];
-            index = i ;
-        }
-        //如果最大值在第一个元素和最后一个返回false
-        if(index == 0 || index == length-1){
-            return false;
-        }
-        //循坏比较
-        for(int i = 0; i&lt;length;i++){
-            if(i&lt;index){
-                //说明在最大值的左边
-                if(A[i] - cur &lt;= pre){
-                return false ;
-                }
-                pre = A[i] - cur ;
-            }
-            if(i&gt;index){
-                //说明在最大值右边
-                if(A[i] == cur || A[i] - cur &gt;= next){
-                    return false;
-                }
-                next = A[i] - cur ;
-            }
-        }
-        return true;
-    }
-}
-</code></pre>
-<p><strong>优化</strong></p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -285,10 +261,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2020/11/04/note-深度优先算法/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/11/03/day3-栈 设计一个支持增量操作的栈/" data-enable="true">
+    <a href="/2020/11/04/note-滑动窗口法/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

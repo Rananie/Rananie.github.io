@@ -11,7 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="刷题笔记,Java," />
+    <meta name="keywords" content="刷题笔记,JavaScript," />
   
 
   
@@ -187,14 +187,44 @@
 输出：&quot;abccdcdcdxyz&quot;
 </code></pre><p><strong>思路</strong></p>
 <p>看见方括号，首先想到用栈。</p>
-<p>题目给定的条件有四种可能出现的字符<br>1.字母<br>2.数字<br>3.[<br>4.]</p>
-<ul>
-<li>如果是字母 –&gt; 添加到 stack 当中</li>
-<li>如果是数字 –&gt; 添加到 stack 中 </li>
-<li>如果是 [ –&gt; 说明重复字符串开始 </li>
-<li>如果是 ] –&gt; 说明重复字符串结束 –&gt; 将重复字符串重复前一步储存的数字遍</li>
-</ul>
-<p><strong>代码</strong></p>
+<p>题目给定的条件有四种可能出现的字符<br>1.字母 -&gt; 直接拼接str<br>2.数字 -&gt; 拼接到数字字符串<br>3.[   -&gt; 当前的str与当前的num入栈,清空str与num<br>4.]   -&gt; {str,num}出栈,当前的str是需要重复的字符串，{}里的str是[前的字符串</p>
+<p>示例: <code>xy3[a2[c]]</code></p>
+<pre><code>   | str | num |stack
+x  | &quot;x&quot; |&quot;&quot; | []
+y  | &quot;xy&quot;|&quot;&quot; | []
+3  | &quot;xy&quot;|&quot;3&quot;| []
+[  | &quot;&quot;| &quot;&quot;| [{str:&quot;xy&quot;,num:&quot;3&quot;}]
+a  | &quot;a&quot; | &quot;&quot;| [{str:&quot;xy&quot;,num:&quot;3&quot;}]
+2  | &quot;a&quot; | &quot;2&quot;| [{str:&quot;xy&quot;,num:&quot;3&quot;}]
+[  | &quot;&quot; | &quot;&quot;| [{str:&quot;xy&quot;,num:&quot;3&quot;},{str:&quot;a&quot;,num:&quot;2&quot;}]
+c  | &quot;c&quot;|&quot; &quot; |[{str:&quot;xy&quot;,num:&quot;3&quot;},{str:&quot;a&quot;,num:&quot;2&quot;}]
+]  | &quot;a&quot; + &quot;cc&quot;|&quot;&quot; |[{str:&quot;xy&quot;,num:&quot;3&quot;}]
+]  | &quot;xy&quot; + &quot;accaccacc&quot;|&quot;&quot; |[]
+</code></pre><p><strong>代码</strong></p>
+<pre><code class="js">/**
+ * @param {string} s
+ * @return {string}
+ */
+var decodeString = function(s) {
+    let num = &#39;&#39;,str=&#39;&#39;;
+    let stack = [] ;
+    for(let char of s){
+        if(!isNaN(char)){
+            num += char;     
+        }else if(char == &quot;[&quot;){
+          stack.push({str,num});
+          str =&quot;&quot;;
+          num =&quot;&quot;;
+        }else if(char ==&quot;]&quot;){
+        let date = stack.pop();
+        str = date.str + str.repeat(date.num);
+        }else{
+        str += char;
+        }
+    }
+    return str;
+};
+</code></pre>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -210,7 +240,7 @@
   
     <div class="passage-tags">
      
-      <a href="/tags/Java/"><i class="fa fa-tags"></i>Java</a>
+      <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
     
     </div>
   

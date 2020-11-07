@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ranan" />
+  
+  
+  <title>Java面向对象-类的成员 | Ranan_blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Java,Java," />
+  
+
+  
+  <meta name="description" content="Ranan的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Ranan",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/Rananie" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-11-06
+    </span>
+    
+      <span>
+        | <a href="/categories/Java/"><i class="fa fa-bookmark"></i>Java</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Java面向对象-类的成员
+  </h1>
+  
+  <article class="passage-article">
+    <p>Java类及类的成员:属性、方法、构造器;代码块、内部类<br>面向对象的三大特征:封装性、继承性、多态性<br>其他关键字:this、super、static、final、abstract、package、import、interface</p>
+<h2 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h2><p>类(Class)与对象(Object)是面向对象的核心概念。<br>类是对一类事务的抽象描述<br>对象是实际存在的该类事务的每个个体，也称为实例(instance)</p>
+<p>面向对象程序设计的重点是类的设计，也就是类的成员(属性与方法)的设计。</p>
+<p><strong>类的成员</strong></p>
+<ul>
+<li>实例变量,不以static修饰</li>
+<li>类变量,以static修饰</li>
+</ul>
+<p>类的实例化: 类名(变量类型) 类的实例名(变量) = new 类名()</p>
+<p>类中方法的声明: 权限修饰符(可省略) 返回值类型(没有就void) 方法名(形参类型 形参名,形参列表){方法体}</p>
+<p>权限修饰符:private、public、缺省、protected  –&gt; 封装性</p>
+<p><strong>成员变量与局部变量</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">位置</th>
+<th style="text-align:center">权限修饰符</th>
+<th style="text-align:center">默认初始化值</th>
+<th style="text-align:center">内存加载位置</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">成员变量</td>
+<td style="text-align:center">类的{}里</td>
+<td style="text-align:center">可以使用权限修饰符</td>
+<td style="text-align:center">根据其类型有默认初始化值</td>
+<td style="text-align:center">非static的 堆空间</td>
+</tr>
+<tr>
+<td style="text-align:center">局部变量</td>
+<td style="text-align:center">方法内、方法形参、构造器内、构造器形参、代码块内</td>
+<td style="text-align:center">不可以使用权限修饰符</td>
+<td style="text-align:center">没有默认初始化值,在调用局部变量前要显示赋值</td>
+<td style="text-align:center">栈空间</td>
+</tr>
+</tbody>
+</table>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p><strong>方法的重载(overload)</strong><br>同一个类中,允许存在同名方法,只要他们的参数个数或者参数类型不同。  -&gt; 两同一不同:同一个类、相同方法名，参数列表不同</p>
+<p>通过对象调用方法时，如何确定某一个指定的方法?    方法名 -&gt; 参数列表(参数的个数,数据类型及顺序)</p>
+<p>Java的重载是可以包括父类和子类的,子类可以重载父类的同名不同参数的方法</p>
+<p><strong>方法的重写(override/overwrite)</strong></p>
+<p>子类继承父类以后，可以对父类中同名同参数的方法，进行覆盖操作</p>
+<p>重写的规定：<br>    方法声明：权限修饰符 返回值类型 方法名(形参列表) throws 异常的类型{<br>    //方法体<br>    }<br>1.子类重写继承的方法：要求方法名、形参列表要相同<br>2.子类重写的方法权限修饰符 &gt; =  父类被重写方法权限修饰符  –&gt; 子类不能重写父类中声明为private权限的方法<br>3.异常类型也是包含关系  子类 &lt;= 父类<br>4.返回值类型:基本数据类型同，引用数据类型同或子类<br>    父类void,子类void<br>    父类返回A类型,子类A类或A类的子类<br>    父类基本数据类型,子类相同的基本数据类型<br>5.重写的是非static  -&gt; static方法不能被覆盖,随类的加载而加载</p>
+<p><strong>可变个数的形参</strong></p>
+<p>格式:数据类型 … 变量名</p>
+<p>String …strs = String[] strs</p>
+<p>使用:<br>1.当调用可变个数形参的方法时，可以传参0,1,2…<br>2.会与本类中方法名相同,形参不同的方法之间构成重载<br>3.此写法类似JS的三点运算符,所有参数会被封装成一个数组<br>4.可变个数形参在方法的形参中，必须声明在<strong>末尾</strong><br>5.注意如果子父类的形参分别是…strs与[]strs也会重写<br>6.优先会调用参数列表个数确定的方法</p>
+<p><strong>方法参数的值传递机制-值传递</strong><br>基本数据类型:数据值<br>引用数据类型:地址值(含变量的数据类型 –&gt; 用于赋值的检查)</p>
+<h4 id="main-方法"><a href="#main-方法" class="headerlink" title="main()方法"></a>main()方法</h4><p>main()方法的使用说明<br>1.main()方法作为程序的入口<br>2.main()方法是一个静态方法，通过类调用<br>3.main()方法可以让我们与控制台交互(Scanner) java 运行文件名 传入的参数也就是main方法接收的参数 (运行时cmd传参) -&gt; java 类名 “Tom” “ranan”</p>
+<pre><code>    public static void main(String args []){
+    }
+</code></pre><h3 id="构造器-constructor"><a href="#构造器-constructor" class="headerlink" title="构造器(constructor)"></a>构造器(constructor)</h3><p>任何一个类都有构造器constructor,构造器与类同名</p>
+<p><strong>构造器的作用</strong><br>1.创建对象:new + 构造器<br>2.初始化对象的信息</p>
+<p><strong>构造器的说明</strong><br>1.如果没有显式的定义类的构造器,系统默认提供一个空参的构造器，<strong>空参的构造器权限跟类一样</strong><br>2.定义构造器的格式:权限修饰符 类名(形参列表) 不需要返回值类型<br>3.一个类中定义的多个构造器,彼此构成重载<br>4.显示定义了有参数的构造器之后,系统就不提供默认的空参构造器<br>5.一个类中至少有一个构造器</p>
+<pre><code>//创建类的对象: new + 构造器
+Person p = new Person()
+class Person{
+    //属性...
+    //构造器
+    public Person(){
+
+    }
+    //方法...
+}
+</code></pre><p><strong>属性赋值的先后顺序</strong></p>
+<p>1.默认初始化<br>2.显示初始化<br>3.构造器中初始化</p>
+<p><strong>JavaBean</strong><br>JavaBean是Java语言写成的可重用组件<br>JavaBean其实就是指符合如下标准的Java类:<br>①类是公共的<br>②有一个无参的公共的构造器<br>③有属性,且有对应的get、set方法</p>
+<h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><p>1.代码块用来初始化类、对象，不用调用即可执行。<br>2.代码块分为静态代码块<code>static{}</code>与非静态代码块<code>{}</code><br>    静态代码块随着类的加载而执行，初始化类的信息。<br>    非静态代码块随着对象的创建而执行，可以在创建对象时，对对象的属性等进行初始化。</p>
+<p>非静态代码块是在堆中的,每new一次开辟一个新空间执行一次非静态代码块。</p>
+<p><strong>执行顺序</strong></p>
+<p>执行顺序：由父及子，静态先行</p>
+<p>知识点1:因为继承，子类加载前要加载父类的所有信息<br>知识点2:代码块执行先于构造器</p>
+<p>存疑:<br>非静态代码块的执行随着构造器的执行而执行???</p>
+<pre><code class="JAVA">class Father {
+    static {
+        System.out.println(&quot;1&quot;);
+    }
+    {
+        System.out.println(&quot;2&quot;);
+    }
+    public Father() {
+        System.out.println(&quot;3&quot;);
+    }
+}
+public class Son extends Father {
+    static {
+        System.out.println(&quot;4&quot;);
+    }
+    {
+        System.out.println(&quot;5&quot;);
+    }
+    public Son() {
+        System.out.println(&quot;6&quot;);
+    }
+    public static void main(String[] args) { // 由父及子 静态先行
+        System.out.println(&quot;7&quot;);
+        new Son();
+    }
+}
+
+/*
+main方法也是静态方法，需要类去调
+此例中是通过Son.main调用，先需要加载Son
+
+因为继承，子类加载前要加载父类的所有信息
+son -&gt; father-&gt;Object 跟着继承链往上找，Object加载完毕，加载father，静态代码块执行，父类加载完毕son类加载，静态代码块执行，然后才是Son.main的调用输出7，然后执行new Son()
+
+1.输出1
+2.输出4
+3.输出7
+
+执行new Son() 找子类的构造器，先执行super()继承父类的构造器，父类的构造器继承Object的构造器，Object的构造器执行完毕后，由于代码块先于构造器，所以父类的非静态代码块执行，再执行父类的构造器，此时子类继承父类完毕，执行自己的非静态代码块，再执行构造器初始化对象。
+
+4.输出2
+5.输出3
+6.输出5
+7.输出6
+*/
+
+</code></pre>
+<p><strong>属性的赋值顺序</strong><br>1.默认初始化<br>2.显示初始化/在代码块中赋值<br>3.构造器中初始化</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#类和对象"><span class="toc-text">类和对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-text">方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#main-方法"><span class="toc-text">main()方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造器-constructor"><span class="toc-text">构造器(constructor)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码块"><span class="toc-text">代码块</span></a></li></ol></li></ol>
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/Java/"><i class="fa fa-tags"></i>Java</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2020/11/07/day7-链表 两两交换链表中的节点/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2020/11/06/Java面向对象-三大特征/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

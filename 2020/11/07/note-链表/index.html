@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ranan" />
+  
+  
+  <title>note-链表 | Ranan_blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="刷题笔记," />
+  
+
+  
+  <meta name="description" content="Ranan的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Ranan",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/Rananie" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-11-07
+    </span>
+    
+      <span>
+        | <a href="/categories/刷题笔记/"><i class="fa fa-bookmark"></i>刷题笔记</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    note-链表
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="链表的结构"><a href="#链表的结构" class="headerlink" title="链表的结构"></a>链表的结构</h2><p><img src="../img/leetcode/链表的结构.png"></p>
+<p>单链表:结点有一个指针域的链表<br>双链表:结点有两个指针域的链表，双向链表的本质就是空间换时间，因此如果题目对时间有要求，可以考虑使用双向链表，<br>循环链表:首尾相接的链表，当我们需要在遍历到尾部之后重新开始遍历的时候，可以考虑使用循环链表。</p>
+<p>头指针:执行链表中第一个结点的指针。<br>首元结点:链表中存储第一个数据元素a1的结点。<br>头结点:链表首元结点之前的一个结点,往往不存储元素，作为附加结点。</p>
+<p><strong>头结点</strong></p>
+<p>1.如何表示空表?</p>
+<p>无头结点,头指针为空时表示空表 head == null<br>有头结点,当头结点的指针域为空时表示空表 head.next == null</p>
+<p>2.头结点的好处?</p>
+<p>便于首元结点的处理<br>    首元节点的地址保存在头结点的指针域中，所以链表的第一个位置上的操作和其他位置一致，不需要进行特殊处理。<br>便于空表和非空表的统一处理</p>
+<p>3.头结点的数据域内装什么？</p>
+<p>可以为空，也可以存放线性表的长度等附加信息。但此结点在统计表长时不算入。</p>
+<h2 id="链表的基本操作"><a href="#链表的基本操作" class="headerlink" title="链表的基本操作"></a>链表的基本操作</h2><p><strong>判断链表是否为空</strong></p>
+<pre><code class="JAVA">boolean ListEmpty(ListNode head){
+    return head.next == null
+}
+</code></pre>
+<p><strong>单链表的销毁</strong></p>
+<p>从头指针开始，依次释放所有的结点，包括了头结点。</p>
+<pre><code>while(L){
+    //需要辅助结点p，p指向要销毁的结点
+    P = L;
+    L = L.next ;
+    //Java中有垃圾回收机制,p = null
+    delete p ;
+}   
+</code></pre><p><strong>清空链表</strong></p>
+<p>链表仍存在，但链表中无元素，成为空链表，头指针和头结点仍然在。</p>
+<pre><code>//P从首元结点开始
+p = L.next;
+while(p){
+    //q指向要清除的结点的下一个结点
+    q = p.next;
+    delete p ;
+    p = q;
+}
+
+</code></pre><p><strong>结点的取值</strong></p>
+<pre><code>//p指针用于寻找，从首元结点开始，count表示计数,i表示要找的第几个元素
+
+p = L.next;
+count = 1;
+while(p &amp;&amp; count &lt; i){
+    P = p.next;
+    count ++ ;
+}
+</code></pre><p><strong>结点的插入</strong></p>
+<p>这里往往需要先遍历找到结点</p>
+<pre><code>temp = 待插入位置的前驱节点.next
+待插入位置的前驱节点.next = 待插入指针
+待插入指针.next = temp
+</code></pre><h3 id="结点的删除"><a href="#结点的删除" class="headerlink" title="结点的删除"></a>结点的删除</h3><p>只需要将需要删除的节点的前驱指针的 next 指针修正为其下下个节点即可，注意考虑边界条件。</p>
+<p>伪代码：</p>
+<pre><code>待删除位置的前驱节点.next = 待删除位置的前驱节点.next.next
+</code></pre><p><strong>遍历</strong></p>
+<p>伪代码</p>
+<pre><code>当前指针 =  头指针
+while 当前指针不为空 {
+   print(当前节点)
+   当前指针 = 当前指针.next
+}
+</code></pre><h2 id="常见题型"><a href="#常见题型" class="headerlink" title="常见题型"></a>常见题型</h2><p><strong>反转链表</strong></p>
+<p>1.将某个链表进行反转<br>2.将某个链表按K个一组进行反转<br>3.在 O(n) 时间, O(1) 空间复杂度下逆序读取链表的某个值</p>
+<p>反转的核心就是 当前的结点.next = pre </p>
+<p>伪代码</p>
+<pre><code>当前指针 = 头指针
+前一个结点 = null
+while 当前的指针不为空 {
+    //因为需要修改当前结点的next,所以用一个新的next指针找到下一个结点
+    下一个结点 = 当前指针.next;
+    当前指针.next = 前一个节点
+    前一个节点 = 当前指针
+    当前指针 = 下一个节点
+}
+//最终pre指向第一个元素
+return 前一个节点;
+</code></pre><p>JS</p>
+<pre><code class="JS">let cur = head;
+let pre = null;
+while (cur) {
+  const next = cur.next;
+  cur.next = pre;
+  pre = cur;
+  cur = next;
+}
+return pre;
+</code></pre>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#链表的结构"><span class="toc-text">链表的结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链表的基本操作"><span class="toc-text">链表的基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#结点的删除"><span class="toc-text">结点的删除</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见题型"><span class="toc-text">常见题型</span></a></li></ol>
+  </div>
+</aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2020/11/07/note-递归/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2020/11/07/day7-链表 两两交换链表中的节点/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

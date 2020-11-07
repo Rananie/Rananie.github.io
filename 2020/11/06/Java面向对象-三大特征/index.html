@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ranan" />
+  
+  
+  <title>Java面向对象-三大特征 | Ranan_blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Java,Java," />
+  
+
+  
+  <meta name="description" content="Ranan的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Ranan",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/Rananie" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-11-06
+    </span>
+    
+      <span>
+        | <a href="/categories/Java/"><i class="fa fa-bookmark"></i>Java</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Java面向对象-三大特征
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="面向对象的特点"><a href="#面向对象的特点" class="headerlink" title="面向对象的特点"></a>面向对象的特点</h2><h3 id="封装与隐藏"><a href="#封装与隐藏" class="headerlink" title="封装与隐藏"></a>封装与隐藏</h3><p>为什么需要封装性？设计程序追求”高内聚，低耦合”<br>高内聚:类的内部数据操作细节自己完成，不允许外部干涉<br>低耦合:仅对外暴露少量的方法用于使用</p>
+<p><strong>封装性的体现</strong><br>1.将类的属性私(xx)有化(private),提供公共的(public)方法来获取(getxx)和设置(setxx)该私有属性<br>2.不对外暴露的私有方法<br>3.单例模式(将构造器私有化)</p>
+<p>封装性的体现，需要权限修饰符来配合<br>封装性:Java提供了4种权限修饰符来修饰类及类的内部结构，体现其在被调用时的可见性大小</p>
+<p><strong>权限修饰符</strong><br>1.权限从小到大 private、缺省、protected、public<br>2.4种权限可以用来修饰类的属性、方法、构造器、内部类<br>3.对于class的权限修饰只可以用public和default(缺省);public类可以在任意地方被访问,default类只可以被同一个包内部的类访问</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">修饰符</th>
+<th style="text-align:center">类内部</th>
+<th style="text-align:center">同一个包</th>
+<th style="text-align:center">不同包的子类</th>
+<th style="text-align:center">同一个工程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">private</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">- </td>
+</tr>
+<tr>
+<td style="text-align:center">(缺省)</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">protected</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">- </td>
+</tr>
+<tr>
+<td style="text-align:center">public</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+</tr>
+</tbody>
+</table>
+<p>不同包下的普通类(非子类)不能调用声明为private、缺省、protected权限的属性</p>
+<h3 id="继承性"><a href="#继承性" class="headerlink" title="继承性"></a>继承性</h3><p>继承在原有类的基础上进行扩展,一个子类只能有一个父类</p>
+<pre><code>public class Student extend Person{
+    //与Person重复的就不用写的
+}
+</code></pre><p><strong>继承性的好处</strong><br>1.减少了代码的冗余，提高了代码的复用性<br>2.便于功能的扩展<br>3.为多态性的使用提供前提</p>
+<h3 id="多态性"><a href="#多态性" class="headerlink" title="多态性"></a>多态性</h3><p>对象的多态性,<strong>父类的引用指向子类的对象</strong>,可以理解为一个事物的多种形态。</p>
+<p><strong>多态的使用(虚拟方法调用)</strong><br>1.当<strong>调用子父类同名同参数的方法</strong>时，实际执行的是子类重写父类的方法。此时称父类的方法为虚拟方法。<br>2.在编译期,只能调用父类中声明的方法,但在运行期,我们实际执行的是子类重新父类的方法<br>3.对象的多态性只适用与方法,不适用于属性—&gt; 属性不会被重写,若同名则在内存中会出现两个。使用的时候声明的是什么类型使用的就是什么类型的属性。(属性编译和运行都看左边) </p>
+<p><strong>虚拟方法调用</strong><br>方法编译时看左边,运行时看右边,编译的时候以为调用的是父类的方法,实际调用的是子类的方法。</p>
+<p>不能调用子类所特有的方法，编译时，该实例是父类的。</p>
+<p>常用场景:<br>当一个方法的形参是父类时,实参可以传子类的实例(父类的引用指向子类的对象),调用时实际调用的是子类重写的方法,这样就不用分别定义形参是子类的该方法。</p>
+<p><strong>多态是运行时行为</strong>,父类动态调用属于子类的该方法，在编译时是无法确定调用的是哪一个子类的方法，所以是运行时行为。(动态绑定)</p>
+<pre><code>class Animal{
+    protected void eat(){
+        ...
+    }
+}
+class Cat extends Animal{
+    protected void eat(){
+        ...
+    }
+}
+class Dog extends Animal{
+    protected void eat(){
+        ..
+    }
+}
+
+public class Test{
+    public static Animal get(int key){
+        switch(key){
+            case 0:
+                return new Cat();
+            case 1：
+                return new Dog();
+        }
+
+    }
+    public static void main(String[] args){
+        int key = new Random().nextInt(2);
+        Animal animal = get(key);
+        animal.eat();
+    }
+}
+</code></pre><p><strong>多态性的使用前提</strong><br>1.类的继承关系<br>2.方法的重写</p>
+<p><strong>向下转型</strong></p>
+<p>前提:存在子父类关系<br>目的:使用子类的特定方法</p>
+<p>有了多态性以后，内存中实际上是加载了子类的属性和方法，但是由于变量声明为父类类型，导致编译时，只能调用父类中声明的属性和方法。子类特有的属性和方法不能调用。</p>
+<pre><code>// 调用子类特有属性和方法
+//p的地址值指向new出来的空间，但是编译器只看的Person的属性和方法或者Person和Man共有的
+Person p = new Man()
+Person p1 = new Woman()
+//把p的地址赋值给m1，由于m1是Man类型，所以看得见Man特有的属性和方法
+Man m1 = (Man)p
+
+Object o = new Man()
+//o可以转到Man的父类,最低可转换到Man
+</code></pre><p>使用强转时，可能出现ClassCaseException的异常。可以先用instanceof关键字判断一下再向下转型。</p>
+<p><img src="/img/Java/向下转型.png"></p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象的特点"><span class="toc-text">面向对象的特点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#封装与隐藏"><span class="toc-text">封装与隐藏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继承性"><span class="toc-text">继承性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多态性"><span class="toc-text">多态性</span></a></li></ol></li></ol>
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/Java/"><i class="fa fa-tags"></i>Java</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2020/11/06/Java面向对象-类的成员/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2020/11/06/Java关键字/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

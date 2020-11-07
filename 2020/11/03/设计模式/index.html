@@ -89,7 +89,7 @@
     </nav>
     <div class="site-header-btn">
       
-        <a href="https://github.com/Rananie/" target="_blank" id="site-github">
+        <a href="https://github.com/Rananie" target="_blank" id="site-github">
           <i class="fa fa-github-alt"></i>
         </a>
       
@@ -166,7 +166,9 @@
   </h1>
   
   <article class="passage-article">
-    <h2 id="单例设计模式"><a href="#单例设计模式" class="headerlink" title="单例设计模式"></a>单例设计模式</h2><p>某个类只能存在一个对象实例，且该类只提供一个取得其对象的方法。要让类在虚拟机中只能产生一个对象，首先将类的构造器的访问权限设置为private，这样就不能用new在类外产生类的对象了，但可以在内部产生该类的对象。因为在类的外部无法得到类的对象，只能调用该类的某个静态方法以返回类内部创建的对象，静态方法只能访问类中的静态成员变量，所以只指向类内部产生的该类对象的变量也必须定义成静态的。</p>
+    <p>设计模式是在实践中总结和理论化之后的代码结构、编程风格、以及解决问题的思考方式。</p>
+<h2 id="单例设计模式"><a href="#单例设计模式" class="headerlink" title="单例设计模式"></a>单例设计模式</h2><p>目的：只存在一个对象</p>
+<p>某个类只能存在一个对象实例，且该类只提供一个取得其对象的方法。要让类在虚拟机中只能产生一个对象，首先将类的构造器的访问权限设置为private，这样就不能用new在类外产生类的对象了，但可以在内部产生该类的对象。因为在类的外部无法得到类的对象，只能调用该类的某个静态方法以返回类内部创建的对象，静态方法只能访问类中的静态成员变量，所以只指向类内部产生的该类对象的变量也必须定义成静态的。</p>
 <table>
 <thead>
 <tr>
@@ -192,9 +194,9 @@
 Class Bank(){
     private Bank(){}
     //内部创建类的对象
-    Private static Bank() instance = new Bank()
+    private static Bank() instance = new Bank()
     //提供公共的方法，返回类的实例
-    Public static Bank getInstance(){
+    public static Bank getInstance(){
     return instance;
     }
 }
@@ -203,9 +205,10 @@ Class Order(){
     //私有化构造器
     private Order(){}
     //声明当前类对象，没有初始化
-    private static Order instance = null
+    private static Order instance = null;
+
     //在方法中造对象
-    public static Order getInstance(){
+    public synchronized static Order getInstance(){
       If(instance == null){
       Instance = new Order()
         }
@@ -213,6 +216,8 @@ Class Order(){
     }
 }
 </code></pre>
+<p><strong>应用场景</strong></p>
+<p>网站的计数器，一般单例模式实现，否则难以同步。<br>应用程序的日志应用，一般是由于共享的日志文件一直处于打开状态，因为只能有一个实例去操作，否则内容不好追加。<br>数据库连接池的设计，因为数据库连接是一种数据库资源。<br>Application单例的典型应用。</p>
 
   </article>
   <aside class="table-content" id="site-toc">

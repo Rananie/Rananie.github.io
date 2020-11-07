@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ranan" />
+  
+  
+  <title>Java关键字 | Ranan_blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Java,Java," />
+  
+
+  
+  <meta name="description" content="Ranan的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Ranan",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/Rananie" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-11-06
+    </span>
+    
+      <span>
+        | <a href="/categories/Java/"><i class="fa fa-bookmark"></i>Java</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Java关键字
+  </h1>
+  
+  <article class="passage-article">
+    <p>权限修饰符:private 缺省 protected public -&gt; 封装性<br>修饰符:static \ final \ abstact \ native </p>
+<h3 id="权限修饰符"><a href="#权限修饰符" class="headerlink" title="权限修饰符"></a>权限修饰符</h3><p>1.权限从小到大 private、缺省、protected、public<br>2.4种权限可以用来修饰类的属性、方法、构造器、内部类<br>3.对于class的权限修饰只可以用public和default(缺省);public类可以在任意地方被访问,default类只可以被同一个包内部的类访问</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">修饰符</th>
+<th style="text-align:center">类内部</th>
+<th style="text-align:center">同一个包</th>
+<th style="text-align:center">不同包的子类</th>
+<th style="text-align:center">同一个工程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">private</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">- </td>
+</tr>
+<tr>
+<td style="text-align:center">(缺省)</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">protected</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">- </td>
+</tr>
+<tr>
+<td style="text-align:center">public</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+<td style="text-align:center">Yes</td>
+</tr>
+</tbody>
+</table>
+<p>不同包下的普通类(非子类)不能调用声明为private、缺省、protected权限的属性</p>
+<h3 id="this"><a href="#this" class="headerlink" title="this"></a>this</h3><p>this指向当前实例,可以理解为当前对象。</p>
+<p>this可以调用:属性、方法、构造器</p>
+<p>在类的方法中,我们可以使用’this.属性’或’this.方法’的方式,调用当前对象属性或方法,通常会省略’this.’，但如果方法的形参和类的属性同名时,必须显示用”this.变量”来表明是属性。</p>
+<p>this还可以用来调用构造器,在构造器中通过使用”this(形参列表)”来调用其他不同的构造器。”this(形参列表)”必须声明在当前构造器的<strong>首行</strong></p>
+<pre><code>public Person(){
+   //... 
+}
+public Person(String name){
+    this(); //调用空参,通过传不同类型的参数调用其他不同的构造器
+}
+</code></pre><h3 id="super"><a href="#super" class="headerlink" title="super"></a>super</h3><p>super理解为父类的，可以用来调用属性、方法、构造器</p>
+<p>this与super都是解决子类父类成员重名时，用谁的问题</p>
+<p><strong>super的使用</strong><br>1.子类重写父类的方法后,想使用父类的原方法可以使用super<br>2.super(形参列表)的形式调用父类中的构造器,必须声明在子类构造器的<strong>首行</strong><br>3.构造器首行没有显示声明this(形参列表)或super(形参列表),默认调用的super()</p>
+<h4 id="子类对象的实例化过程"><a href="#子类对象的实例化过程" class="headerlink" title="子类对象的实例化过程"></a>子类对象的实例化过程</h4><p>从结果上来看(继承性):<br>    子类继承父类以后,就获取了父类中声明的属性或方法<br>    创建子类的对象,在堆空间中,就会加载所有父类中声明的属性<br>从过程上来看:<br>    通过子类的构造器创建子类对象时，最先会直接或间接调用其父类的构造器(super在第一行)，直到调用到java.lang.Object类中空参的构造器为止,在调用自己的构造器。</p>
+<p>明确:虽然创建子类对象时,调用了父类的构造器但没有new,所以只创建了一个new子类出来的对象。</p>
+<h3 id="package"><a href="#package" class="headerlink" title="package"></a>package</h3><p>1.为了更好的实现项目中类的管理提供包的概念<br>2.使用package声明类或接口所属的包，声明在源文件的首行<br>3.包属于标识符，遵循标识符的命名规则、规范(都小写)<br>4.每’.’一次，就代表一层文件目录</p>
+<p>补充:同一个包下，不能命名同名的接口、类;不同的包下，可以命名同名的接口、类</p>
+<h4 id="MVC设计模式"><a href="#MVC设计模式" class="headerlink" title="MVC设计模式"></a>MVC设计模式</h4><p>MVC将整个程序分成视图模式层(view)、控制器层(controller)、数据模型层(model)三层</p>
+<p>模型层 model 主要处理数据<br>数据对象封装 model.bean/domain<br>数据库操作类 model.dao<br>数据库 model.db</p>
+<p>视图层 view 显示数据<br>相关工具栏 view.utils<br>自定义view view.ui</p>
+<p>控制层 controller 处理业务逻辑<br>应用界面相关 controller.activity<br>存放fragment controller.fragment<br>显示列表的适配器 controller.adapter<br>服务相关 controller.service<br>抽取的基类 controller.base</p>
+<h3 id="import"><a href="#import" class="headerlink" title="import"></a>import</h3><p>1.导入指定包下的类、接口(导入所有用通配符<em>)<br>2.声明在包声明和类声明之间<br>3.使用是的本包或者java.lang包下的，则可以省略import结构，<strong>用其他包的内容都要引用</strong><br>4.在源文件中使用了不同包下的同名类，至少一个类以全类名的方式使用(包名.类 …)<br>5.如果’xxx.</em>‘方式表明可以调用xxx包下的所有结构(当前层次)，但是如果使用的是xxx的子包仍然需要显示调用  –&gt; 只要跨包就要import<br>6.import static 导入指定类或接口中的静态结构 -&gt; import 落脚点是类或接口，import static 落脚点是类中的静态结构</p>
+<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><p>引入：编写一个类(无static)时，实际在描述其对象的属性和行为，而并没有产生实质上的对象，只有通过new关键字才会分配内存空间给对象，其方法才可以被外部调用。有时候希望无论是否产生了对象或无论产生了多少对象的情况下，<strong>某些特定的数据在内存空间里只有一份</strong>，所有对象共享。</p>
+<p>说明:<br>1.static主要用来修饰类的内部结构:属性、方法、代码块、内部类<br>2.static修饰属性 -&gt; 静态变量/类变量<br>   属性按是否使用static修饰分为 静态属性 VS 非静态属性(实例变量)<br>   类的多个对象共享同一个静态变量<br>   静态变量随类的加载而加载早于对象的创建，由于类只加载一次(缓存在方法区)所以静态变量在内存中只会存在一份<strong>存在方法区的静态域中</strong> (方法区:类的加载信息、静态域、常量池)<br>3.使用static修饰方法 -&gt; 静态方法<br>   (从生命周期思考)<br>   静态方法随类的加载而加载,此时还没有对象，所以静态方法中不能使用this和super。<br>   静态方法中只能调用静态方法或静态属性 ，非静态方法中，既可以调用非静态的也可以调用静态的</p>
+<p><strong>总结</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">静态方法/类变量</th>
+<th style="text-align:center">非静态方法/实例变量 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">类</td>
+<td style="text-align:center">yes</td>
+<td style="text-align:center">no</td>
+</tr>
+<tr>
+<td style="text-align:center">对象</td>
+<td style="text-align:center">yes</td>
+<td style="text-align:center">yes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h3><p>语法: a instanceof A 判断对象a是否是类A的实例(间接的也行)<br>返回值：是返回true,不是返回false<br>说明：<br>1.要求a所属的类与类A必须是父子类关系，否则编译会出错。</p>
+<h3 id="final"><a href="#final" class="headerlink" title="final"></a>final</h3><p>final可以用来修饰的结构:类、方法、变量</p>
+<p>1.final用来修饰类<br>    此类不能被其他类继承，比如：String类、System类、StringBuffer类…<br>2.final修饰方法<br>    此方法不可以被重写<br>3.final修饰变量<br>    final修饰属性，可以赋值的位置:显示初始化，代码块中初始化、构造器中初始化<br>    final修饰局部变量，修饰形参时仅能使用不能修改</p>
+<p>如果希望每个对象final修饰的属性值不一样，可以在构造器中赋值<br>static可以与final同时使用,称为全局常量。</p>
+<h3 id="abstract抽象类"><a href="#abstract抽象类" class="headerlink" title="abstract抽象类"></a>abstract抽象类</h3><p>有时候将父类设计得非常抽象，以至于它没有<strong>具体的实例</strong>仅用于继承，这样的类叫做抽象类。</p>
+<p>abstract可以用来修饰类、方法</p>
+<p>1.abstract修饰类:抽象类<br>    不可以被实例化<br>    抽象类中一定要有构造器，便于子类实例化时调用<br>2.abstract修饰方法:抽象方法<br>    方法没有方法体,只有方法声明(大括号也没有)，不可以被调用<br>    包含抽象方法的类一定是抽象类，因为抽象方法不可以被调用，如果类不是抽象类，被实例化之后就可以被对象调用。<br>    若子类重写了父类中的所有抽象方法后，可以实例化;否则子类必须也是抽象方法。</p>
+<p>抽象类使用说明:<br>1.abstract不能用来修饰私有方法，因为私有方法不能被重写；也不能用来修饰静态方法，静态方法在静态域中只有一份，可以说修改，但不能说是重写(覆盖);也不能用来修饰跟着final的方法、final的类。</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#权限修饰符"><span class="toc-text">权限修饰符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#this"><span class="toc-text">this</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#super"><span class="toc-text">super</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#子类对象的实例化过程"><span class="toc-text">子类对象的实例化过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#package"><span class="toc-text">package</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MVC设计模式"><span class="toc-text">MVC设计模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#import"><span class="toc-text">import</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#static"><span class="toc-text">static</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#instanceof"><span class="toc-text">instanceof</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#final"><span class="toc-text">final</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#abstract抽象类"><span class="toc-text">abstract抽象类</span></a></li></ol>
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/Java/"><i class="fa fa-tags"></i>Java</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2020/11/06/Java面向对象-三大特征/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2020/11/05/note-前缀和/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

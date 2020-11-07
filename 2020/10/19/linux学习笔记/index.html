@@ -89,7 +89,7 @@
     </nav>
     <div class="site-header-btn">
       
-        <a href="https://github.com/Rananie/" target="_blank" id="site-github">
+        <a href="https://github.com/Rananie" target="_blank" id="site-github">
           <i class="fa fa-github-alt"></i>
         </a>
       
@@ -215,6 +215,79 @@
 <p>/etc/shadow文件 - 口令配置文件<br>    记录密码和登陆信息是加密文件<br>    每行含义:登录名:加密口令:最后一次修改时间:最小时间间隔:最大时间间隔:警告时间:不活动时间:失效时间:标志</p>
 <h3 id="实用指令"><a href="#实用指令" class="headerlink" title="实用指令"></a>实用指令</h3><p><strong>指令运行级别</strong><br>常用运行级别是3和5,系统的运行级别配置文件/etc/inittab<br>0:关机<br>1:单用户(找回丢失密码)<br>2:多用户无网络服务<br>3:多用户有网络服务<br>4:保留<br>5:图形界面<br>6:重启</p>
 <p>命令:init [希望进入的级别号0123456] 切换到指定运行级别的指令</p>
+<p>如何找回丢失的root密码？<br>思路:进入单用户模式,root不需要密码就可以登陆，然后修改root密码<br>实现:开机-&gt;在引导时输入回车键 -&gt; 看见第一个界面输入e -&gt; 新界面选择第二行输入e -&gt;输入1回车 =&gt; 再次输入b进入单用户模式 -&gt; 使用passwd指令来修改root密码<br>前提:不可以远程，仅仅在装Linux系统的电脑可以操作</p>
+<p>帮助指令<br>语法: man [命令或配置文件]<br>功能描述:获得帮助信息<br>语法: help 查看的指令(功能描述:获得shell内置命令的帮助信息)</p>
+<h4 id="文件目录类"><a href="#文件目录类" class="headerlink" title="文件目录类"></a>文件目录类</h4><p><strong>pwd指令</strong><br>语法:pwd<br>功能:显示当前工作目录的绝对路径</p>
+<p><strong>ls指令</strong><br>语法:ls [选项] [目录或是文件]<br>常用选项:<br>-a 显示当前目录所有的文件和目录,包含隐藏文件</p>
+<ul>
+<li>l 以列表的方式显示信息</li>
+<li>h 符合人查看习惯的显示</li>
+</ul>
+<p><strong>cd切换指令</strong><br>语法:cd [参数]<br>功能描述:切换到指定目录<br>常用参数:<br>绝对路径和相对路径<br>cd ~ 或者cd 回到自己的家目录<br>cd .. 回到当前目录的上一级目录</p>
+<p><strong>mkdir指定</strong><br>  midir指令用于创建目录<br>基本语法<br>   mkdir [选项] 要创建的目录<br>常用选项<br>   -p: 创建多级目录<br>实例:<br>mkdir /home/dog 创建的一级目录</p>
+<p><strong>rmdir指令</strong><br>基本语法:<br>rmdir [选项] 删除的空目录<br>使用细节:<br>   rmdir 删除的是空目录，如果目录下有内容时无法删除<br>rm -rf 删除非空的目录</p>
+<p><strong>rm 指令</strong><br>rm 指令删除文件或目录<br>基本语法： rm [选项] 要删除的文件或目录<br>常用选项</p>
+<ul>
+<li>r 递归删除整个文件夹</li>
+<li>f 强制删除不提示<br>rm -rf 删除目录</li>
+</ul>
+<p><strong>mv 指令</strong><br>mv 移动文件与目录或者重命名<br>基本语法:<br>mv oldNameFile newNameFile 重命名  当前的目录的old移动到当前目录时发现已经有了，所以就重命名<br>mv 源地址 目的  移动文件<br>实例:<br>mv aaa.txt  /root/ 当前目录的aaa移动到root目录下</p>
+<p><strong>touch指令</strong><br>touch指令创建空文件<br>基本语法: touch 文件名称(可以时多个文件，用空格分隔)</p>
+<p><strong>cp指令</strong><br>cp指令拷贝文件到指定目录<br>基本语法: cp [选项] source(源文件) dest(目的)<br>常用选项<br>-r 递归复制整个文件夹<br>例子:<br>将/home/test整个目录拷贝到/home/xxx目录 cp -r test/ xxx/<br>强制覆盖不提示的方法\cp</p>
+<p><strong>cat指令</strong><br>cat查看文件内容<br>基本语法: cat [选项] 要查看的文件<br>常用选项:  -n 显示行号<br>使用细节:cat只能浏览文件，而不能修改文件，为了浏览方便，一般会带上管道指令 | more ,代表分页显示(空格跳到下一页)<br>实例: cat -n /root/aaa.txt | more</p>
+<p>more 指令是一个基于vi编辑器的文本过滤器，以全屏幕的方式按页显示文本文件的内容<br>基本语法: more 要查看的文件<br>使用细节:enter 一行行看，空格 翻页，ctrl+b 上一页<br>less 指令用来分屏查看文件内容,它的功能与more类似，但比more指令更强大，支持各种显示终端,less指定在显示文件内容时，并不是一次将整个文件加载之后才显示，二十根据显示需要加载内容，对于显示大型文件具有较高的效率<br>语法:less 要查看的文件</p>
+<p><strong>&gt; 指令和&gt;&gt;指令</strong></p>
+<blockquote>
+<p>输出重定向(会覆盖)和 &gt;&gt; 追加指令</p>
+</blockquote>
+<p>基本语法:</p>
+<ol>
+<li>ls -l &gt;文件 ：ls -l显示的内容覆盖写入文件中</li>
+<li>Is -l &gt;&gt; 文件ls -l显示的内容追加到文件后面</li>
+<li>Cat 文件1 &gt; 文件2 将文件1的内容覆盖到文件2</li>
+<li>echo “内容” &gt;&gt; 文件</li>
+</ol>
+<p><strong>echo指令</strong><br>echo输入内容到控制台<br>基本语法： echo [选项] [输出内容]<br>实例:输出当前环境变量 echo $PATH</p>
+<p><strong>head指令</strong><br>head用于显示文件的开头部分内容，默认情况下该指令显示文件前10行内容<br>基本语法:<br>head 文件<br>Head -n 数字 文件  数字代表查看的行数，-n代表指示查看行数命令</p>
+<p><strong>tail指令</strong><br>tail用于输出文件中尾部的内容，默认输出后10行<br>基本语法:<br>tail 文件 查看文件后10行内容<br>tail -n 数字 文件 查看文件的后数字行内容<br>tail -f 文件 实时追踪该文档的所有更新(经常使用)</p>
+<p><strong>ln 指令</strong><br>软链接(符号链接)，类似windows的快捷方式，主要存放了所链接文件的路径<br>基本语法:<br>ln -s [原文件或目录] [软链接名]<br>给原文件创建一个软链接<br>细节说明:<br>1.删除软链接时不用带最后的/，仅仅删除软链接本身<br>2.切换到软链接之后，用pwd查看目录时，看到的是软链接所在的目录(类比桌面快捷键)</p>
+<p><strong>history指令</strong><br>查看已经执行过的历史命令，也可以执行历史指令<br>基本语法:<br>history [数字]<br>使用细节:<br>默认显示所有指令，可选中的数字代表显示最近的几条，使用<code>!数字</code>执行历史指令</p>
+<h3 id="时间日期类"><a href="#时间日期类" class="headerlink" title="时间日期类"></a>时间日期类</h3><p><strong>date指令-显示/修改当前日期</strong></p>
+<p>基本语法:<br>data 显示当前时间<br>data “+%Y %d” 显示当前年份，双引号里的加号可以看成字符串拼接%Y年%m月%d日%H时%M分%S秒<br>data  -s 字符串时间 设置系统当前日期</p>
+<p><strong>cal指令-查看日历</strong><br>cal [选项]<br>使用细节:<br>1.不加选项，本月日历<br>2.选项可填年份，显示整年的日历</p>
+<h3 id="搜索查找类"><a href="#搜索查找类" class="headerlink" title="搜索查找类"></a>搜索查找类</h3><p><strong>find指令-查询</strong><br>find指令将从指令目录向下递归地遍历其各个子目录，将满足条件的文件或者目录显示在终端<br>基本语法:<br>find [搜索范围] [选项]<br>应用实例:<br>1.按文件名，根据名称查找/home目录下的hello.txt   -  find /home -name hello.txt<br>2.按拥有者，查找/opt目录下用户名称为nobody的文件 - find /home -user nobody<br>3.查找整个linux系统下大于20m的文件 +大于 -小于  - find / -size +20M</p>
+<p><strong>locate指令</strong><br>locate指令可以快速定位文件路径。locate指令利用事先建立的系统中所有文件名及路径的locate数据库实现快速定位给定的文件。Locate指令无需遍历整个文件系统，查询速度较快。<br>基本语法:<br>locate 搜索文件   - 返回文件的路径<br>使用细节:<br>由于locate指令基于数据库进行查询，所以第一次运行前，必须使用updatedb指令创建locate数据库<br><strong>grep指令与管道符号 |</strong><br>grep过滤查找，查找文件中是否存在某个关键词，管道符|表示将前一个命令的处理结果输出传递给后面的指令执行<br>基本语法:<br>grep [选项] 查找内容 源文件<br>-n 显示匹配以及行号<br>-i 忽略字母大小写<br>应用实例:<br>请在hello.txt文件中，查找yes所在行，并显示行号 cat hello.txt | grep -n yes </p>
+<h3 id="压缩和解压"><a href="#压缩和解压" class="headerlink" title="压缩和解压"></a>压缩和解压</h3><p><strong>gzip/gunzip指令-压缩/解压文件</strong><br>基本语法:<br>gzip 文件   - 只能将文件压缩为*.gz文件，原文件删除只剩下压缩后的文件<br>Gunzip 文件.gz  - 解压缩文件命令</p>
+<p><strong>zip/unzip指令</strong><br>zip用于压缩文件，unzip用于解压，在项目打包发布中有用<br>基本语法:<br>zip [选项] XX.zip 将要压缩的内容<br>unzip [选项] 解压到的路径 XXX.zip<br>常用选项：<br>zip</p>
+<ul>
+<li>r 递归压缩，即压缩目录<br>unzip</li>
+<li>d&lt;目录&gt; 指定解压后文件的存放目录<br>实例:<br>将mypackage.zip解压到/opt/tem/路径下  - unzip - d /opt/tmp/ mypackage.zip</li>
+</ul>
+<p><strong>tar指令</strong><br>tar指令是打包指令，最后打包后的文件是.tar.gz的文件<br>基本语法:<br>tar [选项] XXX.tar.gz 打包的内容<br>常用选项:<br>-c 产生.tar打包文件<br>-v 显示详细信息<br>-f 指定压缩后的文件名<br>-z 打包同时压缩<br>-x 解压<br>实例:<br>压缩多个文件，将/home/a1.txt 和/home/a2.txt 压缩成 a.tar.gz   - tar -zcvf a.tar.gz /home/a1.txt  /home/a2.txt<br>将myhome.tar.gz 解压到/opt目录下 - tar -zxvf myhome.tar.gz -C /opt/  (注意解压到的目录必须存在)<br>将myhome.tar.gz 解压到当前目录下 - tar -zxvf myhome.tar.gz</p>
+<h2 id="组管理和权限管理"><a href="#组管理和权限管理" class="headerlink" title="组管理和权限管理"></a>组管理和权限管理</h2><h3 id="组管理"><a href="#组管理" class="headerlink" title="组管理"></a>组管理</h3><p>在linux中每个文件都有所有者、所在组、其他组的概率</p>
+<p><strong>文件/目录 所有者</strong></p>
+<p>查看文件的所有者<br>指令:ls -ahl </p>
+<p>修改文件的所有者<br>指令:chown 用户名 文件名</p>
+<p><strong>文件/目录 所在组</strong></p>
+<p>组的创建<br>指令:groupadd 组名</p>
+<p>默认情况下，当某个用户创建了一个文件后，这个文件的所在组就是该用户所在的组</p>
+<p>查看文件/目录所在组<br>指令:ls -ahl</p>
+<p>修改文件所在组<br>指令:chgrp 组名 文件名</p>
+<p>改变用户所在组<br>usermod -g 组名 用户名<br>usermod -d 目录名 用户名 改变该用户登陆的初始目录</p>
+<h3 id="权限-文件和目录-管理"><a href="#权限-文件和目录-管理" class="headerlink" title="权限(文件和目录)管理"></a>权限(文件和目录)管理</h3><p>例子：ls -l<br>显示：文件类型 文件所有者权限(3个位置) 文件所在组的用户的权限 文件其他组的用户权限,1 文件的所有者 所属组 数字 文件最后的修改时间 文件名</p>
+<p>文件类型: - 普通文件 d:目录 l:软链接 c:字符设备 b:块文件(硬盘等)</p>
+<p>1:<br>如果是文件，文件表示硬链接，如果是目录表示该目录的子目录个数</p>
+<p>数字:<br>代表文件大小，如果是目录则是4096</p>
+<p>rwx权限:<br>文件</p>
+<ul>
+<li>r 可读、查看  </li>
+<li>w 可以修改但是不可删除，删除的前提是对该文件所在的目录有写权限</li>
+<li>x 可以被执行<br>目录</li>
+<li>r代表可读,可以读取，ls查看目录内容</li>
+<li>w代表可写，可以修改，目录的创建/删除、重命名</li>
+<li>x代表可执行，可以进入该目录</li>
+</ul>
+<p>还可以用数字表示r=4,w=2,x=1</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -223,7 +296,7 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux的目录结构"><span class="toc-text">Linux的目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux操作"><span class="toc-text">Linux操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#远程登陆Linux"><span class="toc-text">远程登陆Linux</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vi与Vim编辑器"><span class="toc-text">Vi与Vim编辑器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开机、重启和用户登陆注销"><span class="toc-text">开机、重启和用户登陆注销</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户管理"><span class="toc-text">用户管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#用户组"><span class="toc-text">用户组</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实用指令"><span class="toc-text">实用指令</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux的目录结构"><span class="toc-text">Linux的目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux操作"><span class="toc-text">Linux操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#远程登陆Linux"><span class="toc-text">远程登陆Linux</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vi与Vim编辑器"><span class="toc-text">Vi与Vim编辑器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#开机、重启和用户登陆注销"><span class="toc-text">开机、重启和用户登陆注销</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用户管理"><span class="toc-text">用户管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#用户组"><span class="toc-text">用户组</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实用指令"><span class="toc-text">实用指令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#文件目录类"><span class="toc-text">文件目录类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#时间日期类"><span class="toc-text">时间日期类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#搜索查找类"><span class="toc-text">搜索查找类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#压缩和解压"><span class="toc-text">压缩和解压</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#组管理和权限管理"><span class="toc-text">组管理和权限管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#组管理"><span class="toc-text">组管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#权限-文件和目录-管理"><span class="toc-text">权限(文件和目录)管理</span></a></li></ol></li></ol>
   </div>
 </aside>
   

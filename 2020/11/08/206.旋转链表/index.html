@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>day1-数组 嘉义 | Ranan_blog</title>
+  <title>206.旋转链表 | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -148,7 +148,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-11-01
+      <i class="fa fa-calendar"></i>2020-11-08
     </span>
     
       <span>
@@ -162,35 +162,44 @@
     
   </div>
   <h1 class="passage-title">
-    day1-数组 嘉义
+    206.旋转链表
   </h1>
   
   <article class="passage-article">
-    <p><strong>题目</strong></p>
-<p><a href="https://leetcode-cn.com/problems/plus-one/" target="_blank" rel="noopener">leetcode66.加一</a></p>
-<p>给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。<br>最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。<br>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
-<p>示例 1:<br>输入: [1,2,3]<br>输出: [1,2,4]<br>解释: 输入数组表示数字 123。<br>示例 2:<br>输入: [4,3,2,1]<br>输出: [4,3,2,2]<br>解释: 输入数组表示数字 4321。</p>
-<p>提示：不要将数组转化为数字做加法再转回来。</p>
+    <p><strong>题目</strong><br>定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。</p>
+<p>示例:</p>
+<pre><code>输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL
+输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL
+</code></pre><p>限制：0 &lt;= 节点个数 &lt;= 5000</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof" target="_blank" rel="noopener">https://leetcode-cn.com/problems/fan-zhuan-lian-biao-lcof</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 <p><strong>思路</strong></p>
-<p>从最后一个数组元素开始往前遍历，不是9直接+1返回数组，是9变为0进入下一次循环，不断的重复直到某一个数组元素不是9或者找到了第一个元素。<br>特殊情况数组元素全为9的时候，例子:[9,9] -&gt; [1,0,0]</p>
-<p><strong>代码</strong></p>
+<p>反转的核心就是 当前的结点.next = pre , 所以需要一个指针指向前一个结点，为了防止断链(后一个结点找不到),还需要一个指针指向当前结点的后一个结点。</p>
+<p>套上模板:</p>
+<pre><code>当前指针 = 头指针
+前一个结点 = null
+while 当前的指针不为空 {
+    //因为需要修改当前结点的next,所以用一个新的next指针找到下一个结点
+    下一个结点 = 当前指针.next;
+    当前指针.next = 前一个节点
+    前一个节点 = 当前指针
+    当前指针 = 下一个节点
+}
+//最终pre指向第一个元素
+return 前一个节点;
+</code></pre><p><strong>代码</strong></p>
 <pre><code class="JAVA">class Solution {
-    public int[] plusOne(int[] digits) {
-
-        for(int i = digits.length-1 ; i &gt;= 0 ; i--) //从后往前遍历
-        {
-            if(digits[i] != 9){
-                digits[i]++ ;
-                return digits;
-            }
-            digits [i] = 0 ;
+    public ListNode reverseList(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while(cur != null){
+            //保存当前结点的后一个结点
+            ListNode next = cur.next;
+            //开始反转结点
+            cur.next = pre;
+            pre = cur;
+            cur = next;
         }
-        //如果退出循环说明是特殊情况，且目前的数组元素全是0。
-        //因为JAVA数组长度一确定就不能修改，所以用返回一个新数组
-        //数组中为int型元素默认值为0，所以只需要修改第一个元素为1
-         int newArr [] = new int [digits.length + 1]; 
-         newArr[0] = 1;
-         return newArr;
+        return pre;
     }
 }
 </code></pre>
@@ -260,10 +269,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/11/02/day2-数组 字符的最短距离/" data-enable="true">
+    <a href="/2020/11/08/day8-61.旋转链表/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/10/23/10-24pla算法/" data-enable="true">
+    <a href="/2020/11/08/110-平衡二叉树/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

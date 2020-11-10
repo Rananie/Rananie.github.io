@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ranan" />
+  
+  
+  <title>day439.字符串解码 | Ranan_blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="刷题笔记,JavaScript," />
+  
+
+  
+  <meta name="description" content="Ranan的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Ranan",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/Rananie" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-11-04
+    </span>
+    
+      <span>
+        | <a href="/categories/刷题笔记/"><i class="fa fa-bookmark"></i>刷题笔记</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    day439.字符串解码
+  </h1>
+  
+  <article class="passage-article">
+    <p><strong>题目</strong></p>
+<p><a href="https://leetcode-cn.com/problems/shortest-distance-to-a-character/" target="_blank" rel="noopener">leetcode394.字符串解码</a></p>
+<p>给定一个经过编码的字符串，返回它解码后的字符串。<br>编码规则为: k[encoded_string]，表示其中方括号内部的 encoded_string 正好重复k次。注意k保证为正整数。</p>
+<p>你可以认为输入字符串总是有效的；输入字符串中没有额外的空格，且输入的方括号总是符合格式要求的。</p>
+<p>此外，你可以认为原始数据不包含数字，所有的数字只表示重复的次数 k ，例如不会出现像 3a 或 2[4] 的输入。</p>
+<p>示例 ：</p>
+<pre><code>输入：s = &quot;3[a]2[bc]&quot;
+输出：&quot;aaabcbc&quot;
+
+输入：s = &quot;3[a2[c]]&quot;
+输出：&quot;accaccacc&quot;
+
+输入：s = &quot;2[abc]3[cd]ef&quot;
+输出：&quot;abcabccdcdcdef&quot;
+
+输入：s = &quot;abc3[cd]xyz&quot;
+输出：&quot;abccdcdcdxyz&quot;
+</code></pre><p><strong>思路</strong></p>
+<p>看见方括号，首先想到用栈。</p>
+<p>题目给定的条件有四种可能出现的字符<br>1.字母 -&gt; 直接拼接str<br>2.数字 -&gt; 拼接到数字字符串<br>3.[   -&gt; 当前的str与当前的num入栈,清空str与num<br>4.]   -&gt; {str,num}出栈,当前的str是需要重复的字符串，{}里的str是[前的字符串</p>
+<p>示例: <code>xy3[a2[c]]</code></p>
+<pre><code>   | str | num |stack
+x  | &quot;x&quot; |&quot;&quot; | []
+y  | &quot;xy&quot;|&quot;&quot; | []
+3  | &quot;xy&quot;|&quot;3&quot;| []
+[  | &quot;&quot;| &quot;&quot;| [{str:&quot;xy&quot;,num:&quot;3&quot;}]
+a  | &quot;a&quot; | &quot;&quot;| [{str:&quot;xy&quot;,num:&quot;3&quot;}]
+2  | &quot;a&quot; | &quot;2&quot;| [{str:&quot;xy&quot;,num:&quot;3&quot;}]
+[  | &quot;&quot; | &quot;&quot;| [{str:&quot;xy&quot;,num:&quot;3&quot;},{str:&quot;a&quot;,num:&quot;2&quot;}]
+c  | &quot;c&quot;|&quot; &quot; |[{str:&quot;xy&quot;,num:&quot;3&quot;},{str:&quot;a&quot;,num:&quot;2&quot;}]
+]  | &quot;a&quot; + &quot;cc&quot;|&quot;&quot; |[{str:&quot;xy&quot;,num:&quot;3&quot;}]
+]  | &quot;xy&quot; + &quot;accaccacc&quot;|&quot;&quot; |[]
+</code></pre><p><strong>代码</strong></p>
+<pre><code class="js">/**
+ * @param {string} s
+ * @return {string}
+ */
+var decodeString = function(s) {
+    let num = &#39;&#39;,str=&#39;&#39;;
+    let stack = [] ;
+    for(let char of s){
+        if(!isNaN(char)){
+            num += char;     
+        }else if(char == &quot;[&quot;){
+          stack.push({str,num});
+          str =&quot;&quot;;
+          num =&quot;&quot;;
+        }else if(char ==&quot;]&quot;){
+        let date = stack.pop();
+        str = date.str + str.repeat(date.num);
+        }else{
+        str += char;
+        }
+    }
+    return str;
+};
+</code></pre>
+<p><strong>其他解法</strong></p>
+<p>这道题是一个不断的解码之后拼接的问题，把答的字符串分解成一个个小的字符串进行解码。</p>
+<p>比如:”3[a2[c]d]2[b]xy”,可以拆分成”3[a2[c]d]”,”2[b]”,”xy”。”[]” 里可能嵌套 “[]” ,所以需要递归的只有拆分后有”[]”的部分。</p>
+<p>这时套入递归的三个问题</p>
+<p>1.终止条件(基线条件)是什么?<br>    什么时候递归结束,”]”结束递归</p>
+<p>2.应该返回什么？<br>    题目对字符串进行解码，返回的应该是解好码的字符串，”3[a2[c]d]” 这种情况可以看出这种递归其实是从内到外的,不仅要返回解码好的”cc”,还应该返回”d”的下标,也就是”]”的下一个位置给上一级递归继续进行,直到最外层的”]”解析完毕。</p>
+<p>3.本级递归应该做什么？递归的目的是什么？<br>   首先本层应该要对字符串进行解码，其次是要与已经解好码的字符串进行拼接。结合2按要求进行返回。</p>
+<pre><code class="JS">const type = {
+    isAlpha: s =&gt; /[a-z]/i.test(s),
+    isDigit: s =&gt; /[0-9]/.test(s),
+    isOpenParen: s =&gt; s === &#39;[&#39;,
+    isCloseParen: s =&gt; s === &#39;]&#39;,
+};
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+var decodeString = function (s, i = 0) {
+    // 从 i 开始遍历字符串
+    let decoded = &#39;&#39;; // 解密字符串
+    let cnt = &#39;&#39;; // 累计次数
+    while (i &lt; s.length) {
+        if (type.isAlpha(s[i])) {
+            decoded += s[i];
+            i++;
+        } else if (type.isDigit(s[i])) {
+            cnt += s[i];
+            i++;
+        } else if (type.isOpenParen(s[i])) {
+            //从内层的递归中获取解码好的字符串与下一次从哪里开始的坐标
+            const [pattern, nextIndex] = decodeString(s, i + 1);
+            decoded += pattern.repeat(Number(cnt));
+            cnt = &#39;&#39;;
+            i = nextIndex;
+            continue;
+        } else if (type.isCloseParen(s[i])) {
+            return [decoded, i + 1];
+        }
+    }
+    return decoded;
+};
+</code></pre>
+<p><a href="https://github.com/suukii/91-days-algorithm/blob/master/basic/array-stack-queue/04.decode-string.md" target="_blank" rel="noopener">参考</a></p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2020/11/04/note-深度优先算法/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2020/11/04/note-滑动窗口法/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

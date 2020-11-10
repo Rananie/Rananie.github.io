@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>day2-数组 字符的最短距离 | Ranan_blog</title>
+  <title>day9-109.有序链表转换二叉搜索树 | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -148,7 +148,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-11-02
+      <i class="fa fa-calendar"></i>2020-11-10
     </span>
     
       <span>
@@ -162,84 +162,93 @@
     
   </div>
   <h1 class="passage-title">
-    day2-数组 字符的最短距离
+    day9-109.有序链表转换二叉搜索树
   </h1>
   
   <article class="passage-article">
     <p><strong>题目</strong></p>
-<p><a href="https://leetcode-cn.com/problems/shortest-distance-to-a-character/" target="_blank" rel="noopener">leetcode821.字符的最短距离</a></p>
-<p>给定一个字符串 S 和一个字符 C。返回一个代表字符串 S 中每个字符到字符串 S 中的字符 C 的最短距离的数组。</p>
-<p>示例 1:<br>输入: S = “loveleetcode”, C = ‘e’<br>输出: [3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0]</p>
-<p>说明:<br>字符串 S 的长度范围为 [1, 10000]。<br>C 是一个单字符，且保证是字符串 S 里的字符。<br>S 和 C 中的所有字母均为小写字母。</p>
+<p>给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。</p>
+<p>本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。</p>
+<p>示例:</p>
+<p>给定的有序链表： [-10, -3, 0, 5, 9],</p>
+<p>一个可能的答案是：[0, -3, 9, -10, null, 5], 它可以表示下面这个高度平衡二叉搜索树：</p>
+<pre><code>  0
+ / \
+</code></pre><p>   -3   9<br>   /   /<br> -10  5</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree" target="_blank" rel="noopener">https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 <p><strong>思路</strong></p>
-<ol>
-<li>初始化一个数组distanceArr，赋最大值。</li>
-<li>找到S中与C相等的字符。</li>
-<li>先往左边扫，直到扫到第一个或者distanceArr[left] &lt; distance。</li>
-<li>再往右边扫，直到扫到下一个C或者最后一个数组元素。</li>
-</ol>
-<p>说明：</p>
-<ul>
-<li>往右扫时扫到下一个C就停止而不用比是不是最短距离的原因是：以下一个C为基准往左扫的时候会比较距离。</li>
-<li>数组元素默认值为0，0已经是最小距离了，为方便比较赋最大值    。</li>
-</ul>
+<p>找中间结点作为根结点，中间结点的左边链表又使中间结点为根节点，依次递归。左边链表变成一颗平衡二叉树后，作为根结点的左子树。右边链表同样的处理作为根结点的右子树。</p>
+<p>找中间结点需要用到快慢指针，把链表转换成平衡二叉树时考虑用递归。</p>
+<p>找中间结点的方法</p>
+<pre><code class="Java">//获取到中间结点
+ListNode centerNode(ListNode head){
+    ListNode slow = head,fast = head;
+    while(fast!=null &amp;&amp; fast.next != null){
+    //快指针走两步
+    fast  = fast.next.next;
+    //慢指针走一步
+    slow = slow.next;
+    }
+    return slow;
+    }
+</code></pre>
 <p><strong>代码</strong></p>
-<pre><code class="JAVA">import java.util.Arrays;
+<pre><code class="Java">/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
 class Solution {
-    public int[] shortestToChar(String S, char C) {
-        int length = S.length();
-        int distanceArr [] = new int [length];
-        //刚开始数组的距离不能全部为0,因为这样就是最小的距离的没办法比较之后更改
-        Arrays.fill(distanceArr,Integer.MAX_VALUE);
-        for(int i = 0 ; i &lt; length ; i++){
-            //S中找到C
-            if(C == S.charAt(i)){
-                //记录左指令与右指针，并且距离distance
-                int left = i,right = i + 1,distance = 0 ;
-                //往左边扫,扫到最开始或者遇见数组中距离比distance小的结束
-                while(left &gt;= 0 &amp;&amp; distanceArr[left] &gt; distance){
-                    distanceArr[left--] = distance++ ; 
-                }
-                //跳出循环之后，应该更新distance
-                distance = 1 ;
-                //往右边扫,扫到下一个C或者最后一个数组元素
-                while(right &lt; length &amp;&amp; C != S.charAt(right) ) {
-                    distanceArr[right++] = distance ++;
-                }
-            }
+
+    public TreeNode sortedListToBST(ListNode head) {
+        if (head == null) return null;
+        //开始的时候尾结点没有任何影响
+        return dfs(head,null);
+    }
+    //链表变成平衡二叉树
+    TreeNode dfs(ListNode head,ListNode tail){
+        if (head == tail) return null;
+        ListNode mid = centerNode(head,tail);
+        TreeNode cur = new TreeNode(mid.val);
+        cur.left = dfs(head,mid);
+        cur.right = dfs(mid.next,tail);
+        return cur;
+
+    }
+    //获取到中间结点
+    ListNode centerNode(ListNode head,ListNode tail){
+        ListNode slow = head,fast = head;
+        while(fast!= tail &amp;&amp; fast.next != tail){
+       //快指针走两步
+        fast  = fast.next.next;
+        //慢指针走一步
+        slow = slow.next;
         }
-        return distanceArr;
+         return slow;
     }
 }
 </code></pre>
-<p><strong>反思</strong><br>可以先对可能情况进行分类帮助分析：<br> 1.只有左边有C字符： sdafC…<br> 2.左右两边都有C字符：…CdsfsC…<br> 3.只有右边有C字符：…Cdsff</p>
-<p><strong>其他解法</strong></p>
-<pre><code class="JAVA">class Solution {
-    public int[] shortestToChar(String S, char C) {
-        int length = S.length();
-        int distanceArr [] = new int [length];
-        int pre = - 10000; //刚开始没有e距离就无限大,因为后面的-pre
-        //先从左往右遍历
-        for(int i = 0 ; i &lt; length ; i++){
-            //每一个元素计算与pre的距离，遇见C把C的当前位置更新为pre
-            //looexxevx v离第二个e的距离小于第一个e所以更新e的位置为pre
-            if(C == S.charAt(i)){
-                pre = i;
-            }
-            distanceArr[i] = i - pre;
-        }
-        //从右往前遍历
-        pre = 10000;
-        for(int i =length-1 ; i&gt;=0 ;i--){
-            if(C == S.charAt(i)){
-                pre = i;
-            }
-            distanceArr[i] = Math.min(distanceArr[i], pre - i);
-        }
-        return distanceArr;
-    }
-}
-</code></pre>
+<p>centerNode和dfs的形参列表一样，里面的代码也互相不干扰，也可以合并成一个函数。</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -306,10 +315,10 @@ class Solution {
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/11/03/设计模式/" data-enable="true">
+    <a href="/2020/11/10/day10-160-相交链表/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/11/01/day1-数组 加一/" data-enable="true">
+    <a href="/2020/11/08/day8-61.旋转链表/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

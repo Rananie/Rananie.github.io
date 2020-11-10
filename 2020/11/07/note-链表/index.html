@@ -225,7 +225,8 @@ while 当前指针不为空 {
    print(当前节点)
    当前指针 = 当前指针.next
 }
-</code></pre><h2 id="常见题型"><a href="#常见题型" class="headerlink" title="常见题型"></a>常见题型</h2><p><strong>反转链表</strong></p>
+</code></pre><h2 id="常见题型"><a href="#常见题型" class="headerlink" title="常见题型"></a>常见题型</h2><p>链表的常见考点:<br>1.指针的修改<br>2.链表的拼接</p>
+<h3 id="反转链表"><a href="#反转链表" class="headerlink" title="反转链表"></a>反转链表</h3><p><strong>迭代</strong></p>
 <p>1.将某个链表进行反转<br>2.将某个链表按K个一组进行反转<br>3.在 O(n) 时间, O(1) 空间复杂度下逆序读取链表的某个值</p>
 <p>反转的核心就是 当前的结点.next = pre </p>
 <p>伪代码</p>
@@ -240,7 +241,7 @@ while 当前的指针不为空 {
 }
 //最终pre指向第一个元素
 return 前一个节点;
-</code></pre><p>JS</p>
+</code></pre><p>迭代的写法</p>
 <pre><code class="JS">let cur = head;
 let pre = null;
 while (cur) {
@@ -251,6 +252,22 @@ while (cur) {
 }
 return pre;
 </code></pre>
+<p><strong>递归</strong></p>
+<p>以反转链表为例，结合之前做的两两交换链表中的结点,反转链表其实可以看成是每个结点都要改变。</p>
+<p>可以想象前面的链表都处理好了。</p>
+<p><img src="../img/leetcode/链表01.png"></p>
+<p>套上递归三部曲:<br>1.终止条件(基线条件)是什么?<br>    反转链表的目的是每一个都反转，那么递归的结束条件是没有可以反转的就可以结束递归了，也就是为空</p>
+<p>2.应该返回什么？<br>    根据图片，我们应该返回需要处理的下一个结点作为新的head；反转链表的话当然还是要返回一个处理好的链表。</p>
+<p>3.本级递归应该做什么？递归的目的是什么？<br>    本级递归需要做的就是指向前面已经处理好的链表。</p>
+<pre><code class="Python">def dfs(head, pre):
+    if not head: return pre
+    next = head.next
+    head.next = pre
+    dfs(next, head)
+dfs(head, None)
+</code></pre>
+<h3 id="快慢指针"><a href="#快慢指针" class="headerlink" title="快慢指针"></a>快慢指针</h3><p>判断链表是否有环、链表的交点，以及环的入口都是使用快慢指针。</p>
+<p>由于链表不支持随机访问，因为如果要获取链表中间项或倒数第几项等特定元素就需要快慢指针。<br>比如找链表中间项可以用两个指针，一个大步走(一次走两步)，一个小步走(一次走一步)，这样快指针走到头，慢指针刚好在中间。<br>比如找链表倒数第二个结点，可以让块指针先走一步，慢指针再走，这样快指针走到头，慢指针刚好在倒数第二个。</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -259,7 +276,7 @@ return pre;
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#链表的结构"><span class="toc-text">链表的结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链表的基本操作"><span class="toc-text">链表的基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#结点的删除"><span class="toc-text">结点的删除</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见题型"><span class="toc-text">常见题型</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#链表的结构"><span class="toc-text">链表的结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链表的基本操作"><span class="toc-text">链表的基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#结点的删除"><span class="toc-text">结点的删除</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见题型"><span class="toc-text">常见题型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#反转链表"><span class="toc-text">反转链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快慢指针"><span class="toc-text">快慢指针</span></a></li></ol></li></ol>
   </div>
 </aside>
   
@@ -314,7 +331,7 @@ return pre;
     <a href="/2020/11/07/note-递归/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/11/07/day7-链表 两两交换链表中的节点/" data-enable="true">
+    <a href="/2020/11/07/day7-24.两两交换链表中的节点/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

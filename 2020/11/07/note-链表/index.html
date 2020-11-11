@@ -268,6 +268,24 @@ dfs(head, None)
 </code></pre>
 <h3 id="快慢指针"><a href="#快慢指针" class="headerlink" title="快慢指针"></a>快慢指针</h3><p>判断链表是否有环、链表的交点，以及环的入口都是使用快慢指针。</p>
 <p>由于链表不支持随机访问，因为如果要获取链表中间项或倒数第几项等特定元素就需要快慢指针。<br>比如找链表中间项可以用两个指针，一个大步走(一次走两步)，一个小步走(一次走一步)，这样快指针走到头，慢指针刚好在中间。<br>比如找链表倒数第二个结点，可以让块指针先走一步，慢指针再走，这样快指针走到头，慢指针刚好在倒数第二个。</p>
+<h3 id="相交或环形链表"><a href="#相交或环形链表" class="headerlink" title="相交或环形链表"></a>相交或环形链表</h3><p>1.判断某条链表是否存在环。<br>2.获取某条链表环的大小。<br>3.获取某两条链表的相交节点。</p>
+<h4 id="相交链表"><a href="#相交链表" class="headerlink" title="相交链表"></a>相交链表</h4><p><strong>双指针法</strong></p>
+<p>找到两个单链表相交的起始节点。</p>
+<p><a href="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/14/160_statement.png" target="_blank" rel="noopener">如图所示</a></p>
+<p>这种题目的重点就是</p>
+<p>A单独的部分 + AB共有的部分 + B单独的部分 = B单独的部分 + AB共有的部分 + A单独的部分</p>
+<p>这样一定在交点处相遇。即使没有交点，去掉AB共有的部分，等式也是成立的。</p>
+<p><strong>哈希法</strong></p>
+<p>1.有 A, B 这两条链表, 先遍历其中一个，比如 A 链表, 并将 A 中的所有节点存入哈希表。<br>2.遍历 B 链表,检查节点是否在哈希表中, 第一个存在的就是相交节点</p>
+<h4 id="环形链表"><a href="#环形链表" class="headerlink" title="环形链表"></a>环形链表</h4><h5 id="判断是否有环"><a href="#判断是否有环" class="headerlink" title="判断是否有环"></a>判断是否有环</h5><p><strong>思路</strong><br>可以使用快慢指针法， 分别定义 fast 和 slow指针，从头结点出发，fast指针每次移动两个节点，slow指针每次移动一个节点，如果 fast 和 slow指针在途中相遇 ，说明这个链表有环。</p>
+<ul>
+<li>问题：为什么一定在环中相遇？<br>在非环的位置，fast一定走的比slow快，所以fast一定会先进入环，然后在环中循环。slow是一步一步走的，那么在环中一定会相遇。</li>
+</ul>
+<h5 id="求环的起点"><a href="#求环的起点" class="headerlink" title="求环的起点"></a>求环的起点</h5><p><strong>哈希法</strong></p>
+<p>遍历整个链表，如果当前的结点不在哈希表中则添加之后继续遍历，如果在哈希表中,那么当前的结点就是环的入口结点。</p>
+<p>时间复杂度：O(N)<br>空间复杂度：O(N) 新建一个哈希表</p>
+<p><strong>快慢指针法</strong></p>
+<p><img src="../img/leetcode/环形链表入口点.jpg"></p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -276,7 +294,7 @@ dfs(head, None)
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#链表的结构"><span class="toc-text">链表的结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链表的基本操作"><span class="toc-text">链表的基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#结点的删除"><span class="toc-text">结点的删除</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见题型"><span class="toc-text">常见题型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#反转链表"><span class="toc-text">反转链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快慢指针"><span class="toc-text">快慢指针</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#链表的结构"><span class="toc-text">链表的结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链表的基本操作"><span class="toc-text">链表的基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#结点的删除"><span class="toc-text">结点的删除</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见题型"><span class="toc-text">常见题型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#反转链表"><span class="toc-text">反转链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快慢指针"><span class="toc-text">快慢指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相交或环形链表"><span class="toc-text">相交或环形链表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#相交链表"><span class="toc-text">相交链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#环形链表"><span class="toc-text">环形链表</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#判断是否有环"><span class="toc-text">判断是否有环</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#求环的起点"><span class="toc-text">求环的起点</span></a></li></ol></li></ol></li></ol></li></ol>
   </div>
 </aside>
   

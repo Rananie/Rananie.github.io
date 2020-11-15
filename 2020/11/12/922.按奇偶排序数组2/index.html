@@ -6,12 +6,12 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>110.平衡二叉树 | Ranan_blog</title>
+  <title>922.按奇偶排序数组2 | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="刷题笔记," />
+    <meta name="keywords" content="刷题笔记,Java," />
   
 
   
@@ -148,7 +148,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-11-08
+      <i class="fa fa-calendar"></i>2020-11-12
     </span>
     
       <span>
@@ -162,73 +162,62 @@
     
   </div>
   <h1 class="passage-title">
-    110.平衡二叉树
+    922.按奇偶排序数组2
   </h1>
   
   <article class="passage-article">
     <p><strong>题目</strong></p>
-<p>给定一个二叉树，判断它是否是高度平衡的二叉树。<br>本题中，一棵高度平衡二叉树定义为：<br>一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过1</p>
+<p>给定一个非负整数数组 A， A 中一半整数是奇数，一半整数是偶数。</p>
+<p>对数组进行排序，以便当 A[i] 为奇数时，i 也是奇数；当 A[i] 为偶数时， i 也是偶数。</p>
+<p>你可以返回任何满足上述条件的数组作为答案。</p>
+<p>示例：</p>
+<pre><code>输入：[4,2,5,7]
+输出：[4,5,2,7]
+解释：[4,7,2,5]，[2,5,4,7]，[2,7,4,5] 也会被接受。
+</code></pre><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/sort-array-by-parity-ii" target="_blank" rel="noopener">https://leetcode-cn.com/problems/sort-array-by-parity-ii</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 <p><strong>思路</strong></p>
-<p>1.终止条件(基线条件)是什么?<br>    树为空的时候</p>
-<p>2.应该返回什么？<br>    它是一个平衡二叉树需要满足三个条件：它的左子树是平衡二叉树，它的右子树是平衡二叉树，它的左右子树的高度差不大于1。换句话说：如果它的左子树或右子树不是平衡二叉树，或者它的左右子树高度差大于1，那么它就不是平衡二叉树。<br>    这里我们返回的信息应该是既包含子树的深度的int类型的值，又包含子树是否是平衡二叉树的boolean类型的值。</p>
-<pre><code>可以定义一个单独的ReturnNode类
-
-```
-class ReturnNode{
-boolean isB;
-int depth;
-//构造方法
-public ReturnNode(int depth,boolean isB){
-this.isB = isB;
-this.depth = depth;
-}
-}
-```
-</code></pre><p>3.本级递归应该做什么？递归的目的是什么？<br>    目前树有三个节点：root，left，right。我们首先判断left子树和right子树是否是平衡二叉树，如果不是则直接返回false。再判断两树高度差是否不大于1，如果大于1也直接返回false。否则说明以root为节点的子树是平衡二叉树，那么就返回true和它的高度。</p>
+<p>利用一个新的数组，用even记录偶数下标，odd记录奇数下标，循环目标数组依次把原数组的元素按要求放到新数组之中。</p>
 <p><strong>代码</strong></p>
-<pre><code class="JAVA">/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-class Solution {
-    class ReturnNode{
-        boolean isB;
-        int depth;
-        //构造方法
-        public ReturnNode(int depth,boolean isB){
-        this.isB = isB;
-        this.depth = depth;
+<pre><code class="JAVA">public int[] sortArrayByParityII(int[] A) {
+    int length = A.length;
+    int [] B = new int [length];
+    int even = 0 , odd = 1; //记录偶数和基数开始的位置
+    for(int i=0 ; i&lt;length ;i++){
+        if(A[i] %2 == 0){
+            //说明是偶数
+            B[even] = A[i];
+            even += 2;
+        }
+        else{
+            B[odd] = A[i];
+            odd += 2 ;
         }
     }
-    //主函数
-    public boolean isBalanced(TreeNode root) {
-        return isBST(root).isB;
+    return B;
+}
+</code></pre>
+<p><strong>其他解法</strong></p>
+<p>1.循环<br>2.找到偶数位置上不符合条件的元素<br>3.一定会有个奇数位置上不符合条件的元素与其匹配，找到这个元素<br>4.进入下一次循环</p>
+<p>双指针法</p>
+<pre><code class="JAVA">public int[] sortArrayByParityII(int[] A) {
+int length = A.length;
+int even = 0, odd = 1;
+while(even&lt;length){
+    //出错的A[even]
+    if(A[even] % 2 !=0 ){
+        //寻找与其匹配的奇数
+        while(A[odd]%2 !=0){
+            odd = odd + 2;
+        }
+        //找到了交换
+        int temp = A[even];
+        A[even] = A[odd];
+        A[odd] = temp ;
+
     }
-    public ReturnNode isBST(TreeNode root){
-        if(root == null){
-            return new ReturnNode(0, true);
-        }
-        ReturnNode left = isBST(root.left);
-        ReturnNode right = isBST(root.right);
-        if(left.isB == false || right.isB == false){
-            return new ReturnNode(0, false); 
-        }
-        if(Math.abs(left.depth - right.depth) &gt; 1){
-            return new ReturnNode(0, false);
-        }
-        return new ReturnNode(Math.max(left.depth,right.depth)+1,true);
-    }
+    even = even + 2;
+}
+return A;
 }
 </code></pre>
 
@@ -243,6 +232,12 @@ class Solution {
   </div>
 </aside>
   
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/Java/"><i class="fa fa-tags"></i>Java</a>
+    
+    </div>
   
 </div>
 
@@ -291,10 +286,10 @@ class Solution {
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/11/08/206.旋转链表/" data-enable="true">
+    <a href="/2020/11/13/328.奇偶链表/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/11/07/104-求二叉树的最大深度/" data-enable="true">
+    <a href="/2020/11/11/day11-142.环形链表2/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

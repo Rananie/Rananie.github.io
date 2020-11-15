@@ -289,6 +289,10 @@ son -&gt; father-&gt;Object 跟着继承链往上找，Object加载完毕，加�
 
 </code></pre>
 <p><strong>属性的赋值顺序</strong><br>1.默认初始化<br>2.显示初始化/在代码块中赋值<br>3.构造器中初始化</p>
+<h3 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h3><p>允许一个类的定义位在另一个类的内部，前者称为内部类，后者称为外部类。<br>内部类的分类: 成员内部类(作为类的成员,可以用static修饰) vs 局部内部类(方法内、代码块内、构造器内)</p>
+<p>成员内部类:<br>    1.作为外部类的成员<br>        1.1调用外部类的结构 外部类名.this.xxx<br>        1.2可以被static修饰/可以被四种权限修饰 -&gt; 外部类只能缺省或public<br>    2.作为一个类:<br>        2.1可以定义属性、方法、构造器等<br>        2.2可以被final修饰，表示此类不能被继承<br>        2.3可以被abstract修饰，表示此类不能被实例化</p>
+<p>1.如何实例化成员内部类的对象<br>    静态成员内部类: 外部类名.内部类名 对象名 = new 外部类名.内部类名();<br>    非静态成员内部类: new一个外部类的实例，外部类名.内部类名 对象名 = 外部类实例.new 内部类名()</p>
+<p>2.如何在成员内部类中区分调用外部类的结构<br>    外部类名.this.xxx<br>3.开发中局部内部类的使用</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -297,7 +301,7 @@ son -&gt; father-&gt;Object 跟着继承链往上找，Object加载完毕，加�
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#类和对象"><span class="toc-text">类和对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-text">方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#main-方法"><span class="toc-text">main()方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造器-constructor"><span class="toc-text">构造器(constructor)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码块"><span class="toc-text">代码块</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#类和对象"><span class="toc-text">类和对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-text">方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#main-方法"><span class="toc-text">main()方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造器-constructor"><span class="toc-text">构造器(constructor)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码块"><span class="toc-text">代码块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内部类"><span class="toc-text">内部类</span></a></li></ol></li></ol>
   </div>
 </aside>
   

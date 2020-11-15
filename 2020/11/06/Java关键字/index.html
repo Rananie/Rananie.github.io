@@ -274,7 +274,10 @@ Person p  = new Person(){
 }
 </code></pre>
 <h3 id="接口interface"><a href="#接口interface" class="headerlink" title="接口interface"></a>接口interface</h3><p>Java不支持多重继承，接口可以实现多重继承。</p>
-<p>接口的使用：<br>1.Java中接口与类是并列的结构<br>2.定义接口 -&gt; 定义接口中的成员<br>    JDK7及以前，只能定义全局常量和抽象方法<br>    全局常量:public static final<br>    抽象方法:public abstract<br>    JDK8还可以定义静态方法、默认方法<br>3.接口中不能定义构造器，意味着接口不可以实例化<br>4.Java开发中,接口通过让类去实现(implements)的方式来使用<br>    如果实现类覆盖(实现)了接口中的所有抽象方法，则此实现类就可以实例化<br>    如果实现了没有覆盖覆盖(实现)接口所有的抽象方法，则此实现类为抽象类(加上abstract)<br>5.Java类可以实现多个接口 –&gt; 弥补Java单继承性的局限性<br>格式:class AA extends BB implements CC,DD<br>6.接口与接口之间可以多继承<br>7.接口的具体使用，体现了多态性(形参为接口，实参为实现类)<br>8.接口实际上可以看作一种规范</p>
+<p>接口的使用：<br>1.Java中接口与类是并列的结构<br>2.定义接口 -&gt; 定义接口中的成员<br>    JDK7及以前，只能<br>    全局常量:public static final<br>    抽象方法:public abstract<br>    JDK8还可以定义<br>    静态方法：public static,只能接口来调用<br>    默认方法: public default<br>    类优先原则<br>    如果实现类继承的父类和实现的接口中声明了同名同参数的默认方法，那么子类在没有重写此方法的情况下，默认调用的是父类的该方法。</p>
+<p>3.接口中不能定义构造器，意味着接口不可以实例化<br>4.Java开发中,接口通过让类去实现(implements)的方式来使用<br>    如果实现类覆盖(实现)了接口中的所有抽象方法，则此实现类就可以实例化<br>    如果实现了没有覆盖覆盖(实现)接口所有的抽象方法，则此实现类为抽象类(加上abstract)<br>    JDK8<br>    默认方法，可以通过接口名.super.方法名调用</p>
+<p>5.Java类可以实现多个接口 –&gt; 弥补Java单继承性的局限性<br>格式:class AA extends BB implements CC,DD<br>    如果继承的接口中有同名同参的默认方法，实现类需要重写该方法，不然会报错</p>
+<p>6.接口与接口之间可以多继承<br>7.接口的具体使用，体现了多态性(形参为接口，实参为实现类)<br>8.接口实际上可以看作一种规范</p>
 <p>接口的主要用途就是被实现类实现 -&gt; 面向接口编程</p>
 <pre><code class="JAVA">interface Flyable{
     //全局常量

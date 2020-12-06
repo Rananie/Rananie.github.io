@@ -210,28 +210,30 @@
 </tbody>
 </table>
 <p>不同包下的普通类(非子类)不能调用声明为private、缺省、protected权限的属性</p>
+<h3 id="return"><a href="#return" class="headerlink" title="return"></a>return</h3><p>1.使用在方法体中，用于结束方法与返回数据<br>2.return关键字后面不可以声明执行语句<br>3.在异常处理中try-catch-finally的结构中，如果try/catch的结构中写了return，但是finally中的结构仍会执行</p>
 <h3 id="this"><a href="#this" class="headerlink" title="this"></a>this</h3><p>this指向当前实例,可以理解为当前对象。</p>
 <p>this可以调用:属性、方法、构造器</p>
 <p>在类的方法中,我们可以使用’this.属性’或’this.方法’的方式,调用当前对象属性或方法,通常会省略’this.’，但如果方法的形参和类的属性同名时,必须显示用”this.变量”来表明是属性。</p>
-<p>this还可以用来调用构造器,在构造器中通过使用”this(形参列表)”来调用其他不同的构造器。”this(形参列表)”必须声明在当前构造器的<strong>首行</strong></p>
+<p>this还可以用来调用构造器,在构造器中通过使用”this(形参列表)”来调用其他不同的构造器，最多只能有一个。”this(形参列表)”必须声明在当前构造器的<strong>首行</strong></p>
 <pre><code>public Person(){
    //... 
 }
 public Person(String name){
     this(); //调用空参,通过传不同类型的参数调用其他不同的构造器
 }
-</code></pre><h3 id="super"><a href="#super" class="headerlink" title="super"></a>super</h3><p>super理解为父类的，可以用来调用属性、方法、构造器</p>
+</code></pre><h3 id="super"><a href="#super" class="headerlink" title="super"></a>super</h3><p>super理解为父类的</p>
+<p>super可以调用属性、方法、构造器</p>
 <p>this与super都是解决子类父类成员重名时，用谁的问题</p>
 <p><strong>super的使用</strong><br>1.子类重写父类的方法后,想使用父类的原方法可以使用super<br>2.super(形参列表)的形式调用父类中的构造器,必须声明在子类构造器的<strong>首行</strong><br>3.构造器首行没有显示声明this(形参列表)或super(形参列表),默认调用的super()</p>
 <h4 id="子类对象的实例化过程"><a href="#子类对象的实例化过程" class="headerlink" title="子类对象的实例化过程"></a>子类对象的实例化过程</h4><p>从结果上来看(继承性):<br>    子类继承父类以后,就获取了父类中声明的属性或方法<br>    创建子类的对象,在堆空间中,就会加载所有父类中声明的属性<br>从过程上来看:<br>    通过子类的构造器创建子类对象时，最先会直接或间接调用其父类的构造器(super在第一行)，直到调用到java.lang.Object类中空参的构造器为止,在调用自己的构造器。</p>
 <p>明确:虽然创建子类对象时,调用了父类的构造器但没有new,所以只创建了一个new子类出来的对象。</p>
-<h3 id="package"><a href="#package" class="headerlink" title="package"></a>package</h3><p>1.为了更好的实现项目中类的管理提供包的概念<br>2.使用package声明类或接口所属的包，声明在源文件的首行<br>3.包属于标识符，遵循标识符的命名规则、规范(都小写)<br>4.每’.’一次，就代表一层文件目录</p>
+<h3 id="package"><a href="#package" class="headerlink" title="package"></a>package</h3><p>1.为了更好的实现项目中类的管理提供包的概念<br>2.使用package声明类或接口所属的包，声明在源文件的<strong>首行</strong><br>3.包属于标识符，遵循标识符的命名规则、规范(都小写)<br>4.每’.’一次，就代表一层文件目录</p>
 <p>补充:同一个包下，不能命名同名的接口、类;不同的包下，可以命名同名的接口、类</p>
 <h4 id="MVC设计模式"><a href="#MVC设计模式" class="headerlink" title="MVC设计模式"></a>MVC设计模式</h4><p>MVC将整个程序分成视图模式层(view)、控制器层(controller)、数据模型层(model)三层</p>
 <p>模型层 model 主要处理数据<br>数据对象封装 model.bean/domain<br>数据库操作类 model.dao<br>数据库 model.db</p>
 <p>视图层 view 显示数据<br>相关工具栏 view.utils<br>自定义view view.ui</p>
 <p>控制层 controller 处理业务逻辑<br>应用界面相关 controller.activity<br>存放fragment controller.fragment<br>显示列表的适配器 controller.adapter<br>服务相关 controller.service<br>抽取的基类 controller.base</p>
-<h3 id="import"><a href="#import" class="headerlink" title="import"></a>import</h3><p>1.导入指定包下的类、接口(导入所有用通配符<em>)<br>2.声明在包声明和类声明之间<br>3.使用是的本包或者java.lang包下的，则可以省略import结构，<strong>用其他包的内容都要引用</strong><br>4.在源文件中使用了不同包下的同名类，至少一个类以全类名的方式使用(包名.类 …)<br>5.如果’xxx.</em>‘方式表明可以调用xxx包下的所有结构(当前层次)，但是如果使用的是xxx的子包仍然需要显示调用  –&gt; 只要跨包就要import<br>6.import static 导入指定类或接口中的静态结构 -&gt; import 落脚点是类或接口，import static 落脚点是类中的静态结构</p>
+<h3 id="import"><a href="#import" class="headerlink" title="import"></a>import</h3><p>1.导入指定包下的类、接口(导入所有用通配符<em>)<br>2.声明在包声明和类声明之间<br>3.使用是的本包或者java.lang包(包含一些Java语言的核心类)下的，则可以省略import结构，<strong>用其他包的内容都要引用</strong><br>4.在源文件中使用了不同包下的同名类，至少一个类以全类名的方式使用(包名.类 …)<br>5.如果’xxx.</em>‘方式表明可以调用xxx包下的所有结构(仅一层)，但是如果使用的是xxx的子包仍然需要显示调用  –&gt; 只要跨包就要import<br>6.import static 导入指定类或接口中的静态结构 -&gt; import 落脚点是类或接口，import static 落脚点是类中的静态结构</p>
 <h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><p>引入：编写一个类(无static)时，实际在描述其对象的属性和行为，而并没有产生实质上的对象，只有通过new关键字才会分配内存空间给对象，其方法才可以被外部调用。有时候希望无论是否产生了对象或无论产生了多少对象的情况下，<strong>某些特定的数据在内存空间里只有一份</strong>，所有对象共享。</p>
 <p>说明:<br>1.static主要用来修饰类的内部结构:属性、方法、代码块、内部类<br>2.static修饰属性 -&gt; 静态变量/类变量<br>   属性按是否使用static修饰分为 静态属性 VS 非静态属性(实例变量)<br>   类的多个对象共享同一个静态变量<br>   静态变量随类的加载而加载早于对象的创建，由于类只加载一次(缓存在方法区)所以静态变量在内存中只会存在一份<strong>存在方法区的静态域中</strong> (方法区:类的加载信息、静态域、常量池)<br>3.使用static修饰方法 -&gt; 静态方法<br>   (从生命周期思考)<br>   静态方法随类的加载而加载,此时还没有对象，所以静态方法中不能使用this和super。<br>   静态方法中只能调用静态方法或静态属性 ，非静态方法中，既可以调用非静态的也可以调用静态的</p>
 <p><strong>总结</strong></p>
@@ -274,7 +276,7 @@ Person p  = new Person(){
 }
 </code></pre>
 <h3 id="接口interface"><a href="#接口interface" class="headerlink" title="接口interface"></a>接口interface</h3><p>Java不支持多重继承，接口可以实现多重继承。</p>
-<p>接口的使用：<br>1.Java中接口与类是并列的结构<br>2.定义接口 -&gt; 定义接口中的成员<br>    JDK7及以前，只能<br>    全局常量:public static final<br>    抽象方法:public abstract<br>    JDK8还可以定义<br>    静态方法：public static,只能接口来调用<br>    默认方法: public default<br>    类优先原则<br>    如果实现类继承的父类和实现的接口中声明了同名同参数的默认方法，那么子类在没有重写此方法的情况下，默认调用的是父类的该方法。</p>
+<p>接口的使用：<br>1.Java中接口与类是并列的结构<br>2.定义接口 -&gt; 定义接口中的成员<br>    JDK7及以前，只能<br>    全局常量:public static final<br>    抽象方法:public abstract<br>    JDK8还可以定义<br>    静态方法：public static,只能接口来调用<br>    默认方法: public default<br>    类优先原则<br>    如果实现类继承父类和实现的接口中声明了同名同参数的默认方法，那么子类在没有重写此方法的情况下，默认调用的是父类的该方法。</p>
 <p>3.接口中不能定义构造器，意味着接口不可以实例化<br>4.Java开发中,接口通过让类去实现(implements)的方式来使用<br>    如果实现类覆盖(实现)了接口中的所有抽象方法，则此实现类就可以实例化<br>    如果实现了没有覆盖覆盖(实现)接口所有的抽象方法，则此实现类为抽象类(加上abstract)<br>    JDK8<br>    默认方法，可以通过接口名.super.方法名调用</p>
 <p>5.Java类可以实现多个接口 –&gt; 弥补Java单继承性的局限性<br>格式:class AA extends BB implements CC,DD<br>    如果继承的接口中有同名同参的默认方法，实现类需要重写该方法，不然会报错</p>
 <p>6.接口与接口之间可以多继承<br>7.接口的具体使用，体现了多态性(形参为接口，实参为实现类)<br>8.接口实际上可以看作一种规范</p>
@@ -350,7 +352,7 @@ class ProxyServer implements NetWork{
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#权限修饰符"><span class="toc-text">权限修饰符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#this"><span class="toc-text">this</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#super"><span class="toc-text">super</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#子类对象的实例化过程"><span class="toc-text">子类对象的实例化过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#package"><span class="toc-text">package</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MVC设计模式"><span class="toc-text">MVC设计模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#import"><span class="toc-text">import</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#static"><span class="toc-text">static</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#instanceof"><span class="toc-text">instanceof</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#final"><span class="toc-text">final</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#abstract抽象类"><span class="toc-text">abstract抽象类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口interface"><span class="toc-text">接口interface</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#权限修饰符"><span class="toc-text">权限修饰符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#return"><span class="toc-text">return</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#this"><span class="toc-text">this</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#super"><span class="toc-text">super</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#子类对象的实例化过程"><span class="toc-text">子类对象的实例化过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#package"><span class="toc-text">package</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MVC设计模式"><span class="toc-text">MVC设计模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#import"><span class="toc-text">import</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#static"><span class="toc-text">static</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#instanceof"><span class="toc-text">instanceof</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#final"><span class="toc-text">final</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#abstract抽象类"><span class="toc-text">abstract抽象类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接口interface"><span class="toc-text">接口interface</span></a></li></ol>
   </div>
 </aside>
   

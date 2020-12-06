@@ -166,42 +166,7 @@
   </h1>
   
   <article class="passage-article">
-    <h4 id="Object类"><a href="#Object类" class="headerlink" title="Object类"></a>Object类</h4><p>Java.lang.Object类是所有类(除Object类本身)的祖先类</p>
-<p><strong>equals(Object obj)方法</strong></p>
-<p>只适用于引用数据类型，比较的是地址值<br>Obhect类中equals()定义的方法和==作用是相同的</p>
-<pre><code>public boolean equals(Object obj){
-    return (this == obj)
-}
-</code></pre><p>String、Date、File、包装类等都重写了Object类中的equals()方法，比较的两个对象的实体类容是否相同</p>
-<p>通常情况下，自定义的类如果使用equals()方法，也会比较对象的实体类容是否相同，所以可以重写equals()方法</p>
-<pre><code>//手写版本,
-class Customer{
-public boolean equals(Object obj){
-    if(this == obj){
-        return true
-    }
-    if(obj instanceof Customer){
-        //Customer是父类,转换了后父类可以调用子类的特有方法用于比较
-        Customer cust = (Customer)obj
-        //比较两个对象的每个属性是否相同
-        ....
-
-    }
-
-</code></pre><p>特殊：String类型在常量池,重新定义一个变量是，若在常量池中发现有内容一样的字符串，会直接把该字符串的地址赋值给该变量。new String()方法创建的字符串除外</p>
-<p><strong>toString()方法</strong></p>
-<p>1.当我们打印一个引用对象时,实际上就是调用当前对象的toString(),输出地址<br>2.Object类中toString()的定义:</p>
-<pre><code>public String toString(){
-    return getClass().getName() + &quot;@&quot; + Integer.toHexString((hashCode));
-}
-</code></pre><p>3.String、Date、File、包装类等都重写了Object类中的toString()方法，返回”实体内容”信息</p>
-<p>特例：</p>
-<pre><code class="JAVA">String s = &quot;abc&quot;;
-s = null ;
-System.out.println(s) //null
-System.out.println(s.toString) //出现空指针异常
-</code></pre>
-<p><strong>getClass方法</strong></p>
+    <p><strong>getClass方法</strong></p>
 <p>实例.getClass()方法,返回实例的直接父类</p>
 <h4 id="JUnit"><a href="#JUnit" class="headerlink" title="JUnit"></a>JUnit</h4><p>Java中的JUnit单元测试<br>1.使用JUnit<br>test目录(src同级)用于存放测试类，在此目录上右击鼠标并将此目录标记为Test Resources Root<br>选择要进行测试的类文件，在类文件中按下组合键CTRL+SHIFT+T弹出创建测试类的窗口或者右键goto -&gt; test<br>2.自动创建的Java类，进行单元测试<br>    此类是public<br>    此类提供公共的无参构造器(默认的不需要去写)<br>3.此类中声明单元测试方法<br>    此方法的权限是public,没有形参与返回值<br>4.此单元测试方法的上面需要声明注释@Test,并导入import org.junit.Test</p>
 <h4 id="包装类Wrapper"><a href="#包装类Wrapper" class="headerlink" title="包装类Wrapper"></a>包装类Wrapper</h4><p>包装类(封装类):针对八种基本数据类型定义相应的引用类型</p>
@@ -265,7 +230,7 @@ public void test(){
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#Object类"><span class="toc-text">Object类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JUnit"><span class="toc-text">JUnit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#包装类Wrapper"><span class="toc-text">包装类Wrapper</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#JUnit"><span class="toc-text">JUnit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#包装类Wrapper"><span class="toc-text">包装类Wrapper</span></a></li></ol>
   </div>
 </aside>
   

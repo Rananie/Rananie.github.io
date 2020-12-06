@@ -167,9 +167,11 @@
   
   <article class="passage-article">
     <h2 id="面向对象的特点"><a href="#面向对象的特点" class="headerlink" title="面向对象的特点"></a>面向对象的特点</h2><h3 id="封装与隐藏"><a href="#封装与隐藏" class="headerlink" title="封装与隐藏"></a>封装与隐藏</h3><p>为什么需要封装性？设计程序追求”高内聚，低耦合”<br>高内聚:类的内部数据操作细节自己完成，不允许外部干涉<br>低耦合:仅对外暴露少量的方法用于使用</p>
-<p><strong>封装性的体现</strong><br>1.将类的属性私(xx)有化(private),提供公共的(public)方法来获取(getxx)和设置(setxx)该私有属性<br>2.不对外暴露的私有方法<br>3.单例模式(将构造器私有化)</p>
+<p>隐藏对象内部的复杂性，只对外公开简单的接口，便于外界调用，从而提高系统的可扩展性、可维护性。</p>
+<p><strong>封装性的体现</strong></p>
+<p>1.将类的属性私(xx)有化(private),提供公共的(public)方法来获取(getxx)和设置(setxx)该私有属性<br>2.不对外暴露的私有方法<br>3.单例模式(将构造器私有化)</p>
 <p>封装性的体现，需要权限修饰符来配合<br>封装性:Java提供了4种权限修饰符来修饰类及类的内部结构，体现其在被调用时的可见性大小</p>
-<p><strong>权限修饰符</strong><br>1.权限从小到大 private、缺省、protected、public<br>2.4种权限可以用来修饰类的属性、方法、构造器、内部类<br>3.对于class的权限修饰只可以用public和default(缺省);public类可以在任意地方被访问,default类只可以被同一个包内部的类访问</p>
+<p><strong>权限修饰符</strong><br>1.权限从小到大 private &lt; 缺省 &lt; protected &lt; public<br>2.4种权限可以用来修饰类的内部结构:属性、方法、构造器、内部类<br>3.对于class的权限修饰只可以用public和default(缺省)</p>
 <table>
 <thead>
 <tr>
@@ -212,17 +214,74 @@
 </tbody>
 </table>
 <p>不同包下的普通类(非子类)不能调用声明为private、缺省、protected权限的属性</p>
-<h3 id="继承性"><a href="#继承性" class="headerlink" title="继承性"></a>继承性</h3><p>继承在原有类的基础上进行扩展,一个子类只能有一个父类</p>
-<pre><code>public class Student extend Person{
+<h3 id="继承性"><a href="#继承性" class="headerlink" title="继承性"></a>继承性</h3><pre><code>public class Student extend Person{
     //与Person重复的就不用写的
 }
 </code></pre><p><strong>继承性的好处</strong><br>1.减少了代码的冗余，提高了代码的复用性<br>2.便于功能的扩展<br>3.为多态性的使用提供前提</p>
-<h3 id="多态性"><a href="#多态性" class="headerlink" title="多态性"></a>多态性</h3><p>对象的多态性,<strong>父类的引用指向子类的对象</strong>,可以理解为一个事物的多种形态。</p>
-<p><strong>多态的使用(虚拟方法调用)</strong><br>1.当<strong>调用子父类同名同参数的方法</strong>时，实际执行的是子类重写父类的方法。此时称父类的方法为虚拟方法。<br>2.在编译期,只能调用父类中声明的方法,但在运行期,我们实际执行的是子类重新父类的方法<br>3.对象的多态性只适用与方法,不适用于属性—&gt; 属性不会被重写,若同名则在内存中会出现两个。使用的时候声明的是什么类型使用的就是什么类型的属性。(属性编译和运行都看左边) </p>
+<p>子类继承父类后，子类中就获取了父类中声明的所有的属性和方法。特别的，父类中声明为private的属性或方法，子类继承父类以后，仍然认为获取了父类中私的结构。只因为封装性的影响，使得子类不能直接调用父类的结构而已。</p>
+<h4 id="Object类"><a href="#Object类" class="headerlink" title="Object类"></a>Object类</h4><p>Java.lang.Object类是所有类(除Object类本身)的祖先类<br>1.Object类只声明了一个空参的构造器<br>2.数组也作为 Object类的子类出现，可以调用 Object类中声明的方法</p>
+<p>Java.lang.Object类中定义的一些方法:<br>public boolean equals(Object obj) 对象比较<br>public int hashCode()     获取Hash码<br>public String toString() 对象打印时调用</p>
+<p><strong>equals(Object obj)方法</strong></p>
+<p>只适用于引用数据类型，比较的是地址值<br>Object类中equals()定义的方法和==作用是相同的</p>
+<pre><code>public boolean equals(Object obj){
+    return (this == obj)
+}
+</code></pre><p><strong>说明</strong><br>1.String、Date、File、包装类等都重写了Object类中的equals()方法，比较的两个对象的实体类容是否相同<br>2.通常情况下，自定义的类如果使用equals()方法，也会比较对象的实体类容是否相同，所以可以重写equals()方法</p>
+<pre><code class="JAVA">//手写版本,
+class Customer{
+public boolean equals(Object obj){
+    //利用了多态性，形参是object，实参其实大多数时候是object的子类
+    if(this == obj){
+        return true
+    }
+    if(obj instanceof Customer){
+        //父类没办法看见子类独有的方法
+        //确定该Object子类也是Customer的实例
+        //Customer是父类,转换了后父类可以调用子类的特有方法用于比较
+        Customer cust = (Customer)obj
+        //比较两个对象的每个属性是否相同
+        ....
+
+    }
+//自动生成的版本
+@Override
+public boolean equals(Object obj) {
+    if (this == obj)
+        return true;
+    if (obj == null)
+        return false;
+    if (getClass() != obj.getClass())
+        return false;
+    Person other = (Person) obj;
+    if (age != other.age)
+        return false;
+    if (name == null) {
+        if (other.name != null)
+            return false;
+    } else if (!name.equals(other.name))
+        return false;
+    return true;
+</code></pre>
+<p>特殊：String类型在常量池,重新定义一个变量时，若在常量池中发现有内容一样的字符串，会直接把该字符串的地址赋值给该变量。new String()方法创建的字符串除外</p>
+<p><strong>toString()方法</strong></p>
+<p>1.当我们打印一个引用对象时,实际上就是调用当前对象的toString(),输出地址<br>2.Object类中toString()的定义:</p>
+<pre><code>public String toString(){
+    return getClass().getName() + &quot;@&quot; + Integer.toHexString((hashCode));
+}
+</code></pre><p>3.String、Date、File、包装类等都重写了Object类中的toString()方法，返回”实体内容”信息</p>
+<p>特例：</p>
+<pre><code class="JAVA">String s = &quot;abc&quot;;
+s = null ;
+System.out.println(s) //null
+System.out.println(s.toString) //出现空指针异常
+</code></pre>
+<h3 id="多态性"><a href="#多态性" class="headerlink" title="多态性"></a>多态性</h3><p>对象的多态性:<strong>父类的引用指向子类的对象</strong><br>编译时和运行时类型不一致，产生了多态</p>
+<p><strong>多态性的使用前提</strong><br>1.类的继承关系<br>2.方法的重写</p>
+<p><strong>多态的使用(虚拟方法调用)</strong></p>
+<p>1.当<strong>调用子父类同名同参数的方法</strong>时,在编译期,只能调用父类中声明的方法,但在运行期,我们实际执行的是子类重新父类的方法<br>2.对象的多态性只适用与方法,不适用于属性 —&gt; 属性不会被重写,若同名则在内存中会出现两个。使用的时候声明的是什么类型使用的就是什么类型的属性。(属性编译和运行都看左边) </p>
 <p><strong>虚拟方法调用</strong><br>方法编译时看左边,运行时看右边,编译的时候以为调用的是父类的方法,实际调用的是子类的方法。</p>
 <p>不能调用子类所特有的方法，编译时，该实例是父类的。</p>
-<p>常用场景:<br>当一个方法的形参是父类时,实参可以传子类的实例(父类的引用指向子类的对象),调用时实际调用的是子类重写的方法,这样就不用分别定义形参是子类的该方法。</p>
-<p><strong>多态是运行时行为</strong>,父类动态调用属于子类的该方法，在编译时是无法确定调用的是哪一个子类的方法，所以是运行时行为。(动态绑定)</p>
+<p><strong>多态是运行时行为</strong>,父类动态调用属于子类的方法，在编译时是无法确定调用的是哪一个子类的方法，所以是运行时行为。(动态绑定)</p>
 <pre><code>class Animal{
     protected void eat(){
         ...
@@ -255,12 +314,11 @@ public class Test{
         animal.eat();
     }
 }
-</code></pre><p><strong>多态性的使用前提</strong><br>1.类的继承关系<br>2.方法的重写</p>
-<p><strong>向下转型</strong></p>
+</code></pre><h4 id="向下转型"><a href="#向下转型" class="headerlink" title="向下转型"></a>向下转型</h4><p>向上转型:多态</p>
 <p>前提:存在子父类关系<br>目的:使用子类的特定方法</p>
-<p>有了多态性以后，内存中实际上是加载了子类的属性和方法，但是由于变量声明为父类类型，导致编译时，只能调用父类中声明的属性和方法。子类特有的属性和方法不能调用。</p>
+<p>有了<strong>多态性以后，内存中实际上是加载了子类的属性和方法，但是由于变量声明为父类类型，导致编译时，只能调用父类中声明的属性和方法。子类特有的属性和方法不能调用。(编译器看不见)</strong></p>
 <pre><code>// 调用子类特有属性和方法
-//p的地址值指向new出来的空间，但是编译器只看的Person的属性和方法或者Person和Man共有的
+//p的地址值指向new出来的空间，编译时实例是属于person类的，编译器只看的Person的属性和方法
 Person p = new Man()
 Person p1 = new Woman()
 //把p的地址赋值给m1，由于m1是Man类型，所以看得见Man特有的属性和方法
@@ -278,7 +336,7 @@ Object o = new Man()
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象的特点"><span class="toc-text">面向对象的特点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#封装与隐藏"><span class="toc-text">封装与隐藏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继承性"><span class="toc-text">继承性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多态性"><span class="toc-text">多态性</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#面向对象的特点"><span class="toc-text">面向对象的特点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#封装与隐藏"><span class="toc-text">封装与隐藏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继承性"><span class="toc-text">继承性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Object类"><span class="toc-text">Object类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多态性"><span class="toc-text">多态性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#向下转型"><span class="toc-text">向下转型</span></a></li></ol></li></ol></li></ol>
   </div>
 </aside>
   

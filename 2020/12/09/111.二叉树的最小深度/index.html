@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>day14-100.相同的树 | Ranan_blog</title>
+  <title>111.二叉树的最小深度 | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -148,7 +148,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-11-16
+      <i class="fa fa-calendar"></i>2020-12-09
     </span>
     
       <span>
@@ -162,68 +162,67 @@
     
   </div>
   <h1 class="passage-title">
-    day14-100.相同的树
+    111.二叉树的最小深度
   </h1>
   
   <article class="passage-article">
     <p><strong>题目</strong></p>
-<p>给定两个二叉树，编写一个函数来检验它们是否相同。</p>
-<p>如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。</p>
-<pre><code>示例 1:
-输入:       1         1
-          / \       / \
-         2   3     2   3
-
-        [1,2,3],   [1,2,3]
-
-输出: true
-示例 2:
-
-输入:      1          1
-          /           \
-         2             2
-
-        [1,2],     [1,null,2]
-
-输出: false
-示例 3:
-
-输入:      1         1
-          / \       / \
-         2   1     1   2
-
-        [1,2,1],   [1,1,2]
-
-输出: false
-</code></pre><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/same-tree" target="_blank" rel="noopener">https://leetcode-cn.com/problems/same-tree</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<p><strong>思路</strong></p>
-<p>1.确定递归函数的参数和返回值类型<br>判断两棵树是不是相等，那么需要两个指针分别指向两棵树比较的位置，返回值类型为布尔类型。</p>
-<pre><code class="JAVA">public boolean isSameTree(TreeNode p, TreeNode q)
+<p>给定一个二叉树，找出其最小深度。<br>最小深度是从根节点到最近叶子节点的最短路径上的节点数量。<br>说明: 叶子节点是指没有子节点的节点。</p>
+<h3 id="递归法"><a href="#递归法" class="headerlink" title="递归法"></a>递归法</h3><p><strong>思路</strong><br>1.确定递归函数的参数和返回值</p>
+<pre><code class="JAVA">public int minDepth(TreeNode root) {}
 </code></pre>
-<p>2.终止条件<br>当两个比较结点的数字不同就可以返回了，要比较两个节点数值相不相同，首先要把两个节点为空的情况弄清楚！否则后面比较数值的时候就会操作空指针了。</p>
-<p>为空的情况:<br>2.1其中一个为空,另外一个不为空 return false<br>2.1两个都为空 return true</p>
-<pre><code class="JAVA">if(p == null &amp;&amp; q != null) return false;
-else if(p != null &amp;&amp; q == null) return true;
-else if(p == null &amp;&amp; q == null) return false;
-else if(p.val !=  q.val) return false;
-else{
-    //数值相同的情况
+<p>2.确定终止条件</p>
+<p>结点为空的时候</p>
+<pre><code class="JAVA">if(root == null) return 0;
+</code></pre>
+<p>3.确定单层递归的逻辑(从局部考虑)</p>
+<p>选择左子树和右子树的高度中较小的一个+1<br>这个是错误的写法，比如只有右子树的结点会是左子树的高度+1 = 0+1 =1</p>
+<pre><code class="JAVA">depth = Math.min(minDepth(root.left),minDepth(root.right))+1;
+</code></pre>
+<p>需要分情况讨论<br>如果左子树为空，右子树不为空，说明最小深度是 1 + 右子树的深度。<br>右子树为空，左子树不为空，最小深度是 1 + 左子树的深度。最后如果左右子树都不为空，返回左右子树深度最小值 + 1 。</p>
+<pre><code class="JAVA">if(root.left == null){
+    return minDepth(root.right) + 1;
+}else if(root.right ==null){
+    return minDepth(root.left) + 1;
+}else{
+    return Math.min(minDepth(root.left),minDepth(root.right))+1;
 }
-</code></pre>
-<p>3.本层递归应该做什么<br>从局部看成3个结点，返回值类型为布尔类型，那么检查了根节点的情况，需要分别检查左边结点与右边结点</p>
-<pre><code class="JAVA">isSameTree(p.left,q.left);
-isSameTree(p.right,q.right);
 </code></pre>
 <p><strong>代码</strong></p>
 <pre><code class="JAVA">class Solution {
-    public boolean isSameTree(TreeNode p, TreeNode q) {
-    if(p == null &amp;&amp; q != null) return false;
-    else if(p != null &amp;&amp; q == null) return false;
-    else if(p == null &amp;&amp; q == null) return true;
-    else if(p.val !=  q.val) return false;
-    else{
-    return isSameTree(p.left,q.left) &amp;&amp; isSameTree(p.right,q.right);
+    public int minDepth(TreeNode root) {
+    if(root == null) return 0;
+    if(root.left == null){
+        return minDepth(root.right) + 1;
+    }else if(root.right ==null){
+       return minDepth(root.left) + 1;
+    }else{
+     return Math.min(minDepth(root.left),minDepth(root.right))+1;
     }
+    }
+}
+</code></pre>
+<h3 id="迭代法"><a href="#迭代法" class="headerlink" title="迭代法"></a>迭代法</h3><p>考虑层序遍历，从根结点开始，这层没有左右孩子为空的结点，则深度+1，如果发现有左右孩子为空的结点，说明这个结点为叶子结点，且第一个出现的叶子结点到根结点的距离就是最小深度。</p>
+<p>套上层次遍历需要分层的模板</p>
+<pre><code class="JAVA">class Solution {
+    public int minDepth(TreeNode root) {
+     if(root == null) return 0;
+     if(root.right == null &amp;&amp; root.left == null) return 1;
+     Queue&lt;TreeNode&gt; queue = new LinkedList&lt;TreeNode&gt;();
+     queue.add(root);
+     int depth = 0 ;
+     while(!queue.isEmpty()){
+        int size = queue.size();
+        for(int i = 0 ; i&lt;size ; i++){
+            root = queue.poll();
+            if(root.right == null &amp;&amp; root.left == null) return depth+1;
+            if(root.right != null) queue.add(root.right);
+            if(root.left != null) queue.add(root.left);
+        }
+        depth++;
+     }
+     //防止编译错误，随便返回
+     return depth;  
     }
 }
 </code></pre>
@@ -235,7 +234,7 @@ isSameTree(p.right,q.right);
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#递归法"><span class="toc-text">递归法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#迭代法"><span class="toc-text">迭代法</span></a></li></ol>
   </div>
 </aside>
   
@@ -293,10 +292,10 @@ isSameTree(p.right,q.right);
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/11/16/102.二叉树的层次遍历/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/11/16/101-对称二叉树/" data-enable="true">
+    <a href="/2020/12/03/226.翻转二叉树/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

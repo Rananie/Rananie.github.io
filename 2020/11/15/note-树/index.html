@@ -173,7 +173,28 @@
 </blockquote>
 <p>平衡二叉树：左子树和右子树的深度之差(平衡因子)的绝对值不超过1，且它的左子树和右子树都是一颗平衡二叉树。</p>
 <p>二叉搜索树：二叉搜索树是一个有序树，左子树上所有结点的值小于根结点的值；右子树上所有结点的值大于根结点的值</p>
-<h2 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h2><ul>
+<h2 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h2><h3 id="二叉树算法框架"><a href="#二叉树算法框架" class="headerlink" title="二叉树算法框架"></a>二叉树算法框架</h3><p>二叉树算法的总路线:明确一个节点要做的事情，然后剩下的事抛给框架。</p>
+<pre><code class="JAVA">void traverse(TreeNode root) {
+    // root 需要做什么？在这做。
+    // 其他的不用 root 操心，抛给框架
+    traverse(root.left);
+    traverse(root.right);
+}
+</code></pre>
+<p>比如100.判断两棵二叉树是否完全相同</p>
+<pre><code>boolean isSameTree(TreeNode root1, TreeNode root2) {
+    // 都为空的话，显然相同
+    if (root1 == null &amp;&amp; root2 == null) return true;
+    // 一个为空，一个非空，显然不同,如果都为空为执行上面的判断提前返回不会到这一步。
+    if (root1 == null || root2 == null) return false;
+    // 两个都非空，但 val 不一样也不行
+    if (root1.val != root2.val) return false;
+
+    // root1 和 root2 该比的都比完了
+    return isSameTree(root1.left, root2.left)
+        &amp;&amp; isSameTree(root1.right, root2.right);
+}
+</code></pre><ul>
 <li style="list-style: none"><input type="checkbox" checked> 144.二叉树的前序遍历</li>
 <li style="list-style: none"><input type="checkbox" checked> 94.二叉树的中序遍历</li>
 <li style="list-style: none"><input type="checkbox" checked> 145.二叉树的后序遍历</li>
@@ -336,14 +357,17 @@ stack.push(null); // 中节点访问过，但是还没有处理，加入空节�
 <li style="list-style: none"><input type="checkbox" checked> 199.二叉树的右视图</li>
 <li style="list-style: none"><input type="checkbox" checked> 429.N叉树的层序遍历</li>
 <li style="list-style: none"><input type="checkbox" checked> 513.找树左下角的值</li>
+<li style="list-style: none"><input type="checkbox" checked> 515.在每个树行中找最大值</li>
+<li style="list-style: none"><input type="checkbox" checked> 559.N叉树的最大深度</li>
 <li style="list-style: none"><input type="checkbox" checked> 637.二叉树的层平均值</li>
+<li style="list-style: none"><input type="checkbox" checked> [111.二叉树的最小深度]</li>
 </ul>
-<p>层序遍历一个二叉树，就是从左到右一层一层的去遍历二叉树。<br>一般DFS用递归去实现（也可以用栈实现），BFS需要用队列去实现。</p>
+<p>层序遍历一个二叉树，就是从左到右一层一层的去遍历二叉树。</p>
 <blockquote>
 <p>这种层序遍历方式就是图论中的广度优先遍历，只不过我们应用在二叉树上。</p>
 </blockquote>
 <p><strong>模板</strong></p>
-<p>层次遍历的步骤:<br>1.对于不为空的结点，先把该结点加入到队列中<br>2.从队中拿出结点，如果该结点的左右结点不为空，就分别把左右结点加入队列中<br>3.重复上述操作直到队列为空</p>
+<p>层次遍历的步骤:<br>1.对于不为空的结点，先把该结点加入到队列中<br>2.从队中拿出结点，如果该结点的孩子结点不为空，就分别把孩子结点加入队列中<br>3.重复上述操作直到队列为空</p>
 <pre><code class="JAVA">public class Solution{
 class TreeNode {
     int val;
@@ -408,28 +432,7 @@ class Solution {
     }
 }
 </code></pre>
-<h2 id="二叉树算法"><a href="#二叉树算法" class="headerlink" title="二叉树算法"></a>二叉树算法</h2><p>二叉树算法的总路线:明确一个节点要做的事情，然后剩下的事抛给框架。</p>
-<pre><code class="JAVA">void traverse(TreeNode root) {
-    // root 需要做什么？在这做。
-    // 其他的不用 root 操心，抛给框架
-    traverse(root.left);
-    traverse(root.right);
-}
-</code></pre>
-<p>比如100.判断两棵二叉树是否完全相同</p>
-<pre><code>boolean isSameTree(TreeNode root1, TreeNode root2) {
-    // 都为空的话，显然相同
-    if (root1 == null &amp;&amp; root2 == null) return true;
-    // 一个为空，一个非空，显然不同,如果都为空为执行上面的判断提前返回不会到这一步。
-    if (root1 == null || root2 == null) return false;
-    // 两个都非空，但 val 不一样也不行
-    if (root1.val != root2.val) return false;
-
-    // root1 和 root2 该比的都比完了
-    return isSameTree(root1.left, root2.left)
-        &amp;&amp; isSameTree(root1.right, root2.right);
-}
-</code></pre><p><strong>二叉搜索树</strong>（Binary Search Tree，简称 BST）是一种很常用的的二叉树。它的定义是：一个二叉树中，任意节点的值要大于等于左子树所有节点的值，且要小于等于右边子树的所有节点的值。</p>
+<h2 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h2><p><strong>二叉搜索树</strong>（Binary Search Tree，简称 BST）是一种很常用的的二叉树。它的定义是：一个二叉树中，任意节点的值要大于等于左子树所有节点的值，且要小于等于右边子树的所有节点的值。</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -438,7 +441,7 @@ class Solution {
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树的种类"><span class="toc-text">二叉树的种类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树的遍历"><span class="toc-text">二叉树的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#前序遍历"><span class="toc-text">前序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#中序遍历"><span class="toc-text">中序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#后序遍历"><span class="toc-text">后序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#层次遍历"><span class="toc-text">层次遍历</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树算法"><span class="toc-text">二叉树算法</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树的种类"><span class="toc-text">二叉树的种类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树的遍历"><span class="toc-text">二叉树的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉树算法框架"><span class="toc-text">二叉树算法框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前序遍历"><span class="toc-text">前序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#中序遍历"><span class="toc-text">中序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#后序遍历"><span class="toc-text">后序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#层次遍历"><span class="toc-text">层次遍历</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉搜索树"><span class="toc-text">二叉搜索树</span></a></li></ol>
   </div>
 </aside>
   
@@ -490,10 +493,10 @@ class Solution {
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/11/16/112-路径总和/" data-enable="true">
+    <a href="/2020/11/16/112.路径总和/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/11/15/day15-129.求根到叶子节点数字之和/" data-enable="true">
+    <a href="/2020/11/15/129.求根到叶子节点数字之和/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

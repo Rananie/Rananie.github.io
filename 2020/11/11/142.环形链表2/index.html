@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>day9-109.有序链表转换二叉搜索树 | Ranan_blog</title>
+  <title>day11-142.环形链表2 | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -148,7 +148,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-11-10
+      <i class="fa fa-calendar"></i>2020-11-11
     </span>
     
       <span>
@@ -162,93 +162,57 @@
     
   </div>
   <h1 class="passage-title">
-    day9-109.有序链表转换二叉搜索树
+    day11-142.环形链表2
   </h1>
   
   <article class="passage-article">
     <p><strong>题目</strong></p>
-<p>给定一个单链表，其中的元素按升序排序，将其转换为高度平衡的二叉搜索树。</p>
-<p>本题中，一个高度平衡二叉树是指一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1。</p>
-<p>示例:</p>
-<p>给定的有序链表： [-10, -3, 0, 5, 9],</p>
-<p>一个可能的答案是：[0, -3, 9, -10, null, 5], 它可以表示下面这个高度平衡二叉搜索树：</p>
-<pre><code>  0
- / \
-</code></pre><p>   -3   9<br>   /   /<br> -10  5</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree" target="_blank" rel="noopener">https://leetcode-cn.com/problems/convert-sorted-list-to-binary-search-tree</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。</p>
+<p>为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。注意，pos 仅仅是用于标识环的情况，并不会作为参数传递到函数中。</p>
+<p>示例：</p>
+<p><a href="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist.png" target="_blank" rel="noopener">示例1</a></p>
+<pre><code>输入：head = [3,2,0,-4], pos = 1
+输出：返回索引为 1 的链表节点
+解释：链表中有一个环，其尾部连接到第二个节点。
+</code></pre><p><a href="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test2.png" target="_blank" rel="noopener">示例2</a></p>
+<pre><code>输入：head = [1,2], pos = 0
+输出：返回索引为 0 的链表节点
+解释：链表中有一个环，其尾部连接到第一个节点。
+</code></pre><p><a href="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test3.png" target="_blank" rel="noopener">示例3</a></p>
+<pre><code>输入：head = [1], pos = -1
+输出：返回 null
+解释：链表中没有环。
+</code></pre><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/linked-list-cycle-ii" target="_blank" rel="noopener">https://leetcode-cn.com/problems/linked-list-cycle-ii</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 <p><strong>思路</strong></p>
-<p>找中间结点作为根结点，中间结点的左边链表又使中间结点为根节点，依次递归。左边链表变成一颗平衡二叉树后，作为根结点的左子树。右边链表同样的处理作为根结点的右子树。</p>
-<p>找中间结点需要用到快慢指针，把链表转换成平衡二叉树时考虑用递归。</p>
-<p>找中间结点的方法</p>
-<pre><code class="Java">//获取到中间结点
-ListNode centerNode(ListNode head){
-    ListNode slow = head,fast = head;
-    while(fast!=null &amp;&amp; fast.next != null){
-    //快指针走两步
-    fast  = fast.next.next;
-    //慢指针走一步
-    slow = slow.next;
-    }
-    return slow;
-    }
-</code></pre>
+<ul>
+<li>哈希法</li>
+</ul>
+<p>遍历整个链表，如果当前的结点不在哈希表中则添加之后继续遍历，如果在哈希表中,那么当前的结点就是环的入口结点。</p>
+<p>时间复杂度：O(N)<br>空间复杂度：O(N) 新建一个哈希表</p>
+<ul>
+<li>快慢指针法</li>
+</ul>
+<p>思路见链表笔记</p>
 <p><strong>代码</strong></p>
-<pre><code class="Java">/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode() {}
- *     ListNode(int val) { this.val = val; }
- *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
- * }
- */
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
-class Solution {
-
-    public TreeNode sortedListToBST(ListNode head) {
-        if (head == null) return null;
-        //开始的时候尾结点没有任何影响
-        return dfs(head,null);
-    }
-    //链表变成平衡二叉树
-    TreeNode dfs(ListNode head,ListNode tail){
-        if (head == tail) return null;
-        ListNode mid = centerNode(head,tail);
-        TreeNode cur = new TreeNode(mid.val);
-        cur.left = dfs(head,mid);
-        cur.right = dfs(mid.next,tail);
-        return cur;
-
-    }
-    //获取到中间结点
-    ListNode centerNode(ListNode head,ListNode tail){
-        ListNode slow = head,fast = head;
-        while(fast!= tail &amp;&amp; fast.next != tail){
-       //快指针走两步
-        fast  = fast.next.next;
-        //慢指针走一步
+<pre><code class="Java">public ListNode detectCycle(ListNode head) {
+           ListNode fast = head,slow = head;
+     //排除空链和只有一个结点
+     while (fast != null &amp;&amp; fast.next != null) {
+        fast = fast.next.next;
         slow = slow.next;
+        //先判断有没有环，在某个位置会相遇
+        if(slow == fast){
+             while (head != slow) {
+                    //两相遇指针，一个从头结点开始，
+                    head = head.next;
+                    slow = slow.next;
+                }
+                return slow;
         }
-         return slow;
-    }
+     }
+     return null;
 }
 </code></pre>
-<p>centerNode和dfs的形参列表一样，里面的代码也互相不干扰，也可以合并成一个函数。</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -315,10 +279,10 @@ class Solution {
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/11/10/day10-160.相交链表/" data-enable="true">
+    <a href="/2020/11/12/922.按奇偶排序数组2/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/11/08/day8-61.旋转链表/" data-enable="true">
+    <a href="/2020/11/10/160.相交链表/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

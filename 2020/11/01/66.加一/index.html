@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>day2-821.字符的最短距离 | Ranan_blog</title>
+  <title>66.加一 | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -148,7 +148,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-11-02
+      <i class="fa fa-calendar"></i>2020-11-01
     </span>
     
       <span>
@@ -162,81 +162,35 @@
     
   </div>
   <h1 class="passage-title">
-    day2-821.字符的最短距离
+    66.加一
   </h1>
   
   <article class="passage-article">
     <p><strong>题目</strong></p>
-<p><a href="https://leetcode-cn.com/problems/shortest-distance-to-a-character/" target="_blank" rel="noopener">leetcode821.字符的最短距离</a></p>
-<p>给定一个字符串 S 和一个字符 C。返回一个代表字符串 S 中每个字符到字符串 S 中的字符 C 的最短距离的数组。</p>
-<p>示例 1:<br>输入: S = “loveleetcode”, C = ‘e’<br>输出: [3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0]</p>
-<p>说明:<br>字符串 S 的长度范围为 [1, 10000]。<br>C 是一个单字符，且保证是字符串 S 里的字符。<br>S 和 C 中的所有字母均为小写字母。</p>
+<p><a href="https://leetcode-cn.com/problems/plus-one/" target="_blank" rel="noopener">leetcode66.加一</a></p>
+<p>给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。<br>最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。<br>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
+<p>示例 1:<br>输入: [1,2,3]<br>输出: [1,2,4]<br>解释: 输入数组表示数字 123。<br>示例 2:<br>输入: [4,3,2,1]<br>输出: [4,3,2,2]<br>解释: 输入数组表示数字 4321。</p>
+<p>提示：不要将数组转化为数字做加法再转回来。</p>
 <p><strong>思路</strong></p>
-<ol>
-<li>初始化一个数组distanceArr，赋最大值。</li>
-<li>找到S中与C相等的字符。</li>
-<li>先往左边扫，直到扫到第一个或者distanceArr[left] &lt; distance。</li>
-<li>再往右边扫，直到扫到下一个C或者最后一个数组元素。</li>
-</ol>
-<p>说明：</p>
-<ul>
-<li>往右扫时扫到下一个C就停止而不用比是不是最短距离的原因是：以下一个C为基准往左扫的时候会比较距离。</li>
-<li>数组元素默认值为0，0已经是最小距离了，为方便比较赋最大值    。</li>
-</ul>
+<p>从最后一个数组元素开始往前遍历，不是9直接+1返回数组，是9变为0进入下一次循环，不断的重复直到某一个数组元素不是9或者找到了第一个元素。<br>特殊情况数组元素全为9的时候，例子:[9,9] -&gt; [1,0,0]</p>
 <p><strong>代码</strong></p>
-<pre><code class="JAVA">import java.util.Arrays;
-class Solution {
-    public int[] shortestToChar(String S, char C) {
-        int length = S.length();
-        int distanceArr [] = new int [length];
-        //刚开始数组的距离不能全部为0,因为这样就是最小的距离的没办法比较之后更改
-        Arrays.fill(distanceArr,Integer.MAX_VALUE);
-        for(int i = 0 ; i &lt; length ; i++){
-            //S中找到C
-            if(C == S.charAt(i)){
-                //记录左指令与右指针，并且距离distance
-                int left = i,right = i + 1,distance = 0 ;
-                //往左边扫,扫到最开始或者遇见数组中距离比distance小的结束
-                while(left &gt;= 0 &amp;&amp; distanceArr[left] &gt; distance){
-                    distanceArr[left--] = distance++ ; 
-                }
-                //跳出循环之后，应该更新distance
-                distance = 1 ;
-                //往右边扫,扫到下一个C或者最后一个数组元素
-                while(right &lt; length &amp;&amp; C != S.charAt(right) ) {
-                    distanceArr[right++] = distance ++;
-                }
-            }
-        }
-        return distanceArr;
-    }
-}
-</code></pre>
-<p><strong>反思</strong><br>可以先对可能情况进行分类帮助分析：<br> 1.只有左边有C字符： sdafC…<br> 2.左右两边都有C字符：…CdsfsC…<br> 3.只有右边有C字符：…Cdsff</p>
-<p><strong>其他解法</strong></p>
 <pre><code class="JAVA">class Solution {
-    public int[] shortestToChar(String S, char C) {
-        int length = S.length();
-        int distanceArr [] = new int [length];
-        int pre = - 10000; //刚开始没有e距离就无限大,因为后面的-pre
-        //先从左往右遍历
-        for(int i = 0 ; i &lt; length ; i++){
-            //每一个元素计算与pre的距离，遇见C把C的当前位置更新为pre
-            //looexxevx v离第二个e的距离小于第一个e所以更新e的位置为pre
-            if(C == S.charAt(i)){
-                pre = i;
+    public int[] plusOne(int[] digits) {
+
+        for(int i = digits.length-1 ; i &gt;= 0 ; i--) //从后往前遍历
+        {
+            if(digits[i] != 9){
+                digits[i]++ ;
+                return digits;
             }
-            distanceArr[i] = i - pre;
+            digits [i] = 0 ;
         }
-        //从右往前遍历
-        pre = 10000;
-        for(int i =length-1 ; i&gt;=0 ;i--){
-            if(C == S.charAt(i)){
-                pre = i;
-            }
-            distanceArr[i] = Math.min(distanceArr[i], pre - i);
-        }
-        return distanceArr;
+        //如果退出循环说明是特殊情况，且目前的数组元素全是0。
+        //因为JAVA数组长度一确定就不能修改，所以用返回一个新数组
+        //数组中为int型元素默认值为0，所以只需要修改第一个元素为1
+         int newArr [] = new int [digits.length + 1]; 
+         newArr[0] = 1;
+         return newArr;
     }
 }
 </code></pre>
@@ -306,10 +260,10 @@ class Solution {
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/11/03/设计模式/" data-enable="true">
+    <a href="/2020/11/02/821.字符的最短距离/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/11/01/day1-66.加一/" data-enable="true">
+    <a href="/2020/10/23/10-24pla算法/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

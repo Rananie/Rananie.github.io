@@ -6,12 +6,12 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>day439.字符串解码 | Ranan_blog</title>
+  <title>24.两两交换链表中的节点 | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="刷题笔记,JavaScript," />
+    <meta name="keywords" content="刷题笔记,Java," />
   
 
   
@@ -148,7 +148,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-11-04
+      <i class="fa fa-calendar"></i>2020-11-07
     </span>
     
       <span>
@@ -162,111 +162,43 @@
     
   </div>
   <h1 class="passage-title">
-    day439.字符串解码
+    24.两两交换链表中的节点
   </h1>
   
   <article class="passage-article">
-    <p><strong>题目</strong></p>
-<p><a href="https://leetcode-cn.com/problems/shortest-distance-to-a-character/" target="_blank" rel="noopener">leetcode394.字符串解码</a></p>
-<p>给定一个经过编码的字符串，返回它解码后的字符串。<br>编码规则为: k[encoded_string]，表示其中方括号内部的 encoded_string 正好重复k次。注意k保证为正整数。</p>
-<p>你可以认为输入字符串总是有效的；输入字符串中没有额外的空格，且输入的方括号总是符合格式要求的。</p>
-<p>此外，你可以认为原始数据不包含数字，所有的数字只表示重复的次数 k ，例如不会出现像 3a 或 2[4] 的输入。</p>
-<p>示例 ：</p>
-<pre><code>输入：s = &quot;3[a]2[bc]&quot;
-输出：&quot;aaabcbc&quot;
+    <p><strong>题目</strong><br>给定一个链表，两两交换其中相邻的节点，并返回交换后的链表。</p>
+<p>你不能只是单纯的改变节点内部的值，而是需要实际的进行节点交换。</p>
+<p>示例:</p>
+<pre><code>输入：head = [1,2,3,4]
+输出：[2,1,4,3]
 
-输入：s = &quot;3[a2[c]]&quot;
-输出：&quot;accaccacc&quot;
+输入：head = []
+输出：[]
 
-输入：s = &quot;2[abc]3[cd]ef&quot;
-输出：&quot;abcabccdcdcdef&quot;
-
-输入：s = &quot;abc3[cd]xyz&quot;
-输出：&quot;abccdcdcdxyz&quot;
-</code></pre><p><strong>思路</strong></p>
-<p>看见方括号，首先想到用栈。</p>
-<p>题目给定的条件有四种可能出现的字符<br>1.字母 -&gt; 直接拼接str<br>2.数字 -&gt; 拼接到数字字符串<br>3.[   -&gt; 当前的str与当前的num入栈,清空str与num<br>4.]   -&gt; {str,num}出栈,当前的str是需要重复的字符串，{}里的str是[前的字符串</p>
-<p>示例: <code>xy3[a2[c]]</code></p>
-<pre><code>   | str | num |stack
-x  | &quot;x&quot; |&quot;&quot; | []
-y  | &quot;xy&quot;|&quot;&quot; | []
-3  | &quot;xy&quot;|&quot;3&quot;| []
-[  | &quot;&quot;| &quot;&quot;| [{str:&quot;xy&quot;,num:&quot;3&quot;}]
-a  | &quot;a&quot; | &quot;&quot;| [{str:&quot;xy&quot;,num:&quot;3&quot;}]
-2  | &quot;a&quot; | &quot;2&quot;| [{str:&quot;xy&quot;,num:&quot;3&quot;}]
-[  | &quot;&quot; | &quot;&quot;| [{str:&quot;xy&quot;,num:&quot;3&quot;},{str:&quot;a&quot;,num:&quot;2&quot;}]
-c  | &quot;c&quot;|&quot; &quot; |[{str:&quot;xy&quot;,num:&quot;3&quot;},{str:&quot;a&quot;,num:&quot;2&quot;}]
-]  | &quot;a&quot; + &quot;cc&quot;|&quot;&quot; |[{str:&quot;xy&quot;,num:&quot;3&quot;}]
-]  | &quot;xy&quot; + &quot;accaccacc&quot;|&quot;&quot; |[]
-</code></pre><p><strong>代码</strong></p>
-<pre><code class="js">/**
- * @param {string} s
- * @return {string}
- */
-var decodeString = function(s) {
-    let num = &#39;&#39;,str=&#39;&#39;;
-    let stack = [] ;
-    for(let char of s){
-        if(!isNaN(char)){
-            num += char;     
-        }else if(char == &quot;[&quot;){
-          stack.push({str,num});
-          str =&quot;&quot;;
-          num =&quot;&quot;;
-        }else if(char ==&quot;]&quot;){
-        let date = stack.pop();
-        str = date.str + str.repeat(date.num);
-        }else{
-        str += char;
+输入：head = [1]
+输出：[1] 
+</code></pre><p>提示：<br>链表中节点的数目在范围 [0, 100] 内<br>0 &lt;= Node.val &lt;= 100</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/swap-nodes-in-pairs" target="_blank" rel="noopener">https://leetcode-cn.com/problems/swap-nodes-in-pairs</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p><strong>思路</strong></p>
+<p>“将相邻的链表节点两两交换”，我们可以把链表两两分成若干组，在组内互换节点后再组合起来。</p>
+<p>1.终止条件(基线条件)是什么?<br>    什么时候递归结束，没有可以交换的结点就结束递归，也就是只剩下一个结点或者没有结点的时候。</p>
+<p>2.应该返回什么？<br>    本题的目的是两两交换结点，那么本级递归应该向上一级返回交换好的链表，这里返回指向交换好链表的指针。</p>
+<p>3.本级递归应该做什么？递归的目的是什么？<br>    因为返回值是交换好的链表，所以结合第二步，只考虑本级递归，这个链表在我们眼中其实就三个结点：head、head.next、已处理好的链表部分。<br>    因为前一级递归返回过来的是已经处理好的链表部分，也就是图中的第三个部分，在交换图中的前两个结点时，交换后需要连接上第三个部分，所以这里需要看见的是三个结点。</p>
+<p><img src="../img/leetcode/24.png"></p>
+<p><strong>代码</strong></p>
+<pre><code class="JAVA">class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if(head == null || head.next == null){
+            return head;
         }
-    }
-    return str;
-};
+          //下面的任务便是交换这3个节点中的前两个节点
+       ListNode next = head.next;
+       head.next =  swapPairs(next.next);
+       next.next = head;
+       return next;
+}
+}
 </code></pre>
-<p><strong>其他解法</strong></p>
-<p>这道题是一个不断的解码之后拼接的问题，把答的字符串分解成一个个小的字符串进行解码。</p>
-<p>比如:”3[a2[c]d]2[b]xy”,可以拆分成”3[a2[c]d]”,”2[b]”,”xy”。”[]” 里可能嵌套 “[]” ,所以需要递归的只有拆分后有”[]”的部分。</p>
-<p>这时套入递归的三个问题</p>
-<p>1.终止条件(基线条件)是什么?<br>    什么时候递归结束,”]”结束递归</p>
-<p>2.应该返回什么？<br>    题目对字符串进行解码，返回的应该是解好码的字符串，”3[a2[c]d]” 这种情况可以看出这种递归其实是从内到外的,不仅要返回解码好的”cc”,还应该返回”d”的下标,也就是”]”的下一个位置给上一级递归继续进行,直到最外层的”]”解析完毕。</p>
-<p>3.本级递归应该做什么？递归的目的是什么？<br>   首先本层应该要对字符串进行解码，其次是要与已经解好码的字符串进行拼接。结合2按要求进行返回。</p>
-<pre><code class="JS">const type = {
-    isAlpha: s =&gt; /[a-z]/i.test(s),
-    isDigit: s =&gt; /[0-9]/.test(s),
-    isOpenParen: s =&gt; s === &#39;[&#39;,
-    isCloseParen: s =&gt; s === &#39;]&#39;,
-};
-
-/**
- * @param {string} s
- * @return {string}
- */
-var decodeString = function (s, i = 0) {
-    // 从 i 开始遍历字符串
-    let decoded = &#39;&#39;; // 解密字符串
-    let cnt = &#39;&#39;; // 累计次数
-    while (i &lt; s.length) {
-        if (type.isAlpha(s[i])) {
-            decoded += s[i];
-            i++;
-        } else if (type.isDigit(s[i])) {
-            cnt += s[i];
-            i++;
-        } else if (type.isOpenParen(s[i])) {
-            //从内层的递归中获取解码好的字符串与下一次从哪里开始的坐标
-            const [pattern, nextIndex] = decodeString(s, i + 1);
-            decoded += pattern.repeat(Number(cnt));
-            cnt = &#39;&#39;;
-            i = nextIndex;
-            continue;
-        } else if (type.isCloseParen(s[i])) {
-            return [decoded, i + 1];
-        }
-    }
-    return decoded;
-};
-</code></pre>
-<p><a href="https://github.com/suukii/91-days-algorithm/blob/master/basic/array-stack-queue/04.decode-string.md" target="_blank" rel="noopener">参考</a></p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -282,7 +214,7 @@ var decodeString = function (s, i = 0) {
   
     <div class="passage-tags">
      
-      <a href="/tags/JavaScript/"><i class="fa fa-tags"></i>JavaScript</a>
+      <a href="/tags/Java/"><i class="fa fa-tags"></i>Java</a>
     
     </div>
   
@@ -333,10 +265,10 @@ var decodeString = function (s, i = 0) {
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/11/04/note-深度优先算法/" data-enable="true">
+    <a href="/2020/11/07/note-链表/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/11/04/note-滑动窗口法/" data-enable="true">
+    <a href="/2020/11/06/Java面向对象-类的成员/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>day11-142.环形链表2 | Ranan_blog</title>
+  <title>104.求二叉树的最大深度 | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -148,7 +148,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-11-11
+      <i class="fa fa-calendar"></i>2020-11-07
     </span>
     
       <span>
@@ -162,55 +162,35 @@
     
   </div>
   <h1 class="passage-title">
-    day11-142.环形链表2
+    104.求二叉树的最大深度
   </h1>
   
   <article class="passage-article">
     <p><strong>题目</strong></p>
-<p>给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。</p>
-<p>为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。注意，pos 仅仅是用于标识环的情况，并不会作为参数传递到函数中。</p>
-<p>示例：</p>
-<p><a href="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist.png" target="_blank" rel="noopener">示例1</a></p>
-<pre><code>输入：head = [3,2,0,-4], pos = 1
-输出：返回索引为 1 的链表节点
-解释：链表中有一个环，其尾部连接到第二个节点。
-</code></pre><p><a href="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test2.png" target="_blank" rel="noopener">示例2</a></p>
-<pre><code>输入：head = [1,2], pos = 0
-输出：返回索引为 0 的链表节点
-解释：链表中有一个环，其尾部连接到第一个节点。
-</code></pre><p><a href="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/12/07/circularlinkedlist_test3.png" target="_blank" rel="noopener">示例3</a></p>
-<pre><code>输入：head = [1], pos = -1
-输出：返回 null
-解释：链表中没有环。
-</code></pre><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/linked-list-cycle-ii" target="_blank" rel="noopener">https://leetcode-cn.com/problems/linked-list-cycle-ii</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p>给定一个二叉树，找出其最大深度。</p>
+<p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p>
+<p>说明: 叶子节点是指没有子节点的节点。</p>
+<p>示例：<br>给定二叉树 [3,9,20,null,null,15,7]，</p>
+<pre><code>3
+</code></pre><p>   / \<br>  9  20<br>    /  \<br>   15   7<br>返回它的最大深度 3 。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/maximum-depth-of-binary-tree" target="_blank" rel="noopener">https://leetcode-cn.com/problems/maximum-depth-of-binary-tree</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 <p><strong>思路</strong></p>
-<ul>
-<li>哈希法</li>
-</ul>
-<p>遍历整个链表，如果当前的结点不在哈希表中则添加之后继续遍历，如果在哈希表中,那么当前的结点就是环的入口结点。</p>
-<p>时间复杂度：O(N)<br>空间复杂度：O(N) 新建一个哈希表</p>
-<ul>
-<li>快慢指针法</li>
-</ul>
-<p>思路见链表笔记</p>
+<p>1.终止条件(基线条件)是什么?<br>    什么时候递归结束，树为空的时候，此时树的深度为0,返回0，递归就结束了。</p>
+<p>2.应该返回什么？<br>    题目求的是树的最大深度，我们需要从每一级得到的信息应该是这一级对应的树的最大深度，返回值应该是的最大深度。</p>
+<p>3.本级递归应该做什么？递归的目的是什么？<br>    首先，还是强调要走出之前的思维误区，递归后我们眼里的树一定是这个样子的，看下图。本级递归就三个节点：root、root.left、root.right，其中根据第二步，root.left和root.right分别记录的是root的左右子树的最大深度。那么本级递归应该做什么就很明确了，自然就是在root的左右子树中选择较大的一个，再加上1就是以root为根的子树的最大深度了，然后再返回这个深度即可。</p>
+<p><img src="../img/leetcode/104.png"></p>
 <p><strong>代码</strong></p>
-<pre><code class="Java">public ListNode detectCycle(ListNode head) {
-           ListNode fast = head,slow = head;
-     //排除空链和只有一个结点
-     while (fast != null &amp;&amp; fast.next != null) {
-        fast = fast.next.next;
-        slow = slow.next;
-        //先判断有没有环，在某个位置会相遇
-        if(slow == fast){
-             while (head != slow) {
-                    //两相遇指针，一个从头结点开始，
-                    head = head.next;
-                    slow = slow.next;
-                }
-                return slow;
+<pre><code class="JAVA">class Solution {
+    public int maxDepth(TreeNode root) {
+        int max = 0;
+        if(root == null){
+            return 0;
         }
-     }
-     return null;
+        int leftDepth = maxDepth(root.left);
+        int rightDepth = maxDepth(root.right);
+        max = Math.max(leftDepth,rightDepth) + 1;
+        return max;
+    }
 }
 </code></pre>
 
@@ -279,10 +259,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/11/12/922.按奇偶排序数组2/" data-enable="true">
+    <a href="/2020/11/08/110.平衡二叉树/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/11/10/day10-160.相交链表/" data-enable="true">
+    <a href="/2020/11/07/note-递归/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>day1-66.加一 | Ranan_blog</title>
+  <title>100.相同的树 | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -148,7 +148,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-11-01
+      <i class="fa fa-calendar"></i>2020-11-16
     </span>
     
       <span>
@@ -162,35 +162,68 @@
     
   </div>
   <h1 class="passage-title">
-    day1-66.加一
+    100.相同的树
   </h1>
   
   <article class="passage-article">
     <p><strong>题目</strong></p>
-<p><a href="https://leetcode-cn.com/problems/plus-one/" target="_blank" rel="noopener">leetcode66.加一</a></p>
-<p>给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。<br>最高位数字存放在数组的首位， 数组中每个元素只存储单个数字。<br>你可以假设除了整数 0 之外，这个整数不会以零开头。</p>
-<p>示例 1:<br>输入: [1,2,3]<br>输出: [1,2,4]<br>解释: 输入数组表示数字 123。<br>示例 2:<br>输入: [4,3,2,1]<br>输出: [4,3,2,2]<br>解释: 输入数组表示数字 4321。</p>
-<p>提示：不要将数组转化为数字做加法再转回来。</p>
+<p>给定两个二叉树，编写一个函数来检验它们是否相同。</p>
+<p>如果两个树在结构上相同，并且节点具有相同的值，则认为它们是相同的。</p>
+<pre><code>示例 1:
+输入:       1         1
+          / \       / \
+         2   3     2   3
+
+        [1,2,3],   [1,2,3]
+
+输出: true
+示例 2:
+
+输入:      1          1
+          /           \
+         2             2
+
+        [1,2],     [1,null,2]
+
+输出: false
+示例 3:
+
+输入:      1         1
+          / \       / \
+         2   1     1   2
+
+        [1,2,1],   [1,1,2]
+
+输出: false
+</code></pre><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/same-tree" target="_blank" rel="noopener">https://leetcode-cn.com/problems/same-tree</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 <p><strong>思路</strong></p>
-<p>从最后一个数组元素开始往前遍历，不是9直接+1返回数组，是9变为0进入下一次循环，不断的重复直到某一个数组元素不是9或者找到了第一个元素。<br>特殊情况数组元素全为9的时候，例子:[9,9] -&gt; [1,0,0]</p>
+<p>1.确定递归函数的参数和返回值类型<br>判断两棵树是不是相等，那么需要两个指针分别指向两棵树比较的位置，返回值类型为布尔类型。</p>
+<pre><code class="JAVA">public boolean isSameTree(TreeNode p, TreeNode q)
+</code></pre>
+<p>2.终止条件<br>当两个比较结点的数字不同就可以返回了，要比较两个节点数值相不相同，首先要把两个节点为空的情况弄清楚！否则后面比较数值的时候就会操作空指针了。</p>
+<p>为空的情况:<br>2.1其中一个为空,另外一个不为空 return false<br>2.1两个都为空 return true</p>
+<pre><code class="JAVA">if(p == null &amp;&amp; q != null) return false;
+else if(p != null &amp;&amp; q == null) return true;
+else if(p == null &amp;&amp; q == null) return false;
+else if(p.val !=  q.val) return false;
+else{
+    //数值相同的情况
+}
+</code></pre>
+<p>3.本层递归应该做什么<br>从局部看成3个结点，返回值类型为布尔类型，那么检查了根节点的情况，需要分别检查左边结点与右边结点</p>
+<pre><code class="JAVA">isSameTree(p.left,q.left);
+isSameTree(p.right,q.right);
+</code></pre>
 <p><strong>代码</strong></p>
 <pre><code class="JAVA">class Solution {
-    public int[] plusOne(int[] digits) {
-
-        for(int i = digits.length-1 ; i &gt;= 0 ; i--) //从后往前遍历
-        {
-            if(digits[i] != 9){
-                digits[i]++ ;
-                return digits;
-            }
-            digits [i] = 0 ;
-        }
-        //如果退出循环说明是特殊情况，且目前的数组元素全是0。
-        //因为JAVA数组长度一确定就不能修改，所以用返回一个新数组
-        //数组中为int型元素默认值为0，所以只需要修改第一个元素为1
-         int newArr [] = new int [digits.length + 1]; 
-         newArr[0] = 1;
-         return newArr;
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+    if(p == null &amp;&amp; q != null) return false;
+    else if(p != null &amp;&amp; q == null) return false;
+    else if(p == null &amp;&amp; q == null) return true;
+    else if(p.val !=  q.val) return false;
+    else{
+    return isSameTree(p.left,q.left) &amp;&amp; isSameTree(p.right,q.right);
+    }
     }
 }
 </code></pre>
@@ -260,10 +293,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/11/02/day2-821.字符的最短距离/" data-enable="true">
+    <a href="/2020/11/16/102.二叉树的层次遍历/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/10/23/10-24pla算法/" data-enable="true">
+    <a href="/2020/11/16/101.对称二叉树/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

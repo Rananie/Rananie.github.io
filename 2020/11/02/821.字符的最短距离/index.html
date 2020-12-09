@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>day13-104.求二叉树的最大深度 | Ranan_blog</title>
+  <title>821.字符的最短距离 | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -148,7 +148,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-11-07
+      <i class="fa fa-calendar"></i>2020-11-02
     </span>
     
       <span>
@@ -162,34 +162,81 @@
     
   </div>
   <h1 class="passage-title">
-    day13-104.求二叉树的最大深度
+    821.字符的最短距离
   </h1>
   
   <article class="passage-article">
     <p><strong>题目</strong></p>
-<p>给定一个二叉树，找出其最大深度。</p>
-<p>二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。</p>
-<p>说明: 叶子节点是指没有子节点的节点。</p>
-<p>示例：<br>给定二叉树 [3,9,20,null,null,15,7]，</p>
-<pre><code>3
-</code></pre><p>   / \<br>  9  20<br>    /  \<br>   15   7<br>返回它的最大深度 3 。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/maximum-depth-of-binary-tree" target="_blank" rel="noopener">https://leetcode-cn.com/problems/maximum-depth-of-binary-tree</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p><a href="https://leetcode-cn.com/problems/shortest-distance-to-a-character/" target="_blank" rel="noopener">leetcode821.字符的最短距离</a></p>
+<p>给定一个字符串 S 和一个字符 C。返回一个代表字符串 S 中每个字符到字符串 S 中的字符 C 的最短距离的数组。</p>
+<p>示例 1:<br>输入: S = “loveleetcode”, C = ‘e’<br>输出: [3, 2, 1, 0, 1, 0, 0, 1, 2, 2, 1, 0]</p>
+<p>说明:<br>字符串 S 的长度范围为 [1, 10000]。<br>C 是一个单字符，且保证是字符串 S 里的字符。<br>S 和 C 中的所有字母均为小写字母。</p>
 <p><strong>思路</strong></p>
-<p>1.终止条件(基线条件)是什么?<br>    什么时候递归结束，树为空的时候，此时树的深度为0,返回0，递归就结束了。</p>
-<p>2.应该返回什么？<br>    题目求的是树的最大深度，我们需要从每一级得到的信息应该是这一级对应的树的最大深度，返回值应该是的最大深度。</p>
-<p>3.本级递归应该做什么？递归的目的是什么？<br>    首先，还是强调要走出之前的思维误区，递归后我们眼里的树一定是这个样子的，看下图。本级递归就三个节点：root、root.left、root.right，其中根据第二步，root.left和root.right分别记录的是root的左右子树的最大深度。那么本级递归应该做什么就很明确了，自然就是在root的左右子树中选择较大的一个，再加上1就是以root为根的子树的最大深度了，然后再返回这个深度即可。</p>
-<p><img src="../img/leetcode/104.png"></p>
+<ol>
+<li>初始化一个数组distanceArr，赋最大值。</li>
+<li>找到S中与C相等的字符。</li>
+<li>先往左边扫，直到扫到第一个或者distanceArr[left] &lt; distance。</li>
+<li>再往右边扫，直到扫到下一个C或者最后一个数组元素。</li>
+</ol>
+<p>说明：</p>
+<ul>
+<li>往右扫时扫到下一个C就停止而不用比是不是最短距离的原因是：以下一个C为基准往左扫的时候会比较距离。</li>
+<li>数组元素默认值为0，0已经是最小距离了，为方便比较赋最大值    。</li>
+</ul>
 <p><strong>代码</strong></p>
-<pre><code class="JAVA">class Solution {
-    public int maxDepth(TreeNode root) {
-        int max = 0;
-        if(root == null){
-            return 0;
+<pre><code class="JAVA">import java.util.Arrays;
+class Solution {
+    public int[] shortestToChar(String S, char C) {
+        int length = S.length();
+        int distanceArr [] = new int [length];
+        //刚开始数组的距离不能全部为0,因为这样就是最小的距离的没办法比较之后更改
+        Arrays.fill(distanceArr,Integer.MAX_VALUE);
+        for(int i = 0 ; i &lt; length ; i++){
+            //S中找到C
+            if(C == S.charAt(i)){
+                //记录左指令与右指针，并且距离distance
+                int left = i,right = i + 1,distance = 0 ;
+                //往左边扫,扫到最开始或者遇见数组中距离比distance小的结束
+                while(left &gt;= 0 &amp;&amp; distanceArr[left] &gt; distance){
+                    distanceArr[left--] = distance++ ; 
+                }
+                //跳出循环之后，应该更新distance
+                distance = 1 ;
+                //往右边扫,扫到下一个C或者最后一个数组元素
+                while(right &lt; length &amp;&amp; C != S.charAt(right) ) {
+                    distanceArr[right++] = distance ++;
+                }
+            }
         }
-        int leftDepth = maxDepth(root.left);
-        int rightDepth = maxDepth(root.right);
-        max = Math.max(leftDepth,rightDepth) + 1;
-        return max;
+        return distanceArr;
+    }
+}
+</code></pre>
+<p><strong>反思</strong><br>可以先对可能情况进行分类帮助分析：<br> 1.只有左边有C字符： sdafC…<br> 2.左右两边都有C字符：…CdsfsC…<br> 3.只有右边有C字符：…Cdsff</p>
+<p><strong>其他解法</strong></p>
+<pre><code class="JAVA">class Solution {
+    public int[] shortestToChar(String S, char C) {
+        int length = S.length();
+        int distanceArr [] = new int [length];
+        int pre = - 10000; //刚开始没有e距离就无限大,因为后面的-pre
+        //先从左往右遍历
+        for(int i = 0 ; i &lt; length ; i++){
+            //每一个元素计算与pre的距离，遇见C把C的当前位置更新为pre
+            //looexxevx v离第二个e的距离小于第一个e所以更新e的位置为pre
+            if(C == S.charAt(i)){
+                pre = i;
+            }
+            distanceArr[i] = i - pre;
+        }
+        //从右往前遍历
+        pre = 10000;
+        for(int i =length-1 ; i&gt;=0 ;i--){
+            if(C == S.charAt(i)){
+                pre = i;
+            }
+            distanceArr[i] = Math.min(distanceArr[i], pre - i);
+        }
+        return distanceArr;
     }
 }
 </code></pre>
@@ -259,10 +306,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/11/08/110.平衡二叉树/" data-enable="true">
+    <a href="/2020/11/03/设计模式/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/11/07/note-递归/" data-enable="true">
+    <a href="/2020/11/01/66.加一/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

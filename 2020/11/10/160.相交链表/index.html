@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>day16-513.找树左下角的值 | Ranan_blog</title>
+  <title>160.相交链表 | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -148,7 +148,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-11-16
+      <i class="fa fa-calendar"></i>2020-11-10
     </span>
     
       <span>
@@ -162,83 +162,32 @@
     
   </div>
   <h1 class="passage-title">
-    day16-513.找树左下角的值
+    160.相交链表
   </h1>
   
   <article class="passage-article">
-    <p><strong>题目</strong></p>
-<p>给定一个二叉树，在树的最后一行找到最左边的值。</p>
-<pre><code>示例 1:
-输入:
-
-    2
-   / \
-  1   3
-
-输出:
-1
-
-示例 2:
-输入:
-
-        1
-       / \
-      2   3
-     /   / \
-    4   5   6
-       /
-      7
-
-输出:
-7
-</code></pre><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/find-bottom-left-tree-value" target="_blank" rel="noopener">https://leetcode-cn.com/problems/find-bottom-left-tree-value</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+    <p><strong>题目</strong><br>编写一个程序，找到两个单链表相交的起始节点。</p>
+<p>如下面的两个链表：</p>
+<p><a href="https://user-images.githubusercontent.com/38604634/98552943-08c0cc80-22da-11eb-8f51-7bd7a9f491f8.png" target="_blank" rel="noopener">题目</a></p>
+<p>在节点 c1 开始相交。</p>
+<p>注意：<br>如果两个链表没有交点，返回 null.<br>在返回结果后，两个链表仍须保持原有的结构。<br>可假定整个链表结构中没有循环。<br>程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists" target="_blank" rel="noopener">https://leetcode-cn.com/problems/intersection-of-two-linked-lists</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
 <p><strong>思路</strong></p>
-<p>本题应该输出的是最后一层的第一个数。<br>首先想到的是套上BFS的模板</p>
+<p>相交的问题，想到了快慢指针，有两个指针，指向A链表的pA,指向B链表的pB。</p>
+<p>通过走过的总路程一样的办法，假设A自己独有的部分为a，B独有的部分为b，AB共有的部分为c。那么a+c +b = b+c +a。</p>
+<p>若相交，在C处相交<br>若不相交，a + b = b+ a, C点为null</p>
 <p><strong>代码</strong></p>
-<pre><code class="JAVA">/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
-class Solution {
-    public int findBottomLeftValue(TreeNode root) {
-
-    Queue&lt;TreeNode&gt; queue = new LinkedList&lt;TreeNode&gt;();
-    TreeNode currentNode = root;
-    queue.add(currentNode);
-    int ans = root.val;
-    while(!queue.isEmpty()){
-        int size = queue.size();
-        //分层
-        for(int i =0; i&lt; size;i++){ 
-        currentNode=queue.poll();
-        //队列的先进先出的特点，那么每次循环开始的第一个元素就是最左边的
-        if(i == 0) ans = currentNode.val;
-        if(currentNode.left!=null)queue.add(currentNode.left);
-        if(currentNode.right!=null)queue.add(currentNode.right);
+<pre><code class="Java">public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        if(headA == null||headB == null){
+            return null;
         }
-    }
-    return ans;
-
-    }
-}
-</code></pre>
-<p><strong>其他解法</strong></p>
-<p>不用进行分层，可以少一层循环。<br>入队的时候，从右往左，右边先入，那么最后出队的就是最左边的结点，</p>
-<pre><code class="JAVA">class Solution {
-    public int findBottomLeftValue(TreeNode root) {
-        Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;();
-        queue.offer(root);
-        while(!queue.isEmpty()){
-            root = queue.poll();
-            if (root.right != null) queue.offer(root.right);
-            if (root.left != null) queue.offer(root.left);
+        ListNode pA = headA,pB = headB;
+        while(pA != pB){
+            pA = pA == null?  headB : pA.next;
+            pB = pB == null?  headA : pB.next;
         }
-        return root.val;
+        return pA;
     }
 }
 </code></pre>
@@ -308,10 +257,10 @@ class Solution {
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/12/03/226.翻转二叉树/" data-enable="true">
+    <a href="/2020/11/11/142.环形链表2/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/11/16/102.二叉树的层次遍历/" data-enable="true">
+    <a href="/2020/11/10/109.有序链表转换二叉搜索树/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

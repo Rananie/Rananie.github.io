@@ -288,7 +288,11 @@ System.out.print(arr[0])
 <pre><code>//可以不用new
 String s1 = &quot;hello&quot;;
 String s2 = new String()
-</code></pre><p><strong>charAt(index)方法</strong></p>
+</code></pre><p><strong>字面量赋值</strong><br>String str=”hello”</p>
+<p>1.先去缓冲池中找有没有hello对象，没有新建并入池，</p>
+<p><strong>new关键字</strong><br>String str=new String(“hello”)</p>
+<p>1.系统先创建一个匿名对象hello存在堆内存A中<br>2.new关键字会在堆内存中开辟一块新的空间B存放hello对象<br>3.把地址返回值给栈内存中的str，此时A对象为垃圾对象(因为它没有被任何栈中的变量指向)</p>
+<p><strong>charAt(index)方法</strong></p>
 <p>string.charAt(index) 方法用于返回指定索引处的字符。索引范围为从 0 到 length() - 1。</p>
 <p>this/super:调用属性、方法、构造器<br>static修饰类的内部结构:属性、方法、代码块、内部类<br>final可以用来修饰的结构:类、方法、变量<br>abstract可以用来修饰:类、方法 仅用于继承</p>
 

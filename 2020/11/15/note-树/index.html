@@ -167,12 +167,16 @@
   
   <article class="passage-article">
     <p>二叉树是树结构的一种，两个叉就是说每个节点最多只有两个子节点，我们习惯称之为左节点和右节点</p>
-<h2 id="二叉树的种类"><a href="#二叉树的种类" class="headerlink" title="二叉树的种类"></a>二叉树的种类</h2><p>满二叉树：只有度为0的结点和度为2的结点，并且度为0的结点在同一层上<br>完全二叉树：若二叉树的深度为k，除第k层外，其他各层的结点数都达到了最大个数，第k层所有的结点都连续集中在最左边</p>
+<h2 id="二叉树的概念"><a href="#二叉树的概念" class="headerlink" title="二叉树的概念"></a>二叉树的概念</h2><p><strong>二叉树的种类</strong></p>
+<p>满二叉树：只有度为0的结点和度为2的结点，并且度为0的结点在同一层上<br>完全二叉树：若二叉树的深度为k，除第k层外，其他各层的结点数都达到了最大个数，第k层所有的结点都连续集中在最左边</p>
 <blockquote>
 <p>优先级队列其实是一个堆，堆就是一棵完全二叉树，同时保证父子结点的顺序关系</p>
 </blockquote>
 <p>平衡二叉树：左子树和右子树的深度之差(平衡因子)的绝对值不超过1，且它的左子树和右子树都是一颗平衡二叉树。</p>
 <p>二叉搜索树：二叉搜索树是一个有序树，左子树上所有结点的值小于根结点的值；右子树上所有结点的值大于根结点的值</p>
+<p><strong>高度与深度</strong></p>
+<p>二叉树节点的深度：指从<strong>根节点</strong>到该节点的最长简单路径边的条数<br>二叉树节点的高度: 从该节点到<strong>叶子节点</strong>的最长简单路径边的条数</p>
+<p>因为求深度可以从上往下去查，所以需要前序遍历(中左右)，而高度只能从下往上去查，所以只能后序遍历(左右中)</p>
 <h2 id="二叉树的遍历"><a href="#二叉树的遍历" class="headerlink" title="二叉树的遍历"></a>二叉树的遍历</h2><h3 id="二叉树算法框架"><a href="#二叉树算法框架" class="headerlink" title="二叉树算法框架"></a>二叉树算法框架</h3><p>二叉树算法的总路线:明确一个节点要做的事情，然后剩下的事抛给框架。</p>
 <pre><code class="JAVA">void traverse(TreeNode root) {
     // root 需要做什么？在这做。
@@ -360,7 +364,7 @@ stack.push(null); // 中节点访问过，但是还没有处理，加入空节�
 <li style="list-style: none"><input type="checkbox" checked> 515.在每个树行中找最大值</li>
 <li style="list-style: none"><input type="checkbox" checked> 559.N叉树的最大深度</li>
 <li style="list-style: none"><input type="checkbox" checked> 637.二叉树的层平均值</li>
-<li style="list-style: none"><input type="checkbox" checked> [111.二叉树的最小深度]</li>
+<li style="list-style: none"><input type="checkbox" checked> 111.二叉树的最小深度</li>
 </ul>
 <p>层序遍历一个二叉树，就是从左到右一层一层的去遍历二叉树。</p>
 <blockquote>
@@ -377,7 +381,7 @@ class TreeNode {
 }
 public static void LaywerTraversal(TreeNode root){
         if(root==null) return;
-        Queue&lt;TreeNode&gt; queue = new ArrayDeque&lt;&gt;();
+        Queue&lt;TreeNode&gt; queue = new LinkedList&lt;&gt;();
         TreeNode currentNode = root;
         queue.add(currentNode);
         while(!queue.isEmpty()){
@@ -441,7 +445,7 @@ class Solution {
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树的种类"><span class="toc-text">二叉树的种类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树的遍历"><span class="toc-text">二叉树的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉树算法框架"><span class="toc-text">二叉树算法框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前序遍历"><span class="toc-text">前序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#中序遍历"><span class="toc-text">中序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#后序遍历"><span class="toc-text">后序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#层次遍历"><span class="toc-text">层次遍历</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉搜索树"><span class="toc-text">二叉搜索树</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树的概念"><span class="toc-text">二叉树的概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉树的遍历"><span class="toc-text">二叉树的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#二叉树算法框架"><span class="toc-text">二叉树算法框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#前序遍历"><span class="toc-text">前序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#中序遍历"><span class="toc-text">中序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#后序遍历"><span class="toc-text">后序遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#层次遍历"><span class="toc-text">层次遍历</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二叉搜索树"><span class="toc-text">二叉搜索树</span></a></li></ol>
   </div>
 </aside>
   

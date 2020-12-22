@@ -6,12 +6,12 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>10.8循环-质数/完数 | Ranan_blog</title>
+  <title>Java多线程 | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="刷题笔记,Java," />
+    <meta name="keywords" content="Java,Java," />
   
 
   
@@ -148,11 +148,11 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-10-08
+      <i class="fa fa-calendar"></i>2020-12-21
     </span>
     
       <span>
-        | <a href="/categories/刷题笔记/"><i class="fa fa-bookmark"></i>刷题笔记</a>
+        | <a href="/categories/Java/"><i class="fa fa-bookmark"></i>Java</a>
       </span>
     
     
@@ -162,68 +162,32 @@
     
   </div>
   <h1 class="passage-title">
-    10.8循环-质数/完数
+    Java多线程
   </h1>
   
   <article class="passage-article">
-    <h2 id="质数"><a href="#质数" class="headerlink" title="质数"></a>质数</h2><p><strong>思路</strong><br>质数：只能被1和它本身整除的自然数</p>
-<p>利用循环,如果这个数可以与其他数取余为0，说明不是质数。</p>
-<p>不是质数的数都可以拆成两个数相乘,也就是成对出现的，所有循环的条件到这个数的根号就行了</p>
-<pre><code>public class PrimeNumber {
-    public static void main(String[] args) {
-
-        for(int i= 3 ;i&lt;=100;i++){
-            boolean isFlag = true;
-            //优化二：对本身是质数的自然数是有效的
-            for (int j =2;j &lt;= Math.sqrt(i);j++){
-                if(i%j==0){
-                    //可以除尽，说明不是质数退出当前循环
-                    isFlag = false;
-                    break;//优化1：只对本身非质数的自然数是有效的
-                }
-            }
-            if(isFlag){
-                System.out.println(i + &quot;是质数&quot;);
-            }
-        }
+    <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>程序：用某种语言编写的一组指令的集合，即一段静态的代码、静态对象。</p>
+<p>进程：是程序的一次执行过程或者正在运行的一个程序。是一个动态的过程，有自己的生命周期。<br>进程作为资源分配单位，系统会在运行时为每个进程分配不同的内存区域<br>程序是静态的，进程是动态的</p>
+<p>线程：一个程序内部的一条执行路径。<br>一个进程 = 多个线程，线程作为调度和执行的单位，每个线程拥有独立的运行栈和程序计数器，线程切换的开销小。<br>一个进程中的多个线程共享方法区和堆 -&gt; 同一个堆中分配对象，可以访问相同的变量和对象，这就使得线程间通信更简便、高效，但多个线程操作共享的系统资源可能会带来安全的隐患。</p>
+<p>并行：多个CPU同时执行多个任务。多个人同时做不同的事。<br>并发：一个CPU”同时”执行多个任务。多个人做同一件事。</p>
+<p>一个Java应用程序java.exe，其实至少有三个线程：main()主线程，gc()垃圾回收线程、异常处理线程。当然如果发生异常，会影响主线程。</p>
+<h2 id="线程的创建和使用"><a href="#线程的创建和使用" class="headerlink" title="线程的创建和使用"></a>线程的创建和使用</h2><h3 id="继承Thread类"><a href="#继承Thread类" class="headerlink" title="继承Thread类"></a>继承Thread类</h3><p>Java语言的JVM允许程序运行多个线程，通过java.lang.Thread类来体现</p>
+<p>Thread类的特性<br>1.每个线程都是通过某个特定Thread对象的run()方法来操作的，经常把run()方法的主体称为线程体。<br>2.通过该Thread对象的start()方法来启动这个线程，而非直接调用run()</p>
+<pre><code class="Java">//1.创建一个继承于Thread类的子类
+public class NewThread extends Thread{
+//2.重新Thread的run()
+    public void run(){
+        //将此线程执行的操作声明在run()中
     }
 }
-</code></pre><p><strong>优化</strong><br>利用标签可以有更加简单的写法</p>
-<pre><code>public class PrimeNumber {
-    public static void main(String[] args) {
-
-       label:for(int i= 3 ;i&lt;=100;i++){
-            for (int j =2;j &lt;= Math.sqrt(i);j++){
-                if(i%j==0){
-                    continue label;
-                }
-            }
-                System.out.println(i + &quot;是质数&quot;);
-        }
-    }
-}
-</code></pre><h2 id="完数"><a href="#完数" class="headerlink" title="完数"></a>完数</h2><p><strong>题目</strong><br>一个数如果恰好等于它的因子(除去这个数本身的其他约数)之和，这个数就称为”完数”。例如6=1+2+3，找出1000以内的所有完数。</p>
-<p><strong>思路</strong><br>需要找因子</p>
-<p>1.由于因子的成对出现，所以找到这个数的开根号为止<br>2.1是任何数的因子且1不是完数,所以从2开始找<br>3.需要一个变量来记录因子和,是因子就加上，最后和这个数比较</p>
-<pre><code>public class wanshu {
-    public static void main(String[] args) {
-        for (int i=2;i&lt;=1000;i++){
-            //因为1是所有数的因子，所以因子之和从1开始
-            int total = 1;
-            //为了避免每次循环都计算
-            double end = Math.sqrt(i);
-            for (int j=2;j &lt;= end;j++){
-                if ( i%j ==0){
-                    total = total + j + i/j ;
-                }
-            }
-            if (i == total){
-                System.out.println(i + &quot;是完数&quot;);
-            }
-        }
-    }
-}
+//3.创建Thread类的子类的对象
+NewThread newThread = new NewThread();
+//4.通过此对象调用start()
+newThread.start();
+//newThread是主线程帮忙造的，start调用之后分线程开始执行。
 </code></pre>
+<h2 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h2><h2 id="线程的同步-⭐"><a href="#线程的同步-⭐" class="headerlink" title="线程的同步 ⭐"></a>线程的同步 ⭐</h2><p>解决线程安全问题</p>
+<h2 id="线程的通信"><a href="#线程的通信" class="headerlink" title="线程的通信"></a>线程的通信</h2><h2 id="JDK5-0新增线程创建方式"><a href="#JDK5-0新增线程创建方式" class="headerlink" title="JDK5.0新增线程创建方式"></a>JDK5.0新增线程创建方式</h2>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -231,7 +195,7 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#质数"><span class="toc-text">质数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#完数"><span class="toc-text">完数</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的创建和使用"><span class="toc-text">线程的创建和使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#继承Thread类"><span class="toc-text">继承Thread类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的生命周期"><span class="toc-text">线程的生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的同步-⭐"><span class="toc-text">线程的同步 ⭐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的通信"><span class="toc-text">线程的通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK5-0新增线程创建方式"><span class="toc-text">JDK5.0新增线程创建方式</span></a></li></ol>
   </div>
 </aside>
   
@@ -289,10 +253,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/10/09/Java总结/" data-enable="true">
+    <a href="/2020/12/22/98.验证二叉搜索树/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/09/25/Java基础/" data-enable="true">
+    <a href="/2020/12/14/Java异常/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

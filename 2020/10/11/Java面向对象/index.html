@@ -169,60 +169,7 @@
     <p><strong>getClass方法</strong></p>
 <p>实例.getClass()方法,返回实例的直接父类</p>
 <h4 id="JUnit"><a href="#JUnit" class="headerlink" title="JUnit"></a>JUnit</h4><p>Java中的JUnit单元测试<br>1.使用JUnit<br>test目录(src同级)用于存放测试类，在此目录上右击鼠标并将此目录标记为Test Resources Root<br>选择要进行测试的类文件，在类文件中按下组合键CTRL+SHIFT+T弹出创建测试类的窗口或者右键goto -&gt; test<br>2.自动创建的Java类，进行单元测试<br>    此类是public<br>    此类提供公共的无参构造器(默认的不需要去写)<br>3.此类中声明单元测试方法<br>    此方法的权限是public,没有形参与返回值<br>4.此单元测试方法的上面需要声明注释@Test,并导入import org.junit.Test</p>
-<h4 id="包装类Wrapper"><a href="#包装类Wrapper" class="headerlink" title="包装类Wrapper"></a>包装类Wrapper</h4><p>包装类(封装类):针对八种基本数据类型定义相应的引用类型</p>
-<p><img src="/img/Java/包装类.png"></p>
-<p>基本数据类型、包装类与String类间的转换</p>
-<p><img src="/img/Java/基本数据类型包装类的转换.png"></p>
-<p><strong>基本数据类型与包装类</strong></p>
-<p>JDK5.0新特性：的自动装箱与自动拆箱</p>
-<pre><code>int num = 10
-Integer num1 = new Integer(num)
-int num0 = num1.intValue
-method(num1);
 
-//自动装箱
-int num2 = 10
-Integer in1 = num2
-//自动拆箱
-int num3 = in1
-
-
-//method
-public void method(Object obj)
-</code></pre><p><strong>基本数据类型、包装类 -&gt; String</strong></p>
-<p>方法1：连接运算<br>方法2：调用String重载的valueOf(xxx)</p>
-<pre><code>//方法1：连接运算
-int num = 10;
-String str = num + &quot;&quot;;
-//方法2：调用Strinf重载的valueOf(xxx)
-float f = 12.3f
-String str2 = String.valueof(f)
-</code></pre><p><strong>String -&gt; 基本数据类型、包装类</strong></p>
-<p>调用包装类的parseXxx(String str)</p>
-<pre><code>String str1 = &quot;123&quot;;
-int num = Integer.paserInt(str1)
-</code></pre><p><strong>习题</strong></p>
-<p>三目运算符要求:前后的数据类型统一,所以整型会自动类型提升到浮点型。</p>
-<pre><code>//习题1
-Object o1 = true ? new Integer(1) : new Double(2.0)
-System.out.println(o1) //1.0
-//习题2
-public void test(){
-    Integer i = new Integer(1);
-    Integer j = new Integer(1);
-    System.out.println(i == j); //false
-
-    //Integer内部定义了IntegerCache结构,自动装箱的时候从Integer cache数组(-128~127)中找,不需要重新new了，所以找到的是同一个地址
-
-    Integer m = 1;
-    Integer n = 1;
-    System.out.println(m == n); //true
-
-    Integer x = 128;
-    Integer y = 128 ;
-    System.out.println(x == y); //false
-}
-</code></pre>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -230,7 +177,7 @@ public void test(){
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#JUnit"><span class="toc-text">JUnit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#包装类Wrapper"><span class="toc-text">包装类Wrapper</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#JUnit"><span class="toc-text">JUnit</span></a></li></ol>
   </div>
 </aside>
   

@@ -222,8 +222,7 @@
 <p>② 可以介绍一下重载和重写的具体规则<br>  重载:两同一不同 -&gt; 同一个类、相同方法名，参数列表不同<br>  重写:继承,同名同参数</p>
 <p>③ 重载：不表现为多态性<br>  重写:表现为多态性<br>  -&gt; 从编译和运行的角度看,编译器是知道同名不同参数列表的方法是不同得的方法,所以重载在编译时知道调用地址，所以是静态绑定的。而重写只有等方法调用的时候才知道具体的调用，所以是动态绑定的。</p>
 <p>如何定位到一个方法: 1.先看方法名 2.对比参数列表</p>
-<h3 id="5-final、finally、finalize的区别"><a href="#5-final、finally、finalize的区别" class="headerlink" title="5.final、finally、finalize的区别"></a>5.final、finally、finalize的区别</h3><p>finalize:当对象被回收前,垃圾回收器自动调用该对象的finalize方法</p>
-<h3 id="6-equals-与-的区别"><a href="#6-equals-与-的区别" class="headerlink" title="6.equals()与==的区别"></a>6.equals()与==的区别</h3><p>== : 运算符,基本数据类型比较数值(不一定数据类型一样),引用数据类型比较两个对象的地址值。 -&gt; == 符号使用时，左右两边的变量一致(可以通过某种方法统一)<br>equals(): 方法,只使用于引用数据类型,没重写equals()比较的是地址，重写的比较的是实体内容</p>
+<h3 id="5-equals-与-的区别"><a href="#5-equals-与-的区别" class="headerlink" title="5.equals()与==的区别"></a>5.equals()与==的区别</h3><p>== : 运算符,基本数据类型比较数值(不一定数据类型一样),引用数据类型比较两个对象的地址值。 -&gt; == 符号使用时，左右两边的变量一致(可以通过某种方法统一)<br>equals(): 方法,只使用于引用数据类型,没重写equals()比较的是地址，重写的比较的是实体内容</p>
 <pre><code>int i =10
 double d = 10.0
 //存在自动类型提升
@@ -244,7 +243,7 @@ System.out.println(arr);
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#辨析"><span class="toc-text">辨析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-break和continue的相同点与不同点"><span class="toc-text">1.break和continue的相同点与不同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-面向过程-procedure-oriented-programming-与面向对象-object-oriented-programming"><span class="toc-text">2.面向过程(procedure oriented programming)与面向对象(object oriented programming)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-成员变量与局部变量的区别"><span class="toc-text">3.成员变量与局部变量的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-区分方法的重载和重写"><span class="toc-text">4.区分方法的重载和重写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-final、finally、finalize的区别"><span class="toc-text">5.final、finally、finalize的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-equals-与-的区别"><span class="toc-text">6.equals()与==的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-String类型值的两种不同赋值"><span class="toc-text">7.String类型值的两种不同赋值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#理解"><span class="toc-text">理解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-万事万物皆对象？"><span class="toc-text">1.万事万物皆对象？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-println参数为char数组时的重载"><span class="toc-text">2.println参数为char数组时的重载</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#辨析"><span class="toc-text">辨析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-break和continue的相同点与不同点"><span class="toc-text">1.break和continue的相同点与不同点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-面向过程-procedure-oriented-programming-与面向对象-object-oriented-programming"><span class="toc-text">2.面向过程(procedure oriented programming)与面向对象(object oriented programming)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-成员变量与局部变量的区别"><span class="toc-text">3.成员变量与局部变量的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-区分方法的重载和重写"><span class="toc-text">4.区分方法的重载和重写</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-equals-与-的区别"><span class="toc-text">5.equals()与==的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-String类型值的两种不同赋值"><span class="toc-text">7.String类型值的两种不同赋值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#理解"><span class="toc-text">理解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-万事万物皆对象？"><span class="toc-text">1.万事万物皆对象？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-println参数为char数组时的重载"><span class="toc-text">2.println参数为char数组时的重载</span></a></li></ol></li></ol>
   </div>
 </aside>
   
@@ -305,7 +304,7 @@ System.out.println(arr);
     <a href="/2020/10/09/10-9数组练习/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/10/08/10-8循环-质数.完数/" data-enable="true">
+    <a href="/2020/09/25/Java基础/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

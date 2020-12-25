@@ -166,27 +166,102 @@
   </h1>
   
   <article class="passage-article">
-    <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>程序：用某种语言编写的一组指令的集合，即一段静态的代码、静态对象。</p>
-<p>进程：是程序的一次执行过程或者正在运行的一个程序。是一个动态的过程，有自己的生命周期。<br>进程作为资源分配单位，系统会在运行时为每个进程分配不同的内存区域<br>程序是静态的，进程是动态的</p>
-<p>线程：一个程序内部的一条执行路径。<br>一个进程 = 多个线程，线程作为调度和执行的单位，每个线程拥有独立的运行栈和程序计数器，线程切换的开销小。<br>一个进程中的多个线程共享方法区和堆 -&gt; 同一个堆中分配对象，可以访问相同的变量和对象，这就使得线程间通信更简便、高效，但多个线程操作共享的系统资源可能会带来安全的隐患。</p>
+    <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>程序：为完成特定任务，用某种语言编写的一组指令的集合，即一段<strong>静态</strong>(没有加载到内存空间中)的代码、静态对象。</p>
+<p>进程：是程序的一次执行过程或者正在运行的一个程序。是一个动态的过程，有自己的生命周期。<br><strong>进程作为资源分配单位</strong>，系统会在运行时为每个进程分配不同的内存区域。 <strong>每个进程有自己的方法区和堆</strong><br>程序是静态的，进程是动态的</p>
+<p>线程(thread)：一个程序内部的一条执行路径。<br>一个进程 = 多个线程，<strong>线程作为调度和执行的单位，每个线程拥有独立的运行栈和程序计数器</strong>，线程切换的开销小。<br>一个进程中的多个线程共享方法区和堆 -&gt; 同一个堆中分配对象，可以访问相同的变量和对象，这就使得线程间通信更简便、高效，但多个线程操作共享的系统资源可能会带来安全的隐患。</p>
 <p>并行：多个CPU同时执行多个任务。多个人同时做不同的事。<br>并发：一个CPU”同时”执行多个任务。多个人做同一件事。</p>
 <p>一个Java应用程序java.exe，其实至少有三个线程：main()主线程，gc()垃圾回收线程、异常处理线程。当然如果发生异常，会影响主线程。</p>
 <h2 id="线程的创建和使用"><a href="#线程的创建和使用" class="headerlink" title="线程的创建和使用"></a>线程的创建和使用</h2><h3 id="继承Thread类"><a href="#继承Thread类" class="headerlink" title="继承Thread类"></a>继承Thread类</h3><p>Java语言的JVM允许程序运行多个线程，通过java.lang.Thread类来体现</p>
-<p>Thread类的特性<br>1.每个线程都是通过某个特定Thread对象的run()方法来操作的，经常把run()方法的主体称为线程体。<br>2.通过该Thread对象的start()方法来启动这个线程，而非直接调用run()</p>
+<p><strong>Thread类的特性</strong><br>1.每个线程都是通过某个特定Thread对象的run()方法来操作的，经常把run()方法的主体称为线程体。<br>2.通过该Thread对象的start()方法来启动这个线程，而非直接调用run()</p>
+<p><strong>使用</strong></p>
+<p>1.创建一个继承于Thread类的子类<br>2.重写Thread的run(),将此线程执行的操作声明在run()中<br>3.创建Thread类的子类的对象<br>4.通过此对象调用start(),start的作用 <strong>①启动当前线程</strong> ②调用当前线程的run()</p>
+<p>问题1：不能直接子类对象调用run方法启动线程<br>如果子类对象直接调用run方法，相当于调用了普通的方法，并没有启动新线程。<br>问题2：在启动一个线程，同样的操作<br>再调用一次 newThread.start(); 是错误的。<strong>因为线程start只能启动一次</strong>。重新创建一个子类对象。</p>
 <pre><code class="Java">//1.创建一个继承于Thread类的子类
 public class NewThread extends Thread{
-//2.重新Thread的run()
+//2.重写Thread的run()
     public void run(){
         //将此线程执行的操作声明在run()中
+        this.yield();
+        //this指的是这个类的实例对象，
     }
 }
+//如main方法里
 //3.创建Thread类的子类的对象
 NewThread newThread = new NewThread();
 //4.通过此对象调用start()
-newThread.start();
+newThread.start(); //1.启动当前线程 2.调用当前线程的run()
 //newThread是主线程帮忙造的，start调用之后分线程开始执行。
 </code></pre>
-<h2 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h2><h2 id="线程的同步-⭐"><a href="#线程的同步-⭐" class="headerlink" title="线程的同步 ⭐"></a>线程的同步 ⭐</h2><p>解决线程安全问题</p>
+<p>可以使用匿名子类</p>
+<pre><code class="java">new Thread(){
+    @override
+    public void run(){}
+}.start();
+</code></pre>
+<h4 id="Thread类的方法"><a href="#Thread类的方法" class="headerlink" title="Thread类的方法"></a>Thread类的方法</h4><p>void start():①启动当前线程 ②调用当前线程的run()<br>run():线程在被调用时执行的操作<br>String getName():返回线程的名称<br>void setName(String name):设置该线程名称<br>设置线程的名字还可以在子类中设置构造器继承父类构造器。<br>static Thread currentThread():返回执行当前代码的线程Thread。在Thread子类中就是this，通常用于主线程和Runnable实现类<br>isAlive():判断线程是否还存活。</p>
+<p>yield():释放当前cpu的执行权，之后再公平竞争<br>join(): 占用cpu。在线程a中调用线程b的join(),此时线程a就进入阻塞状态，直到线程b执行完以后，线程a才结束阻塞状态变成就绪状态，等待获取cpu的使用权<br>static sleep(long millitime):单位是ms,让当前线程睡眠指定的millitime毫秒</p>
+<p>线程通讯：wait()/notify()/notifyAll()这三个方法定义在Object类中的。</p>
+<pre><code class="Java">//1.创建一个继承于Thread类的子类
+public class NewThread extends Thread{
+//2.重写Thread的run()
+    public void run(){
+        //将此线程执行的操作声明在run()中
+        this.yield();
+        //this指的是这个类的实例对象，
+        //Thread.currentThread().yield()也可以
+
+        //这里只能try-catch 因为run方法的父类并没有throws，子类异常&lt;=父类异常
+        try{
+            sleep(1000);
+        }catch(InterruptedException e){
+            e.printStackTrace;
+        }
+    }
+}
+</code></pre>
+<h3 id="实现Runnable接口"><a href="#实现Runnable接口" class="headerlink" title="实现Runnable接口"></a>实现Runnable接口</h3><p>因为类的单继承性，如果某个子类已经继承了一个类，此时可以通过实现Runnable接口创建线程。</p>
+<p>1.创建一个实现Runnable接口的类<br>2.实现类去实现Runnable中的抽象方法:run()<br>3.创建实现类的对象<br>4.将此对象作为参数传递到Threa类的构造器中，创建Thread类的对象<br>5.通过Thread类的对象调用statr方法</p>
+<pre><code class="JAVA">//1.创建一个实现Runnable接口的类
+class Mthread implements Runnable{
+//2.实现类去实现Runnable中的抽象方法:run()
+@Override
+public void run(){
+    System.out.println(Thread.currentThread().getName())
+}
+}
+//如main方法里你m
+//3.创建实现类的对象
+MThread mThread = new MThread();
+//4.将此对象作为参数传递到Threa类的构造器中，创建Thread类的对象
+Thread t1 = new Thread(mThread);
+//5.通过Thread类的对象调用statr方法
+t1.start();
+
+//在启动一个线程，同样的操作
+Thread t2 = new Thread(mThread);
+t2.start();
+</code></pre>
+<p>start()①启动当前线程 ②调用当前线程的run(),调用的是当前线程的run，跟Mthread类有什么关系呢？</p>
+<p>当前线程的run间接的调用Runnable类型 mThread里的run()。</p>
+<pre><code class="Java"> //target Thread类中 private Runnable target;
+ //构造器 public Thread(Runnable target){}
+public void run(){
+    if(target != null) target.run();
+}
+</code></pre>
+<p><strong>比较实现Runnable接口与继承Thread类两种方式</strong></p>
+<p>开发时，优先选择实现Runnable接口的方式<br>原因：<br>1.实现的方式可以多实现，没有类单继承性的局限性<br>2.实现的方式更适合来处理多个线程有共享数据的情况</p>
+<p>联系：<br>Thread类本身也实现了Runnable接口，都需要重写run()方法，都是通过调用Thread类中的start()方法开启线程。</p>
+<h2 id="线程的调度"><a href="#线程的调度" class="headerlink" title="线程的调度"></a>线程的调度</h2><p>抢占式：高优先级的线程抢占CPU</p>
+<p><strong>Java的调度方法</strong><br>同优先级线程组成先进先出队列，使用时间片策略。<br>对高优先级，使用优先调度的抢占式策略。</p>
+<p><strong>线程的优先级等级</strong><br>MAX_PRIORITY ：10<br>MIN_PRIORITY : 1<br>NORM_PRIORITY: 5 默认优先级 </p>
+<p>getPriority()：返回线程优先级<br>setPriority(int newPriority)：改变线程的优先级</p>
+<p>说明：<br>1.线程创建时继承父线程的优先级<br>2.优先级低的线程只是获取CPU时间片的优先级被降低，但不会永久分配不到CPU时间片，JAVA的线程调度在保障效率的前提下尽可能公平</p>
+<h2 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h2><p>JDK中用Thread.State类定义了线程的几种状态</p>
+<p><strong>新建NEW</strong>：当一个Thread类或其子类的对象被声明并创建时，新生的线程对象处于新建状态。<br><strong>就绪RUNNABLE</strong>：处于新建状态的线程被start()后，将进入线程队列等待CPU时间片，此时它已经具备了运行的条件，只是没有分配到CPU资源。<br><strong>运行RUNNING</strong>：当就绪的线程被调度并获得CPU资源时，便进入运行状态，run()方法定义了线程的操作和功能。<br><strong>阻塞BLOCKED</strong>：在某种特殊情况下，被人为挂起或执行输入输出操作时，让出CPU并临时终止自己的执行，进入阻塞状态<br><strong>死亡DEAD</strong>：线程完成了它的全部工作或线程被提前强制性地终止或出现异常导致结束</p>
+<p><img src="https://raw.githubusercontent.com/Rananie/imgs_rananie/master/blog/%E5%A4%9A%E7%BA%BF%E7%A8%8B_%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.jpg?token=AHTYULDMXHRVVLM2Y2QO2M274SI4G"></p>
+<h2 id="线程的同步-⭐"><a href="#线程的同步-⭐" class="headerlink" title="线程的同步 ⭐"></a>线程的同步 ⭐</h2><p>线程的安全：多个线程对数据的共享<br>当某个线程正在进行某个操作，还没有操作完成，其他线程也进来操作。<br><strong>如何解决？</strong><br>1.加锁，即使该线程出现了阻塞，也不能被改变。</p>
+<p>解决线程安全问题</p>
 <h2 id="线程的通信"><a href="#线程的通信" class="headerlink" title="线程的通信"></a>线程的通信</h2><h2 id="JDK5-0新增线程创建方式"><a href="#JDK5-0新增线程创建方式" class="headerlink" title="JDK5.0新增线程创建方式"></a>JDK5.0新增线程创建方式</h2>
   </article>
   <aside class="table-content" id="site-toc">
@@ -195,7 +270,7 @@ newThread.start();
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的创建和使用"><span class="toc-text">线程的创建和使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#继承Thread类"><span class="toc-text">继承Thread类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的生命周期"><span class="toc-text">线程的生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的同步-⭐"><span class="toc-text">线程的同步 ⭐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的通信"><span class="toc-text">线程的通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK5-0新增线程创建方式"><span class="toc-text">JDK5.0新增线程创建方式</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的创建和使用"><span class="toc-text">线程的创建和使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#继承Thread类"><span class="toc-text">继承Thread类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Thread类的方法"><span class="toc-text">Thread类的方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现Runnable接口"><span class="toc-text">实现Runnable接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的调度"><span class="toc-text">线程的调度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的生命周期"><span class="toc-text">线程的生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的同步-⭐"><span class="toc-text">线程的同步 ⭐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的通信"><span class="toc-text">线程的通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK5-0新增线程创建方式"><span class="toc-text">JDK5.0新增线程创建方式</span></a></li></ol>
   </div>
 </aside>
   

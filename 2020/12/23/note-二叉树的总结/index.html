@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ranan" />
+  
+  
+  <title>二叉树的总结 | Ranan_blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="刷题笔记," />
+  
+
+  
+  <meta name="description" content="Ranan的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Ranan",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/Rananie" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-12-23
+    </span>
+    
+      <span>
+        | <a href="/categories/刷题笔记/"><i class="fa fa-bookmark"></i>刷题笔记</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    二叉树的总结
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="递归三要素与回溯"><a href="#递归三要素与回溯" class="headerlink" title="递归三要素与回溯"></a>递归三要素与回溯</h2><p><strong>递归</strong></p>
+<p>1.确定递归函数的参数和返回值<br>2.确定终止条件<br>3.确定单层递归逻辑</p>
+<p><strong>回溯</strong></p>
+<p>总是成对出现的，回溯还隐藏在递归传值的形参中，因为形参有自己的作用域。<br>后序遍历也隐藏着天然的回溯，后序遍历是从底往上，前序遍历是从上往下</p>
+<h2 id="递归的返回值"><a href="#递归的返回值" class="headerlink" title="递归的返回值"></a>递归的返回值</h2><p>关于递归函数的返回值问题，一般需要遍历整棵树是不需要返回值的，如果要搜索其中一条符合条件的路径，是需要及时返回的。</p>
+<p>但是在236题中，发现如果需要对递归的返回值进行逻辑处理，其实也相当于遍历了整棵树并返回了值。</p>
+<p><strong>搜索一条边的写法</strong></p>
+<pre><code class="Java">if (递归函数(root-&gt;left)) return ;
+if (递归函数(root-&gt;right)) return ;
+</code></pre>
+<p><strong>搜索整棵树的写法</strong></p>
+<pre><code class="Java">left = 递归函数(root-&gt;left);
+right = 递归函数(root-&gt;right);
+left与right的逻辑处理;
+</code></pre>
+<h2 id="技巧"><a href="#技巧" class="headerlink" title="技巧"></a>技巧</h2><p>1.求众数结合有一个技巧可以较少遍历的次数，适当的清空结果集。<br>2.若仅与前一个值有关，就可以使用pre记录<br>3.类似数组构造二叉树的题目，每次分隔尽量不定义新数组，通过下标索引直接在原数组上操作。<br>4.灵活运用遍历，二叉搜索树中序遍历产生的数组是从小到大，那么二叉搜索树逆中序遍历产生的数组是从大到小</p>
+<p><strong>分类</strong><br>一般：<br>1.涉及到二叉树的构造，无论普通二叉树还是二叉搜索树一定前序，都是先构造中节点。<br>2.求普通二叉树的属性，一般是后序，一般要通过递归函数的返回值做计算。单纯求深度就用前序。<br>3.求二叉搜索树的属性，一定是中序了，要不白瞎了有序性了。</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#递归三要素与回溯"><span class="toc-text">递归三要素与回溯</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#递归的返回值"><span class="toc-text">递归的返回值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#技巧"><span class="toc-text">技巧</span></a></li></ol>
+  </div>
+</aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2020/12/25/297-二叉树的序列化与反序列化/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2020/12/23/236.二叉树的最近公共祖先/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

@@ -200,20 +200,29 @@ Class Bank(){
     return instance;
     }
 }
-//懒汉式 --------------还要修改
+//懒汉式 
 Class Order(){
     //私有化构造器
     private Order(){}
     //声明当前类对象，没有初始化
     private static Order instance = null;
 
-    //在方法中造对象
-    public synchronized static Order getInstance(){
-      If(instance == null){
-      Instance = new Order()
-        }
-    return instance
-    }
+    //在方法中造对象，效率稍差
+  //  public synchronized static Order getInstance(){
+     // If(instance == null){
+      //Instance = new Order()
+        //}
+    //return instance
+    //}
+    //双重检查，效率稍高
+    if(instance == null){
+      synchronized(Bank.class){
+         If(instance == null){
+            Instance = new Order()
+          }
+      }
+      return instance
+   }
 }
 </code></pre>
 <p><strong>应用场景</strong></p>

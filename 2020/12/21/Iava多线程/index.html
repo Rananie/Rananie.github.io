@@ -176,6 +176,7 @@
 <p><strong>使用</strong></p>
 <p>1.创建一个继承于Thread类的子类<br>2.重写Thread的run(),将此线程执行的操作声明在run()中<br>3.创建Thread类的子类的对象<br>4.通过此对象调用start(),start的作用 <strong>①启动当前线程</strong> ②调用当前线程的run()</p>
 <p>问题1：不能直接子类对象调用run方法启动线程<br>如果子类对象直接调用run方法，相当于调用了普通的方法，并没有启动新线程。<br>问题2：在启动一个线程，同样的操作<br>再调用一次 newThread.start(); 是错误的。<strong>因为线程start只能启动一次</strong>。重新创建一个子类对象。</p>
+<p><strong>共享数据</strong><br>1.可以成员变量设置static<br>2.可以模仿Runnable，设置构造器，构造器中的指向同一个地址来实现数据共享。</p>
 <pre><code class="Java">//1.创建一个继承于Thread类的子类
 public class NewThread extends Thread{
 //2.重写Thread的run()
@@ -199,7 +200,7 @@ newThread.start(); //1.启动当前线程 2.调用当前线程的run()
 }.start();
 </code></pre>
 <h4 id="Thread类的方法"><a href="#Thread类的方法" class="headerlink" title="Thread类的方法"></a>Thread类的方法</h4><p>void start():①启动当前线程 ②调用当前线程的run()<br>run():线程在被调用时执行的操作<br>String getName():返回线程的名称<br>void setName(String name):设置该线程名称<br>设置线程的名字还可以在子类中设置构造器继承父类构造器。<br>static Thread currentThread():返回执行当前代码的线程Thread。在Thread子类中就是this，通常用于主线程和Runnable实现类<br>isAlive():判断线程是否还存活。</p>
-<p>yield():释放当前cpu的执行权，之后再公平竞争<br>join(): 占用cpu。在线程a中调用线程b的join(),此时线程a就进入阻塞状态，直到线程b执行完以后，线程a才结束阻塞状态变成就绪状态，等待获取cpu的使用权<br>static sleep(long millitime):单位是ms,让当前线程睡眠指定的millitime毫秒</p>
+<p>yield():释放当前cpu的执行权，之后再公平竞争<br>join(): 占用cpu。在线程a中调用线程b的join(),此时线程a就进入阻塞状态，直到线程b执行完以后，线程a才结束阻塞状态变成就绪状态，等待获取cpu的使用权<br>static sleep(long millitime):单位是ms,让当前线程睡眠指定的millitime毫秒,<strong>不会释放当前占有的锁</strong>，导致线程进入TIMED-WATING状态。</p>
 <p>线程通讯：wait()/notify()/notifyAll()这三个方法定义在Object类中的。</p>
 <pre><code class="Java">//1.创建一个继承于Thread类的子类
 public class NewThread extends Thread{
@@ -260,9 +261,133 @@ public void run(){
 <h2 id="线程的生命周期"><a href="#线程的生命周期" class="headerlink" title="线程的生命周期"></a>线程的生命周期</h2><p>JDK中用Thread.State类定义了线程的几种状态</p>
 <p><strong>新建NEW</strong>：当一个Thread类或其子类的对象被声明并创建时，新生的线程对象处于新建状态。<br><strong>就绪RUNNABLE</strong>：处于新建状态的线程被start()后，将进入线程队列等待CPU时间片，此时它已经具备了运行的条件，只是没有分配到CPU资源。<br><strong>运行RUNNING</strong>：当就绪的线程被调度并获得CPU资源时，便进入运行状态，run()方法定义了线程的操作和功能。<br><strong>阻塞BLOCKED</strong>：在某种特殊情况下，被人为挂起或执行输入输出操作时，让出CPU并临时终止自己的执行，进入阻塞状态<br><strong>死亡DEAD</strong>：线程完成了它的全部工作或线程被提前强制性地终止或出现异常导致结束</p>
 <p><img src="https://raw.githubusercontent.com/Rananie/imgs_rananie/master/blog/%E5%A4%9A%E7%BA%BF%E7%A8%8B_%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.jpg?token=AHTYULDMXHRVVLM2Y2QO2M274SI4G"></p>
-<h2 id="线程的同步-⭐"><a href="#线程的同步-⭐" class="headerlink" title="线程的同步 ⭐"></a>线程的同步 ⭐</h2><p>线程的安全：多个线程对数据的共享<br>当某个线程正在进行某个操作，还没有操作完成，其他线程也进来操作。<br><strong>如何解决？</strong><br>1.加锁，即使该线程出现了阻塞，也不能被改变。</p>
-<p>解决线程安全问题</p>
-<h2 id="线程的通信"><a href="#线程的通信" class="headerlink" title="线程的通信"></a>线程的通信</h2><h2 id="JDK5-0新增线程创建方式"><a href="#JDK5-0新增线程创建方式" class="headerlink" title="JDK5.0新增线程创建方式"></a>JDK5.0新增线程创建方式</h2>
+<h2 id="线程的同步-⭐"><a href="#线程的同步-⭐" class="headerlink" title="线程的同步 ⭐"></a>线程的同步 ⭐</h2><p>线程的安全：多个线程对数据的共享<br>当某个线程正在进行某个操作，还没有操作完成，其他线程也进来操作。<br>在Java中，我们通过同步机制，来解决线程的安全问题。</p>
+<h3 id="synchronized"><a href="#synchronized" class="headerlink" title="synchronized"></a>synchronized</h3><h4 id="同步代码块"><a href="#同步代码块" class="headerlink" title="同步代码块"></a>同步代码块</h4><p>synchronized(同步监视器){<br>    需要被同步的代码<br>}</p>
+<p>说明：<br>操作共享数据的代码为需要被同步的代码，注意包含代码的范围。<br>共享数据指多个线程共同操作的变量。<br>可以理解成一个线程拿了锁，执行需要同步的代码，执行完毕后解锁</p>
+<p><strong>同步监视器（锁）</strong><br>任何一个类的对象，都可以充当锁。<br><strong>要求：多个线程必须要共用同一个锁</strong></p>
+<p>结论<br>1.可以考虑使用当前对象this，继承Thread方法要小心this是否是同一个锁。<br>2.还可以传Window.class，<strong>说明类也是一个对象</strong>。Window.class是Class类的实例，Class clazz = Window.class，其中Window.class是唯一的，因为类只加载一次。**也就是说当前的类是Class实例。</p>
+<p>同步方式：<br>1.解决了线程的安全问题<br>2.操作同步代码时，只能有一个线程参与，其他线程等待，相当于是一个单线程过程，效率低。</p>
+<pre><code class="java">class Window1 implements Runnable{
+    private int ticket = 100;
+    //Object obj = new Object();
+    @Override
+    public void run() {
+        while (true){
+            //synchronized(obj){
+                synchronized(this){
+                if(ticket&gt;0){
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(Thread.currentThread().getName() +&quot;:卖票&quot; + ticket);
+                    ticket--;
+                }
+
+                else{
+                    break;
+                }
+            }
+
+        }
+    }
+}
+public class WindowTest1 {
+    public static void main(String[] args) {
+        Window1 w = new Window1();
+        Thread t1 = new Thread(w);
+        Thread t2 = new Thread(w);
+        Thread t3 = new Thread(w);
+
+        t1.setName(&quot;窗口1&quot;);
+        t2.setName(&quot;窗口2&quot;);
+        t3.setName(&quot;窗口3&quot;);
+        t1.start();
+        t2.start();
+        t3.start();
+
+    }
+}
+//继承Thread类的安全问题
+package ranan;
+
+/**
+ * 继承Thread类
+ * 创建三个窗口卖票，总票数为100张
+ * 存在线程的安全问题
+ * @author ranan
+ * @create 2020-12-23 16:57
+ */
+class Window extends Thread{
+    private static int ticket = 100;
+    //要公用同一个锁
+    //static  Object obj = new Object();
+    @Override
+    public void run() {
+        while (true){
+           //synchronized (obj){
+            synchronized(Window.class){
+                //Window.class是Class类的实例
+                //Class clazz = Window.class;
+                //是唯一的，因为类只加载一次。
+                if(ticket&gt;0){
+                    try {
+                        Thread.sleep((100));
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    System.out.println(getName() +&quot;:卖票&quot; + ticket);
+                    ticket--;
+                }
+
+                else{
+                    break;
+                }
+            }
+        }
+    }
+
+}
+public class WindowTest {
+    public static void main(String[] args) {
+        Window t1 = new Window();
+        Window t2 = new Window();
+        Window t3 = new Window();
+        t1.setName(&quot;窗口1&quot;);
+        t2.setName(&quot;窗口2&quot;);
+        t3.setName(&quot;窗口3&quot;);
+        t1.start();
+        t2.start();
+        t3.start();
+    }
+}
+</code></pre>
+<h4 id="同步方法"><a href="#同步方法" class="headerlink" title="同步方法"></a>同步方法</h4><p>如果操作共享数据的代码完整的声明在一个方法中，可以将这个方法声明同步的。</p>
+<p>1.解决实现Runnable接口的线程安全问题，在方法前面添加synchronized关键字，此时的同步监视器是this。<br>2.解决Thread继承类的线程安全问题，对于Thread继承类来说，注意该方法要写成静态的，这样该方法只会加载一份，此时的同步监视器是当前的类。</p>
+<p><strong>总结</strong><br>1.同步方法仍然涉及到同步监视器，只是不需要我们显式的声明<br>2.非静态的同步方法，同步监视器是this。静态的同步方法，同步监视器是l当前的类。</p>
+<h3 id="方式二：Lock锁-JDK5-0新增"><a href="#方式二：Lock锁-JDK5-0新增" class="headerlink" title="方式二：Lock锁 JDK5.0新增"></a>方式二：Lock锁 JDK5.0新增</h3><p><strong>为了避免程序出现异常而无法正确释放锁，在使用ReentrantLock时必须在finally语句块中执行锁的释放。</strong></p>
+<p>注意要同一个锁上锁解锁、</p>
+<pre><code>//无参默认fair=false，有参数一般为true表示公平先进先出
+//1.新建ReentrantLock对象
+ReentrantLock lock = new ReentrantLock();
+
+
+try{
+//2.调用锁定方法lock(),上锁
+lock.lock();
+}finally{
+//3.调用解锁方法:unlock(),解锁
+lock.unlock();
+}
+</code></pre><p><strong>synchronized与lock/reentrantLock的比较</strong></p>
+<p>synchronized: 在执行完相应的同步代码以后，自动的释放同步监视器<br>reentrantLoc:<br>1.Lock显式获取锁和释放锁<br>2.lock可以知道有没有成功获取锁</p>
+<p>推荐优先使用顺序<br>Lock -&gt; 同步代码块 -&gt; 同步方法</p>
+<h3 id="线程的死锁问题"><a href="#线程的死锁问题" class="headerlink" title="线程的死锁问题"></a>线程的死锁问题</h3><p>有多个线程同时被阻塞时，它们之间若相互等待对方释放锁资源，就会出现死锁。<br>说明：<br>1.出现死锁后，不会出现异常，不会出现提示，只是所有的线程都从处于阻塞状态，无法继续。<br>2.我们使用同步时，要避免出现死锁。<br>解决办法：为锁操作添加超时时间，在线程持有锁超时后自动释放该锁。</p>
+<h3 id="练习题1"><a href="#练习题1" class="headerlink" title="练习题1"></a>练习题1</h3><p>银行有一个账户，有两个储户分别向同一个账户存3000元，每次存1000存3次，每次存完打印余额<br>分析：<br>1.是否是多线程？是，两个储户线程，创建线程<br>2.是否有共享数据？有，账户<br>3.是否有线程安全问题？有<br>4.如何解决线程安全问题？同步机制，有三种方式。</p>
+<p><a href="https://github.com/Rananie/Java_code/blob/master/Thread/AccountTest.java" target="_blank" rel="noopener">代码</a></p>
+<h2 id="线程的通信"><a href="#线程的通信" class="headerlink" title="线程的通信"></a>线程的通信</h2><h3 id="多线程如何共享数据"><a href="#多线程如何共享数据" class="headerlink" title="多线程如何共享数据"></a>多线程如何共享数据</h3><p>1.将Runnable对象作为一个类的内部类，将共享数据作为这个类的成员变量。<br>2.将数据抽象成一个类，并将对这个数据的操作封装在类的方法中。</p>
+<h2 id="JDK5-0新增线程创建方式"><a href="#JDK5-0新增线程创建方式" class="headerlink" title="JDK5.0新增线程创建方式"></a>JDK5.0新增线程创建方式</h2>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -270,7 +395,7 @@ public void run(){
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的创建和使用"><span class="toc-text">线程的创建和使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#继承Thread类"><span class="toc-text">继承Thread类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Thread类的方法"><span class="toc-text">Thread类的方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现Runnable接口"><span class="toc-text">实现Runnable接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的调度"><span class="toc-text">线程的调度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的生命周期"><span class="toc-text">线程的生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的同步-⭐"><span class="toc-text">线程的同步 ⭐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的通信"><span class="toc-text">线程的通信</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK5-0新增线程创建方式"><span class="toc-text">JDK5.0新增线程创建方式</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本概念"><span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的创建和使用"><span class="toc-text">线程的创建和使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#继承Thread类"><span class="toc-text">继承Thread类</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Thread类的方法"><span class="toc-text">Thread类的方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现Runnable接口"><span class="toc-text">实现Runnable接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的调度"><span class="toc-text">线程的调度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的生命周期"><span class="toc-text">线程的生命周期</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的同步-⭐"><span class="toc-text">线程的同步 ⭐</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#synchronized"><span class="toc-text">synchronized</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#同步代码块"><span class="toc-text">同步代码块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#同步方法"><span class="toc-text">同步方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方式二：Lock锁-JDK5-0新增"><span class="toc-text">方式二：Lock锁 JDK5.0新增</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#线程的死锁问题"><span class="toc-text">线程的死锁问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#练习题1"><span class="toc-text">练习题1</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#线程的通信"><span class="toc-text">线程的通信</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#多线程如何共享数据"><span class="toc-text">多线程如何共享数据</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK5-0新增线程创建方式"><span class="toc-text">JDK5.0新增线程创建方式</span></a></li></ol>
   </div>
 </aside>
   

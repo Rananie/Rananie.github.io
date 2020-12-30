@@ -166,9 +166,8 @@
   </h1>
   
   <article class="passage-article">
-    <h2 id="链表的结构"><a href="#链表的结构" class="headerlink" title="链表的结构"></a>链表的结构</h2><p><img src="../img/leetcode/链表的结构.png"></p>
-<p>单链表:结点有一个指针域的链表<br>双链表:结点有两个指针域的链表，双向链表的本质就是空间换时间，因此如果题目对时间有要求，可以考虑使用双向链表，<br>循环链表:首尾相接的链表，当我们需要在遍历到尾部之后重新开始遍历的时候，可以考虑使用循环链表。</p>
-<p>头指针:执行链表中第一个结点的指针。<br>首元结点:链表中存储第一个数据元素a1的结点。<br>头结点:链表首元结点之前的一个结点,往往不存储元素，作为附加结点。</p>
+    <h2 id="链表的结构"><a href="#链表的结构" class="headerlink" title="链表的结构"></a>链表的结构</h2><p>单链表:结点有一个指针域的链表<br>双链表:结点有两个指针域的链表，双向链表的本质就是空间换时间，因此如果题目对时间有要求，可以考虑使用双向链表，<br>循环链表:首尾相接的链表，当我们需要在遍历到尾部之后重新开始遍历的时候，可以考虑使用循环链表。</p>
+<p>头指针:执行链表中第一个结点的指针。<br>首元结点:链表中存储第一个数据元素va1的结点。<br>头结点:链表首元结点之前的一个结点,往往不存储元素，作为附加结点。</p>
 <p><strong>头结点</strong></p>
 <p>1.如何表示空表?</p>
 <p>无头结点,头指针为空时表示空表 head == null<br>有头结点,当头结点的指针域为空时表示空表 head.next == null</p>
@@ -176,7 +175,15 @@
 <p>便于首元结点的处理<br>    首元节点的地址保存在头结点的指针域中，所以链表的第一个位置上的操作和其他位置一致，不需要进行特殊处理。<br>便于空表和非空表的统一处理</p>
 <p>3.头结点的数据域内装什么？</p>
 <p>可以为空，也可以存放线性表的长度等附加信息。但此结点在统计表长时不算入。</p>
-<h2 id="链表的基本操作"><a href="#链表的基本操作" class="headerlink" title="链表的基本操作"></a>链表的基本操作</h2><p><strong>判断链表是否为空</strong></p>
+<h2 id="链表的基本操作"><a href="#链表的基本操作" class="headerlink" title="链表的基本操作"></a>链表的基本操作</h2><p><strong>链表节点的定义</strong></p>
+<pre><code class="JAVA"> public class ListNode {
+      int val;
+      ListNode next;
+      ListNode() {}
+      ListNode(int val) { this.val = val; }
+      ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+</code></pre>
+<p><strong>判断链表是否为空</strong></p>
 <pre><code class="JAVA">boolean ListEmpty(ListNode head){
     return head.next == null
 }
@@ -212,62 +219,43 @@ while(p &amp;&amp; count &lt; i){
 }
 </code></pre><p><strong>结点的插入</strong></p>
 <p>这里往往需要先遍历找到结点</p>
-<pre><code>temp = 待插入位置的前驱节点.next
-待插入位置的前驱节点.next = 待插入指针
-待插入指针.next = temp
-</code></pre><h3 id="结点的删除"><a href="#结点的删除" class="headerlink" title="结点的删除"></a>结点的删除</h3><p>只需要将需要删除的节点的前驱指针的 next 指针修正为其下下个节点即可，注意考虑边界条件。</p>
+<p><img src="https://raw.githubusercontent.com/Rananie/imgs_rananie/master/algorithm/basic/%E8%8A%82%E7%82%B9%E7%9A%84%E6%8F%92%E5%85%A5.jpg?token=AHTYULGZZ5YRYNDVR4HFSI275LEC6"></p>
+<p><strong>结点的删除</strong></p>
+<p>只需要将需要删除的节点的前驱指针的 next 指针修正为其下下个节点即可，注意考虑边界条件。</p>
 <p>伪代码：</p>
 <pre><code>待删除位置的前驱节点.next = 待删除位置的前驱节点.next.next
-</code></pre><p><strong>遍历</strong></p>
-<p>伪代码</p>
-<pre><code>当前指针 =  头指针
-while 当前指针不为空 {
-   print(当前节点)
-   当前指针 = 当前指针.next
+</code></pre><h3 id="链表的遍历"><a href="#链表的遍历" class="headerlink" title="链表的遍历"></a>链表的遍历</h3><p><strong>链表是一种兼具递归和迭代性质的数据结构</strong>，树结构是链表的衍生，所以链表也有前序遍历和后序遍历。</p>
+<pre><code class="JAVA">void traverse(ListNode head){
+    //前序遍历
+    traverse(head.next);
+    //后序遍历
 }
-</code></pre><h2 id="常见题型"><a href="#常见题型" class="headerlink" title="常见题型"></a>常见题型</h2><p>链表的常见考点:<br>1.指针的修改<br>2.链表的拼接</p>
-<h3 id="反转链表"><a href="#反转链表" class="headerlink" title="反转链表"></a>反转链表</h3><p><strong>迭代</strong></p>
-<p>1.将某个链表进行反转<br>2.将某个链表按K个一组进行反转<br>3.在 O(n) 时间, O(1) 空间复杂度下逆序读取链表的某个值</p>
-<p>反转的核心就是 当前的结点.next = pre </p>
-<p>伪代码</p>
-<pre><code>当前指针 = 头指针
-前一个结点 = null
-while 当前的指针不为空 {
-    //因为需要修改当前结点的next,所以用一个新的next指针找到下一个结点
-    下一个结点 = 当前指针.next;
-    当前指针.next = 前一个节点
-    前一个节点 = 当前指针
-    当前指针 = 下一个节点
-}
-//最终pre指向第一个元素
-return 前一个节点;
-</code></pre><p>迭代的写法</p>
-<pre><code class="JS">let cur = head;
-let pre = null;
-while (cur) {
-  const next = cur.next;
-  cur.next = pre;
-  pre = cur;
-  cur = next;
-}
-return pre;
 </code></pre>
-<p><strong>递归</strong></p>
-<p>以反转链表为例，结合之前做的两两交换链表中的结点,反转链表其实可以看成是每个结点都要改变。</p>
-<p>可以想象前面的链表都处理好了。</p>
-<p><img src="../img/leetcode/链表01.png"></p>
-<p>套上递归三部曲:<br>1.终止条件(基线条件)是什么?<br>    反转链表的目的是每一个都反转，那么递归的结束条件是没有可以反转的就可以结束递归了，也就是为空</p>
-<p>2.应该返回什么？<br>    根据图片，我们应该返回需要处理的下一个结点作为新的head；反转链表的话当然还是要返回一个处理好的链表。</p>
-<p>3.本级递归应该做什么？递归的目的是什么？<br>    本级递归需要做的就是指向前面已经处理好的链表。</p>
-<pre><code class="Python">def dfs(head, pre):
-    if not head: return pre
-    next = head.next
-    head.next = pre
-    dfs(next, head)
-dfs(head, None)
-</code></pre>
-<h3 id="快慢指针"><a href="#快慢指针" class="headerlink" title="快慢指针"></a>快慢指针</h3><p>判断链表是否有环、链表的交点，以及环的入口都是使用快慢指针。</p>
-<p>由于链表不支持随机访问，因为如果要获取链表中间项或倒数第几项等特定元素就需要快慢指针。<br>比如找链表中间项可以用两个指针，一个大步走(一次走两步)，一个小步走(一次走一步)，这样快指针走到头，慢指针刚好在中间。<br>比如找链表倒数第二个结点，可以让块指针先走一步，慢指针再走，这样快指针走到头，慢指针刚好在倒数第二个。</p>
+<p><strong>性能分析</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">插入/删除(时间复杂度)</th>
+<th style="text-align:center">查询(时间复杂度)</th>
+<th style="text-align:center">使用场景 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">数组</td>
+<td style="text-align:center">O(n)</td>
+<td style="text-align:center">o(1)</td>
+<td style="text-align:center">数据量固定、频繁查询、较少增删</td>
+</tr>
+<tr>
+<td style="text-align:center">链表</td>
+<td style="text-align:center">O(1)</td>
+<td style="text-align:center">O(n)</td>
+<td style="text-align:center">数据量不固定，频繁增删、较少查询</td>
+</tr>
+</tbody>
+</table>
 <h3 id="相交或环形链表"><a href="#相交或环形链表" class="headerlink" title="相交或环形链表"></a>相交或环形链表</h3><p>1.判断某条链表是否存在环。<br>2.获取某条链表环的大小。<br>3.获取某两条链表的相交节点。</p>
 <h4 id="相交链表"><a href="#相交链表" class="headerlink" title="相交链表"></a>相交链表</h4><p><strong>双指针法</strong></p>
 <p>找到两个单链表相交的起始节点。</p>
@@ -294,7 +282,7 @@ dfs(head, None)
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#链表的结构"><span class="toc-text">链表的结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链表的基本操作"><span class="toc-text">链表的基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#结点的删除"><span class="toc-text">结点的删除</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见题型"><span class="toc-text">常见题型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#反转链表"><span class="toc-text">反转链表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快慢指针"><span class="toc-text">快慢指针</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相交或环形链表"><span class="toc-text">相交或环形链表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#相交链表"><span class="toc-text">相交链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#环形链表"><span class="toc-text">环形链表</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#判断是否有环"><span class="toc-text">判断是否有环</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#求环的起点"><span class="toc-text">求环的起点</span></a></li></ol></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#链表的结构"><span class="toc-text">链表的结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#链表的基本操作"><span class="toc-text">链表的基本操作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#链表的遍历"><span class="toc-text">链表的遍历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相交或环形链表"><span class="toc-text">相交或环形链表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#相交链表"><span class="toc-text">相交链表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#环形链表"><span class="toc-text">环形链表</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#判断是否有环"><span class="toc-text">判断是否有环</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#求环的起点"><span class="toc-text">求环的起点</span></a></li></ol></li></ol></li></ol></li></ol>
   </div>
 </aside>
   

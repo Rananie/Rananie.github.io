@@ -6,12 +6,12 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>归档: 2020/11 | 第4页 | Ranan_blog</title>
+  <title>note-双指针 | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo, Theme-AD" />
+    <meta name="keywords" content="刷题笔记," />
   
 
   
@@ -36,7 +36,7 @@
     welcome: {"enable":false,"interval":30},
     start_time: "2018-02-10",
     passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
-    is_post: false,
+    is_post: true,
     lock: false,
     author: "Ranan",
     share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
@@ -144,18 +144,66 @@
 </nav>
 <div id="site-process"></div>
     <main>
-      <div class="timeline">
-  <h2 class="timeline-title">归档: 111篇</h2>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2020-12-30
+    </span>
+    
+      <span>
+        | <a href="/categories/刷题笔记/"><i class="fa fa-bookmark"></i>刷题笔记</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    note-双指针
+  </h1>
   
-    
-      <h3 class="timeline-subtitle">2020</h3>
-    
-    <div class="timeline-item">
-      <time>2020-11-01</time>
-      <a target="_self" href="/2020/11/01/66.加一/">66.加一</a>
-    </div>
+  <article class="passage-article">
+    <h2 id="快慢指针"><a href="#快慢指针" class="headerlink" title="快慢指针"></a>快慢指针</h2><p><strong>快慢指针主要解决链表中的问题</strong>，比如判断链表是否有环、链表的交点，以及环的入口都是使用快慢指针。</p>
+<p>由于链表不支持随机访问，因为如果要获取链表中间项或倒数第几项等特定元素就需要快慢指针。<br>比如找链表中间项可以用两个指针，一个大步走(一次走两步)，一个小步走(一次走一步)，这样快指针走到头，慢指针刚好在中间。<br>比如找链表倒数第二个结点，可以让快指针先走一步，慢指针再走，这样快指针走到头，慢指针刚好在倒数第二个。</p>
+<ul>
+<li style="list-style: none"><input type="checkbox" checked> 141.环形链表</li>
+<li style="list-style: none"><input type="checkbox" checked> 142.环形链表2</li>
+<li style="list-style: none"><input type="checkbox" checked> offer22.链表中倒数第k个节点</li>
+</ul>
+<p><strong>141.环形链表</strong><br>核心思想：如果不含环，跑的快的会先遇见null。如果含环，最终快慢指针会相遇。</p>
+<pre><code class="JAVA">public boolean hasCycle(ListNode head) {
+ListNode fast,slow;
+    fast = slow = head;
+    while(fast !=null &amp;&amp;fast.next != null){
+        fast = fast.next.next;
+        slow = slow.next;
+        if(fast == slow) return true;
+    }   
+    return false;
+}
+</code></pre>
+<p><strong>142.环形链表2,需要返回这个环的起点</strong></p>
+<p>核心思想：相遇之后一个节点指向头节点，两个节点每次只走一步，相遇处就是环的起点。</p>
+<p>1.第一次相遇时：slow走了s步，fast走了2s步<br>2.假设相遇点离环的起点距离为m<br>3.fast比slow多走了 n 个环的长度，即 f = nb + s<br>4.由1,3可得 s = nb f= 2nb<br>5.假设f回到头节点，同时开始一步一步走，那么f走m到入口节点，s走了了nb+m也到了入口节点。所以第二次相遇点就是环的入口节点。</p>
+<p><strong>offer22.链表中倒数第k个节点</strong><br>核心思想：快指针先走k步，然后快慢指针同时开始走，当快指针走到链表尾null的时候，慢指针走到倒数第k个节点。</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#快慢指针"><span class="toc-text">快慢指针</span></a></li></ol>
+  </div>
+</aside>
+  
   
 </div>
+
     </main>
     
     <div class="site-footer-wrapper">
@@ -201,15 +249,15 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/archives/2020/11/page/3/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2020/12/30/25.K个一组翻转链表/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
   <div class="bottom-bar-right">
-    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
       <i class="fa fa-bars"></i>
     </a>
     

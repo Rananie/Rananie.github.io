@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ranan" />
+  
+  
+  <title>note-二分法 | Ranan_blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="刷题笔记," />
+  
+
+  
+  <meta name="description" content="Ranan的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Ranan",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/Rananie" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2021-01-04
+    </span>
+    
+      <span>
+        | <a href="/categories/刷题笔记/"><i class="fa fa-bookmark"></i>刷题笔记</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    note-二分法
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="二分搜索的简单框架"><a href="#二分搜索的简单框架" class="headerlink" title="二分搜索的简单框架"></a>二分搜索的简单框架</h2><p>如果是有序数组，可以考虑使用二分法</p>
+<p><strong>重心在while里用&lt;=还是&lt;,mid是+1还是-1，主要是清除搜索区间</strong></p>
+<p>mid需要采用防止溢出的写法，(left+right)/2中如果left与right太大，会导致整型溢出，而left+(right-left)/2不会溢出且结果一样。</p>
+<pre><code class="java">    public int searchInsert(int[] nums, int target) {
+        int left = 0;int right = nums.length - 1; 
+        while(left&lt;=right){
+        int mid = left + (right - left)/2; //防溢出的写法
+        if(nums[mid] == target)return mid;
+        else if(nums[mid]&lt;target) left = mid+1 ; //闭区间
+        else if(nums[mid]&gt;target) right = mid-1;
+        }//退出来说明没找到
+        return -1;
+    }
+    //找左侧边界
+    public int searchInsert(int[] nums, int target) {
+    int left = 0;int right = nums.length - 1; 
+    while(left&lt;=right){
+    int mid = left + (right - left)/2; 
+    if(nums[mid] == target)right = mid-1; //找到不返回，往左侧收缩
+    else if(nums[mid]&lt;target) left = mid+1;
+    else if(nums[mid]&gt;target) right = mid-1;
+    }
+    //检查left越界情况
+    if(left&gt;=nums.length||nums[left]!=target)return -1;
+    return left;
+    }
+    //找右边界
+    public int searchInsert(int[] nums, int target) {
+    int left = 0;int right = nums.length - 1; 
+    while(left&lt;=right){
+    int mid = left + (right - left)/2; 
+    if(nums[mid] == target)left = mid+1; //找到不返回，往右侧收缩
+    else if(nums[mid]&lt;target) left = mid+1;
+    else if(nums[mid]&gt;target) right = mid-1;
+    }
+    //检查left越界情况
+    if(right&lt;0||nums[right]!=target)return -1;
+    return right;
+    }
+</code></pre>
+<p>为什么要单独处理越界问题？<br>注意target比所有元素小以及比所有元素大的情况，</p>
+<h3 id="35-搜索插入位置"><a href="#35-搜索插入位置" class="headerlink" title="35.搜索插入位置"></a>35.搜索插入位置</h3><ul>
+<li style="list-style: none"><input type="checkbox" checked> 704.二分查找</li>
+</ul>
+<p><strong>题目</strong><br>给定一个排序数组和一个目标值，在数组中找到目标值，并返回其索引。如果目标值不存在于数组中，返回它将会被按顺序插入的位置。</p>
+<p>你可以假设数组中无重复元素。</p>
+<p>示例 1:</p>
+<p>输入: [1,3,5,6], 5<br>输出: 2<br>示例 2:</p>
+<p>输入: [1,3,5,6], 2<br>输出: 1<br>示例 3:</p>
+<p>输入: [1,3,5,6], 7<br>输出: 4<br>示例 4:</p>
+<p>输入: [1,3,5,6], 0<br>输出: 0</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/search-insert-position" target="_blank" rel="noopener">https://leetcode-cn.com/problems/search-insert-position</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p><strong>代码</strong></p>
+<pre><code class="java">class Solution {
+    public int searchInsert(int[] nums, int target) {
+        int left = 0;int right = nums.length - 1; 
+        //  mid = 0;   
+        while(left&lt;=right){
+        int mid = left + (right - left)/2; //防溢出的写法
+        if(nums[mid] == target)return mid;
+        else if(nums[mid]&lt;target) left = mid+1;
+        else if(nums[mid]&gt;target) right = mid-1;
+        }//退出来说明没找到
+        return right+1;
+    }
+}
+</code></pre>
+<p><strong>问题1：</strong>为什么while循环的条件中是&lt;=,而不是&lt;?<br>初始化时right =nums.length - 1,right指向的是最后一个元素，相当于搜索的区间是<code>[left,right]</code>。当right=nums.length时，是越界的相当于区间是<code>[left,right)</code>。这道题采用的是前者。<br>什么时候停止搜索？1.找到了。2.循环终止了。<br>循环什么时候终止？当搜索区间为空的时候就可以停止了。while(left&lt;=right)的终止条件相当于<code>[right+..,right]</code>，这个时候搜索区间为空了。而while(left&lt; right)的终止条件是<code>[right,right]</code>这个时候搜索空间并不是空了，如<code>[2,2]</code>说明索引2的元素被漏掉了。</p>
+<p><strong>问题2：</strong>为什么left = mid+1和right=mid-1?<br>这个操作的主要目的就是控制搜索区间，就本题的搜索区间是<code>[left,right]</code>，那么当检查到当前的mid不是目标数字时，应该去搜索<code>[left,mid-1]</code>或者<code>[mid+1,right]</code>,mid本身已经被搜索过了。</p>
+<p><strong>问题3：</strong>算法的不足？<br>如果当目标元素在数组中重复时，想获取左侧边界或者右侧边界的索引时，此算法就不行了。</p>
+<h3 id="34-在排序数组中查找元素的第一个和最后一个"><a href="#34-在排序数组中查找元素的第一个和最后一个" class="headerlink" title="34.在排序数组中查找元素的第一个和最后一个"></a>34.在排序数组中查找元素的第一个和最后一个</h3><p><strong>题目</strong><br>给定一个按照升序排列的整数数组 nums，和一个目标值 target。找出给定目标值在数组中的开始位置和结束位置。</p>
+<p>如果数组中不存在目标值 target，返回 [-1, -1]。</p>
+<p>进阶：</p>
+<p>你可以设计并实现时间复杂度为 O(log n) 的算法解决此问题吗？</p>
+<p>示例 1：</p>
+<p>输入：nums = [5,7,7,8,8,10], target = 8<br>输出：[3,4]<br>示例 2：</p>
+<p>输入：nums = [5,7,7,8,8,10], target = 6<br>输出：[-1,-1]<br>示例 3：</p>
+<p>输入：nums = [], target = 0<br>输出：[-1,-1]</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array" target="_blank" rel="noopener">https://leetcode-cn.com/problems/find-first-and-last-position-of-element-in-sorted-array</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p><strong>思路</strong><br>套入框架，分两次查找</p>
+<pre><code class="java">public int[] searchRange(int[] nums, int target) {
+//分两次查找
+//找作左边界
+int first,last;int[] ans = new int [2];
+int left = 0;int right = nums.length - 1; 
+while(left&lt;=right){
+int mid = left + (right - left)/2; 
+if(nums[mid]&lt;target) ans[0] = left = mid+1;
+else  right = mid-1;
+}
+//检查left越界情况
+if(left&gt;=nums.length||nums[left]!=target)ans[0] = -1;
+//找右边界
+left = 0; right = nums.length - 1; 
+while(left&lt;=right){
+int mid = left + (right - left)/2; 
+if(nums[mid]&lt;=target) left = mid+1;
+else  right = mid-1;
+}
+//检查right越界情况
+if(right&lt;0||nums[right]!=target)ans[1] = -1;
+else ans[1] = right;
+return ans;
+}
+</code></pre>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#二分搜索的简单框架"><span class="toc-text">二分搜索的简单框架</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#35-搜索插入位置"><span class="toc-text">35.搜索插入位置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#34-在排序数组中查找元素的第一个和最后一个"><span class="toc-text">34.在排序数组中查找元素的第一个和最后一个</span></a></li></ol></li></ol>
+  </div>
+</aside>
+  
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2021/01/03/234.回文链表/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

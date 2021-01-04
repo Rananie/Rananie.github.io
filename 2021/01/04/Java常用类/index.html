@@ -148,7 +148,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-01-04
+      <i class="fa fa-calendar"></i>2021-01-04
     </span>
     
       <span>
@@ -330,7 +330,7 @@ public void test(){
     Integer y = 128 ;
     System.out.println(x == y); //false
 }
-</code></pre><h2 id="StringBuffer-StringBuilder类"><a href="#StringBuffer-StringBuilder类" class="headerlink" title="StringBuffer/StringBuilder类"></a>StringBuffer/StringBuilder类</h2><p>String:不可变的字符序列，底层用<code>char[]</code>数组存储<br>StringBuffer:可变的字符序列,线程安全的，效率低，底层用<code>char[]</code>数组存储,JDK9.0后是<code>byte[]</code><br>StringBuilder:可变的字符序列,底层用<code>char[]</code>数组存储,线程不安全，效率高，JDK5.0新增</p>
+</code></pre><h2 id="StringBuffer-StringBuilder类"><a href="#StringBuffer-StringBuilder类" class="headerlink" title="StringBuffer/StringBuilder类"></a>StringBuffer/StringBuilder类</h2><p>String:不可变的字符序列，底层用<code>char[]</code>数组存储<br>StringBuffer:可变的字符序列,线程安全的，效率低，底层用<code>char[]</code>数组存储,JDK9.0后是<code>byte[]</code>,建议指定参数，避免频繁扩容复制。<br>StringBuilder:可变的字符序列,底层用<code>char[]</code>数组存储,线程不安全，效率高，JDK5.0新增,建议指定参数，避免频繁扩容复制。</p>
 <p>源码分析：</p>
 <pre><code class="java">StringBuffer sb1 =new StringBuffer(); //new char value = new char[16],底层创建了一个长度是16的数组
 sb1.append(&quot;a&quot;);//value[0]=&#39;a&#39;;
@@ -407,10 +407,10 @@ System.out.print(sb2.length()) //3
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/01/29/Cookie、LocalStorage、sessionStorage/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/01/04/note-双指针/" data-enable="true">
+    <a href="/2021/01/04/note-双指针/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

@@ -6,7 +6,7 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>Java常用类 | Ranan_blog</title>
+  <title>Java字符串 | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -148,7 +148,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-12-29
+      <i class="fa fa-calendar"></i>2020-01-04
     </span>
     
       <span>
@@ -162,11 +162,11 @@
     
   </div>
   <h1 class="passage-title">
-    Java常用类
+    Java字符串
   </h1>
   
   <article class="passage-article">
-    <h2 id="字符串相关的类"><a href="#字符串相关的类" class="headerlink" title="字符串相关的类"></a>字符串相关的类</h2><h3 id="String"><a href="#String" class="headerlink" title="String"></a>String</h3><p>1.Serializable表示字符串是支持序列化的<br>2.comparable接口，表示String可以比较大小<br>3.String类是一个final类，用双引号引起来表示，String对象的字符内容是存储在一个字符数组value[]中，值在创建之后不能更改。</p>
+    <h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><h3 id="String-1"><a href="#String-1" class="headerlink" title="String"></a>String</h3><p>1.Serializable表示字符串是支持序列化的<br>2.comparable接口，表示String可以比较大小<br>3.String类是一个final类，用双引号引起来表示，String对象的字符内容是存储在一个字符数组value[]中，值在创建之后不能更改。</p>
 <pre><code class="JAVA">public final class String implements java.io.Serializable,Comparable&lt;String&gt;,CharSequence
 {
     //常量数组
@@ -216,7 +216,7 @@ String s4 = new String(char [] a,int startIndex,int count);
 <p><strong>String不同拼接操作的对比</strong></p>
 <ul>
 <li>常量与常量的拼接结果在常量池，且常量池中不会存在相同内容的常量。</li>
-<li>只要其中有一个是变量，就相当于new，结果在堆空间中</li>
+<li>只要其中有一个是变量，就相当于new，结果在堆空间中，注意加了final关键字的变量其实是常量，存储在常量池中。</li>
 <li>如果拼接的结果调用intern()方法,返回值就在常量池中。</li>
 </ul>
 <pre><code class="JAVA">String s1 = &quot;javaEE&quot;;
@@ -235,6 +235,10 @@ System.out.println(s3 == s5);//false
 System.out.println(s3 == s6);//false
 System.out.println(s5 == s6);//false
 System.out.println(s3 == s7);//true
+
+final String s8 =&quot;javaEE&quot;; //final存储在常量池中
+String s9 = s8 + &quot;hadoop&quot;;
+System.out.println(s3 == s9);
 </code></pre>
 <h4 id="面试题"><a href="#面试题" class="headerlink" title="面试题"></a>面试题</h4><p><strong>面试题1</strong>:String s = new String(“abc”);方式创建对象，在内存中创建了几个对象？<br>两个，一个是堆空间中new结构，另一个是char[]对应的常量池中的数据”abc”</p>
 <p><strong>面试题2</strong></p>
@@ -254,7 +258,6 @@ System.out.println(s3 == s7);//true
         System.out.println(ex.ch);//best
     }
 }
-
 </code></pre>
 <p>补充：</p>
 <p>堆Heap:一个JVM实例只存在一个堆内存，堆内存的大小是可以调节的。类加载器读取了类文件后，需要把类、方法、常变量放入堆内存中，保存所有引用类型的真实信息。</p>
@@ -302,7 +305,10 @@ String str2 = String.valueof(f)
 <p>调用包装类的parseXxx(String str)</p>
 <pre><code>String str1 = &quot;123&quot;;
 int num = Integer.paserInt(str1)
-</code></pre><p><strong>String与char[]之间的转换</strong><br>String -&gt; char[]<br>str.toCharArray() 返回一个char类型的数组<br>char[] -&gt; String:调用String的构造器<br>new String(arr) 返回一个String</p>
+</code></pre><p><strong>String与char[]之间的转换</strong><br>String -&gt; char[]<br>str.toCharArray() 返回一个char类型的数组<br>char[] -&gt; String 调用String的构造器<br>new String(arr) 返回一个String</p>
+<p><strong>String与byte[]之间的转换</strong></p>
+<p>编码：字符串 -&gt; 字节(二进制数据)<br>解码：字节 -&gt; 字符串</p>
+<p>编码：String -&gt; byte[] 调用getBytes方法<br>str.getBytes() 返回一个byte类型的数组,参数是字符集的名字<br>解码：byte[] -&gt; String 调用String构造器<br>new String(bytes,字符集) 解码字节使用的字符集要同编码的一样，使用同一个规则。 </p>
 <p><strong>习题</strong></p>
 <p>三目运算符要求:前后的数据类型统一,所以整型会自动类型提升到浮点型。</p>
 <pre><code>//习题1
@@ -324,7 +330,18 @@ public void test(){
     Integer y = 128 ;
     System.out.println(x == y); //false
 }
+</code></pre><h2 id="StringBuffer-StringBuilder类"><a href="#StringBuffer-StringBuilder类" class="headerlink" title="StringBuffer/StringBuilder类"></a>StringBuffer/StringBuilder类</h2><p>String:不可变的字符序列，底层用<code>char[]</code>数组存储<br>StringBuffer:可变的字符序列,线程安全的，效率低，底层用<code>char[]</code>数组存储,JDK9.0后是<code>byte[]</code><br>StringBuilder:可变的字符序列,底层用<code>char[]</code>数组存储,线程不安全，效率高，JDK5.0新增</p>
+<p>源码分析：</p>
+<pre><code class="java">StringBuffer sb1 =new StringBuffer(); //new char value = new char[16],底层创建了一个长度是16的数组
+sb1.append(&quot;a&quot;);//value[0]=&#39;a&#39;;
+StringBuffer sb2 =new StringBuffer(&#39;abc&#39;);//char[] value = new char[&#39;abc&#39;.length()+16] 
+
+System.out.print(sb1.length()) //0 return count,append一个count++
+System.out.print(sb2.length()) //3
+
+//扩容问题：如果添加的数据底层数组放不下了，需要扩充底层数。先新建一个数组扩大长度，把原数组copy上去。
 </code></pre>
+
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -332,7 +349,7 @@ public void test(){
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串相关的类"><span class="toc-text">字符串相关的类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#String"><span class="toc-text">String</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#String的实例化方法"><span class="toc-text">String的实例化方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#面试题"><span class="toc-text">面试题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String常用方法"><span class="toc-text">String常用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#包装类Wrapper"><span class="toc-text">包装类Wrapper</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#String"><span class="toc-text">String</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#String-1"><span class="toc-text">String</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#String的实例化方法"><span class="toc-text">String的实例化方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#面试题"><span class="toc-text">面试题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String常用方法"><span class="toc-text">String常用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#包装类Wrapper"><span class="toc-text">包装类Wrapper</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StringBuffer-StringBuilder类"><span class="toc-text">StringBuffer/StringBuilder类</span></a></li></ol>
   </div>
 </aside>
   
@@ -390,10 +407,10 @@ public void test(){
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/12/30/25.K个一组翻转链表/" data-enable="true">
+    <a href="/2020/01/29/Cookie、LocalStorage、sessionStorage/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/12/28/206.旋转链表/" data-enable="true">
+    <a href="/2020/01/04/note-双指针/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

@@ -6,12 +6,12 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>941.有效的山脉数组 | Ranan_blog</title>
+  <title>note-双指针 | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="刷题笔记,Java," />
+    <meta name="keywords" content="刷题笔记," />
   
 
   
@@ -148,7 +148,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2020-11-03
+      <i class="fa fa-calendar"></i>2021-01-05
     </span>
     
       <span>
@@ -162,83 +162,67 @@
     
   </div>
   <h1 class="passage-title">
-    941.有效的山脉数组
+    note-双指针
   </h1>
   
   <article class="passage-article">
-    <p><strong>题目</strong></p>
-<p><a href="https://leetcode-cn.com/problems/shortest-distance-to-a-character/" target="_blank" rel="noopener">leetcode941</a></p>
-<p>给定一个整数数组 A，如果它是有效的山脉数组就返回 true，否则返回 false。</p>
-<p>让我们回顾一下，如果 A 满足下述条件，那么它是一个山脉数组：</p>
-<p>A.length &gt;= 3<br>在 0 &lt; i &lt; A.length - 1 条件下，存在 i 使得：<br>A[0] &lt; A[1] &lt; … A[i-1] &lt; A[i]<br>A[i] &gt; A[i+1] &gt; … &gt; A[A.length - 1]</p>
-<p><img src="/img/leetcode/mountain_array.png.png"></p>
-<p><strong>思路</strong></p>
-<p>1.先找到最大值记录下坐标i。<br>2.一个变量记录元素与最大值的差<br>3.i的左边，当前元素与最大值的差与变量比较，应该越来越大<br>4.i的右边，当前元素与最大值的差与变量比较，应该越来越小</p>
-<p><strong>代码</strong></p>
-<pre><code class="JAVA">class Solution {
-    public boolean validMountainArray(int[] A) {
-        int length = A.length;
-        int pre = -10000;
-        int next =  10000;
-        if(length == 0){
-            return false;
-        }
-        //找到最大值
-        int cur = A[0],index = 0;
-        for(int i = 1  ; i&lt;length ; i++){
-            if(A[i] &lt;= cur ){
-                break;
-            }
-            cur = A[i];
-            index = i ;
-        }
-        //如果最大值在第一个元素和最后一个返回false
-        if(index == 0 || index == length-1){
-            return false;
-        }
-        //循坏比较
-        for(int i = 0; i&lt;length;i++){
-            if(i&lt;index){
-                //说明在最大值的左边
-                if(A[i] - cur &lt;= pre){
-                return false ;
-                }
-                pre = A[i] - cur ;
-            }
-            if(i&gt;index){
-                //说明在最大值右边
-                if(A[i] == cur || A[i] - cur &gt;= next){
-                    return false;
-                }
-                next = A[i] - cur ;
-            }
-        }
-        return true;
-    }
+    <h2 id="快慢指针"><a href="#快慢指针" class="headerlink" title="快慢指针"></a>快慢指针</h2><p><strong>快慢指针主要解决链表中的问题</strong>，比如判断链表是否有环、链表的交点，以及环的入口都是使用快慢指针。</p>
+<p>由于链表不支持随机访问，因为如果要获取链表中间项或倒数第几项等特定元素就需要快慢指针。<br>比如找链表中间项可以用两个指针，一个大步走(一次走两步)，一个小步走(一次走一步)，这样快指针走到头，慢指针刚好在中间。<br>比如找链表倒数第二个结点，可以让快指针先走一步，慢指针再走，这样快指针走到头，慢指针刚好在倒数第二个。</p>
+<ul>
+<li style="list-style: none"><input type="checkbox" checked> 141.环形链表</li>
+<li style="list-style: none"><input type="checkbox" checked> 142.环形链表2</li>
+<li style="list-style: none"><input type="checkbox" checked> offer22.链表中倒数第k个节点</li>
+</ul>
+<p><strong>141.环形链表</strong><br>核心思想：如果不含环，跑的快的会先遇见null。如果含环，最终快慢指针会相遇。</p>
+<pre><code class="JAVA">public boolean hasCycle(ListNode head) {
+ListNode fast,slow;
+    fast = slow = head;
+    while(fast !=null &amp;&amp;fast.next != null){
+        fast = fast.next.next;
+        slow = slow.next;
+        if(fast == slow) return true;
+    }   
+    return false;
 }
 </code></pre>
-<p><strong>优化</strong></p>
-<p>第二天起来看，感觉写的太复杂了。要多花时间在思考上面，而不是写代码QAQ<br>转换了下思维，可以从开头往右找峰值，找到峰值返回；然后从后面往左找峰值，找到峰值返回，再比较峰值数的索引是不是一样就行了。这样想想好像比之前的思路更简洁一点，至少代码是简洁了好多。</p>
-<pre><code class="JAVA">class Solution {
-    public boolean validMountainArray(int[] A) {
-        int length = A.length;
-        if(length &lt; 3){
-            return false;
-        } 
-        //左右两个指针
-        int left = 0,right = length-1;
-        //从左往又找最大值
-        while(left &lt; length-1 &amp;&amp; A[left] &lt; A[left+1]){
-            left++;
-        }
-        //从右往左找
-       while(right &gt; 0 &amp;&amp; A[right] &lt; A[right-1]){
-            right--;
-        }
-        if(left == 0 || right == length-1 ||left != right){
-            return false;
-        }
-        return true;
+<p><strong>142.环形链表2,需要返回这个环的起点</strong></p>
+<p>核心思想：相遇之后一个节点指向头节点，两个节点每次只走一步，相遇处就是环的起点。</p>
+<p>1.第一次相遇时：slow走了s步，fast走了2s步<br>2.假设相遇点离环的起点距离为m<br>3.fast比slow多走了 n 个环的长度，即 f = nb + s<br>4.由1,3可得 s = nb f= 2nb<br>5.假设f回到头节点，同时开始一步一步走，那么f走m到入口节点，s走了了nb+m也到了入口节点。所以第二次相遇点就是环的入口节点。</p>
+<p><strong>offer22.链表中倒数第k个节点</strong><br>核心思想：快指针先走k步，然后快慢指针同时开始走，当快指针走到链表尾null的时候，慢指针走到倒数第k个节点。</p>
+<h2 id="左右指针"><a href="#左右指针" class="headerlink" title="左右指针"></a>左右指针</h2><p>左右指针一般用在有序数组问题，实际是指两个索引值，一般初始化为left=0，right=nums.length-1。</p>
+<p><strong>27.移除元素</strong><br>双指针法（快慢指针法）：通过一个快指针和慢指针在一个for循环下完成两个for循环的工作。<br>主要的考虑是如何原地修改元素，不增加额外的空间。<br>使用双指针的本质是<strong>为了区分已处理和未处理</strong>, —已处理的—slow—需要处理的—fast—-其余的</p>
+<p>思路：<br>1.快指针用于遍历数组，慢指针用来移除元素与返回移除后的新长度。<br>2.当fast指向的值与val相等时,fast指向下一个，因为需要用fast指向的值来替换与val相等的值，所以fast继续往下指，直到与val不等。<br>3.当fast指向的值与val不相等时,可以进行替换了。用当前fast的值替换slow指向的值，替换之后slow再++指向下一个元素。<br>假设总长度为n,与val相等的元素有m个，fast是一直往下走的，而slow当nums[fast] = value时是不走的，所以slow走了n-m步，也就是新数组的长度。</p>
+<pre><code class="JAVA">public int removeElement(int[] nums, int val) {
+    int slow = 0;
+    for(int fast=0;fast&lt;nums.length;fast++){
+        if(val != nums[fast])
+        nums[slow++] = nums[fast];
+    }
+    return slow;
+}
+</code></pre>
+<p><strong>26.删除排序数组中的重复项</strong><br>模仿27题的思路，思考什么时候该替换元素了。</p>
+<pre><code class="JAVA">public int removeDuplicates(int[] nums) {
+    int slow = 0;
+    for(int fast = 1;fast&lt;nums.length;fast++){
+        //fast与slow相等时，说明该元素需要替换，替换的元素在不等的时候
+        if(nums[fast]!=nums[slow]){
+            nums[++slow] = nums[fast];
+        }      
+    }
+    return slow+1;
+}
+</code></pre>
+<p><strong>数组的反转</strong></p>
+<pre><code class="java">void reverse(int[] nums){
+    int left = 0;
+    int right = nums.length-1;
+    while(left&lt;right){
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
+        left++;
+        right--;
     }
 }
 </code></pre>
@@ -250,16 +234,10 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#快慢指针"><span class="toc-text">快慢指针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#左右指针"><span class="toc-text">左右指针</span></a></li></ol>
   </div>
 </aside>
   
-  
-    <div class="passage-tags">
-     
-      <a href="/tags/Java/"><i class="fa fa-tags"></i>Java</a>
-    
-    </div>
   
 </div>
 
@@ -308,10 +286,10 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2020/11/04/394.字符串解码/" data-enable="true">
+    <a href="/2021/01/06/note-滑动窗口法/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/11/03/1381.设计一个支持增量操作的栈/" data-enable="true">
+    <a href="/2021/01/04/Java常用类/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

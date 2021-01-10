@@ -322,12 +322,13 @@ public class Test{
 Person p = new Man()
 Person p1 = new Woman()
 //把p的地址赋值给m1，由于m1是Man类型，所以看得见Man特有的属性和方法
+//不管向上转还是向下转，前提是实例包含这个结构
 Man m1 = (Man)p
 
 Object o = new Man()
 //o可以转到Man的父类,最低可转换到Man
 </code></pre><p>使用强转时，可能出现ClassCaseException的异常。可以先用instanceof关键字判断一下再向下转型。</p>
-<p><img src="/img/Java/向下转型.png"></p>
+<p><img src="https://raw.githubusercontent.com/Rananie/imgs_rananie/master/blog/java/%E5%90%91%E4%B8%8B%E8%BD%AC%E5%9E%8B.png?token=AHTYULCB43U4TF4UPBDU5PC77MGWI"></p>
 
   </article>
   <aside class="table-content" id="site-toc">

@@ -148,7 +148,7 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2021-01-04
+      <i class="fa fa-calendar"></i>2021-01-10
     </span>
     
       <span>
@@ -268,15 +268,15 @@ System.out.println(s3 == s9);
 <li>Tenure Generation Space 养老区</li>
 <li>permanent Space 永久存储区 (可以看成方法区)</li>
 </ul>
-<h3 id="String常用方法"><a href="#String常用方法" class="headerlink" title="String常用方法"></a>String常用方法</h3><p>int length():返回字符串的长度,return value.length;<br>char charAt(int index):返回某索引处的字符,return value[index]<br>boolean isEmpty():判断是否是空字符串,return value.length == 0<br>String toLowerCase():使用默认语言环境，将String中所有的字符转换成小写，返回转换的结果，原字符串不变<br>String toUpperCase():使用默认语言环境，将String中所有的字符转换成小写，返回转换的结果，原字符串不变<br>String trim():返回字符串的副本，忽略前导空白和尾部空白<br>boolean equals(Object obj):比较字符串的内容是否相同<br>boolean equalsIgnoreCase(String anotherString):与equals方法类似，忽略大小写<br>String concat(String str):将指定字符串连接到此字符串的结尾，等价用+，此方法不常用<br>int compareTo(String anotherString):比较两个字符串的大小，从左往右一个一个比，根据Asc码相减。<br>String subString(int beginIndex):返回一个新的字符串，从begin开始截取,截取符在数字的左边。<br>String subString(int beginIndex,int endIndex):返回一个新的字符串，从begin开始、end结束,截取符在数字的左边。<br>boolean endWith(String suffix):测试此字符串是否以指定的后缀结束<br>boolean startsWith(String prefix):测试此字符串是否以指定的前缀开始<br>boolean startWith(String prefix,int toffset):测试此字符串从指定索引开始的字符串是否以指定的前缀开始<br>boolean contains(CharSequence s):当前仅当此字符串包含指定的char值序列时，返回true<br>int indexOf(String str):返回指定字符串在此字符串中第一次出现处的索引，没找到返回-1<br>int indexOf(String str,int fromIndex):返回指定字符串在此字符串中从指定位置开始第一次出现处的索引，没找到返回-1<br>int lastIndexOf(String str):返回指定字符串从后往前找第一次出现的索引位置，没找到返回-1<br>int lastIndexOf(String str,int fromIndex):返回指定子字符串在此字符串中最后一次出现处的索引，从指定的索引开始从后往前查找，没找到返回-1</p>
+<h3 id="String常用方法"><a href="#String常用方法" class="headerlink" title="String常用方法"></a>String常用方法</h3><p>int length():返回字符串的长度,return value.length;<br>char charAt(int index):返回某索引处的字符,return value[index]<br>boolean isEmpty():判断是否是空字符串,return value.length == 0<br>String toLowerCase():使用默认语言环境，将String中所有的字符转换成小写，返回转换的结果，原字符串不变<br>String toUpperCase():使用默认语言环境，将String中所有的字符转换成小写，返回转换的结果，原字符串不变<br>String trim():返回字符串的副本，忽略前导空白和尾部空白<br>boolean equals(Object obj):比较字符串的内容是否相同<br>boolean equalsIgnoreCase(String anotherString):与equals方法类似，忽略大小写<br>String concat(String str):将指定字符串连接到此字符串的结尾，等价用+，此方法不常用<br>int compareTo(String anotherString):比较两个字符串的大小，从左往右一个一个比，根据Asc码相减。<br>String substring(int beginIndex):返回一个新的字符串，从begin开始截取,截取符在数字的左边。<br>String substring(int beginIndex,int endIndex):返回一个新的字符串，从begin开始、end结束,截取符在数字的左边。<br>boolean endWith(String suffix):测试此字符串是否以指定的后缀结束<br>boolean startsWith(String prefix):测试此字符串是否以指定的前缀开始<br>boolean startWith(String prefix,int toffset):测试此字符串从指定索引开始的字符串是否以指定的前缀开始<br>boolean contains(CharSequence s):当前仅当此字符串包含指定的char值序列时，返回true<br>int indexOf(String str):返回指定字符串在此字符串中第一次出现处的索引，没找到返回-1<br>int indexOf(String str,int fromIndex):返回指定字符串在此字符串中从指定位置开始第一次出现处的索引，没找到返回-1<br>int lastIndexOf(String str):返回指定字符串从后往前找第一次出现的索引位置，没找到返回-1<br>int lastIndexOf(String str,int fromIndex):返回指定子字符串在此字符串中最后一次出现处的索引，从指定的索引开始从后往前查找，没找到返回-1</p>
 <p><strong>替换</strong><br>String replace(char oldChar,char newChar):返回一个新的字符串，通过用newChar替换旧的字符，所有都替换<br>String repalce(CharSequence targer,CharSequence replacement):使用指定的字面值替换目标字符串<br>String replaceAll(String regex,String replacement):替换正则表达式匹配到的东西<br>String replaceFirst(String regex,String replacement)：替换其中一个</p>
 <p><strong>匹配</strong><br>boolean matches(Sting regex):告知此字符串是否匹配给定的正则</p>
 <p><strong>切片</strong><br>String[] split(String regex):根据给定的正则表达式的匹配拆分此字符<br>String[] split(String regex,int limit):根据给定的正则表达式的匹配拆分此字符,最多不超过limit个</p>
 <h4 id="包装类Wrapper"><a href="#包装类Wrapper" class="headerlink" title="包装类Wrapper"></a>包装类Wrapper</h4><p>只有子父类关系才可以强转</p>
 <p>包装类(封装类):针对八种基本数据类型定义相应的引用类型</p>
-<p><img src="/img/Java/包装类.png"></p>
+<p><img src="https://raw.githubusercontent.com/Rananie/imgs_rananie/master/blog/java/%E5%8C%85%E8%A3%85%E7%B1%BB.png?token=AHTYULGINKPGLNZFNFBRRF277ME26"></p>
 <p>基本数据类型、包装类与String类间的转换</p>
-<p><img src="/img/Java/基本数据类型包装类的转换.png"></p>
+<p><img src="https://raw.githubusercontent.com/Rananie/imgs_rananie/master/blog/java/%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8C%85%E8%A3%85%E7%B1%BB%E7%9A%84%E8%BD%AC%E6%8D%A2.png?token=AHTYULD3RSRAKKEJ3R5Y7RK77MFEW"></p>
 <p><strong>基本数据类型与包装类</strong></p>
 <p>JDK5.0新特性：的自动装箱与自动拆箱</p>
 <pre><code>int num = 10
@@ -311,7 +311,7 @@ int num = Integer.paserInt(str1)
 <p>编码：String -&gt; byte[] 调用getBytes方法<br>str.getBytes() 返回一个byte类型的数组,参数是字符集的名字<br>解码：byte[] -&gt; String 调用String构造器<br>new String(bytes,字符集) 解码字节使用的字符集要同编码的一样，使用同一个规则。 </p>
 <p><strong>习题</strong></p>
 <p>三目运算符要求:前后的数据类型统一,所以整型会自动类型提升到浮点型。</p>
-<pre><code>//习题1
+<pre><code class="java">//习题1
 Object o1 = true ? new Integer(1) : new Double(2.0)
 System.out.println(o1) //1.0
 //习题2
@@ -330,7 +330,8 @@ public void test(){
     Integer y = 128 ;
     System.out.println(x == y); //false
 }
-</code></pre><h2 id="StringBuffer-StringBuilder类"><a href="#StringBuffer-StringBuilder类" class="headerlink" title="StringBuffer/StringBuilder类"></a>StringBuffer/StringBuilder类</h2><p>String:不可变的字符序列，底层用<code>char[]</code>数组存储<br>StringBuffer:可变的字符序列,线程安全的，效率低，底层用<code>char[]</code>数组存储,JDK9.0后是<code>byte[]</code>,建议指定参数，避免频繁扩容复制。<br>StringBuilder:可变的字符序列,底层用<code>char[]</code>数组存储,线程不安全，效率高，JDK5.0新增,建议指定参数，避免频繁扩容复制。</p>
+</code></pre>
+<h2 id="StringBuffer-StringBuilder类"><a href="#StringBuffer-StringBuilder类" class="headerlink" title="StringBuffer/StringBuilder类"></a>StringBuffer/StringBuilder类</h2><p><strong>三者关系</strong><br>String:不可变的字符序列，底层用<code>char[]</code>数组存储<br>StringBuffer:可变的字符序列,线程安全的，效率低，底层用<code>char[]</code>数组存储,JDK9.0后是<code>byte[]</code>,建议指定参数，避免频繁扩容复制。<br>StringBuilder:可变的字符序列,底层用<code>char[]</code>数组存储,线程不安全，效率高，JDK5.0新增,建议指定参数，避免频繁扩容复制。</p>
 <p>源码分析：</p>
 <pre><code class="java">StringBuffer sb1 =new StringBuffer(); //new char value = new char[16],底层创建了一个长度是16的数组
 sb1.append(&quot;a&quot;);//value[0]=&#39;a&#39;;
@@ -341,6 +342,20 @@ System.out.print(sb2.length()) //3
 
 //扩容问题：如果添加的数据底层数组放不下了，需要扩充底层数。先新建一个数组扩大长度，把原数组copy上去。
 </code></pre>
+<p><strong>三者转换</strong></p>
+<p>String –&gt; StringBuffer<br>通过构造方法：<br>StringBuffer sb = new StringBuffer(“abc”);<br>通过append方法：<br>StringBuffer sb = new StringBuffer();<br>sb.append(“abc”);</p>
+<p>StringBuffer –&gt; String<br>通过构造方法：<br>StringBuffer sb = new StringBuffer(“abc”);<br>String s = new String(sb);<br>通过toString方法：<br>StringBuffer sb = new StringBuffer(“abc”);<br>String s = sb.toString();<br>通过subString方法：<br>StringBuffer sb = new StringBuffer(“abc”);<br>String s = sb.substring(0, sb.length());</p>
+<h3 id="StringBuffer-StringBuilder方法"><a href="#StringBuffer-StringBuilder方法" class="headerlink" title="StringBuffer/StringBuilder方法"></a>StringBuffer/StringBuilder方法</h3><p>不同于String的额外方法。</p>
+<p>stringBuffer.append(“xx”):用于进行字符串拼接，直接在原字符串上操<br>stringBuffer.delete(int start,int end):删除指定位置的内容，直接在原字符操作。<strong>只要涉及下标位置的都是左闭右开，也就是下标的左边开始划分</strong><br>stringBuffer.replace(int start,int end,String str):把[start,end)的位置替换成str<br>stringBuffer.insert(int offset,xxx):在offset位置插入xxx<br>stringBuffer.reverse():把当前字符串逆转</p>
+<p><strong>方法链</strong></p>
+<pre><code class="JAVA">//比如append
+public StringBuilder append(String str){
+    super.append(str);
+    //返回的仍然是StringBuffe
+    return this;
+}
+</code></pre>
+<p><strong>总结</strong><br>增:append(xxx)<br>删:delete(int start,int end)<br>改:replace(int start,int end,String str) / setCharAt(int n,char ch)<br>查:charAt(int n )<br>插:stringBuffer.insert(int offset,xxx)<br>长度:length()<br>遍历:for()+charAt()/toString()</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -349,7 +364,7 @@ System.out.print(sb2.length()) //3
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#String"><span class="toc-text">String</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#String-1"><span class="toc-text">String</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#String的实例化方法"><span class="toc-text">String的实例化方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#面试题"><span class="toc-text">面试题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String常用方法"><span class="toc-text">String常用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#包装类Wrapper"><span class="toc-text">包装类Wrapper</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StringBuffer-StringBuilder类"><span class="toc-text">StringBuffer/StringBuilder类</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#String"><span class="toc-text">String</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#String-1"><span class="toc-text">String</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#String的实例化方法"><span class="toc-text">String的实例化方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#面试题"><span class="toc-text">面试题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#String常用方法"><span class="toc-text">String常用方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#包装类Wrapper"><span class="toc-text">包装类Wrapper</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#StringBuffer-StringBuilder类"><span class="toc-text">StringBuffer/StringBuilder类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#StringBuffer-StringBuilder方法"><span class="toc-text">StringBuffer/StringBuilder方法</span></a></li></ol></li></ol>
   </div>
 </aside>
   
@@ -407,10 +422,10 @@ System.out.print(sb2.length()) //3
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2021/01/05/note-双指针/" data-enable="true">
+    <a href="/2021/01/10/java日期/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2021/01/04/note-二分法/" data-enable="true">
+    <a href="/2021/01/10/76.最小覆盖子串/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

@@ -177,8 +177,8 @@
 <p><strong>题解</strong></p>
 <p>这是一个连续问题，首先想到的是滑动窗口，先看滑动窗口的模板</p>
 <pre><code class="JAVA">void slidingWindow(String s, String t){
-Map&lt;String, String&gt; window = new HashMap&lt;String,String&gt;(); 
-Map&lt;String, String&gt; need = new HashMap&lt;String,String&gt;(); //暂时不知道有什么用
+Map&lt;Character, Integer&gt; window = new HashMap&lt;Character, Integer&gt;(); 
+Map&lt;Character, Integer&gt; need = new HashMap&lt;Character, Integer&gt;(); //暂时不知道有什么用
 for(char c:t) map.put(key,map.getOrDefault(key,0)+1);//暂时不知道有什么用
 
 int left=0,right=0;
@@ -290,7 +290,7 @@ while(right&lt;s.length()){
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2021/01/09/567.字符串的排列/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
     <a href="/2021/01/06/209.长度最小的子数组/" data-enable="true">

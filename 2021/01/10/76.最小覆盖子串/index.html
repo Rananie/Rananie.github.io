@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ranan" />
+  
+  
+  <title>76.最小覆盖子串 | Ranan_blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="刷题笔记,Java," />
+  
+
+  
+  <meta name="description" content="Ranan的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Ranan",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/Rananie" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2021-01-10
+    </span>
+    
+      <span>
+        | <a href="/categories/刷题笔记/"><i class="fa fa-bookmark"></i>刷题笔记</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    76.最小覆盖子串
+  </h1>
+  
+  <article class="passage-article">
+    <p><strong>题目</strong></p>
+<p>给你一个字符串 s 、一个字符串 t 。返回 s 中涵盖 t 所有字符的最小子串。如果 s 中不存在涵盖 t 所有字符的子串，则返回空字符串 “” 。</p>
+<p>注意：如果 s 中存在这样的子串，我们保证它是唯一的答案。</p>
+<p>示例 1：</p>
+<p>输入：s = “ADOBECODEBANC”, t = “ABC”<br>输出：”BANC”<br>示例 2：</p>
+<p>输入：s = “a”, t = “a”<br>输出：”a”</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/minimum-window-substring" target="_blank" rel="noopener">https://leetcode-cn.com/problems/minimum-window-substring</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p><strong>思路</strong></p>
+<p>对于可变窗口，同样固定初始化左右指针left和right,分别表示窗口的左右顶点。</p>
+<p>1.left和right都初始化为0。<br>2.right指针移动一步<br>3.判断窗口内的连续元素是否满足题目限定的条件<br>    3.1 如果满足，再判断是否需要更新最优解，如果需要则更新最优解。并尝试通过移动 left 指针缩小窗口大小。循环执行 3.1<br>    3.2 如果不满足，则继续。</p>
+<p>也就是说right指针先右移，直到窗口满足条件，然后移动left指针，缩小范围。</p>
+<p>根据之前题目的思路，需要两个计数器，一个是子串计数，一个是长串的计数器，长串中只计数子串中有的元素的个数，最后比较两个计数器是否相等。<br>因为采用hash表计数，那么比较计数器相等时很麻烦，可以采用辅助变量，计数器中的值相等就+1，最后长度等于子串的长度说明两个计数器是相等的。</p>
+<p>套上模板</p>
+<pre><code class="JAVA">void slidingWindow(String s, String t){
+Map&lt;Character, Integer&gt; window = new HashMap&lt;Character, Integer&gt;(); 
+Map&lt;Character, Integer&gt; need = new HashMap&lt;Character, Integer&gt;(); //暂时不知道有什么用
+for(char c:t) map.put(key,map.getOrDefault(key,0)+1);//暂时不知道有什么用
+
+int left=0,right=0;
+int valid=0;
+while(right&lt;s.length()){
+    //c是将要移入窗口的字符
+    char c = s.charAt(right);
+    //右移窗口
+    right++;
+    //进行窗口内数据的一系列更新
+    ...
+    //判断左窗口是否需要收缩
+    while(window needs shrink){
+    //d是将移除窗口的字符
+    char d =s.charAt(left);
+    //左移窗口
+    left++;
+    //进行窗口内从数据的一系列更新
+    ...
+    }
+}
+}
+</code></pre>
+<p>什么时候进行窗口收缩？当前窗口符合条件了就可以进行窗口收缩。<br>那么什么时候算符合条件了呢？子串中的字母被全部覆盖，count == need.size()</p>
+<pre><code class="java">class Solution {
+    public String minWindow(String s, String t) {
+    Map&lt;Character, Integer&gt; window = new HashMap&lt;Character, Integer&gt;(); 
+    Map&lt;Character, Integer&gt; need = new HashMap&lt;Character, Integer&gt;();
+    int sLe = s.length(),tLe = t.length();
+    int left = 0, right = 0 ; 
+    //记录开始位置，与最小长度返回用
+    int len = Integer.MAX_VALUE;
+    int start = 0;
+    int count=0 ; //计数器，用来间接比较两个hash表是否一样
+    //把t子串的信息放入need的map函数
+    for(int i = 0 ;i&lt;tLe;i++){
+        char c = t.charAt(i);
+        need.put(c , need.getOrDefault(c ,0)+1);
+    }
+    //右指针开始扩大范围,左闭右开
+    while(right &lt; sLe){
+        char cur = s.charAt(right); //当前字符
+        right++;
+        //窗口更新
+        //只计数与need中相等的部分
+        if(need.containsKey(cur)){
+            window.put(cur , window.getOrDefault(cur,0)+1);
+            //更新计数器
+            if(need.get(cur).equals(window.get(cur)))
+                count++;
+        }
+
+        //收缩窗口
+        while(count == need.size()){
+            //更新最小的长度
+            if(right - left&lt;len){
+                //保存原来的left
+                start = left; 
+                len = right - left;
+            }
+            //d是将移除窗口的字符
+            char d =s.charAt(left);
+            //左移窗口
+            left++;
+            //窗口更新
+            if(need.containsKey(d)){
+                //更新计数器 
+                if(need.get(d).equals(window.get(d)))
+                    count--;
+                window.put(d, window.get(d)-1);
+            }
+        }
+    }
+    return (len == Integer.MAX_VALUE) ? &quot;&quot; : (s.substring(start,start+len)) ;
+    }
+}
+</code></pre>
+<p>尤其注意这里的没有用<code>==</code>而是用的<code>equals</code>，因为hash表中Integer超出范围之后会重新new一个所以地址是不相等的。</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/Java/"><i class="fa fa-tags"></i>Java</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2021/01/10/Java常用类/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2021/01/09/567.字符串的排列/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

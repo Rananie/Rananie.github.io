@@ -6,12 +6,12 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>java日期 | Ranan_blog</title>
+  <title>30.串联所有单词的子串 | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Java,Java," />
+    <meta name="keywords" content="刷题笔记,Java," />
   
 
   
@@ -148,11 +148,11 @@
   <div class="passage">
   <div class="passage-meta">
     <span>
-      <i class="fa fa-calendar"></i>2021-01-10
+      <i class="fa fa-calendar"></i>2021-01-12
     </span>
     
       <span>
-        | <a href="/categories/Java/"><i class="fa fa-bookmark"></i>Java</a>
+        | <a href="/categories/刷题笔记/"><i class="fa fa-bookmark"></i>刷题笔记</a>
       </span>
     
     
@@ -162,25 +162,60 @@
     
   </div>
   <h1 class="passage-title">
-    java日期
+    30.串联所有单词的子串
   </h1>
   
   <article class="passage-article">
-    <h2 id="JDK8之前日期时间API"><a href="#JDK8之前日期时间API" class="headerlink" title="JDK8之前日期时间API"></a>JDK8之前日期时间API</h2><p><strong>java.lang.System类</strong></p>
-<p>public static long currentTimeMills()用来返回当前时间与1970年1月1日0时0分0秒之间以毫秒为单位的时间差。</p>
-<p><strong>java中的data类</strong></p>
-<ul>
-<li>java.util.Date类<ul>
-<li>java.sql.Date类</li>
-</ul>
-</li>
-</ul>
-<p>java.util.Date类<br>1.两个构造器的使用<br>    构造器1：new Date() 创建一个对应当前时间的Date对象。<br>    构造器2：new Date(long date):形参为毫秒数，创建指定毫秒数的Date对象<br>2.两个方法的使用<br>    toString():显示当前的年、月、日、时、分、秒<br>    getTime():获取当前date对象对应的时间戳(1970年1月1日0时0分0秒之间的毫秒数)</p>
-<p>java.sql.Date类对应着数据库中的日期类型的变量<br>1.如何实例化 new java.sql.Date(long date)<br>2.java.sql.Date对象 –&gt; java.util.Date对象 向上转型直接赋值<br>3.java.util.Date对象 –&gt; java.sql.Date对象 </p>
-<pre><code class="java">Data date = new Date();
-java.sql.Date date1 = new java.sql.Date(date.getTime())
+    <p><strong>题目</strong><br>给定一个字符串 s 和一些长度相同的单词 words。找出 s 中恰好可以由 words 中所有单词串联形成的子串的起始位置。</p>
+<p>注意子串要与 words 中的单词完全匹配，中间不能有其他字符，但不需要考虑 words 中单词串联的顺序。</p>
+<p>示例 1：<br>输入：<br>  s = “barfoothefoobarman”,<br>  words = [“foo”,”bar”]<br>输出：[0,9]<br>解释：<br>从索引 0 和 9 开始的子串分别是 “barfoo” 和 “foobar” 。<br>输出的顺序不重要, [9,0] 也是有效答案。<br>示例 2：</p>
+<p>输入：<br>  s = “wordgoodgoodgoodbestword”,<br>  words = [“word”,”good”,”best”,”word”]<br>输出：[]</p>
+<p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/substring-with-concatenation-of-all-words" target="_blank" rel="noopener">https://leetcode-cn.com/problems/substring-with-concatenation-of-all-words</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
+<p><strong>思路</strong></p>
+<p>单词是不变的，但是单词之间的组合是可以变的。容易想到567题:<br>输入: s1 = “ab” s2 = “eidbaooo”<br>输出: True<br>解释: s2 包含 s1 的排列之一 (“ba”).</p>
+<p>把一个单词看成一个字符，单词间再随便排列，那么顺序是无所谓的，只需要关注单词出现的频率就可以了。</p>
+<p>注意这里的单词长度是固定的。可以把长度 =单词长度*单词个数 的串看成子串，只需要比较子串是否符合条件。</p>
+<p>判断子串是否相等，可以利用之前的思路。扫描子串的单词，如果当前扫描的单词在need中，就把该单词存到window中，并判断window中该单词的value是不是大于need该单词的 value ，如果大了，就代表该子串不是我们要找的，说明重复了某个单词重复了很多遍。如果不大于，接着判断下一个单词的情况。子串扫描结束，如果子串的全部单词都符合，那么该子串就是我们找的其中一个。</p>
+<p><strong>代码</strong></p>
+<pre><code class="java">class Solution {
+    public List&lt;Integer&gt; findSubstring(String s, String[] words) { 
+    HashMap&lt;String,Integer&gt; need = new HashMap&lt;String,Integer&gt;();
+    List&lt;Integer&gt; res = new ArrayList&lt;&gt;();   
+    int wordNum = words.length;
+    if (wordNum == 0) {
+        return res;
+    }
+    int wordLen = words[0].length();
+    for(int i=0;i&lt;words.length;i++){
+        String cur = words[i];
+        need.put(cur,need.getOrDefault(cur,0)+1);
+    }
+    //遍历所有的子串
+    for(int i=0;i&lt;s.length() - wordNum*wordLen+1;i++){
+        HashMap&lt;String,Integer&gt; window = new HashMap&lt;String,Integer&gt;();
+        //开始比较子串是否相等
+        int num=0; 
+        while(num&lt;wordNum){
+            //获取当前的单词
+            String cur = s.substring(i + num*wordLen,i+(num+1)*wordLen);
+            //判断该单词是否在HashMap中
+            if(need.containsKey(cur)){
+                window.put(cur,window.getOrDefault(cur,0)+1);
+                //排除重复的
+                if(window.get(cur) &gt; need.get(cur))break;
+            }else{
+                //没有就跳出循环
+                break;
+            }
+            num++;
+        }
+        //判断是否所有单词都符合,跳出循环可能是break也可能是所有单词都符合
+        if(num == wordNum) res.add(i);
+    }
+    return res;
+ }
+}
 </code></pre>
-<p><strong>不管向上转还是向下转，前提是实例包含这个结构</strong>，new的父类，不能直接强转成子类。</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -189,7 +224,7 @@ java.sql.Date date1 = new java.sql.Date(date.getTime())
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK8之前日期时间API"><span class="toc-text">JDK8之前日期时间API</span></a></li></ol>
+    
   </div>
 </aside>
   
@@ -247,10 +282,10 @@ java.sql.Date date1 = new java.sql.Date(date.getTime())
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2021/01/11/438.找到字符串中所有字母异位词/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2021/01/10/Java常用类/" data-enable="true">
+    <a href="/2021/01/11/java日期/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

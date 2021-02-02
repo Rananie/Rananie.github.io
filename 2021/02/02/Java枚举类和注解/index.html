@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ranan" />
+  
+  
+  <title>Java枚举类和注解 | Ranan_blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Java,Java," />
+  
+
+  
+  <meta name="description" content="Ranan的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Ranan",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/Rananie" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2021-02-02
+    </span>
+    
+      <span>
+        | <a href="/categories/Java/"><i class="fa fa-bookmark"></i>Java</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Java枚举类和注解
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="枚举类"><a href="#枚举类" class="headerlink" title="枚举类"></a>枚举类</h2><p>定义:类的对象<strong>有限个，确定的</strong>，我们称此类为枚举类。<br>使用:当需要定义一组常量时，强烈使用枚举类。<br>说明：若枚举只有一个对象，则可以作为一种单例模式的实现方式。</p>
+<h3 id="如何自定义枚举类？"><a href="#如何自定义枚举类？" class="headerlink" title="如何自定义枚举类？"></a>如何自定义枚举类？</h3><p>方式一：jdk5.0之前，自定义枚举类<br>方式二：jdk5.0,可以使用enum关键字定义枚举类</p>
+<pre><code class="java">//自定义枚举类
+class Season{
+    //1.声明Season对象的属性，类是常量，属性也是常量
+    private final String seasonName;
+    private final String seasonDesc;
+    //2.私有化构造器，因为类的对象是有限个，确定的
+    private Season(seasonName,seasonDesc){
+        //给对象属性赋值，final的变量不可以使用默认值
+        this.seasonName = seasonName;
+        this.seasonDesc = seasonDesc;
+    }
+    //3.提供当前枚举类的多个对象
+    public static final Season SPRING = new Season(&quot;春天&quot;，&quot;春暖花开&quot;);
+    public static final Season SUMMER = new Season(&quot;夏天&quot;，&quot;夏日炎炎&quot;);
+    public static final Season AUTUMN = new Season(&quot;秋天&quot;，&quot;秋高气爽&quot;);
+    public static final Season WINTER = new Season(&quot;冬天&quot;，&quot;冬天雪地&quot;);
+    //其他诉求1：get类的属性
+    //其他诉求2：提供toString方法
+}
+</code></pre>
+<h3 id="如何使用关键字enum定义枚举类？"><a href="#如何使用关键字enum定义枚举类？" class="headerlink" title="如何使用关键字enum定义枚举类？"></a>如何使用关键字enum定义枚举类？</h3><p>1.eunm定义的枚举类默认继承于java.lang.Eunm类,该类已重写toString方法,返回的是常量对象的名字SUMMER、SPRING等。<br>2.开头上来就需要提供当前枚举类的常量对象。</p>
+<pre><code class="java">//使用enum关键字
+enum Season{
+    //1.提供当前枚举类的对象，多个对象之间用&quot;,&quot;，最后一个对象用&quot;;&quot;
+   SPRING(&quot;春天&quot;，&quot;春暖花开&quot;),
+   SUMMER(&quot;夏天&quot;，&quot;夏日炎炎&quot;),
+   AUTUMN(&quot;秋天&quot;，&quot;秋高气爽&quot;),
+   WINTER(&quot;冬天&quot;，&quot;冬天雪地&quot;);
+
+//--------其余没变化，toString已被重写
+
+    //1.声明Season对象的属性，类是常量，属性也是常量
+    private final String seasonName;
+    private final String seasonDesc;
+    //2.私有化构造器，因为类的对象是有限个，确定的
+    private Season(seasonName,seasonDesc){
+        //给对象属性赋值，final的变量不可以使用默认值
+        this.seasonName = seasonName;
+        this.seasonDesc = seasonDesc;
+    }
+    //其他诉求1：get类的属性
+}
+</code></pre>
+<h3 id="Enum类的常用方法"><a href="#Enum类的常用方法" class="headerlink" title="Enum类的常用方法"></a>Enum类的常用方法</h3><p>枚举类.values():返回一个数组，数组的每个元素是枚举类对象的常量名。<br>枚举类.valueOf(String str):可以把一个字符串转为对应的枚举类对象名，返回对应的枚举类对象。如果objName没有对应的枚举类对象名,则会抛出异常。<br>枚举类实例.toString():返回当前枚举类对象常量的名称</p>
+<h3 id="实现接口的枚举类"><a href="#实现接口的枚举类" class="headerlink" title="实现接口的枚举类"></a>实现接口的枚举类</h3><p>情况1：实现接口，在enum类中实现抽象方法 –&gt; 所有对象共用一个抽象方法<br>情况2：不同的常量对象分别实现抽象方法 –&gt; 不同对象对该抽象方法的实现不一样</p>
+<pre><code class="java">//情况1：实现接口，在enum类中实现抽象方法
+enum Seanson implements 接口{
+    @Override
+}
+//情况2：不同的常量对象分别实现抽象方法
+enum Season{
+   SPRING(&quot;春天&quot;，&quot;春暖花开&quot;){
+       @Override
+   },
+   SUMMER(&quot;夏天&quot;，&quot;夏日炎炎&quot;){
+       @Override
+   },
+   AUTUMN(&quot;秋天&quot;，&quot;秋高气爽&quot;){
+       @Override
+   },
+   WINTER(&quot;冬天&quot;，&quot;冬天雪地&quot;){
+       @Override
+   };
+}  
+</code></pre>
+<h2 id="注解-Annotation"><a href="#注解-Annotation" class="headerlink" title="注解(Annotation)"></a>注解(Annotation)</h2><p>Annotation其实就是代码里的特殊标记，如@Override。这些标记可以在编译，类加载、运行时被读取，并执行相应的处理。通过Annotation，程序员可以在不改变原有逻辑的情况下，在源文件中嵌入一些补充信息。代码分析工具、开发工具和部署工具可以通过这些补充信息进行验证或部署。</p>
+<p>Annotation可以像修饰符一样被使用，可用于<strong>修饰包、类、构造器、方法、成员变量、参数、局部变量的声明</strong>，这些信息被保存在Annotation的”name=value”对中。</p>
+<p>注解是一种趋势，一定程度可以说：框架 = 注解 + 反射 + 设计模式</p>
+<h3 id="常见的Annotation示例"><a href="#常见的Annotation示例" class="headerlink" title="常见的Annotation示例"></a>常见的Annotation示例</h3><p>使用Annotation时要在其前面增加@符号,并把<strong>该Annotation当成一个修饰符使用。</strong></p>
+<p>示例一：生成文档相关的注释<br>@author 标明开发该类模块的作者，多个作者之间使用,分割<br>@version 表明该类模块的版本<br>@see 参考转向，也是相关的主题<br>@date  编写的时间<br>以下三个标记只适用于方法<br>@param 形参名 形参类型 返回值说明<br>@return 返回值类型 返回值说明<br>@exception 异常类型 异常说明</p>
+<p>示例二:在<strong>编译时</strong>进行格式检查(JDK内置的三个基本注解)<br>@Override:限定重写父类方法，该注解只能用于方法<br>@Deprecated:用于表示锁修饰的元素(类、方法等)已过时。<br>@SuppressWarnings({“警告信息1”,”警告信息2”}):抑制编译器警告</p>
+<p>示例三：跟踪代码依赖性，实现替代配置文件功能。<br>Servlet3.0提供了注解，使得不在需要在web.xml文件中进行Servlet的部署<br>spring框架中关于”事务”的管理  @Text</p>
+<h3 id="自定义Annotation"><a href="#自定义Annotation" class="headerlink" title="自定义Annotation"></a>自定义Annotation</h3><p>参照SuppressWarnings定义</p>
+<p>Annotation的成员变量在Annotation定义中以无参数方法的形式来声明。<br>其<strong>方法名和返回值定义了该成员的名字和类型</strong>，我们称为配置参数。<br>类型只能是八种基本数据类型、String类型、Class类型、enum类型、Annotation类型以及以上所有类型的数组。<br>如果只有一个参数成员,建议使用参数名为value。<br>定义Annotation的成员变量时为其指定初始值，指定成员变量的初始值可使用<strong>default关键字</strong>。<br>没有成员定义的Annotation称为标记，包含成员变量的Annotation称为元数据Annotation。</p>
+<pre><code class="java">public @interface MyAnnotation{
+ String value();
+ //可以指定默认值
+ String value () default &quot;hello&quot;;
+}
+//使用时
+@MyAnnotation(value = &quot;hello&quot;)
+//当只有一个成员时，可以省略成员名
+@MyAnnotation(&quot;hello&quot;)
+</code></pre>
+<h3 id="JDK中的元注解"><a href="#JDK中的元注解" class="headerlink" title="JDK中的元注解"></a>JDK中的元注解</h3><p>定义：元注解用于修饰其他Annotation定义。</p>
+<p>JDK5.0提供了4个标准的meta-annotation类型，分别是Retention,Target,Documented,Inherited。</p>
+<blockquote>
+<p>元数据的理解：String name = “ranan”,真实数据是ranan,String name可以看成对ranan的修饰，元数据：对现有的数据进行修饰</p>
+</blockquote>
+<p>@Retention:指定修饰的Annotation的生命周期，包含了RetentionPolicy类型的成员变量<br>    RetentionPolicy.SOURCE:在源文件中有效(源文件保留)，编译器直接丢弃这种策略的注释。<br>    RetentionPolicy.CLASS:在class文件中有效(class保留)，当运行Java程序时，JVM不会保留注释，这是默认值。<br>    RetentionPolicy.RUNTIME:在运行时有效(运行时保留),当运行Java程序时，JVM会保留注释，程序可以通过反射获取该注释。</p>
+<p>@Target:用于指定被修饰的Annotation能用于修饰哪些程序元素<br>    TYPE:Class，interface<br>    FIELD:文件<br>    METHOD:方法<br>    PARAMETER:参数<br>    CONSTRUCTOR:构造器<br>    LOCAL_VARIABLE:局部变量<br>    ANNOTATION_TYPE:注解类型<br>    PACKAGE:包</p>
+<p>以下两个注解使用频率低<br>@Documented:用于指定被修饰的Annotation类将被javadoc工具解析时保留下来。默认情况下Javadoc是不包括注解的。<br>@Inherited:被修饰的Anotation将具有<strong>继承性</strong>。如果某个类使用了被@Inherited修饰的Annotaiton，则其子类将自动具有该Annotaiton。</p>
+<h3 id="利用反射获取注解信息-—反射时再来补充笔记"><a href="#利用反射获取注解信息-—反射时再来补充笔记" class="headerlink" title="利用反射获取注解信息  —反射时再来补充笔记"></a>利用反射获取注解信息  —反射时再来补充笔记</h3><h3 id="JDK8-中注释的新特性"><a href="#JDK8-中注释的新特性" class="headerlink" title="JDK8 中注释的新特性"></a>JDK8 中注释的新特性</h3><h4 id="可重复注解"><a href="#可重复注解" class="headerlink" title="可重复注解"></a>可重复注解</h4><p>注解可以重复定义多个</p>
+<p>1.在MyAnnotation声明@Repeatable(MyAnnotations.class)。关联两个注解<br>2.MyAnnotation的Target、Retention、Inherited和MyAnnotations相同</p>
+<pre><code class="java">//jdk8
+@Repeatable(MyAnnotations.class)
+public @interface @MyAnnotation{
+    String value() default &quot;hello&quot;;
+}
+@MyAnnotation(value = &quot;hello&quot;)
+@MyAnnotation(value = &quot;abc&quot;)
+//jdk 8 之前的写法
+@MyAnnotations({@MyAnnotation(value = &quot;hello&quot;)}，{@MyAnnotation(value = &quot;abc&quot;)})
+
+public @interface @MyAnnotations{
+   MyAnnotation[] value(); 
+}
+</code></pre>
+<h4 id="类型注解"><a href="#类型注解" class="headerlink" title="类型注解"></a>类型注解</h4><p>TYPE_PARAMETER:表示该注解能写在类型变量的声明语句中(如泛型声明)<br>TYPE_USE:表示该注解能写在使用类型的任何语句中。</p>
+<pre><code class="java">@Target({TYPE_PARAMETER,TYPE_USE})
+public @interface @MyAnnotation{}
+//使用
+class Generic&lt;@MyAnnotation T&gt;{
+    public void show(){
+        ArrayList&lt;@MyAnnotation String&gt; list = new ArrayList&lt;&gt;()
+    }
+}
+</code></pre>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#枚举类"><span class="toc-text">枚举类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何自定义枚举类？"><span class="toc-text">如何自定义枚举类？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何使用关键字enum定义枚举类？"><span class="toc-text">如何使用关键字enum定义枚举类？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Enum类的常用方法"><span class="toc-text">Enum类的常用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现接口的枚举类"><span class="toc-text">实现接口的枚举类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注解-Annotation"><span class="toc-text">注解(Annotation)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#常见的Annotation示例"><span class="toc-text">常见的Annotation示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义Annotation"><span class="toc-text">自定义Annotation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JDK中的元注解"><span class="toc-text">JDK中的元注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#利用反射获取注解信息-—反射时再来补充笔记"><span class="toc-text">利用反射获取注解信息  —反射时再来补充笔记</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JDK8-中注释的新特性"><span class="toc-text">JDK8 中注释的新特性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#可重复注解"><span class="toc-text">可重复注解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#类型注解"><span class="toc-text">类型注解</span></a></li></ol></li></ol></li></ol>
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/Java/"><i class="fa fa-tags"></i>Java</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2021/01/11/java日期/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

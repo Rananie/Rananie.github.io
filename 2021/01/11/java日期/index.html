@@ -208,6 +208,45 @@ public void testExer(){
 <h3 id="java-util-Calendar"><a href="#java-util-Calendar" class="headerlink" title="java.util.Calendar"></a>java.util.Calendar</h3><p>Calendar是一个抽象基类，主要用于完成日期字段之间相互操作的功能</p>
 <p>获取Calendar实例的方法<br>1.使用Calendar.getInstance()方法<br>2.调用子类GregorianCalendar的构造器</p>
 <p>常用方法<br>//获取今天是一年的第几天…,获取信息<br>calendar.get(Calendar.DAY_OF_MONTH);<br>//把指定的属性设置成指定的值.会修改calendar本身实列<br>void calendar.set(Calendar.DAY_OF_MONTH,22)<br>// +3天<br>void calendar.add(Calendar.DAY_OF_MONTH,3)<br>//日历类–&gt;Date<br>final Date getTime(): 日历类–&gt;Date<br>Date date = calendar.getTime()<br>//Date –&gt; 日历类<br>final void setTime(Date date)<br>calendar.setTime(data)</p>
+<h2 id="JDK8中新日期时间API"><a href="#JDK8中新日期时间API" class="headerlink" title="JDK8中新日期时间API"></a>JDK8中新日期时间API</h2><p>JDK8之前面临的问题：<br>1.可变性:像日期和时间这样的类应该是不可变的。<br>2.偏移性：Date中的年份是从1900开始的，而月份都是从0开始。(year + 1900,month + 1,date)<br>3.格式化：格式化只对Date有用，Calendar则不行。<br>4.并不是线程安全的。</p>
+<h3 id="java-time"><a href="#java-time" class="headerlink" title="java.time"></a>java.time</h3><p><strong>LocalDate,LocalTime,LocalDateTime</strong></p>
+<p>1.实例化</p>
+<p>静态方法<br>now()方法:获取当前的日期、时间、日期+时间<br>of()方法:设置指定的时间,没有偏移量</p>
+<p>2.操作方法，实例方法<br>getXxx() 获取相关属性<br>withXxx() 设置相关属性，有返回值，返回值是修改后的日期，原来的不改变，不可变性。<br>plusXxx()/minusXxx() 对相关属性进行增加删除操作</p>
+<pre><code class="java">//now()获取当前的日期、时间、日期+时间
+//2020-09-09
+LocalDate localDate = LocalDate.now()
+LocalTime localTime = LocalTime.now()
+LocalDateTime localDateTime = LocalDateTime.now()
+
+//of（）:设置指定的时间,没有偏移量
+LocalDateTime localDateTime = LocalDateTime.of(year,month,dayOfMonth,hour,minute,second)
+</code></pre>
+<p><strong>Instant</strong></p>
+<p>时间线上的一个瞬时点，可以用来记录应用程序中的事件时间戳。是一个数以1970年开始，以毫秒为单位。<br>类似 java.util.Date 类</p>
+<p>1.实例化</p>
+<p>now():获取本初子午线对应的标准时间<br>ofEpochMilli(long毫秒数):通过毫米数实例化instant -&gt;Date(long millis)</p>
+<pre><code class="java">//有时差，按照本初子午线的时间
+Instant instant = Instant.now();
+//实例方法，添加时间的偏移量
+OffsetDateTime atOffsetDateTime = instant.atOffset(ZoneOffset.ofHours(8)); //设置时区
+Instant instant = Instant.ofEpochMilli(milli);
+</code></pre>
+<p>2.操作</p>
+<p>instant.toEpochMilli():获取对应的毫秒数  -&gt; Date类的getTime()</p>
+<pre><code class="java">//获取自1970年1月1日0时0分0秒(UTC)开始的毫秒数
+long milli = instant.toEpochMilli();
+</code></pre>
+<p><strong>java.time.format.DateTimeFormatter类</strong></p>
+<p>DateTimeFormatter：格式化或解析日期、时间。类似与SimpleDateFormat</p>
+<p>1.实例化<br>预定义的标准格式：如ISO_LOCAL_DATA_TIME<br>本地化相关的格式: 如ofLocalzedDateTime()。参数FormatStyle.Long/FormatStyle.MEDIUM/FormatStyle.SHORT 适用于LocalDateTime<br>自定义的格式(常用):ofPattern(“yyyy-MM-dd hh:mm:ss E”)</p>
+<pre><code class="java">//实例化
+DateTimeFormatter formatter = DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd hh:mm:ss E&quot;);
+//格式化 日期 -&gt; 字符串
+String str = formatter.format(LocalDateTime/LocalDate/LocalTime) //2019-02-18 03:52:09
+//解析 字符串 -&gt; 日期
+formatter.parse(str);
+</code></pre>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -216,7 +255,7 @@ public void testExer(){
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK8之前日期时间API"><span class="toc-text">JDK8之前日期时间API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#java-lang-System类"><span class="toc-text">java.lang.System类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#java中的data类"><span class="toc-text">java中的data类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#java-text-SimpleDateFormat类"><span class="toc-text">java.text.SimpleDateFormat类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#java-util-Calendar"><span class="toc-text">java.util.Calendar</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK8之前日期时间API"><span class="toc-text">JDK8之前日期时间API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#java-lang-System类"><span class="toc-text">java.lang.System类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#java中的data类"><span class="toc-text">java中的data类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#java-text-SimpleDateFormat类"><span class="toc-text">java.text.SimpleDateFormat类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#java-util-Calendar"><span class="toc-text">java.util.Calendar</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JDK8中新日期时间API"><span class="toc-text">JDK8中新日期时间API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#java-time"><span class="toc-text">java.time</span></a></li></ol></li></ol>
   </div>
 </aside>
   
@@ -274,10 +313,10 @@ public void testExer(){
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/2021/01/12/30.串联所有单词的子串/" data-enable="true">
+    <a href="/2021/02/02/Java枚举类和注解/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2021/01/11/Java常用类/" data-enable="true">
+    <a href="/2021/01/11/Java字符串/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

@@ -198,6 +198,7 @@
 }
 </code></pre><p>体会:throws的方法只是将异常抛给了方法的调用者，并没有真正将异常处理掉。</p>
 <h2 id="用户自定义异常"><a href="#用户自定义异常" class="headerlink" title="用户自定义异常"></a>用户自定义异常</h2><p><strong>手动抛出异常</strong><br>关于异常对象的产生：<br>    ①系统自动生成的异常对象<br>    ②手动的生成一个异常对象，并抛出throw (i)</p>
+<p><strong>运行时异常可以不用处理</strong></p>
 <pre><code>//运行时异常可以不用处理
 throw new RuntiomeException(&quot;有些有message参数&quot;)
 //需要处理因为包含了编译时异常，可选throws或者try-catch-finally
@@ -286,7 +287,7 @@ public MyException(String msg){
     <a href="/2020/12/21/Java多线程/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/2020/12/14/257.二叉树的所有路径/" data-enable="true">
+    <a href="/2020/11/15/note-树/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>

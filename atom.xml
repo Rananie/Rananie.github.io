@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-02-02T08:26:37.036Z</updated>
+  <updated>2021-02-07T09:19:28.264Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java集合</title>
+    <link href="http://yoursite.com/2021/02/04/Java%E9%9B%86%E5%90%88/"/>
+    <id>http://yoursite.com/2021/02/04/Java集合/</id>
+    <published>2021-02-04T00:02:27.000Z</published>
+    <updated>2021-02-07T09:19:28.264Z</updated>
+    
+    <content type="html"><![CDATA[<p>集合、数组都是对多个数据进行存储操作(主要是内存层面存储)的结构，简称Java容器。</p><p><strong>数组的特点</strong><br>1.数组初始化以后，长度确定不可变<br>2.数组定义好，其元素的类型确定不可变(可能有多态性)<br>3.数组中提供的方法有限，对于添加、删除、插入数据等操作不方便。<br>4.获取数组中实际元素的个数是没有办法的。<br>5.数组存储数据的特点是有序、可重复的。</p><h2 id="Java集合"><a href="#Java集合" class="headerlink" title="Java集合"></a>Java集合</h2><p>Java集合可分为Collection和Map两种体系</p><p>Collection接口：单列数据，定义了存储一组对象的方法和集合<br>    List接口:元素有序，可重复的集合<br>    Set接口 :元素无序、不可重复的集合<br>Map接口：双列数据，保存有映射关系(键值对)的集合</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;集合、数组都是对多个数据进行存储操作(主要是内存层面存储)的结构，简称Java容器。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;数组的特点&lt;/strong&gt;&lt;br&gt;1.数组初始化以后，长度确定不可变&lt;br&gt;2.数组定义好，其元素的类型确定不可变(可能有多态性)&lt;br&gt;3.数组中提供的方
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="http://yoursite.com/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>Java枚举类和注解</title>

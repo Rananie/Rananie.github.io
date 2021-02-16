@@ -168,9 +168,61 @@
   <article class="passage-article">
     <p>集合、数组都是对多个数据进行存储操作(主要是内存层面存储)的结构，简称Java容器。</p>
 <p><strong>数组的特点</strong><br>1.数组初始化以后，长度确定不可变<br>2.数组定义好，其元素的类型确定不可变(可能有多态性)<br>3.数组中提供的方法有限，对于添加、删除、插入数据等操作不方便。<br>4.获取数组中实际元素的个数是没有办法的。<br>5.数组存储数据的特点是有序、可重复的。</p>
-<h2 id="Java集合"><a href="#Java集合" class="headerlink" title="Java集合"></a>Java集合</h2><p>Java集合可分为Collection和Map两种体系</p>
-<p>Collection接口：单列数据，定义了存储一组对象的方法和集合<br>    List接口:元素有序，可重复的集合<br>    Set接口 :元素无序、不可重复的集合<br>Map接口：双列数据，保存有映射关系(键值对)的集合</p>
+<h2 id="Java集合"><a href="#Java集合" class="headerlink" title="Java集合"></a>Java集合</h2><p>Java集合可分为Collection和Map两种体系,集合存储的优点是解决数组存储数据方面的弊端。</p>
+<p>Collection接口：单列数据，用来存储一个一个的对象<br>    List接口:元素有序，可重复的集合  –&gt; ‘动态’数组<br>    Set接口 :元素无序、不可重复的集合<br>Map接口：双列数据，保存有映射关系(键值对)的集合</p>
+<h3 id="Collection接口"><a href="#Collection接口" class="headerlink" title="Collection接口"></a>Collection接口</h3><p>向collection接口的实现类的对象中添加数据obj时，要求obj所在类要重写equals方法。</p>
+<p><strong>Abstract Methods</strong><br>add(Object e):将元素e添加到集合中<br>size():获取添加的元素个数<br>addAll(Collection coll):将形参coll集合的元素添加到当前集合中<br>clear():清空集合元素<br>isEmpty():判断当前集合是否为空<br>cantains(Object obj):判断当前集合中是否包含obj，<strong>是否包含是通过调用obj的equals判断</strong><br>containsAll(Collection coll):判断形参coll中的所有元素是否都存在当前集合中。<br>remove(Object obj):移除某个元素，同样通过equals寻找移除的元素<br>removeAll(Collection coll):从当前集合中移除coll集合中所有的元素，需要调用equals函数<br>retainAll(Collection coll):求两个集合的交集,结果为修改当前集合后的集合。<br>equals(Collection coll):比较两个集合是否一样。<br>hashCode():返回当前对象的哈希值</p>
+<p>集合转换成数组 –&gt; coll.toArray()<br>数组转换成List  –&gt; Arrays.asList(new String[]{‘AA’,’BB’,’CC’})<br><strong>注意:</strong><br>List arr = Arrays.asList(new int[]{123,456})会把new int[]{123,456}整体看成一个元素<br>可以写成 List arr = Arrays.asList(123,456)</p>
+<h4 id="集合的遍历-iterator-接口"><a href="#集合的遍历-iterator-接口" class="headerlink" title="集合的遍历:iterator 接口"></a>集合的遍历:iterator 接口</h4><p>集合元素的遍历操作:Iterator迭代器接口。</p>
+<pre><code class="Java">Iterator iterator = coll.iterator();
+//方式一：通过iterator.next()获得集合元素
+iterator.next();
+//方式二：循环,不推荐
+for(int i =0;i&lt;coll.size;i++){
+    iterator.next();
+}
+//方式三：推荐!
+//hasNext():判断是否还有下一个元素
+while(iterator.hasNext()){
+    //next():①指针下移 ②将下移以后集合位置上的元素返回
+    Object obj = iterator.next();
+    if(&quot;Tom&quot;.equals(obj)){
+    //iterator中的remove(),删除集合中的元素
+    iterator.remove()
+    }
+}
+</code></pre>
+<p>迭代器的执行原理:iterator只是用来遍历的。</p>
+<p><img src="https://raw.githubusercontent.com/Rananie/imgs_rananie/master/blog/java/%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%8E%9F%E7%90%86.jpg?token=AHTYULDKVQTHUBIJIJIMCDLAFOQQY"></p>
+<h4 id="集合的遍历-foreach循环"><a href="#集合的遍历-foreach循环" class="headerlink" title="集合的遍历:foreach循环"></a>集合的遍历:foreach循环</h4><p>foreach循环用于遍历数组和集合</p>
+<pre><code class="java">//第一个位置，是当前的元素
+//第二个位置，是遍历的对象
+//集合元素的类型 局部变量 ：集合
+for(Object obj : coll){
 
+}
+</code></pre>
+<p><strong>面试题</strong></p>
+<p>知识点：foreach只能遍历不能赋值</p>
+<pre><code class="Java">String [] arr = new String[]{&quot;ranan&quot;,&quot;ranan&quot;}
+//普通for循环
+for(int i=0;i&lt;arr.length;i++){
+    arr[i] = &quot;xx&quot;
+}
+for(int i=0;i&lt;arr.length;i++){
+    System.out.println(arr[i]); //输出&quot;xx&quot;
+}
+
+//foreach循环
+for(String s:arr){
+    //这里的s是局部变量，相当与取出arr[i]的值赋值给了变量s，改变的是s的值
+    s = &quot;xx&quot;;
+}
+for(int i=0;i&lt;arr.length;i++){
+    System.out.println(arr[i]); //输出&quot;ranan&quot;
+}
+</code></pre>
+<h4 id="List接口"><a href="#List接口" class="headerlink" title="List接口"></a>List接口</h4>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -178,7 +230,7 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java集合"><span class="toc-text">Java集合</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java集合"><span class="toc-text">Java集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Collection接口"><span class="toc-text">Collection接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#集合的遍历-iterator-接口"><span class="toc-text">集合的遍历:iterator 接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#集合的遍历-foreach循环"><span class="toc-text">集合的遍历:foreach循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#List接口"><span class="toc-text">List接口</span></a></li></ol></li></ol></li></ol>
   </div>
 </aside>
   

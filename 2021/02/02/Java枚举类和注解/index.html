@@ -242,6 +242,7 @@ enum Season{
 <p>示例三：跟踪代码依赖性，实现替代配置文件功能。<br>Servlet3.0提供了注解，使得不在需要在web.xml文件中进行Servlet的部署<br>spring框架中关于”事务”的管理  @Text</p>
 <h3 id="自定义Annotation"><a href="#自定义Annotation" class="headerlink" title="自定义Annotation"></a>自定义Annotation</h3><p>参照SuppressWarnings定义</p>
 <p>Annotation的成员变量在Annotation定义中以无参数方法的形式来声明。<br>其<strong>方法名和返回值定义了该成员的名字和类型</strong>，我们称为配置参数。<br>类型只能是八种基本数据类型、String类型、Class类型、enum类型、Annotation类型以及以上所有类型的数组。<br>如果只有一个参数成员,建议使用参数名为value。<br>定义Annotation的成员变量时为其指定初始值，指定成员变量的初始值可使用<strong>default关键字</strong>。<br>没有成员定义的Annotation称为标记，包含成员变量的Annotation称为元数据Annotation。</p>
+<p>1.注解声明为:@interface<br>2.内部定义成员,通常使用value表示<br>3.可以指定成员的默认值，使用default定义<br>4.如果自定义注解没成员，表明是一个标识作用</p>
 <pre><code class="java">public @interface MyAnnotation{
  String value();
  //可以指定默认值
@@ -269,9 +270,10 @@ public @interface @MyAnnotation{
 }
 @MyAnnotation(value = &quot;hello&quot;)
 @MyAnnotation(value = &quot;abc&quot;)
+
 //jdk 8 之前的写法
 @MyAnnotations({@MyAnnotation(value = &quot;hello&quot;)}，{@MyAnnotation(value = &quot;abc&quot;)})
-
+//MyAnnotations
 public @interface @MyAnnotations{
    MyAnnotation[] value(); 
 }

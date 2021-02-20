@@ -6,12 +6,12 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>归档: 2020 | 第4页 | Ranan_blog</title>
+  <title>Java比较器 | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo, Theme-AD" />
+    <meta name="keywords" content="Java,Java," />
   
 
   
@@ -36,7 +36,7 @@
     welcome: {"enable":false,"interval":30},
     start_time: "2018-02-10",
     passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
-    is_post: false,
+    is_post: true,
     lock: false,
     author: "Ranan",
     share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
@@ -144,72 +144,84 @@
 </nav>
 <div id="site-process"></div>
     <main>
-      <div class="timeline">
-  <h2 class="timeline-title">归档: 85篇</h2>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2021-02-16
+    </span>
+    
+      <span>
+        | <a href="/categories/Java/"><i class="fa fa-bookmark"></i>Java</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Java比较器
+  </h1>
   
-    
-      <h3 class="timeline-subtitle">2020</h3>
-    
-    <div class="timeline-item">
-      <time>2020-08-06</time>
-      <a target="_self" href="/2020/08/06/vue组件通信/">vue组件通信</a>
-    </div>
+  <article class="passage-article">
+    <h2 id="自然排序-java-lang-Comparable"><a href="#自然排序-java-lang-Comparable" class="headerlink" title="自然排序:java.lang.Comparable"></a>自然排序:java.lang.Comparable</h2><p>1.像String、包装类等实现了Comparable接口，重写了compareTo()方法<br>2.重写compareTo()的规则: 进行了从小到大的排序(负数在前、正数在后面)<br>  如果当前对象this大于形参对象obj,则返回正整数。<br>  如果当前对象this小于形参对象obj，则返回负整数<br>  如果当前对象this等于形参obj.则返回零<br>3.利用Array.sort(Object obj)进行排序,调用comparaTo()方法</p>
+<p>例子：指明商品按照价格从低到高排序</p>
+<pre><code class="java">public class Goods implements Comparable{
+  //...
+  @Override
+  public int comparaTo(Object o){
+    if(o instanceof Goods){
+      Goods goods = (Goods) o;
+      //方式一
+      if(this.price&gt;goods.price){
+        return 1 ;
+      }else if(this.price&lt;goods.price){
+        return -1;
+      }else{
+        return 0;
+      }
+      //方式二
+      return Double.compare(this.price,goods.price);
+    }
+  }
+}
+</code></pre>
+<h2 id="定制排序-java-util-Comparator"><a href="#定制排序-java-util-Comparator" class="headerlink" title="定制排序:java.util.Comparator"></a>定制排序:java.util.Comparator</h2><p>1.背景：<br>元素的类型没有实现java.lang.Comparable接口而又不方便修改代码<br>实现了java.lang.Comparable接口的排序规则不适合当前的操作</p>
+<p>2.使用重写compare(Object o1,Object o2)方法，比较o1和o2的大小</p>
+<pre><code class="java">//obj为需要比较的类
+Arrays.sort(Object obj,new Comparator(){
+//利用匿名实现类的方法
+  @Override
+  public int compare(Object o1,Object o2){
+    //具体的排序方法
+  }
+})
+</code></pre>
+<h2 id="System类"><a href="#System类" class="headerlink" title="System类"></a>System类</h2><p>工具类</p>
+<p>void exit(int status):退出程序，status值为0代表正常退出，非零代表异常退出<br>void gc():请求系统进行垃圾回收，至于系统是否立即回收，则取决于系统中垃圾回收算法的实现以及系统执行时的情况。<br>String getProperty(String key):该方法的作用是获取系统中属性名为key的属性对应的值。</p>
+<h2 id="Math类"><a href="#Math类" class="headerlink" title="Math类"></a>Math类</h2><h2 id="BigI"><a href="#BigI" class="headerlink" title="BigI"></a>BigI</h2>
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#自然排序-java-lang-Comparable"><span class="toc-text">自然排序:java.lang.Comparable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定制排序-java-util-Comparator"><span class="toc-text">定制排序:java.util.Comparator</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#System类"><span class="toc-text">System类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Math类"><span class="toc-text">Math类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BigI"><span class="toc-text">BigI</span></a></li></ol>
+  </div>
+</aside>
   
-    
-    <div class="timeline-item">
-      <time>2020-07-31</time>
-      <a target="_self" href="/2020/07/31/python-基础/">python基础</a>
-    </div>
   
+    <div class="passage-tags">
+     
+      <a href="/tags/Java/"><i class="fa fa-tags"></i>Java</a>
     
-    <div class="timeline-item">
-      <time>2020-07-31</time>
-      <a target="_self" href="/2020/07/31/vue基础/">vue基础</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-07-30</time>
-      <a target="_self" href="/2020/07/30/奇奇怪怪的坑们/">奇奇怪怪的坑们</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-07-28</time>
-      <a target="_self" href="/2020/07/28/promise/">Promise</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-07-28</time>
-      <a target="_self" href="/2020/07/28/promise链式调用顺序/">promise链式调用顺序</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-07-28</time>
-      <a target="_self" href="/2020/07/28/宏队列与微队列/">js异步:宏队列与微队列</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-07-27</time>
-      <a target="_self" href="/2020/07/27/数组的方法/">数组的方法</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-07-27</time>
-      <a target="_self" href="/2020/07/27/字符串的方法/">字符串的方法</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-07-27</time>
-      <a target="_self" href="/2020/07/27/拷贝/">深度克隆</a>
     </div>
   
 </div>
+
     </main>
     
     <div class="site-footer-wrapper">
@@ -255,15 +267,15 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/archives/2020/page/3/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/archives/2020/page/5/" data-enable="true">
+    <a href="/2021/02/04/Java集合/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
   <div class="bottom-bar-right">
-    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
       <i class="fa fa-bars"></i>
     </a>
     

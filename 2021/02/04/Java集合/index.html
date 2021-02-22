@@ -173,7 +173,7 @@
 <h3 id="Collection接口"><a href="#Collection接口" class="headerlink" title="Collection接口"></a>Collection接口</h3><p>向collection接口的实现类的对象中添加数据obj时，要求obj所在类要重写equals方法。</p>
 <p><strong>Abstract Methods</strong><br>add(Object e):将元素e添加到集合中<br>size():获取添加的元素个数<br>addAll(Collection coll):将形参coll集合的元素添加到当前集合中<br>clear():清空集合元素<br>isEmpty():判断当前集合是否为空<br>cantains(Object obj):判断当前集合中是否包含obj，<strong>是否包含是通过调用obj的equals判断</strong><br>containsAll(Collection coll):判断形参coll中的所有元素是否都存在当前集合中。<br>remove(Object obj):移除某个元素，同样通过equals寻找移除的元素<br>removeAll(Collection coll):从当前集合中移除coll集合中所有的元素，需要调用equals函数<br>retainAll(Collection coll):求两个集合的交集,结果为修改当前集合后的集合。<br>equals(Collection coll):比较两个集合是否一样。<br>hashCode():返回当前对象的哈希值</p>
 <p>集合转换成数组 –&gt; coll.toArray()<br>数组转换成List  –&gt; Arrays.asList(new String[]{‘AA’,’BB’,’CC’})<br><strong>注意:</strong><br>List arr = Arrays.asList(new int[]{123,456})会把new int[]{123,456}整体看成一个元素<br>可以写成 List arr = Arrays.asList(123,456)</p>
-<h4 id="集合的遍历-iterator-接口"><a href="#集合的遍历-iterator-接口" class="headerlink" title="集合的遍历:iterator 接口"></a>集合的遍历:iterator 接口</h4><p>集合元素的遍历操作:Iterator迭代器接口。</p>
+<h4 id="集合的遍历-iterator-接口"><a href="#集合的遍历-iterator-接口" class="headerlink" title="集合的遍历:iterator 接口"></a>集合的遍历:iterator 接口</h4><p>集合元素的遍历操作:Iterator迭代器接口。<strong>只能遍历集合Collection,map不行</strong></p>
 <pre><code class="Java">Iterator iterator = coll.iterator();
 //方式一：通过iterator.next()获得集合元素
 iterator.next();
@@ -191,6 +191,9 @@ while(iterator.hasNext()){
     iterator.remove()
     }
 }
+//方法引用，Java8新特性
+coll.forEach(System.out::println)
+
 </code></pre>
 <p>迭代器的执行原理:iterator只是用来遍历的。</p>
 <p><img src="https://raw.githubusercontent.com/Rananie/imgs_rananie/master/blog/java/%E8%BF%AD%E4%BB%A3%E5%99%A8%E5%8E%9F%E7%90%86.jpg?token=AHTYULDKVQTHUBIJIJIMCDLAFOQQY"></p>
@@ -198,9 +201,7 @@ while(iterator.hasNext()){
 <pre><code class="java">//第一个位置，是当前的元素
 //第二个位置，是遍历的对象
 //集合元素的类型 局部变量 ：集合
-for(Object obj : coll){
-
-}
+for(Object obj : coll){}
 </code></pre>
 <p><strong>面试题</strong></p>
 <p>知识点：foreach只能遍历不能赋值</p>
@@ -226,7 +227,7 @@ for(int i=0;i&lt;arr.length;i++){
 <ul>
 <li>ArrayList:List接口的主要实现类，线程不安全、效率高，底层使用Object[]存储</li>
 <li>LinkedList:底层使用双向链表存储，对于频繁的插入、删除操作效率更高</li>
-<li>Vector:List接口的古老实现类，线程安全、效率低，底层使用Object[]存储</li>
+<li>Vector:List接口的古老实现类，线程安全、效率低，底层使用Object[]存储，默认长度为10。默认扩容为原数组的2倍</li>
 </ul>
 <p><strong>ArrayList</strong></p>
 <p>JDK7</p>
@@ -256,7 +257,36 @@ ArrayList list = new ArrayList(数字)
 <p>注意：<br>new HashSet()实际上是new了一个HashMap，向HashSet添加元素实际上是向HashMap添加元素</p>
 <p><strong>LinkedHashSet</strong></p>
 <p>LinkedHashSet作为HashSet的子类，在添加数据的同时，每个数据还维护了两个引用指针，遍历其内部数据时可以按照添加的顺序遍历</p>
-
+<p><strong>TreeSet</strong></p>
+<p>要求：向TreeSet中添加的数据，要求是相同类的对象<br>作用：进行排序</p>
+<p>遍历的时候会调用排序方法进行自动排序。</p>
+<p>自然排序(Comparable接口)：<br>比较两个对象是否相同的标准为:compareTo()返回0,不再是equals()</p>
+<p>定制排序(Comparator接口)：<br>比较两个对象是否相同的标准为:compare()返回0，不再是equals()</p>
+<pre><code class="Java">Comparator com = new Comparator(){
+    //定制排序内容
+    @override
+    public int compare(Object o1,Object o2){}
+}
+TreeSet set = new TreeSet(com)
+</code></pre>
+<p><strong>练习题</strong></p>
+<p>1.在List内去除重复数字值,要求尽量简单</p>
+<p>HashSet常常用于过滤重复元素 –&gt; set.addAll(list)  –&gt; return new ArrayList(set)</p>
+<pre><code class="Java">//Person类中重写了hashCode()和equals()方法
+HashSet set = new HashSet();
+Person p1 = new Person(1001,&quot;AA&quot;);
+Person p2 = new Person(1002,&quot;BB&quot;);
+set.add(p1);
+set.add(p2);
+p1.name = &quot;CC&quot;;
+set.remove(p1);//remove时先计算hash值(此题由id和name共同计算所得),内容变了hash值也变了
+System.out.println(set);//1001,&quot;CC&quot;   1002,&quot;BB&quot;
+set.add(new Person(1001,&quot;CC&quot;));//原来的p1的hash值是按照1001,&quot;AA&quot;计算所得，此时算出来的应该是新的hash值
+System.out.println(set);//1001,&quot;CC&quot;   1002,&quot;BB&quot;  1001,&quot;CC&quot;
+set.add(new Person(1001,&quot;AA&quot;)); //这里算出来是p1的hash值，hash值相同调用equals方法发现不同
+System.out.println(set);//1001,&quot;CC&quot;   1002,&quot;BB&quot;  1001,&quot;CC&quot; 1001,&quot;AA&quot;      
+</code></pre>
+<h3 id="Map接口"><a href="#Map接口" class="headerlink" title="Map接口"></a>Map接口</h3>
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -264,7 +294,7 @@ ArrayList list = new ArrayList(数字)
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java集合"><span class="toc-text">Java集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Collection接口"><span class="toc-text">Collection接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#集合的遍历-iterator-接口"><span class="toc-text">集合的遍历:iterator 接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#集合的遍历-foreach循环"><span class="toc-text">集合的遍历:foreach循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#List接口"><span class="toc-text">List接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Set接口"><span class="toc-text">Set接口</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java集合"><span class="toc-text">Java集合</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Collection接口"><span class="toc-text">Collection接口</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#集合的遍历-iterator-接口"><span class="toc-text">集合的遍历:iterator 接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#集合的遍历-foreach循环"><span class="toc-text">集合的遍历:foreach循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#List接口"><span class="toc-text">List接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Set接口"><span class="toc-text">Set接口</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Map接口"><span class="toc-text">Map接口</span></a></li></ol></li></ol>
   </div>
 </aside>
   

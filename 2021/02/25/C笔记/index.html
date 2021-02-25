@@ -6,12 +6,12 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>归档 | 第8页 | Ranan_blog</title>
+  <title>C笔记 | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo, Theme-AD" />
+    <meta name="keywords" content="其他,C," />
   
 
   
@@ -36,7 +36,7 @@
     welcome: {"enable":false,"interval":30},
     start_time: "2018-02-10",
     passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
-    is_post: false,
+    is_post: true,
     lock: false,
     author: "Ranan",
     share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
@@ -144,72 +144,75 @@
 </nav>
 <div id="site-process"></div>
     <main>
-      <div class="timeline">
-  <h2 class="timeline-title">归档: 86篇</h2>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2021-02-25
+    </span>
+    
+      <span>
+        | <a href="/categories/其他/"><i class="fa fa-bookmark"></i>其他</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    C笔记
+  </h1>
   
-    
-      <h3 class="timeline-subtitle">2020</h3>
-    
-    <div class="timeline-item">
-      <time>2020-03-22</time>
-      <a target="_self" href="/2020/03/22/unexpected-token/">unexpected-token&lt; 报错</a>
-    </div>
+  <article class="passage-article">
+    <h2 id="前导"><a href="#前导" class="headerlink" title="前导"></a>前导</h2><p>产生一个变量就分配空间</p>
+<h3 id="值传递和地址传递"><a href="#值传递和地址传递" class="headerlink" title="值传递和地址传递"></a>值传递和地址传递</h3><p>默认值传递的类型：基本数据类型(整型类型、小数类型、字符类型char)，结构体，共用体</p>
+<p>默认传递地址的类型：指针、数组</p>
+<h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><p><code>&amp;</code> :获取变量的地址,<code>%p</code>输出一个变量的地址，如<code>printf(&quot;地址=%p&quot;,&amp;num)</code><br><code>*</code> :<br>1.指针类型，指针变量存的是一个地址，这个地址指向的空间存的才是值。<br>2.如 int <em>ptr = &amp;num。ptr是指向int类型的指针变量，即ptr是`int</em><code>类型，是指向一个int类型的变量。
+3.取值符，获取指针指向的变量的值。如</code>* ptr`在内存中指向的是num，获取到了num值</p>
+<p>总结：<br>ptr –&gt; num的地址<br>num、*ptr –&gt; num的值</p>
+<p>注意点：1.指针加的是一个单位,如下面代码加的是4个字节(一个int)</p>
+<pre><code class="C">int var[] = {10,100,200}; //int数组
+int i,*ptr;
+ptr = var;
+ptr++; //ptr存放的var的首地址值+4字节(int)
+</code></pre>
+<h3 id="指针数组"><a href="#指针数组" class="headerlink" title="指针数组"></a>指针数组</h3><p>指针数组的定义:数据类型 <em> 指针数组名[大小];<br>如:int </em>ptr[3]<br>1.ptr声明为一个指针数组<br>2.由三个整数指针组成。ptr中的每个元素，都是一个指向int值的指针</p>
+<p>注意点:2.字符串的名称就代表首地址,可以理解为数组中存放的是字符串的变量名字。例如<code>char *pStr=&quot;abc&quot;</code>,输出用的pStr</p>
+<pre><code class="C">char *books[] ={
+    &quot;三国演义&quot;,
+    &quot;西游记&quot;,
+    &quot;红楼梦&quot;,
+    &quot;水浒传&quot;
+};
+int i ,len=4;
+for(i=0;i&lt;len;i++){
+    //char *pStr=&quot;abc&quot;,输出用pStr
+    printf(&quot;books[%d]指向字符串是=%s&quot;,i.books[i]);
+}
+</code></pre>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前导"><span class="toc-text">前导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#值传递和地址传递"><span class="toc-text">值传递和地址传递</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指针"><span class="toc-text">指针</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#指针数组"><span class="toc-text">指针数组</span></a></li></ol></li></ol>
+  </div>
+</aside>
   
-    
-    <div class="timeline-item">
-      <time>2020-03-01</time>
-      <a target="_self" href="/2020/03/01/XHR的ajax封装/">XHR的ajax封装(简单版本)</a>
-    </div>
   
+    <div class="passage-tags">
+     
+      <a href="/tags/C/"><i class="fa fa-tags"></i>C</a>
     
-    <div class="timeline-item">
-      <time>2020-02-27</time>
-      <a target="_self" href="/2020/02/27/axios/">axios</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-02-25</time>
-      <a target="_self" href="/2020/02/25/node-js/">Node.js（3.28更新）</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-02-23</time>
-      <a target="_self" href="/2020/02/23/闭包/">闭包</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-02-23</time>
-      <a target="_self" href="/2020/02/23/回调函数/">回调函数</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-02-14</time>
-      <a target="_self" href="/2020/02/14/git-1/">git&amp;GitHub</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-02-09</time>
-      <a target="_self" href="/2020/02/09/富文本tinymce/">富文本tinymce</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-02-06</time>
-      <a target="_self" href="/2020/02/06/软件超市项目后台管理界面开发流程3/">软件超市项目后台管理界面开发流程3</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-01-31</time>
-      <a target="_self" href="/2020/01/31/软件超市项目后台管理界面开发流程2/">软件超市项目后台管理界面开发流程2</a>
     </div>
   
 </div>
+
     </main>
     
     <div class="site-footer-wrapper">
@@ -255,15 +258,15 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/archives/page/7/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/archives/page/9/" data-enable="true">
+    <a href="/2021/02/16/Java比较器/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
   <div class="bottom-bar-right">
-    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
       <i class="fa fa-bars"></i>
     </a>
     

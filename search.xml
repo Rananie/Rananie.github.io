@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[C笔记]]></title>
+    <url>%2F2021%2F02%2F25%2FC%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[前导产生一个变量就分配空间 值传递和地址传递默认值传递的类型：基本数据类型(整型类型、小数类型、字符类型char)，结构体，共用体 默认传递地址的类型：指针、数组 指针&amp; :获取变量的地址,%p输出一个变量的地址，如printf(&quot;地址=%p&quot;,&amp;num)* :1.指针类型，指针变量存的是一个地址，这个地址指向的空间存的才是值。2.如 int ptr = &amp;num。ptr是指向int类型的指针变量，即ptr是`int类型，是指向一个int类型的变量。 3.取值符，获取指针指向的变量的值。如* ptr`在内存中指向的是num，获取到了num值 总结：ptr –&gt; num的地址num、*ptr –&gt; num的值 注意点：1.指针加的是一个单位,如下面代码加的是4个字节(一个int) int var[] = {10,100,200}; //int数组 int i,*ptr; ptr = var; ptr++; //ptr存放的var的首地址值+4字节(int) 指针数组指针数组的定义:数据类型 指针数组名[大小];如:int ptr[3]1.ptr声明为一个指针数组2.由三个整数指针组成。ptr中的每个元素，都是一个指向int值的指针 注意点:2.字符串的名称就代表首地址,可以理解为数组中存放的是字符串的变量名字。例如char *pStr=&quot;abc&quot;,输出用的pStr char *books[] ={ &quot;三国演义&quot;, &quot;西游记&quot;, &quot;红楼梦&quot;, &quot;水浒传&quot; }; int i ,len=4; for(i=0;i&lt;len;i++){ //char *pStr=&quot;abc&quot;,输出用pStr printf(&quot;books[%d]指向字符串是=%s&quot;,i.books[i]); }]]></content>
+      <categories>
+        <category>其他</category>
+      </categories>
+      <tags>
+        <tag>C</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Java比较器]]></title>
     <url>%2F2021%2F02%2F16%2FJava%E6%AF%94%E8%BE%83%E5%99%A8%2F</url>
     <content type="text"><![CDATA[自然排序:java.lang.Comparable1.像String、包装类等实现了Comparable接口，重写了compareTo()方法2.重写compareTo()的规则: 进行了从小到大的排序(负数在前、正数在后面) 如果当前对象this大于形参对象obj,则返回正整数。 如果当前对象this小于形参对象obj，则返回负整数 如果当前对象this等于形参obj.则返回零3.利用Array.sort(Object obj)进行排序,调用comparaTo()方法 例子：指明商品按照价格从低到高排序 public class Goods implements Comparable{ //... @Override public int comparaTo(Object o){ if(o instanceof Goods){ Goods goods = (Goods) o; //方式一 if(this.price&gt;goods.price){ return 1 ; }else if(this.price&lt;goods.price){ return -1; }else{ return 0; } //方式二 return Double.compare(this.price,goods.price); } } } 定制排序:java.util.Comparator1.背景：元素的类型没有实现java.lang.Comparable接口而又不方便修改代码实现了java.lang.Comparable接口的排序规则不适合当前的操作 2.使用重写compare(Object o1,Object o2)方法，比较o1和o2的大小 //obj为需要比较的类 Arrays.sort(Object obj,new Comparator(){ //利用匿名实现类的方法 @Override public int compare(Object o1,Object o2){ //具体的排序方法 } }) System类工具类 void exit(int status):退出程序，status值为0代表正常退出，非零代表异常退出void gc():请求系统进行垃圾回收，至于系统是否立即回收，则取决于系统中垃圾回收算法的实现以及系统执行时的情况。String getProperty(String key):该方法的作用是获取系统中属性名为key的属性对应的值。 Math类其方法的参数和返回值类型一般为double型 包装类 Integer.compare(int,int):比较大小 BigInteger/BigDecimal类BigInteger可以表示不可变的任意精度的整数 BigDecimal要求数字精度比较高，支持不可变的、任意精度的有符号十进制定点数。]]></content>

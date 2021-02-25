@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2021-02-21T11:06:42.171Z</updated>
+  <updated>2021-02-25T03:14:32.372Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C笔记</title>
+    <link href="http://yoursite.com/2021/02/25/C%E7%AC%94%E8%AE%B0/"/>
+    <id>http://yoursite.com/2021/02/25/C笔记/</id>
+    <published>2021-02-25T00:48:44.000Z</published>
+    <updated>2021-02-25T03:14:32.372Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前导"><a href="#前导" class="headerlink" title="前导"></a>前导</h2><p>产生一个变量就分配空间</p><h3 id="值传递和地址传递"><a href="#值传递和地址传递" class="headerlink" title="值传递和地址传递"></a>值传递和地址传递</h3><p>默认值传递的类型：基本数据类型(整型类型、小数类型、字符类型char)，结构体，共用体</p><p>默认传递地址的类型：指针、数组</p><h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><p><code>&amp;</code> :获取变量的地址,<code>%p</code>输出一个变量的地址，如<code>printf(&quot;地址=%p&quot;,&amp;num)</code><br><code>*</code> :<br>1.指针类型，指针变量存的是一个地址，这个地址指向的空间存的才是值。<br>2.如 int <em>ptr = &amp;num。ptr是指向int类型的指针变量，即ptr是`int</em><code>类型，是指向一个int类型的变量。3.取值符，获取指针指向的变量的值。如</code>* ptr`在内存中指向的是num，获取到了num值</p><p>总结：<br>ptr –&gt; num的地址<br>num、*ptr –&gt; num的值</p><p>注意点：1.指针加的是一个单位,如下面代码加的是4个字节(一个int)</p><pre><code class="C">int var[] = {10,100,200}; //int数组int i,*ptr;ptr = var;ptr++; //ptr存放的var的首地址值+4字节(int)</code></pre><h3 id="指针数组"><a href="#指针数组" class="headerlink" title="指针数组"></a>指针数组</h3><p>指针数组的定义:数据类型 <em> 指针数组名[大小];<br>如:int </em>ptr[3]<br>1.ptr声明为一个指针数组<br>2.由三个整数指针组成。ptr中的每个元素，都是一个指向int值的指针</p><p>注意点:2.字符串的名称就代表首地址,可以理解为数组中存放的是字符串的变量名字。例如<code>char *pStr=&quot;abc&quot;</code>,输出用的pStr</p><pre><code class="C">char *books[] ={    &quot;三国演义&quot;,    &quot;西游记&quot;,    &quot;红楼梦&quot;,    &quot;水浒传&quot;};int i ,len=4;for(i=0;i&lt;len;i++){    //char *pStr=&quot;abc&quot;,输出用pStr    printf(&quot;books[%d]指向字符串是=%s&quot;,i.books[i]);}</code></pre>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;前导&quot;&gt;&lt;a href=&quot;#前导&quot; class=&quot;headerlink&quot; title=&quot;前导&quot;&gt;&lt;/a&gt;前导&lt;/h2&gt;&lt;p&gt;产生一个变量就分配空间&lt;/p&gt;
+&lt;h3 id=&quot;值传递和地址传递&quot;&gt;&lt;a href=&quot;#值传递和地址传递&quot; class=&quot;headerlin
+      
+    
+    </summary>
+    
+      <category term="其他" scheme="http://yoursite.com/categories/%E5%85%B6%E4%BB%96/"/>
+    
+    
+      <category term="C" scheme="http://yoursite.com/tags/C/"/>
+    
+  </entry>
   
   <entry>
     <title>Java比较器</title>

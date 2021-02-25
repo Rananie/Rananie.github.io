@@ -169,6 +169,22 @@
     <h2 id="前导"><a href="#前导" class="headerlink" title="前导"></a>前导</h2><p>产生一个变量就分配空间</p>
 <h3 id="值传递和地址传递"><a href="#值传递和地址传递" class="headerlink" title="值传递和地址传递"></a>值传递和地址传递</h3><p>默认值传递的类型：基本数据类型(整型类型、小数类型、字符类型char)，结构体，共用体</p>
 <p>默认传递地址的类型：指针、数组</p>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p><strong>字符串也就是字符数组</strong>，在C语言中没有string类型,字符占1个字节。</p>
+<p>注意：<br>1.字符串使用null字符(‘\n’)终止一维字符数组。char str[7]={a,b,c},在内存中为a、b、c、<code>\n</code>。<code>\n</code>表示字符串结束。<br>2.<strong>null要占用数组的一个空间</strong>，数组有多余的空间(需要明确指定数组的长度)，则会自动添加。<br>3.char str[] = {a,b,c}不会自动添加。char grrrting[] = “hello”会默认添加null字符。</p>
+<p>相关写法</p>
+<pre><code class="C">char str1[] = {&quot;I am happy&quot;}; //默认后面加&#39;\0&#39;
+char str2[] = &quot;I am happy&quot;; //省略{}号，默认后面加&#39;\n&#39;
+char str3[] ={&#39;I&#39;,&#39;&#39;,&#39;a&#39;,&#39;m&#39;,&#39;&#39;,&#39;h&#39;,&#39;a&#39;,&#39;p&#39;,&#39;p&#39;,&#39;y&#39;}; //字符数组后面不会加&#39;\0&#39;,可能有乱码 
+char str4[5]= {&#39;C&#39;,&#39;h&#39;,&#39;i&#39;,&#39;n&#39;,&#39;a&#39;}; //字符数组后面不会加&#39;\0&#39;，可能有乱码
+char * pStr = &quot;hello&quot;;
+</code></pre>
+<p><strong>字符数组与字符串</strong><br>字符数组只能对各个元素赋值，不可以一起赋值。</p>
+<pre><code class="java">char str[14]; //str实际是一个常量
+str=&quot;hello tom&quot;; //错误的,因为相当于对常量赋值。
+str[0] = &quot;i&quot;; //正确的
+</code></pre>
+<h3 id="字符串相关函数"><a href="#字符串相关函数" class="headerlink" title="字符串相关函数"></a>字符串相关函数</h3><p>引入<code>include&lt;string.h&gt;</code></p>
+<p>strcpy(s1,s2) 复制字符串s2到字符串s1<br>strcat(s1,s2) 连接字符串s2到字符串s1末尾<br>strlen(s1) 返回字符串s1的长度<br>strcmp(s1,s2) s1小于s2返回负数,s1大于s2返回整数<br>strchr(s1,ch) 返回一个指针，指向字符串s1中字符ch第一次出现的位置<br>strstr(s1,s2) 返回一个指针，指向字符串s1中字符串s2第一次出现的位置</p>
 <h2 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h2><p><code>&amp;</code> :获取变量的地址,<code>%p</code>输出一个变量的地址，如<code>printf(&quot;地址=%p&quot;,&amp;num)</code><br><code>*</code> :<br>1.指针类型，指针变量存的是一个地址，这个地址指向的空间存的才是值。<br>2.如 int <em>ptr = &amp;num。ptr是指向int类型的指针变量，即ptr是`int</em><code>类型，是指向一个int类型的变量。
 3.取值符，获取指针指向的变量的值。如</code>* ptr`在内存中指向的是num，获取到了num值</p>
 <p>总结：<br>ptr –&gt; num的地址<br>num、*ptr –&gt; num的值</p>
@@ -179,7 +195,7 @@ ptr = var;
 ptr++; //ptr存放的var的首地址值+4字节(int)
 </code></pre>
 <h3 id="指针数组"><a href="#指针数组" class="headerlink" title="指针数组"></a>指针数组</h3><p>指针数组的定义:数据类型 <em> 指针数组名[大小];<br>如:int </em>ptr[3]<br>1.ptr声明为一个指针数组<br>2.由三个整数指针组成。ptr中的每个元素，都是一个指向int值的指针</p>
-<p>注意点:2.字符串的名称就代表首地址,可以理解为数组中存放的是字符串的变量名字。例如<code>char *pStr=&quot;abc&quot;</code>,输出用的pStr</p>
+<p>注意点:2.字符串相当于是字符数组，变量名就相当与是首地址。例如<code>char *pStr=&quot;abc&quot;</code>,用的pStr代表输出该字符数组。</p>
 <pre><code class="C">char *books[] ={
     &quot;三国演义&quot;,
     &quot;西游记&quot;,
@@ -192,6 +208,8 @@ for(i=0;i&lt;len;i++){
     printf(&quot;books[%d]指向字符串是=%s&quot;,i.books[i]);
 }
 </code></pre>
+<p><strong>多重指针</strong></p>
+<p>int<strong> ptr,ptr的类型是int </strong>，访问这个值时使用<code>**ptr</code></p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -200,7 +218,7 @@ for(i=0;i&lt;len;i++){
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前导"><span class="toc-text">前导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#值传递和地址传递"><span class="toc-text">值传递和地址传递</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指针"><span class="toc-text">指针</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#指针数组"><span class="toc-text">指针数组</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前导"><span class="toc-text">前导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#值传递和地址传递"><span class="toc-text">值传递和地址传递</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串相关函数"><span class="toc-text">字符串相关函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指针"><span class="toc-text">指针</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#指针数组"><span class="toc-text">指针数组</span></a></li></ol></li></ol>
   </div>
 </aside>
   

@@ -192,8 +192,11 @@ str[0] = &quot;i&quot;; //正确的
 <pre><code class="C">int var[] = {10,100,200}; //int数组
 int i,*ptr;
 ptr = var;
-ptr++; //ptr存放的var的首地址值+4字节(int)
+ptr++; //ptr = ptr存放的var的首地址值+4字节(int)，ptr存放的地址会改变
+//ptr[1] = ptr + 1个单位 ptr存放的地址不会改变
 </code></pre>
+<p>当接受值为指针时，可以传数组因为传递的是数组的首地址</p>
+<p>指针的注意事项和细节<br>1.指针变量存放的是地址，从这个角度看指针的本质就是地址<br>2.变量声明的时候，如果没有确切的地址赋值，为指针变量赋值NULL<br>3.赋为NULL值的指针被称为空指针，NULL指针是一个定义在标准库<code>stdio.h</code>中值为零的常量<code>#define NULL 0</code></p>
 <h3 id="指针数组"><a href="#指针数组" class="headerlink" title="指针数组"></a>指针数组</h3><p>指针数组的定义:数据类型 <em> 指针数组名[大小];<br>如:int </em>ptr[3]<br>1.ptr声明为一个指针数组<br>2.由三个整数指针组成。ptr中的每个元素，都是一个指向int值的指针</p>
 <p>注意点:2.字符串相当于是字符数组，变量名就相当与是首地址。例如<code>char *pStr=&quot;abc&quot;</code>,用的pStr代表输出该字符数组。</p>
 <pre><code class="C">char *books[] ={
@@ -210,6 +213,53 @@ for(i=0;i&lt;len;i++){
 </code></pre>
 <p><strong>多重指针</strong></p>
 <p>int<strong> ptr,ptr的类型是int </strong>，访问这个值时使用<code>**ptr</code></p>
+<h3 id="指针函数与函数指针"><a href="#指针函数与函数指针" class="headerlink" title="指针函数与函数指针"></a>指针函数与函数指针</h3><p><strong>指针函数</strong></p>
+<p>type * functionName(param list)</p>
+<p>允许函数的返回值是一个指针(地址)</p>
+<p>static修饰的变量会在静态数据区，不会随函数消亡而消亡。</p>
+<p>指针函数注意事项和细节<br>1.函数运行结束后会销毁在它内部定义的所有局部数据，包括局部变量、局部数组和形式参数，函数返回的指针不能指向这些数据。<br>2.函数运行结束后会销毁所有的局部数据，销毁并不是将局部数据所占用的内存全部清零，而是程序放弃对它的使用权限，后面的代码可以使用这块内存。销毁之后可能后面代码没有使用该内存，所以还能返回，</p>
+<p><strong>函数指针</strong></p>
+<p>函数指针是指向函数的指针</p>
+<p>一个函数总是占用一段连续的内存区域,函数名在表达式中有时也会被转换为该函数所在内存区域的首地址，类似数组。</p>
+<p>定义：returnType(<em>pointerName)(param list);<br>举例：int (</em>pmax)(int,int)=max; 没有形参用void<br>函数指针的名字pmax，int表示该函数指针指向的函数是返回int类型的，max函数名。使用(*pmax)(x,y)或者pmax(x,y)调用函数</p>
+<p>1.returnType 为函数返回值类型<br>2.pointerName 为指针名称<br>3.param list 为函数参数列表<br>4.参数列表中可以同时给出参数的类型和名称，也可以只给出参数的类型。<br>5.括号不能省略，如果省略就成了函数原型，表明返回值类型为returnType *(也就是指针函数)</p>
+<p><strong>回调函数</strong></p>
+<p>函数指针变量可以作为某个函数的参数来使用。</p>
+<h2 id="动态内存分配"><a href="#动态内存分配" class="headerlink" title="动态内存分配"></a>动态内存分配</h2><p>全局变量 – 内存中的静态存储区<br>非静态的局部变量 – 内存中的动态存储区 – stack栈<br>临时使用的数据 – 建立动态内存分配区域，需要时随时开辟，不需要时及时释放 – heap堆</p>
+<p>根据需要向系统申请所需大小的空间，由于未在声明部分定义其为变量或者数组，不能通过变量名或者数组名来引用这些数据，只能通过指针</p>
+<p><strong>内存动态分配的相关函数</strong><br>头文件 <code>#include &lt;stdlib.h&gt;</code>声明了四个关于内存动态分配的函数</p>
+<p>1.函数原型void *malloc(unsigned int size)<br>malloc – memory allocation<br>作用：在内存的动态存储区(heap)中分配一个长度为size的连续空间<br>说明：形参size的类型为无符号整型，函数返回值是所分配区域的第一个字节的地址，即此函数是一个指针型函数<br>举例:malloc(100);开辟100字节的临时空间，返回值为其第一个字节的地址</p>
+<p>2.函数原型void *calloc(unsigned n,unsigned size)<br>作用：在内存的动态存储区(heap)分配n个长度为size的连续空间，一般用于数组<br>说明：函数返回指向所分配域起始位置的指针，分配不成功，返回NULL<br>举例：用calloc函数可以为一维数组开辟动态存储空间，n为数组元素的个数，每个元素的长度为size</p>
+<p>3.函数原型void free(void *p)<br>作用：释放变量p指向的动态空间，使这部分空间能重新被其他变量使用。<br>说明：free函数无返回值<br>举例：free(p)</p>
+<p>4.原型函数void <em>realloc(void </em>p,unsigned int size)<br>作用：重新分配malloc或calloc函数获得的动态空间大小，将p指向的动态空间大小改为size，p值不变，分配失败返回NULL</p>
+<p>返回类型说明<br>void <em> 指针称为无类型指针，不指向哪一种具体的类型数据，只表示用来指向一个抽象类型的数据，即仅提供一个<strong>纯地址</strong>(不能用</em> 无类型指针获取值)，而不能指向任何具体的对象。</p>
+<p>说明1：当把void指针赋值给不同基类型的指针变量时，编译系统会自动进行转换(c99)，不必用户自己进行强制转换<br>说明2：赋值后p3得到a的纯地址，但并不指向a，不能通过*p3来获取a的值</p>
+<pre><code class="c">//举例1
+int a= 3;
+void *p3 = NULL;
+p3 = &amp;3; //p3 =(void *)&amp;a
+//举例2
+int *p;
+p = (int *)malloc(5*sizeof(int));//开辟了5*4=20字节的空间 (int *) 表示void* -&gt;int*
+//c99可以如下写法
+p = malloc(5*sizeof(int));
+for(i=0;i&lt;5;i++){
+    scanf(%d,p+1); //这里地址+1个单位,相当于+4个字节
+}
+</code></pre>
+<p><strong>动态分配内存的基本原则</strong><br>1.避免分配大量的小内存块，分配heap上的内存有一些系统开销，所以分配许多小的内存块比分配几个大内存块的系统开销大<br>2.仅在需要时分配内存并及时释放，否则出现内存泄漏。<br>3.在循环中分配内存时，要小心</p>
+<h2 id="结构体和共用体"><a href="#结构体和共用体" class="headerlink" title="结构体和共用体"></a>结构体和共用体</h2><h3 id="结构体"><a href="#结构体" class="headerlink" title="结构体"></a>结构体</h3><p>存储一组类型不同的数据 </p>
+<pre><code class="c">//定义结构体
+struct Cat{
+    char * name;
+    int age;
+}
+//使用Cat结构体，创建变量
+struct Cat cat1;
+//给cat1的成员赋值
+cat1.name = &quot;小白&quot;;
+cat1.age = 3;
+</code></pre>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -218,7 +268,7 @@ for(i=0;i&lt;len;i++){
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前导"><span class="toc-text">前导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#值传递和地址传递"><span class="toc-text">值传递和地址传递</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串相关函数"><span class="toc-text">字符串相关函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指针"><span class="toc-text">指针</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#指针数组"><span class="toc-text">指针数组</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前导"><span class="toc-text">前导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#值传递和地址传递"><span class="toc-text">值传递和地址传递</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#字符串"><span class="toc-text">字符串</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串相关函数"><span class="toc-text">字符串相关函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指针"><span class="toc-text">指针</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#指针数组"><span class="toc-text">指针数组</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#指针函数与函数指针"><span class="toc-text">指针函数与函数指针</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动态内存分配"><span class="toc-text">动态内存分配</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结构体和共用体"><span class="toc-text">结构体和共用体</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#结构体"><span class="toc-text">结构体</span></a></li></ol></li></ol>
   </div>
 </aside>
   

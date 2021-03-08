@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ranan" />
+  
+  
+  <title>Java泛型 | Ranan_blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="Java,Java," />
+  
+
+  
+  <meta name="description" content="Ranan的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Ranan",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/Rananie" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2021-03-04
+    </span>
+    
+      <span>
+        | <a href="/categories/Java/"><i class="fa fa-bookmark"></i>Java</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Java泛型
+  </h1>
+  
+  <article class="passage-article">
+    <p>泛型:标签<br>允许在定义类、接口时通过一个标识表示类中某个属性的类型或者某个方法的返回值及参数类型。<strong>这个参数将在使用时确定。</strong></p>
+<pre><code class="java">ArrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;() 
+
+Map&lt;String,Integer&gt; list = new HashMap&lt;String,Integer&gt;() 
+//因为前后都一样，jdk7特性:类型推断
+Map&lt;String,Integer&gt; list = new HashMap&lt;&gt;() 
+
+Set&lt;Map.Entry&lt;String,Integer&gt;&gt; entry = map.entrySet()
+</code></pre>
+<p>在集合中使用泛型:<br>总结:<br>1.集合接口或集合类在jdk5.0时都修改为带泛型的结构。<br>2.在实例化集合类时,可以指明具体的泛型类型<br>3.泛型不可以使用基本数据类型,可以使用包装类。<br>4.使用泛型后，在编译时就会进行类型检查，保证数据的安全</p>
+<h2 id="自定义泛型结构"><a href="#自定义泛型结构" class="headerlink" title="自定义泛型结构"></a>自定义泛型结构</h2><p>编写代码时不确定参数类型，使用时才确定就可以使用泛型</p>
+<h3 id="自定义泛型类、泛型接口"><a href="#自定义泛型类、泛型接口" class="headerlink" title="自定义泛型类、泛型接口"></a>自定义泛型类、泛型接口</h3><p>1.定义了泛型类，实例化并没有指明类的泛型，则认为泛型类型为Object类型。  – 不推荐这样使用，建议实例化时要指明类的泛型</p>
+<pre><code class="java">//通常泛型用T、E表示;泛型类似于参数
+public class Order&lt;T&gt;{
+    //类的内部结构就可以使用类的泛型
+    int orderId;
+    T orderT;
+    public Oeder(){
+        //T类型的数组
+
+        //编译不通过，T是个参数，只有具体类型才可以使用这种写法
+        T [] arr = new T[10];
+        //正确写法
+        T [] arr = (T[]) new Object[10];
+    }
+    public Oeder(String orderName,int orderId,T orderT){
+        this.orderName = orderName;
+        this.orderId = orderId;
+        this.orderT = oederT;
+    }
+}
+
+ArrayList&lt;String&gt; list1 = null;
+ArrayList&lt;Integer&gt; list2 = null;
+//泛型不同的引用不能相互赋值，编译出错
+list1 = list2
+
+
+class Father&lt;T1,T2&gt;{
+}
+//子类不保留父类的泛型，子类不是泛型类
+//1.没有类型，擦除
+class son1 extends Father{
+    //等价于class son1 extends Father&lt;Object,Object&gt;
+}
+class son&lt;A,B&gt; extends Father{
+//子类定义自己的泛型
+}
+//2.具体类型
+class son2 extends Father&lt;Integer,String&gt;{    
+}
+
+//子类保留父亲的泛型，子类是泛型类
+//1.全部保留
+class son3&lt;T1,T2&gt; extends Father&lt;T1,T2&gt;{
+}
+//2.部分保留
+class son4&lt;T2&gt; extends Father&lt;Integer,T2&gt;{
+}
+
+
+</code></pre>
+<p>尽管在编译时ArrayList<string> 和 ArrayList<integer>是两种类型，但是在运行时只有一个ArrayList被加载到JVM中</integer></string></p>
+<p><strong>注意点</strong><br>1.泛型类可能有多个参数，<code>&lt;E1,E2,E3&gt;</code><br>2.泛型的构造器public GenericClass(){}<br>3.泛型不同的引用不能相互赋值<br>4.泛型如果不指定，对应类型按照Object处理，但不等价与Object<br>5.静态方法中不能使用类的泛型(泛型是实例化时指定)，异常类不能声明为泛型类<br>6.不是使用<code>new E[]</code>,可以使用<code>E[] elements = (E[]) new Object[capacity]</code>;</p>
+<h3 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h3><p>1.在方法中出现了泛型的结构，泛型参数与类的泛型参数没有任何关系。<br>2.泛型方法所属的类是不是泛型类都没有关系<br>3.<strong>泛型方法可以声明为静态</strong>，原因:泛型参数是在调用方法时确定的，并不是在实例化时。</p>
+<pre><code class="java">//编译器会认为是不是有个类是E，所以需要标注标签表示是泛型
+public List&lt;E&gt; copyFromArrayToList(E[] arr)
+//正确写法
+public &lt;E&gt; List&lt;E&gt; copyFromArrayToList(E[] arr)
+</code></pre>
+<p><strong>泛型在继承方法的体现</strong></p>
+<p>1.类A是类B的父类，但是G<a>和G<b>并列关系、不具备子父类关系。<br>2.类A是类B的父类，A<g>和B<g>具备子父类关系</g></g></b></a></p>
+<pre><code class="java">//多态
+Object obj = null;
+String str = null;
+obj = str;
+Object[] arr1 = null;
+String[] arr2 = null;
+arr1 = arr2;
+
+//List&lt;Object&gt;与List&lt;String&gt;不具备字符类关系
+List&lt;Object&gt; list1 = null
+List&lt;String&gt; list2 = null
+list1 =list2; //报错
+</code></pre>
+<p><strong>通配符?的使用</strong></p>
+<p>A是类B的父类，但是G<a>和G<b>没有关系，两者共同的父类G&lt;?&gt;</b></a></p>
+<p>1.添加:对于List&lt;?&gt;就不能向其内部添加数据(防止破坏数据安全性),除了null。<br>2.读取:允许读取数据,读取的数据类型为Object</p>
+<pre><code class="java">List&lt;Object&gt; list1 = null;
+List&lt;String&gt; list2 = null;
+
+List&lt;?&gt; list = null;
+list = list1;
+list = list2;
+
+class Info{}
+class Person&lt;T extends Info&gt;{
+    //这里写T不写问号，问号用于父类？
+}
+</code></pre>
+<p><strong>有限制条件的通配符</strong><br>指定上限extends(&lt;=):使用时指定的类型必须是继承某个类，或者实现某个接口<br>指定下线super(&gt;=):使用时指定的类型不能小于操作的类</p>
+<p>读取数据的时候,为了保持兼容性，应该用最上界的数据类型接收<br>写入数据的时候，<code>[super A类，正无穷]</code>，可以写入A类及其子类，因为多态性，父类可以指向子类。</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义泛型结构"><span class="toc-text">自定义泛型结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义泛型类、泛型接口"><span class="toc-text">自定义泛型类、泛型接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#泛型方法"><span class="toc-text">泛型方法</span></a></li></ol></li></ol>
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/Java/"><i class="fa fa-tags"></i>Java</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="/2021/03/07/JavaIO流/" data-enable="true">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2021/02/25/C笔记/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

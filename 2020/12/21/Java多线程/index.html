@@ -310,7 +310,7 @@ public class ThreadPool {
 <p>说明：<br>共享数据指多个线程共同操作的变量。<br>操作共享数据的代码为需要被同步的代码，注意包含代码的范围。<br>可以理解成一个线程拿了锁，执行需要同步的代码，执行完毕后解锁</p>
 <p><strong>同步监视器（锁）</strong></p>
 <p>1.任何一个类的对象，都可以充当锁。<br>2.<strong>要求：多个线程必须要共用同一个锁</strong></p>
-<p>结论<br>1.可以考虑使用当前对象this，继承Thread方法要小心this是否是同一个锁。<br>2.还可以传Window.class，<strong>说明类也是一个对象</strong>。Window.class是Class类的实例，Class clazz = Window.class，其中Window.class是唯一的，因为类只加载一次。**也就是说当前的类是Class实例。</p>
+<p>结论<br>1.可以考虑使用当前对象this，继承Thread方法要小心this是否是同一个锁。<br>2.还可以传Window.class，<strong>说明类也是一个对象</strong>。Window.class是Class类的实例，Class clazz = Window.class，其中Window.class是唯一的，因为类只加载一次。也就是说当前的类是Class实例。</p>
 <p>同步方式：<br>1.解决了线程的安全问题<br>2.操作同步代码时，只能有一个线程参与，其他线程等待，相当于是一个单线程过程，效率低。</p>
 <pre><code class="java">class Window1 implements Runnable{
     private int ticket = 100;

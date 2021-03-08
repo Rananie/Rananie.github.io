@@ -6,12 +6,12 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>归档 | 第8页 | Ranan_blog</title>
+  <title>JavaIO流 | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo, Theme-AD" />
+    <meta name="keywords" content="Java,Java," />
   
 
   
@@ -36,7 +36,7 @@
     welcome: {"enable":false,"interval":30},
     start_time: "2018-02-10",
     passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
-    is_post: false,
+    is_post: true,
     lock: false,
     author: "Ranan",
     share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
@@ -144,72 +144,69 @@
 </nav>
 <div id="site-process"></div>
     <main>
-      <div class="timeline">
-  <h2 class="timeline-title">归档: 88篇</h2>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2021-03-07
+    </span>
+    
+      <span>
+        | <a href="/categories/Java/"><i class="fa fa-bookmark"></i>Java</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    JavaIO流
+  </h1>
   
-    
-      <h3 class="timeline-subtitle">2020</h3>
-    
-    <div class="timeline-item">
-      <time>2020-05-26</time>
-      <a target="_self" href="/2020/05/26/exports/">exports与module.exports的区别</a>
-    </div>
+  <article class="passage-article">
+    <h2 id="File类"><a href="#File类" class="headerlink" title="File类"></a>File类</h2><p>java.io.File类:File类的一个对象,代表文件和文件目录路径的抽象表示形式<br>仅对文件或文件目录本身进行操作,不涉及文件内容</p>
+<p><strong>创建File类的实例</strong></p>
+<p>分隔符</p>
+<p>路径分隔符和系统有关：windows<code>\</code>,UNIX和URL<code>/</code><br>File类提供了一个常量public static final String separator，根据操作系统，动态分配分隔符。</p>
+<pre><code class="java">//内存层面的对象
+
+File file = new File(pathname)
+//第一个参数是上层路径，第二个参数文件目录/文件
+File file1 = new File(parentpath,childpath)
+//第一个参数问file类型，第二个参数为文件
+File file2 = new File(file1,filename)
+</code></pre>
+<h3 id="File类的常用方法"><a href="#File类的常用方法" class="headerlink" title="File类的常用方法"></a>File类的常用方法</h3><p>public String getAbsolutePath():获取绝对路径<br>public String getPath():获取路径<br>public String getName():获取名称<br>public String getParent:获取上层文件目录路径(仅决定路径有效),若无返回null<br>public long length():获取文件长度(字节数),蹦获取目录的长度<br>public long lastModified():获取最后一次的修改时间，毫秒值</p>
+<p><strong>适用于文件目录</strong><br>public String[] list():获取指定目录下的所有文件或者文件目录的名称数组<br>public File[] listFiles():获取指定目录下的所有文件或者文件目录的File数组</p>
+<p><strong>移动+重命名</strong><br>public boolean renameTo(File dest):把文件移动(重命名)到指定的文件路径<br>如:file1.renameTo(dile2)<br>    要返回true，需要file1存在，file2不存在</p>
+<p><strong>判断功能</strong><br>public boolean isDirectory():判断是否是文件目录<br>public boolean isFile():判断是否是文件<br>public boolean exists():判断是否存在<br>public boolean canRead():判断是否可读<br>public boolean canWrite():判断是否可写<br>public boolean isHidden():判断是否隐藏 </p>
+<p><strong>创建磁盘中对应的文件或文件目录</strong></p>
+<p>public boolean createNewFile():创建文件，若文件存在，则不创建，返回false。(有实例对象，实例对象可能不存在时可以用此方法)<br>public boolean mkdir():创建文件目录,如果文件目录存在，不创建。如果上层目录也不存在，也不创建。<br>public boolean mkdirs():创建文件目录，如果上层文件目录不存在，一并创建</p>
+<p><strong>删除磁盘中的文件或文件目录</strong><br>public boolean delete()删除文件或者文件夹<br>1.Java中的删除不走回收站<br>2.删除文件目录，文件目录下不能有其他的文件</p>
+<h2 id="IO流"><a href="#IO流" class="headerlink" title="IO流"></a>IO流</h2><p>如果需要读取或写入文件类容，必须使用IO流来完成</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#File类"><span class="toc-text">File类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#File类的常用方法"><span class="toc-text">File类的常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO流"><span class="toc-text">IO流</span></a></li></ol>
+  </div>
+</aside>
   
-    
-    <div class="timeline-item">
-      <time>2020-05-25</time>
-      <a target="_self" href="/2020/05/25/npm包管理/">npm包管理</a>
-    </div>
   
+    <div class="passage-tags">
+     
+      <a href="/tags/Java/"><i class="fa fa-tags"></i>Java</a>
     
-    <div class="timeline-item">
-      <time>2020-03-22</time>
-      <a target="_self" href="/2020/03/22/unexpected-token/">unexpected-token&lt; 报错</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-03-01</time>
-      <a target="_self" href="/2020/03/01/XHR的ajax封装/">XHR的ajax封装(简单版本)</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-02-27</time>
-      <a target="_self" href="/2020/02/27/axios/">axios</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-02-25</time>
-      <a target="_self" href="/2020/02/25/node-js/">Node.js（3.28更新）</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-02-23</time>
-      <a target="_self" href="/2020/02/23/闭包/">闭包</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-02-23</time>
-      <a target="_self" href="/2020/02/23/回调函数/">回调函数</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-02-14</time>
-      <a target="_self" href="/2020/02/14/git-1/">git&amp;GitHub</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-02-09</time>
-      <a target="_self" href="/2020/02/09/富文本tinymce/">富文本tinymce</a>
     </div>
   
 </div>
+
     </main>
     
     <div class="site-footer-wrapper">
@@ -255,15 +252,15 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/archives/page/7/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/archives/page/9/" data-enable="true">
+    <a href="/2021/03/04/Java泛型/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
   <div class="bottom-bar-right">
-    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
       <i class="fa fa-bars"></i>
     </a>
     

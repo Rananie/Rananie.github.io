@@ -166,10 +166,18 @@
   </h1>
   
   <article class="passage-article">
-    <h2 id="自然排序-java-lang-Comparable"><a href="#自然排序-java-lang-Comparable" class="headerlink" title="自然排序:java.lang.Comparable"></a>自然排序:java.lang.Comparable</h2><p>1.像String、包装类等实现了Comparable接口，重写了compareTo()方法<br>2.重写compareTo()的规则: 进行了从小到大的排序(负数在前、正数在后面)<br>  如果当前对象this大于形参对象obj,则返回正整数。<br>  如果当前对象this小于形参对象obj，则返回负整数<br>  如果当前对象this等于形参obj.则返回零<br>3.利用Array.sort(Object obj)进行排序,调用comparaTo()方法</p>
+    <h2 id="自然排序-java-lang-Comparable"><a href="#自然排序-java-lang-Comparable" class="headerlink" title="自然排序:java.lang.Comparable"></a>自然排序:java.lang.Comparable</h2><p>所有的举例都是没有泛型的情况，比较器是可以使用泛型，仅第一个例子使用了泛型，后面的例子泛型写法类似于第一个例子。</p>
+<p>1.像String、包装类等实现了Comparable接口，重写了compareTo()方法<br>2.重写compareTo()的规则: 进行了从小到大的排序(负数在前、正数在后面)<br>  如果当前对象this大于形参对象obj,则返回正整数。<br>  如果当前对象this小于形参对象obj，则返回负整数<br>  如果当前对象this等于形参obj.则返回零<br>3.利用Array.sort(Object obj)进行排序,调用comparaTo()方法</p>
 <p>例子：指明商品按照价格从低到高排序</p>
-<pre><code class="java">public class Goods implements Comparable{
-  //...
+<pre><code class="java">//泛型，比较的对象类型
+public class Goods implements Comparable&lt;Goods&gt;{
+  //有泛型的情况
+  public int compareTo(Goods o){
+    return this.name.compareTo(o.name);
+  }
+
+
+  //没有泛型的情况
   @Override
   public int comparaTo(Object o){
     if(o instanceof Goods){

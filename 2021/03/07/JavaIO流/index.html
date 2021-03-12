@@ -168,8 +168,18 @@
   <article class="passage-article">
     <h2 id="File类"><a href="#File类" class="headerlink" title="File类"></a>File类</h2><p>java.io.File类:File类的一个对象,代表文件和文件目录路径的抽象表示形式<br>仅对文件或文件目录本身进行操作,不涉及文件内容</p>
 <p><strong>创建File类的实例</strong></p>
+<p>在main方法里使用相对路径,相对于当前的Project下;在单元测试(test)方法里,相对路径为当前module下。</p>
+<pre><code class="java">public static void main(String[] args){
+    File file = new  File(&quot;hello.txt&quot;); //相较于当前Project工程
+}
+
+@Test
+public void testFileReader(){
+    File file = new  File(&quot;hello.txt&quot;); //相较于当前Module
+}
+</code></pre>
 <p>分隔符</p>
-<p>路径分隔符和系统有关：windows<code>\</code>,UNIX和URL<code>/</code><br>File类提供了一个常量public static final String separator，根据操作系统，动态分配分隔符。</p>
+<p>路径分隔符和系统有关：windows<code>\</code>,UNIX和URL<code>/</code><br>File类提供了一个常量<code>public static final String separator</code>，根据操作系统，动态分配分隔符。</p>
 <pre><code class="java">//内存层面的对象
 
 File file = new File(pathname)
@@ -185,7 +195,120 @@ File file2 = new File(file1,filename)
 <p><strong>创建磁盘中对应的文件或文件目录</strong></p>
 <p>public boolean createNewFile():创建文件，若文件存在，则不创建，返回false。(有实例对象，实例对象可能不存在时可以用此方法)<br>public boolean mkdir():创建文件目录,如果文件目录存在，不创建。如果上层目录也不存在，也不创建。<br>public boolean mkdirs():创建文件目录，如果上层文件目录不存在，一并创建</p>
 <p><strong>删除磁盘中的文件或文件目录</strong><br>public boolean delete()删除文件或者文件夹<br>1.Java中的删除不走回收站<br>2.删除文件目录，文件目录下不能有其他的文件</p>
-<h2 id="IO流"><a href="#IO流" class="headerlink" title="IO流"></a>IO流</h2><p>如果需要读取或写入文件类容，必须使用IO流来完成</p>
+<h2 id="IO流"><a href="#IO流" class="headerlink" title="IO流"></a>IO流</h2><p>如果需要读取或写入文件类容，必须使用IO流来完成。</p>
+<p><strong>流的分类</strong><br>操作数据单位不同分为:字节流(8 bit),字符流(16 bit)<br>数据流的流向不同分为:输入流，输出流<br>流的角色不同分为：节点流(最基础直接的作用于文件上的，自己可以处理的)，处理流(作用于已有流上的)</p>
+<p><strong>流的体系结构</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">抽象基类</th>
+<th style="text-align:center">字节流</th>
+<th style="text-align:center">字符流</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">输入流</td>
+<td style="text-align:center">InputStream</td>
+<td style="text-align:center">Reader</td>
+</tr>
+<tr>
+<td style="text-align:center">输出流</td>
+<td style="text-align:center">OutputStream</td>
+<td style="text-align:center">Writer</td>
+</tr>
+</tbody>
+</table>
+<p>1.Java的IO流涉及很多类，实际上都是从4个抽象基类派生的<br>2.这4个类派生出来的子类名称都是以其父类名为后缀</p>
+<p><img src="https://github.com/Rananie/imgs_rananie/blob/master/blog/java/%E6%B5%81%E4%BD%93%E7%B3%BB.png"></p>
+<p>抽象基类:InputStream OutputStream Reader Writer<br>节点流(文件流):FileInputStream FileOutputSream FileReader FileWriter<br>缓冲流(典型的处理流):BufferedInputStream BufferedOutputStream BufferedReader BufferedWriter</p>
+<h3 id="节点流"><a href="#节点流" class="headerlink" title="节点流"></a>节点流</h3><p>读入的文件一定要存在，否则就会报FileNotFoundExceotion<br>写入的文件可以不存在</p>
+<h4 id="读数据"><a href="#读数据" class="headerlink" title="读数据"></a>读数据</h4><p>1.实例化File类的对象,指明要操作的文件<br>2.提供具体的流<br>3.数据的读入 – 补充:read()返回读入的一个字符(一个字符也对应一个ascII码的数字),如果达到文件末尾，返回-1<br>4.流的关闭</p>
+<p><strong>关于异常处理的注意点</strong><br>如果采用throws<br>假设可能异常点1通过，可能异常点2发生阻塞在该异常点创建IOException对象抛出异常，后面代码不执行，流就没关闭，造成资源泄露。</p>
+<p>采用try{}-catch()-finally</p>
+<pre><code class="java">public void testFileReader() {
+    FileReader fr = null;
+    try{
+    //1.实例化File类的对象,指明要操作的文件
+    File file = new  File(&quot;hello.txt&quot;);
+    //2.提供具体的流
+    fr = new FileReader(file); //----可能异常点1
+    //3.数据的读入
+    //read() 返回读入的一个字符(一个字符也对应一个ascII码的数字),如果达到文件末尾，返回-1
+    //int data = fr.read();
+    //while(data != -1){
+        //System.out.print((char)data);
+        //data = fr.read();
+    //}
+    //语法格式的修改
+    int data ;
+    while((fr.read()) != -1){//----可能异常点2
+        System.out.print((char)data);
+    }   
+    }catch(IOException e){
+        e.printStackTrace()
+    }finally{
+        if(fr !=null){ //判断是防止可能异常点1出错时，可能异常点3报错
+            try{
+                 //4.流的关闭
+                 fr.cloase();//----可能异常点3
+            }catch(IOException e){
+                e.printStackTace()
+            }
+        }
+    }
+}
+</code></pre>
+<p><strong>read()操作升级，使用read的重载方法</strong></p>
+<p>read(arr):每次读一组，返回每次读入cbuf数组中的字符数量，读到末尾返回-1</p>
+<pre><code class="java">//---这里省略对异常的处理
+public void testFileReader() {
+      //1.实例化File类的对象,指明要操作的文件
+    File file = new  File(&quot;hello.txt&quot;);
+    //2.提供具体的流
+    fr = new FileReader(file); 
+    //3.数据的读入
+    //一个一个读速度太慢了,每次读一组，返回每次读入cbuf数组中的字符数量，读到末尾返回-1
+    char[] cbuf = new char[5];
+    int len;
+    while(len = fr.read(cbuf)!=-1){
+        //————错误写法错误写法错误写法
+        //for(int i= 0 ;i&lt;cbuf.length;i++){
+            //System.out.print(cbuf[i]); //比如helloworld123，最后一次读的是123ld
+        //}
+        //-----正确写法
+         for(int i= 0 ;i&lt;len;i++){
+            System.out.print(cbuf[i]);
+        }
+        //方法二  错误写法类似上面的错误写法，最后一次读，数组底层是123ld
+        //String str = new String(cubf);
+        String str = new String(cbuf,0,len);
+    }  
+}
+</code></pre>
+<h4 id="写数据"><a href="#写数据" class="headerlink" title="写数据"></a>写数据</h4><p>1.输出操作对应的File可以不存在，不存在则自动创建该文件<br>2.FileWriter构造器的第二参数是添加方式，默认false覆盖写，true表示追加写</p>
+<p><strong>注意点</strong><br>write再运行一次默认是覆盖写,但一个程序里(一次运行)循环的写，是接着写(流通道并没有关闭)。</p>
+<pre><code class="java">//---这里省略对异常的处理,关于异常处理类似前面的例子
+//1.提供File类的对象，指明写出到的文件
+File file = new File(&quot;hello.txt&quot;);
+//2.提供FileWriter的对象，用于数据的写出
+FileWrite fw = new FileWriter(file);
+//3.写出的操作
+fw.write(); 
+//fw.write(cbuf,0,len);写入cbuf数据,从0开始写len个
+//4.流资源的关闭
+fw.close()
+</code></pre>
+<p><strong>结论</strong><br>1.对于文本文件(.txt,.java,.c…..)，使用字符流处理。<br>2.对于非文本文件，使用字节流处理。</p>
+<p>文本文件用字节流也可以赋值，看出乱码也不影响最后复制完的结果,因为最终都是0101存储的。流只相当于一个搬运工。</p>
+<h3 id="缓冲流"><a href="#缓冲流" class="headerlink" title="缓冲流"></a>缓冲流</h3><p>说明:不能直接作用到文件上，作用在节点流上<br>作用:提高流读取、写入的速度</p>
+<p>BufferedInputStream<br>BufferedOutputStream<br>BufferedReader<br>BufferedWriter</p>
+<pre><code class="java">//1.造文件
+File srcFile = new File(path);
+//2.造流
+FileInputStream fis = new FileInputStream(srcFile);
+
+</code></pre>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -194,7 +317,7 @@ File file2 = new File(file1,filename)
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#File类"><span class="toc-text">File类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#File类的常用方法"><span class="toc-text">File类的常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO流"><span class="toc-text">IO流</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#File类"><span class="toc-text">File类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#File类的常用方法"><span class="toc-text">File类的常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO流"><span class="toc-text">IO流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#节点流"><span class="toc-text">节点流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#读数据"><span class="toc-text">读数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#写数据"><span class="toc-text">写数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缓冲流"><span class="toc-text">缓冲流</span></a></li></ol></li></ol>
   </div>
 </aside>
   
@@ -252,7 +375,7 @@ File file2 = new File(file1,filename)
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2021/03/11/C++笔记/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
     <a href="/2021/03/04/Java泛型/" data-enable="true">

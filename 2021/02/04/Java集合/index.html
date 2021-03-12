@@ -309,6 +309,14 @@ while(iterator.hasNext()){
     Map.Entry entry = (Map.Entry) obj;
     System.out.println(entry.getKey()+&quot;---&gt;&quot;+entry.getValue());
 }
+//写法二
+Set &lt;Map.Entry&lt;String,Integer&gt;&gt; entrySet = map.entrySet();
+Iterator &lt;Map.Entry&lt;String,Integer&gt;&gt; iterator = entrySet.iterator();
+while(iterator.hasNext()){
+    Map.Entry &lt;String,Integer&gt; entry = iterator.next();
+    String key = entry.getKey();
+    Integer value = entry.getValue();
+}
 </code></pre>
 <h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h4><p><strong>问题1：HashMap的底层实现原理?</strong></p>
 <p>JDK7:</p>

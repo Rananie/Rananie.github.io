@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ranan" />
+  
+  
+  <title>c++笔记 | Ranan_blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="其他,C," />
+  
+
+  
+  <meta name="description" content="Ranan的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Ranan",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/Rananie" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2021-03-11
+    </span>
+    
+      <span>
+        | <a href="/categories/其他/"><i class="fa fa-bookmark"></i>其他</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    c++笔记
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>常见的预编译和条件编译指令</p>
+<pre><code class="c++">#define //定义一个预处理宏
+#undef  //取消宏的定义
+#if     //编译预处理中的条件命令，相当于C语法中的if语句
+#ifdef  //判断某个宏是否被定义，若已定义，执行随后的语句
+#ifndef //与#ifdef相反，判断某个宏是否未被定义
+#elif   //若#if, #ifdef, #ifndef或前面的#elif条件不满足，则执行#elif之后的语句，相当于C语法中的else-if
+#else   //与#if, #ifdef, #ifndef对应, 若这些条件不满足，则执行#else之后的语句，相当于C语法中的else
+#endif  //#if, #ifdef, #ifndef这些条件命令的结束标志.
+</code></pre>
+<h3 id="include"><a href="#include" class="headerlink" title="include"></a>include</h3><p>说明:include是C++的编译预处理命令,作用为引入对应的文件</p>
+<p>预处理器处理程序的源代码，是在编译器之前运行。</p>
+<p>#include只接受一个参数：头文件名</p>
+<p><strong>include的两种写法区别</strong></p>
+<p><code>include&lt;***.h&gt;</code>表示让编译器在编译器的预设标准路径下搜索响应的头文件，如果找不到就报错。<br><code>include&quot;***.h&quot;</code>表示先在工程路径下搜索，如果失败，再到系统标准路径下搜索</p>
+<p>总结：标准库文件两种方式都可以,用户自定义的头文件只能采用””的方式</p>
+<pre><code class="c++">#include &lt;iostream&gt; //效率较高
+#include &quot;iostream&quot; //效率较低
+</code></pre>
+<h3 id="条件编译"><a href="#条件编译" class="headerlink" title="条件编译"></a>条件编译</h3><p><strong>定义</strong>:一般情况下，源程序中所有的行都参加编译。希望当满足某条件时对一组语句进行编译，而当条件不满足时则编译另一组语句。</p>
+<p><strong>常见形式</strong></p>
+<p>形式1说明:当标识符已经被#define命令定义过，则对程序段1进行编译，否则编译程序段2。其中#else可以省略。</p>
+<pre><code class="c++">#ifdef 标识符
+程序段1
+#else
+程序段2
+#endif
+</code></pre>
+<p>形式2说明:如果标识符未被#define命令定义过，则对程序片段1进行编译；否则对程序片段2进行编译。</p>
+<pre><code class="c++">#ifndef 标识符
+程序段1
+#else
+程序段2
+#endif
+</code></pre>
+<p>形式3说明:如果表达式的值为真，则对程序片段1进行编译；否则对程序片段2进行编译。因此可以使程序在不同条件下完成不同的功能。</p>
+<pre><code class="c++">#if 标识符
+程序段1
+#else
+程序段2
+#endif
+</code></pre>
+<p><strong>常见使用</strong></p>
+<p>最常见的就是头文件使用的防止重复定义的写法。<br>说明:编译时把所有文件包含起来，第一次编译到此处时，会定义_ABCD_H_并编译下面的代码。往下继续编译时，倘若有其它文件引用了这个头文件，会再次遇到这一段代码，然后发现_ADCD_H_已经被定义，所以“ifndef _ADCD_H_”后面的代码都不会编译，这样就防止了头文件的重复定义。</p>
+<pre><code class="c++">#ifndef _ABCD_H_
+#define _ABCD_H_
+
+/*
+......
+*/
+
+#endif
+</code></pre>
+<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><p><code>::</code>表示作用域和所属关系。</p>
+<p><strong>作用域符号</strong></p>
+<p>为了避免不同的类有名称相同的成员而采用作用域的方式进行区分。或者在类里声明了,并没有定义，在类外定义、<br>格式: 类名称::类的成员名称<br>举例:<code>int cbmc_parseoptionst::doit()</code><br>说明:cbmc_parseoptionst类里的int doit()方法</p>
+<p><strong>全局作用域符号</strong></p>
+<p>当全局变量在局部函数中与其中某个变量重名，那么就可以用<code>::</code>来区分此时使用的是全局变量。</p>
+<p><strong>命名空间作用域符</strong></p>
+<p>用来注明所使用的类、函数属于哪一个命名空间的<br>格式:namespace::name</p>
+<h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><h3 id="virtual"><a href="#virtual" class="headerlink" title="virtual"></a>virtual</h3><p><strong>修饰类的成员函数–虚函数</strong><br>虚函数是C++多态的实现途径</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#编译"><span class="toc-text">编译</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#include"><span class="toc-text">include</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#条件编译"><span class="toc-text">条件编译</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#作用域"><span class="toc-text">作用域</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关键字"><span class="toc-text">关键字</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#virtual"><span class="toc-text">virtual</span></a></li></ol></li></ol>
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/C/"><i class="fa fa-tags"></i>C</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2021/03/07/JavaIO流/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

@@ -223,7 +223,7 @@ File file2 = new File(file1,filename)
 <p><img src="https://github.com/Rananie/imgs_rananie/blob/master/blog/java/%E6%B5%81%E4%BD%93%E7%B3%BB.png"></p>
 <p>抽象基类:InputStream OutputStream Reader Writer<br>节点流(文件流):FileInputStream FileOutputSream FileReader FileWriter<br>缓冲流(典型的处理流):BufferedInputStream BufferedOutputStream BufferedReader BufferedWriter</p>
 <h3 id="节点流"><a href="#节点流" class="headerlink" title="节点流"></a>节点流</h3><p>读入的文件一定要存在，否则就会报FileNotFoundExceotion<br>写入的文件可以不存在</p>
-<h4 id="读数据"><a href="#读数据" class="headerlink" title="读数据"></a>读数据</h4><p>1.实例化File类的对象,指明要操作的文件<br>2.提供具体的流<br>3.数据的读入 – 补充:read()返回读入的一个字符(一个字符也对应一个ascII码的数字),如果达到文件末尾，返回-1<br>4.流的关闭</p>
+<h4 id="读数据"><a href="#读数据" class="headerlink" title="读数据"></a>读数据</h4><p>1.实例化File类的对象,指明要操作的文件<br>2.提供具体的流<br>3.数据的读入 – 补充:read()返回读出的一个字符对应的int型(一个字符也对应一个ascII码的数字),如果达到文件末尾，返回-1<br>4.流的关闭</p>
 <p><strong>关于异常处理的注意点</strong><br>如果采用throws<br>假设可能异常点1通过，可能异常点2发生阻塞在该异常点创建IOException对象抛出异常，后面代码不执行，流就没关闭，造成资源泄露。</p>
 <p>采用try{}-catch()-finally</p>
 <pre><code class="java">public void testFileReader() {
@@ -260,7 +260,7 @@ File file2 = new File(file1,filename)
 }
 </code></pre>
 <p><strong>read()操作升级，使用read的重载方法</strong></p>
-<p>read(arr):每次读一组，返回每次读入cbuf数组中的字符数量，读到末尾返回-1</p>
+<p>read(arr):每次读一组放入arr中，返回每次读入arr数组中的字符数量，读到末尾返回-1</p>
 <pre><code class="java">//---这里省略对异常的处理
 public void testFileReader() {
       //1.实例化File类的对象,指明要操作的文件
@@ -287,7 +287,7 @@ public void testFileReader() {
 }
 </code></pre>
 <h4 id="写数据"><a href="#写数据" class="headerlink" title="写数据"></a>写数据</h4><p>1.输出操作对应的File可以不存在，不存在则自动创建该文件<br>2.FileWriter构造器的第二参数是添加方式，默认false覆盖写，true表示追加写</p>
-<p><strong>注意点</strong><br>write再运行一次默认是覆盖写,但一个程序里(一次运行)循环的写，是接着写(流通道并没有关闭)。</p>
+<p><strong>注意点</strong><br>write再运行一次默认是覆盖写,但一次运行里循环的写，是接着写(流通道并没有关闭)。</p>
 <pre><code class="java">//---这里省略对异常的处理,关于异常处理类似前面的例子
 //1.提供File类的对象，指明写出到的文件
 File file = new File(&quot;hello.txt&quot;);
@@ -301,13 +301,47 @@ fw.close()
 </code></pre>
 <p><strong>结论</strong><br>1.对于文本文件(.txt,.java,.c…..)，使用字符流处理。<br>2.对于非文本文件，使用字节流处理。</p>
 <p>文本文件用字节流也可以赋值，看出乱码也不影响最后复制完的结果,因为最终都是0101存储的。流只相当于一个搬运工。</p>
-<h3 id="缓冲流"><a href="#缓冲流" class="headerlink" title="缓冲流"></a>缓冲流</h3><p>说明:不能直接作用到文件上，作用在节点流上<br>作用:提高流读取、写入的速度</p>
-<p>BufferedInputStream<br>BufferedOutputStream<br>BufferedReader<br>BufferedWriter</p>
-<pre><code class="java">//1.造文件
-File srcFile = new File(path);
-//2.造流
-FileInputStream fis = new FileInputStream(srcFile);
+<h3 id="缓冲流"><a href="#缓冲流" class="headerlink" title="缓冲流"></a>缓冲流</h3><p>说明:不能直接作用到文件上，作用在节点流上<br>作用:提高流读取、写入的速度<br>原因:内部提供了一个写缓冲区</p>
+<p><strong>刷新缓存区</strong><br>bos.flush()<br>正常情况下，写数据的时候等内部缓冲区满了之后自动执行flush()。手动调用该方法会提前刷新。</p>
+<p>要求:先关外层的流，再关闭内层的流<br>说明:关闭外层流的同时,内层流也会自动的进行关闭。</p>
+<p><strong>注意:这里的参数可以直接是路径,会自动包装成new File(路径)</strong><br>BufferedInputStream - FileInputStream<br>    read(byte[] buffer)<br>BufferedOutputStream  - FileInputStream<br>    write(byte[] buffer,0,len)<br>BufferedReader - FileReader<br>    read(char[] cbuf)<br>    新方法readLine()返回字符串(不包含换行符),读完返回null。<br>    方法newLine()表示添加换行符<br>BufferedWriter - FileWriter<br>    write(char[] cbuf,0,len)</p>
+<p>补充:写的时候可以通过异或加密，读的时候通过再异或一次解密(对一个数异或的异或等于本身)</p>
+<pre><code class="java">//实现非文本文件的复制
 
+//1.造文件
+File srcFile = new File(path);
+File destFile = new File(path)
+//2.造流
+    //2.1造节点流
+FileInputStream fis = new FileInputStream(srcFile);
+FileInputStream fos= new FileOutputStream(destFile)
+    //2.2造缓冲流
+BufferedInputStream bis = new BufferedInputStream(fis);
+BufferedOutputStream bos = new BufferedOutputStream(fos);
+
+//3.复制的细节:读取、写入
+byte[] buffer = new byte[10];
+int len;
+while((len = bis.read(buffer))!= -1){
+    bos.write(buffer,0,len);
+   // bos.flush(); //刷新缓存区
+}
+
+//4.资源关闭
+//要求:先关外层的流，再关闭内层的流
+//说明:关闭外层流的同时,内层流也会自动的进行关闭。
+
+//BufferedReader读数据有了新方法
+String data;
+while(data = br.readLine()!=null){
+    bw.write(data); //data中不包含换行符
+}
+</code></pre>
+<h3 id="转换流"><a href="#转换流" class="headerlink" title="转换流"></a>转换流</h3><p>说明:转换流提供了字节流和字符流之间的转换</p>
+<p>1.转换流(看后缀):属于字符流<br>InputStreamReader:将字节的输入流InputStream转换成字符的输入流Reader –解码<br>OutputStreamWriter:将字符的输出流Write转化为字节的输出流OutputStream –编码 </p>
+<pre><code class="java">FileInputStream fis = new FileInputStream(&quot;dbcp.txt&quot;);
+//第二个参数为字符集,字节--&gt;字符 根据读的文件存的格式决定,这样就可以在控制台输出的
+InputStreamRead isr = new InputStreamReader(fis)
 </code></pre>
 
   </article>
@@ -317,7 +351,7 @@ FileInputStream fis = new FileInputStream(srcFile);
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#File类"><span class="toc-text">File类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#File类的常用方法"><span class="toc-text">File类的常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO流"><span class="toc-text">IO流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#节点流"><span class="toc-text">节点流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#读数据"><span class="toc-text">读数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#写数据"><span class="toc-text">写数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缓冲流"><span class="toc-text">缓冲流</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#File类"><span class="toc-text">File类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#File类的常用方法"><span class="toc-text">File类的常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO流"><span class="toc-text">IO流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#节点流"><span class="toc-text">节点流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#读数据"><span class="toc-text">读数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#写数据"><span class="toc-text">写数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缓冲流"><span class="toc-text">缓冲流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#转换流"><span class="toc-text">转换流</span></a></li></ol></li></ol>
   </div>
 </aside>
   

@@ -383,6 +383,29 @@ ObjecInputStream os = new ObjectInputStream(new FileOutputStream(&quot;objec.dat
 Object obj = os.readObject();
 os.close();
 </code></pre>
+<h3 id="RandomAccessFile类"><a href="#RandomAccessFile类" class="headerlink" title="RandomAccessFile类"></a>RandomAccessFile类</h3><p>实现了DataInput、DataOutput两个接口，既可以作为输入流，也可以作为输出流。并不继承于之前的四个基类，直接继承于java.lang.Object类。</p>
+<p>与其他类的区别：<br>1.可输入也可以输出<br>2.写文件时,从文件内容中的文件记录指针位置开始覆盖(默认指向开头)</p>
+<pre><code class="java">//构造器
+public RandomAccessFile(File file,String mode)
+public RandomAccessFile(String name,String mode)
+/*
+参数mode
+r:以只读方式打开,则并不会创建文件，而是去读取已存在的文件
+rw:打开以便读取和写入
+rwd:打开以便读取和写入:同步文件内容的更新
+rws:打开以便读取和写入:同步文件内容和元数据的更新
+*/
+raf1.write(&quot;xyz&quot;.getBytes()); //转换成byte数组
+</code></pre>
+<p>方法<br>void seek(long pos):将文件记录指针定位到pos位置，默认为0</p>
+<h3 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h3><p>NIO可以替代标准的Java IO API，NIO与原来的IO有同样的作用和目的,但是使用的方式完全不同。<br>IO是面向流的，NIO支持面向缓冲区的、基于通道的IO操作。<strong>NIO将以更加高效的方式进行文件的读写操作</strong></p>
+<p>Java API中提供了两套NIO，一套是针对标准输入输出NIO，另一套就是网络编程NIO</p>
+<h3 id="NIO-2-Path、Paths和Files核心API"><a href="#NIO-2-Path、Paths和Files核心API" class="headerlink" title="NIO.2 Path、Paths和Files核心API"></a>NIO.2 Path、Paths和Files核心API</h3><p>Path接口可以看成是File类的升级版本<br>Paths类提供的静态get()方法用来获取Path对象<br>java.nio.file.Files类用于操作文件或目录的工具类</p>
+<pre><code class="java">//以前
+File file = new File(&quot;index.heml&quot;);
+//java7
+Path path = Paths.get(&quot;index.html&quot;);
+</code></pre>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -391,7 +414,7 @@ os.close();
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#File类"><span class="toc-text">File类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#File类的常用方法"><span class="toc-text">File类的常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO流"><span class="toc-text">IO流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#节点流"><span class="toc-text">节点流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#读数据"><span class="toc-text">读数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#写数据"><span class="toc-text">写数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缓冲流"><span class="toc-text">缓冲流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#转换流"><span class="toc-text">转换流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他流的使用"><span class="toc-text">其他流的使用</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#File类"><span class="toc-text">File类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#File类的常用方法"><span class="toc-text">File类的常用方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#IO流"><span class="toc-text">IO流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#节点流"><span class="toc-text">节点流</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#读数据"><span class="toc-text">读数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#写数据"><span class="toc-text">写数据</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缓冲流"><span class="toc-text">缓冲流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#转换流"><span class="toc-text">转换流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他流的使用"><span class="toc-text">其他流的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RandomAccessFile类"><span class="toc-text">RandomAccessFile类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NIO"><span class="toc-text">NIO</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NIO-2-Path、Paths和Files核心API"><span class="toc-text">NIO.2 Path、Paths和Files核心API</span></a></li></ol></li></ol>
   </div>
 </aside>
   

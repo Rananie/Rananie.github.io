@@ -6,12 +6,12 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>归档: 2020/10 | Ranan_blog</title>
+  <title>Java网络编程 | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo, Theme-AD" />
+    <meta name="keywords" content="Java,Java," />
   
 
   
@@ -36,7 +36,7 @@
     welcome: {"enable":false,"interval":30},
     start_time: "2018-02-10",
     passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
-    is_post: false,
+    is_post: true,
     lock: false,
     author: "Ranan",
     share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
@@ -144,36 +144,72 @@
 </nav>
 <div id="site-process"></div>
     <main>
-      <div class="timeline">
-  <h2 class="timeline-title">归档: 90篇</h2>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2021-03-23
+    </span>
+    
+      <span>
+        | <a href="/categories/Java/"><i class="fa fa-bookmark"></i>Java</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Java网络编程
+  </h1>
   
-    
-      <h3 class="timeline-subtitle">2020</h3>
-    
-    <div class="timeline-item">
-      <time>2020-10-22</time>
-      <a target="_self" href="/2020/10/22/python总结/">python总结</a>
-    </div>
+  <article class="passage-article">
+    <p><strong>网络编程的目的</strong> 直接或间接地通过网络协议与其它计算机实现数据交换，进行通信，</p>
+<p>网络中的两个主要的问题<br>1.在特定网络中定位到主机(IP)，定位到主机的特定应用(端口号)<br>2.如何可靠高效地进行数据传输(网络通信协议)</p>
+<h3 id="InetAddress类"><a href="#InetAddress类" class="headerlink" title="InetAddress类"></a>InetAddress类</h3><p>IP:唯一标识Internet上的计算机(通信实体)<br>IPV4:4个字节组成，4个0-255<br>IPV6:16个字节组成，8个无符号整数，每个整数用4个16进制表示。如3ffe:3201:1401:1280:c8ff:fe4d:c8ff:fe4d</p>
+<p>在Java中使用InetAddress类代表IP</p>
+<p>域名 –DNS(Domain Name System域名解析服务器) –&gt; IP地址</p>
+<pre><code class="java">//static getByNname(&quot;String Ip地址/域名&quot;)
+//打印出ip地址
+InetAddress inet1 = InetAddress.getByName(&quot;192.168.10.14&quot;);
+//打印出域名/ip地址
+InetAddress inet2 = InetAddress.getByName(&quot;www.baidu.com&quot;);
+//本地回路地址:127.0.0.1 --&gt; localhost  
+//获取本机的ip地址
+InetAddress inet3 = InetAddress.getLocalHost() 
+//获取域名
+inet2.getHostName();
+//获取地址
+inet2.getHostAddress();
+</code></pre>
+<p><strong>端口号</strong></p>
+<p>端口号标识计算机上正在运行的进程。不同的进程有不同的端口号。</p>
+<p>公认端口:0~1023,被预先定义的服务通信占用。(HTTP占用端口80，FTP占用端口21，Telnet占用端口23)<br>注册端口:1024~49151,分配给用户进程或应用程序(Tomcat占用端口8080，MySQL占用端口3306，Oracle占用端口1521)<br>动态/私有端口:49152~65535</p>
+<p><strong>网络套接字Socket = 端口号 + IP</strong></p>
+<h3 id="传输层协议"><a href="#传输层协议" class="headerlink" title="传输层协议"></a>传输层协议</h3><p>TCP(Transmission Control Protocol传输控制协议)<br>UDP(User Datagram Protocol用户数据报协议)</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#InetAddress类"><span class="toc-text">InetAddress类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#传输层协议"><span class="toc-text">传输层协议</span></a></li></ol>
+  </div>
+</aside>
   
-    
-    <div class="timeline-item">
-      <time>2020-10-19</time>
-      <a target="_self" href="/2020/10/19/linux学习笔记/">linux学习笔记</a>
-    </div>
   
+    <div class="passage-tags">
+     
+      <a href="/tags/Java/"><i class="fa fa-tags"></i>Java</a>
     
-    <div class="timeline-item">
-      <time>2020-10-16</time>
-      <a target="_self" href="/2020/10/16/python-matplotlib/">python-matplotlib</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-10-09</time>
-      <a target="_self" href="/2020/10/09/Java总结/">Java总结(学习中)</a>
     </div>
   
 </div>
+
     </main>
     
     <div class="site-footer-wrapper">
@@ -222,12 +258,12 @@
     <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2021/03/11/C++笔记/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
   <div class="bottom-bar-right">
-    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
       <i class="fa fa-bars"></i>
     </a>
     

@@ -339,6 +339,7 @@ while(data = br.readLine()!=null){
 </code></pre>
 <h3 id="转换流"><a href="#转换流" class="headerlink" title="转换流"></a>转换流</h3><p>说明:转换流提供了字节流和字符流之间的转换</p>
 <p>转换流(看后缀):属于字符流<br>InputStreamReader:将字节的输入流InputStream转换成字符的输入流Reader –解码 第二个参数为字符集,字节–&gt;字符 根据读的文件存的格式决定,这样就可以在控制台输出的<br>OutputStreamWriter:将字符的输出流Write转化为字节的输出流OutputStream –编码 </p>
+<p>编码决定了解码的方式</p>
 <h3 id="其他流的使用"><a href="#其他流的使用" class="headerlink" title="其他流的使用"></a>其他流的使用</h3><p><strong>标准的输入、输出流</strong><br>System.in:标准的输入流，默认从键盘输入<br>System.out:标准的输出流，默认从控制台输出<br>重定向:public static void setIn(InputStream is)/setOut(PrintStream ps)方式重新指定输入和输出的设备</p>
 <p>举例:从键盘输入字符串，要求将读取到的整行字符串转成大写输出。然后继续进行输入操作，直到输入’e’或者’exit’,退出程序</p>
 <p>方法:使用System.in实现，readLine()这个可以看作next()。system.in 返回inputStream字节流 –&gt; 转换流 –&gt; BufferedReader的readLine()字符流</p>
@@ -367,7 +368,21 @@ ps = new PrintStream(fos,true);
 System.setOut(ps); //把标准输出流改成从文件输出
 System.out.prinyln(&quot;xxx&quot;);//输出到文件
 </code></pre>
-<p><strong>数据流</strong><br>作用:用于操作Java语言的基本数据类型和String的数据到文件里<br><strong>对象流</strong><br>作用:用于操作Java语言对象到文件里</p>
+<p><strong>数据流</strong><br>作用:用于操作Java语言的基本数据类型和String的数据到文件里</p>
+<p><strong>对象流</strong><br>作用:用于存储和读取基本数据类型数据或对象的处理流</p>
+<p>序列化:用ObjectOutputStream类保存基本类型数据或对象的机制<br>反序列化:用ObjectInputStream类读取基本类型或对象的机制</p>
+<p>注意：<br>1.不能序列化static(是类的,序列化争对的是类的对象)和transient(不被序列化)修饰的成员变量<br>2.对象对应的类要可序列化(实现接口Serializable或Externalizable)，还要保证其内部所有属性也必须是可序列化的。</p>
+<p>补充:<br>1.Serializable为标识接口,实现类不用重写方法，但实现类需要有一个全局常量<code>static final long serialVersionUID= xxxxxL</code><br>2.如果类没有显示定义serialVersionUID,值是java运行时环境根据类的内部细节自动生成的。<strong>若类做了修改,serialVersionUID可能发生变化</strong>,建议显示声明。<br>3.用于序列化和反序列化时识别类,反序列化时找到类的serialVersionUID要求和序列化时的serialVersionUID一样。</p>
+<pre><code class="java">//序列化:将内存中的java对象保存到磁盘或通过网络传输
+ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(&quot;objec.dat&quot;));
+oos.writeObject(new String(&quot;xxx&quot;));
+oos.flush(); //刷新操作
+oss.close();
+//反序列化:将磁盘文件中的对象还原为内存中的一个java对象
+ObjecInputStream os = new ObjectInputStream(new FileOutputStream(&quot;objec.dat&quot;));
+Object obj = os.readObject();
+os.close();
+</code></pre>
 
   </article>
   <aside class="table-content" id="site-toc">

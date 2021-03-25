@@ -198,14 +198,15 @@ try{}catch(){
 
 }
 </code></pre>
-<h3 id="异常处理机制二：throws-异常类型"><a href="#异常处理机制二：throws-异常类型" class="headerlink" title="异常处理机制二：throws + 异常类型"></a>异常处理机制二：throws + 异常类型</h3><pre><code>class ExceptionTest{
+<h3 id="异常处理机制二：throws-异常类型"><a href="#异常处理机制二：throws-异常类型" class="headerlink" title="异常处理机制二：throws + 异常类型"></a>异常处理机制二：throws + 异常类型</h3><pre><code class="java">class ExceptionTest{
     //写在方法声明处，指明此方法执行时，可能会抛出的异常类型。
     public void method() throws 异常类型{
         //并没有捕获异常，只是将异常往上抛
         //真正的处理是try-catch
     }
 }
-</code></pre><p>体会:throws的方法只是将异常抛给了方法的调用者，并没有真正将异常处理掉。</p>
+</code></pre>
+<p>体会:throws的方法只是将异常抛给了方法的调用者，并没有真正将异常处理掉。</p>
 <h2 id="用户自定义异常"><a href="#用户自定义异常" class="headerlink" title="用户自定义异常"></a>用户自定义异常</h2><p><strong>手动抛出异常</strong><br>关于异常对象的产生：<br>    ①系统自动生成的异常对象<br>    ②手动的生成一个异常对象，并抛出throw (i)</p>
 <p><strong>运行时异常可以不用处理</strong></p>
 <pre><code>//运行时异常可以不用处理

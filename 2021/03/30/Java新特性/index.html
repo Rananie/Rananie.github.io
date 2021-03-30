@@ -6,12 +6,12 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>归档 | 第7页 | Ranan_blog</title>
+  <title>Java新特性 | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo, Theme-AD" />
+    <meta name="keywords" content="Java,Java," />
   
 
   
@@ -36,7 +36,7 @@
     welcome: {"enable":false,"interval":30},
     start_time: "2018-02-10",
     passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
-    is_post: false,
+    is_post: true,
     lock: false,
     author: "Ranan",
     share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
@@ -144,72 +144,58 @@
 </nav>
 <div id="site-process"></div>
     <main>
-      <div class="timeline">
-  <h2 class="timeline-title">归档: 92篇</h2>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2021-03-30
+    </span>
+    
+      <span>
+        | <a href="/categories/Java/"><i class="fa fa-bookmark"></i>Java</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    Java新特性
+  </h1>
   
-    
-      <h3 class="timeline-subtitle">2020</h3>
-    
-    <div class="timeline-item">
-      <time>2020-07-22</time>
-      <a target="_self" href="/2020/07/22/JavaScript高级/">JavaScript高级</a>
-    </div>
+  <article class="passage-article">
+    <h2 id="Java8"><a href="#Java8" class="headerlink" title="Java8"></a>Java8</h2><p>Java8(jdk1.8)是Java语言开发的一个主要版本。</p>
+<h3 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h3><p>核心思路:可推断的可省略<br>本质:作为<strong>函数式接口</strong>实现类的对象<br>格式:() -&gt; {}<br><code>()</code> Lambda形参列表,接口中的抽象方法的形参列表<br><code>-&gt;</code> Lambda操作符,箭头操作符<br><code>{}</code> Lambda体,重写的抽象方法的方法体</p>
+<p><strong>Lambda的使用</strong></p>
+<p>Lambad形参列表<br>1.只有一个参数  -&gt; 小括号可以省略<br>2.参数类型可以推断出来(基本都行) -&gt; 可以省略</p>
+<p>Lambda体<br>只有一条语句 -&gt; 大括号、return可以省略</p>
+<h4 id="函数式-Functional-接口"><a href="#函数式-Functional-接口" class="headerlink" title="函数式(Functional)接口"></a>函数式(Functional)接口</h4><p>定义:接口只声明了一个抽象方法 -&gt; 省略<code>new Runnable(){@ovverride public void run}</code><br>表示:<code>@FunctionalInterface</code><br>说明:Lambda表达式可以看成函数式接口实现类的对象 -&gt; 以前用匿名实现类表示的现在可以用Lambda表达式来写</p>
+<p>java.util.funciton包下定义了java8的函数式接口</p>
+<p><strong>Java内置四大核心函数式接口</strong><br><img src="https://raw.githubusercontent.com/Rananie/imgs_rananie/master/blog/java/%E5%87%BD%E6%95%B0%E6%97%B6%E6%8E%A5%E5%8F%A3.png?token=AHTYULEKXTIVPWQQP2EQIKDAMKMTS"></p>
+<h3 id="Stream-API"><a href="#Stream-API" class="headerlink" title="Stream API"></a>Stream API</h3><h3 id="方法引用与构造器引用"><a href="#方法引用与构造器引用" class="headerlink" title="方法引用与构造器引用"></a>方法引用与构造器引用</h3><h3 id="Optional类"><a href="#Optional类" class="headerlink" title="Optional类"></a>Optional类</h3><p>最大化减少空指针异常</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java8"><span class="toc-text">Java8</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Lambda表达式"><span class="toc-text">Lambda表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#函数式-Functional-接口"><span class="toc-text">函数式(Functional)接口</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stream-API"><span class="toc-text">Stream API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法引用与构造器引用"><span class="toc-text">方法引用与构造器引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Optional类"><span class="toc-text">Optional类</span></a></li></ol></li></ol>
+  </div>
+</aside>
   
-    
-    <div class="timeline-item">
-      <time>2020-07-21</time>
-      <a target="_self" href="/2020/07/21/BOM/">BOM</a>
-    </div>
   
+    <div class="passage-tags">
+     
+      <a href="/tags/Java/"><i class="fa fa-tags"></i>Java</a>
     
-    <div class="timeline-item">
-      <time>2020-07-18</time>
-      <a target="_self" href="/2020/07/18/DOM/">DOM</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-07-16</time>
-      <a target="_self" href="/2020/07/16/正则表达式/">正则表达式</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-07-15</time>
-      <a target="_self" href="/2020/07/15/原型与原型链/">原型与原型链</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-07-15</time>
-      <a target="_self" href="/2020/07/15/this指针/">this指针</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-07-13</time>
-      <a target="_self" href="/2020/07/13/webpack5/">webpack5</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-07-12</time>
-      <a target="_self" href="/2020/07/12/webpack详细配置/">webpack详细配置</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-07-10</time>
-      <a target="_self" href="/2020/07/10/webpack优化配置/">webpack优化配置</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2020-07-09</time>
-      <a target="_self" href="/2020/07/09/JavaScript基础/">JavaScript基础（7.15更新）</a>
     </div>
   
 </div>
+
     </main>
     
     <div class="site-footer-wrapper">
@@ -255,15 +241,15 @@
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="/archives/page/6/" data-enable="true">
+    <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="/archives/page/8/" data-enable="true">
+    <a href="/2021/03/27/Java反射/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
   <div class="bottom-bar-right">
-    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
       <i class="fa fa-bars"></i>
     </a>
     

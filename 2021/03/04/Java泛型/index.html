@@ -225,8 +225,6 @@ class son3&lt;T1,T2&gt; extends Father&lt;T1,T2&gt;{
 //2.部分保留
 class son4&lt;T2&gt; extends Father&lt;Integer,T2&gt;{
 }
-
-
 </code></pre>
 <p>尽管在编译时ArrayList<string> 和 ArrayList<integer>是两种类型，但是在运行时只有一个ArrayList被加载到JVM中</integer></string></p>
 <p><strong>注意点</strong><br>1.泛型类可能有多个参数，<code>&lt;E1,E2,E3&gt;</code><br>2.泛型的构造器public GenericClass(){}<br>3.泛型不同的引用不能相互赋值<br>4.泛型如果不指定，对应类型按照Object处理，但不等价与Object<br>5.静态方法中不能使用类的泛型(泛型是实例化时指定)，异常类不能声明为泛型类<br>6.不是使用<code>new E[]</code>,可以使用<code>E[] elements = (E[]) new Object[capacity]</code>;</p>
@@ -266,7 +264,8 @@ class Person&lt;T extends Info&gt;{
     //这里写T不写问号，问号用于父类？
 }
 </code></pre>
-<p><strong>有限制条件的通配符</strong><br>指定上限extends(&lt;=):使用时指定的类型必须是继承某个类，或者实现某个接口<br>指定下线super(&gt;=):使用时指定的类型不能小于操作的类</p>
+<p><strong>有限制条件的通配符</strong></p>
+<p>指定上限extends(&lt;=):使用时指定的类型必须是继承某个类，或者实现某个接口<br>指定下线super(&gt;=):使用时指定的类型不能小于操作的类</p>
 <p>读取数据的时候,为了保持兼容性，应该用最上界的数据类型接收<br>写入数据的时候，<code>[super A类，正无穷]</code>，可以写入A类及其子类，因为多态性，父类可以指向子类。</p>
 
   </article>

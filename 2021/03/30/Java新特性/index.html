@@ -167,7 +167,7 @@
   
   <article class="passage-article">
     <h2 id="Java8"><a href="#Java8" class="headerlink" title="Java8"></a>Java8</h2><p>Java8(jdk1.8)是Java语言开发的一个主要版本。</p>
-<h3 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h3><p>核心思路:可推断的可省略<br>本质:作为<strong>函数式接口</strong>实现类的对象<br>格式:<code>() -&gt; {}</code><br><code>()</code> Lambda形参列表,接口中的抽象方法的形参列表<br><code>-&gt;</code> Lambda操作符,箭头操作符<br><code>{}</code> Lambda体,重写的抽象方法的方法体</p>
+<h3 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h3><p>核心思路:可推断的可省略<br>本质:作为<strong>函数式接口</strong>实现类的对象<br>格式:<code>() -&gt; {}</code><br><code>()</code> Lambda形参列表,接口中的抽象方法的形参列表<br><code>-&gt;</code> Lambda操作符,箭头操作符<br><code>{}</code> Lambda体,重写的抽象方法的方法体<br>使用场景:当需要对一个函数式接口实例化时 -&gt; 用匿名实现类实现的都可以用Lambda表达式</p>
 <p><strong>Lambda的使用</strong></p>
 <p>Lambad形参列表<br>1.只有一个参数  -&gt; 小括号可以省略<br>2.参数类型可以推断出来(基本都行) -&gt; 可以省略</p>
 <p>Lambda体<br>只有一条语句 -&gt; 大括号、return可以省略</p>
@@ -239,7 +239,7 @@ func2.apply(1002);
 <p><strong>Stream说明</strong><br>1.Stream自己不存储元素<br>2.Stream不会改变源对象，会返回一个持有结果的新Stream<br>3.Stream操作是延迟执行的，会等到需要结果的时候才执行</p>
 <p><strong>Stream和Collection集合的区别</strong><br>Collection:静态的内存数据结构，面向数据<br>Stream:有关计算，通过CPU实现计算，面向计算</p>
 <p><strong>Stream操作的三个步骤</strong><br>1.创建Stream:一个数据源(如集合、数组)，获取一个流<br>2.中间操作：一个中间操作链，对数据源的数据进行处理<br>3.终止操作(终端操作)：一旦执行终止操作，<strong>就执行中间操作链，并产生结果,之后不会再被使用.</strong></p>
-<h4 id="Stream的实例化"><a href="#Stream的实例化" class="headerlink" title="Stream的实例化"></a>Stream的实例化</h4><p>1.通过集合,实例对象.stram()/实例对象，parallelStream()<br>2.通过数组，Arrays.stream(arr)<br>3.Stream.of(容器)<br>4.无限流</p>
+<h4 id="Stream的实例化"><a href="#Stream的实例化" class="headerlink" title="Stream的实例化"></a>Stream的实例化</h4><p>1.通过集合(或容器的实例对象),实例对象.stram()/实例对象，parallelStream()<br>2.通过数组，Arrays.stream(arr)<br>3.Stream.of(容器)<br>4.无限流</p>
 <pre><code class="java">//1。通过集合
 List &lt;Employee&gt; employees = EmployeeData.getEmployees()//得到集合
 //default Stream&lt;E&gt; stream() Collection接口下的默认方法，返回一个顺序流(按顺序获取)
@@ -265,6 +265,8 @@ Stream&lt;Integer&gt; stream = Stream.of(1,2,3,4,5,6) //这里的int是包装类
 //4.创造无限流
 //迭代 public static&lt;T&gt; Stream &lt;T&gt; iterate(final T seed,final UnayOperator&lt;T&gt; f) 第二个参数是特殊的Function，参数和返回值是同样的类型
 Stream.iterate(0,t-&gt;t+2).limit(10).forEach(System.out::println); //输出0开始的10个偶数
+//不加limit是不会被终止操作终止的
+
 //生成 public static&lt;T&gt; Stream &lt;T&gt; generate(Supplier &lt;T&gt; s)
 Stream.generate(Math::random).limit(10).forEach(System.out::println);
 </code></pre>
@@ -290,10 +292,11 @@ Arrays.stream(arr).skip(2).forEach(System.out::print);
 Arrays.stream(arr).distinct().forEach(System.out::print);
 </code></pre>
 <p><strong>映射</strong></p>
-<p>map(Function f):接收一个函数作为参数，将元素转换成其他形式或提取信息，该函数会被应用到每个元素上，并将其映射成一个新的元素,类似list的add<br>flatMap(Function f):接收一个函数作为参数,将一个流中的每个值都转成一个个流，然后再将这些流扁平化成为一个流，类似list的addAll</p>
+<p>map(Function f):接收一个函数作为参数，将元素转换成其他形式或提取信息，该函数会被应用到每个元素上，并将其映射成一个新的元素,类似list的add</p>
+<p>flatMap(Function f):接收一个函数作为参数,将一个流中的每个值都转成一个流(内部值取出来转化成一个流)，然后再将这些流扁平化成为一个流(方便链式操作)，类似list的addAll,把内部的值都取出来。</p>
 <pre><code class="java">//map(Function f):接收一个函数作为参数，将元素转换成其他形式或提取信息，该函数会被应用到每个元素上，并将其映射成一个新的元素
 List&lt;String&gt; list = Arrays.asList(&quot;aa&quot;, &quot;bb&quot;, &quot;cc&quot;, &quot;dd&quot;);
-        list.stream().map(str -&gt; str.toUpperCase()).forEach(System.out::print);
+list.stream().map(str -&gt; str.toUpperCase()).forEach(System.out::print);
 
 //flatMap(Function f):接收一个函数作为参数，将一个流中的每个值都转成一个个流，然后再将这些流扁平化成为一个流 
 //fliatMap类似addAll,map类似add
@@ -336,11 +339,11 @@ Integer sum = list.stream().reduce(0, Integer::sum);//Double::sum
 employees.stream().filiter(e-&gt;e.getSalary&gt;6000).collect(Collects.toList());
 //Collects.toSet()  Collects.toCollection
 </code></pre>
-<h3 id="Optional类"><a href="#Optional类" class="headerlink" title="Optional类"></a>Optional类</h3><p>作用:最大化减少空指针异常<br>说明:Optional<t>类(java.util.Optional)是一个容器类，可以保存类型T的值，代表这个值存在。或者仅仅保存null，表示这个值不存在。</t></p>
+<h3 id="Optional类"><a href="#Optional类" class="headerlink" title="Optional类"></a>Optional类</h3><p>作用:最大化减少空指针异常 -&gt; 问了解决空指针问题<br>说明:Optional<t>类(java.util.Optional)是一个容器类，可以保存类型T的值，代表这个值存在。或者仅仅保存null，表示这个值不存在。</t></p>
 <p>Optional提供很多方法，这样不用显式进行空值检测。</p>
 <p><strong>创建Optional类对象的方法</strong><br>Optional.of(T t):创建一个Optional实例，t必须非空<br>Optional.empty():创建一个空的Optional实例<br>Optional.ofNullable(T t):t可以为null，常用方法</p>
 <p><strong>判断Optional容器是否包含对象</strong><br>boolean isPresent():判断是否包含对象</p>
-<p><strong>获取Optional容器的对象</strong><br>T orElse(T other):如果有值就将其返回，没有就返回指定的other对象，也就是设置默认值。常用方法<br>T get():如果调用对象包含值，返回该值，否则抛异常。<br>T orElseGet(Supplier&lt;? extend T&gt; other):如果有值则返回，否则返回由Supplier接口实现提供的对象</p>
+<p><strong>获取Optional容器的对象</strong><br>T orElse(T other):如果有值就将其返回，没有就返回指定的other对象，也就是设置默认值。常用方法<br>T get():获取内部封装的数据value如果调用对象包含值，返回该值，否则抛异常。<br>T orElseGet(Supplier&lt;? extend T&gt; other):如果有值则返回，否则返回由Supplier接口实现提供的对象</p>
 <p>不确定：Optional.ofNullable(T t) + T orElse(T other)<br>确定：Optional.of(T t) + T get()</p>
 <p>使用举例</p>
 <pre><code class="java">public String getGirlName(Boy boy){
@@ -359,7 +362,227 @@ Boy boy = optionalGirl.orElse(new boy(&quot;ranan&quot;)); //有就返回，没�
 
 }
 </code></pre>
-<h2 id="Java9-10-11"><a href="#Java9-10-11" class="headerlink" title="Java9/10/11"></a>Java9/10/11</h2>
+<h2 id="Java9"><a href="#Java9" class="headerlink" title="Java9"></a>Java9</h2><h3 id="模块化系统"><a href="#模块化系统" class="headerlink" title="模块化系统"></a>模块化系统</h3><p>模块(module)不声明默认就是隐藏。因此，模块化使得代码组织上更安全，因为可以指定哪些暴露，哪些隐藏。</p>
+<p>模板之间的暴露关系需要在src下新建module.info.java</p>
+<pre><code class="java">//moduleName的module.info.java
+module moduleName{
+  exports packageName
+}
+//moduleName1的module.info.java
+module moduleName1{
+  requires moduleName;
+}
+</code></pre>
+<h3 id="jShell命令"><a href="#jShell命令" class="headerlink" title="jShell命令"></a>jShell命令</h3><p>Java的交互式编程环境REPL(read - evaluate - print - loop),以交互式的方式对语句和表达式进行求值。</p>
+<p>cmd:jshell命令进入交互式编程环境</p>
+<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><h4 id="接口的私有方法"><a href="#接口的私有方法" class="headerlink" title="接口的私有方法"></a>接口的私有方法</h4><p>java8中接口的方法，权限都是默认的public(可省略)<br>抽象方法:如果实现类覆盖(实现)了接口中的所有抽象方法，则此实现类就可以实例化;如果实现了没有覆盖覆盖(实现)接口所有的抽象方法，则此实现类为抽象类(加上abstract)<br>静态方法，只能由接口自己调用<br>默认(default关键字)的方法，可以重写,可以通过接口名.super.方法名调用或者使用实例对象调用</p>
+<p>java9中方法的访问权限修饰符可以声明为peivate</p>
+<pre><code class="java">//如下的三个方法的权限修饰符都是public
+void methodAbstract();
+static void methodStatic(){
+        System.out.println(&quot;我是接口中的静态方法&quot;);
+};
+default void menthodDefault(){
+        System.out.println(&quot;我是接口中的默认方法&quot;);
+}
+//Jdk9中允许定义私有方法
+private void menthodPrivate(){
+        System.out.println(&quot;我是接口中的私有方法&quot;);
+}
+</code></pre>
+<h4 id="钻石操作符的使用升级"><a href="#钻石操作符的使用升级" class="headerlink" title="钻石操作符的使用升级"></a>钻石操作符的使用升级</h4><p>钻石操作符<code>&lt;&gt;</code></p>
+<p>匿名实现类与钻石操作符共同使用时，可以进行类型推断。</p>
+<pre><code class="java">//jdk7的新特性:类型推断
+ArrayList&lt;String&gt; list = new ArrayList&lt;&gt;();
+//jdk8匿名实现类与钻石操作符共同使用时是不能进行类型推断的
+Comparator&lt;Object&gt; com = new Comparator&lt;Object&gt;() {
+  @Override
+  public int compare(Object o, Object t1) {
+               return 0;
+  }
+}
+</code></pre>
+<h4 id="try语句"><a href="#try语句" class="headerlink" title="try语句"></a>try语句</h4><p>java8可以实现<strong>资源的自动关闭</strong>(不用在finally)，但要求执行后必须关闭的所有资源必须在try小括号中初始化，否则编译不通过。<br>java9自动关闭的资源可以在try子句的外部初始化，初始化好了再传给try子句。</p>
+<p><strong>注意</strong><br>1.try小括号里的资源是final类型的,只能使用不能修改。</p>
+<pre><code class="java">//@Test 单元测试方式不能在控制台读数据
+//java8之前处理资源关闭需要在finally中
+public static void main(String[] args) {
+InputStreamReader reader = null;
+try {
+  reader = new InputStreamReader(System.in);
+  char[] cbuf = new char[20];
+  int len;
+   if((len = reader.read(cbuf)) !=-1){
+    String str = new String(cbuf,0,len);
+    System.out.println(str);
+    }
+   } catch (IOException e) {
+     e.printStackTrace();
+   } finally {
+     if(reader!=null){
+       try {
+          reader.close();
+         } catch (IOException e) {
+          e.printStackTrace();
+          }
+        }
+  }
+}
+
+//java8:自动关闭的资源初始化必须在try小括号中
+try (InputStreamReader reader = new InputStreamReader(System.in)){
+  char[] cbuf = new char[20];
+  int len;
+  if((len = reader.read(cbuf)) !=-1){
+    String str = new String(cbuf,0,len);
+    System.out.println(str);
+  }
+} catch (IOException e) {
+            e.printStackTrace();
+}
+
+//java9:自动关闭的资源可以在外部初始化
+InputStreamReader reader = new InputStreamReader(System.in);
+try (reader){
+  char[] cbuf = new char[20];
+  int len;
+  if((len = reader.read(cbuf)) !=-1){
+     String str = new String(cbuf,0,len);
+     System.out.println(str);
+  }
+} catch (IOException e) {
+  e.printStackTrace();
+}
+</code></pre>
+<h4 id="String存储结构变更"><a href="#String存储结构变更" class="headerlink" title="String存储结构变更"></a>String存储结构变更</h4><p>StringBuffer与StringBuilder和String存储结构也变了</p>
+<p>char[] value  -&gt; byte[] value</p>
+<h4 id="集合工厂方法-快速创建只读集合"><a href="#集合工厂方法-快速创建只读集合" class="headerlink" title="集合工厂方法:快速创建只读集合"></a>集合工厂方法:快速创建只读集合</h4><p>补充:Arrays.asList()得到的集合是只读集合</p>
+<p>Java9的of()方法</p>
+<pre><code class="java">//创建只读集合 
+//java8的写法
+ArrayList&lt;String&gt; nameList = new ArrayList&lt;&gt;();
+nameList.add(&quot;Hoe&quot;);
+nameList.add(&quot;Joe&quot;);
+nameList.add(&quot;Bill&quot;);
+nameList = (ArrayList&lt;String&gt;) Collections.unmodifiableList(nameList);
+System.out.println(nameList);
+
+//Java9
+List&lt;Integer&gt; list = List.of(1, 2, 3, 4, 5);
+Set&lt;Integer&gt; set = Set.of(23, 3, 54, 65, 43);
+Map.ofEntries(Map.entry(&quot;tom&quot;,&quot;34&quot;),Map.entry(&quot;Lili&quot;,25));
+</code></pre>
+<h4 id="InputStream加强"><a href="#InputStream加强" class="headerlink" title="InputStream加强"></a>InputStream加强</h4><p>InputStream新方法<code>transferTo</code>,可以用来将数据直接传输到OutputStream</p>
+<p>输入流.transferTo(输出流):把输入流中的所有数据直接自动复制到输出流</p>
+<h4 id="Stream-API-1"><a href="#Stream-API-1" class="headerlink" title="Stream API"></a>Stream API</h4><p>Stream接口中添加了4个新方法</p>
+<p><strong>Stream实例的生成</strong><br>Stream.of(null)是不行的，Stream.of(null,null)是可以的。Java8中的Steam不能只有单个元素null,否则会报空指针异常。<br>Java9中Stream.ofNullable(),参数只能是一个值，可以为null</p>
+<p>iterate方法的新重载,第二个参数为断定型，满足条件才继续迭代，不满足条件则终止。</p>
+<pre><code class="java">//java8
+//迭代 public static&lt;T&gt; Stream &lt;T&gt; iterate(final T seed,final UnayOperator&lt;T&gt; f) 第二个参数是特殊的Function，参数和返回值是同样的类型
+Stream.iterate(0,t-&gt;t+2).forEach(System.out::println); //是不会被终止操作终止的，创建的是无限流
+
+//java9
+//x=100时终止
+Stream.iterate(0,x-&gt;x&lt;100,x-&gt;x+2).forEach(System.out::println); 
+</code></pre>
+<p><strong>中间操作方法</strong><br>takeWhile(Predicate p):在有序的Stream中,takeWhile返回从开头开始的尽量多的元素，有一个不满足就不再判断了，返回前面都满足的元素。<br>dropWhile(Predicate p):返回从开头开始第一个不满足条的件及其后面的元素,返回剩余的元素。</p>
+<h4 id="Optional获取Stream的方法"><a href="#Optional获取Stream的方法" class="headerlink" title="Optional获取Stream的方法"></a>Optional获取Stream的方法</h4><p>Optional类(容器)中的Stream()的使用</p>
+<pre><code class="java">ArrayList&lt;String&gt; list= new ArrayList&lt;&gt;();
+list.add(&quot;Tom&quot;);
+list.add(&quot;Jerry&quot;);
+list.add(&quot;Tim&quot;);
+Optional&lt;ArrayList&lt;String&gt;&gt; list1 = Optional.ofNullable(list);
+Stream&lt;ArrayList&lt;String&gt;&gt; stream = list1.stream();
+//stream.count(); 只有一个流，把流中的元素全部取出再封装成一个流
+stream.flatMap(x-&gt;x.stream()).forEach(System.out::println);
+</code></pre>
+<h2 id="Java10"><a href="#Java10" class="headerlink" title="Java10"></a>Java10</h2><h3 id="局部变量类型推断"><a href="#局部变量类型推断" class="headerlink" title="局部变量类型推断"></a>局部变量类型推断</h3><p>从等号右边推断出等号左边的类型,用<code>var</code>代表类型。</p>
+<p>工作原理:在处理var时，编译器先查看表达式右边部分，根据右边的类型进行推断，作为左边变量的类型，然后将该类型写入字节码中。</p>
+<p>注意:<br>1.var不是关键字，所以可以声明方法名变量名为var<br>2.var并不会改变Java是一门静态类型语言(先编译再运行)的事实，</p>
+<pre><code class="java">//int num = 10;
+var num = 10;
+/*
+右边的&lt;&gt;里根据左边推断出来的,ArrayList&lt;String&gt; list = new ArrayList&lt;&gt;();如果使用类型推断省略左边的泛型类型，那么右边的泛型需要显示的写出来。
+*/
+var list = new ArrayList&lt;String&gt;();
+//for(String i:list){}
+for(var i:list){}
+</code></pre>
+<p><strong>不允许的情况</strong></p>
+<p>总之就是右边可以把左边推出来就可以使用</p>
+<p>1.方法的参数类型，返回值，构造器的参数类型。<br>2.类的属性不可以用，因为属性有默认值，需要知道类型。<br>3.catch块的参数</p>
+<pre><code class="java">//1.局部变量不赋值，就不能实现类型推断
+//var num;
+//var num = null; 引用类型都是null不饿能推断出来
+
+//2.使用了Lambda表达式，左边的函数式接口不能声明为var，因为Lambda表达式就是从左边的函数式接口推断出来的
+//var sup = () -&gt; Math.random,
+Supplier&lt;Double&gt; sup = ()-&gt;Math.random();
+
+//3.var arr1 = {1,2,3,4}
+int[] arr = new int[]{1,2,3,4};
+var arr1 = new int[]{1,2,3,4};
+int[] arr2 = {1,2,3,4};
+
+</code></pre>
+<h3 id="of方法与copyOf方法"><a href="#of方法与copyOf方法" class="headerlink" title="of方法与copyOf方法"></a>of方法与copyOf方法</h3><p>Java9开始，jdk里为集合(List/Set/Map)添加了of(9新增)和copyOf(10新增),两个方法都用来创建不可变的集合。</p>
+<p>copyOf(参数) 参数本身是只读的，返回的就是原来的。参数本身不是只读的，返回新的只读集合。</p>
+<pre><code class="java">//copyOf(参数) 参数本身是只读的，返回的就是原来的
+var list = List.of(&quot;Java&quot;,&quot;Python&quot;,&quot;C&quot;);
+var copy = List.copyOf(list);
+System.out.println(copy == list);//true
+//参数本身不是只读的，返回新的只读集合
+var list2 = new ArrayList&lt;String&gt;();
+var copy2 = List.copyOf(list2);
+System.out.println(list2 == copy2);//false
+</code></pre>
+<h2 id="Java11"><a href="#Java11" class="headerlink" title="Java11"></a>Java11</h2><p>Java11是长期支持的版本。</p>
+<h3 id="String的新增方法"><a href="#String的新增方法" class="headerlink" title="String的新增方法"></a>String的新增方法</h3><p>isBlank方法：判断字符串是否为空<br>strip方法:去掉字符串中的空白包括\n\t<br>//stripLeading去除开头的空白</p>
+<pre><code class="java">//isBlank方法判断字符串是否为空
+System.out.println(&quot; \n &quot;.isBlank()); //true
+
+//strip方法去掉字符串中的空白包括\n\t
+System.out.println(&quot;  xxx  &quot;.strip());
+//之前的方法，去除首尾的白\n\t
+System.out.println(&quot;  xxx  &quot;.trim());
+
+//stripLeading去除开头的空白
+System.out.println(&quot;  xxx  &quot;.stripLeading());
+//stripTrailing()去除尾部的空白
+System.out.println(&quot;  xxx  &quot;.stripTrailing());
+//repeat方法重复n次
+System.out.println(&quot;abc&quot;.repeat(5));
+
+System.out.println(&quot; abcd \n ddd&quot;.lines().count()); //2
+</code></pre>
+<h3 id="Optional的新增方法"><a href="#Optional的新增方法" class="headerlink" title="Optional的新增方法"></a>Optional的新增方法</h3><p>boolean isEmpty() 判断value是否为空 JDK11<br>T orElseThrow() value非空返回value，否则抛异常NoSuchElementException JDK10<br>ifPresentOrElse(Consumer&lt;?super T&gt;action,Runnable emptyAction) value非空执行参数1功能，为空执行参数2功能 JDK9<br>Optional <t> or(Supplier&lt;? extend Optional&lt;? extend T&gt;&gt; supplier):value非空，返回对应的非空，value为空，返回形参封装的Optional，而orElse关注的是value</t></p>
+<pre><code class="java">Optional&lt;Object&gt; op = Optional.empty();
+System.out.println(op.isPresent()); //JDK8,判断内部的value是否存在
+System.out.println(op.isEmpty());//JDK11，判断内部的value是否为空
+
+Optional&lt;String&gt; op1 = Optional.of(&quot;hello&quot;);
+Optional&lt;Object&gt; op2 = op.or(() -&gt; op1);
+System.out.println(op2); //hello
+</code></pre>
+<h3 id="局部变量类型推断的升级"><a href="#局部变量类型推断的升级" class="headerlink" title="局部变量类型推断的升级"></a>局部变量类型推断的升级</h3><p>var前面可以添加注解</p>
+<pre><code class="java">//错误形式
+//Consumer&lt;String&gt;  con1 = (@Deprecated t) -&gt; System.out.print(t.toUpperCase());
+//使用var的好处是在使用Lambda表达式时可以给参数加上注解
+Consumer&lt;String&gt;  con1 = (@Deprecated var t) -&gt; System.out.print(t.toUpperCase());
+</code></pre>
+<h3 id="全新的HTTP客户端API"><a href="#全新的HTTP客户端API" class="headerlink" title="全新的HTTP客户端API"></a>全新的HTTP客户端API</h3><p>java.net.http包下,HttpClient类主要替换HttpURLConnection，提供对WebSocket和HTTP/2的支持。</p>
+<h3 id="更简化的编译运行程序"><a href="#更简化的编译运行程序" class="headerlink" title="更简化的编译运行程序"></a>更简化的编译运行程序</h3><p>一个命令编译运行源代码的注意点<br>1.只执行源文件中的第一个类，第一个类必须包含main方法<br>2.不可以使用其他源文件中的自定义类，本文件中的自定义类是可以使用的</p>
+<pre><code class="java">//编译
+javac Javastack.java
+//运行 Javastack类
+java Javastack
+
+//java11通过一个java命令
+java Javastak.java
+</code></pre>
+<h3 id="ZGC"><a href="#ZGC" class="headerlink" title="ZGC"></a>ZGC</h3><p>GC(垃圾回收)是java的主要优势之一</p>
+<p>ZGC,A Scalable Low-Latency Garbage Collector(Experimental),后面Experimental说明还不建议用到生产环境。ZGC是一个并发的，基于region，压缩型的垃圾收集器，只有root扫描阶段会STW(stop the world),因此GC停顿时间不会随着堆的增长和存活对象的增长而变从长。</p>
+
   </article>
   <aside class="table-content" id="site-toc">
   <div class="table-content-title">
@@ -367,7 +590,7 @@ Boy boy = optionalGirl.orElse(new boy(&quot;ranan&quot;)); //有就返回，没�
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java8"><span class="toc-text">Java8</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Lambda表达式"><span class="toc-text">Lambda表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#函数式-Functional-接口"><span class="toc-text">函数式(Functional)接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法引用"><span class="toc-text">方法引用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构造器引用"><span class="toc-text">构造器引用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stream-API"><span class="toc-text">Stream API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Stream的实例化"><span class="toc-text">Stream的实例化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Stream的中间操作"><span class="toc-text">Stream的中间操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Stream的终止操作"><span class="toc-text">Stream的终止操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Optional类"><span class="toc-text">Optional类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java9-10-11"><span class="toc-text">Java9/10/11</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Java8"><span class="toc-text">Java8</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Lambda表达式"><span class="toc-text">Lambda表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#函数式-Functional-接口"><span class="toc-text">函数式(Functional)接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法引用"><span class="toc-text">方法引用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#构造器引用"><span class="toc-text">构造器引用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Stream-API"><span class="toc-text">Stream API</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Stream的实例化"><span class="toc-text">Stream的实例化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Stream的中间操作"><span class="toc-text">Stream的中间操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Stream的终止操作"><span class="toc-text">Stream的终止操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Optional类"><span class="toc-text">Optional类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java9"><span class="toc-text">Java9</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#模块化系统"><span class="toc-text">模块化系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jShell命令"><span class="toc-text">jShell命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#语法"><span class="toc-text">语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#接口的私有方法"><span class="toc-text">接口的私有方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#钻石操作符的使用升级"><span class="toc-text">钻石操作符的使用升级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#try语句"><span class="toc-text">try语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#String存储结构变更"><span class="toc-text">String存储结构变更</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#集合工厂方法-快速创建只读集合"><span class="toc-text">集合工厂方法:快速创建只读集合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#InputStream加强"><span class="toc-text">InputStream加强</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Stream-API-1"><span class="toc-text">Stream API</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Optional获取Stream的方法"><span class="toc-text">Optional获取Stream的方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java10"><span class="toc-text">Java10</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#局部变量类型推断"><span class="toc-text">局部变量类型推断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#of方法与copyOf方法"><span class="toc-text">of方法与copyOf方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Java11"><span class="toc-text">Java11</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#String的新增方法"><span class="toc-text">String的新增方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Optional的新增方法"><span class="toc-text">Optional的新增方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#局部变量类型推断的升级"><span class="toc-text">局部变量类型推断的升级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#全新的HTTP客户端API"><span class="toc-text">全新的HTTP客户端API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#更简化的编译运行程序"><span class="toc-text">更简化的编译运行程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ZGC"><span class="toc-text">ZGC</span></a></li></ol></li></ol>
   </div>
 </aside>
   

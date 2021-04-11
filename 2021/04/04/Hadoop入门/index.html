@@ -189,7 +189,58 @@
 <p>图示说明<br>服务器节点:ResourceManager + Node Manager<br>App Mstr:集群中运行的任务(job)</p>
 <p><strong>MapReduce架构</strong><br>MapReduce将计算过程分为两个阶段:Map和Reduce<br>1.Map阶段<strong>并行处理</strong>输入数据  –&gt; 负责大任务分小任务<br>2.Reduce阶段对Map结果进行汇总  –&gt; 负责汇总结果</p>
 <h2 id="Hadoop运行环境搭建"><a href="#Hadoop运行环境搭建" class="headerlink" title="Hadoop运行环境搭建"></a>Hadoop运行环境搭建</h2><h3 id="虚拟机环境准备"><a href="#虚拟机环境准备" class="headerlink" title="虚拟机环境准备"></a>虚拟机环境准备</h3><p>1.克隆虚拟机<br>2.修改克隆虚拟机的静态IP<br>3.修改主机名<br>4.关闭防火墙<br>5.创建ranan用户<br>6.配置ranan用户具有root权限</p>
-<p>1.克隆虚拟机 </p>
+<h4 id="原虚拟机设置"><a href="#原虚拟机设置" class="headerlink" title="原虚拟机设置"></a>原虚拟机设置</h4><p><strong>1 网络配置</strong><br>选择NAT模式<br>目的:宿主机windows和虚拟机linux能够进行网路连接,同时虚拟机linux可以通过宿主机window进入互联网</p>
+<p>linux 网络是是动态的<br>window - vmnet8虚拟网卡 ipconfig 192.168.146.1 </p>
+<pre><code>   - 真实网卡  192.168.43.159 与外面网络通讯
+</code></pre><p>linux与window构成了一个网络,linux通过虚拟网卡、真实网卡代理虚拟网卡与外面网络通讯</p>
+<p>补充:<br>修改虚拟网卡ip地址 编辑-虚拟网络编辑器-子网ip<br>虚拟网卡网关需要和真实网卡网关一致 编辑-虚拟网络编辑器-NAT设置 192.168.146.2<br>window网关 网络和internet-更改适配器-vmnet8-属性-ip4</p>
+<p><strong>ping</strong><br>说明:ping测试主机之间网络连通信<br>基本语法:ping 目的主机(测试当前服务器是否可以连接目的主机)</p>
+<p><strong>2 配置静态IP地址</strong><br>作用:因为服务器的ip总是不变的</p>
+<p>这里配置的是192.168.146.130</p>
+<pre><code># 先进入网卡配置文件
+[root@localhost ~]# cd /etc/sysconfig/network-scripts/
+
+[root@localhost network-scripts]# ls           #会看到一个配置网卡的配置文件，我的是ifcfg-ens33
+
+[root@localhost network-scripts]# vim ifcfg-ens33  #进入到网卡配置文件中
+
+# 配置文件中必有的
+ONBOOT=yes #系统启动时网络接口是否有效
+BOOTPROTO=static # IP地址的配置方法[static(静态分配)|none(不使用协议)|bootp(bootp协议)|dhcp(DHCP协议)]
+IPADDR=192.168.146.130 # IP设置
+GATEWAY=192.168.146.2 # 网关
+DNS1=192.168.146.2 # DNS配置成和网关一样的
+NETMASK=255.255.255.0
+
+# 按esc切换模式 ins插入
+:wq  # 输入:wq退出文件
+
+# 重启网络服务，如果报错执行 reboot
+service network restart
+#ifconfig查看信息
+</code></pre><p><strong>3 主机名配置</strong></p>
+<p>作用:修改主机名为一系列有规律的主机名(方便管理)，并修改hosts文件添加我们需要的主机名和地址映射(方便节点服务器间通过主机名进行通讯)</p>
+<p>补充:计算机网络<br>通过主机名通讯时,先会去该机的hosts文件找该主机名的ip，(DNS DomainNameSystem 域名系统的规则一层一层找)</p>
+<pre><code># 1.hostname 查看当前主机名:localhost.CentOS 
+hostname 
+
+# 2.修改linux的主机映射文件 主机名不要有&#39;_&#39;
+vim /etc/sysconfig/network
+NETWORKING=yes
+NETWORKING_IPV6=no
+HOSTNAME=hadoop100 # 设置当前虚拟机主机名为hadoop100
+
+# 3. 打开/etc/hosts文件
+vim /etc/hosts
+192.168.146.130 hadoop100 # 作用:通过主机名进行操作
+
+ping hadoop100 # 如果没ping通则重启服务,这里相当于自己ping自己
+</code></pre><p><strong>需求:希望windows可以通过主机名来连接centos</strong></p>
+<p>补充:如果是linux主机间.则修改的文件是/etc/hosts</p>
+<p>修改windows的主机映射文件(hosts文件)</p>
+<p>1.进入c/windows/System32/drivers/etc文件<br>2.复制hosts文件到桌面<br>3.打开桌面的hosts文件并添加如下内容<br>192.168.146.130 hadoop100<br>4.用桌面上的hosts文件覆盖c/windows/System32/drivers/etc路径中的hosts文件</p>
+<h4 id="虚拟机准备"><a href="#虚拟机准备" class="headerlink" title="虚拟机准备"></a>虚拟机准备</h4><p>1.克隆虚拟机<br>虚拟机中的当前状态 - 创建完整克隆 </p>
+<p>2.修改克隆虚拟机的IP地址<br>vim /etc/udev/rules.d/70-persistent-net.rules</p>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -198,7 +249,7 @@
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hadoop组成-面试重点"><span class="toc-text">Hadoop组成(面试重点)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hadoop运行环境搭建"><span class="toc-text">Hadoop运行环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟机环境准备"><span class="toc-text">虚拟机环境准备</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#概念"><span class="toc-text">概念</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Hadoop组成-面试重点"><span class="toc-text">Hadoop组成(面试重点)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hadoop运行环境搭建"><span class="toc-text">Hadoop运行环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟机环境准备"><span class="toc-text">虚拟机环境准备</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#原虚拟机设置"><span class="toc-text">原虚拟机设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#虚拟机准备"><span class="toc-text">虚拟机准备</span></a></li></ol></li></ol></li></ol>
   </div>
 </aside>
   

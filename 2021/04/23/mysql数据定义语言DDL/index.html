@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Ranan" />
+  
+  
+  <title>mysql数据定义语言DDL | Ranan_blog</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  
+    <meta name="keywords" content="大数据,mysql," />
+  
+
+  
+  <meta name="description" content="Ranan的博客">
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script>
+  // theme-ad's config script
+  // it can be used in every script
+  
+  window.AD_CONFIG = {
+    leancloud: {"appid":"Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz","appkey":"WaR7nrzhliHj9aVwdQzkdlGd","comment":false,"count":false},
+    welcome: {"enable":false,"interval":30},
+    start_time: "2018-02-10",
+    passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
+    is_post: true,
+    lock: false,
+    author: "Ranan",
+    share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
+    mathjax: false,
+    page_type: "",
+    root: "/"
+  };
+</script>
+
+  <script src="/vendor/sha256.min.js"></script>
+<script src="/js/auth.js"></script>
+<script src="/js/index.js"></script>
+<script src="/vendor/qrcode.min.js"></script>
+
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/styles/components/highlight/highlight.css">
+
+  
+</head>
+  <body>
+    <header class="site-header">
+  <div class="site-header-brand">
+    
+      <span class="site-header-brand-title">
+        <a href="/">Ranan</a>
+      </span>
+    
+    
+  </div>
+  <div class="site-header-right">
+    <nav class="site-header-navigation">
+      
+        <a href="/" target="_self">首页</a>
+      
+        <a href="/archives/" target="_self">归档</a>
+      
+        <a href="/tags/" target="_self">标签</a>
+      
+        <a href="/categories/" target="_self">分类</a>
+      
+        <a href="/about/" target="_self">关于</a>
+      
+    </nav>
+    <div class="site-header-btn">
+      
+        <a href="https://github.com/Rananie" target="_blank" id="site-github">
+          <i class="fa fa-github-alt"></i>
+        </a>
+      
+      <a href="javascript:void(0);" id="site-search">
+        <i class="fa fa-search"></i>
+      </a>
+      <a href="javascript:void(0);" id="site-nav-btn">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+    </div>
+  </div>
+</header>
+<nav class="table-content" id="site-nav">
+  <div class="table-content-title">
+    <span>导航</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc">
+      
+        <li class="toc-item">
+          <a href="/" target="_self">
+            首页
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/archives/" target="_self">
+            归档
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/tags/" target="_self">
+            标签
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/categories/" target="_self">
+            分类
+          </a>
+        </li>
+      
+        <li class="toc-item">
+          <a href="/about/" target="_self">
+            关于
+          </a>
+        </li>
+      
+    </ol>
+  </div>
+</nav>
+<div id="site-process"></div>
+    <main>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2021-04-23
+    </span>
+    
+      <span>
+        | <a href="/categories/大数据/"><i class="fa fa-bookmark"></i>大数据</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    mysql数据定义语言DDL
+  </h1>
+  
+  <article class="passage-article">
+    <h2 id="库的管理"><a href="#库的管理" class="headerlink" title="库的管理"></a>库的管理</h2><p><strong>创建 create</strong><br>语法:create database 库名 </p>
+<pre><code class="sql"># 案例:创建库
+create database if not exists books;
+</code></pre>
+<p><strong>修改 alter</strong><br>更改库的字符集</p>
+<pre><code class="sql">ALTER DATABASE books character set gbk;
+</code></pre>
+<p><strong>删除 drop</strong></p>
+<pre><code class="sql">drop database if exists books;
+</code></pre>
+<h2 id="表的管理"><a href="#表的管理" class="headerlink" title="表的管理"></a>表的管理</h2><h3 id="创建-create"><a href="#创建-create" class="headerlink" title="创建 create"></a>创建 create</h3><p>语法: create table 表名(<br>    列名 列的类型(【长度】) 【约束】,<br>    列名 列的类型(【长度】) 【约束】,<br>    列名 列的类型(【长度】) 【约束】<br>);</p>
+<pre><code class="sql"># 案例:创建表Book
+
+CREATE TABLE book(
+    id INT,# 编号
+    bName VARCHAR(20),# mysql字符类型使用VARCHAR
+    price DOUBLE,# 价格
+    authorId INT,# 作者,作者表
+    publishDate DATETIME #出版日期
+);
+
+DESC book; # 查询表
+
+# 创建author
+CREATE TABLE author(
+    id INT,
+    auName VARCHAR(20),
+    nation VARCHAR(10)
+);
+DESC author;
+</code></pre>
+<h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><p>原则:选择的类型越简单越好，能保存数值的类型越小越好</p>
+<p>数值型:<br>    整型:tinyint、smallint、mediumint、int/integer、bigint<br>    小数:定点数、浮点数，<br>字符型:<br>    较短的文本:char、varchar<br>    较长的文本:text、blob(较长的二进制数据)<br>日期型: datetime、timestamp</p>
+<p><strong>数值型</strong></p>
+<p>整型:tinyint、smallint、mediumint、int/integer、bigint<br>说明:<br>1.如何设置无符号和有符号<br>默认有符号</p>
+<pre><code class="sql">create table tab_int(
+    t1 INT ZEROFILL,# 加上就默认变成无符号
+    t2 INT unsigned
+);
+</code></pre>
+<p>2.如果超出整型范围，会报out of range异常，并插入临界值<br>3.如果不设置长度有默认的长度，这里的长度代表显示结果的宽度，不足补0(默认不补,设置关键字zerofill,设置后默认无符号) – 建议不适用</p>
+<p>浮点型:float(M,D)、double(M,D)<br>定点型(最大取值范围与double相同,更精确):DEC/DECIMAL(M,D)<br>说明:<br>1.M和D可以省略(dec有默认值M=10,D=0),D小数点后的位数，M=整数的位数+小数的位数(D)<br>2.定点型精确度高</p>
+<p><strong>字符型</strong></p>
+<p>较短的文本:<br>char(M)、varchar(M)<br>binary/varbinary(二进制)<br>ENUM(‘枚举类型1’,’枚举类型2’,’仅可以从中选忽略大小写’)<br>Set类似enum一次性可以选择多个插入(‘a,b’)<br>说明:<br>1.M最多的字符数(汉字也算一个字符)<br>2.<br>说明|char|varchar<br>-|-|-<br>M|可以省略|不可以省略<br>特点|开辟固定长度的空间|varchar根据字符长度开辟空间<br>空间耗费|较多|较少<br>效率|略高|略低</p>
+<p>较长的文本:text、blob(较长的二进制数据)</p>
+<h3 id="修改-alter"><a href="#修改-alter" class="headerlink" title="修改 alter"></a>修改 alter</h3><p>语法:alter table 表名 add|drop|change|modify COLUMN 列名 【列类型 约束】</p>
+<pre><code class="sql"># 修改列名 
+ALTER TABLE book CHANGE COLUMN publishdate pubDate DATETIME;
+
+# 修改列的类型或约束
+ALTER TABLE book MODIFY COLUMN pubDate TIMESTAMP;
+# 添加新列 
+ALTER TABLE author ADD COLUMN annual DOUBLE;
+# 删除列
+ALTER TABLE author DROP COLUMN annual;
+# 修改表名
+ALTER TABLE author RENAME TO bookAuthor;
+DESC book;
+DESC author;
+</code></pre>
+<h3 id="删除-drop"><a href="#删除-drop" class="headerlink" title="删除 drop"></a>删除 drop</h3><p>语法:DROP TABLE 表名</p>
+<h3 id="表的复制"><a href="#表的复制" class="headerlink" title="表的复制"></a>表的复制</h3><pre><code class="sql">INSERT INTO author VALUES
+(1,&#39;村上春树&#39;,&#39;日本&#39;),
+(2,&#39;莫言&#39;,&#39;中国&#39;),
+(3,&#39;冯唐&#39;,&#39;中国&#39;);
+
+# 1.仅仅复制表的结构,不复制数据
+CREATE TABLE copy LIKE author;
+
+# 2.复制表的结构+数据
+CREATE TABLE copy2
+SELECT * FROM author;
+
+# 3.复制部分数据
+CREATE TABLE copy3
+SELECT id,auName 
+FROM author
+WHERE nation=&#39;中国&#39;;
+
+# 4.仅仅复制部分结构，不需要数据
+CREATE TABLE copy4
+SELECT id,auName 
+FROM 库名.author # 复制不同库的表
+WHERE 0; # 设置谁也不满足就不会返回数据了
+</code></pre>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#库的管理"><span class="toc-text">库的管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表的管理"><span class="toc-text">表的管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建-create"><span class="toc-text">创建 create</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改-alter"><span class="toc-text">修改 alter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除-drop"><span class="toc-text">删除 drop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表的复制"><span class="toc-text">表的复制</span></a></li></ol></li></ol>
+  </div>
+</aside>
+  
+  
+    <div class="passage-tags">
+     
+      <a href="/tags/mysql/"><i class="fa fa-tags"></i>mysql</a>
+    
+    </div>
+  
+</div>
+
+    </main>
+    
+    <div class="site-footer-wrapper">
+  <footer class="site-footer">
+    
+    <!--<div class="site-footer-info">-->
+      <!--<i class="fa fa-clock-o"></i> 本站已稳定运行<span id="site-time"></span>-->
+    <!--</div>-->
+    
+    
+      <div class="site-footer-info">
+        <i class="fa fa-at"></i> Email: 981684424@qq.com
+      </div>
+    
+    <div class="site-footer-info">
+      <i class="fa fa-copyright"></i> 
+      2019 <a href="https://github.com/dongyuanxin/theme-ad/" target="_blank">Theme-AD</a>.
+      Created by <a href="https://godbmw.com/" target="_blank">GodBMW</a>.
+      All rights reserved.
+    </div>
+  </footer>
+</div>
+    <div id="site-layer" style="display:none;">
+  <div class="site-layer-content">
+    <div class="site-layer-header">
+      <span class="site-layer-header-title" id="site-layer-title"></span>
+      <i class="fa fa-close" id="site-layer-close"></i>
+    </div>
+    <div class="site-layer-body" id="site-layer-container">
+      <div class="site-layer-input" id="site-layer-search" style="display: none;">
+        <div class="site-layer-input-choose">
+          <a href="javascript:void(0);" title="Change Search Engine">Google</a>
+        </div>
+        <input type="text">
+        <i class="fa fa-search"></i>
+      </div>
+      
+      <div id="site-layer-welcome" style="display:none;"></div>
+    </div>
+  </div>
+</div>
+    
+
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <a href="javascript:void(0);" data-enable="false">
+      <i class="fa fa-arrow-left"></i>
+    </a>
+    <a href="/2021/04/23/mysql数据操作语言DML/" data-enable="true">
+      <i class="fa fa-arrow-right"></i>
+    </a>
+  </div>
+  <div class="bottom-bar-right">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
+      <i class="fa fa-bars"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="site-toggle-share-btn">
+      <i class="fa fa-share-alt"></i>
+    </a>
+    
+    <a href="javascript:void(0);" id="back-top-btn">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+  </div>
+</div>
+    <div id="share-btn">
+  
+  
+  
+  
+  
+</div>
+    
+
+
+
+
+
+    
+  </body>
+</html>

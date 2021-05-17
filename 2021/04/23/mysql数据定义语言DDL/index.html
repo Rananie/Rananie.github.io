@@ -166,7 +166,7 @@
   </h1>
   
   <article class="passage-article">
-    <h2 id="库的管理"><a href="#库的管理" class="headerlink" title="库的管理"></a>库的管理</h2><p><strong>创建 create</strong><br>语法:create database 库名 </p>
+    <h2 id="库的管理"><a href="#库的管理" class="headerlink" title="库的管理"></a>库的管理</h2><p><strong>创建 create</strong><br>语法:create database 库名 【character set 字符集】</p>
 <pre><code class="sql"># 案例:创建库
 create database if not exists books;
 </code></pre>
@@ -197,26 +197,12 @@ CREATE TABLE author(
 );
 DESC author;
 </code></pre>
-<h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><p>原则:选择的类型越简单越好，能保存数值的类型越小越好</p>
-<p>数值型:<br>    整型:tinyint、smallint、mediumint、int/integer、bigint<br>    小数:定点数、浮点数，<br>字符型:<br>    较短的文本:char、varchar<br>    较长的文本:text、blob(较长的二进制数据)<br>日期型: datetime、timestamp</p>
-<p><strong>数值型</strong></p>
-<p>整型:tinyint、smallint、mediumint、int/integer、bigint<br>说明:<br>1.如何设置无符号和有符号<br>默认有符号</p>
-<pre><code class="sql">create table tab_int(
-    t1 INT ZEROFILL,# 加上就默认变成无符号
-    t2 INT unsigned
-);
-</code></pre>
-<p>2.如果超出整型范围，会报out of range异常，并插入临界值<br>3.如果不设置长度有默认的长度，这里的长度代表显示结果的宽度，不足补0(默认不补,设置关键字zerofill,设置后默认无符号) – 建议不适用</p>
-<p>浮点型:float(M,D)、double(M,D)<br>定点型(最大取值范围与double相同,更精确):DEC/DECIMAL(M,D)<br>说明:<br>1.M和D可以省略(dec有默认值M=10,D=0),D小数点后的位数，M=整数的位数+小数的位数(D)<br>2.定点型精确度高</p>
-<p><strong>字符型</strong></p>
-<p>较短的文本:<br>char(M)、varchar(M)<br>binary/varbinary(二进制)<br>ENUM(‘枚举类型1’,’枚举类型2’,’仅可以从中选忽略大小写’)<br>Set类似enum一次性可以选择多个插入(‘a,b’)<br>说明:<br>1.M最多的字符数(汉字也算一个字符)<br>2.<br>说明|char|varchar<br>-|-|-<br>M|可以省略|不可以省略<br>特点|开辟固定长度的空间|varchar根据字符长度开辟空间<br>空间耗费|较多|较少<br>效率|略高|略低</p>
-<p>较长的文本:text、blob(较长的二进制数据)</p>
 <h3 id="修改-alter"><a href="#修改-alter" class="headerlink" title="修改 alter"></a>修改 alter</h3><p>语法:alter table 表名 add|drop|change|modify COLUMN 列名 【列类型 约束】</p>
 <pre><code class="sql"># 修改列名 
 ALTER TABLE book CHANGE COLUMN publishdate pubDate DATETIME;
 
-# 修改列的类型或约束
-ALTER TABLE book MODIFY COLUMN pubDate TIMESTAMP;
+# 修改列的类型 约束
+ALTER TABLE book MODIFY COLUMN pubDate TIMESTAMP 【约束】;
 # 添加新列 
 ALTER TABLE author ADD COLUMN annual DOUBLE;
 # 删除列
@@ -226,6 +212,7 @@ ALTER TABLE author RENAME TO bookAuthor;
 DESC book;
 DESC author;
 </code></pre>
+<p><strong>添加列</strong><br>语法:alter table 表名 add column 列名 类型 【first|after 字段名】<br>add是默认添加在字段的最后,如果需要定义顺序在最后修改。</p>
 <h3 id="删除-drop"><a href="#删除-drop" class="headerlink" title="删除 drop"></a>删除 drop</h3><p>语法:DROP TABLE 表名</p>
 <h3 id="表的复制"><a href="#表的复制" class="headerlink" title="表的复制"></a>表的复制</h3><pre><code class="sql">INSERT INTO author VALUES
 (1,&#39;村上春树&#39;,&#39;日本&#39;),
@@ -251,6 +238,181 @@ SELECT id,auName
 FROM 库名.author # 复制不同库的表
 WHERE 0; # 设置谁也不满足就不会返回数据了
 </code></pre>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>原则:选择的类型越简单越好，能保存数值的类型越小越好</p>
+<p>数值型:<br>    整型:tinyint、smallint、mediumint、int/integer、bigint<br>    小数:定点数、浮点数，<br>字符型:<br>    较短的文本:char、varchar<br>    较长的文本:text、blob(较长的二进制数据)<br>日期型: datetime、timestamp</p>
+<p><strong>数值型</strong></p>
+<p>整型:tinyint、smallint、mediumint、int/integer、bigint<br>说明:<br>1.如何设置无符号和有符号<br>默认有符号</p>
+<pre><code class="sql">create table tab_int(
+    t1 INT ZEROFILL,# 加上就默认变成无符号
+    t2 INT unsigned
+);
+</code></pre>
+<p>2.如果超出整型范围，会报out of range异常，并插入临界值<br>3.如果不设置长度有默认的长度，这里的长度代表显示结果的宽度，不足补0(默认不补,设置关键字zerofill,设置后默认无符号) – 建议不适用</p>
+<p>浮点型:float(M,D)、double(M,D)<br>定点型(最大取值范围与double相同,更精确):DEC/DECIMAL(M,D)<br>说明:<br>1.M和D可以省略(dec有默认值M=10,D=0),D小数点后的位数，M=整数的位数+小数的位数(D)<br>2.如果超出范围，会报out of range异常，并插入临界值<br>3.定点型精确度高</p>
+<p><strong>字符型</strong></p>
+<p>较短的文本:<br>char(M)、varchar(M)<br>binary/varbinary(二进制)<br>ENUM(‘枚举类型1’,’枚举类型2’,’仅可以从中选忽略大小写’)<br>Set类似enum一次性可以选择多个插入(‘a,b’)<br>说明:<br>1.M最多的字符数(汉字也算一个字符)<br>2.<br>说明|char|varchar<br>-|-|-<br>最大长度不能超过M|可以省略,默认1|不可以省略<br>特点|开辟固定长度的空间|varchar根据字符长度开辟空间<br>空间耗费|较多|较少<br>效率|略高|略低</p>
+<p>较长的文本:text、blob(较长的二进制数据)</p>
+<p><strong>日期型</strong><br>date、datetime、timestamp(受时区、版本影响)、time、year</p>
+<h3 id="常见约束"><a href="#常见约束" class="headerlink" title="常见约束"></a>常见约束</h3><p>用于限制表中的数据，为了保证表中数据的准确性和可靠性<br>添加约束的时机(添加数据前)：1.创建表时 2.修改表时<br>约束的添加分类:<br>1.列级约束 语法都支持,但外键约束没有效果<br>2.表级约束 除了非空、默认其余都支持 </p>
+<p>语法: create table 表名(<br>    列名 列的类型(【长度】) 【约束】,<br>    表级约束<br>)</p>
+<p><strong>六大约束</strong><br>NOT NULL :非空<br>DEFAULT:保证该字段有默认值<br>PRIMARY KRY:主键，用于保证该字段的值具有唯一性且非空<br>UNIQUE:保证该字段具有唯一性,可以为空<br>CHECK:检查约束(mysql不支持)<br>FOREIGN KEY:外键，用于限制两个表的关系，用于保证该字段的值必须来自另外一个表关联列的值</p>
+<p><strong>主键与唯一</strong></p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>保证唯一性</th>
+<th>是否支持为空</th>
+<th>一个表中的个数</th>
+<th>是否允许字段组合</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主键</td>
+<td>√</td>
+<td>×</td>
+<td>最多一个</td>
+<td>√,但不推荐</td>
+</tr>
+<tr>
+<td>唯一</td>
+<td>√</td>
+<td>√(只能插入一个null)</td>
+<td>可以有多个</td>
+<td>√，但不推荐</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="sql">CREATE TABLE stuinfo(
+    id INT ,
+    stuName CHAR(1) ,
+    seat INT,
+    age INT, 
+    majorid INT,
+    PRIMARY KEY(id,stuName),#两个字段组合成一个主键
+    PRIMARY KEY(seat,age)
+)
+</code></pre>
+<p><strong>外键</strong><br>1.要求在从表(stuinfo)设置外键类型<br>2.从表(stuinfo)的外键列的类型和主表(major)的关联列的类型要求一致或兼容<br>3.主表(major)的关联列必须是一个key(一般是主键或唯一键)<br>4.插入数据时先major再stuinfo,删除数据时先stuinfo再major</p>
+<p><strong>创建表时列级约束</strong><br>show index from 表名<br>查看表中所有的索引:主键、唯一、外键、自定义</p>
+<pre><code class="sql">CREATE DATABASE students;
+USE students;
+
+CREATE TABLE stuinfo(
+    id INT PRIMARY KEY NOT NULL,#主键 可以添加多个约束
+    stuName VARCHAR(20) NOT NULL,# 非空
+    seat INT UNIQUE,#唯一
+    age INT DEFAULT 18 #默认约束
+);
+
+CREATE TABLE major(
+    id INT PRIMARY KEY,
+    majorName VARCHAR(20)
+);
+</code></pre>
+<p><strong>创建表时表级约束</strong><br>语法:【CONSTRAINT 约束名(索引名、主键固定)】(有默认名字) 约束类型(字段名)</p>
+<pre><code class="sql">CREATE TABLE stuinfo(
+    id INT ,
+    stuName CHAR(1) ,
+    seat INT,
+    age INT, 
+    majorid INT,
+    # 表级约束  up xx 代表索引的名字，主键固定
+    CONSTRAINT pk PRIMARY KEY(id),#id设置为主键
+    CONSTRAINT up UNIQUE(seat),#seat设置为唯一键
+    CONSTRAINT xx FOREIGN KEY(majorid) REFERENCES major(id)
+);
+</code></pre>
+<p>通用写法</p>
+<pre><code class="sql">CREATE TABLE stuinfo(
+    id INT PRIMARY KEY,#主键
+    stuName VARCHAR(20) NOT NULL,# 非空
+    seat INT UNIQUE,#唯一
+    age INT DEFAULT 18, #默认约束
+    majorid INT,
+    CONSTRAINT fk_stuinfo_major FOREIGN KEY(majorid) REFERENCES major(id)
+);
+</code></pre>
+<p><strong>修改表时添加约束</strong></p>
+<p>列级约束<br>ALTER TABLE 表名 MODIFY COLUMN 字段名 字段类型 新约束</p>
+<p>表级约束<br>ALTER TABLE 表名 add 【CONSTRAINT 约束名】 约束类型(字段名)</p>
+<pre><code class="sql"># 列级约束...
+# 添加非空约束
+ALTER TABLE book MODIFY COLUMN stuname varchar(20) not null;
+# 添加默认约束
+ALTER TABLE book MODIFY COLUMN age int default 18;
+
+# 表级约束写法
+ALTER TABLE book add primary key(id)
+
+ALTER TABLE book add CONSTRAINT fk_stuinfo_major FOREIGN KEY(majorid) REFERENCES major(id)
+</code></pre>
+<p><strong>修改表时删除约束</strong></p>
+<p>删除主键,直接不写是删除不了的<br>1.主键不是标识列 - 直接drop删除<br>2.主键是标识列 - 先删去标识列再drop删除</p>
+<pre><code class="sql"># 删除非空约束,可以不写默认为null
+ALTER TABLE book MODIFY COLUMN stuname varchar(20) 【NULL】;
+# 删除默认
+ALTER TABLE book MODIFY COLUMN age int;
+# 删除主键,直接不写 不可以 删除不了
+ALTER TABLE book MODIFY COLUMN id int;
+
+# 表级约束写法
+ALTER TABLE book drop primary key; # 只能这样写
+# 删除唯一
+ALTER TABLE book drop index seat(索引名);
+ALTER TABLE book drop FOREIGN KEY fk_stuinfo_major;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>位置</th>
+<th>支持的约束类型</th>
+<th>是否可以起约束名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>列级约束</td>
+<td>列的后面</td>
+<td>语法都支持,外键没效果</td>
+<td>不可以</td>
+</tr>
+<tr>
+<td>表级约束</td>
+<td>所有列的下面</td>
+<td>默认和非空不支持,其他支持</td>
+<td>可以,主键没效果</td>
+</tr>
+</tbody>
+</table>
+<h3 id="标识列-自增长列"><a href="#标识列-自增长列" class="headerlink" title="标识列(自增长列)"></a>标识列(自增长列)</h3><p>可以不用手动插入值,系统提供默认的序列值</p>
+<p>说明:<br>1.两种写法<br>insert into 表名(列名…不写自增列) values(值1,….)<br>INSERT INTO tab_identity VALUES(NULL,’john’)  用NULL占位置<br>2.使用范围(是一个key):唯一键、主键、外键、自定义<br>3.至多有一个标识列<br>4.标识列的类型只能是数值型</p>
+<pre><code class="sql"># 创建表时
+CREATE TABLE tab_identity(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    NAME VARCHAR(20)
+);
+
+INSERT INTO tab_identity VALUES(NULL,&#39;john&#39;); #用NULL占位置
+INSERT INTO tab_identity(name) VALUES(&#39;john&#39;); 
+
+# 可以手动插入值来修改起始值,从10开始
+INSERT INTO tab_identity VALUES(10,&#39;john&#39;); 
+INSERT INTO tab_identity VALUES(NULL,&#39;john&#39;);
+
+SHOW VARIABLES LIKE &#39;%auto_increment%&#39;;
+# auto_increment_increment 1 默认步长为1
+# auto_increment_offset 1 默认从1开始
+# mysql中不支持设置起始值
+set auto_increment_increment=步长
+
+# 修改表时设置标识列
+ALTER TABLE tab_identity MODIFY COLUMN id int  PRIMARY KEY AUTO_INCREMENT;
+# 修改表时删除标识列,此时id还是主键
+ALTER TABLE tab_identity MODIFY COLUMN id int;
+</code></pre>
 
   </article>
   <aside class="table-content" id="site-toc">
@@ -259,7 +421,7 @@ WHERE 0; # 设置谁也不满足就不会返回数据了
     <span>目录</span>
   </div>
   <div class="table-content-main">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#库的管理"><span class="toc-text">库的管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表的管理"><span class="toc-text">表的管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建-create"><span class="toc-text">创建 create</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改-alter"><span class="toc-text">修改 alter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除-drop"><span class="toc-text">删除 drop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表的复制"><span class="toc-text">表的复制</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#库的管理"><span class="toc-text">库的管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#表的管理"><span class="toc-text">表的管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建-create"><span class="toc-text">创建 create</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改-alter"><span class="toc-text">修改 alter</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除-drop"><span class="toc-text">删除 drop</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表的复制"><span class="toc-text">表的复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据类型"><span class="toc-text">数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见约束"><span class="toc-text">常见约束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标识列-自增长列"><span class="toc-text">标识列(自增长列)</span></a></li></ol></li></ol>
   </div>
 </aside>
   
@@ -317,7 +479,7 @@ WHERE 0; # 设置谁也不满足就不会返回数据了
 
 <div class="bottom-bar">
   <div class="bottom-bar-left">
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2021/05/17/mysql事务控制语言TCL/" data-enable="true">
       <i class="fa fa-arrow-left"></i>
     </a>
     <a href="/2021/04/23/mysql数据操作语言DML/" data-enable="true">

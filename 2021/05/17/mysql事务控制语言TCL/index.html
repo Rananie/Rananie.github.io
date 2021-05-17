@@ -6,12 +6,12 @@
   <meta name="author" content="Ranan" />
   
   
-  <title>归档: 2021/4 | Ranan_blog</title>
+  <title>mysql事务控制语言TCL | Ranan_blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo, Theme-AD" />
+    <meta name="keywords" content="大数据,mysql," />
   
 
   
@@ -36,7 +36,7 @@
     welcome: {"enable":false,"interval":30},
     start_time: "2018-02-10",
     passwords: ["efe07af7441da2b69c4a41e42e73be4db47f66010a56900788a458354a7373ec", ],
-    is_post: false,
+    is_post: true,
     lock: false,
     author: "Ranan",
     share: {"twitter":false,"facebook":false,"weibo":false,"qq":false,"wechat":false},
@@ -144,42 +144,110 @@
 </nav>
 <div id="site-process"></div>
     <main>
-      <div class="timeline">
-  <h2 class="timeline-title">归档: 98篇</h2>
+      
+  <div class="passage">
+  <div class="passage-meta">
+    <span>
+      <i class="fa fa-calendar"></i>2021-05-17
+    </span>
+    
+      <span>
+        | <a href="/categories/大数据/"><i class="fa fa-bookmark"></i>大数据</a>
+      </span>
+    
+    
+      <span>
+        | <i class="fa fa-unlock-alt"></i>UNLOCK
+      </span>
+    
+  </div>
+  <h1 class="passage-title">
+    mysql事务控制语言TCL
+  </h1>
   
-    
-      <h3 class="timeline-subtitle">2021</h3>
-    
-    <div class="timeline-item">
-      <time>2021-04-23</time>
-      <a target="_self" href="/2021/04/23/mysql数据定义语言DDL/">mysql数据定义语言DDL</a>
-    </div>
+  <article class="passage-article">
+    <p>Transaction Control Language 事务控制语言</p>
+<p>事务:一个或一组sql语句组成一个执行单元,这个执行单元作为不可分割的整体执行。如果某个语句执行错误，整个单元回滚到最初的状态。</p>
+<blockquote>
+<p>在mysql中用的最多的存储引擎有innodb,myisam,memor。其中innodb支持事务。通过show engines查看mysql支持的存储引擎。</p>
+</blockquote>
+<p><strong>特点</strong></p>
+<p>事务的ACID属性<br>原子性(Atomicity):事务是一个不可分割的单位<br>一致性(Consistency):数据从一个一致状态切换到另外一个一致状态<br>隔离性(Isolation):一个事务的执行不受其他事务干扰<br>持久性(Durability):一个事务一旦被提交,对数据库中数据的改变就是永久性的</p>
+<h2 id="事务的创建"><a href="#事务的创建" class="headerlink" title="事务的创建"></a>事务的创建</h2><p>隐式事务：事务没有明显的开启和结束标记<br>比如:select、insert、update、delete语句(DML) - 自动提交默认开启<code>show variables like &#39;autocommit&#39;</code></p>
+<p>显示事务:事务具有明显的开启和结束标记<br>前提:必须先设置自动提交功能为禁用<code>set autocommit = 0</code>,仅对当前的事务有效</p>
+<pre><code class="sql"># 步骤1:开启事务
+set autoccommit = 0;
+start transaction; # 可选
+
+# 步骤2:编写事务中的sql语句(select insert update delete)
+
+# 步骤3:结束事务
+commit; # 提交事务
+rollback; # 回滚事务
+</code></pre>
+<h3 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h3><p>如果同时运行多个事务，访问数据库中相同的数据时，需要采用隔离机制。</p>
+<p><strong>事务的并发问题</strong><br>脏读：对于两个事务，t1,t2,如果T1读取了已经被t2修改过的但是还没有提交的数据，但是最后t2回滚了，t1读取的内容是临时并且无效的<br>不可重复读：对于两个事务，T1，T2读取了一个字段的值，但是T2更新了这个字段,T1再次读取的时候，两读取的数据是不一致的 - <strong>针对更新</strong><br>幻读：对于两个事务T1,T2,T1从一个表中按照一定的条件读取字段，接着T2将表进行了更新，插入几行新数据，当T1再次以相同的条件进行读取的时候，会出现新的数据 - <strong>针对插入删除</strong></p>
+<p><strong>事务的隔离级别</strong></p>
+<p><img src="https://img2020.cnblogs.com/blog/1345685/202105/1345685-20210517170747523-1757245052.png" alt=""></p>
+<p>查看当前隔离级别<br>select @@tx_isolation<br>设置当前mysql连接的隔离级别<br>set 【session】 transaction isolation level 隔离级别<br>设置数据库系统的全局的隔离级别<br>set global transaction isolation level 隔离级别<br>设置保存点,搭配rollback使用<br>savepoint 节点名;<br>rollback to 节点名;</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>脏读</th>
+<th>不可重复读</th>
+<th>幻读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>read uncommitted</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>read committed</td>
+<td>×</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>repeatable read(mysql默认)</td>
+<td>×</td>
+<td>×</td>
+<td>√</td>
+</tr>
+<tr>
+<td>serializable</td>
+<td>×</td>
+<td>×</td>
+<td>×</td>
+</tr>
+</tbody>
+</table>
+<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><p>虚拟表(临时),并没有真实保存数据,动态生成<br>应用场景:<br>1.多个地方用到同样的查询结果<br>2.该查询结果使用的sql语句较为复杂<br>语法:<br>    create view 视图名<br>    as<br>    sql查询语句</p>
+
+  </article>
+  <aside class="table-content" id="site-toc">
+  <div class="table-content-title">
+    <i class="fa fa-arrow-right fa-lg" id="site-toc-hide-btn"></i>
+    <span>目录</span>
+  </div>
+  <div class="table-content-main">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#事务的创建"><span class="toc-text">事务的创建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#隔离级别"><span class="toc-text">隔离级别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#视图"><span class="toc-text">视图</span></a></li></ol>
+  </div>
+</aside>
   
-    
-    <div class="timeline-item">
-      <time>2021-04-23</time>
-      <a target="_self" href="/2021/04/23/mysql数据操作语言DML/">mysql数据操作语言DML</a>
-    </div>
   
+    <div class="passage-tags">
+     
+      <a href="/tags/mysql/"><i class="fa fa-tags"></i>mysql</a>
     
-    <div class="timeline-item">
-      <time>2021-04-14</time>
-      <a target="_self" href="/2021/04/14/mysql数据查询语言DQL/">mysql数据查询语言DQL</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2021-04-04</time>
-      <a target="_self" href="/2021/04/04/Hadoop环境搭建/">Hadoop环境搭建</a>
-    </div>
-  
-    
-    <div class="timeline-item">
-      <time>2021-04-04</time>
-      <a target="_self" href="/2021/04/04/Java新特性12-13/"></a>
     </div>
   
 </div>
+
     </main>
     
     <div class="site-footer-wrapper">
@@ -228,12 +296,12 @@
     <a href="javascript:void(0);" data-enable="false">
       <i class="fa fa-arrow-left"></i>
     </a>
-    <a href="javascript:void(0);" data-enable="false">
+    <a href="/2021/04/23/mysql数据定义语言DDL/" data-enable="true">
       <i class="fa fa-arrow-right"></i>
     </a>
   </div>
   <div class="bottom-bar-right">
-    <a href="javascript:void(0);" data-enable="false" id="site-toc-show-btn">
+    <a href="javascript:void(0);" data-enable="true" id="site-toc-show-btn">
       <i class="fa fa-bars"></i>
     </a>
     

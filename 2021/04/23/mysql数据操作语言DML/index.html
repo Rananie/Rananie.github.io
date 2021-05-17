@@ -169,19 +169,20 @@
     <h2 id="插入insert"><a href="#插入insert" class="headerlink" title="插入insert"></a>插入insert</h2><p><strong>插入方式1</strong></p>
 <p>语法: insert into 表名(列名,….) values(值1,….)</p>
 <p>说明:<br>1.插入的值的类型要与列的类型一致或兼容<br>2.可以为null的值:①列写了值为NULL②列值都不写<br>3.列和值的个数需要对应<br>4.可以省略列名,默认所有列，列的顺序和表中列的顺序一致</p>
+<p>int类型写成了字符型,会自动转换为int类型</p>
 <p><strong>插入方式2</strong><br>语法:<br>insert into 表名<br>set 列名=值,列名=值…</p>
 <p><strong>两种方式的区别</strong><br>1.方式一支持一次性插入多行values(),(),..<br>2.方式一支持子查询，方式二不支持,<code>insert into.. select</code></p>
-<h2 id="修改update"><a href="#修改update" class="headerlink" title="修改update"></a>修改update</h2><h3 id="修改单表的记录"><a href="#修改单表的记录" class="headerlink" title="修改单表的记录"></a>修改单表的记录</h3><p>语法:<br>update 表明<br>set 列=新值,列=新值..<br>where 筛选条件;<br>执行顺序-123</p>
+<h2 id="修改update"><a href="#修改update" class="headerlink" title="修改update"></a>修改update</h2><h3 id="修改单表的记录"><a href="#修改单表的记录" class="headerlink" title="修改单表的记录"></a>修改单表的记录</h3><p>语法:<br>update 表名<br>set 列=新值,列=新值..<br>where 筛选条件;</p>
 <h3 id="修改多表的记录"><a href="#修改多表的记录" class="headerlink" title="修改多表的记录"></a>修改多表的记录</h3><p>sql92语法只支持内联:<br>update 表1 别名,表2 别名<br>set 列=值,…<br>where 连接条件<br>and 筛选条件</p>
 <p>sql99语法:<br>update 表1 别名,<br>inner|left|right join 表2 别名<br>on 连接条件 (这相当于连接成了新表)<br>set 列=值…<br>where 筛选条件</p>
-<h2 id="删除delete"><a href="#删除delete" class="headerlink" title="删除delete"></a>删除delete</h2><h3 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h3><p><strong>单表的删除</strong></p>
-<p>语法:delete from 表名 where 筛选条件<br>说明:删除整行</p>
-<p><strong>多表的删除</strong></p>
+<h2 id="删除delete"><a href="#删除delete" class="headerlink" title="删除delete"></a>删除delete</h2><h3 id="delete"><a href="#delete" class="headerlink" title="delete"></a>delete</h3><p><strong>单表记录的删除</strong></p>
+<p>语法:delete from 表名 【where 筛选条件|limit 条目数】<br>说明:删除整行</p>
+<p><strong>多表记录的删除</strong></p>
 <p>sql92语法<br>delete 表1别名,表2别名(需要删除的表)<br>from 表1 别名，表2 别名<br>where 连接条件<br>and 筛选条件</p>
 <p>sql99语法<br>delete 表1别名,表2别名(需要删除的表)<br>from 表1 别名<br>inner|left|right join 表2 别名<br>on 连接条件<br>where 筛选条件</p>
 <h3 id="truncate"><a href="#truncate" class="headerlink" title="truncate"></a>truncate</h3><p>语法:truncate table 表名;<br>说明:删除(清空)整个表</p>
-<p><strong>对比</strong></p>
-<p>1.如果要删除的表中有自增长列,delete删除后,插入数据从自增长列的断点开始，truncate从1开始<br>2.delete删除有返回值，truncate删除没有返回值<br>3.truncate删除不能回滚,delete删除可以回滚<br>4.delete可以加where条件,truncate不能加</p>
+<p><strong>对比(面试题)</strong></p>
+<p>1.如果要删除的表中有自增长列,delete删除后,插入数据从自增长列的断点开始，truncate从1开始<br>2.delete删除有返回值(受影响的行数)，truncate删除没有返回值<br>3.truncate删除不能回滚,delete删除可以回滚<br>4.delete可以加where条件,truncate不能加where条件</p>
 
   </article>
   <aside class="table-content" id="site-toc">

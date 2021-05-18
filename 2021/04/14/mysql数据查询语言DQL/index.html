@@ -389,9 +389,9 @@ SELECT TRUNCATE(1.65,1) # 输出1.6
 <p><strong>其他函数</strong><br>version() 版本号<br>database() 当前库<br>user() 当前用户<br>password(str) 给str加密<br>md5(str) 返回该str的md5形式</p>
 <p><strong>流程控制函数</strong></p>
 <p>格式:if(表达式,成立执行,不成立执行)</p>
-<p>case函数的使用一：swich case -&gt; 适用于等值判断</p>
+<p>case函数的使用一：switch case -&gt; 适用于等值判断</p>
 <p>格式:case 要判断的字段或表达式<br>when 常量1 then 要显示的值1或语句1 (;是语句时添加)<br>when 常量2 then 要显示的值2或语句2 (;是语句时添加)<br>else 默认情况<br>end<br>注意:<br>case做表达式时,then后是显示的值<br>case做语句时,then后是语句</p>
-<p>case函数的使用二:类似于多重if -&gt; 使用于不等式的判断<br>case<br>when 条件1 then 满足条件1要显示的值1或语句1(;是语句时添加)<br>when 条件2 then 满足条件2要显示的值2或语句2(;是语句时添加)<br>else 要显示的值n或语句n<br>end</p>
+<p>case函数的使用二:类似于多重if -&gt; 适用于不等式的判断<br>case<br>when 条件1 then 满足条件1要显示的值1或语句1(;是语句时添加)<br>when 条件2 then 满足条件2要显示的值2或语句2(;是语句时添加)<br>else 要显示的值n或语句n<br>end</p>
 <pre><code class="sql">/* 查询员工的工资
 部门号 = 30，显示的工资为1.1
 部门号 = 40，显示的工资为1.2

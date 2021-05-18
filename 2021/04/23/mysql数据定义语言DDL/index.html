@@ -388,7 +388,7 @@ ALTER TABLE book drop FOREIGN KEY fk_stuinfo_major;
 </tbody>
 </table>
 <h3 id="标识列-自增长列"><a href="#标识列-自增长列" class="headerlink" title="标识列(自增长列)"></a>标识列(自增长列)</h3><p>可以不用手动插入值,系统提供默认的序列值</p>
-<p>说明:<br>1.两种写法<br>insert into 表名(列名…不写自增列) values(值1,….)<br>INSERT INTO tab_identity VALUES(NULL,’john’)  用NULL占位置<br>2.使用范围(是一个key):唯一键、主键、外键、自定义<br>3.至多有一个标识列<br>4.标识列的类型只能是数值型</p>
+<p>说明:<br>1.两种写法<br>insert into 表名(列名…不写自增列) values(值1,…不写)<br>INSERT INTO tab_identity VALUES(NULL,’john’)  用NULL占位置<br>2.使用范围(是一个key):唯一键、主键、外键、自定义<br>3.至多有一个标识列<br>4.标识列的类型只能是数值型</p>
 <pre><code class="sql"># 创建表时
 CREATE TABLE tab_identity(
     id INT PRIMARY KEY AUTO_INCREMENT,

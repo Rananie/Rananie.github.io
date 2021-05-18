@@ -182,7 +182,7 @@
 <p>sql99语法<br>delete 表1别名,表2别名(需要删除的表)<br>from 表1 别名<br>inner|left|right join 表2 别名<br>on 连接条件<br>where 筛选条件</p>
 <h3 id="truncate"><a href="#truncate" class="headerlink" title="truncate"></a>truncate</h3><p>语法:truncate table 表名;<br>说明:删除(清空)整个表</p>
 <p><strong>对比(面试题)</strong></p>
-<p>1.如果要删除的表中有自增长列,delete删除后,插入数据从自增长列的断点开始，truncate从1开始<br>2.delete删除有返回值(受影响的行数)，truncate删除没有返回值<br>3.truncate删除不能回滚,delete删除可以回滚<br>4.delete可以加where条件,truncate不能加where条件</p>
+<p>1.如果要删除的表中有自增长列,delete删除后,插入数据从自增长列的断点开始，truncate从1开始<br>2.delete删除有返回值(受影响的行数)，truncate删除没有返回值<br>3.<strong>truncate删除不能回滚,delete删除可以回滚</strong><br>4.delete可以加where条件,truncate不能加where条件</p>
 
   </article>
   <aside class="table-content" id="site-toc">
